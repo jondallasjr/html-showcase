@@ -124,6 +124,9 @@
             padding: 15px;
             position: relative;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .panel::before {
@@ -143,10 +146,14 @@
 
         .panel img {
             width: 100%;
-            height: auto; /* keep aspect ratio */
-            max-width: 600px; /* ~6 inches at 96dpi */
-            max-height: 400px; /* ~4 inches at 96dpi */
-            object-fit: cover; /* keeps cropping clean */
+            height: auto;
+            /* keep aspect ratio */
+            max-width: 600px;
+            /* ~6 inches at 96dpi */
+            max-height: 400px;
+            /* ~4 inches at 96dpi */
+            object-fit: cover;
+            /* keeps cropping clean */
             border-radius: 8px;
             margin-bottom: 15px;
         }
