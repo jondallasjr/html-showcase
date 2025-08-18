@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Complete "Stands" Legal Guide for Zimbabwe 2025</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #FFF8E1 0%, #FFE0B2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .comic-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        .comic-header {
+            background: linear-gradient(135deg, #2E7D32 0%, #4CAF50 100%);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            position: relative;
+        }
+
+        .comic-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .comic-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .comic-stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            font-size: 0.9rem;
+        }
+
+        .stat-item {
+            background: rgba(255,255,255,0.2);
+            padding: 10px 15px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .comic-content {
+            padding: 20px;
+        }
+
+        .comic-panel {
+            margin-bottom: 40px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border: 3px solid #2E7D32;
+        }
+
+        .panel-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .panel-content {
+            padding: 20px;
+            position: relative;
+        }
+
+        .speech-bubble {
+            background: white;
+            border: 3px solid #2E7D32;
+            border-radius: 20px;
+            padding: 15px 20px;
+            margin: 10px 0;
+            position: relative;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .speech-bubble.chipo {
+            background: #FFE0B2;
+            border-color: #FF9800;
+            margin-left: 20px;
+        }
+
+        .speech-bubble.banda {
+            background: #E8F5E8;
+            border-color: #4CAF50;
+            margin-right: 20px;
+        }
+
+        .speech-bubble.narrator {
+            background: #F3E5F5;
+            border-color: #9C27B0;
+            font-style: italic;
+            border-radius: 10px;
+        }
+
+        .speech-bubble::before {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 30px;
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 10px solid #2E7D32;
+        }
+
+        .speech-bubble.chipo::before {
+            border-top-color: #FF9800;
+        }
+
+        .speech-bubble.banda::before {
+            border-top-color: #4CAF50;
+        }
+
+        .speech-bubble.narrator::before {
+            display: none;
+        }
+
+        .character-name {
+            font-weight: bold;
+            color: #2E7D32;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+
+        .chipo .character-name {
+            color: #FF9800;
+        }
+
+        .banda .character-name {
+            color: #4CAF50;
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, #FFB300 0%, #FF8F00 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .info-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .checklist {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            border-left: 5px solid #4CAF50;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .check-icon {
+            color: #4CAF50;
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #D32F2F 0%, #F44336 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .warning-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .price-tag {
+            background: #FFB300;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .step-indicator {
+            background: #2E7D32;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin: 0 auto 15px;
+        }
+
+        .conclusion-panel {
+            background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .conclusion-title {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .cta-button {
+            background: #FFB300;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 20px 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 20px rgba(0,0,0,0.3);
+        }
+
+        .split-panel {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .split-item {
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #2E7D32;
+        }
+
+        .split-item.harare {
+            background: linear-gradient(135deg, #FFB300 0%, #FF8F00 100%);
+            color: white;
+        }
+
+        .split-item.mashonaland {
+            background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%);
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .comic-title {
+                font-size: 1.8rem;
+            }
+            
+            .comic-stats {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .split-panel {
+                grid-template-columns: 1fr;
+            }
+            
+            .panel-image {
+                height: 300px;
+            }
+        }
+
+        .character-intro {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin: 20px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .character-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #2E7D32;
+        }
+
+        .character-info h3 {
+            color: #2E7D32;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="comic-container">
+        <!-- Header -->
+        <div class="comic-header">
+            <h1 class="comic-title">The Complete "Stands" Legal Guide for Zimbabwe 2025</h1>
+            <p class="comic-subtitle">Everything You Need to Know in 2025</p>
+            <div class="comic-stats">
+                <div class="stat-item">🏠 8,000+ Properties</div>
+                <div class="stat-item">👥 2,000+ Agents</div>
+                <div class="stat-item">🌍 80 Cities</div>
+                <div class="stat-item">💰 Average: $109,000</div>
+            </div>
+        </div>
+
+        <div class="comic-content">
+            <!-- Scene 1: Opening -->
+            <div class="comic-panel">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl--lxozcUJEC/add39af76ff861c5746108e59cb0969c6d1a9693017ee513d6a7042a52fc1bb8830afb4b0c43a7b2e150844c66897225ccd863b26292306b7fd283443b9b8686ff5b2b30b6c105d08c1f7259f7d4112dd8843b5d55269c97aec3905c6bc882f9d9b39f2f" alt="Harare Street Scene" class="panel-image">
+                <div class="panel-content">
+                    <div class="speech-bubble narrator">
+                        <strong>In Zimbabwe's booming property market, buying a 'stand' can feel like navigating a legal minefield...</strong>
+                    </div>
+                    <div class="speech-bubble chipo">
+                        <div class="character-name">Chipo</div>
+                        A stand for $109,000? But what exactly am I buying? And why are there so many documents?
+                    </div>
+                    <div class="info-box">
+                        <div class="info-title">💡 Did You Know?</div>
+                        Stands make up 18.7% of Zimbabwe's property market, with 1,456 stands currently available nationwide.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Character Introductions -->
+            <div class="character-intro">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-fG-D9pCffM/d1fccf3ee819a567fc8c185fab78624c71d81f924a4c86b029366a812a71f14d1859354a06deda6d25299c3507c0e8e2e43f45cedbba46b0f2dc4326a1e9f0c1f8c0278c68e3e7c511ac8b5a5600e4655943783f885d895839b3dc267d54af8077e5cf12" alt="Chipo" class="character-avatar">
+                <div class="character-info">
+                    <h3>Meet Chipo</h3>
+                    <p>A young professional ready to buy her first stand in Zimbabwe. She's smart but overwhelmed by the legal complexities.</p>
+                </div>
+            </div>
+
+            <div class="character-intro">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-2D6igmP9g5/a91778515a4e95d856854ecab2a343f5999a44d042ff6e8b54fa55bb388ca62eb390da90440f0f8aac2df487fde287d2410dbd90489a3fadf61896c113e490bc8ae5402a5ba349d2d71b847bb53bff1cf03e319ffa5307b0579bacd1330796e35328d4b4" alt="Mr. Banda" class="character-avatar">
+                <div class="character-info">
+                    <h3>Meet Mr. Banda</h3>
+                    <p>An experienced real estate agent with deep knowledge of Zimbabwe's property laws. He'll be Chipo's guide.</p>
+                </div>
+            </div>
+
+            <!-- Scene 2: Meet the Expert -->
+            <div class="comic-panel">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-nQJQK1xP27/e3309358995627efe89a0e17b6ec2277e2d4a2f2c69b1c8df5a601d5da1b4dd7104970b42287068d3b7dbecd652a9d33704775d1a4b0b7906e8e2cbb95385fa5326d733f7be50970d63d7d29f54664f3f21fc3658d10393b0d7e59e6041567e39424d043" alt="Real Estate Office" class="panel-image">
+                <div class="panel-content">
+                    <div class="speech-bubble banda">
+                        <div class="character-name">Mr. Banda</div>
+                        Let me help you understand stands in Zimbabwe. It's not just land - it's your future home's foundation!
+                    </div>
+                    <div class="speech-bubble chipo">
+                        <div class="character-name">Chipo</div>
+                        I've heard horror stories about property fraud. How do I protect myself?
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scene 3: What Is a Stand? -->
+            <div class="comic-panel">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-mwDo5S5md2/447a1cf6a97f5662d7a02d62cb4b6748757ed4b0ba28fce7a142a682eb511eb094cb3fca504ae8f6f4090e97900a94e58ccd2a175f01673ca056ee080daf4b1f8f99e3bc8cbca3b1bc4e7fb827915ce5ca27511990295fbc6a83b65fbacbcb4aff35d263" alt="Three Types of Stands" class="panel-image">
+                <div class="panel-content">
+                    <div class="speech-bubble narrator">
+                        A 'stand' isn't just any piece of land - it's a legally defined plot with specific zoning...
+                    </div>
+                    <div class="split-panel">
+                        <div class="split-item">
+                            <h4>🏠 Residential Stand</h4>
+                            <p>Land zoned specifically for building homes</p>
+                        </div>
+                        <div class="split-item">
+                            <h4>🏢 Commercial Stand</h4>
+                            <p>Land designated for business premises</p>
+                        </div>
+                    </div>
+                    <div class="split-item" style="grid-column: 1/-1; margin-top: 10px;">
+                        <h4>🏭 Industrial Stand</h4>
+                        <p>Land allocated for manufacturing or industrial activities</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scene 4: Document Detective -->
+            <div class="comic-panel">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-m_rmhr-Apf/cc9ce067a58f7402a32c1ad2cdd5639faa4dfc04d16e917abb958c90ef2d963b879323a8332d99b5d672b0ac223f052ce47779f89cf4a02c9eba1613a4f03bff2de931089c0569c56db1e4192d5ad23d0a1d48c34d4f3d6fc6b98366bae26db788a7f6a2" alt="Document Detective" class="panel-image">
+                <div class="panel-content">
+                    <div class="speech-bubble banda">
+                        <div class="character-name">Mr. Banda</div>
+                        Think of these documents as your property's DNA - each one tells part of the story.
+                    </div>
+                    <div class="speech-bubble chipo">
+                        <div class="character-name">Chipo</div>
+                        So the Title Deed is the most important?
+                    </div>
+                    <div class="speech-bubble banda">
+                        <div class="character-name">Mr. Banda</div>
+                        Exactly! It's the gold standard proof of ownership.
+                    </div>
+                    <div class="checklist">
+                        <h4>Essential Documents Checklist:</h4>
+                        <div class="checklist-item">
+                            <span class="check-icon">✓</span>
+                            <strong>Title Deed</strong> - The gold standard document showing legal ownership
+                        </div>
+                        <div class="checklist-item">
+                            <span class="check-icon">✓</span>
+                            <strong>Valid Offer or Allocation Letter</strong> - Often used with newly subdivided stands
+                        </div>
+                        <div class="checklist-item">
+                            <span class="check-icon">✓</span>
+                            <strong>Approved Subdivision Permit</strong> - Required when a larger plot has been divided
+                        </div>
+                        <div class="checklist-item">
+                            <span class="check-icon">✓</span>
+                            <strong>Approved Survey Diagrams</strong> - Shows exact boundaries and dimensions
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scene 5: Infrastructure Check -->
+            <div class="comic-panel">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-z85byst6bs/911d213e8538dfa14945c4f27951938e93d3d28dc51bfb4de1e352d7950e2f35e7135f5815a3cca1afa3b231ad8d206ccaac2594e006bde2c2dace7768e4725d0d64e33106dd361798668877852ad5b7d2eb7cc16ca57d6fb1c5c3724e2caa6a494a2fca" alt="Infrastructure Check" class="panel-image">
+                <div class="panel-content">
+                    <div class="speech-bubble chipo">
+                        <div class="character-name">Chipo</div>
+                        How do I know if the infrastructure is really there?
+                    </div>
+                    <div class="speech-bubble banda">
+                        <div class="character-name">Mr. Banda</div>
+                        Always verify! Look for the Certificate of Compliance from the local council.
+                    </div>
+                    <div class="checklist">
+                        <h4>Infrastructure Verification:</h4>
+                        <div class="checklist-item">
+                            <span class="check-icon">✓</span>
+                            <strong>Water Access</strong> - Verify water pipe connections
+                        </div>
+                        <div class="checklist-item">
+                            <span class="check-icon">✓</span>
+                            <strong>Electricity</strong> - Check for electrical pole access
+                        </div>
+                        <div class="checklist-item">
+                            <span class="check-icon">✓</span>
+                            <strong>Sewage System</strong> - Confirm sewage connections
+                        </div>
+                        <div class="checklist-item">
+                            <span class="check-icon">✓</span>
+                            <strong>Road Access</strong> - Ensure proper road connectivity
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scene 6: Purchase Process -->
+            <div class="comic-panel">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-raDGUOeh9h/bebfa038c7bd1fa0599a8bd2f38a35581f24dcc028acfb3812e7f7f94cbdb16be16c35c96004f88245e4bce98ea633e4e70dc0866f8536b13cb39ea16671f6a7fc5cd3acbc8c39fa5c88f5d3c74ff1a8ce4d3a87dd42bc84edd9ec2d755f4982835e8c76" alt="Purchase Process Journey" class="panel-image">
+                <div class="panel-content">
+                    <div class="speech-bubble narrator">
+                        The journey from interest to ownership has specific legal waypoints...
+                    </div>
+                    <div style="display: flex; justify-content: space-around; margin: 20px 0;">
+                        <div style="text-align: center;">
+                            <div class="step-indicator">1</div>
+                            <strong>Due Diligence</strong>
+                            <p>Research & Verify</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <div class="step-indicator">2</div>
+                            <strong>Agreement of Sale</strong>
+                            <p>Legal Contract</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <div class="step-indicator">3</div>
+                            <strong>Payment & Transfer</strong>
+                            <p>Deeds Registry</p>
+                        </div>
+                    </div>
+                    <div class="info-box">
+                        <div class="info-title">⏱️ Timeline</div>
+                        The typical stand transfer process takes 3-6 months, depending on complexity and local authority efficiency.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scene 7: Regional Differences -->
+            <div class="comic-panel">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-YcCX6e7zXF/cd0750b3007bf57a8409ccc3040685b5b600c07e33dad3031f8f818f7c785ca02ac82a0578d0c1a4a9eeab1e6368925f9c5d81d8be21ae4da23f9f467c3f0934467c75abb9399efd0cf6dfb17bc2b2cd47fba908a1f87228d937da7eb9d241654c33473d" alt="Regional Map" class="panel-image">
+                <div class="panel-content">
+                    <div class="speech-bubble banda">
+                        <div class="character-name">Mr. Banda</div>
+                        Remember, Chipo - Zimbabwe isn't uniform. Harare stands cost double what you'd pay in Mashonaland East!
+                    </div>
+                    <div class="split-panel">
+                        <div class="split-item harare">
+                            <h4>🏙️ Harare Metropolitan</h4>
+                            <div class="price-tag">Average: $123,000</div>
+                            <div class="price-tag">Per m²: $53</div>
+                            <p>Urban setting with formal processes and higher prices</p>
+                        </div>
+                        <div class="split-item mashonaland">
+                            <h4>🌾 Mashonaland East</h4>
+                            <div class="price-tag">Average: $54,000</div>
+                            <div class="price-tag">Per m²: $38</div>
+                            <p>Rural setting with more affordable options</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scene 8: Fraud Warning -->
+            <div class="comic-panel">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-oQ5UnV5Xod/86a489be967fd416a62f6b2cd41fe62cbcc11b36a521d3dd0f02d904e39d4d7b699aa32d12f43b895578e61271d510715476946532c5ed7776f64d628e522b412243d38982fe430118c260c7776c9b22c2a8fd9cf2cd81a9cf9a25420871ba9b4d60fbfb" alt="Fraud Warning" class="panel-image">
+                <div class="panel-content">
+                    <div class="speech-bubble banda">
+                        <div class="character-name">Mr. Banda</div>
+                        With stands averaging $109,000, fraudsters see opportunity. Always verify the seller's identity!
+                    </div>
+                    <div class="speech-bubble chipo">
+                        <div class="character-name">Chipo</div>
+                        That's terrifying! How common is this?
+                    </div>
+                    <div class="warning-box">
+                        <div class="warning-title">⚠️ Fraud Prevention</div>
+                        <ul style="margin-left: 20px;">
+                            <li>Verify seller's identity with government-issued ID</li>
+                            <li>Conduct title deed search at Deeds Registry Office</li>
+                            <li>Use a reputable lawyer for all transactions</li>
+                            <li>Never pay cash without proper documentation</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scene 9: Boundary Disputes -->
+            <div class="comic-panel">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-_yR6cvyPID/08d71f2548d2376ada998f0c39fbee22cdf13d3511a2ebc43c341dc9af124efb00ce10d1f6bf8764e42c428f476866d7cffc6e4f2e3dbd1e1b5077844df4355cf2f3513a4393bf2720bc954cfe136447aaa3114d5ab5210ffd7130c74347a7e5f276a808" alt="Boundary Dispute" class="panel-image">
+                <div class="panel-content">
+                    <div class="speech-bubble narrator">
+                        Boundary disputes can turn your dream purchase into a nightmare...
+                    </div>
+                    <div class="speech-bubble" style="background: #ffebee; border-color: #f44336;">
+                        <div class="character-name" style="color: #f44336;">Neighbor 1</div>
+                        This fence has been here for 10 years!
+                    </div>
+                    <div class="speech-bubble" style="background: #ffebee; border-color: #f44336;">
+                        <div class="character-name" style="color: #f44336;">Neighbor 2</div>
+                        But it's 2 meters onto my property!
+                    </div>
+                    <div class="speech-bubble" style="background: #e8f5e8; border-color: #4caf50;">
+                        <div class="character-name" style="color: #4caf50;">Surveyor</div>
+                        The official survey doesn't lie...
+                    </div>
+                    <div class="info-box">
+                        <div class="info-title">🛡️ Protection Tips</div>
+                        <ul style="margin-left: 20px;">
+                            <li>Commission professional land survey before purchase</li>
+                            <li>Walk boundaries with seller and neighbors</li>
+                            <li>Check survey diagrams against physical markers</li>
+                            <li>Include exact boundary descriptions in purchase agreement</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scene 10: Hidden Costs -->
+            <div class="comic-panel">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl--Dgyc1cgHM/6bfe30f1eaef1d36e6bc132f07f710664acf7caa3ab95f7817f9446ca1d3388a80286dd82b37c3bf4b79cdf61a411693cf319f672cad075b8bac8291a813859640670fc28e1f76b90dfc584e17598fc1e34d5e10552aaadb8952d046f04731d39e00da06" alt="Hidden Costs Storm" class="panel-image">
+                <div class="panel-content">
+                    <div class="speech-bubble chipo">
+                        <div class="character-name">Chipo</div>
+                        I budgeted for the stand price, but all these other costs!
+                    </div>
+                    <div class="speech-bubble banda">
+                        <div class="character-name">Mr. Banda</div>
+                        That's why we plan for transfer fees, stamp duty, and legal costs upfront.
+                    </div>
+                    <div class="warning-box">
+                        <div class="warning-title">💰 Additional Costs to Budget For</div>
+                        <ul style="margin-left: 20px;">
+                            <li>Capital Gains Tax clearance (paid by seller)</li>
+                            <li>Property transfer tax (typically 1-4% of purchase price)</li>
+                            <li>Conveyancing fees (legal fees for property transfer)</li>
+                            <li>Lodging fees at Deeds Registry Office</li>
+                            <li>Survey costs and inspections</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scene 11: Financing Options -->
+            <div class="comic-panel">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-tEp0xXnQHb/50897d7c97bad4cd425cad4a0c15d757d5fdc3a3bb2a30ec35c88eb55d055dd5ff5e93d67bacaf510a4159f6857778bde125541a524c7541c1f46c5145bfbf23604977c072524574912ed2ff2764c477930533f703c4872711a4de6497819f534ec4f0e5" alt="Financing Balance Scale" class="panel-image">
+                <div class="panel-content">
+                    <div class="speech-bubble" style="background: #e3f2fd; border-color: #2196f3;">
+                        <div class="character-name" style="color: #2196f3;">Bank Officer</div>
+                        We'll need perfect title deeds for the loan...
+                    </div>
+                    <div class="speech-bubble" style="background: #f3e5f5; border-color: #9c27b0;">
+                        <div class="character-name" style="color: #9c27b0;">Developer</div>
+                        Our payment plan is flexible, but ownership transfers only after final payment.
+                    </div>
+                    <div class="split-panel">
+                        <div class="split-item">
+                            <h4>🏦 Bank Loans</h4>
+                            <ul>
+                                <li>5-20 year terms</li>
+                                <li>Requires perfect title deeds</li>
+                                <li>Stand serves as collateral</li>
+                                <li>Traditional approval process</li>
+                            </ul>
+                        </div>
+                        <div class="split-item">
+                            <h4>🏗️ Developer Financing</h4>
+                            <ul>
+                                <li>Flexible payment plans</li>
+                                <li>Ownership after final payment</li>
+                                <li>May have stricter default terms</li>
+                                <li>Always review with lawyer</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scene 12: Building Dreams -->
+            <div class="comic-panel">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-Gx-LpBh47Z/a771f14258d87d44725e07bc1d97ec802a191fa164b0b108ab564d7bbc522584408606cd5e788c03b5132a554c8b7252c81dbdf9995422733de77935ac83b5e738049916e04f399827423f5eebc6b11c4dc00bb87354d30f23a906510383dbb0afdb3d3e" alt="Building Dreams" class="panel-image">
+                <div class="panel-content">
+                    <div class="speech-bubble chipo">
+                        <div class="character-name">Chipo</div>
+                        I own the stand, but building brings new legal requirements!
+                    </div>
+                    <div class="speech-bubble banda">
+                        <div class="character-name">Mr. Banda</div>
+                        Building permits, environmental assessments, regular inspections - it's all part of the journey.
+                    </div>
+                    <div class="checklist">
+                        <h4>Building Requirements:</h4>
+                        <div class="checklist-item">
+                            <span class="check-icon">✓</span>
+                            <strong>Building Plans Approval</strong> - Must be approved by local authority
+                        </div>
+                        <div class="checklist-item">
+                            <span class="check-icon">✓</span>
+                            <strong>Environmental Assessment</strong> - May be required for larger projects
+                        </div>
+                        <div class="checklist-item">
+                            <span class="check-icon">✓</span>
+                            <strong>Development Timeline</strong> - Must begin within 2-5 years of purchase
+                        </div>
+                        <div class="checklist-item">
+                            <span class="check-icon">✓</span>
+                            <strong>Regular Inspections</strong> - Required at various construction stages
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scene 13: Dispute Resolution -->
+            <div class="comic-panel">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-hrlZa72UC7/acc70aa06d1f60952f72d2b4e376483c45515bf499369444d6b2595730aeb27b73df3b4335ff9b8e8d3eeb1f04faf169998bde9f3a5fe328439177c1c2327fb62f4ddc9d7d48719d5e978d2c730085f55c184461103dbc1327b1fb583c224876c49a7dce" alt="Dispute Resolution Stages" class="panel-image">
+                <div class="panel-content">
+                    <div class="speech-bubble narrator">
+                        When disputes arise, you have options - from friendly negotiation to formal legal proceedings...
+                    </div>
+                    <div style="display: flex; justify-content: space-around; margin: 20px 0;">
+                        <div style="text-align: center;">
+                            <div class="step-indicator" style="background: #4CAF50;">1</div>
+                            <strong>Negotiation</strong>
+                            <p>Direct discussion</p>
+                            <p>💰 Low cost</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <div class="step-indicator" style="background: #FF9800;">2</div>
+                            <strong>Mediation</strong>
+                            <p>Third party help</p>
+                            <p>💰💰 Medium cost</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <div class="step-indicator" style="background: #F44336;">3</div>
+                            <strong>Court</strong>
+                            <p>Legal proceedings</p>
+                            <p>💰💰💰 High cost</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scene 14: Expert Tips -->
+            <div class="comic-panel">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-Rqse2CeyQy/35e923d9ffd4fbdee13976d38eeec269c51124842cd0537f41837121545de85c199fcf7884063dc0d9b8cf5229b8c13f9a609d877037fcbfa174e4fbf6faf5340e02a7e2a3560eb782da57216fbc99ef9e6b759ed4939a6b1b86611f26b5f132866333fd" alt="Expert Tips Checklist" class="panel-image">
+                <div class="panel-content">
+                    <div class="speech-bubble banda">
+                        <div class="character-name">Mr. Banda</div>
+                        Follow these five golden rules, and you'll navigate the market like a pro!
+                    </div>
+                    <div class="checklist">
+                        <h4>🌟 Mr. Banda's Golden Rules:</h4>
+                        <div class="checklist-item">
+                            <span class="check-icon">🔍</span>
+                            <strong>Always verify ownership</strong> - The median $55,000 is too much to risk to fraud
+                        </div>
+                        <div class="checklist-item">
+                            <span class="check-icon">💰</span>
+                            <strong>Budget for all costs</strong> - Plan for transfer fees, stamp duty, and legal fees
+                        </div>
+                        <div class="checklist-item">
+                            <span class="check-icon">👀</span>
+                            <strong>Visit personally</strong> - Never purchase a stand you haven't inspected
+                        </div>
+                        <div class="checklist-item">
+                            <span class="check-icon">🏘️</span>
+                            <strong>Research the neighborhood</strong> - Check amenities and development plans
+                        </div>
+                        <div class="checklist-item">
+                            <span class="check-icon">👨‍💼</span>
+                            <strong>Consult professionals</strong> - Expert guidance is invaluable
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scene 15: Success Story -->
+            <div class="comic-panel">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-MAZbjK2DQe/00cdd68b0ca013150a300ffff6c33c71ca4cf6727670ea357f462d66942510fcf9574ad606a11cbf0d33ac378a08e84dfa52a08324f90a3e846d6293e459231cf5a625b2dea941a890cd1814b5f7cc97e009c637249e5536f36a6ed53dfc72503be20f68" alt="Success Story" class="panel-image">
+                <div class="panel-content">
+                    <div class="speech-bubble chipo">
+                        <div class="character-name">Chipo</div>
+                        Thanks to proper legal preparation, my dream became reality!
+                    </div>
+                    <div class="speech-bubble narrator">
+                        With the right knowledge and professional guidance, your perfect stand awaits on solid legal ground.
+                    </div>
+                    <div class="info-box" style="background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%);">
+                        <div class="info-title">🎉 One Year Later</div>
+                        Chipo successfully navigated the legal process, avoided all pitfalls, and now owns her dream home. Her investment of time in understanding the law paid off tremendously!
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scene 16: Call to Action -->
+            <div class="comic-panel">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl--aA-sILJFG/35efd382fd1b7e906c763f5906915e1c97ef360b65f9b8d52ca75d112914055b886f20f17a12b11ad026d1f4c4e19fc01e8d354ef336b79af091617e5b6bc4260ccfe079551c023e28f63638580adab6c86f6d666428df1d97efe6629e8e532da30ce9e5" alt="Property Website Interface" class="panel-image">
+                <div class="panel-content">
+                    <div class="speech-bubble narrator">
+                        Ready to find your perfect stand? Visit Propertybook and connect with verified agents across Zimbabwe.
+                    </div>
+                    <div class="info-box">
+                        <div class="info-title">🌐 Get Started Today</div>
+                        <p>Visit <strong>www.propertybook.co.zw</strong> to:</p>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>Browse 8,000+ verified properties</li>
+                            <li>Connect with 2,000+ trusted agents</li>
+                            <li>Access properties in 80+ cities and towns</li>
+                            <li>Get expert legal guidance throughout your journey</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Conclusion -->
+        <div class="conclusion-panel">
+            <h2 class="conclusion-title">Your Property Journey Starts Here</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 20px;">
+                Armed with this legal knowledge, you're now better positioned to navigate Zimbabwe's stand market with confidence.
+            </p>
+            <p style="margin-bottom: 30px;">
+                Remember that each region has its nuances, and professional guidance is invaluable. 
+                Proper legal preparation now will save you countless headaches down the road.
+            </p>
+            <button class="cta-button" onclick="window.open('http://www.propertybook.co.zw', '_blank')">
+                🏠 Find Your Perfect Stand
+            </button>
+            <button class="cta-button" onclick="alert('Contact a verified agent near you!')">
+                👥 Connect with Agents
+            </button>
+            <div style="margin-top: 30px; font-size: 0.9rem; opacity: 0.9;">
+                <p><strong>Disclaimer:</strong> This comic provides general information about Zimbabwe's property laws. 
+                Always consult with qualified legal professionals for specific situations.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add some interactivity
+        document.addEventListener('DOMContentLoaded', function() {
+            // Smooth scrolling for better reading experience
+            const panels = document.querySelectorAll('.comic-panel');
+            
+            // Add animation on scroll
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.transform = 'translateY(0)';
+                        entry.target.style.opacity = '1';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            panels.forEach(panel => {
+                panel.style.transform = 'translateY(50px)';
+                panel.style.opacity = '0';
+                panel.style.transition = 'transform 0.6s ease, opacity 0.6s ease';
+                observer.observe(panel);
+            });
+
+            // Add click handlers for interactive elements
+            document.querySelectorAll('.speech-bubble').forEach(bubble => {
+                bubble.addEventListener('click', function() {
+                    this.style.transform = 'scale(1.02)';
+                    setTimeout(() => {
+                        this.style.transform = 'scale(1)';
+                    }, 200);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time to Secure Your Future: Zimbabwe's New Title Deeds Law</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bangers&family=Open+Sans:wght@400;600;700&display=swap');
+        
+        :root {
+            --deep-blue: #0F4C75;
+            --golden-amber: #F39C12;
+            --zimbabwe-red: #E74C3C;
+            --warm-beige: #F5E6D3;
+            --dark-green: #27AE60;
+            --text-dark: #2C3E50;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: linear-gradient(135deg, var(--warm-beige), #fff);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .comic-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Comic Title */
+        .comic-title {
+            text-align: center;
+            background: linear-gradient(45deg, var(--deep-blue), var(--golden-amber));
+            color: white;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .comic-title::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255,255,255,0.1) 10px,
+                rgba(255,255,255,0.1) 20px
+            );
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .comic-title h1 {
+            font-family: 'Bangers', cursive;
+            font-size: 3.5rem;
+            text-shadow: 3px 3px 0px var(--zimbabwe-red);
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .comic-title p {
+            font-size: 1.2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Panel Layouts */
+        .comic-page {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            border: 3px solid var(--deep-blue);
+        }
+
+        .panel-grid {
+            display: grid;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .single-panel {
+            grid-template-columns: 1fr;
+        }
+
+        .double-panel {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .triple-panel {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .panel {
+            background: white;
+            border: 4px solid var(--text-dark);
+            border-radius: 10px;
+            padding: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .panel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 2px,
+                rgba(0,0,0,0.05) 2px,
+                rgba(0,0,0,0.05) 4px
+            );
+            pointer-events: none;
+        }
+
+        .panel img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .wide-panel img {
+            height: 300px;
+        }
+
+        .tall-panel img {
+            height: 350px;
+        }
+
+        /* Speech Bubbles */
+        .speech-bubble {
+            background: white;
+            border: 3px solid var(--text-dark);
+            border-radius: 20px;
+            padding: 12px 16px;
+            margin: 10px 0;
+            position: relative;
+            font-weight: 600;
+        }
+
+        .speech-bubble::before {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 30px;
+            width: 0;
+            height: 0;
+            border-left: 12px solid transparent;
+            border-right: 12px solid transparent;
+            border-top: 12px solid var(--text-dark);
+        }
+
+        .speech-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -9px;
+            left: 32px;
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 10px solid white;
+        }
+
+        .thought-bubble {
+            background: var(--warm-beige);
+            border: 3px solid var(--deep-blue);
+            border-radius: 25px;
+            padding: 12px 16px;
+            margin: 10px 0;
+            position: relative;
+            font-style: italic;
+        }
+
+        .narrator-box {
+            background: linear-gradient(135deg, var(--golden-amber), #F8C471);
+            border: 3px solid var(--deep-blue);
+            border-radius: 15px;
+            padding: 15px;
+            margin: 15px 0;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Character Names */
+        .character-name {
+            font-family: 'Bangers', cursive;
+            font-size: 1.1rem;
+            color: var(--deep-blue);
+            margin-bottom: 5px;
+        }
+
+        /* Info Boxes */
+        .info-box {
+            background: linear-gradient(135deg, var(--deep-blue), #1B4F72);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border: 4px solid var(--golden-amber);
+        }
+
+        .info-box h3 {
+            font-family: 'Bangers', cursive;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--golden-amber);
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, var(--zimbabwe-red), #C0392B);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border: 4px solid #F1C40F;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        .success-box {
+            background: linear-gradient(135deg, var(--dark-green), #229954);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border: 4px solid var(--golden-amber);
+        }
+
+        /* Steps List */
+        .steps-list {
+            background: white;
+            border: 3px solid var(--deep-blue);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 15px;
+            background: var(--warm-beige);
+            border-radius: 10px;
+            border-left: 5px solid var(--golden-amber);
+        }
+
+        .step-number {
+            background: var(--deep-blue);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+            font-family: 'Bangers', cursive;
+            font-size: 1.2rem;
+        }
+
+        /* Countdown Timer */
+        .countdown {
+            background: linear-gradient(45deg, var(--zimbabwe-red), #E67E22);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            font-family: 'Bangers', cursive;
+            font-size: 2rem;
+            text-shadow: 2px 2px 0px rgba(0,0,0,0.5);
+            animation: urgentPulse 1.5s infinite;
+        }
+
+        @keyframes urgentPulse {
+            0%, 100% { background: linear-gradient(45deg, var(--zimbabwe-red), #E67E22); }
+            50% { background: linear-gradient(45deg, #C0392B, var(--zimbabwe-red)); }
+        }
+
+        /* Contact Info */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .contact-card {
+            background: white;
+            border: 3px solid var(--deep-blue);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .contact-card h4 {
+            color: var(--deep-blue);
+            font-family: 'Bangers', cursive;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        /* Call to Action */
+        .cta-button {
+            background: linear-gradient(45deg, var(--golden-amber), #F7DC6F);
+            color: var(--deep-blue);
+            padding: 20px 40px;
+            border: none;
+            border-radius: 25px;
+            font-family: 'Bangers', cursive;
+            font-size: 1.8rem;
+            text-decoration: none;
+            display: inline-block;
+            margin: 20px 10px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            border: 4px solid var(--deep-blue);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.4);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .comic-title h1 {
+                font-size: 2.5rem;
+            }
+            
+            .double-panel,
+            .triple-panel {
+                grid-template-columns: 1fr;
+            }
+            
+            .panel img {
+                height: 200px;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .highlight {
+            background: var(--golden-amber);
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+
+        .urgent {
+            color: var(--zimbabwe-red);
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="comic-container">
+        <!-- Comic Cover -->
+        <div class="comic-title">
+            <h1>TIME TO SECURE YOUR FUTURE</h1>
+            <p>Zimbabwe's New Title Deeds Law: You Have 24 Months to Act!</p>
+        </div>
+
+        <!-- Opening Scene -->
+        <div class="comic-page">
+            <div class="panel-grid single-panel">
+                <div class="panel wide-panel">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-TnZhh4kOyl/3b3933a8d6cda4123d7a78dcb744f8807827ca8d7b24de0b940446bcf11ba62ab6911670f3c5eeab48d3b165ba63c57373603170a4df7be2c35d63f650d737877fdfa42e51395e7e521387173d9096117969c622f711972e5d1b322b4ba89126e8a53386" alt="News Anchor Announcement">
+                    <div class="narrator-box">
+                        "Across Zimbabwe, a new law is changing how we protect our most valuable possessions..."
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Family Introduction -->
+        <div class="comic-page">
+            <div class="panel-grid double-panel">
+                <div class="panel">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-S0FiAfM0bd/d74b3aa6763e3922cf771a0d769397bfd2539fb0f58e35a8323ffba1c6797c55184618ece6c967fea82b4df5883fdee92bbf4f2f5a4381a999d4963be2ecf5713fb925b862a09232860f30200206d69ce67cb0bdc9719a91a47b989cb98192a595ee7b3e" alt="Family Living Room Reaction">
+                    <div class="character-name">FATHER:</div>
+                    <div class="speech-bubble">"Baba, what does this mean for our house?"</div>
+                    <div class="character-name">GRANDMOTHER:</div>
+                    <div class="speech-bubble">"I've had these papers since 1987..."</div>
+                </div>
+                <div class="panel">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-zfohnqMDtq/f0d1ebd4246b11a346acfe3266c2b153568da11799b9c8e30addadd3da4830476f6b0dfcf0315c2c6a14ee9f9c9e370b9f4fb59ff015205662fdb665166bbc19214941aff76119cf285496722d5b88d6fc07e9e9529327dc7840f1e66314f7b0e69e0f99" alt="Examining Old Title Deeds">
+                    <div class="narrator-box">
+                        The Mukamuri family, like thousands of others, holds onto papers that prove their home belongs to them.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- The Countdown Begins -->
+        <div class="countdown">
+            ⏰ 24 MONTHS TO REPLACE YOUR TITLE DEEDS ⏰
+        </div>
+
+        <!-- Understanding Title Deeds -->
+        <div class="comic-page">
+            <div class="info-box">
+                <h3>📜 What Are Title Deeds?</h3>
+                <p>Think of title deeds like a <strong>birth certificate for your property</strong>. Without them, you can't prove it's yours!</p>
+            </div>
+            
+            <div class="panel-grid single-panel">
+                <div class="panel">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-GvTR5h62jO/57a0617e90395ad868f598bfa66ed1a7520854ca70164432349b84074eecda8846aae79704a4efa67dfe02fb82922b9ebad2da97237db0e5001f346454aabd2ba274ed779abd24e197cd1ddd1b0a5ac4974e814a39cf86c4164c74d1db4e0efcfc112d6c" alt="Birth Certificate Property Metaphor">
+                    <div class="narrator-box">
+                        Only the Deeds Registry Office can issue official title deeds in Zimbabwe.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- The Problem -->
+        <div class="comic-page">
+            <div class="warning-box">
+                <h3>⚠️ THE PROBLEM</h3>
+                <p>Too many Zimbabweans have lost their life savings to criminals with <span class="highlight">fake title deeds</span>!</p>
+            </div>
+            
+            <div class="panel-grid double-panel">
+                <div class="panel">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-GQX7sxWQHi/dbf5fba1356f634685466a5fb7948c444c0643d42ef02f2afd51768807f89f215d73d8a62ccc97964c9ff909df1bf0c8defc9d80a3510dcd243bdcbcf6572abac2d9cf5100d4529ed297065bbb390e42665cb31f3d359d7f8fbc5d1e8d88a49a2391a4da" alt="Document Fraud Warning Scene">
+                    <div class="narrator-box">
+                        Criminals have been creating fake documents to steal property...
+                    </div>
+                </div>
+                <div class="panel">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-DFjrYaNQE8/c6338d66dacef9e609fd705906cb37fa0f363f90845c25fb8c5fb76c2d0f346eeff247d1d083a5072fbddfa820b4acd0f1c82f6085b758fabe9d27118ecaf6c464bae26a4992e2f8171600f46b6ff99253275b44df5514c30ec49a3eb07b3daa9db49" alt="Old vs New Title Deeds Comparison">
+                    <div class="narrator-box">
+                        The new "securitised" deeds are stored on computer and printed on special security paper that's nearly impossible to fake.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Taking Action -->
+        <div class="comic-page">
+            <div class="panel-grid double-panel">
+                <div class="panel">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-vNa2QcCsBd/d83cfb945930bb367f5ecb8157a6cb4219a2b83e69abe76526e41d96ca532b6511af82621e88fe85c21c9be8900d012bf726c29b603282c073003ae1c7a31ea4c586ac01523082c11644035033d051635e0fc1df888a973c4fa70fb4212e6cf2bf67b87e" alt="Family Action Planning">
+                    <div class="character-name">FATHER:</div>
+                    <div class="speech-bubble">"We won't wait until the last minute. Let's start this process now."</div>
+                    <div class="character-name">MOTHER:</div>
+                    <div class="speech-bubble">"What do we need to do first?"</div>
+                </div>
+                <div class="panel">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-xbZGuTyLJM/322004a0ee87bd1f5898fd8f0bc877f3fa25f26e3e4d09038f2974ea61565d0073c4b9d5c32f3f30adfaf5b3e6218b5be983db9c700d3cfaa718a0204575cb18cff91ea0cd733a5c2f8bc90e6fe3678252454d0777a75a240ee4dbf618b4221beab9dbd8" alt="Document Gathering Montage">
+                    <div class="narrator-box">
+                        Step 1: Gather all your important documents - original title deeds, national IDs, and any related paperwork.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- The 5-Step Process -->
+        <div class="comic-page">
+            <div class="info-box">
+                <h3>🗂️ THE 5-STEP PROCESS</h3>
+            </div>
+            
+            <div class="steps-list">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div>
+                        <strong>PREPARE:</strong> Gather original title deeds, national ID, and supporting documents
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div>
+                        <strong>VISIT:</strong> Go to Deeds Registry Office in Harare or Bulawayo
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div>
+                        <strong>VERIFY:</strong> Officials check your documents are authentic
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div>
+                        <strong>WAIT:</strong> Processing takes 6 weeks to several months
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <div>
+                        <strong>EXCHANGE:</strong> Receive new securitised deed for old one
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- The Journey -->
+        <div class="comic-page">
+            <div class="panel-grid triple-panel">
+                <div class="panel">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-WTWzZ7-Uy_/3b5c30bf473e52c129c3a2ca2149554771973a6b20e4413ec21b8db14e3150f931b246b1398c2929fe80e4e7d47db5db45b5707fcffbfc3197b14dcb5a4bb9145ff45b0c96cb37d46c3358ef087994c8b26009f06483402006130391e46592847517511c" alt="Journey to Government Office">
+                    <div class="narrator-box">
+                        Step 2: Take your documents to the nearest Deeds Registry Office.
+                    </div>
+                </div>
+                <div class="panel">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-pgMoC5H8S8/ccfaecc69b15176f3eb9d62e86406d9d87bd612ca8bc22b3eef8732380c744d638305a7b6b6f4e882f55bd76d81c232d37fdcd37c8e72b185f704acc6ee310ea44497c4cae8c385c11a954914e52684f49f71f79add53c77f51cc626e5c39369f2d6748a" alt="Government Official Meeting">
+                    <div class="character-name">OFFICIAL:</div>
+                    <div class="speech-bubble">"Everything looks good here. Now we begin the verification process."</div>
+                </div>
+                <div class="panel">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-A8OI2pRBtA/9ef4651eac7aa2c72dc3c01997bd0513a327552f17c0f5805f8f18f427d17185809da2d528034ea252b1b34125c65b75d8e99f49a1b6c8dadcf82f0674c20c1a5068268a5df43b51c69e0cd9109851e9fae8e0bfffa387cd777c99d66d7490990f3b532c" alt="Processing Time Calendar">
+                    <div class="narrator-box">
+                        Step 4: Be patient. The verification process takes 6 weeks to several months.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Success Story -->
+        <div class="comic-page">
+            <div class="panel-grid double-panel">
+                <div class="panel">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-XChrnwM1wR/5f072732cede8c0f40dd4e390bfa01a263520243a919d27f09371588f97ec5fce03178edaf6804ba7db081b0479dd5963a866aaf3fd17ed901ff3a134f275fc7ad57b54fd26d0a64a3a072c0e47a17e303b9206324e3ca8232495b803f989aee143a3feb" alt="Official Document Exchange">
+                    <div class="character-name">OFFICIAL:</div>
+                    <div class="speech-bubble">"Here's your new securitised title deed. Please hand over your old deed."</div>
+                    <div class="character-name">FATHER:</div>
+                    <div class="speech-bubble">"Thank you. Our property is now protected."</div>
+                </div>
+                <div class="panel">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-qE027vWnxr/b8ac43ae729ee2ed19e71cc44010cef1e8c84275174930fc15881b1ceb0e23a1a4fcea5de98398b955f0f982e2af1bf50ce8a2e475a362a5edc86cc5acc97827d910c513dcf72245c5947cabe6e549cebe5aaea34758b4540a4d5b365b6aef8d6f989433" alt="Bank Loan Approval Scene">
+                    <div class="character-name">BANKER:</div>
+                    <div class="speech-bubble">"With your updated title deed, we can approve your business loan immediately."</div>
+                </div>
+            </div>
+            
+            <div class="success-box">
+                <h3>✅ BENEFITS OF THE NEW SYSTEM</h3>
+                <p>• <strong>Enhanced Security:</strong> Nearly impossible to counterfeit<br>
+                • <strong>Digital Storage:</strong> Protected by computer systems<br>
+                • <strong>Faster Transactions:</strong> Easier property sales and loans<br>
+                • <strong>Fraud Prevention:</strong> Protects your investment</p>
+            </div>
+        </div>
+
+        <!-- Warning: Don't Wait -->
+        <div class="comic-page">
+            <div class="warning-box">
+                <h3>⚠️ DON'T BE LIKE THE CHIFAMBA FAMILY!</h3>
+                <p>They waited too long and now face stress and long queues...</p>
+            </div>
+            
+            <div class="panel-grid double-panel">
+                <div class="panel">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-YC2-r8En5S/6558014f2da0aba22b9ad1feb4c7d5cb82fa556e3912eff193c802a9493a3e3591c880172b63875188bf8e81cb1ac22db41ff59fa67bcd9b3084f7cf84169236ed2516df9ddfba724741c3a8befc0dd5fddcc6301acf0b3554bc65cecbdccaec9122d36b" alt="Procrastinator Family Stress">
+                    <div class="narrator-box">
+                        Meanwhile, the Chifamba family waited too long...
+                    </div>
+                </div>
+                <div class="panel">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-oyx1ghysHM/63c07a33f57935cbb07e0ef676aaa48165b4b766cc5ba63e106f53a5e9885834cc2b964f245c1d9bc8b66c1649f8a5aaa0aaec336a1a07eed9c1eb00a6a3d172a93e5e63d9173f48893f177a62af954c5078afbbb8cd37d290158db7c88f5c6d9aed67a6" alt="Long Office Queue Rush">
+                    <div class="character-name">PERSON IN LINE:</div>
+                    <div class="speech-bubble">"I wish I had started this process months ago!"</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- The Choice -->
+        <div class="comic-page">
+            <div class="panel-grid single-panel">
+                <div class="panel wide-panel">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-xLgD8aO8Az/8540bdbaab9d2e6abfb3c0b131d1c6a13856dc2541f4613426dbbbbdeceb2ded61b22e88de42bbb5c63455b4e1dc9da6b2793923a581ffc63f58ca19d07c75305424f496a2570fa4eaafa977ce4f0c4750d881471642ac817b383866cafbdbbb36f49656" alt="Choice Path Comparison">
+                    <div class="narrator-box">
+                        The choice is yours: Start now while offices aren't busy, or stress later when time runs out.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Community Action -->
+        <div class="comic-page">
+            <div class="panel-grid single-panel">
+                <div class="panel wide-panel">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-phwo0syU7t/509bc750141a619c629379309e8b6b14daeb58dc7980b43ec4313f280630a02b21c4832e75fc6f2499f82d369cdd5f35009049f22ef5b680158e3e55fc65b5fac4f444ebc3527c1d4a9dd8a439b5f03de3c726618ee4171718d5b769d6b056a13747045c" alt="Community Information Sharing">
+                    <div class="character-name">COMMUNITY LEADER:</div>
+                    <div class="speech-bubble">"Let's all help each other get this done. Share this information with everyone you know."</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Essential Information -->
+        <div class="comic-page">
+            <div class="info-box">
+                <h3>📋 ESSENTIAL INFORMATION</h3>
+            </div>
+            
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <h4>⏰ DEADLINE</h4>
+                    <p><strong class="urgent">24 months</strong> from law enactment</p>
+                </div>
+                <div class="contact-card">
+                    <h4>🏢 OFFICES</h4>
+                    <p>Harare and Bulawayo<br>Deeds Registry</p>
+                </div>
+                <div class="contact-card">
+                    <h4>⏱️ PROCESSING TIME</h4>
+                    <p>6 weeks to several months</p>
+                </div>
+                <div class="contact-card">
+                    <h4>📄 DOCUMENTS NEEDED</h4>
+                    <p>• Original title deeds<br>• National ID<br>• Supporting papers</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Final Call to Action -->
+        <div class="comic-page">
+            <div class="panel-grid single-panel">
+                <div class="panel wide-panel">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-ouHMLAimXQ/d401fd412e8203a69bac24e6c044fb669cecab64b83548b799fa1e94e050554a9e20b8650bfcac51ccbc799e212bafa372bb9f6dc8834ca721616f0b5bd89779dade0b2986325b02d4637dd426b4d57548c9f5f0c0a8969582f0d663b8f5eab69b4677b9" alt="Protected Community Aerial View">
+                    <div class="narrator-box">
+                        When everyone protects their property rights, the whole community becomes stronger.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="countdown">
+                🚨 DON'T WAIT - START TODAY! 🚨
+            </div>
+            
+            <div style="text-align: center;">
+                <a href="#" class="cta-button">🏃‍♂️ START YOUR PROCESS NOW</a>
+                <a href="https://propertybook.co.zw" class="cta-button">📖 LEARN MORE</a>
+            </div>
+            
+            <div class="narrator-box" style="text-align: center; font-size: 1.2rem; margin-top: 20px;">
+                <strong>Your property is one of your most valuable possessions. Don't wait - protect it today!</strong>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div style="text-align: center; padding: 20px; color: var(--deep-blue); font-size: 0.9rem;">
+            <p>For more property news and help in Zimbabwe, visit <strong>Propertybook.co.zw</strong></p>
+            <p>We help you understand property laws and protect your investments.</p>
+        </div>
+    </div>
+</body>
+</html>

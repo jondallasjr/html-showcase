@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Building Cluster Housing in Zimbabwe - A Comic Guide</title>
+    <style>
+        :root {
+            --terracotta-red: #C65D07;
+            --sage-green: #87A96B;
+            --golden-yellow: #F4B942;
+            --deep-brown: #8B4513;
+            --comic-border: #2c2c2c;
+            --speech-bubble: #f9f9f9;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, var(--sage-green), var(--golden-yellow));
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .comic-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .comic-header {
+            background: linear-gradient(45deg, var(--terracotta-red), var(--deep-brown));
+            color: white;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .comic-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M0 50 Q25 25 50 50 T100 50 V100 H0 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: 200px 100px;
+        }
+
+        .comic-header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 2;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .comic-header p {
+            font-size: 1.2em;
+            position: relative;
+            z-index: 2;
+            opacity: 0.9;
+        }
+
+        .comic-page {
+            padding: 40px;
+            border-bottom: 5px solid var(--terracotta-red);
+            background: linear-gradient(to bottom, #fafafa, #f5f5f5);
+        }
+
+        .page-title {
+            font-size: 2em;
+            color: var(--terracotta-red);
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-bottom: 3px solid var(--golden-yellow);
+            padding-bottom: 10px;
+        }
+
+        .comic-panels {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .panel {
+            border: 4px solid var(--comic-border);
+            border-radius: 15px;
+            overflow: hidden;
+            background: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .panel:hover {
+            transform: translateY(-5px);
+        }
+
+        .panel-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .panel-content {
+            padding: 20px;
+            min-height: 150px;
+            background: linear-gradient(to bottom, white, #f9f9f9);
+        }
+
+        .speech-bubble {
+            background: var(--speech-bubble);
+            border: 2px solid var(--comic-border);
+            border-radius: 15px;
+            padding: 15px;
+            margin: 10px 0;
+            position: relative;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .speech-bubble.character-sarah {
+            border-color: var(--terracotta-red);
+            background: linear-gradient(135deg, #fff, #fef7f0);
+        }
+
+        .speech-bubble.character-council {
+            border-color: var(--sage-green);
+            background: linear-gradient(135deg, #fff, #f0f7f0);
+        }
+
+        .speech-bubble::before {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 30px;
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 10px solid var(--speech-bubble);
+        }
+
+        .character-sarah::before {
+            border-top-color: #fef7f0;
+        }
+
+        .character-council::before {
+            border-top-color: #f0f7f0;
+        }
+
+        .speech-bubble .speaker {
+            font-weight: bold;
+            color: var(--terracotta-red);
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            font-size: 0.9em;
+            letter-spacing: 1px;
+        }
+
+        .character-council .speaker {
+            color: var(--sage-green);
+        }
+
+        .narration {
+            background: linear-gradient(135deg, var(--golden-yellow), #fff);
+            border: 2px solid var(--deep-brown);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px 0;
+            font-style: italic;
+            color: var(--deep-brown);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .narration::before {
+            content: '📖 ';
+            font-size: 1.2em;
+            margin-right: 5px;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, var(--sage-green), var(--golden-yellow));
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 3px solid var(--terracotta-red);
+        }
+
+        .highlight-box h3 {
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .stat-item {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid var(--golden-yellow);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: var(--terracotta-red);
+        }
+
+        .stat-label {
+            color: var(--deep-brown);
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .process-flow {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 20px 0;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .process-step {
+            background: white;
+            border: 3px solid var(--sage-green);
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--sage-green);
+            position: relative;
+        }
+
+        .process-step::after {
+            content: '→';
+            position: absolute;
+            right: -25px;
+            color: var(--terracotta-red);
+            font-size: 1.5em;
+        }
+
+        .process-step:last-child::after {
+            display: none;
+        }
+
+        .call-to-action {
+            background: linear-gradient(45deg, var(--terracotta-red), var(--deep-brown));
+            color: white;
+            padding: 30px;
+            text-align: center;
+            border-radius: 15px;
+            margin: 30px 0;
+        }
+
+        .call-to-action h3 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+
+        .call-to-action p {
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .comic-panels {
+                grid-template-columns: 1fr;
+            }
+            
+            .comic-header h1 {
+                font-size: 2em;
+            }
+            
+            .process-flow {
+                flex-direction: column;
+            }
+            
+            .process-step::after {
+                content: '↓';
+                right: auto;
+                bottom: -25px;
+            }
+        }
+
+        .character-intro {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: linear-gradient(135deg, #fff, #fef7f0);
+            padding: 20px;
+            border-radius: 15px;
+            border: 3px solid var(--terracotta-red);
+            margin: 20px 0;
+        }
+
+        .character-intro img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--golden-yellow);
+        }
+
+        .character-info h4 {
+            color: var(--terracotta-red);
+            font-size: 1.3em;
+            margin-bottom: 5px;
+        }
+
+        .character-info p {
+            color: var(--deep-brown);
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="comic-container">
+        <div class="comic-header">
+            <h1>Building Cluster Housing in Zimbabwe</h1>
+            <p>A Comic Guide to Urban Development Success</p>
+        </div>
+
+        <!-- Page 1: Introduction - The Housing Challenge -->
+        <div class="comic-page">
+            <h2 class="page-title">Page 1: The Housing Challenge</h2>
+            
+            <div class="comic-panels">
+                <!-- Panel 1: Urban Growth Overview -->
+                <div class="panel">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-lM7KomyZYT/25e5cf4128856197d2ddd357babe27346a64e1bab7b78e5b709a89c8458fa0a88dbbe543aa39c0c4845e40eb850b43ac1f1d0e8a03fade89dde198220bed38ddd245c78a2563a373617ad068f4e019a44c52d698036a89139ccedae3fb5a547132cba4f6" alt="Harare Urban Density" class="panel-image">
+                    <div class="panel-content">
+                        <div class="narration">
+                            As Zimbabwe's cities grow, traditional housing can't keep up with demand...
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Panel 2: Meet Our Developer -->
+                <div class="panel">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-qqAwH3kiMd/a12dc30d3670d39b7cd8993a650598438b8c8481fe989f93d5d4f3878133e56c6911e7ad0aae9128a4627bf049cdd624b74de44d902d1a318e2386fc2fb917cd4f81476f2008278f77bf5911310318011ac861fd7be6ca9a553796d5d4ee00bbb84b09d5" alt="Sarah Developer Portrait" class="panel-image">
+                    <div class="panel-content">
+                        <div class="character-intro">
+                            <div class="character-info">
+                                <h4>Meet Sarah</h4>
+                                <p>Property Developer & Urban Planning Expert</p>
+                            </div>
+                        </div>
+                        <div class="speech-bubble character-sarah">
+                            <div class="speaker">Sarah</div>
+                            I'm Sarah, a property developer. Today I'll show you how cluster housing can solve Zimbabwe's urban housing crisis.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Panel 3: The Solution -->
+                <div class="panel">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-SyCNMbgoMA/2fa4a5812d27a194803b6d2e64723a114715ab22f00e5b2df3712c512b76930d531c0a66d5ef41b9aff4f82e795a8eeaf348dd9b0649dbeeaf41007885d4d9d02532f20cbabd97ddfa67e501e341f573a5a07dd93d39a2fd9489a5bba0307bdd848e3ab5" alt="Housing Comparison" class="panel-image">
+                    <div class="panel-content">
+                        <div class="narration">
+                            Cluster housing allows more families to live in the same area while maintaining quality and privacy.
+                        </div>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <div class="stat-number">1</div>
+                                <div class="stat-label">Traditional</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">7-11</div>
+                                <div class="stat-label">Cluster Units</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page 2: Understanding the Permits Process -->
+        <div class="comic-page">
+            <h2 class="page-title">Page 2: Understanding the Permits Process</h2>
+            
+            <div class="comic-panels">
+                <!-- Panel 4: The First Challenge -->
+                <div class="panel">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-mkGYF51SHi/6686689825e4cdfb4c38d696e5a845c64beab1f9b777212aab2021da4f868ab0a982997ba8679c2933563a6f325515c1cf1beddb716545eecca5fb5b483caefeb34b0a4f91ecc77ef8e3e08d9178a62fff56edaa6620e1f1dec7a2d0f0b7027525f93a0c" alt="Zoning Map Scene" class="panel-image">
+                    <div class="panel-content">
+                        <div class="speech-bubble character-sarah">
+                            <div class="speaker">Sarah</div>
+                            First challenge: Standard residential stands only allow one house plus a cottage. We need to change that.
+                        </div>
+                        <div class="highlight-box">
+                            <h3>Zoning Requirements</h3>
+                            <p>• Single Family → Multi-Family rezoning required<br>
+                            • Application process: ~6 months<br>
+                            • Public notification mandatory</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Panel 5: The Application Journey -->
+                <div class="panel">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-3ubBPjNUFu/de76fa9eec31b16a690995c6bca8c0c17de28081dd6dbf467251410a3b932e83dd60534466c36b984e55ac75af8e085799451ce1cac25f6ec7c764d00fbabd546741e00f2dff155e519e841b315da7265c6819e73d93861a31e3b0c5ddf5bde8e9a48c03" alt="Permit Process Flowchart" class="panel-image">
+                    <div class="panel-content">
+                        <div class="narration">
+                            The re-zoning process takes about 6 months and involves several steps...
+                        </div>
+                        <div class="process-flow">
+                            <div class="process-step">1</div>
+                            <div class="process-step">2</div>
+                            <div class="process-step">3</div>
+                            <div class="process-step">4</div>
+                            <div class="process-step">✓</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Panel 6: Council Meeting -->
+                <div class="panel">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-ANqHE_2v6T/18a87a33954ae7b51585fcd630cd5ce3f281b7df565bab22df04e84969a17b7ac0d4d39fe2afebf3a69f2568b2f799e2230961e6459f5ff9f3439691905dff7f276ff56e6bcaeb58060b7a7ae27e497c5fc634e2e5082e700eeee6ee39be078841b00605" alt="Council Chamber Meeting" class="panel-image">
+                    <div class="panel-content">
+                        <div class="speech-bubble character-council">
+                            <div class="speaker">Council Official</div>
+                            Your application aligns with our densification agenda. We see the need for more efficient housing solutions.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page 3: Design Regulations and Planning -->
+        <div class="comic-page">
+            <h2 class="page-title">Page 3: Design Regulations and Planning</h2>
+            
+            <div class="comic-panels">
+                <!-- Panel 7: Land Requirements -->
+                <div class="panel">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl--H-NWYVKEC/7dd3cf0b910a67aeb44d4a72835e84a40ee546c28b55bdd65a0e07a8d5856a8b2375758cbd60bc27bd6bd079811964652b0e53ec934400c73bdc611afc6bd18c358ad5b1bd5a06a7b04f6fef24a2bad96b6589f4dbe631df63cb57466c10abede283747a" alt="Land Allocation Diagram" class="panel-image">
+                    <div class="panel-content">
+                        <div class="narration">
+                            Design regulations are specific: 500 sqm minimum for standalone units, 300 sqm for semi-detached.
+                        </div>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <div class="stat-number">500</div>
+                                <div class="stat-label">sqm standalone</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">300</div>
+                                <div class="stat-label">sqm semi-detached</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Panel 8: Engineering Requirements -->
+                <div class="panel">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-G-8w8CQcJd/615ec0bae26a140d78c4253f61b78755b8c9b46be64b1db2397abd4c0f53357aa9176f02fbf1c8b91c4f3548394b300dfc41aaf6a69c32069410c2cea90ebe3b8dd929eab8aabcbcde7d212d8e2321d5fea3b7dcd49465da4a371bf457831f1a456528f8" alt="Engineering Plans" class="panel-image">
+                    <div class="panel-content">
+                        <div class="speech-bubble character-sarah">
+                            <div class="speaker">Sarah</div>
+                            Once approved, we need detailed engineering plans for utilities and infrastructure.
+                        </div>
+                        <div class="highlight-box">
+                            <h3>Required Plans</h3>
+                            <p>• Water & sewer systems<br>
+                            • Bio-digesters (eco-friendly)<br>
+                            • Road access & driveways</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Panel 9: Individual Titles -->
+                <div class="panel">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-86agfTQInl/af08ef774c722a912cc5a1625b7a2938261c9caff7b70eb7fc5a84fb38c390de247bee3f19c7ec430c7efe076cbf8127977839960752eddf2dae06a570735b3abe24f64bec24b1416bdea26dc863ba4032054a3144e9e54264feac35e2f8b06060f3d473" alt="Sectional Title Overview" class="panel-image">
+                    <div class="panel-content">
+                        <div class="narration">
+                            Each unit gets its own sectional title, making them individually sellable properties.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page 4: Financial Strategy -->
+        <div class="comic-page">
+            <h2 class="page-title">Page 4: Financial Strategy</h2>
+            
+            <div class="comic-panels">
+                <!-- Panel 10: The Numbers Game -->
+                <div class="panel">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-QfMcgqM92v/e9f211559c12cdc125be5c5048129b0e35d8510fc549a1ed1e9f914490336ca0c99000a8bc9a2e527096335c57e0415e601cdaef6dc8883fcdae4f271de3904132a8c9dd1e18650a16f73e7b929950c0471774314644b328c1d62a12ccd34ff3258e7d98" alt="Financial Infographic" class="panel-image">
+                    <div class="panel-content">
+                        <div class="speech-bubble character-sarah">
+                            <div class="speaker">Sarah</div>
+                            Building costs around $100,000 per unit, but selling prices reach $250,000 or more in good locations.
+                        </div>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <div class="stat-number">$100k</div>
+                                <div class="stat-label">build cost</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">$250k+</div>
+                                <div class="stat-label">selling price</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">150%</div>
+                                <div class="stat-label">profit margin</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Panel 11: Pre-Selling Strategy -->
+                <div class="panel">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-2gEnKRbkAq/a5545d89cd6175ebd395acb76ca71c533ff079a1746e3d2847c0f8ae2a3ac741ccec4abfa7945282385aec8c151a2fd6c7ea2363ffa2c3087a50d7051238d5942d8dbf5ddc061029a8ee3bcc979cb893723345fa60349902d7b8e2a4de443187b5a067f6" alt="Sales Office Presentation" class="panel-image">
+                    <div class="panel-content">
+                        <div class="narration">
+                            Smart developers don't need all funding upfront. Pre-selling units off plans generates construction capital.
+                        </div>
+                        <div class="highlight-box">
+                            <h3>Pre-Sales Strategy</h3>
+                            <p>• 3D renderings for marketing<br>
+                            • Collect deposits from buyers<br>
+                            • Use funds for construction</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Panel 12: Real Estate Partnership -->
+                <div class="panel">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-K2xaYydNTK/2739100f87eba089669328c93ad4f0a950bacd003008d60d593a1584d3c3938e5216441a4623b8079401c600b77754fcbd50e2dfcc2d3fe8f873f7987f06fc44f45a768a8110cda210a8ff32ae2fd8a1af5e5afa9cc969f706dc7938720f085377779aad" alt="Real Estate Partnership" class="panel-image">
+                    <div class="panel-content">
+                        <div class="speech-bubble character-sarah">
+                            <div class="speaker">Sarah</div>
+                            Partnering with established real estate agencies builds buyer confidence and drives sales.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page 5: Construction and Community Impact -->
+        <div class="comic-page">
+            <h2 class="page-title">Page 5: Construction and Community Impact</h2>
+            
+            <div class="comic-panels">
+                <!-- Panel 13: Breaking Ground -->
+                <div class="panel">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-_2XCk9A0Ll/e9dc218df3eebbadaf569ccc23527756636653e07218e18d7937e87284a8cfecfd2bd48a55a2a42b74676a41ecee1a38baf8c4fa59a7adf9388e42a08dfe958486b62b82076f813f1881c52266cfadc8f7220469fef00c0c4c64d658ef6a95a1a17bbb49" alt="Construction Site" class="panel-image">
+                    <div class="panel-content">
+                        <div class="narration">
+                            With permits approved and pre-sales secured, construction begins...
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Panel 14: Community Benefits -->
+                <div class="panel">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-vjgGnS-Ts1/505ebe3dd25a570ce2d4a6ed9765cb8b586b4afa3f04f030aac76868655a935b5f1e6e9a6dd04eb2c4f63befc2eab5f3823d53e0b12121219bfcc906a176cc0ce9dd5bd895db532af6a03cf5018f0c4ffb0cab306842b7092b2325e6f5ce8734afa1ccb1" alt="Community Integration" class="panel-image">
+                    <div class="panel-content">
+                        <div class="speech-bubble character-sarah">
+                            <div class="speaker">Sarah</div>
+                            Cluster housing helps cities accommodate growth while residents maintain access to existing amenities.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Panel 15: Success and Future -->
+                <div class="panel">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-bjF04mBgCi/1877d17bb34c2711cef4dfc4e6737537464ceeda02cafed1834fe9bb57377953d0e3bf9ec52941b1aee692a8dcc6f7a1903f1daf55e9301fbb83c4002a324b3594e4caa9844b18a7f7e8ece1313fd9edef44d82006f3bc95d058a305e62a06aa2d8b3b62" alt="Aerial Success View" class="panel-image">
+                    <div class="panel-content">
+                        <div class="narration">
+                            Quality cluster housing meets market demand while building stronger communities.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page 6: Conclusion and Call to Action -->
+        <div class="comic-page">
+            <h2 class="page-title">Page 6: Conclusion and Call to Action</h2>
+            
+            <div class="comic-panels">
+                <!-- Panel 16: Lessons Learned -->
+                <div class="panel">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-Dlg1m35W7P/6f7849c1f10d63f50671bf9d7e3e59e9b6be8e78fccee691aa37bac7ef13bc45018786f0fc16890f86a6b57c09860bc351f1cc6dc9e6702d2e34ec12b073e73449489d0549b122872db261a69114d533403770a28778d8f44181f259b6d0497b4407d331" alt="Sarah Success Portrait" class="panel-image">
+                    <div class="panel-content">
+                        <div class="speech-bubble character-sarah">
+                            <div class="speaker">Sarah</div>
+                            Following regulations and best practices creates developments that benefit everyone - investors, buyers, and communities.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Panel 17: The Bigger Picture -->
+                <div class="panel">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-32Nu6CEsSg/8def76834c9ee328d8b2d4f039df7bdfc4fceb3a78eec04b2ababc3f2d009b0a87330973279acb3001a493e6cdc9cdc473b9e732722d397c1b3e524201489a03b3bed01edffa172520f1ebef75664f0ecd63afd0af87f909d68d1893eab0da35f1445536" alt="Harare Skyline Development" class="panel-image">
+                    <div class="panel-content">
+                        <div class="narration">
+                            As Zimbabwe continues to urbanize, cluster housing represents a sustainable solution for quality, affordable living.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Panel 18: Your Opportunity -->
+                <div class="panel">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-uEjr7vYCAp/8b2f4afa3915eae9c262745336a0d2269c88c33528878c93658f7a7fac8afd765ab5ebd9c7defb2df9e054241566b3ca6517f786dd3d4173a5a8eb3ebfa6322ff76ca8a3a6e264474ad4a48a57c47a10d3e7d22991ff5e411f1bd0dba149a5d831447be6" alt="New Project Beginning" class="panel-image">
+                    <div class="panel-content">
+                        <div class="speech-bubble character-sarah">
+                            <div class="speaker">Sarah</div>
+                            Ready to start your own cluster housing project? The opportunity awaits those who plan carefully and follow the proper process.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="call-to-action">
+                <h3>Start Your Cluster Housing Journey Today!</h3>
+                <p>With proper planning, permits, and phased financing, cluster housing presents an attractive development opportunity in Zimbabwe's urban markets. Remember: Follow regulations, build community partnerships, and create quality housing that benefits everyone.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
