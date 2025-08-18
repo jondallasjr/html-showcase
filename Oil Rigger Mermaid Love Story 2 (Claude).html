@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brinehearted - A Poignant Oil Rigger Mermaid Love Story</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(180deg, #2a3f4a 0%, #1a2830 50%, #0f1a20 100%);
+            color: #e8f4f8;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        .slide {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 2rem;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+
+        .slide.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .slide-content {
+            max-width: 1200px;
+            width: 100%;
+            display: grid;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        /* Cover Slide */
+        .cover-slide {
+            background: radial-gradient(circle at center, #1e4a5f 0%, #0a1a25 70%);
+            text-align: center;
+            grid-template-rows: auto 1fr auto;
+        }
+
+        .cover-slide img {
+            max-width: 80%;
+            height: auto;
+            object-fit: contain;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 255, 255, 0.3);
+        }
+
+        .title {
+            font-size: clamp(2.5rem, 8vw, 6rem);
+            font-weight: bold;
+            color: #00d4ff;
+            text-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            font-size: clamp(1rem, 3vw, 1.8rem);
+            color: #ff6b6b;
+            font-style: italic;
+            margin-bottom: 2rem;
+        }
+
+        /* Story Slides */
+        .story-slide {
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .story-slide.full-width {
+            grid-template-columns: 1fr;
+            text-align: center;
+        }
+
+        .story-slide.reverse {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .story-slide.reverse .text-content {
+            order: 2;
+        }
+
+        .story-slide.reverse .image-content {
+            order: 1;
+        }
+
+        .image-content {
+            position: relative;
+        }
+
+        .image-content img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .character-portrait img {
+            max-width: 400px;
+            margin: 0 auto;
+            display: block;
+            border: 3px solid rgba(0, 212, 255, 0.3);
+            border-radius: 50%;
+            padding: 1rem;
+            background: radial-gradient(circle, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
+        }
+
+        .panel-frame img {
+            border: 2px solid rgba(255, 107, 107, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .bioluminescent {
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.4);
+            animation: glow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { box-shadow: 0 0 20px rgba(0, 255, 255, 0.4); }
+            to { box-shadow: 0 0 40px rgba(0, 255, 255, 0.8); }
+        }
+
+        .text-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .narration {
+            font-style: italic;
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            color: #a8d8ea;
+            line-height: 1.6;
+            text-align: left;
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: opacity 0.8s ease 0.5s, transform 0.8s ease 0.5s;
+        }
+
+        .slide.visible .narration {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .dialogue {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border-left: 4px solid #ff6b6b;
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            line-height: 1.5;
+            opacity: 0;
+            transform: translateX(30px);
+            transition: opacity 0.8s ease 1s, transform 0.8s ease 1s;
+        }
+
+        .slide.visible .dialogue {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .dialogue.rafi {
+            border-left-color: #ffa500;
+            background: rgba(255, 165, 0, 0.1);
+        }
+
+        .dialogue.mira {
+            border-left-color: #00ffa5;
+            background: rgba(0, 255, 165, 0.1);
+        }
+
+        .dialogue.whale {
+            border-left-color: #4a90e2;
+            background: rgba(74, 144, 226, 0.1);
+            font-family: 'Courier New', monospace;
+            border-radius: 5px;
+        }
+
+        .speaker {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #00d4ff;
+        }
+
+        /* Background Slides */
+        .background-slide {
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+            min-height: 120vh;
+        }
+
+        .whale-interior {
+            background: linear-gradient(45deg, #1a4a5c 0%, #2d5a73 50%, #1a4a5c 100%);
+        }
+
+        .surface-world {
+            background: linear-gradient(180deg, #8a6914 0%, #5a5a5a 50%, #2a2a2a 100%);
+        }
+
+        .mer-world {
+            background: linear-gradient(135deg, #ff6b6b 0%, #4ecdc4 50%, #45b7d1 100%);
+        }
+
+        /* Act Dividers */
+        .act-divider {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(90deg, transparent 0%, rgba(0, 212, 255, 0.2) 50%, transparent 100%);
+        }
+
+        .act-title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            color: #00d4ff;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+        }
+
+        .act-subtitle {
+            font-size: clamp(1rem, 2.5vw, 1.5rem);
+            color: #ff6b6b;
+            font-style: italic;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .slide {
+                padding: 1rem;
+            }
+
+            .story-slide,
+            .story-slide.reverse {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .story-slide.reverse .text-content,
+            .story-slide.reverse .image-content {
+                order: initial;
+            }
+
+            .slide-content {
+                gap: 1.5rem;
+            }
+
+            .character-portrait img {
+                max-width: 250px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .title {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .narration,
+            .dialogue {
+                font-size: 0.9rem;
+            }
+
+            .dialogue {
+                padding: 1rem;
+            }
+        }
+
+        /* Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            
+            .slide {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        /* Keyboard Navigation */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 6px;
+            background: #000;
+            color: #fff;
+            padding: 8px;
+            text-decoration: none;
+            z-index: 1000;
+        }
+
+        .skip-link:focus {
+            top: 6px;
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: rgba(0, 212, 255, 0.3);
+            z-index: 1000;
+        }
+
+        .scroll-progress {
+            height: 100%;
+            background: linear-gradient(90deg, #00d4ff, #ff6b6b);
+            width: 0%;
+            transition: width 0.1s ease;
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <div class="scroll-indicator">
+        <div class="scroll-progress" id="scroll-progress"></div>
+    </div>
+
+    <main id="main-content">
+        <!-- Cover Slide -->
+        <section class="slide cover-slide visible" id="cover">
+            <div class="slide-content">
+                <div>
+                    <h1 class="title">BRINEHEARTED</h1>
+                    <p class="subtitle">A Poignant Oil Rigger Mermaid Love Story</p>
+                </div>
+                <div class="image-content">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-IyvKoar3Dt/ff9403a7fe69b17fe7a156e18df0485c06a47b0bd602c6204ce39f57c992102f98aed3e455a365baedf4fc42dad7a41fd89e1504179cf16b6f382f9873a809bc7d926b1f2f12d53f7474cbc5e8f0f96f40a5e60e6993a7dcab9eb176d101dfad7813e34b" 
+                         alt="Cover art showing Filipino-American oil rigger Rafi and mermaid Mira inside a whale's ribbed cathedral interior, surrounded by bioluminescent lighting" 
+                         class="bioluminescent">
+                </div>
+                <div>
+                    <p class="narration">"Some falls change everything. Others just get you wet."</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Act I Divider -->
+        <section class="slide act-divider">
+            <h2 class="act-title">Act I: Descent</h2>
+            <p class="act-subtitle">Where a storm changes two worlds forever</p>
+        </section>
+
+        <!-- Character Introduction - Rafi -->
+        <section class="slide story-slide">
+            <div class="image-content character-portrait">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-RG202PAuSs/bf0738581f899cc040d9b8e1e4c552764889014989bc339438048759a704c4ecfd0d7bca323ea78df42333cae7ba9d105f797c10cf74d881c95c5092decd0abf6f7ee1e62fc09bb8c8e14bfe146f46c9e538ed7b7767bad9a24b5b89fb24823ec98af5d6" 
+                     alt="Rafi 'Rook' Navarro, 28-year-old Filipino-American oil rigger with weathered hands and expressive eyes">
+            </div>
+            <div class="text-content">
+                <div class="narration">
+                    Meet Rafi "Rook" Navarro—28 years old, Filipino-American, and a poet of bolt sizes. He's union-curious and carries guilt from a small spill that weighs heavier than any wrench in his tool belt.
+                </div>
+                <div class="dialogue rafi">
+                    <div class="speaker">RAFI</div>
+                    "Every bolt tells a story. Every turn of the wrench... it matters. We're not just extracting oil—we're extracting pieces of the ocean's soul."
+                </div>
+            </div>
+        </section>
+
+        <!-- The Storm -->
+        <section class="slide story-slide reverse surface-world">
+            <div class="image-content panel-frame">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-54XahBRhlf/80b934b9f469f2f1a0624b44f6a3b11d6240d22eb44edbdbfdc37e04d49cb5e49bbec75c467377ef0fff540db9a3c7b32314540da7bca67138f05e1da2dbf580f8a21855deea3e1acf06cf81dcbd0f5a7d872b0627e9172143d5f75d2863781ed2cbe83a" 
+                     alt="Oil rig in stormy waters with Rafi visible on deck as massive waves approach">
+            </div>
+            <div class="text-content">
+                <div class="narration">
+                    The storm arrived like an uninvited truth—sudden, powerful, and impossible to ignore. The rig, humanity's defiant monument to extraction, suddenly seemed very small against the ocean's fury.
+                </div>
+                <div class="dialogue whale">
+                    <div class="speaker">OLD SALT (WHALE THOUGHTS)</div>
+                    [The surface-dwellers never learn. The sea always collects what it's owed.]
+                </div>
+            </div>
+        </section>
+
+        <!-- The Fall -->
+        <section class="slide story-slide">
+            <div class="image-content panel-frame">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-xrWLbKnh5F/945221f108b5e22fb8b1cff48bddcf144f2895dc503695227ecdc322239d8839835d8aea0c3e88b40fd6e9bd6d09571f224bb494741cb934172de3ffad12cc97af353df8f1bff4791ca40b7a82355c8c56ba9982c9457a8e48231688864af14b61aab88d" 
+                     alt="Massive whale's ancient eye appearing as Rafi sinks into the depths">
+            </div>
+            <div class="text-content">
+                <div class="narration">
+                    In the crushing darkness, salvation arrives wearing barnacles and ancient scars. Old Salt, a sperm whale whose songs carry the memory of migrations older than human industry, makes a choice that will change everything.
+                </div>
+                <div class="dialogue whale">
+                    <div class="speaker">OLD SALT</div>
+                    [Another surface-dweller falls from their metal island. But this one... this one feels different.]
+                </div>
+            </div>
+        </section>
+
+        <!-- Whale Interior -->
+        <section class="slide background-slide whale-interior">
+            <div class="slide-content">
+                <div class="image-content">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-wgQv2FMhTk/05c2b8da8e5bb94b912875ac817693b36fc88701fbb9696ce8dacda94508e6890915fa1eec39e47dc0c97b42eda9a60b9c21a79c8a88ee57efe8cbc5c3c3c5fe88d475b824cfba2d37514ff6a302e872981c279f9cca8074773e50b14e8d7d832db3fb1b" 
+                         alt="Cathedral-like interior of whale with ribbed ceiling and bioluminescent algae"
+                         class="bioluminescent">
+                </div>
+                <div class="text-content">
+                    <div class="narration">
+                        Inside Old Salt's belly lies a world that defies surface logic—a cathedral of ribs and bioluminescent wonder, where air pockets form chambers of impossible sanctuary, and driftwood shrines honor boats lost to the deep.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Character Introduction - Mira -->
+        <section class="slide story-slide reverse">
+            <div class="image-content character-portrait">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-RVbM5MraQt/1214520b54005a70c4b5568eb32c41634fc85f5e4a2132cd3c1fcd289bc242f00214bba02c8701cd3eb374f693df73f1e3b5b8181388c316fd0ab99bdbef2085448a5d7e24d72f7e106cd6f9996e8fe7af86f47a5cdfe4229b1dc7077d8c948c0c814e05" 
+                     alt="Mira, elegant mermaid with sea-glass green tail and bioluminescent hair streaks"
+                     class="bioluminescent">
+            </div>
+            <div class="text-content">
+                <div class="narration">
+                    Mira, approximately 25 in surface years, is an ethnographer of "air-folk"—studying the strange surface dwellers who drop artifacts into her realm. Her superpower: weaving algae bioluminescence into maps of memory and meaning.
+                </div>
+                <div class="dialogue mira">
+                    <div class="speaker">MIRA</div>
+                    ⟡⟡⟡ (Click-song with light patterns that roughly translate to: "Another surface artifact arrives—but this one breathes and watches me weave light!")
+                </div>
+            </div>
+        </section>
+
+        <!-- First Meeting -->
+        <section class="slide story-slide whale-interior">
+            <div class="image-content panel-frame bioluminescent">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-WA0cHPsfar/555724f7a837fef0da4a6160b2b53d137e4c3949a25984b5a1c7306a8f472c73b2ca374a2ac3ee4ed3850497e7b63d0dae370f4109afe33c16ca78bae515a190d218f190e0250ac9c4c87d67676c355a0ba950e0980d846b7aa70f236164e20c474b3108" 
+                     alt="First meeting between dripping Rafi and Mira weaving light patterns">
+            </div>
+            <div class="text-content">
+                <div class="narration">
+                    Dripping, disoriented, with his hard hat askew, Rafi encounters the impossible: a being of grace and light, weaving bioluminescent poetry in the water. The meeting that will reshape two worlds begins with the smallest word.
+                </div>
+                <div class="dialogue rafi">
+                    <div class="speaker">RAFI</div>
+                    "Hi?"
+                </div>
+                <div class="dialogue mira">
+                    <div class="speaker">MIRA (in light-glyphs)</div>
+                    ✧ ⟡ ✧ (Curious greeting with cautious welcome)
+                </div>
+            </div>
+        </section>
+
+        <!-- Act II Divider -->
+        <section class="slide act-divider">
+            <h2 class="act-title">Act II: Courtship & Friction</h2>
+            <p class="act-subtitle">Learning each other's languages of love and loss</p>
+        </section>
+
+        <!-- Communication -->
+        <section class="slide story-slide">
+            <div class="image-content panel-frame bioluminescent">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-SJkbdVsPnw/5889283451d027424d44e5fc467490b0442cc5ab9a2eba86779066c89a2c79d35c3375268d605fb14a74b10a0b74c9a264b5c9a2be79c43ef709e460411ea20933ac8461ca588b0cc7592e10db8cdc5ca2f882f814bcd11a465489a1bcc35629d0d14843" 
+                     alt="Mira creating glowing light symbols while Rafi watches intently">
+            </div>
+            <div class="text-content">
+                <div class="narration">
+                    Language blooms between them in patterns of light and gesture. Mira weaves bioluminescent glyphs while Rafi offers the poetry of his tools—each bolt and wrench a word in the vocabulary of connection.
+                </div>
+                <div class="dialogue mira">
+                    <div class="speaker">MIRA</div>
+                    ⟡⟡⟡ (Light-glyph pointing to his tool belt, creating a matching symbol)
+                </div>
+                <div class="dialogue rafi">
+                    <div class="speaker">RAFI</div>
+                    "Trade? You want to trade?" (Offering a bolt like it's precious)
+                </div>
+            </div>
+        </section>
+
+        <!-- Museum of Surface Artifacts -->
+        <section class="slide background-slide whale-interior">
+            <div class="slide-content">
+                <div class="image-content">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-6nGYtKgFWx/3ad1b56e91ce311428f76b6046db2fe3e75a0b306cda04ffc74a0f46d9e11cc2dc3b6a569c1e2f5e4409d25ab38ee7947ec89189c94c40779f4d3e8d675017d69641691b332921d4921676844fc3342fd5fc2a28333b87dfe586ff9ba2fe3a1617b22c30" 
+                         alt="Mira's carefully organized collection of surface artifacts displayed on whale ribs"
+                         class="bioluminescent">
+                </div>
+                <div class="text-content">
+                    <div class="narration">
+                        Mira's "museum" reveals her fascination with surface dwellers—every item catalogued, every piece a mystery to decode. Teapots, tools, and debris become artifacts of a world she's never seen but desperately wants to understand.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Aunt Kelpie Introduction -->
+        <section class="slide story-slide reverse">
+            <div class="image-content character-portrait">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-sO61qdV8Gf/19237cb11e487303475431313f3ea2232af589a5eb136890123fe4efe49af87a266611cbab68a3c272888355731997196ccd20034b67052f3f0d15a20a24b71bd50d21745a55c111a2d05b606886c873aaf549c7bc3e3e17a2b159eab339c9adef0000c4" 
+                     alt="Aunt Kelpie, older mermaid matriarch with silver hair and stern expression">
+            </div>
+            <div class="text-content">
+                <div class="narration">
+                    Aunt Kelpie, Mira's pragmatic matriarch, prefers treaties to romance and politics to poetry. She's seen surface dwellers before—they take more than they give, pollute more than they preserve.
+                </div>
+                <div class="dialogue mira">
+                    <div class="speaker">AUNT KELPIE</div>
+                    "Child, you study their artifacts like love letters. But remember—the surface world sends us their waste, not their gifts."
+                </div>
+            </div>
+        </section>
+
+        <!-- The Accidental Vow -->
+        <section class="slide story-slide whale-interior">
+            <div class="image-content panel-frame bioluminescent">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-s3SPEenbsM/03d8ee9680745ba9f0af43e163ed769991a4b47461a8db3bee87811b4607b19453ee87e29842cccc24506e4b2f1e98588052c724f0a10f9984e482e2f5dbc61509ded73e87cc68408c7cdc172294a78ef642314298e1fcd8e9d85aa2c21207b09d67f2e9" 
+                     alt="Rafi offering bolt like a ring as bioluminescent fireworks explode around them">
+            </div>
+            <div class="text-content">
+                <div class="narration">
+                    A simple gesture becomes a sacred promise. In offering his bolt as a gift, Rafi unknowingly participates in an ancient mer-marriage ritual. Love blooms in bioluminescent fireworks as two hearts accidentally bind themselves together.
+                </div>
+                <div class="dialogue rafi">
+                    <div class="speaker">RAFI</div>
+                    "Trade?" (Offering the bolt like a ring, not understanding the significance)
+                </div>
+                <div class="dialogue mira">
+                    <div class="speaker">AUNT KELPIE (gasping)</div>
+                    "He just vowed! By the ancient laws, they're light-bound!"
+                </div>
+                <div class="dialogue whale">
+                    <div class="speaker">OLD SALT</div>
+                    [Forms will be needed.]
+                </div>
+            </div>
+        </section>
+
+        <!-- Tool Crafting Montage -->
+        <section class="slide story-slide reverse">
+            <div class="image-content panel-frame">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-ueUuof4k_E/6369c2e8a30536f3d0292acd1666dd8a8538863b8bd497d81317266b6a7ffb465c9361f8644f28cb2eba9115edbfd31501ddb209f49e249ef6c590a2d1c6e15979d029e9184a2764cf5bb160c65f52ed89ba12a1d54c0c882a5d6f4fcdd2b4e0cdb72b8b" 
+                     alt="Rafi crafting underwater tools while Mira teaches mer-culture">
+            </div>
+            <div class="text-content">
+                <div class="narration">
+                    Love teaches new languages. Rafi learns to craft tools for underwater life while Mira shares the songs and stories of her people. Each creation, each lesson, brings them closer to understanding.
+                </div>
+                <div class="dialogue rafi">
+                    <div class="speaker">RAFI</div>
+                    "On the surface, we call this a wrench. But down here... what should we call something that joins rather than extracts?"
+                </div>
+                <div class="dialogue mira">
+                    <div class="speaker">MIRA</div>
+                    ⟡✧⟡ "In mer-song, we'd call it 'coral-root'—something that grows connections."
+                </div>
+            </div>
+        </section>
+
+        <!-- Night Swimming -->
+        <section class="slide story-slide">
+            <div class="image-content panel-frame bioluminescent">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-IOscsDUMLu/7d870b1c3a7f896798568d509769471e5e261f64eecff69ba0f66673b718316757ca5848bee830e5b1ceaf4970f513393503d4d5c0da2e67a5febe810baf5cce640054609ed6b04c05daf26ed206210126407382cd8dd3681f7c3cb3ad9b0015c455903c" 
+                     alt="Rafi and Mira swimming together, leaving trails of bioluminescent light">
+            </div>
+            <div class="text-content">
+                <div class="narration">
+                    Their love story writes itself in bioluminescent trails through the water—two beings from different worlds learning to move as one, leaving light in their wake like a living constellation of hope.
+                </div>
+                <div class="dialogue rafi">
+                    <div class="speaker">RAFI</div>
+                    "I never knew the ocean could be this beautiful. All this time, we were taking from it instead of listening to it."
+                </div>
+            </div>
+        </section>
+
+        <!-- Mer-City Background -->
+        <section class="slide background-slide mer-world">
+            <div class="slide-content">
+                <div class="image-content">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-QU9qqQ3qpD/8c7f7ffd5f6eda5d0e89f8b9daa4c5126cc3d74ff7ab9de7d9c0980182703b5a3257d17a1e49e4dc3c459e7b5182acbfaa5cf9adea7c430836ca523515a9b64b99518ecc6ac39a2c2cd3d64611c5b062412362bcefe53e189db9a599c0d8a94e1fae1aa5" 
+                         alt="Modular coral city Tessellate with organic spiral buildings and mer-folk swimming between structures">
+                </div>
+                <div class="text-content">
+                    <div class="narration">
+                        Tessellate—the mer-city where law is sung and architecture grows from living coral. A world that thrives on connection rather than extraction, where every building breathes with the rhythm of the tides.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- The Threat -->
+        <section class="slide story-slide reverse">
+            <div class="image-content panel-frame">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-DyL_ZLFoL2/a4ff64d614b893db3a70503a1eb727d4963db6b4d4fda642f85cdfa01b6800ba56c36cd63b07329855d05731829dedf4d1209c4866b881daa1798312212f65fffb9478e1d8d918da45882bfd46723995f71a1c3ed09d94151280692e0439b34d2d2d977e" 
+                     alt="Seismic survey ship disrupting whale communication with sound waves">
+            </div>
+            <div class="text-content">
+                <div class="narration">
+                    The surface world intrudes with violence disguised as progress. Seismic surveys tear through the ocean's song, disrupting the ancient whale communications and threatening the sanctuary that protects their love.
+                </div>
+                <div class="dialogue whale">
+                    <div class="speaker">OLD SALT</div>
+                    [The metal boats sing death-songs now. The deep paths are filling with noise where whale-song should flow.]
+                </div>
+            </div>
+        </section>
+
+        <!-- Act III Divider -->
+        <section class="slide act-divider">
+            <h2 class="act-title">Act III: Reckoning & Grand Gesture</h2>
+            <p class="act-subtitle">When love demands courage, and courage demands sacrifice</p>
+        </section>
+
+        <!-- Old Salt Portrait -->
+        <section class="slide story-slide">
+            <div class="image-content character-portrait">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-SgKC_PcWJ8/ac9fc5502c689125912d3f2f697036f647d8df4a5fce262ab480b4b5b234e6665398a9322cc4405388be2cc0c7e66cbb6389e5d992f019360aa61592d203e388ef5f92086c5fb22999c9f589de4f428df4f7afc47f5a151ea3fc85976554deae5c39b062" 
+                     alt="Old Salt, ancient sperm whale with wise, knowing eye">
+            </div>
+            <div class="text-content">
+                <div class="narration">
+                    Old Salt, the ancient navigator whose scars tell stories of migrations older than human memory, makes the ultimate sacrifice—beaching himself to protect his pod from the surface world's acoustic violence.
+                </div>
+                <div class="dialogue whale">
+                    <div class="speaker">OLD SALT</div>
+                    [Some anchors hold against storms. Others hold against forgetting. I choose to anchor memory in sand rather than let my family drown in noise.]
+                </div>
+            </div>
+        </section>
+
+        <!-- The Protest -->
+        <section class="slide story-slide reverse surface-world">
+            <div class="image-content panel-frame">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-5YX7uIEZO6/d5c9a44e0291a87c390a33b19c5f32037d2cff6a8a280417a98ae04da7ecfc67319b8376d0c1d8197ee2445ba3ec878aef72e962933d4e7f2f45c3eea98fd3394a5b84b89028b5b4f66619a7d2bfc22821a3eb5e8d1e73003dc72978a2ae401ec17fce4e" 
+                     alt="Empty oil rig with workers' tools laid down in organized protest">
+            </div>
+            <div class="text-content">
+                <div class="narration">
+                    When love teaches you to listen, silence becomes the loudest protest. The rig workers lay down their tools not in abandonment, but in understanding—choosing the ocean's voice over extraction's profit.
+                </div>
+                <div class="dialogue rafi">
+                    <div class="speaker">RAFI (to the union)</div>
+                    "We've been writing the ocean's obituary with every shift. But what if instead we learned to read its poetry?"
+                </div>
+            </div>
+        </section>
+
+        <!-- The Reunion -->
+        <section class="slide story-slide whale-interior">
+            <div class="image-content">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-8lE8hAAqUF/e824d4ba0d17cd402280f72ac5358ccc56dca2a88ee04bea8e77a5a8ec92f58dcdd1dc605937b7c71903ae48361ad15968d5ff22c7d11566f743c6d65cd9bb2e35f490d7619619a3b22962e89df818f13c7a084613365fd11dc54da04add992997f80123" 
+                     alt="Two rings hanging from whale rib - one coral-inlaid bolt, one braided kelp"
+                     class="bioluminescent">
+            </div>
+            <div class="text-content">
+                <div class="narration">
+                    In the end, love becomes a choice renewed with each breath, each tide, each migration. Two rings hang from Old Salt's rib—one forged from surface industry, one woven from ocean memory. Together, they sway with the rhythm of a whale's eternal heartbeat.
+                </div>
+                <div class="dialogue mira">
+                    <div class="speaker">MIRA</div>
+                    "The surface and the deep don't have to be enemies. They can be... seasons of the same love."
+                </div>
+                <div class="dialogue rafi">
+                    <div class="speaker">RAFI</div>
+                    "Then let's learn to breathe in both worlds—with tools that build instead of take, with songs that heal instead of harm."
+                </div>
+                <div class="dialogue whale">
+                    <div class="speaker">OLD SALT</div>
+                    [And in the deep cathedral of memory, two rings swing eternal—marking time not with extraction, but with connection.]
+                </div>
+            </div>
+        </section>
+
+        <!-- Final Slide -->
+        <section class="slide cover-slide">
+            <div class="slide-content">
+                <div class="narration">
+                    <em>Some love stories end with happily ever after. Others begin with "what if we chose each other, every tide, every season, every breath between worlds?"</em>
+                </div>
+                <div class="title" style="font-size: 2rem; margin-top: 2rem;">
+                    THE END
+                </div>
+                <div class="subtitle">
+                    A story of love as counter-economy to extraction
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Scroll-based animations
+        const slides = document.querySelectorAll('.slide');
+        const scrollProgress = document.getElementById('scroll-progress');
+
+        function updateScrollProgress() {
+            const scrollTop = window.pageYOffset;
+            const documentHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = (scrollTop / documentHeight) * 100;
+            scrollProgress.style.width = progress + '%';
+        }
+
+        function animateSlides() {
+            slides.forEach(slide => {
+                const slideTop = slide.offsetTop;
+                const slideHeight = slide.offsetHeight;
+                const windowHeight = window.innerHeight;
+                const scrollTop = window.pageYOffset;
+
+                if (scrollTop + windowHeight > slideTop + slideHeight * 0.3) {
+                    slide.classList.add('visible');
+                }
+            });
+        }
+
+        // Keyboard navigation
+        function handleKeyboard(e) {
+            if (e.key === 'ArrowDown' || e.key === ' ') {
+                e.preventDefault();
+                window.scrollBy(0, window.innerHeight);
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                window.scrollBy(0, -window.innerHeight);
+            }
+        }
+
+        // Event listeners
+        window.addEventListener('scroll', () => {
+            requestAnimationFrame(() => {
+                animateSlides();
+                updateScrollProgress();
+            });
+        });
+
+        window.addEventListener('keydown', handleKeyboard);
+
+        // Initialize
+        animateSlides();
+        updateScrollProgress();
+
+        // Touch scrolling for mobile
+        let startY = 0;
+        let isScrolling = false;
+
+        document.addEventListener('touchstart', e => {
+            startY = e.touches[0].clientY;
+            isScrolling = false;
+        });
+
+        document.addEventListener('touchmove', e => {
+            isScrolling = true;
+        });
+
+        document.addEventListener('touchend', e => {
+            if (!isScrolling) return;
+            
+            const endY = e.changedTouches[0].clientY;
+            const diff = startY - endY;
+            
+            if (Math.abs(diff) > 50) {
+                if (diff > 0) {
+                    // Scroll down
+                    window.scrollBy(0, window.innerHeight * 0.8);
+                } else {
+                    // Scroll up
+                    window.scrollBy(0, -window.innerHeight * 0.8);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

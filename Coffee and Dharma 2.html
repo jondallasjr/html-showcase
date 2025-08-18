@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coffee & Dharma: An Interactive Comic</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #2d4a3e, #1a2d23);
+            color: #f5f3e8;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .slide {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
+            border-bottom: 1px solid rgba(205, 173, 109, 0.2);
+        }
+
+        .slide-content {
+            max-width: 1200px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .slide.full-width .slide-content {
+            grid-template-columns: 1fr;
+            text-align: center;
+            max-width: 900px;
+        }
+
+        .text-content {
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .text-content.animate {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .image-content {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 0.8s ease-out;
+        }
+
+        .image-content.animate {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .slide-image {
+            width: 100%;
+            height: 400px;
+            object-fit: contain;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .slide.cover .slide-image {
+            height: 600px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: #cdad6d;
+            margin-bottom: 1rem;
+            font-weight: 300;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            color: #cdad6d;
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+
+        h3 {
+            font-size: 1.8rem;
+            color: #b8956a;
+            margin-bottom: 1rem;
+        }
+
+        .narration {
+            font-style: italic;
+            font-size: 1.2rem;
+            color: #e8dcc0;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            padding: 1rem;
+            background: rgba(45, 74, 62, 0.3);
+            border-left: 4px solid #cdad6d;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .dialogue {
+            margin: 1rem 0;
+            padding: 0.8rem 1.2rem;
+            background: rgba(184, 149, 106, 0.1);
+            border-radius: 8px;
+            border: 1px solid rgba(184, 149, 106, 0.3);
+        }
+
+        .dialogue-speaker {
+            font-weight: bold;
+            color: #cdad6d;
+            margin-bottom: 0.3rem;
+        }
+
+        .quote {
+            font-style: italic;
+            color: #d4b896;
+            font-size: 1.1rem;
+            text-align: center;
+            padding: 1rem;
+            background: rgba(45, 74, 62, 0.4);
+            border-radius: 8px;
+            margin: 1rem 0;
+            border: 1px solid rgba(205, 173, 109, 0.3);
+        }
+
+        .stats-overlay {
+            background: rgba(205, 173, 109, 0.9);
+            color: #1a2d23;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 1rem;
+        }
+
+        .chapter-title {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            background: rgba(45, 74, 62, 0.8);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            border: 1px solid rgba(205, 173, 109, 0.5);
+        }
+
+        .navigation {
+            position: fixed;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(205, 173, 109, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-dot.active {
+            background: #cdad6d;
+            transform: scale(1.2);
+        }
+
+        .lotus-decoration {
+            position: absolute;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        .lotus-decoration.top-left {
+            top: 10%;
+            left: 10%;
+            transform: rotate(-15deg);
+        }
+
+        .lotus-decoration.bottom-right {
+            bottom: 10%;
+            right: 10%;
+            transform: rotate(15deg);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .slide-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                text-align: center;
+            }
+
+            .slide {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .narration {
+                font-size: 1rem;
+            }
+
+            .navigation {
+                display: none;
+            }
+
+            .chapter-title {
+                position: relative;
+                top: 0;
+                left: 0;
+                margin-bottom: 1rem;
+                text-align: center;
+            }
+        }
+
+        /* Keyboard navigation focus styles */
+        .slide:focus {
+            outline: 2px solid #cdad6d;
+            outline-offset: -2px;
+        }
+
+        /* Scroll animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        /* Loading state */
+        .slide-image.loading {
+            background: linear-gradient(90deg, rgba(45, 74, 62, 0.3) 25%, rgba(205, 173, 109, 0.1) 50%, rgba(45, 74, 62, 0.3) 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+
+        @keyframes loading {
+            0% {
+                background-position: 200% 0;
+            }
+            100% {
+                background-position: -200% 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation dots -->
+    <div class="navigation" id="navigation">
+        <!-- Generated by JavaScript -->
+    </div>
+
+    <!-- Opening Slide -->
+    <section class="slide cover" tabindex="0" data-slide="0">
+        <div class="slide-content">
+            <div class="text-content">
+                <h1>Coffee & Dharma</h1>
+                <div class="narration">
+                    For thousands of years, contemplatives have sought the perfect balance of alertness and calm. Today, billions reach for caffeine to wake up their minds. But what did the ancient masters really say about stimulants? And what does modern science tell us about this daily ritual?
+                </div>
+                <div class="dialogue">
+                    <div class="dialogue-speaker">Modern Meditator:</div>
+                    "I can't even sit still without my morning coffee..."
+                </div>
+                <div class="dialogue">
+                    <div class="dialogue-speaker">Ancient Voice (ethereal):</div>
+                    "The middle path warns against both dullness and agitation."
+                </div>
+            </div>
+            <div class="image-content">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-qnP9IVEs1J/3a937fdd69df934306254f46652bb3c8579bd11636cdb407f71198b8b7caf2f2a8a646b4cddbc7e37fb101e870abba15b3a3ef9271617cef2d8acffab6cfe07a0ac2a5c0b32beee67420adb7a7de2c1a6e511ef329f12763f0c6be814f638d4c6b412233" alt="Split scene showing serene Buddha with coffee cup and jittery modern meditator" class="slide-image">
+            </div>
+        </div>
+        <div class="lotus-decoration top-left">🪷</div>
+        <div class="lotus-decoration bottom-right">🪷</div>
+    </section>
+
+    <!-- Chapter 1: Before the Bean -->
+    <section class="slide" tabindex="0" data-slide="1">
+        <div class="chapter-title">Chapter 1: Before the Bean - Ancient Wisdom</div>
+        <div class="slide-content">
+            <div class="image-content">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-mlLlRdxD6b/31618ff765564d3fc08c01b8ff46d3cd1cbc73e1f629bbf4b9131d2b49e8d86325fb99957f5b4a31680ab87425f1847688201e4fa5e4836a564b3ecd0001dc3ac239e9b9cc36aa5bbc492db9229956a5f41570401085b67211fbecc4884dc07d350b4dff" alt="Buddhist monks in meditation with tea bowls" class="slide-image">
+            </div>
+            <div class="text-content">
+                <h2>The Buddha's Guidelines</h2>
+                <div class="narration">
+                    The Buddha's Fifth Precept forbids intoxicants that cause heedlessness. But tea and coffee? Not considered intoxicants.
+                </div>
+                <div class="dialogue">
+                    <div class="dialogue-speaker">Monk 1:</div>
+                    "After noon, we fast from food..."
+                </div>
+                <div class="dialogue">
+                    <div class="dialogue-speaker">Monk 2:</div>
+                    "But tea without milk? That's permitted until dawn."
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide" tabindex="0" data-slide="2">
+        <div class="slide-content">
+            <div class="text-content">
+                <h3>Zen and the Art of Tea</h3>
+                <div class="narration">
+                    In Tang Dynasty China, Lu Yu elevated tea to an art. Later, Japanese monk Eisai wrote 'Kissa Yōjōki' - praising tea's power to sharpen the mind for longer zazen sessions.
+                </div>
+                <div class="quote">
+                    "Tea is the most wonderful medicine for nourishing one's health... When the mental faculties are sluggish, drink tea." - Eisai
+                </div>
+            </div>
+            <div class="image-content">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-2BpeNm4AFR/f5510d1099bd50628fc9ddb89f1109fecb023371652c8ab37ab691645e3e13f2d256a4d45ef588375e452702ebad48cd94495d265c75f790950621d47f06135e5595b6d76ae841284475fad0c3b2dfa431755d0707c80b34db2cd6f1e39a5c77e9f0bdfc" alt="Traditional Japanese tea ceremony with cherry blossoms" class="slide-image">
+            </div>
+        </div>
+    </section>
+
+    <section class="slide" tabindex="0" data-slide="3">
+        <div class="slide-content">
+            <div class="image-content">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-S4Nk8qNGah/f43c8206770ec154628474eebe6459990f302a55c5dfda97e3b1ce970b93c68a26e1c521716a3319db7a45fa6f987bde3f11d90017b898672bd4079b0345afdd6f5a8763905e0e0c27ceea87cb954286451e6c43038a4df3030d6bff4770c3a69b952b5c" alt="Three gunas energy swirls with coffee beans in rajas section" class="slide-image">
+            </div>
+            <div class="text-content">
+                <h3>The Bhagavad Gita's Food Wisdom</h3>
+                <div class="narration">
+                    The Bhagavad Gita classifies foods by their effect on consciousness. Bitter, pungent, hot and dry foods? Rajasic - agitating the mind.
+                </div>
+                <div class="quote">
+                    "Foods that are bitter, sour, salty, very hot, pungent, dry and burning create pain, grief and disease." - Bhagavad Gita 17.9
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide" tabindex="0" data-slide="4">
+        <div class="slide-content">
+            <div class="text-content">
+                <h3>Ayurveda's Balance</h3>
+                <div class="narration">
+                    Classical Ayurveda predates coffee in India. Modern practitioners classify coffee as rajasic - potentially aggravating Vata's anxiety and Pitta's heat.
+                </div>
+            </div>
+            <div class="image-content">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-doDwK7oNnb/ff952be54beb3909de6370a51510516e6c784826f9ffcb5489dc9538a57037b2f28b3012626c534fac6450ffa02c8a09e6d6b14adbb6aa96156d869c7858a40f96f22d49b0509f6091d2df0df0b8122785ac5e95ae12a845c4eb5a97940f94e19dc57a24" alt="Ayurvedic dosha chart showing coffee's impact on Vata and Pitta" class="slide-image">
+            </div>
+        </div>
+    </section>
+
+    <!-- Chapter 2: The Science of Wakefulness -->
+    <section class="slide" tabindex="0" data-slide="5">
+        <div class="chapter-title">Chapter 2: The Science of Wakefulness</div>
+        <div class="slide-content">
+            <div class="image-content">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-gVCF9z_Lm8/1c392883e5a49b0548416a61c448ed848a4579ba7d49311e16d20dde3b2608345a973ee2335de974137b5354c9144fbf2034bf58b7f003d86a2e49dbf2888bdfe48a49392f5eded9f5326c7aa4f6f18d61f2eca450a81cf36aa513497b86a3151b20733f" alt="Brain neuron showing adenosine and caffeine molecular battle" class="slide-image">
+            </div>
+            <div class="text-content">
+                <h2>Adenosine - The Sleep Molecule</h2>
+                <div class="narration">
+                    As you stay awake, adenosine builds up in your brain, making you sleepy. Caffeine is the perfect molecular mimic - it blocks adenosine's 'time for sleep' signal.
+                </div>
+                <div class="dialogue">
+                    <div class="dialogue-speaker">Adenosine:</div>
+                    "Time to rest now..."
+                </div>
+                <div class="dialogue">
+                    <div class="dialogue-speaker">Caffeine:</div>
+                    "Not so fast! I've got your receptor blocked."
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide" tabindex="0" data-slide="6">
+        <div class="slide-content">
+            <div class="text-content">
+                <h3>The Alertness Timeline</h3>
+                <div class="narration">
+                    Peak alertness hits 30-60 minutes after consumption. But with a 5-hour half-life, that afternoon cup is still active at bedtime.
+                </div>
+                <div class="stats-overlay">
+                    FDA guideline: 400mg daily max for healthy adults (roughly 4 cups of coffee)
+                </div>
+            </div>
+            <div class="image-content">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-FQLUuaob6Y/5bdf3221a79a520260b1f3525ef5012cd3f478b9dc94dd24a2a177464de70c0fe33af9909c7e648eb92cf949a1a03122720fb22b527e08bb64959cefc53b911eb56a90684267820d02d2de8d34fe88a03258b1e2fab57902734dbb5017a8d6c26b5c769a" alt="Graph showing caffeine levels over time with meditator's changing alertness" class="slide-image">
+            </div>
+        </div>
+    </section>
+
+    <section class="slide" tabindex="0" data-slide="7">
+        <div class="slide-content">
+            <div class="image-content">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-xKif78v8pD/966fbafeb7ddbc30e9044b20ac41f0440d0621fa9269faee340ab590538717b73441f6d4529a761b9b35999d9939866d1f1cb0ec80a2c6d733d8d08a72a9049a9909b34bb2fde1af04c815a6e0c87439e16c2413bdbd7c3810e09474d0f77b3360ece8fa" alt="Zen archery target with meditator at center bullseye" class="slide-image">
+            </div>
+            <div class="text-content">
+                <h3>The Meditation Sweet Spot</h3>
+                <div class="narration">
+                    Meditation requires calm alertness. Too little caffeine = dullness. Too much = restless mind. The sweet spot is personal and smaller than most think.
+                </div>
+                <div class="dialogue">
+                    <div class="dialogue-speaker">Over-caffeinated meditator:</div>
+                    "My mind is racing with insights!"
+                </div>
+                <div class="dialogue">
+                    <div class="dialogue-speaker">Under-caffeinated meditator:</div>
+                    "Zzzz..."
+                </div>
+                <div class="dialogue">
+                    <div class="dialogue-speaker">Balanced meditator:</div>
+                    "Aware, present, still."
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chapter 3: The Leaves Tell Different Stories -->
+    <section class="slide" tabindex="0" data-slide="8">
+        <div class="chapter-title">Chapter 3: The Leaves Tell Different Stories</div>
+        <div class="slide-content">
+            <div class="text-content">
+                <h2>Coffee - The Bold Awakener</h2>
+                <div class="narration">
+                    Coffee hits hard and fast. High caffeine content plus compounds like chlorogenic acids create intense alertness - but also higher jitter risk.
+                </div>
+                <div class="stats-overlay">
+                    ~95mg caffeine per 8oz cup
+                </div>
+            </div>
+            <div class="image-content">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-2IZrjE-P5C/cbd884c65408efd296fc9bfae0640d6c6b3547f93b6db4cf1d1776495e567a8b6690deef4eaf77b70a0e30bd3404c20969beb5acc59e967ee8562989a73da0af834f09f1d10cfba2d80ea4a5f91f41f90e235ff6be99575e2016f7b44fc894f3c7fff3ff" alt="Coffee beans transforming into lightning bolts with tense meditator" class="slide-image">
+            </div>
+        </div>
+    </section>
+
+    <section class="slide" tabindex="0" data-slide="9">
+        <div class="slide-content">
+            <div class="image-content">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-tgHnqOKUw5/b9ed56195c085476d40de8d07601915490061f39e2d3c8f3e2178d41a44b3d461a82ba5994973324fa5bc39b2f9b22e8d744eddbf8c9fad2f3beab8d8f58e0e632bf42dc9a01732012747060ab46c8e5c3fe96de8ff5830c9fb6fed0b4cd0a4e248a2918" alt="British tea setting with mandala steam patterns" class="slide-image">
+            </div>
+            <div class="text-content">
+                <h3>Black Tea - The Middle Way</h3>
+                <div class="narration">
+                    Black tea offers moderate stimulation. Theaflavins and thearubigins create a different chemical profile - alert without the edge.
+                </div>
+                <div class="stats-overlay">
+                    ~47mg caffeine per 8oz cup
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide" tabindex="0" data-slide="10">
+        <div class="slide-content">
+            <div class="text-content">
+                <h3>Green Tea - The Gentle Focus</h3>
+                <div class="narration">
+                    Green tea's secret weapon: L-theanine. This amino acid promotes alpha brain waves - the relaxed alertness perfect for meditation.
+                </div>
+                <div class="stats-overlay">
+                    ~28mg caffeine + L-theanine per 8oz cup
+                </div>
+                <div class="dialogue">
+                    <div class="dialogue-speaker">Brain:</div>
+                    "Caffeine says wake up!"
+                </div>
+                <div class="dialogue">
+                    <div class="dialogue-speaker">L-theanine:</div>
+                    "...but stay calm about it."
+                </div>
+            </div>
+            <div class="image-content">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-SPzxYPVTI8/6dd75d6ff5e4b0008a5213b9fa8e9cf267bcc878c5c5441dea6978d9f9836546bd970ecdea59478a22a495a132e6f7ed6aaecfe045fc1c824cabdd060f7a100928a822879d855fa30a4583a68378104adf9a174cfee58b54d4b663b53c74f43d4c822562" alt="Japanese tea garden with green tea leaves transforming into alpha brain waves" class="slide-image">
+            </div>
+        </div>
+    </section>
+
+    <section class="slide" tabindex="0" data-slide="11">
+        <div class="slide-content">
+            <div class="image-content">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-dDdS8V_Hj0/5ae662342bda7f680d2be3b9a2006edd3bc30b1f75a7026083f43926982eaa2b3c79c69baa97a5a6a176d40b0bcb76a5f22b7dbafe8a33eb0f64b8c7131aaef09a7078458e37b926b51224de7de92b3755170713e184c36820ad1d51d306c6322034777e" alt="Traditional matcha ceremony with bamboo whisk creating zen circle" class="slide-image">
+            </div>
+            <div class="text-content">
+                <h3>Matcha - The Mindful Powerhouse</h3>
+                <div class="narration">
+                    Matcha delivers the whole leaf - shade-grown for maximum L-theanine. The Japanese discovered centuries ago: this is calm-alert consciousness in a bowl.
+                </div>
+                <div class="stats-overlay">
+                    38-176mg caffeine (varies by amount) + high L-theanine
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide" tabindex="0" data-slide="12">
+        <div class="slide-content">
+            <div class="text-content">
+                <h3>The Alternative Awakeners</h3>
+                <div class="narration">
+                    Beyond coffee and tea lie other teachers: Yerba mate's steady sociability, guayusa's gentle focus, yaupon's ceremonial clarity, cacao's heart-opening warmth.
+                </div>
+            </div>
+            <div class="image-content">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-Sy9YyuVAbh/03c133216238e9ae94836bf40cef91c9b99f57128dcc080ae847e9c4c6250cf4f157dc78383aa131525e5f00daa6c4de337fc595ac57938c31a1a7ca7e650d45d15b4d21e19e90f06eac42e85518a8d3a4e54ad06607ed02f2abcb87f4d13ad63e2e3c65" alt="World map showing different caffeinated plants with unique energy signatures" class="slide-image">
+            </div>
+        </div>
+    </section>
+
+    <!-- Chapter 4: The Contemplative's Guide -->
+    <section class="slide" tabindex="0" data-slide="13">
+        <div class="chapter-title">Chapter 4: The Contemplative's Guide</div>
+        <div class="slide-content">
+            <div class="image-content">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-IPzNghJbTl/c28c98d55d52f1e072e0b55b505fcb0c8134d01d90d11c37c7c31250ecac5e796831364e145d15735a7216c26bac9918836396027d52f245e4926ae369212d54ba22f873f4c89f8022bc45d463002d2baf560c964d95c392e75dad90a82fc34ffb0709fc" alt="Clock face with meditation cushion showing optimal timing zones" class="slide-image">
+            </div>
+            <div class="text-content">
+                <h2>Timing is Everything</h2>
+                <div class="narration">
+                    Ancient monks timed their tea for maximum benefit. Modern science confirms: 30-60 minutes before sitting for alertness, but stop 8-10 hours before sleep to protect your practice.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide" tabindex="0" data-slide="14">
+        <div class="slide-content">
+            <div class="text-content">
+                <h3>Start Small, Go Slow</h3>
+                <div class="narration">
+                    Begin with 25-75mg - half a cup of tea, light matcha, small americano. Your nervous system will tell you the rest.
+                </div>
+                <div class="dialogue">
+                    <div class="dialogue-speaker">Body:</div>
+                    "This feels right..."
+                </div>
+                <div class="dialogue">
+                    <div class="dialogue-speaker">Mind:</div>
+                    "I can focus without forcing."
+                </div>
+            </div>
+            <div class="image-content">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-E7RxXVcvhP/30fbdbf337742fbd4e1c8fc08e9b6fa5757bc5addfccbd7aa599dfdf7b0cfc38d03e9a806bcd0a4d96d1100f957bbccb070ecae6befcedd09208d815e3370ef93e9250786a39186e49e5e6ae142f1eddc51191ccba73c2df8836ae28ec5ebc4c632689d2" alt="Progressive dose measuring cups with meditator's changing expression" class="slide-image">
+            </div>
+        </div>
+    </section>
+
+    <section class="slide" tabindex="0" data-slide="15">
+        <div class="slide-content">
+            <div class="image-content">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-Xmdf3zs76-/55a1b9919d6ebdf0a2f3fea1df76733e9fd467ce4d26a15bb6d2aec9e2e00c01eb2e44d6fc7fa3a2f1a7a6464cc5cc484aefd0e02465919be5be8bcf18fccc28a52259611000a599442a64d059f7ee43c1848eec994c61eebcc9f891e029f0388bc22855" alt="Side-by-side comparison of coffee vs tea brain wave patterns" class="slide-image">
+            </div>
+            <div class="text-content">
+                <h3>The Tea Advantage</h3>
+                <div class="narration">
+                    For anxiety-prone practitioners, tea's L-theanine acts as a buffer - maintaining alertness while smoothing the rough edges.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chapter 5: Modern Practice, Ancient Wisdom -->
+    <section class="slide" tabindex="0" data-slide="16">
+        <div class="chapter-title">Chapter 5: Modern Practice, Ancient Wisdom</div>
+        <div class="slide-content">
+            <div class="text-content">
+                <h2>The Middle Path Applied</h2>
+                <div class="narration">
+                    The Buddha taught the middle way between extreme asceticism and indulgence. Caffeine, used mindfully, can be skillful means - a tool, not a crutch.
+                </div>
+                <div class="quote">
+                    "Not an intoxicant, but not neutral either."
+                </div>
+            </div>
+            <div class="image-content">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-W5HtZ4DupZ/6f4a285000fe2e1510fb4c9f7e9114d8032a6cb24d39d21267a0fc454870982e991f8997965d2569a968b6107eef89c0e6bbafe5c38b77c43db3a5cc6884fc835e362e09bacc35975d62f9e8d57fe2a82557940fe8f544591727399b884a670479725ff0" alt="Buddha figure made of tea leaves and coffee beans in perfect balance" class="slide-image">
+            </div>
+        </div>
+    </section>
+
+    <section class="slide" tabindex="0" data-slide="17">
+        <div class="slide-content">
+            <div class="image-content">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-lvZvp-_YfB/878f0b02af9db47d7527d1f7af7de0dee05722185d08f4c7e7a1ae50ee148c4aa4aa6116874479787f44110e5cabe612965db0f9cdf143fc9cf4eb768a86a3f579ff86427039c112032a5ba67c87cdb4a915318ab727de3efd34741e48189b308c375254" alt="Modern meditation hall with practitioners holding various beverages mindfully" class="slide-image">
+            </div>
+            <div class="text-content">
+                <h3>Integration Practice</h3>
+                <div class="narration">
+                    Whether you choose coffee's bold awakening, tea's gentle focus, or simple water's clarity - the key is conscious consumption aligned with your practice goals.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Closing Slide -->
+    <section class="slide cover full-width" tabindex="0" data-slide="18">
+        <div class="slide-content">
+            <div class="text-content">
+                <h1>The Invitation</h1>
+                <div class="narration">
+                    For thousands of years, contemplatives have found their way to awakening - some with tea's gentle companionship, some with coffee's honest jolt, many with nothing but breath and presence. The question isn't what's in your cup, but what's in your heart.
+                </div>
+                <div class="dialogue">
+                    <div class="dialogue-speaker">Reader:</div>
+                    "So what should I choose?"
+                </div>
+                <div class="dialogue">
+                    <div class="dialogue-speaker">Ancient Wisdom:</div>
+                    "Choose awareness. Everything else is just... leaves and beans."
+                </div>
+            </div>
+            <div class="image-content">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-9OqfJMgjWw/30b93e9f291188a5f3b90344261bfff19d0ff5b9a54f346ce8fb77b1831960a06a30820b7ac8d2ce321eb34ef03cba57a049ec45bfcdc9ac7f0c5aef9822bfd4bf6b28f557afe482cacea7b7cad9935616750f6591ae1c1889ed34930960522a484bca42" alt="Mountain sunrise with meditation cushion and steaming cup" class="slide-image">
+            </div>
+        </div>
+        <div class="lotus-decoration top-left">🪷</div>
+        <div class="lotus-decoration bottom-right">🪷</div>
+    </section>
+
+    <script>
+        // Initialize the comic
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.slide');
+            const navigation = document.getElementById('navigation');
+            let currentSlide = 0;
+
+            // Create navigation dots
+            slides.forEach((slide, index) => {
+                const dot = document.createElement('div');
+                dot.className = 'nav-dot';
+                if (index === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => scrollToSlide(index));
+                navigation.appendChild(dot);
+            });
+
+            const navDots = document.querySelectorAll('.nav-dot');
+
+            // Intersection Observer for scroll animations
+            const observerOptions = {
+                threshold: 0.5,
+                rootMargin: '0px 0px -100px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const slideIndex = parseInt(entry.target.dataset.slide);
+                        updateCurrentSlide(slideIndex);
+                        animateSlideContent(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            slides.forEach(slide => {
+                observer.observe(slide);
+            });
+
+            function updateCurrentSlide(index) {
+                currentSlide = index;
+                navDots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === index);
+                });
+            }
+
+            function animateSlideContent(slide) {
+                const textContent = slide.querySelector('.text-content');
+                const imageContent = slide.querySelector('.image-content');
+                
+                if (textContent) {
+                    textContent.classList.add('animate');
+                }
+                if (imageContent) {
+                    setTimeout(() => {
+                        imageContent.classList.add('animate');
+                    }, 300);
+                }
+            }
+
+            function scrollToSlide(index) {
+                slides[index].scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                switch(e.key) {
+                    case 'ArrowDown':
+                    case ' ':
+                        e.preventDefault();
+                        if (currentSlide < slides.length - 1) {
+                            scrollToSlide(currentSlide + 1);
+                        }
+                        break;
+                    case 'ArrowUp':
+                        e.preventDefault();
+                        if (currentSlide > 0) {
+                            scrollToSlide(currentSlide - 1);
+                        }
+                        break;
+                    case 'Home':
+                        e.preventDefault();
+                        scrollToSlide(0);
+                        break;
+                    case 'End':
+                        e.preventDefault();
+                        scrollToSlide(slides.length - 1);
+                        break;
+                }
+            });
+
+            // Touch/swipe support for mobile
+            let touchStartY = 0;
+            let touchEndY = 0;
+
+            document.addEventListener('touchstart', (e) => {
+                touchStartY = e.changedTouches[0].screenY;
+            });
+
+            document.addEventListener('touchend', (e) => {
+                touchEndY = e.changedTouches[0].screenY;
+                handleSwipe();
+            });
+
+            function handleSwipe() {
+                const swipeThreshold = 50;
+                const swipeDistance = touchStartY - touchEndY;
+
+                if (Math.abs(swipeDistance) > swipeThreshold) {
+                    if (swipeDistance > 0 && currentSlide < slides.length - 1) {
+                        // Swipe up - next slide
+                        scrollToSlide(currentSlide + 1);
+                    } else if (swipeDistance < 0 && currentSlide > 0) {
+                        // Swipe down - previous slide
+                        scrollToSlide(currentSlide - 1);
+                    }
+                }
+            }
+
+            // Image loading optimization
+            const images = document.querySelectorAll('.slide-image');
+            images.forEach(img => {
+                img.classList.add('loading');
+                img.onload = () => {
+                    img.classList.remove('loading');
+                };
+                img.onerror = () => {
+                    img.classList.remove('loading');
+                    img.style.background = 'rgba(205, 173, 109, 0.2)';
+                };
+            });
+
+            // Initial animation for first slide
+            setTimeout(() => {
+                animateSlideContent(slides[0]);
+            }, 500);
+        });
+    </script>
+</body>
+</html>
