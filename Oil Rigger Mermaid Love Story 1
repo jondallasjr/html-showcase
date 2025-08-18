@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Brinehearted — a poignant rom-com comic</title>
+<style>
+/* ---------- tokens ---------- */
+:root{
+  --indigo:#0B1A2B; --teal:#1FB5A7; --seaglass:#79C9B8; --coral:#FF5A58;
+  --amber:#FFB000; --seafoam:#BFE9DE; --graphite:#4A4A4A;
+  --bg:radial-gradient(1200px 60% at 50% -10%,rgba(31,181,167,.15),transparent),#020812;
+  --text:#EAEFF2; --muted:#9FB7B9;
+  --panel-shadow:0 10px 40px rgba(0,0,0,.35);
+}
+/* high-contrast toggle (progressive enhancement, no JS) */
+#contrast:checked ~ main{filter:contrast(115%) saturate(110%);}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0; color:var(--text); background:var(--bg);
+  font:16px/1.5 ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto;
+  scroll-behavior:smooth; accent-color:var(--teal);
+}
+a{color:var(--seafoam)}
+/* ---------- deck layout ---------- */
+.deck{
+  scroll-snap-type:y mandatory;
+  overscroll-behavior-y:contain;
+}
+.slide{
+  min-height:100svh; display:grid; gap:1.25rem;
+  grid-template-columns: 1.2fr .8fr; align-items:center;
+  padding:clamp(16px,4vw,40px);
+  position:relative; scroll-snap-align:start;
+  container-type:inline-size;
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+/* mobile stack */
+@container (max-width:900px){
+  .slide{grid-template-columns:1fr}
+}
+/* images */
+.figure{margin:0; position:relative; filter:drop-shadow(var(--panel-shadow));}
+.pane{
+  width:100%; height:75vh; max-height:78svh; display:block; background:#000;
+  object-fit:contain; border-radius:18px;
+}
+.pane.transparent{background:transparent; filter:none}
+.pane.framed{outline:2px solid rgba(255,255,255,.08); outline-offset:8px}
+/* ornament overlay */
+.ornament{
+  position:absolute; inset:0; pointer-events:none; object-fit:contain; opacity:.9;
+}
+/* captions outside the pane */
+.caption{display:flex; flex-direction:column; gap:.75rem}
+h2, h3{margin:.25rem 0 .5rem; font-weight:700; letter-spacing:.2px}
+h2{font-size:clamp(22px,4vw,34px)}
+h3{font-size:clamp(18px,3vw,22px); color:var(--seafoam)}
+.narration{
+  font-variant:small-caps; font-weight:600; color:var(--amber);
+  letter-spacing:.5px; opacity:.95;
+}
+.dialogue{display:grid; gap:.25rem}
+.dialogue .who{color:var(--teal); font-weight:700; display:block}
+.dialogue .line{color:var(--text)}
+.sfx{color:var(--muted); font-style:italic}
+/* accessibility helpers */
+.visually-hidden{position:absolute!important;clip:rect(1px,1px,1px,1px);padding:0;border:0;height:1px;width:1px;overflow:hidden;white-space:nowrap}
+/* header / footer */
+.header{
+  position:sticky; top:0; z-index:10; backdrop-filter:blur(8px);
+  background:linear-gradient(to bottom,rgba(2,8,18,.9),transparent);
+  padding:.5rem 1rem; display:flex; align-items:center; gap:1rem
+}
+.logo{height:36px; width:auto; object-fit:contain}
+.controls{margin-left:auto; display:flex; gap:1rem; align-items:center}
+.navdots{display:flex; gap:.5rem}
+.navdots a{
+  width:10px;height:10px;border-radius:50%;display:inline-block;
+  background:rgba(255,255,255,.25)
+}
+.navdots a:focus,.navdots a:hover{outline:2px solid var(--teal); outline-offset:2px}
+.footer{padding:2rem 1rem; text-align:center; color:var(--muted)}
+/* ---------- motion (CSS scroll-driven; falls back gracefully) ---------- */
+@keyframes riseFade{from{opacity:0; transform:translateY(24px)} to{opacity:1; transform:none}}
+@keyframes scaleGlow{from{opacity:.4; transform:scale(.98)} to{opacity:1; transform:scale(1)}}
+.slide{
+  view-timeline-name: --reveal;
+  view-timeline-axis: block;
+}
+.figure, .caption{animation: riseFade .6s ease both; animation-timeline: --reveal; animation-range: entry 5% cover 30%}
+.pane{animation: scaleGlow .8s ease both; animation-timeline: --reveal; animation-range: entry 0% cover 25%}
+/* ---------- responsive type ---------- */
+@media (prefers-reduced-motion:reduce){
+  .figure,.caption,.pane{animation:none}
+  .deck{scroll-behavior:auto}
+}
+/* ---------- scroll snap indicator ---------- */
+.slide::after{
+  content:""; position:absolute; right:18px; bottom:18px; width:6px; height:28px;
+  border-radius:999px; background:linear-gradient(var(--teal),transparent);
+  opacity:.35
+}
+</style>
+</head>
+<body>
+<a href="#cover" class="visually-hidden">Skip to start</a>
+
+<header class="header" role="banner" aria-label="Top bar">
+  <img class="logo" alt="Bolt–coral rings emblem" src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-E5iwFe4RsF/3f1d7ec02b4d11a87f79665c679dff6a10e409d8a65f29268e0153ea885bb501a47428de1ff839c881c2bfa5af1a7f53c3f68bdec56186c57afaf4a25e0615010287337ee66d4d63acfc9d6cd4ba02716d96a2c3ba9f4ad9e3c045f75e16fe3f9cea4451" />
+  <strong>Brinehearted</strong>
+  <div class="controls">
+    <label><input id="contrast" type="checkbox"> high-contrast</label>
+    <nav class="navdots" aria-label="Quick sections">
+      <a href="#cover" aria-label="Cover" title="Cover"></a>
+      <a href="#fall" aria-label="The Fall"></a>
+      <a href="#swallow" aria-label="The Swallow"></a>
+      <a href="#cave" aria-label="Whale Cathedral"></a>
+      <a href="#rafi" aria-label="Rafi"></a>
+      <a href="#mira" aria-label="Mira"></a>
+      <a href="#vow" aria-label="Light-Vow"></a>
+      <a href="#walkout" aria-label="Silent Walkout"></a>
+      <a href="#beacons" aria-label="Beacon Run"></a>
+      <a href="#mercity" aria-label="Mer-City"></a>
+      <a href="#evie" aria-label="Evie"></a>
+      <a href="#aunt" aria-label="Aunt"></a>
+      <a href="#blowhole" aria-label="Skylight"></a>
+      <a href="#rings" aria-label="Rings on Rib"></a>
+    </nav>
+  </div>
+</header>
+
+<main class="deck" role="main">
+  <!-- COVER -->
+  <section id="cover" class="slide" tabindex="-1" aria-labelledby="t-cover">
+    <figure class="figure">
+      <img class="pane" fetchpriority="high" decoding="async"
+        src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-m5EG4O1-Uh/85e35d755b540d71a45fdd1c202d83be923152b8920414e1ef0b7aab96909eb147f7a50d577c80de1811f5314c64885ff0f49894e320202576fbb86ea9b37da450728a9067a7b81e056bb99d4cabbe7aecbec4db485be51ad635820741c331766a6aeceb"
+        alt="Rafi and Mira in a whale-rib cathedral; bioluminescent pool; a watchful whale eye in the gloom." />
+    </figure>
+    <figcaption class="caption">
+      <h2 id="t-cover">Whale-rib cathedral</h2>
+      <p class="narration">Love is a map you learn by breath.</p>
+      <div class="dialogue">
+        <span class="who">RAFI &amp; MIRA</span>
+        <span class="line">A quiet promise, spoken in light.</span>
+      </div>
+      <div class="sfx">whale breath—slow</div>
+    </figcaption>
+  </section>
+
+  <!-- THE FALL -->
+  <section id="fall" class="slide" tabindex="-1" aria-labelledby="t-fall">
+    <figure class="figure">
+      <img class="pane" loading="lazy" decoding="async"
+        src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-xdeqDoBIow/8649595f019b4904b701bb3ef71bc25b61d5082b2b9b690267609c520557d8f59eb4c196b31e4639d90935e0451789af2995f132c21ac61088a34076e25fdeb3c2eb99236ef4d8b78dff61b58149f53c68919c89fc696540ec5a896905dafd814d2e326f"
+        alt="Storm over rig; Rafi slips as hard-hat tumbles; rope whips; rain like needles." />
+    </figure>
+    <div class="caption">
+      <h2 id="t-fall">The fall</h2>
+      <p class="narration">A bad step, a long sentence.</p>
+      <div class="sfx">klnk — splssh</div>
+    </div>
+  </section>
+
+  <!-- THE SWALLOW -->
+  <section id="swallow" class="slide" tabindex="-1" aria-labelledby="t-swallow">
+    <figure class="figure">
+      <img class="pane" loading="lazy" decoding="async"
+        src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-0Qh4qt4B4k/4af805a26e95b16b0024af90b3950160aa8dcac5e2ed48a68193ee166d49682733d3f22c813788583589b4a29a4e0673419490fe53e5d0f59e92655ca3a718c447580f209eeea93c3c7fcca42cc99875bd5eb5dcd16cad5121a57efbd47c687ae4df24d7"
+        alt="A whale maw like a cathedral entrance; Rafi drawn into the blue-black interior." />
+    </figure>
+    <div class="caption">
+      <h2 id="t-swallow">The swallow</h2>
+      <p class="narration">Mouths become doors when stories need rooms.</p>
+      <div class="sfx">whummm</div>
+    </div>
+  </section>
+
+  <!-- WHALE CATHEDRAL BG -->
+  <section id="cave" class="slide" tabindex="-1" aria-labelledby="t-cave">
+    <figure class="figure">
+      <img class="pane" loading="lazy" decoding="async"
+        src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-tW6wjCD89R/fdb79bfa6d7fdadda0722c020336a3d5f0ddbc9c717d1795e994faa0b7c7a419dc776a03be5ab623639612eb22496dd5b945c3254fce301ff0e84aef12bf1d203d98d7faac4ade9bdfa26bfec5e716b101cda687312ea430eb247dee674fb571ab2f510b"
+        alt="Vast whale-interior basilica: arched ribs, algae lanterns, bioluminescent pool; drift-wood shrines." />
+    </figure>
+    <div class="caption">
+      <h2 id="t-cave">Glow-cave</h2>
+      <p class="narration">There is air. Time to be foolish or brave.</p>
+    </div>
+  </section>
+
+  <!-- RAFI PORTRAIT -->
+  <section id="rafi" class="slide" tabindex="-1" aria-labelledby="t-rafi">
+    <figure class="figure">
+      <img class="pane framed" loading="lazy" decoding="async"
+        src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-uWjKi1Jgqi/94c80109296ff4271b627f83a32124de7b407abbb744585e6b435e2671d495e03a12d06fc0da30aeba1b5b3d88b1dc5997eaefc6fb5730278d4a8de00bed68d3939b1d81e54e151483c2ae97edf745eb33cd532043ad360f9ce38705ad5929b012e4a701"
+        alt="Rafi—wiry Filipino-American sailor—hard-hat nicked, bolt on lanyard, wrench in hand." />
+      <img class="ornament" alt="" aria-hidden="true"
+        src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-8krk2giftw/3e2f18ab4b3c2fd6b808a2628d200fc5c3255e919a799f0e40669e1cfc33a5debbfc5906daebbb7ba06206e7b549b30da06efb49ff3d8eec59fc075a5e9b74fd91ebf1249dd6b9a7d4e8c0141a7cacd497678d6a29838187c1f8b18315ade0fdc4c0a7d3" />
+    </figure>
+    <div class="caption">
+      <h2 id="t-rafi">Rook</h2>
+      <p class="narration">A poet of bolt sizes; allergic to hard talks.</p>
+      <div class="dialogue">
+        <span class="who">RAFI</span>
+        <span class="line">“I fix things. Sometimes I break first.”</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- MIRA PORTRAIT -->
+  <section id="mira" class="slide" tabindex="-1" aria-labelledby="t-mira">
+    <figure class="figure">
+      <img class="pane framed" loading="lazy" decoding="async"
+        src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-LSx_uwi8hJ/d71a93294461370fa38a31608ff3dae5ba1e8985cccba314ca3e43cf22967b9db2f89532286468e4c4cd4b27a8e93955bcf6a754145b7eff00e8f7806de59a7ef4a7c32688553fa6501e25f0ae30ae51490f055fede43c65e84c6676e061cdf1f23429c5"
+        alt="Mira—mermaid ethnographer—sea-glass tail, ear-frills, freckles lit with algae filaments." />
+      <img class="ornament" alt="" aria-hidden="true"
+        src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-8krk2giftw/3e2f18ab4b3c2fd6b808a2628d200fc5c3255e919a799f0e40669e1cfc33a5debbfc5906daebbb7ba06206e7b549b30da06efb49ff3d8eec59fc075a5e9b74fd91ebf1249dd6b9a7d4e8c0141a7cacd497678d6a29838187c1f8b18315ade0fdc4c0a7d3" />
+    </figure>
+    <div class="caption">
+      <h2 id="t-mira">Mira</h2>
+      <p class="narration">The sea studies us back.</p>
+      <div class="dialogue">
+        <span class="who">MIRA</span>
+        <span class="line">Light can be grammar if you let it.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIGHT-VOW -->
+  <section id="vow" class="slide" tabindex="-1" aria-labelledby="t-vow">
+    <figure class="figure">
+      <img class="pane" loading="lazy" decoding="async"
+        src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-psX9HoHKzo/55b065956ab6871e1b5d176afa72b830120bf163cd1a6214bb55871b755bafe203bed23df2d2c12b68aeec4ebbff1072dc6134ce4f94c5e0232660090069070398639a21d871cb216056cc8416798e3afdd40ac41db92b31dfb5ca21285be4d100a2af06"
+        alt="Algae filaments spiral around a rig bolt, forming a hovering ring between Rafi and Mira; Aunt’s silhouette nearby." />
+    </figure>
+    <div class="caption">
+      <h2 id="t-vow">Light-vow</h2>
+      <p class="narration">Some rituals are verbs; some are traps.</p>
+      <div class="sfx">fuwshh</div>
+    </div>
+  </section>
+
+  <!-- SILENT WALKOUT PAGE -->
+  <section id="walkout" class="slide" tabindex="-1" aria-labelledby="t-walkout">
+    <figure class="figure">
+      <img class="pane" loading="lazy" decoding="async"
+        src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-fS21vMvWww/2f0a9e2e60566247904c51081e5f826edb23f1cfbdda6febcebb531d00c2647674373518b77d8af64e850a6451e5cf1e9c442fad77f88bfeab52a290dc65281ac74d47eb69443b79a13c08ca8c1ebc3e30834e98d74e59e2e78b24b1e10e7b4d18c159db"
+        alt="Silent triptych: workers turn backs; the rig idles; underwater life pauses." />
+    </figure>
+    <div class="caption">
+      <h2 id="t-walkout">The hum stops</h2>
+      <div class="sfx">…</div>
+    </div>
+  </section>
+
+  <!-- BEACON TRENCH RUN -->
+  <section id="beacons" class="slide" tabindex="-1" aria-labelledby="t-beacons">
+    <figure class="figure">
+      <img class="pane" loading="lazy" decoding="async"
+        src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-y3oxZJacNO/0ce3d007fd5b1374964091dec109a0b8f3d405a65cdc807a2eb0365453998bcc3821bd0ae112ac53c09a73bfa60f8a6a294c118e3203a14828611412fc30416e380f7bf3c50c422d522241545888c57beb0d0035b897f1f9751ad335fb863b559c1ac567"
+        alt="Mira leads whales through a teal beacon corridor; Rafi adjusts a beacon; Old Salt guards." />
+    </figure>
+    <div class="caption">
+      <h2 id="t-beacons">Guidance is love with a map</h2>
+      <div class="sfx">ping — ping</div>
+    </div>
+  </section>
+
+  <!-- MER-CITY BG -->
+  <section id="mercity" class="slide" tabindex="-1" aria-labelledby="t-mer">
+    <figure class="figure">
+      <img class="pane" loading="lazy" decoding="async"
+        src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-ycB-IBwboR/fab01f8b3e7e83c3efce200068cd54cf76353e254e72557d108e333ca8b7f32e4071f1756996ce93d3a4a43a808e834bef1742ef01f01378a4684cac81e007b601cb9fca478158a7748ee729bfd8d1fdef8b898d87bb195ed57b1b64349414d93235a689"
+        alt="Mer-City: modular coral lattice, rope bridges, tide-clock plaza, algae lanterns." />
+    </figure>
+    <div class="caption">
+      <h2 id="t-mer">Tessellate</h2>
+      <p class="narration">A city braided from currents and keeping.</p>
+    </div>
+  </section>
+
+  <!-- EVIE -->
+  <section id="evie" class="slide" tabindex="-1" aria-labelledby="t-evie">
+    <figure class="figure">
+      <img class="pane framed" loading="lazy" decoding="async"
+        src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-jKLO_skZOu/67933ef6bc7b71a9a3de0db9412986750de973db1430645f3cbb9c067fe838041dd64a7739277cc7b587602e937a8f1accb42e8509a68aaea7c6bd334bb9c7f9e4f1ccf69bca2847d1ac781b7abfd85ae605abeb7449fb67922376ec452973166126b8d9"
+        alt="Evie—rig safety officer—rain jacket, reflective vest, safety glasses; steady gaze on deck." />
+    </figure>
+    <div class="caption">
+      <h2 id="t-evie">Evie Kline</h2>
+      <p class="narration">Courage wears a clipboard.</p>
+    </div>
+  </section>
+
+  <!-- AUNT KELPIE -->
+  <section id="aunt" class="slide" tabindex="-1" aria-labelledby="t-aunt">
+    <figure class="figure">
+      <img class="pane framed" loading="lazy" decoding="async"
+        src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-jCL90VlFlb/737be06f89b9dc4d03695d107c7d17c9a9376b1473dbef6d31f6bf1b9a0a39c8e8ea684f6ea3e3cf91786fe2ddecccd5ba97805638bec505712b93a58e0e4213e653ef9ca9c9b98f2b97505fd2d3e964535fa33f0bc85ac89bb8c3468c8ddb631f045acf"
+        alt="Aunt Kelpie—silver-braided hair, coral torque, red-coral tail accents—poised in tide-court." />
+    </figure>
+    <div class="caption">
+      <h2 id="t-aunt">Aunt Kelpie</h2>
+      <p class="narration">Family is a border with gates.</p>
+    </div>
+  </section>
+
+  <!-- BLOWHOLE SKYLIGHT -->
+  <section id="blowhole" class="slide" tabindex="-1" aria-labelledby="t-blowhole">
+    <figure class="figure">
+      <img class="pane" loading="lazy" decoding="async"
+        src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-pEwrDMAFj6/e4577061dc5ba7c9a951cfe8e08e36117c265a31aab47fd4ed9d1c9ba01bc82ff7df85548c9de22b8dfc4e4b102ad6ab403c8c5f0d0eaca9c07dc58df204d590c2f679816bcefacea474e4fa40e3259d040de03bcc2d83df7a67ed91da0dc9d7b0e6d751"
+        alt="Upward view: blowhole skylight pours faint surface light into a calm air pocket pool." />
+    </figure>
+    <div class="caption">
+      <h2 id="t-blowhole">Skylight</h2>
+      <p class="narration">Above: paychecks. Below: promises.</p>
+    </div>
+  </section>
+
+  <!-- RINGS ON RIB (EPILOGUE) -->
+  <section id="rings" class="slide" tabindex="-1" aria-labelledby="t-rings">
+    <figure class="figure">
+      <img class="pane" loading="lazy" decoding="async"
+        src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-gajFzDMbex/46d09c056ce18aec69d55cbc18d969054e0cd7ff2bebab10f8fc519604be822007204533856425ae4acf2547081632f1615892319a67856546cec7e37036606e0d3439d010c6da14e452c0d45502713ba52edf022c51933567a96a1e8a268ec1d5399a77"
+        alt="Two rings—coral-inlaid bolt and braided kelp—hang from a smooth whale rib; tiny bubbles rise." />
+    </figure>
+    <div class="caption">
+      <h2 id="t-rings">Kept by the sea</h2>
+      <p class="narration">Vows with seasons; climate of care.</p>
+      <div class="sfx">…whale breath…</div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer" role="contentinfo">
+  <img class="logo" alt="" aria-hidden="true"
+    src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-E5iwFe4RsF/3f1d7ec02b4d11a87f79665c679dff6a10e409d8a65f29268e0153ea885bb501a47428de1ff839c881c2bfa5af1a7f53c3f68bdec56186c57afaf4a25e0615010287337ee66d4d63acfc9d6cd4ba02716d96a2c3ba9f4ad9e3c045f75e16fe3f9cea4451" />
+  <div>© Brinehearted • scroll or use keyboard PgUp/PgDn • images fit with <code>object-fit: contain</code></div>
+</footer>
+</body>
+</html>
