@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rule Benders: The Offshore Advantage</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #000000;
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .comic-container {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        .panel {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: #000000;
+            border-bottom: 2px solid #0057FF;
+        }
+
+        .panel-content {
+            max-width: 1200px;
+            width: 100%;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .panel-full {
+            grid-template-columns: 1fr;
+            text-align: center;
+        }
+
+        .panel-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0, 87, 255, 0.3);
+        }
+
+        .panel-text {
+            z-index: 2;
+        }
+
+        .panel-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            color: #0057FF;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .panel-subtitle {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #FF5733;
+        }
+
+        .dialogue {
+            background: rgba(0, 87, 255, 0.1);
+            border-left: 4px solid #0057FF;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            font-style: italic;
+        }
+
+        .narration {
+            background: rgba(255, 87, 51, 0.1);
+            border-left: 4px solid #FF5733;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+        }
+
+        .stats-box {
+            background: linear-gradient(135deg, #0057FF, #FF5733);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1rem 0;
+            color: white;
+            font-weight: 600;
+        }
+
+        .character-intro {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1rem 0;
+            border: 2px solid #0057FF;
+        }
+
+        .warning-box {
+            background: rgba(255, 87, 51, 0.2);
+            border: 2px solid #FF5733;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1rem 0;
+        }
+
+        .success-box {
+            background: rgba(0, 87, 255, 0.2);
+            border: 2px solid #0057FF;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1rem 0;
+        }
+
+        .comic-title {
+            background: linear-gradient(135deg, #000000, #0057FF);
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .comic-title h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 1rem;
+        }
+
+        .comic-title .subtitle {
+            font-size: 1.5rem;
+            color: #FF5733;
+            font-weight: 600;
+        }
+
+        .arc-divider {
+            background: linear-gradient(90deg, #0057FF, #FF5733);
+            padding: 2rem;
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 900;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .disclaimer {
+            background: #1a1a1a;
+            padding: 2rem;
+            text-align: center;
+            border-top: 3px solid #FF5733;
+            font-size: 0.9rem;
+            color: #cccccc;
+        }
+
+        .disclaimer-title {
+            color: #FF5733;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .infographic {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1rem 0;
+            border: 1px solid #0057FF;
+        }
+
+        .country-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .country-card {
+            background: rgba(0, 87, 255, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid #0057FF;
+            text-align: center;
+        }
+
+        .progress-bar {
+            background: #333;
+            height: 6px;
+            border-radius: 3px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #0057FF, #FF5733);
+            height: 100%;
+            border-radius: 3px;
+            transition: width 2s ease;
+        }
+
+        @media (max-width: 768px) {
+            .panel-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                padding: 1rem;
+            }
+            
+            .panel-title {
+                font-size: 2rem;
+            }
+            
+            .comic-title h1 {
+                font-size: 2.5rem;
+            }
+            
+            .panel-image {
+                height: 300px;
+            }
+        }
+
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #0057FF, #FF5733);
+            z-index: 1000;
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="scroll-indicator" id="scrollIndicator"></div>
+    
+    <div class="comic-container">
+        <!-- Title -->
+        <div class="comic-title">
+            <h1>Rule Benders</h1>
+            <div class="subtitle">The Offshore Advantage</div>
+            <p style="margin-top: 2rem; font-size: 1.1rem;">An Educational Comic About Legal Tax Optimization</p>
+        </div>
+
+        <!-- Arc 1: The Great Tax Awakening -->
+        <div class="arc-divider">Arc 1: The Great Tax Awakening</div>
+
+        <!-- Panel 1: The Tax Burden -->
+        <div class="panel">
+            <div class="panel-content">
+                <div class="panel-text">
+                    <h2 class="panel-title">The Tax Burden</h2>
+                    <div class="narration">
+                        Alex Chen built a seven-figure consulting business. But every April brought the same nightmare...
+                    </div>
+                    <div class="dialogue">
+                        "There has to be a better way than giving half my income to the government."
+                    </div>
+                    <div class="stats-box">
+                        Current Tax Rate: 47% (Federal + State + Local)
+                        <br>Annual Tax Bill: $340,000
+                    </div>
+                </div>
+                <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Overwhelmed entrepreneur with tax documents" class="panel-image">
+            </div>
+        </div>
+
+        <!-- Panel 2: The Lightbulb Moment -->
+        <div class="panel">
+            <div class="panel-content">
+                <img src="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="World map showing tax opportunities" class="panel-image">
+                <div class="panel-text">
+                    <h2 class="panel-title">The Discovery</h2>
+                    <div class="dialogue">
+                        "Wait... my LOCATION determines my tax rate? That's insane!"
+                    </div>
+                    <div class="infographic">
+                        <h3>Tax Rate Reality Check:</h3>
+                        <div class="country-stats">
+                            <div class="country-card">
+                                <strong>United States</strong><br>
+                                Up to 47%
+                            </div>
+                            <div class="country-card">
+                                <strong>Singapore</strong><br>
+                                17%
+                            </div>
+                            <div class="country-card">
+                                <strong>UAE</strong><br>
+                                0%
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Panel 3: The Research Begins -->
+        <div class="panel">
+            <div class="panel-content">
+                <div class="panel-text">
+                    <h2 class="panel-title">The Research Phase</h2>
+                    <div class="narration">
+                        Alex dove deep into international tax optimization, discovering a world of legal opportunities.
+                    </div>
+                    <div class="infographic">
+                        <h3>Initial Research Results:</h3>
+                        <ul style="list-style: none; padding: 0;">
+                            <li>✓ Singapore: 17% corporate tax</li>
+                            <li>✓ UAE: 0% personal income tax</li>
+                            <li>✓ Hong Kong: Territorial system</li>
+                            <li>✓ Switzerland: Banking privacy</li>
+                        </ul>
+                    </div>
+                </div>
+                <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Research and planning" class="panel-image">
+            </div>
+        </div>
+
+        <!-- Panel 4: Meeting the Mentor -->
+        <div class="panel">
+            <div class="panel-content">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Professional mentor Sam Rivera" class="panel-image">
+                <div class="panel-text">
+                    <h2 class="panel-title">Enter the Mentor</h2>
+                    <div class="character-intro">
+                        <h3>Sam Rivera - International Tax Strategist</h3>
+                        <p>15 years helping entrepreneurs optimize their global tax strategies legally and ethically.</p>
+                    </div>
+                    <div class="dialogue">
+                        "Smart entrepreneurs don't just earn money—they keep it. Legally."
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Panel 5: The Legal Foundation -->
+        <div class="panel">
+            <div class="panel-content">
+                <div class="panel-text">
+                    <h2 class="panel-title">The Legal Foundation</h2>
+                    <div class="dialogue">
+                        "Everything we do must be 100% legal and compliant. No exceptions."
+                    </div>
+                    <div class="infographic">
+                        <h3>The Traffic Light System:</h3>
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 1rem 0;">
+                            <div style="background: #28a745; padding: 1rem; border-radius: 8px; text-align: center;">
+                                <strong>GREEN</strong><br>
+                                Legal & Compliant
+                            </div>
+                            <div style="background: #ffc107; padding: 1rem; border-radius: 8px; text-align: center; color: #000;">
+                                <strong>YELLOW</strong><br>
+                                Requires Expert Guidance
+                            </div>
+                            <div style="background: #dc3545; padding: 1rem; border-radius: 8px; text-align: center;">
+                                <strong>RED</strong><br>
+                                Illegal & Risky
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Legal compliance concept" class="panel-image">
+            </div>
+        </div>
+
+        <!-- Panel 6: The Journey Begins -->
+        <div class="panel">
+            <div class="panel-content">
+                <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Journey begins with passport and documents" class="panel-image">
+                <div class="panel-text">
+                    <h2 class="panel-title">The Journey Begins</h2>
+                    <div class="dialogue">
+                        "Show me how the rules actually work."
+                    </div>
+                    <div class="success-box">
+                        <h3>The Plan:</h3>
+                        <p>1. Understand the legal framework<br>
+                        2. Explore jurisdiction options<br>
+                        3. Build proper structure<br>
+                        4. Implement with compliance<br>
+                        5. Optimize and maintain</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Arc 2: The Jurisdiction Shopping Adventure -->
+        <div class="arc-divider">Arc 2: The Jurisdiction Shopping Adventure</div>
+
+        <!-- Panel 7: The Big Four Introduction -->
+        <div class="panel">
+            <div class="panel-content panel-full">
+                <div class="panel-text">
+                    <h2 class="panel-title">The Big Four Destinations</h2>
+                    <div class="dialogue">
+                        "Let me introduce you to the Big Four—where smart money goes to grow."
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Global map highlighting key jurisdictions" class="panel-image" style="margin: 2rem 0;">
+                    <div class="country-stats">
+                        <div class="country-card">
+                            <h3>Singapore</h3>
+                            <p>The Asian Gateway</p>
+                        </div>
+                        <div class="country-card">
+                            <h3>UAE</h3>
+                            <p>The Desert Oasis</p>
+                        </div>
+                        <div class="country-card">
+                            <h3>Hong Kong</h3>
+                            <p>The Financial Bridge</p>
+                        </div>
+                        <div class="country-card">
+                            <h3>Switzerland</h3>
+                            <p>The Classic Choice</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Panel 8: Singapore -->
+        <div class="panel">
+            <div class="panel-content">
+                <div class="panel-text">
+                    <h2 class="panel-title">Singapore</h2>
+                    <h3 class="panel-subtitle">The Asian Gateway</h3>
+                    <div class="stats-box">
+                        ✓ 17% corporate tax rate<br>
+                        ✓ AAA credit rating<br>
+                        ✓ 600+ MNCs headquartered here<br>
+                        ✓ Political stability & rule of law
+                    </div>
+                    <div class="narration">
+                        Singapore combines low taxes with world-class infrastructure and political stability.
+                    </div>
+                </div>
+                <img src="https://images.unsplash.com/photo-1525625293386-3f8f99389edd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Singapore business district skyline" class="panel-image">
+            </div>
+        </div>
+
+        <!-- Panel 9: UAE -->
+        <div class="panel">
+            <div class="panel-content">
+                <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Dubai modern business district" class="panel-image">
+                <div class="panel-text">
+                    <h2 class="panel-title">UAE</h2>
+                    <h3 class="panel-subtitle">The Desert Oasis</h3>
+                    <div class="stats-box">
+                        ✓ 0% personal income tax<br>
+                        ✓ 170+ nationalities welcome<br>
+                        ✓ Free zones for specific industries<br>
+                        ✓ Growing innovation hub
+                    </div>
+                    <div class="narration">
+                        The UAE offers zero personal income tax and a rapidly growing business ecosystem.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Panel 10: Hong Kong -->
+        <div class="panel">
+            <div class="panel-content">
+                <div class="panel-text">
+                    <h2 class="panel-title">Hong Kong</h2>
+                    <h3 class="panel-subtitle">The Financial Bridge</h3>
+                    <div class="stats-box">
+                        ✓ Territorial tax system<br>
+                        ✓ 16.5% corporate rate<br>
+                        ✓ No capital gains tax<br>
+                        ✓ East-meets-West business culture
+                    </div>
+                    <div class="narration">
+                        Hong Kong's territorial system means only local-sourced income is taxed.
+                    </div>
+                </div>
+                <img src="https://images.unsplash.com/photo-1536431311719-398b6704d4cc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Hong Kong financial district" class="panel-image">
+            </div>
+        </div>
+
+        <!-- Panel 11: Switzerland -->
+        <div class="panel">
+            <div class="panel-content">
+                <img src="https://images.unsplash.com/photo-1586374579358-9d19d632b6df?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Swiss banking and mountains" class="panel-image">
+                <div class="panel-text">
+                    <h2 class="panel-title">Switzerland</h2>
+                    <h3 class="panel-subtitle">The Classic Choice</h3>
+                    <div class="stats-box">
+                        ✓ Banking privacy traditions<br>
+                        ✓ Political neutrality<br>
+                        ✓ Wealth management expertise<br>
+                        ✓ Stable currency & economy
+                    </div>
+                    <div class="narration">
+                        Switzerland remains the gold standard for wealth preservation and privacy.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Panel 12: Emerging Players -->
+        <div class="panel">
+            <div class="panel-content">
+                <div class="panel-text">
+                    <h2 class="panel-title">The Emerging Players</h2>
+                    <div class="dialogue">
+                        "Don't sleep on the newcomers—Portugal's Golden Visa, Estonia's e-Residency, Barbados' Welcome Stamp."
+                    </div>
+                    <div class="country-stats">
+                        <div class="country-card">
+                            <strong>Portugal</strong><br>
+                            Golden Visa Program<br>
+                            NHR Tax Benefits
+                        </div>
+                        <div class="country-card">
+                            <strong>Estonia</strong><br>
+                            Digital e-Residency<br>
+                            Tech-Forward Approach
+                        </div>
+                        <div class="country-card">
+                            <strong>Barbados</strong><br>
+                            Welcome Stamp<br>
+                            Caribbean Lifestyle
+                        </div>
+                    </div>
+                </div>
+                <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Modern global connectivity" class="panel-image">
+            </div>
+        </div>
+
+        <!-- Arc 3: The Structure Maze -->
+        <div class="arc-divider">Arc 3: The Structure Maze</div>
+
+        <!-- Panel 13: Entity Structure Game -->
+        <div class="panel">
+            <div class="panel-content">
+                <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Business structure flowchart concept" class="panel-image">
+                <div class="panel-text">
+                    <h2 class="panel-title">The Structure Maze</h2>
+                    <div class="dialogue">
+                        Alex: "This looks complicated..."<br>
+                        Sam: "Every structure serves a purpose. Let's find yours."
+                    </div>
+                    <div class="infographic">
+                        <h3>Structure Options:</h3>
+                        <ul style="list-style: none; padding: 0;">
+                            <li>🏢 Corporation</li>
+                            <li>🤝 LLC</li>
+                            <li>🏛️ Holding Company</li>
+                            <li>🛡️ Trust</li>
+                            <li>🌐 International Hybrid</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Panel 14: The Substance Test -->
+        <div class="panel">
+            <div class="panel-content">
+                <div class="panel-text">
+                    <h2 class="panel-title">The Substance Test</h2>
+                    <div class="narration">
+                        Real substance versus empty shell companies - the difference between legal optimization and risky schemes.
+                    </div>
+                    <div class="success-box">
+                        <h3>Real Economic Substance:</h3>
+                        <p>✓ Actual office space<br>
+                        ✓ Local employees<br>
+                        ✓ Real business activities<br>
+                        ✓ Management decisions made locally</p>
+                    </div>
+                    <div class="warning-box">
+                        <h3>Empty Shell Warning:</h3>
+                        <p>⚠️ No real operations<br>
+                        ⚠️ Nominee directors only<br>
+                        ⚠️ No local substance</p>
+                    </div>
+                </div>
+                <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Real business operations versus empty shell" class="panel-image">
+            </div>
+        </div>
+
+        <!-- Panel 15: Meet Risky Rick -->
+        <div class="panel">
+            <div class="panel-content">
+                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Overconfident entrepreneur taking shortcuts" class="panel-image">
+                <div class="panel-text">
+                    <h2 class="panel-title">Enter Risky Rick</h2>
+                    <div class="character-intro">
+                        <h3>Rick Thompson - The Shortcut Seeker</h3>
+                        <p>Takes dangerous shortcuts and ignores professional advice.</p>
+                    </div>
+                    <div class="dialogue">
+                        "Why pay for advisors? I found this guy who guarantees zero taxes..."
+                    </div>
+                    <div class="warning-box">
+                        <strong>Sam's Warning:</strong> "Watch and learn why shortcuts backfire."
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Panel 16: Professional Team Assembly -->
+        <div class="panel">
+            <div class="panel-content">
+                <div class="panel-text">
+                    <h2 class="panel-title">Building Your Team</h2>
+                    <div class="narration">
+                        Like assembling a superhero team, each professional brings essential expertise.
+                    </div>
+                    <div class="country-stats">
+                        <div class="country-card">
+                            <strong>Tax Strategist</strong><br>
+                            "The Planner"<br>
+                            Creates the blueprint
+                        </div>
+                        <div class="country-card">
+                            <strong>International Lawyer</strong><br>
+                            "The Guardian"<br>
+                            Ensures compliance
+                        </div>
+                        <div class="country-card">
+                            <strong>Banking Specialist</strong><br>
+                            "The Architect"<br>
+                            Builds infrastructure
+                        </div>
+                        <div class="country-card">
+                            <strong>Compliance Accountant</strong><br>
+                            "The Keeper"<br>
+                            Maintains records
+                        </div>
+                    </div>
+                </div>
+                <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Professional team meeting" class="panel-image">
+            </div>
+        </div>
+
+        <!-- Arc 4: The Implementation Journey -->
+        <div class="arc-divider">Arc 4: The Implementation Journey</div>
+
+        <!-- Panel 17: Tax Residency Planning -->
+        <div class="panel">
+            <div class="panel-content">
+                <img src="https://images.unsplash.com/photo-1569154941061-e231b4725ef1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Calendar and travel planning" class="panel-image">
+                <div class="panel-text">
+                    <h2 class="panel-title">Tax Residency Planning</h2>
+                    <div class="stats-box">
+                        <h3>The 183-Day Rule:</h3>
+                        <p>✓ Physical presence requirements<br>
+                        ✓ Severing old ties<br>
+                        ✓ Establishing new domicile<br>
+                        ✓ Proper documentation</p>
+                    </div>
+                    <div class="narration">
+                        Careful planning ensures a clean transition from high-tax to low-tax residency.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Panel 18: Banking Infrastructure -->
+        <div class="panel">
+            <div class="panel-content">
+                <div class="panel-text">
+                    <h2 class="panel-title">Banking Infrastructure</h2>
+                    <div class="narration">
+                        Modern offshore banking combines security, accessibility, and compliance.
+                    </div>
+                    <div class="infographic">
+                        <h3>Banking Setup Process:</h3>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 80%;"></div>
+                        </div>
+                        <p>✓ Due diligence documentation<br>
+                        ✓ Compliance verification<br>
+                        ✓ Account establishment<br>
+                        ✓ Digital banking access</p>
+                    </div>
+                </div>
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Modern digital banking interface" class="panel-image">
+            </div>
+        </div>
+
+        <!-- Panel 19: Rick's Downfall -->
+        <div class="panel">
+            <div class="panel-content">
+                <img src="https://images.unsplash.com/photo-1589994965851-a8f479c573a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Legal troubles and investigations" class="panel-image">
+                <div class="panel-text">
+                    <h2 class="panel-title">Rick's Downfall</h2>
+                    <div class="warning-box">
+                        <h3>The Consequences of Shortcuts:</h3>
+                        <p>💸 $500,000 in penalties<br>
+                        ⚖️ Criminal investigation<br>
+                        💼 Business reputation destroyed<br>
+                        🏠 Personal assets at risk</p>
+                    </div>
+                    <div class="dialogue">
+                        Alex: "Thank goodness we did this legally."
+                    </div>
+                    <div class="narration">
+                        Rick's "guaranteed zero tax" scheme was actually illegal tax evasion.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Panel 20: Alex's Legal Success -->
+        <div class="panel">
+            <div class="panel-content">
+                <div class="panel-text">
+                    <h2 class="panel-title">Alex's Success Story</h2>
+                    <div class="success-box">
+                        <h3>Legal Optimization Results:</h3>
+                        <p>💰 40% tax reduction achieved<br>
+                        ✅ Full compliance maintained<br>
+                        😌 Peace of mind secured<br>
+                        📈 Scalable structure built</p>
+                    </div>
+                    <div class="stats-box">
+                        Before: $340,000 annual tax bill<br>
+                        After: $204,000 annual tax bill<br>
+                        <strong>Annual Savings: $136,000</strong>
+                    </div>
+                    <div class="dialogue">
+                        "I can't believe I waited so long to learn about this!"
+                    </div>
+                </div>
+                <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Successful entrepreneur celebrating" class="panel-image">
+            </div>
+        </div>
+
+        <!-- Arc 5: The Optimization Continues -->
+        <div class="arc-divider">Arc 5: The Optimization Continues</div>
+
+        <!-- Panel 21: Ongoing Strategy -->
+        <div class="panel">
+            <div class="panel-content">
+                <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Strategic planning meeting" class="panel-image">
+                <div class="panel-text">
+                    <h2 class="panel-title">Ongoing Optimization</h2>
+                    <div class="narration">
+                        Tax optimization isn't a one-time event—it's an ongoing strategy that adapts to changing circumstances.
+                    </div>
+                    <div class="infographic">
+                        <h3>Continuous Improvement:</h3>
+                        <p>📊 Annual strategy reviews<br>
+                        🔄 Regulatory compliance updates<br>
+                        🌱 New opportunity identification<br>
+                        🛡️ Risk management adjustments</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Panel 22: Technology Integration -->
+        <div class="panel">
+            <div class="panel-content">
+                <div class="panel-text">
+                    <h2 class="panel-title">Digital Evolution</h2>
+                    <div class="narration">
+                        Modern technology streamlines offshore compliance and management.
+                    </div>
+                    <div class="success-box">
+                        <h3>Tech Stack Benefits:</h3>
+                        <p>🤖 Automated reporting systems<br>
+                        💻 Digital banking platforms<br>
+                        📱 Real-time compliance tracking<br>
+                        ☁️ Cloud-based document management</p>
+                    </div>
+                </div>
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Digital technology and automation" class="panel-image">
+            </div>
+        </div>
+
+        <!-- Panel 23: The Freedom Lifestyle -->
+        <div class="panel">
+            <div class="panel-content">
+                <img src="https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Location independent lifestyle" class="panel-image">
+                <div class="panel-text">
+                    <h2 class="panel-title">The Freedom Lifestyle</h2>
+                    <div class="success-box">
+                        <h3>Benefits Realized:</h3>
+                        <p>🌍 Location independence achieved<br>
+                        💰 Tax efficiency maximized<br>
+                        🎯 Global flexibility maintained<br>
+                        📈 Business scalability enhanced</p>
+                    </div>
+                    <div class="dialogue">
+                        "I can work from anywhere while keeping more of what I earn."
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Panel 24: The Cycle Continues -->
+        <div class="panel">
+            <div class="panel-content">
+                <div class="panel-text">
+                    <h2 class="panel-title">Paying It Forward</h2>
+                    <div class="narration">
+                        Alex now mentors other entrepreneurs, sharing knowledge about legal tax optimization.
+                    </div>
+                    <div class="dialogue">
+                        "The rules aren't stacked against you—they're just complex. Get the right guide."
+                    </div>
+                    <div class="success-box">
+                        <h3>Final Wisdom:</h3>
+                        <p>"Legal optimization isn't just smart—it's your responsibility to your future."</p>
+                    </div>
+                </div>
+                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Mentor guiding new entrepreneur" class="panel-image">
+            </div>
+        </div>
+
+        <!-- Disclaimer -->
+        <div class="disclaimer">
+            <div class="disclaimer-title">Important Legal Disclaimer</div>
+            <p><strong>This comic is for educational entertainment purposes only.</strong> It does not constitute professional tax, legal, or financial advice. Tax laws vary significantly by jurisdiction and change frequently. Individual circumstances greatly affect the applicability and effectiveness of any tax strategy.</p>
+            <br>
+            <p><strong>Before implementing any offshore tax strategies:</strong></p>
+            <ul style="list-style: none; padding: 0; margin: 1rem 0;">
+                <li>✓ Consult with qualified tax professionals</li>
+                <li>✓ Engage international tax attorneys</li>
+                <li>✓ Verify current laws in relevant jurisdictions</li>
+                <li>✓ Ensure full compliance with all reporting requirements</li>
+                <li>✓ Understand the ongoing obligations and costs</li>
+            </ul>
+            <p><strong>Remember:</strong> All tax optimization strategies must be completely legal, properly structured, and include genuine economic substance. Failure to comply with tax laws can result in severe penalties, criminal charges, and reputational damage.</p>
+            <br>
+            <p style="color: #FF5733; font-weight: bold;">Always choose legal compliance over aggressive tax schemes.</p>
+        </div>
+    </div>
+
+    <script>
+        // Scroll progress indicator
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.body.offsetHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            document.getElementById('scrollIndicator').style.width = scrollPercent + '%';
+        });
+
+        // Smooth scrolling for better experience
+        document.documentElement.style.scrollBehavior = 'smooth';
+
+        // Animation on scroll for progress bars
+        const observerOptions = {
+            threshold: 0.5,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const progressBars = entry.target.querySelectorAll('.progress-fill');
+                    progressBars.forEach(bar => {
+                        bar.style.width = bar.style.width || '100%';
+                    });
+                }
+            });
+        }, observerOptions);
+
+        // Observe all panels for animations
+        document.querySelectorAll('.panel').forEach(panel => {
+            observer.observe(panel);
+        });
+    </script>
+</body>
+</html>
