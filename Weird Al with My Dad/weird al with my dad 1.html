@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weird Al and My Dad - A Comic Memory</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Caveat:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-sepia: #D2B48C;
+            --secondary-tan: #F4A460;
+            --accent-orange: #FF8C00;
+            --forest-green: #228B22;
+            --river-blue: #4682B4;
+            --text-dark: #2F4F4F;
+            --cream: #FFF8DC;
+            --brown-accent: #CD853F;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Kalam', cursive;
+            background: linear-gradient(135deg, var(--primary-sepia) 0%, var(--secondary-tan) 50%, var(--accent-orange) 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .comic-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+        }
+
+        /* Floating particles background */
+        .comic-container::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(2px 2px at 20px 30px, rgba(255,140,0,0.3), transparent),
+                        radial-gradient(2px 2px at 40px 70px, rgba(34,139,34,0.2), transparent),
+                        radial-gradient(1px 1px at 90px 40px, rgba(70,130,180,0.3), transparent),
+                        radial-gradient(1px 1px at 130px 80px, rgba(255,140,0,0.2), transparent);
+            background-repeat: repeat;
+            background-size: 150px 150px;
+            animation: particleFloat 20s linear infinite;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        @keyframes particleFloat {
+            0% { transform: translateY(0px) translateX(0px); }
+            100% { transform: translateY(-150px) translateX(-75px); }
+        }
+
+        .page {
+            background: linear-gradient(145deg, rgba(255,248,220,0.95), rgba(255,248,220,0.85));
+            backdrop-filter: blur(10px);
+            margin: 60px 0;
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 
+                0 20px 60px rgba(0,0,0,0.15),
+                0 8px 25px rgba(0,0,0,0.1),
+                inset 0 1px 0 rgba(255,255,255,0.8);
+            position: relative;
+            overflow: hidden;
+            transform: perspective(1000px) rotateX(2deg);
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            border: 1px solid rgba(205,133,63,0.2);
+        }
+
+        .page:hover {
+            transform: perspective(1000px) rotateX(0deg) translateY(-10px);
+            box-shadow: 
+                0 30px 80px rgba(0,0,0,0.2),
+                0 12px 35px rgba(0,0,0,0.15),
+                inset 0 1px 0 rgba(255,255,255,0.9);
+        }
+
+        .page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(255,140,0,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(70,130,180,0.08) 0%, transparent 50%);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+
+        .page:hover::before {
+            opacity: 1;
+        }
+
+        .title-page {
+            text-align: center;
+            background: linear-gradient(135deg, 
+                rgba(210,180,140,0.9) 0%, 
+                rgba(244,164,96,0.85) 50%, 
+                rgba(255,140,0,0.8) 100%);
+            color: var(--text-dark);
+            padding: 80px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .title-page::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg at 50% 50%, 
+                transparent 0deg, 
+                rgba(255,255,255,0.1) 45deg, 
+                transparent 90deg, 
+                rgba(255,255,255,0.05) 135deg, 
+                transparent 180deg);
+            animation: shimmer 8s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes shimmer {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .title-page h1 {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-weight: 700;
+            margin-bottom: 30px;
+            text-shadow: 
+                3px 3px 0px rgba(0,0,0,0.1),
+                6px 6px 20px rgba(0,0,0,0.2);
+            font-family: 'Caveat', cursive;
+            background: linear-gradient(45deg, var(--text-dark), var(--brown-accent), var(--accent-orange));
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            animation: titleGlow 4s ease-in-out infinite alternate;
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes titleGlow {
+            0% { filter: drop-shadow(0 0 10px rgba(255,140,0,0.3)); }
+            100% { filter: drop-shadow(0 0 30px rgba(255,140,0,0.6)); }
+        }
+
+        .subtitle {
+            font-size: clamp(1.2rem, 4vw, 1.8rem);
+            font-style: italic;
+            margin-bottom: 40px;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.5s forwards;
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .panel {
+            position: relative;
+            margin: 30px 0;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 
+                0 15px 35px rgba(0,0,0,0.2),
+                0 5px 15px rgba(0,0,0,0.1);
+            background: linear-gradient(145deg, #ffffff, #f8f8f8);
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            clip-path: polygon(
+                2% 0%, 
+                98% 0%, 
+                100% 8%, 
+                100% 92%, 
+                98% 100%, 
+                2% 100%, 
+                0% 92%, 
+                0% 8%
+            );
+        }
+
+        .panel:hover {
+            transform: scale(1.02) translateY(-5px);
+            box-shadow: 
+                0 25px 50px rgba(0,0,0,0.25),
+                0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .panel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, 
+                rgba(255,255,255,0.8) 0%, 
+                transparent 50%, 
+                rgba(0,0,0,0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .panel:hover::before {
+            opacity: 1;
+        }
+
+        .panel-large { height: 450px; }
+        .panel-medium { height: 350px; }
+        .panel-small { height: 250px; }
+
+        .panel-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            filter: 
+                sepia(25%) 
+                saturate(120%) 
+                brightness(110%) 
+                contrast(105%)
+                drop-shadow(0 0 20px rgba(0,0,0,0.1));
+        }
+
+        .panel:hover .panel-image {
+            transform: scale(1.05);
+            filter: 
+                sepia(15%) 
+                saturate(130%) 
+                brightness(115%) 
+                contrast(110%)
+                drop-shadow(0 0 30px rgba(255,140,0,0.2));
+        }
+
+        .panel-grid {
+            display: grid;
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .grid-2 { grid-template-columns: 1fr 1fr; }
+        .grid-3 { grid-template-columns: repeat(3, 1fr); }
+
+        .journal-entry {
+            background: linear-gradient(145deg, 
+                rgba(255,248,220,0.95), 
+                rgba(255,248,220,0.85));
+            backdrop-filter: blur(8px);
+            border: 3px solid transparent;
+            background-clip: padding-box;
+            border-radius: 20px;
+            padding: 35px;
+            margin: 40px 0;
+            font-family: 'Caveat', cursive;
+            font-size: clamp(1.1rem, 3vw, 1.4rem);
+            line-height: 1.9;
+            color: var(--text-dark);
+            position: relative;
+            box-shadow: 
+                0 15px 35px rgba(205,133,63,0.2),
+                inset 0 1px 0 rgba(255,255,255,0.8);
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            transform: perspective(1000px) rotateX(1deg);
+        }
+
+        .journal-entry:hover {
+            transform: perspective(1000px) rotateX(0deg) translateY(-5px);
+            box-shadow: 
+                0 25px 50px rgba(205,133,63,0.3),
+                inset 0 1px 0 rgba(255,255,255,0.9);
+        }
+
+        .journal-entry::before {
+            content: '"';
+            font-size: 5rem;
+            color: var(--brown-accent);
+            position: absolute;
+            top: -15px;
+            left: 15px;
+            opacity: 0.4;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.1));
+            animation: quoteFloat 6s ease-in-out infinite;
+        }
+
+        .journal-entry::after {
+            content: '"';
+            font-size: 5rem;
+            color: var(--brown-accent);
+            position: absolute;
+            bottom: -35px;
+            right: 15px;
+            opacity: 0.4;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.1));
+            animation: quoteFloat 6s ease-in-out infinite 3s;
+        }
+
+        @keyframes quoteFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(5deg); }
+        }
+
+        .musical-notes {
+            position: absolute;
+            color: var(--accent-orange);
+            font-size: 1.8rem;
+            opacity: 0.7;
+            filter: drop-shadow(0 0 10px rgba(255,140,0,0.5));
+            animation: musicalFloat 4s ease-in-out infinite;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .musical-notes:hover {
+            transform: scale(1.5) rotate(20deg) !important;
+            color: var(--river-blue);
+            filter: drop-shadow(0 0 20px rgba(70,130,180,0.8));
+        }
+
+        @keyframes musicalFloat {
+            0%, 100% { 
+                transform: translateY(0px) rotate(0deg) scale(1);
+                opacity: 0.7;
+            }
+            25% { 
+                transform: translateY(-15px) rotate(10deg) scale(1.1);
+                opacity: 0.9;
+            }
+            50% { 
+                transform: translateY(-25px) rotate(-5deg) scale(1.2);
+                opacity: 1;
+            }
+            75% { 
+                transform: translateY(-10px) rotate(15deg) scale(1.1);
+                opacity: 0.9;
+            }
+        }
+
+        .chapter-title {
+            font-family: 'Caveat', cursive;
+            font-size: clamp(2rem, 6vw, 3rem);
+            color: var(--text-dark);
+            text-align: center;
+            margin: 50px 0 30px 0;
+            text-shadow: 
+                2px 2px 0px rgba(255,255,255,0.8),
+                4px 4px 10px rgba(0,0,0,0.2);
+            position: relative;
+            opacity: 0;
+            animation: slideInFromLeft 0.8s ease 0.2s forwards;
+        }
+
+        .chapter-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, 
+                transparent, 
+                var(--accent-orange), 
+                var(--brown-accent), 
+                var(--accent-orange), 
+                transparent);
+            border-radius: 2px;
+            animation: lineGrow 1s ease 0.8s forwards;
+            transform-origin: center;
+            scale: 0 1;
+        }
+
+        @keyframes slideInFromLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes lineGrow {
+            to { scale: 1 1; }
+        }
+
+        .narrative-text {
+            background: linear-gradient(135deg, 
+                rgba(255,255,255,0.9), 
+                rgba(255,248,220,0.8));
+            backdrop-filter: blur(10px);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            color: var(--text-dark);
+            border-left: 5px solid var(--accent-orange);
+            box-shadow: 
+                0 10px 25px rgba(0,0,0,0.1),
+                inset 0 1px 0 rgba(255,255,255,0.8);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .narrative-text:hover {
+            transform: translateX(10px);
+            border-left-color: var(--river-blue);
+            box-shadow: 
+                0 15px 35px rgba(0,0,0,0.15),
+                inset 0 1px 0 rgba(255,255,255,0.9);
+        }
+
+        .splash-page {
+            height: 550px;
+            position: relative;
+            background: linear-gradient(135deg, var(--river-blue), var(--forest-green));
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 
+                0 20px 60px rgba(0,0,0,0.3),
+                inset 0 1px 0 rgba(255,255,255,0.3);
+        }
+
+        .splash-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.9;
+            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+            filter: brightness(110%) contrast(105%);
+        }
+
+        .splash-page:hover .splash-image {
+            transform: scale(1.1);
+            opacity: 0.95;
+            filter: brightness(115%) contrast(110%) saturate(120%);
+        }
+
+        .splash-text {
+            position: absolute;
+            bottom: 40px;
+            left: 40px;
+            right: 40px;
+            background: linear-gradient(135deg, 
+                rgba(255,255,255,0.95), 
+                rgba(255,248,220,0.9));
+            backdrop-filter: blur(15px);
+            padding: 25px;
+            border-radius: 20px;
+            font-family: 'Caveat', cursive;
+            font-size: clamp(1.2rem, 3vw, 1.6rem);
+            color: var(--text-dark);
+            box-shadow: 
+                0 15px 35px rgba(0,0,0,0.2),
+                inset 0 1px 0 rgba(255,255,255,0.8);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .memories-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 30% 30%, transparent 30%, rgba(255,248,220,0.2) 80%),
+                radial-gradient(circle at 70% 70%, transparent 40%, rgba(255,140,0,0.1) 90%);
+            pointer-events: none;
+            transition: opacity 0.6s ease;
+        }
+
+        .splash-page:hover .memories-overlay {
+            opacity: 0.7;
+        }
+
+        .cast-highlight {
+            color: #FF6B6B;
+            font-weight: bold;
+            text-shadow: 
+                1px 1px 2px rgba(0,0,0,0.2),
+                0 0 10px rgba(255,107,107,0.5);
+            padding: 2px 6px;
+            border-radius: 6px;
+            background: linear-gradient(45deg, 
+                rgba(255,107,107,0.1), 
+                rgba(255,107,107,0.05));
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .cast-highlight:hover {
+            transform: scale(1.1);
+            text-shadow: 
+                1px 1px 2px rgba(0,0,0,0.3),
+                0 0 20px rgba(255,107,107,0.8);
+            background: linear-gradient(45deg, 
+                rgba(255,107,107,0.2), 
+                rgba(255,107,107,0.1));
+        }
+
+        /* Scroll-triggered animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Enhanced responsive design */
+        @media (max-width: 768px) {
+            .grid-2, .grid-3 {
+                grid-template-columns: 1fr;
+            }
+            
+            .panel-grid {
+                gap: 15px;
+            }
+            
+            .page {
+                margin: 30px 0;
+                padding: 25px;
+            }
+            
+            .musical-notes {
+                font-size: 1.4rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .comic-container {
+                padding: 10px;
+            }
+            
+            .page {
+                border-radius: 15px;
+                padding: 20px;
+            }
+            
+            .panel {
+                border-radius: 12px;
+            }
+        }
+
+        /* Loading animation */
+        @keyframes pageLoad {
+            from {
+                opacity: 0;
+                transform: translateY(50px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .page {
+            animation: pageLoad 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+        }
+
+        .page:nth-child(1) { animation-delay: 0.1s; }
+        .page:nth-child(2) { animation-delay: 0.2s; }
+        .page:nth-child(3) { animation-delay: 0.3s; }
+        .page:nth-child(4) { animation-delay: 0.4s; }
+        .page:nth-child(5) { animation-delay: 0.5s; }
+        .page:nth-child(6) { animation-delay: 0.6s; }
+        .page:nth-child(7) { animation-delay: 0.7s; }
+        .page:nth-child(8) { animation-delay: 0.8s; }
+        .page:nth-child(9) { animation-delay: 0.9s; }
+        .page:nth-child(10) { animation-delay: 1.0s; }
+
+        /* Cursor effects */
+        .panel {
+            cursor: pointer;
+        }
+
+        .panel:active {
+            transform: scale(0.98);
+        }
+
+        /* High-performance transforms */
+        .panel,
+        .panel-image,
+        .page,
+        .musical-notes {
+            will-change: transform;
+        }
+    </style>
+</head>
+<body>
+    <div class="comic-container">
+        <!-- Title Page -->
+        <div class="page title-page">
+            <h1>Weird Al and My Dad</h1>
+            <div class="subtitle">A Comic Memory</div>
+            <div class="splash-page">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-rq4ga6DAQX/898dbb7752aeca96afb03ebd2be0d2bf416ba215059f41cfcbde0332e944d3f9458202753462248f7f7207a5ed8d57e8a1aa710e5e8ad2252009e86ef29f68e3ca8080b7e9b7ef03b169f55a24f18ccf938337105da0eb6af4b1409e24744ce98f5ad534" alt="New River Valley" class="splash-image">
+                <div class="memories-overlay"></div>
+            </div>
+            <div class="musical-notes" style="top: 20%; left: 10%; animation-delay: 0s;">♪</div>
+            <div class="musical-notes" style="top: 30%; right: 15%; animation-delay: 1s;">♫</div>
+            <div class="musical-notes" style="bottom: 20%; left: 20%; animation-delay: 2s;">♪</div>
+            <div class="musical-notes" style="top: 45%; right: 30%; animation-delay: 1.5s;">♫</div>
+            <div class="musical-notes" style="bottom: 35%; right: 10%; animation-delay: 2.5s;">♪</div>
+        </div>
+
+        <!-- Opening Journal Entry -->
+        <div class="page fade-in">
+            <div class="journal-entry">
+                My father and I each have freckles. He has red hair. Strong like a mighty oak. I was a boy - 13 I think. I had dyed blond hair. I was a little chunky/overweight and a little awkward.
+            </div>
+        </div>
+
+        <!-- Chapter 1: The Adventure Begins -->
+        <div class="page fade-in">
+            <h2 class="chapter-title">The Adventure Begins</h2>
+            
+            <div class="panel panel-large">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-LrUuX_JU2T/85290d161d9bd9549f5fc7ac23ff26388f887e3e29947b573eeed7ffb6452a7fa52c9f5507b1dee8d91746ad90f58c2fe4c1e42effab0c1777acac89953ebbca22c0d58d7a7afbf9f44328eb458fcc1a8b4ac1827308fc8cb3c6935eff3def055a20c4d1" alt="Loading the purple SUV" class="panel-image">
+            </div>
+
+            <div class="journal-entry">
+                For Summer Camp my troop went to New River, in the virginias. My dad chaperoned and we signed up for the New River Adventure - a special program for just some of the boys to do.
+            </div>
+
+            <div class="panel-grid grid-2">
+                <div class="panel panel-medium">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-MEzPeZR51j/9aab89452691b6787065eed40b896fbcee7f878996a145bf92a3695047dfec9d302a86e4527d8955ba560b32c162ee766822a45703ce241206e7fe71df9e2a5640a2c3d690992446bfa3f5cfd7131fab30e94f632cb7c89e25f65b9fd7634af4b2ccaed4" alt="Father and son hands on paddles" class="panel-image">
+                </div>
+                <div class="narrative-text">
+                    Two freckled hands, one large and weathered, one small and eager, both gripping paddles with the same determination. Like father, like son.
+                </div>
+            </div>
+
+            <div class="musical-notes" style="top: 15%; right: 20%; animation-delay: 0.5s;">♪</div>
+            <div class="musical-notes" style="bottom: 25%; left: 25%; animation-delay: 2s;">♫</div>
+        </div>
+
+        <!-- Chapter 2: White Water Rush -->
+        <div class="page fade-in">
+            <h2 class="chapter-title">Into the Rapids</h2>
+            
+            <div class="panel panel-large">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-DbhH1wU6dU/ddc93ff648fa0b74f5e8813cdc96e137ac86213191ec9f55e55764f1b6329b166dc4ba5423da517e9ef2e08ffeac17acc43516825ac721316e425db3bad3071aa8f75f32f3ef5fc4684d2e772d567a3aa3a6db838543e582e0738880e7e66801b860d868" alt="White water rafting action" class="panel-image">
+            </div>
+
+            <div class="journal-entry">
+                White water rafting. Gosh it was so much fun to be so close to death. (Were we really? ... I think we really were, that if we messed up we could have capsized and/or drowned).
+            </div>
+
+            <div class="panel panel-medium">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-J5oxiSXBrI/bccc4cd90332fd9f9ec9aa16382cfe8b19058f085ccaddec881dc83228c983b38f5a357798565b9466999035bf7fc9851e5329f64c8ba7ab86e0a6679279fbb9e101d697b75943621a9bab7490a8033cbd4562540fd3a81212ad4e2d6a4ae2be413121b0" alt="Peaceful river split" class="panel-image">
+            </div>
+
+            <div class="narrative-text">
+                We took breaks where the river split and calmed down. It was so beautiful back there. We went down that little patch of river on our backs again and again, laughing with friends.
+            </div>
+
+            <div class="musical-notes" style="top: 15%; right: 10%; animation-delay: 1s;">♪</div>
+            <div class="musical-notes" style="bottom: 25%; left: 15%; animation-delay: 1.5s;">♫</div>
+            <div class="musical-notes" style="top: 40%; left: 30%; animation-delay: 2.5s;">♪</div>
+        </div>
+
+        <!-- Chapter 3: The Trail Gets Muddy -->
+        <div class="page fade-in">
+            <h2 class="chapter-title">When Things Went Wrong</h2>
+            
+            <div class="panel-grid grid-2">
+                <div class="panel panel-medium">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-_XInCt6W48/20f201c2914d997676c0c1cef52fd6072a3bdeeb56d86a33ad3fbccbb53350f19a5367a3770931f95949cd15905fa74f48f7245940518a29d7e8618e959e36910a755f4ed835411542fca157b9abcde904e59021aa21e8a7207549234bf62f16ddd49403" alt="Muddy trail sequence" class="panel-image">
+                </div>
+                <div class="narrative-text">
+                    The trail got wetter and wetter, muddier and muddier. Each step became more treacherous.
+                </div>
+            </div>
+
+            <div class="panel panel-large">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-s61Ib_soNa/23b5d9ee67da093c97e024a96ef05408ba251eb5c24f7a29829cf08a67bfc391f04cf2645903c52d07ed7b9c096b57b1ad26c6776e2ab6d7ddf36a40a01010cd1a954035be5e026e1c4ca551dfa342f0e4e6bffdd82f2edf459271f11e1663b63e81f35c" alt="The slip and fall" class="panel-image">
+            </div>
+
+            <div class="journal-entry">
+                I slipped and sliced my wrist open on a rock. I turned around, and called out to the boy behind me, "Help.. I'm bleeding", but it came out more as a factual statement than a desperate plea. It was meaty. Jagged. Muddy, dirty.
+            </div>
+
+            <div class="musical-notes" style="top: 20%; left: 10%; animation-delay: 0.5s;">♪</div>
+        </div>
+
+        <!-- Chapter 4: Emergency Care -->
+        <div class="page fade-in">
+            <h2 class="chapter-title">The Rescue</h2>
+            
+            <div class="panel panel-large">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-qbG4rIGyo0/f31f34ed64dd6e77e2b3b7e7e3329f9b15f2d5e52072e04e0b5bff97646edc2a37b1a9aa9fb4facd123c6bdabd15c4aae12620ed80e7a5163059a8a763f0bba3b8126205f4992010ac066c2991a85a41938caa76c756977d33ddf90f3d9809eca83724ad" alt="Battalion chief helping" class="panel-image">
+            </div>
+
+            <div class="journal-entry">
+                We have a battalion chief (squat, with a big belly, but strong, and with a thick mustache) in our boy scout troop. He cleaned off my gash with water. We pulled the duct tape off the sides of the raft - the duct tape was being used to number the boats. We wrapped it around my <span class="cast-highlight">wrist</span>.
+            </div>
+
+            <div class="panel panel-medium">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl--t6mgo-IHU/6eab963706a86ee92588453497044e56a8d398f9f95fb56f06f45e403a0a666ea2df0c0e9ddc28b7b4495906c7b935bdb9de5964539f4e3893cbb80bc0d989a9604f8045af104ea5b2c810690ac6b92d44b0d1d74e1c7f82b3a43fc9e9fe9eb9a4373351" alt="Mountain bridge view" class="panel-image">
+            </div>
+
+            <div class="narrative-text">
+                We saw the van above the bridge way up in the mountains while we were still rafting from down below. It was parked in the middle of the bridge so we could spot it.
+            </div>
+
+            <div class="musical-notes" style="top: 30%; right: 15%; animation-delay: 1s;">♫</div>
+            <div class="musical-notes" style="bottom: 20%; left: 20%; animation-delay: 2s;">♪</div>
+        </div>
+
+        <!-- Chapter 5: Concert Plans -->
+        <div class="page fade-in">
+            <h2 class="chapter-title">Weeks Later...</h2>
+            
+            <div class="panel-grid grid-2">
+                <div class="panel panel-medium">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-OZ2NXG8kaf/69d9df6a6da8978463dc52781753297fb801a58c959a66f1dbcae8cc42ba53c6338600b2b928cc89b4dea1aef82e03e6bda7f7fe8e4b285a07c8e72ac316cd382b871eeb79cc6e1d561640c1d150476f5dbc5c6be7395b6a5bf39599bfb900527c242bbd" alt="Concert planning calendar" class="panel-image">
+                </div>
+                <div class="panel panel-medium">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-lC0m8devUV/d0d527b2fe14e1ed2927e53227fd6fd86549717032797f8867162a8159f6e566d8c5fccdef164492b4b512cfaa28ddafa00947cfdc68fee63017448bd11f627354f6624c6f034268d945867df5ef55374c150c592f610290b77e3cb9c0cd7c31bb4c0e4e" alt="Four concert friends" class="panel-image">
+                </div>
+            </div>
+
+            <div class="journal-entry">
+                A few weeks after we returned from Summer Camp, Weird Al was playing at the 9:30 Club in Washington D.C. My dad and I went with Carl and Carlson. Carlson was one of my best friends in the boy scouts. His father Carl was real big and fat with a short beard, white hair, glasses, and german.
+            </div>
+
+            <div class="panel panel-small">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-6LSZk2F56m/24d9ba1478ff3d33e95dda21a27be66a24eee2688405ced765fb80f780abbdd754c80e8f01118e8f144effc4f42971ec40f40dc2216c9ed68fcb6665f0c1006bc408e2f71e009a03ddadcc0536b12c3f8eb6daf8b421ecb3ceb91cebbbd1d309ba227c33" alt="9:30 Club exterior" class="panel-image">
+            </div>
+
+            <div class="musical-notes" style="top: 25%; left: 15%; animation-delay: 0.5s;">♪</div>
+            <div class="musical-notes" style="bottom: 30%; right: 20%; animation-delay: 1.5s;">♫</div>
+        </div>
+
+        <!-- Chapter 6: Inside the Club -->
+        <div class="page fade-in">
+            <h2 class="chapter-title">The 9:30 Club</h2>
+            
+            <div class="panel panel-large">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-9vHOjYEqZF/e312a63c479ba78e8128a91eb8f28be8a46aecf57509fa9ee6e71e8ae770dbbf94ec47d704ebb29638cd04ef411444010b63c8b9a56b8398b59802d842462f5f8275d51b29cfc853e824854c7a5845592c98d07f49820be13a9f5af834828c60f7b9e1cf" alt="Club interior second floor" class="panel-image">
+            </div>
+
+            <div class="journal-entry">
+                We were on the second floor of the 9:30 club. Looking down on the band, but not very far away, still quite close. Black brick walls, blue and white lights. Weird Al playing the accordion on stage with a band, his long curly hair.
+            </div>
+
+            <div class="musical-notes" style="top: 20%; left: 20%; animation-delay: 0s;">♪</div>
+            <div class="musical-notes" style="top: 40%; right: 25%; animation-delay: 0.5s;">♫</div>
+            <div class="musical-notes" style="bottom: 30%; left: 30%; animation-delay: 1s;">♪</div>
+            <div class="musical-notes" style="bottom: 15%; right: 15%; animation-delay: 1.5s;">♫</div>
+            <div class="musical-notes" style="top: 60%; left: 10%; animation-delay: 2s;">♪</div>
+            <div class="musical-notes" style="top: 35%; right: 5%; animation-delay: 2.5s;">♫</div>
+        </div>
+
+        <!-- Chapter 7: The Hand Raising Moment -->
+        <div class="page fade-in">
+            <h2 class="chapter-title">The Moment of Hope</h2>
+            
+            <div class="panel panel-large">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-YD21NLBFZM/8c937798714b2e55813b714f3b43172275f03be4f667186c2c43b080f87fc0768f8b9a987361102283c77abbdf64b71b37cc659161cda87b64f5ef5e859766ffa1d4ece280416a3222d959262e86b392bb992af1843527af339f3a6f96859fe7cefb05d4" alt="Hand raising moment" class="panel-image">
+            </div>
+
+            <div class="journal-entry">
+                At the concert, Weird Al asked if anyone from the audience wanted to request a song. Everyone started raising their hands. Mr. Carl told me I should raise my hand, because of my <span class="cast-highlight">wrist, my cast</span>. Then he grabbed onto my arm and raised my wrist cast in the air, waving it around. But then Weird Al chose one of his band members to choose the next song. What a funny letdown.
+            </div>
+
+            <div class="musical-notes" style="top: 15%; left: 25%; animation-delay: 0.5s;">♪</div>
+            <div class="musical-notes" style="bottom: 25%; right: 20%; animation-delay: 1.5s;">♫</div>
+        </div>
+
+        <!-- Chapter 8: Meeting Weird Al -->
+        <div class="page fade-in">
+            <h2 class="chapter-title">The Meet and Greet</h2>
+            
+            <div class="panel panel-large">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-43iQEPSy5P/f0b702de8084e137149fa5c68bcbd77ea9a100ce7388d64710666aa86ff36a9903108a74f18cd8e51c7016120d3493da9cc5c2ca1e107a1186b969c7ec9e20e666349ff94bab4fade7b843892e78211c6095f6fab6e678b5f9fc0e85e8c4b216b9c75e54" alt="Meeting Weird Al" class="panel-image">
+            </div>
+
+            <div class="journal-entry">
+                After the show, which ended around midnight, Carlson and I wanted to stay to meet Weird Al. We waited a long time, maybe another hour or so. And then he came out! Sat down right in front of us. So kind and jolly and sweet. Carlson told Weird Al that he liked his shoes. Weird Al looked at his shoes, then thought for a moment and said "The... shoe store".
+            </div>
+
+            <div class="musical-notes" style="top: 10%; left: 15%; animation-delay: 0s;">♪</div>
+            <div class="musical-notes" style="top: 25%; right: 20%; animation-delay: 1s;">♫</div>
+            <div class="musical-notes" style="bottom: 20%; left: 25%; animation-delay: 2s;">♪</div>
+        </div>
+
+        <!-- Chapter 9: The Drive Home -->
+        <div class="page fade-in">
+            <h2 class="chapter-title">The Journey Home</h2>
+            
+            <div class="panel panel-medium">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-Q_vljPk5hK/e34b49fad367432f7ca3faf0040684fbfd479be348fd20d9ed40a0daf0266fccf4d4933f7a471150212aab43f4932d6598a021ca83009115e66dc3869a3821045b1dcc46c1cdaaa2b41dcf930e88cc810135c8b4009fc86908a7a076941d0b452227bf06" alt="Purple SUV night drive" class="panel-image">
+            </div>
+
+            <div class="panel-grid grid-2">
+                <div class="panel panel-small">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-QiF-_fThWT/e1083982d08fde45d43dd5320ece625d168ae1d88477bfe18b5bd23a7b60cbb61f5f15f4647a171180a248e15af670e5d84827016f19cc5e01d6e129d913e249a7386bda71a98fc1aae4a7d87ba4a0c53419b32757fd2eb4401e009a599b5daa5e344619" alt="Father's determination" class="panel-image">
+                </div>
+                <div class="panel panel-small">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-yKm6_hXffa/bb8e247b7425cb112e08dc02f47add30301eaf8f13784692cd93f55b6369d32296f9218b3c9a85c2dfe288be8bfa998569fa6d5de7ee4937a20eebd8faad075c286f40a72b8105986b5c2a011086a6741997d601445bfc74e8898be9f66acb6d15c95ce0" alt="Seven eleven coffee stop" class="panel-image">
+                </div>
+            </div>
+
+            <div class="journal-entry">
+                On our way home (just me and my dad), I must have fallen asleep in the passenger seat. My dad was driving. It was late. And he normally wakes up at 5am. He was so tired. And, as family lore has it, he chanted to himself "I. WILL. NOT. HURT. THIS. BOY." And used that intention as his strength to get home. He stopped at a 7-11 for a coffee.
+            </div>
+
+            <div class="musical-notes" style="top: 20%; left: 10%; animation-delay: 1s;">♪</div>
+            <div class="musical-notes" style="bottom: 30%; right: 15%; animation-delay: 2s;">♫</div>
+        </div>
+
+        <!-- Closing Page -->
+        <div class="page title-page fade-in">
+            <h2 class="chapter-title">Some Adventures Change Everything</h2>
+            
+            <div class="narrative-text" style="text-align: center; font-size: 1.4rem; background: rgba(255,255,255,0.9); margin: 40px 0;">
+                Some memories become treasures. The <span class="cast-highlight">cast</span> came off, but the music never stopped playing. Dad's freckles, my freckles, Weird Al's smile, and that purple SUV carrying us safely through the night.
+            </div>
+
+            <div class="musical-notes" style="top: 15%; left: 10%; animation-delay: 0s;">♪</div>
+            <div class="musical-notes" style="top: 30%; right: 15%; animation-delay: 1s;">♫</div>
+            <div class="musical-notes" style="bottom: 20%; left: 20%; animation-delay: 2s;">♪</div>
+            <div class="musical-notes" style="bottom: 35%; right: 25%; animation-delay: 3s;">♫</div>
+            <div class="musical-notes" style="top: 50%; left: 50%; animation-delay: 1.5s;">♪</div>
+            <div class="musical-notes" style="top: 25%; left: 35%; animation-delay: 2.5s;">♫</div>
+            <div class="musical-notes" style="bottom: 15%; left: 40%; animation-delay: 3.5s;">♪</div>
+            <div class="musical-notes" style="top: 40%; right: 40%; animation-delay: 4s;">♫</div>
+        </div>
+    </div>
+
+    <script>
+        // Scroll-triggered animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Interactive musical notes
+        document.querySelectorAll('.musical-notes').forEach(note => {
+            note.addEventListener('click', () => {
+                note.style.animation = 'none';
+                setTimeout(() => {
+                    note.style.animation = '';
+                }, 100);
+                
+                // Create ripple effect
+                const ripple = document.createElement('div');
+                ripple.style.cssText = `
+                    position: absolute;
+                    width: 20px;
+                    height: 20px;
+                    border-radius: 50%;
+                    background: radial-gradient(circle, rgba(255,140,0,0.6) 0%, transparent 70%);
+                    pointer-events: none;
+                    animation: ripple 0.6s ease-out forwards;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                `;
+                note.appendChild(ripple);
+                
+                setTimeout(() => ripple.remove(), 600);
+            });
+        });
+
+        // Add ripple keyframes
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: translate(-50%, -50%) scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Panel click interactions
+        document.querySelectorAll('.panel').forEach(panel => {
+            panel.addEventListener('click', () => {
+                panel.style.transform = 'scale(1.05) translateY(-10px)';
+                setTimeout(() => {
+                    panel.style.transform = '';
+                }, 200);
+            });
+        });
+
+        // Parallax effect for background particles
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelector('.comic-container::before');
+            if (parallax) {
+                const speed = scrolled * 0.5;
+                parallax.style.transform = `translateY(${speed}px)`;
+            }
+        });
+    </script>
+</body>
+</html>
