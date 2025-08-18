@@ -43,11 +43,70 @@
             font-size: 1.1rem;
         }
 
+        .files-container {
+            margin-top: 2rem;
+        }
+
+        .folder-section {
+            margin-bottom: 3rem;
+        }
+
+        .folder-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding: 1rem 1.5rem;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 12px;
+            border-left: 4px solid #667eea;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .folder-header:hover {
+            background: linear-gradient(135deg, #e9ecef, #dee2e6);
+            transform: translateX(5px);
+        }
+
+        .folder-icon {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .folder-header.expanded .folder-icon {
+            transform: rotate(90deg);
+        }
+
+        .folder-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #333;
+            flex: 1;
+        }
+
+        .folder-count {
+            background: #667eea;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
         .files-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 1.5rem;
-            margin-top: 2rem;
+            margin-left: 2rem;
+            margin-top: 1rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+
+        .files-grid.expanded {
+            max-height: 2000px;
         }
 
         .file-card {
@@ -157,6 +216,20 @@
             font-family: 'Monaco', 'Menlo', monospace;
         }
 
+        .upload-instruction pre {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 3px solid #667eea;
+            margin-top: 1rem;
+            overflow-x: auto;
+        }
+
+        .upload-instruction pre code {
+            background: none;
+            padding: 0;
+        }
+
         @media (max-width: 768px) {
             .container {
                 padding: 1rem;
@@ -169,10 +242,19 @@
             
             .files-grid {
                 grid-template-columns: 1fr;
+                margin-left: 1rem;
             }
             
             .file-actions {
                 flex-direction: column;
+            }
+
+            .folder-header {
+                padding: 0.75rem 1rem;
+            }
+
+            .folder-name {
+                font-size: 1.1rem;
             }
         }
     </style>
@@ -186,7 +268,7 @@
             <div>🔍 Discovering HTML files...</div>
         </div>
 
-        <div id="files-container" class="files-grid" style="display: none;"></div>
+        <div id="files-container" class="files-container" style="display: none;"></div>
 
         <div id="no-files" class="no-files" style="display: none;">
             <h3>No HTML files found</h3>
@@ -194,13 +276,22 @@
         </div>
 
         <div class="upload-instruction">
-            <h3>How to add new files:</h3>
+            <h3>How to organize and add files:</h3>
             <ol>
-                <li>Add your <code>.html</code> files to the project directory</li>
+                <li>Add <code>.html</code> files to the root directory or organize in folders</li>
+                <li>Create folders like <code>client-a/</code>, <code>prototypes/</code>, <code>mobile/</code></li>
                 <li>Commit and push to GitHub</li>
-                <li>Vercel will automatically redeploy</li>
-                <li>Your files will appear here automatically!</li>
+                <li>Vercel will automatically redeploy and discover all files</li>
+                <li>Folders will be shown as expandable sections!</li>
             </ol>
+            <p><strong>Example structure:</strong></p>
+            <pre><code>client-a/
+  ├── landing.html
+  └── checkout.html
+prototypes/
+  ├── mobile-v1.html
+  └── desktop.html
+landing-page.html</code></pre>
         </div>
     </div>
 
@@ -214,21 +305,79 @@
             // 'mobile-design.html'
         ];
 
-        // Alternative: Auto-discovery approach (requires build script)
         async function discoverFiles() {
             try {
-                // Try to fetch a generated file list (see build script below)
                 const response = await fetch('/files.json');
                 if (response.ok) {
                     const data = await response.json();
-                    return data.files || [];
+                    return data;
                 }
             } catch (e) {
                 console.log('files.json not found, using manual list');
             }
             
-            // Fallback to manual list
-            return htmlFiles;
+            // Fallback to manual list - organize into structure
+            const structure = { '_root': htmlFiles };
+            return { files: htmlFiles, structure: structure };
+        }
+
+        function createFileCard(file) {
+            const fileName = file.split('/').pop().replace(/\.html$/, '').replace(/[-_]/g, ' ');
+            const fileCard = document.createElement('div');
+            fileCard.className = 'file-card';
+            
+            fileCard.innerHTML = `
+                <div class="file-name">${fileName}</div>
+                <div class="file-path">/${file}</div>
+                <div class="file-actions">
+                    <a href="/${file}" class="btn btn-primary" target="_blank">
+                        👁️ Preview
+                    </a>
+                    <a href="/${file}" class="btn btn-secondary">
+                        🔗 Direct Link
+                    </a>
+                </div>
+            `;
+            
+            return fileCard;
+        }
+
+        function createFolderSection(folderPath, files) {
+            const folderSection = document.createElement('div');
+            folderSection.className = 'folder-section';
+            
+            const displayName = folderPath === '_root' ? '📄 Root Files' : `📁 ${folderPath}`;
+            const folderIcon = folderPath === '_root' ? '📄' : '📁';
+            
+            folderSection.innerHTML = `
+                <div class="folder-header" onclick="toggleFolder(this)">
+                    <span class="folder-icon">${folderIcon}</span>
+                    <span class="folder-name">${folderPath === '_root' ? 'Root Files' : folderPath}</span>
+                    <span class="folder-count">${files.length} file${files.length !== 1 ? 's' : ''}</span>
+                </div>
+                <div class="files-grid">
+                </div>
+            `;
+            
+            const filesGrid = folderSection.querySelector('.files-grid');
+            files.forEach(file => {
+                filesGrid.appendChild(createFileCard(file));
+            });
+            
+            return folderSection;
+        }
+
+        function toggleFolder(header) {
+            const filesGrid = header.nextElementSibling;
+            const isExpanded = filesGrid.classList.contains('expanded');
+            
+            if (isExpanded) {
+                filesGrid.classList.remove('expanded');
+                header.classList.remove('expanded');
+            } else {
+                filesGrid.classList.add('expanded');
+                header.classList.add('expanded');
+            }
         }
 
         async function loadFiles() {
@@ -237,37 +386,39 @@
             const noFiles = document.getElementById('no-files');
 
             try {
-                const files = await discoverFiles();
+                const data = await discoverFiles();
+                const structure = data.structure || {};
+                const totalFiles = data.files ? data.files.length : 0;
                 
                 setTimeout(() => {
                     loading.style.display = 'none';
                     
-                    if (files.length === 0) {
+                    if (totalFiles === 0) {
                         noFiles.style.display = 'block';
                         return;
                     }
 
-                    container.style.display = 'grid';
+                    container.style.display = 'block';
                     
-                    files.forEach(file => {
-                        const fileName = file.replace(/\.html$/, '').replace(/[-_]/g, ' ');
-                        const fileCard = document.createElement('div');
-                        fileCard.className = 'file-card';
-                        
-                        fileCard.innerHTML = `
-                            <div class="file-name">${fileName}</div>
-                            <div class="file-path">/${file}</div>
-                            <div class="file-actions">
-                                <a href="/${file}" class="btn btn-primary" target="_blank">
-                                    👁️ Preview
-                                </a>
-                                <a href="/${file}" class="btn btn-secondary">
-                                    🔗 Direct Link
-                                </a>
-                            </div>
-                        `;
-                        
-                        container.appendChild(fileCard);
+                    // Sort folders: root first, then alphabetically
+                    const sortedFolders = Object.keys(structure).sort((a, b) => {
+                        if (a === '_root') return -1;
+                        if (b === '_root') return 1;
+                        return a.localeCompare(b);
+                    });
+                    
+                    sortedFolders.forEach(folderPath => {
+                        const files = structure[folderPath];
+                        if (files && files.length > 0) {
+                            const folderSection = createFolderSection(folderPath, files);
+                            container.appendChild(folderSection);
+                            
+                            // Auto-expand if only one folder or if it's root with few files
+                            if (sortedFolders.length === 1 || (folderPath === '_root' && files.length <= 3)) {
+                                const header = folderSection.querySelector('.folder-header');
+                                toggleFolder(header);
+                            }
+                        }
                     });
                 }, 800);
                 
@@ -275,6 +426,9 @@
                 loading.innerHTML = '<div style="color: #e74c3c;">Error loading files</div>';
             }
         }
+
+        // Make toggleFolder available globally
+        window.toggleFolder = toggleFolder;
 
         // Load files when page loads
         document.addEventListener('DOMContentLoaded', loadFiles);
