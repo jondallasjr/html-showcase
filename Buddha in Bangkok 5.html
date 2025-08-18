@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buddha's Weekend in Bangkok</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Open+Sans:wght@300;400;500&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: linear-gradient(135deg, #2c1810 0%, #8b4513 50%, #daa520 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .comic-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .cover-section {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .cover-art {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .cover-art:hover {
+            transform: scale(1.02);
+        }
+
+        .title {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            color: #daa520;
+            margin: 30px 0 10px 0;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+            font-weight: 600;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: #f4e4bc;
+            font-style: italic;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+
+        .lotus-ornament {
+            width: 80px;
+            height: auto;
+            margin: 20px auto;
+            display: block;
+            filter: drop-shadow(0 0 10px rgba(218, 165, 32, 0.5));
+            animation: gentle-float 3s ease-in-out infinite;
+        }
+
+        @keyframes gentle-float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .page {
+            background: #fdf6e3;
+            margin: 40px auto;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #daa520, #ffd700, #daa520);
+        }
+
+        .page-title {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            color: #8b4513;
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .panel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .panel {
+            position: relative;
+            border: 4px solid #2c1810;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #fff;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .panel:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(44, 24, 16, 0.3);
+            border-color: #daa520;
+        }
+
+        .panel img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .panel:hover img {
+            transform: scale(1.05);
+        }
+
+        .panel-large {
+            grid-column: span 2;
+        }
+
+        .panel-large img {
+            height: 350px;
+        }
+
+        .character-showcase {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin: 40px 0;
+            padding: 30px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .character-image {
+            width: 200px;
+            height: auto;
+            border-radius: 50%;
+            border: 5px solid #daa520;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .character-description {
+            flex: 1;
+            color: #f4e4bc;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .story-flow {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .story-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+            align-items: start;
+        }
+
+        .narrative-text {
+            background: rgba(255,255,255,0.95);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #daa520;
+            font-style: italic;
+            color: #2c1810;
+            line-height: 1.5;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .bangkok-banner {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin: 30px 0;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .comic-footer {
+            text-align: center;
+            margin-top: 60px;
+            padding: 40px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 15px;
+            color: #f4e4bc;
+        }
+
+        .footer-quote {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            font-style: italic;
+            margin-bottom: 20px;
+            color: #daa520;
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .panel-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .panel-large {
+                grid-column: span 1;
+            }
+            
+            .character-showcase {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .story-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .panel:nth-child(1) { animation-delay: 0.1s; }
+        .panel:nth-child(2) { animation-delay: 0.2s; }
+        .panel:nth-child(3) { animation-delay: 0.3s; }
+        .panel:nth-child(4) { animation-delay: 0.4s; }
+        .panel:nth-child(5) { animation-delay: 0.5s; }
+        .panel:nth-child(6) { animation-delay: 0.6s; }
+    </style>
+</head>
+<body>
+    <div class="comic-container">
+        <!-- Cover Section -->
+        <div class="cover-section">
+            <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-GHNkUGAsP_/908af1a3d60f56d2121fd89dea83797f7558192bd78b6275f25823f345074749cf94998d82fb8684ef5798ca9eb6b02f6c1ea42a07dfc8e0ef320a4993971f7c929426253572335fe29af73e35648778019f4b97b602ba2775d7fa207b5ac92212519916" alt="Buddha's Bangkok Weekend Cover" class="cover-art">
+            
+            <h1 class="title">Buddha's Weekend in Bangkok</h1>
+            <p class="subtitle">Holding the Lotus in the Swamp</p>
+            
+            <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-WRaYPNRe4D/4c1a636804b8b13b866ce486ac909c4ecd32ce52a17a28d5d8740046e4385d18f6ac54bdc8355355004ffa6a862e4757877b0547f87622f6c73a1207600e7bca00dbe2bba43632308d7d955db6bca0777bcb56ab9ea6cf84220040190b89c1b70b51322f" alt="Lotus Symbol" class="lotus-ornament">
+        </div>
+
+        <!-- Character Introduction -->
+        <div class="character-showcase">
+            <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-vSCs8gtCXk/d46a1d9fa965352875e90c416c877c585fd34fdefd4ff7cbf428d378851ce6a3f59c90a32b1f6c3ac94d832068e2b29d66ed52b9fb10b13dd214a64cc94a648bcf325b03ed635ee7cf74c6800d7cc2f0fb3ce068e9089457aa680ce2b2860305ea625d3f" alt="Buddha Character" class="character-image">
+            <div class="character-description">
+                <h3 style="color: #daa520; font-family: 'Cinzel', serif; font-size: 1.8rem; margin-bottom: 15px;">Meet the Awakened Traveler</h3>
+                <p>What if the Buddha decided to spend a weekend in modern Bangkok? Not as a detached ascetic avoiding worldly pleasures, but as a master of the Middle Way—fully engaging with the city's chaos, beauty, and temptations while maintaining perfect non-attachment.</p>
+            </div>
+        </div>
+
+        <!-- Page 1: Arrival -->
+        <div class="page fade-in">
+            <h2 class="page-title">Chapter 1: Arrival</h2>
+            <div class="panel-grid">
+                <div class="panel panel-large">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-XCoAM8WiT1/91807f77a8505c0704f477c984ca21408521014e4501b019843f0d88c3a0bf49866488ac5663f4b82ad652c91739b77e36afb716176359497dca5321343d0c168c3264a7522e2f507f56a2e726369ac635854fb6c5a24e6f5418a0b61553f17828a27516" alt="Bangkok Airport Arrival">
+                </div>
+                <div class="panel">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-U6PPZzAiyb/9969f66a24af45db232d0a9355f2d3e3a1b9f905692d23d02130d62e835cfab51aef86b80ed13ded5a96d9b7d3f3c8a150336d3755b04e53ef42d8117be712bf06d7be4bd93feed1ecaa76469cd2ceda69b672f4196070c849fd25080fed6f94ffcb3f6c" alt="Tuk-Tuk Joy Ride">
+                </div>
+                <div class="panel">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-t5g_IrgBTU/20e757f248260b0dca91333eda9e9b9e97b0394607d99d81e42cef517e63ef045ba422b4885b1b1f1fad7ce82f85cb45e6844c4528f4f014fc268a181ed9b5e455fb2323edad44ed137283715665ecce618b4cddde8dac81952f6caa2644a7a61807a589" alt="Guesthouse Connections">
+                </div>
+            </div>
+        </div>
+
+        <!-- Bangkok Nightlife Banner -->
+        <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-vUmAHC8nD-/08b8191344250723f7804944a2db516aa1dab07b2028fc8d02a816bc409076270ca57623fa5d5de599db7d6e0bc6544ceb0e00ae8c77582a1c50418d4d253697317dc0cdae9063ad9ae5f91fd2388348b167945934b4c6a011932a0c942dec5fbd099cc2" alt="Bangkok Nightlife" class="bangkok-banner">
+
+        <!-- Page 2: First Connections & Street Food -->
+        <div class="page fade-in">
+            <h2 class="page-title">Chapter 2: Cultural Immersion</h2>
+            <div class="story-flow">
+                <div class="story-row">
+                    <div class="panel">
+                        <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-tId2OWKBNP/ae0ce655cbc49636b4c26c9603ed11d10f6e83a4d6fbebd09896401db2ddbf627c919eae0d5497d40a6c170556e1d25c420e78781735f3c19060ab6635b292a9c9bab50754d65f59d371ed152265c241193913589e45f8fa7e6b05e65eea3b82571335f2" alt="Street Food Discovery">
+                    </div>
+                    <div class="narrative-text">
+                        Buddha approaches each new experience with genuine curiosity—sampling street food not as a tourist novelty, but as a meditation on taste, culture, and the simple joy of nourishment.
+                    </div>
+                </div>
+                <div class="story-row">
+                    <div class="panel">
+                        <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-Cb45bMBPz-/d9cd9c85f534a30d83ca4eda360290668164ec162163956aa4301fb023358a529b01da7a8ba2d291c16020eba6534bafeca43ed22bdab1eb578c6827257b6699b2bbc2f6366a9fb1f89de28a3eae38a930ad0740d4a974ddfb03c0384665c18e3e21822e" alt="Exotic Food Adventure">
+                    </div>
+                    <div class="panel">
+                        <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-KuGak5I98k/e0dcc86fcaa347e95c852fc51dfec983f236a0fe07113c981fdde818b78b62d87d28385b34b9e215c6a27a82f407f29f7bc190f93371fcf14e8caa1b08cd6a239efc00077cd633b9b83400026effaea52826c54af432572d08b5f05cfdb83b7035adbc1f" alt="Fried Cricket Tasting">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page 3: The Bucket Challenge -->
+        <div class="page fade-in">
+            <h2 class="page-title">Chapter 3: The Bucket Challenge</h2>
+            <div class="panel-grid">
+                <div class="panel panel-large">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-m8c2-Q6xMR/d4fc686af65b6f2e33f00bf9524e1338d765f728b83edfa38169ea625b18e70550174ad5db55ea330bb27dd14668fe02b8936946cefddcfa777462e21a4a3166b92a51e10b65ffbc12afdd9fd97394a717284e99c216975f4eeeacdd34c5693ad47d3f97" alt="The Alcohol Bucket Scene">
+                </div>
+                <div class="panel">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-uyQkk1MfT5/b4e6d50c104204769a7327f6663482300ac6c0daca36803d4a32af8a54fae2fe534ca58faf6669e82057c6350cd75b576cfc00f206378ac0f1ddb9d58ded6853067e1f834b3aa499245cdb56dc98095c938341d8653729fe913193b88e88cdbc3eb3ca6a" alt="Conversation Magnet">
+                </div>
+                <div class="panel">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-10frHCz4Ko/19c09911d3e63ab5906af5f7cf9b5f463bf002b223cad1d39d587b7a8d206b638e590f28a284b06c407836b1acd5fa84047268242a4e6a132d0ade5469a959dfad802a1f6304f1cd124fbd9703b2286d81c14c4b42971f2d61fb1e1fc41f6f0b3045e214" alt="Morning After Compassion">
+                </div>
+            </div>
+            <div class="narrative-text" style="margin-top: 20px;">
+                The revolutionary approach: Buddha participates fully in the social ritual without the desperate clinging that drives most party behavior. He drinks mindfully, engages authentically, and becomes the person everyone somehow ends up confiding in—not the buzzkill, but the wise friend.
+            </div>
+        </div>
+
+        <!-- Page 4: Dance Floor Dharma -->
+        <div class="page fade-in">
+            <h2 class="page-title">Chapter 4: Dance Floor Dharma</h2>
+            <div class="story-flow">
+                <div class="story-row">
+                    <div class="narrative-text">
+                        Buddha's dance becomes a perfect metaphor for the Middle Way—fully engaged with the rhythm and chaos, yet centered and present. People gravitate toward him, not because he's performing, but because authentic joy is magnetic.
+                    </div>
+                    <div class="panel">
+                        <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-O6bYBieNmP/0bbe0c1d01d80ff19b6354f8ab6936afaf8b02e71968e8143da6d1d12c4c401daac569f8b679fc36a2f53b23a98acb237de0ec11feb19db5b91e6fb076fc6d22ee95639de032eb4fa68db21820733dc079879528d3469a128ebd50543865bb92c019e2bf" alt="Dance Floor Entrance">
+                    </div>
+                </div>
+                <div class="story-row">
+                    <div class="panel">
+                        <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-Iv7WlhFz2V/e422202ccc76da4b7d6207c64b179a5895bc471485210291801098c223cd9b624464a17f78b94eb2f6eafd854597b1edfcbde84787b9beb00344b55837d7cb208e3681f2275c4f6aac775c24020ede52d32e6e371a965da709873b9f7d4e8177d3be2838" alt="Buddha Dancing Freely">
+                    </div>
+                    <div class="panel">
+                        <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-Zwtk6HOJDs/21869807351932a9074b29338151a2d9caed2218b7e05d3a3e9660595030296ffb2f954bf39a45a492bbc21d200afb04b2d1f0a0172e3d62a0363436f04d8bf11864a3af2bfdd69f4abb8f007d12dc3651a86e59eeb7fad67c8bbf5c2ed80eca696b4edb" alt="Magnetic Presence">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page 5: The Deeper Teaching -->
+        <div class="page fade-in">
+            <h2 class="page-title">Chapter 5: Easy Hellos, Easy Goodbyes</h2>
+            <div class="panel-grid">
+                <div class="panel panel-large">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-ufx1fmG28O/8e88bd1ad9ff55ad378faba230aaf9f0b9af46d3cfa882286ee4a3c46a69f133128bdeff422116708a62016a56577585bccea213b6e9a9559ba3a5087e2ae780eb5b2f61a47b38f38cc6a53922c73b44d04bf1d4740bc2c6ca61cd62a2fe7b97b6df819b" alt="Easy Goodbye Scene">
+                </div>
+                <div class="panel">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-QIh5siPiyy/f0854b01b7d3f7ba9d8082ccbb2a4023ed95eb5700b25bdf1b69f7e9ce49c119ecf13f556095ef34cf51798a438e50afbdb8dfdebea67562be7d2c3fa4ac8dd08a32dd1f7a44ec195ad7a755b191ef4ec6abe5d76d0320fe3e68a5587a06a15fb4e7352e" alt="Buddha in Golden Hour">
+                </div>
+                <div class="panel">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-I4C747LE3c/195f6d4636d12ac7235c4bb28888e7cae6c28576c36623081b1173ad1ddc1bf534346a05f5559093e3c42d57e4959f9a13bfbd3896aaa37b2077ad11659af445e61652a2cc7f328cd8ec8add1cde7df38f7d004fa79464fa1eeebdead02e159e830b126f" alt="Cultural Bridge">
+                </div>
+            </div>
+        </div>
+
+        <!-- Background Banner -->
+        <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-3uIF8HvERv/0f7fec2ac14b771766e4581b30e2ef72f5e2135aa5baa171089c555517917f19b23a001a1fbb0ef7ed51ad3a3fb25ef7886462116591936c3a4c1a92c758e1c6cc3daa9d9ffc4ff4de748ef789af6a22c94b88382542e3bced4eac24b4e8840d5430036f" alt="Khao San Road Evening" class="bangkok-banner">
+
+        <!-- Comic Footer -->
+        <div class="comic-footer">
+            <p class="footer-quote">"The lotus and the swamp aren't separate"</p>
+            <p>Buddha's weekend wouldn't be about converting anyone to Buddhism or proving the superiority of enlightened living. Instead, it would be a demonstration of what human life looks like when lived without the constant anxiety of trying to control outcomes—still fully engaged, still emotionally available, still capable of joy and sorrow, but no longer driven by the desperate need for life to be different than it is.</p>
+            <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-WRaYPNRe4D/4c1a636804b8b13b866ce486ac909c4ecd32ce52a17a28d5d8740046e4385d18f6ac54bdc8355355004ffa6a862e4757877b0547f87622f6c73a1207600e7bca00dbe2bba43632308d7d955db6bca0777bcb56ab9ea6cf84220040190b89c1b70b51322f" alt="Lotus Symbol" class="lotus-ornament" style="margin-top: 30px;">
+        </div>
+    </div>
+
+    <script>
+        // Add smooth scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Add panel interaction
+        document.querySelectorAll('.panel').forEach(panel => {
+            panel.addEventListener('click', () => {
+                panel.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    panel.style.transform = '';
+                }, 150);
+            });
+        });
+    </script>
+</body>
+</html>

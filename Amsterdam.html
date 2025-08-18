@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amsterdam Family Adventure</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+        }
+        
+        .presentation-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .slide {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+            padding: 40px;
+            min-height: 600px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+        }
+        
+        .slide-number {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: #f8f9fa;
+            color: #666;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .slide h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 700;
+        }
+        
+        .slide h2 {
+            color: #34495e;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        .slide h3 {
+            color: #2980b9;
+            font-size: 1.4em;
+            margin-bottom: 10px;
+        }
+        
+        .slide-content {
+            display: flex;
+            flex: 1;
+            gap: 30px;
+            align-items: center;
+        }
+        
+        .content-text {
+            flex: 1;
+        }
+        
+        .content-image {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .content-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .full-width-image {
+            width: 100%;
+            margin: 20px 0;
+        }
+        
+        .full-width-image img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .feature-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .feature-card h4 {
+            margin: 0 0 10px 0;
+            font-size: 1.2em;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid #ff6b6b;
+        }
+        
+        .icon-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .icon-list li {
+            padding: 8px 0;
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .icon-list li::before {
+            content: '🎯';
+            position: absolute;
+            left: 0;
+            top: 8px;
+        }
+        
+        .timeline {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .timeline-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .boat-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .boat-card {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #3498db;
+        }
+        
+        .emoji {
+            font-size: 1.5em;
+            margin-right: 8px;
+        }
+        
+        @media (max-width: 768px) {
+            .slide-content {
+                flex-direction: column;
+            }
+            
+            .slide {
+                padding: 20px;
+            }
+            
+            .slide h1 {
+                font-size: 2em;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <!-- Slide 1: Title Slide -->
+        <div class="slide">
+            <div class="slide-number">1</div>
+            <h1>Amsterdam Family Adventure</h1>
+            <h2 style="text-align: center; color: #3498db; border: none;">10 Days in the Perfect Location</h2>
+            
+            <div class="full-width-image">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-YV_KurBQzq/11ea14d96bb05df9230ab2ae16aa31016dd53fc508ee4178b27a737a30136f4b34d3634fb9ffa4e589284946b16c43460181b1265111beb682db9bcffe11eb136c45ac4a483897f9cb08a879770c0bbc7ec2519c69ab059ab11f1e4745c2227ddb6c2457" alt="Amsterdam Family Adventure Collage">
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">10</div>
+                    <div>Days</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">4</div>
+                    <div>Generations</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">May-June</div>
+                    <div>Perfect Season</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">∞</div>
+                    <div>Memories</div>
+                </div>
+            </div>
+            
+            <div class="highlight-box">
+                <p style="margin: 0; font-size: 1.2em; text-align: center;">
+                    <strong>When:</strong> May 22 - June 1, 2026 • 
+                    <strong>Who:</strong> Multi-generational family (ages 1-69) • 
+                    <strong>Focus:</strong> Easy, kid-friendly, nature-rich experiences
+                </p>
+            </div>
+        </div>
+
+        <!-- Slide 2: Your Perfect Home Base -->
+        <div class="slide">
+            <div class="slide-number">2</div>
+            <h2><span class="emoji">🏛️</span>Your Perfect Home Base - The Plantage District</h2>
+            
+            <div class="slide-content">
+                <div class="content-text">
+                    <h3>The Wittenberg Area</h3>
+                    <p><strong>Why This Location is Gold for Families:</strong></p>
+                    
+                    <ul class="icon-list">
+                        <li>Amsterdam's "Cultural Garden" - leafy boulevards & elegant squares</li>
+                        <li>ARTIS Zoo: 400 meters from your hotel</li>
+                        <li>Hermitage Museum: 650 meters</li>
+                        <li>Hortus Botanicus: 5-minute walk</li>
+                        <li>Wertheimpark (Amsterdam's oldest): Next door</li>
+                    </ul>
+                    
+                    <div class="highlight-box">
+                        <p style="margin: 0;"><strong>Perfect for:</strong> Strollers, elderly-friendly walking, quiet residential feel with major attractions at your doorstep!</p>
+                    </div>
+                </div>
+                
+                <div class="content-image">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-x3G4yp2Dfg/67da5717a0e2da07cc3f4a1fac3fb53637b00a338d8abe46ef1ecebff91e659a59e279aa07578bb345c5145b118b6cdeb4e35298ae48cd282113d84c365544b481a3019c9fd5a1bfe2e9c84ed38a158aeb6733ce0ed1d0dc8b7e34d3c4c223a69a8c353d" alt="Plantage District Street View">
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Boat Adventures -->
+        <div class="slide">
+            <div class="slide-number">3</div>
+            <h2><span class="emoji">⛵</span>Boat Adventures Made for Families</h2>
+            
+            <div class="full-width-image">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-Xm5Eaawak5/a776125b3164502fa8bc67d610344064b9f2e70488414df8a7ac57941312fc79640ef9820b109e1d3a72ba5401616fc77bcd988a789be3a9d04b5f87c1733f10c5d98c5d257269e4ff67f0286973a9082a62cc117a0aececde58d4a3a0d8fe1c9def85f6" alt="Family Canal Boat Experience">
+            </div>
+            
+            <h3>Amsterdam's Canals with Little Ones</h3>
+            
+            <div class="boat-options">
+                <div class="boat-card">
+                    <h4><span class="emoji">🏴‍☠️</span>Blue Boat Company Kids Cruise</h4>
+                    <ul style="text-align: left; margin: 10px 0;">
+                        <li>Pirate-themed audio guide for kids</li>
+                        <li>Binoculars & treasure hunt booklets</li>
+                        <li>Closed boat = toddler safe!</li>
+                    </ul>
+                </div>
+                
+                <div class="boat-card" style="background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);">
+                    <h4><span class="emoji">🍕</span>Pizza Canal Cruise</h4>
+                    <ul style="text-align: left; margin: 10px 0;">
+                        <li>All-you-can-eat pizza & Ben & Jerry's</li>
+                        <li>Kids under 3: FREE</li>
+                        <li>Perfect family dinner on water</li>
+                    </ul>
+                </div>
+                
+                <div class="boat-card" style="background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%); color: #333;">
+                    <h4><span class="emoji">🥞</span>Pancake Boat</h4>
+                    <ul style="text-align: left; margin: 10px 0;">
+                        <li>Unlimited pancakes while cruising</li>
+                        <li>Ball pool below deck for active toddlers</li>
+                        <li>Dutch tradition meets family fun</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: ARTIS Zoo -->
+        <div class="slide">
+            <div class="slide-number">4</div>
+            <h2><span class="emoji">🦁</span>ARTIS Zoo - Your Neighbor & New Favorite</h2>
+            
+            <div class="slide-content">
+                <div class="content-text">
+                    <h3>Europe's Oldest Zoo at Your Doorstep</h3>
+                    
+                    <div class="highlight-box">
+                        <p><strong>Why It's Perfect for Your Group:</strong></p>
+                    </div>
+                    
+                    <ul class="icon-list">
+                        <li>750+ species in gorgeous garden setting</li>
+                        <li>Multiple playgrounds for toddler energy</li>
+                        <li>Plenty of benches for grandparents to rest</li>
+                        <li>Feeding times - interactive fun for all ages</li>
+                        <li>Historic buildings meet modern exhibits</li>
+                    </ul>
+                    
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <h4><span class="emoji">🐘</span>Animals</h4>
+                            <p>750+ species from around the world</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4><span class="emoji">🎠</span>Playgrounds</h4>
+                            <p>Multiple play areas for endless fun</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="content-image">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-7jIRzGKqcs/075f3ba354e30e538914214b398dc10345b597e1a835b5ae8c904aa40722eaecbcfe8944b774976fd55add959d062dc9cf354c2142a4a0fa9d28028556357abc023e19b0e414ef15f3ff774516073bebbaf81cedd0783282a92b2e8e075b684ef0b051d9" alt="ARTIS Zoo Family Scene">
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Green Oases -->
+        <div class="slide">
+            <div class="slide-number">5</div>
+            <h2><span class="emoji">🌳</span>Green Oases - Amsterdam's Family Parks</h2>
+            
+            <div class="full-width-image">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-rG86w3r4W8/4b6b62e7deaa2db93da41bba6bf6220e445788c0bf57fd329fe75cbe2dac3a10e6dd7268eace35a15be03077348f43b2034cd18e3a16d006c2b78a38c6e5171f512659a37e0cd1ca27be5776ebde7b2e82779350365b96f10e071dfd96bbbe83e6fc60ea" alt="Vondelpark Playground Adventure">
+            </div>
+            
+            <h3>Nature Escapes in the City</h3>
+            
+            <div class="feature-grid">
+                <div class="feature-card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                    <h4>Vondelpark - Amsterdam's Central Park</h4>
+                    <ul style="text-align: left;">
+                        <li>Epic treehouse fort structure</li>
+                        <li>Sandy play areas & paddling pools</li>
+                        <li>Free outdoor theater (perfect timing!)</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                    <h4>Oosterpark - Your Neighborhood Gem</h4>
+                    <ul style="text-align: left;">
+                        <li>Sandy playground & splash pool</li>
+                        <li>Climbing bridge complex</li>
+                        <li>Most multicultural park experience</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                    <h4>Amstelpark - Quiet Family Haven</h4>
+                    <ul style="text-align: left;">
+                        <li>Kids' train & petting zoo</li>
+                        <li>Mini-golf & maze adventures</li>
+                        <li>Monthly farmer's market</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Museums -->
+        <div class="slide">
+            <div class="slide-number">6</div>
+            <h2><span class="emoji">🏛️</span>Museums That Welcome Little Explorers</h2>
+            
+            <div class="slide-content">
+                <div class="content-text">
+                    <h3>Culture Made Fun & Accessible</h3>
+                    
+                    <div class="highlight-box">
+                        <h4><span class="emoji">🧪</span>NEMO Science Museum</h4>
+                        <ul>
+                            <li>5 floors of hands-on experiments</li>
+                            <li>Rooftop playground with city views</li>
+                            <li>Water play areas (perfect for June!)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <h4><span class="emoji">🖼️</span>Rijksmuseum</h4>
+                            <p>Family scavenger hunt with prizes + Beautiful free gardens</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4><span class="emoji">🦋</span>Hortus Botanicus</h4>
+                            <p>World's oldest botanical gardens (1638) - Walk from hotel!</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="content-image">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-wevkJ4L8FB/90f09a0a3f0f770dad0fb1b6c506a5efe79a759f5e92288023bbc6f3015c4bf8db52d87f6c5dad87639f2397a9335a792fb67aa2086e81bdb1d8b0db2aa04f0fb0f6e394fc4e6b34c4981599c56e1217d28fc03ddca3e16443e2cd08c486792449411d9a" alt="NEMO Science Museum Family Fun">
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Free & Budget-Friendly -->
+        <div class="slide">
+            <div class="slide-number">7</div>
+            <h2><span class="emoji">💝</span>Free & Budget-Friendly Adventures</h2>
+            
+            <div class="slide-content">
+                <div class="content-text">
+                    <h3>Amazing Experiences That Don't Break the Bank</h3>
+                    
+                    <div class="highlight-box">
+                        <h4><span class="emoji">🆓</span>Completely FREE:</h4>
+                        <ul>
+                            <li>Rijksmuseum Gardens - sculpture park & city oasis</li>
+                            <li>All city parks & playgrounds (dozens available!)</li>
+                            <li>Houseboat watching along canals</li>
+                            <li>Waterlooplein Market - Netherlands' oldest flea market</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="highlight-box" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
+                        <h4><span class="emoji">💰</span>Very Inexpensive:</h4>
+                        <ul>
+                            <li>City petting zoos scattered throughout</li>
+                            <li>Poffertjes (fluffy mini-pancakes) from street vendors</li>
+                            <li>Tram day passes for easy city exploration</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="content-image">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-v1rzdDY8sl/ac2f85c0694de51444115695d59541db82572623c145cde5acb110703051eae67179fe7986d8c97e316fe7ebd09dc6ba715ae7b984291654a6eae98f852cd5d6f5c553ef993aa40ef5b299ce32ae2e93f1add3f2c48398af37cfb0454698b5d3460b140f" alt="Free Amsterdam Market Experience">
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Music & Cultural Magic -->
+        <div class="slide">
+            <div class="slide-number">8</div>
+            <h2><span class="emoji">🎵</span>Music & Cultural Magic in Late Spring</h2>
+            
+            <div class="slide-content">
+                <div class="content-text">
+                    <h3>Live Entertainment Perfect for Families</h3>
+                    
+                    <div class="feature-grid">
+                        <div class="feature-card" style="background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);">
+                            <h4><span class="emoji">🎭</span>Free Musical Experiences</h4>
+                            <ul style="text-align: left;">
+                                <li>Vondelpark Open Air Theatre</li>
+                                <li>Youth programs Saturday afternoons</li>
+                                <li>June festivals: Red Light Jazz, Holland Festival</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="feature-card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                            <h4><span class="emoji">🩰</span>Special Cultural Treats</h4>
+                            <ul style="text-align: left;">
+                                <li>Dutch National Ballet (walking distance!)</li>
+                                <li>Concertgebouw - world-renowned acoustics</li>
+                                <li>Street musicians throughout canal ring</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="content-image">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-1p6JvhJHzl/7d24a684e410103ec875528402ce60094fee29aad88c9b33985aeab2877cac02cbfcf63ea45c342079358cf67313df7e11df2e08d3db7994656eeeb7e4f42b7ce47b3104a466ee1eff8f0dad75b910fbb6f8bacd5025e4543a74154b94c38484d61a0ef1" alt="Vondelpark Open Air Theatre">
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Easy & Pleasant -->
+        <div class="slide">
+            <div class="slide-number">9</div>
+            <h2><span class="emoji">✨</span>Easy & Pleasant - Perfect for Your Group</h2>
+            
+            <div class="slide-content">
+                <div class="content-text">
+                    <h3>Designed for Comfort & Joy</h3>
+                    
+                    <div class="highlight-box">
+                        <h4>Why This Works for Everyone:</h4>
+                        <ul>
+                            <li>Flat city - easy for strollers & grandparents</li>
+                            <li>Excellent public transport - trams everywhere</li>
+                            <li>Your quiet neighborhood with easy access to everything</li>
+                            <li>Plenty of rest stops - cafés & park benches</li>
+                            <li>Late May/Early June weather - mild & perfect for outdoors</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <h4><span class="emoji">👶</span>Toddler-Friendly</h4>
+                            <p>Stroller access everywhere, safe playgrounds</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4><span class="emoji">👴</span>Senior-Friendly</h4>
+                            <p>Plenty of benches, easy walking distances</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="content-image">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-b4OW5UP60y/47f1c8b7ae9f55e28f02819a58e0ff7f72d16261f143e65680afee593325d2f6cf74c0a88673d24368908f6b65079b08eace1c26945122d3ab96cd01bf0e75259f188b8d9cf53e0df7fc40d8f521493d596b36dd9d511e583bf6af77338d48d35e5d3778" alt="Easy Amsterdam Navigation">
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: Timeline -->
+        <div class="slide">
+            <div class="slide-number">10</div>
+            <h2><span class="emoji">📅</span>Your Perfect 10-Day Timeline</h2>
+            
+            <h3>Suggested Flow for Maximum Enjoyment</h3>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h4><span class="emoji">🏠</span>Days 1-3: Settle In & Explore Neighborhood</h4>
+                    <p>ARTIS Zoo, Hortus Botanicus, Oosterpark</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <h4><span class="emoji">⛵</span>Days 4-6: Classic Amsterdam Adventures</h4>
+                    <p>Canal boat cruise, Vondelpark, NEMO Museum</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <h4><span class="emoji">🎭</span>Days 7-9: Cultural Immersion</h4>
+                    <p>Rijksmuseum, live music, markets</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <h4><span class="emoji">🌲</span>Day 10: Relaxed Farewell</h4>
+                    <p>Amsterdam Forest adventure or peaceful park day</p>
+                </div>
+            </div>
+            
+            <div class="highlight-box">
+                <p style="margin: 0; text-align: center; font-size: 1.2em;">
+                    <strong>Remember:</strong> This is your flexible framework - follow your family's rhythm!
+                </p>
+            </div>
+        </div>
+
+        <!-- Slide 11: Final Slide -->
+        <div class="slide">
+            <div class="slide-number">11</div>
+            <h2><span class="emoji">🌅</span>Your Amsterdam Adventure Awaits</h2>
+            
+            <div class="full-width-image">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-fSGyYnnJPW/e8dd0e586edb94d90f30f4726ceee86b1bd6fbc02afc5ab90b9d6274faa58342940f9bf4b06e7c1ca2f5f111e93ce71447aae2d87e24887017464de69f968dcde5d78265e15a15b72a4bd57031d298a56ff56b2849dc42b247f801fe43042601dc47588f" alt="Amsterdam Golden Hour Farewell">
+            </div>
+            
+            <h3>Why May-June 2026 is Perfect:</h3>
+            
+            <div class="feature-grid">
+                <div class="feature-card" style="background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%); color: #333;">
+                    <h4><span class="emoji">☀️</span>Ideal Weather</h4>
+                    <p>Perfect for outdoor adventures</p>
+                </div>
+                <div class="feature-card" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                    <h4><span class="emoji">🌅</span>Longer Days</h4>
+                    <p>More time for everything</p>
+                </div>
+                <div class="feature-card" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                    <h4><span class="emoji">🎪</span>Festival Season</h4>
+                    <p>Just beginning</p>
+                </div>
+                <div class="feature-card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                    <h4><span class="emoji">🌸</span>Blooming Parks</h4>
+                    <p>At their most beautiful</p>
+                </div>
+            </div>
+            
+            <div class="highlight-box">
+                <h3 style="text-align: center; margin: 0 0 15px 0;"><span class="emoji">💝</span>You've Chosen Brilliantly!</h3>
+                <p style="margin: 0; font-size: 1.2em; text-align: center;">
+                    The Plantage district offers the perfect balance of quiet family comfort and easy access to Amsterdam's greatest treasures. Your multi-generational adventure is set to be unforgettable!
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
