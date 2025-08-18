@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=3.0">
+    <title>Buddha's Weekend in Bangkok</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Open+Sans:wght@300;400;500&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: linear-gradient(135deg, #2c1810 0%, #8b4513 50%, #daa520 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .comic-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .cover-section {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .cover-art {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .cover-art:hover {
+            transform: scale(1.02);
+        }
+
+        .title {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            color: #daa520;
+            margin: 30px 0 10px 0;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+            font-weight: 600;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: #f4e4bc;
+            font-style: italic;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+
+        .lotus-ornament {
+            width: 80px;
+            height: auto;
+            margin: 20px auto;
+            display: block;
+            filter: drop-shadow(0 0 10px rgba(218, 165, 32, 0.5));
+            animation: gentle-float 3s ease-in-out infinite;
+        }
+
+        @keyframes gentle-float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .story-section {
+            background: #fdf6e3;
+            margin: 40px auto;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .story-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #daa520, #ffd700, #daa520);
+        }
+
+        .chapter-title {
+            font-family: 'Cinzel', serif;
+            font-size: 2.2rem;
+            color: #8b4513;
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .comic-image {
+            width: 100%;
+            height: auto;
+            max-height: 400px;
+            object-fit: contain;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            background: #fdf6e3;
+        }
+
+        .framed-image {
+            border: 4px solid #2c1810;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            margin: 20px 0;
+        }
+
+        .framed-image img {
+            width: 100%;
+            height: auto;
+            max-height: 300px;
+            object-fit: contain;
+            background: #fdf6e3;
+        }
+
+        .framed-image:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(44, 24, 16, 0.3);
+            border-color: #daa520;
+        }
+
+        .dialogue-box {
+            background: rgba(255, 255, 255, 0.95);
+            border: 3px solid #daa520;
+            border-radius: 20px;
+            padding: 20px;
+            margin: 25px 0;
+            position: relative;
+            font-family: 'Crimson Text', serif;
+            font-size: 1.1rem;
+            color: #2c1810;
+        }
+
+        .dialogue-box::before {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 30px;
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 15px solid #daa520;
+        }
+
+        .dialogue-box.thought {
+            border-style: dashed;
+            border-color: #8b4513;
+            background: rgba(240, 248, 255, 0.95);
+        }
+
+        .dialogue-box.thought::before {
+            border-top-color: #8b4513;
+        }
+
+        .speaker {
+            font-weight: 600;
+            color: #8b4513;
+            font-size: 1rem;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .narration {
+            background: rgba(44, 24, 16, 0.9);
+            color: #f4e4bc;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 30px 0;
+            font-family: 'Crimson Text', serif;
+            font-size: 1.15rem;
+            font-style: italic;
+            border-left: 5px solid #daa520;
+            line-height: 1.7;
+        }
+
+        .philosophical-aside {
+            background: linear-gradient(135deg, rgba(218, 165, 32, 0.1), rgba(139, 69, 19, 0.1));
+            border: 2px solid #daa520;
+            padding: 30px;
+            margin: 35px 0;
+            border-radius: 15px;
+            position: relative;
+        }
+
+        .philosophical-aside::before {
+            content: '☸';
+            position: absolute;
+            top: -15px;
+            left: 30px;
+            background: #fdf6e3;
+            padding: 0 15px;
+            font-size: 1.5rem;
+            color: #daa520;
+        }
+
+        .philosophical-aside h4 {
+            font-family: 'Cinzel', serif;
+            color: #8b4513;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: start;
+            margin: 30px 0;
+        }
+
+        .character-showcase {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin: 40px 0;
+            padding: 30px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .character-image {
+            width: 200px;
+            height: auto;
+            border-radius: 50%;
+            border: 5px solid #daa520;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .character-description {
+            flex: 1;
+            color: #f4e4bc;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .comic-footer {
+            text-align: center;
+            margin-top: 60px;
+            padding: 40px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 15px;
+            color: #f4e4bc;
+        }
+
+        .footer-quote {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            font-style: italic;
+            margin-bottom: 20px;
+            color: #daa520;
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+            
+            .character-showcase {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="comic-container">
+        <!-- Cover Section -->
+        <div class="cover-section">
+            <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-GHNkUGAsP_/908af1a3d60f56d2121fd89dea83797f7558192bd78b6275f25823f345074749cf94998d82fb8684ef5798ca9eb6b02f6c1ea42a07dfc8e0ef320a4993971f7c929426253572335fe29af73e35648778019f4b97b602ba2775d7fa207b5ac92212519916" alt="Buddha's Bangkok Weekend Cover" class="cover-art">
+            
+            <h1 class="title">Buddha's Weekend in Bangkok</h1>
+            <p class="subtitle">Holding the Lotus in the Swamp</p>
+            
+            <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-WRaYPNRe4D/4c1a636804b8b13b866ce486ac909c4ecd32ce52a17a28d5d8740046e4385d18f6ac54bdc8355355004ffa6a862e4757877b0547f87622f6c73a1207600e7bca00dbe2bba43632308d7d955db6bca0777bcb56ab9ea6cf84220040190b89c1b70b51322f" alt="Lotus Symbol" class="lotus-ornament">
+        </div>
+
+        <!-- Character Introduction -->
+        <div class="character-showcase">
+            <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-vSCs8gtCXk/d46a1d9fa965352875e90c416c877c585fd34fdefd4ff7cbf428d378851ce6a3f59c90a32b1f6c3ac94d832068e2b29d66ed52b9fb10b13dd214a64cc94a648bcf325b03ed635ee7cf74c6800d7cc2f0fb3ce068e9089457aa680ce2b2860305ea625d3f" alt="Buddha Character" class="character-image">
+            <div class="character-description">
+                <h3 style="color: #daa520; font-family: 'Cinzel', serif; font-size: 1.8rem; margin-bottom: 15px;">Meet the Awakened Traveler</h3>
+                <p>What if the Buddha decided to spend a weekend in modern Bangkok? Not as a detached ascetic avoiding worldly pleasures, but as a master of the Middle Way—fully engaging with the city's chaos, beauty, and temptations while maintaining perfect non-attachment.</p>
+            </div>
+        </div>
+
+        <!-- Chapter 1: Arrival -->
+        <div class="story-section fade-in">
+            <h2 class="chapter-title">Chapter 1: Arrival - The Curious Tourist</h2>
+
+            <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-XCoAM8WiT1/91807f77a8505c0704f477c984ca21408521014e4501b019843f0d88c3a0bf49866488ac5663f4b82ad652c91739b77e36afb716176359497dca5321343d0c168c3264a7522e2f507f56a2e726369ac635854fb6c5a24e6f5418a0b61553f17828a27516" alt="Bangkok Airport Arrival" class="comic-image">
+
+            <div class="narration">
+                Suvarnabhumi Airport, Friday evening. Among the sea of travelers clutching phones, checking watches, and wrestling with luggage, one figure moves differently. Buddha carries only a simple cloth bag, his eyes wide with genuine curiosity rather than the glazed anxiety of modern travel. He breathes in deeply—exhaust fumes, street food, humidity, life itself.
+            </div>
+
+            <div class="dialogue-box thought">
+                <div class="speaker">Buddha's thoughts</div>
+                Fascinating. Each person here is carrying their entire world of expectations and fears. The businessman rushing to make connections, the backpacker studying her guidebook like a sacred text, the elderly woman clutching her pearls... All seeking something, all avoiding something. But what if there's nothing to seek and nothing to avoid?
+            </div>
+
+            <div class="two-column">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-U6PPZzAiyb/9969f66a24af45db232d0a9355f2d3e3a1b9f905692d23d02130d62e835cfab51aef86b80ed13ded5a96d9b7d3f3c8a150336d3755b04e53ef42d8117be712bf06d7be4bd93feed1ecaa76469cd2ceda69b672f4196070c849fd25080fed6f94ffcb3f6c" alt="Tuk-Tuk Joy Ride" class="framed-image">
+                
+                <div>
+                    <div class="dialogue-box">
+                        <div class="speaker">Tuk-tuk Driver</div>
+                        You want air conditioning taxi? More comfortable for tourist!
+                    </div>
+
+                    <div class="dialogue-box">
+                        <div class="speaker">Buddha</div>
+                        This is perfect, friend. Why would I want to be separated from this beautiful chaos? The wind, the sounds, the smell of jasmine mixed with exhaust—this IS Bangkok, isn't it?
+                    </div>
+
+                    <div class="narration">
+                        The driver grins, surprised by this response. Most tourists want comfort, predictability, control. This one seems to want... reality.
+                    </div>
+                </div>
+            </div>
+
+            <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-t5g_IrgBTU/20e757f248260b0dca91333eda9e9b9e97b0394607d99d81e42cef517e63ef045ba422b4885b1b1f1fad7ce82f85cb45e6844c4528f4f014fc268a181ed9b5e455fb2323edad44ed137283715665ecce618b4cddde8dac81952f6caa2644a7a61807a589" alt="Guesthouse Connections" class="comic-image">
+
+            <div class="dialogue-box">
+                <div class="speaker">Klaus (German backpacker)</div>
+                So what brings you to Bangkok? Let me guess—temple tours? Meditation retreat?
+            </div>
+
+            <div class="dialogue-box">
+                <div class="speaker">Buddha</div>
+                Actually, I was hoping someone might show me where young people go to have fun. I'm curious about how joy expresses itself in different cultures.
+            </div>
+
+            <div class="dialogue-box">
+                <div class="speaker">Emma (British gap-year student)</div>
+                Wait, seriously? You want to party? I mean... you seem so... zen.
+            </div>
+
+            <div class="dialogue-box">
+                <div class="speaker">Buddha</div>
+                <em>(laughing)</em> What if being zen doesn't mean avoiding life, but diving into it without drowning? What if the point isn't to transcend human experience, but to experience it fully without the desperate need for it to be different?
+            </div>
+
+            <div class="philosophical-aside">
+                <h4>The Middle Way Misconception</h4>
+                Most people imagine the Buddha as someone who would politely decline all invitations to worldly pleasures. But the historical Buddha explicitly rejected extreme asceticism just as much as indulgence. The Middle Way isn't about avoiding experience—it's about experiencing without attachment to outcomes. Buddha can fully engage with Bangkok's chaos precisely because he doesn't need it to be anything other than what it is.
+            </div>
+        </div>
+
+        <!-- Chapter 2: Cultural Immersion -->
+        <div class="story-section fade-in">
+            <h2 class="chapter-title">Chapter 2: Cultural Immersion - Every Bite a Teaching</h2>
+
+            <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-tId2OWKBNP/ae0ce655cbc49636b4c26c9603ed11d10f6e83a4d6fbebd09896401db2ddbf627c919eae0d5497d40a6c170556e1d25c420e78781735f3c19060ab6635b292a9c9bab50754d65f59d371ed152265c241193913589e45f8fa7e6b05e65ea3b82571335f2" alt="Street Food Discovery" class="comic-image">
+
+            <div class="narration">
+                Khao San Road, Saturday morning. The street food symphony begins—sizzling woks, chopping knives, vendors calling in melodic Thai. Buddha approaches a cart where an elderly woman is preparing pad thai with the focused precision of a meditation master.
+            </div>
+
+            <div class="dialogue-box">
+                <div class="speaker">Street Vendor</div>
+                <em>(in Thai, then broken English)</em> You want spicy? Not spicy? Tourist spicy?
+            </div>
+
+            <div class="dialogue-box">
+                <div class="speaker">Buddha</div>
+                <em>(attempting Thai, then English)</em> Surprise me, grandmother. I trust your wisdom about what this dish wants to be.
+            </div>
+
+            <div class="two-column">
+                <div>
+                    <div class="dialogue-box thought">
+                        <div class="speaker">Buddha's reflection</div>
+                        Each ingredient she adds is a choice made in the present moment. No rigid recipe, just response to what is. The noodles tell her when they're ready, the sauce speaks its needs. She's not cooking—she's dancing with the elements.
+                    </div>
+
+                    <div class="narration">
+                        The vendor watches with amusement as Buddha savors each bite with complete attention, as if tasting food for the first time. Other vendors begin to gather, curious about this foreigner who eats like he's receiving communion.
+                    </div>
+                </div>
+
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-Cb45bMBPz-/d9cd9c85f534a30d83ca4eda360290668164ec162163956aa4301fb023358a529b01da7a8ba2d291c16020eba6534bafeca43ed22bdab1eb578c6827257b6699b2bbc2f6366a9fb1f89de28a3eae38a930ad0740d4a974ddfb03c0384665c18e3e21822e" alt="Exotic Food Adventure" class="framed-image">
+            </div>
+
+            <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-KuGak5I98k/e0dcc86fcaa347e95c852fc51dfec983f236a0fe07113c981fdde818b78b62d87d28385b34b9e215c6a27a82f407f29f7bc190f93371fcf14e8caa1b08cd6a239efc00077cd633b9b83400026effaea52826c54af432572d08b5f05cfdb83b7035adbc1f" alt="Fried Cricket Tasting" class="comic-image">
+
+            <div class="dialogue-box">
+                <div class="speaker">Klaus</div>
+                Dude, you're seriously going to eat bugs? That's... intense.
+            </div>
+
+            <div class="dialogue-box">
+                <div class="speaker">Buddha</div>
+                <em>(crunching thoughtfully)</em> Interesting texture. Nutty. Why do we decide some protein is acceptable and some isn't? These little beings fed on clean grain, lived in sunlight. The cow that became your burger yesterday lived a much harder life.
+            </div>
+
+            <div class="dialogue-box">
+                <div class="speaker">Vendor</div>
+                <em>(delighted)</em> You understand! Very nutritious! Good for environment! You are wise man.
+            </div>
+
+            <div class="dialogue-box">
+                <div class="speaker">Buddha</div>
+                We're all just trying to nourish these temporary bodies, aren't we? The cricket, the rice, the chili, you, me—all part of one big feast of existence.
+            </div>
+
+            <div class="philosophical-aside">
+                <h4>Mindful Consumption vs. Spiritual Bypassing</h4>
+                Buddha's approach to food isn't about following rigid dietary rules or performing spiritual purity. Instead, it's about bringing full awareness to the act of nourishment. He tastes completely, without judgment or performance. This isn't spiritual bypassing—avoiding the human experience in favor of seeming enlightened—but rather spiritual embodiment: finding the sacred within the completely ordinary act of eating.
+            </div>
+        </div>
+
+        <!-- Chapter 3: The Bucket Challenge -->
+        <div class="story-section fade-in">
+            <h2 class="chapter-title">Chapter 3: The Bucket Challenge - Sacred Rituals of Connection</h2>
+
+            <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-m8c2-Q6xMR/d4fc686af65b6f2e33f00bf9524e1338d765f728b83edfa38169ea625b18e70550174ad5db55ea330bb27dd14668fe02b8936946cefddcfa777462e21a4a3166b92a51e10b65ffbc12afdd9fd97394a717284e99c216975f4eeeacdd34c5693ad47d3f97" alt="The Alcohol Bucket Scene" class="comic-image">
+
+            <div class="narration">
+                Saturday night, 9 PM. A typical Khao San bar pulsing with neon and energy. Klaus, Emma, and their growing group of international friends surround a table decorated with the infamous alcohol buckets—plastic containers filled with local whiskey, energy drinks, and whatever mixer seemed like a good idea at the time.
+            </div>
+
+            <div class="dialogue-box">
+                <div class="speaker">Klaus</div>
+                Okay Buddha, this is it—the true Bangkok experience! You can't leave Thailand without trying a bucket!
+            </div>
+
+            <div class="dialogue-box">
+                <div class="speaker">Emma</div>
+                But... I mean, if it's against your beliefs or whatever, we totally understand—
+            </div>
+
+            <div class="dialogue-box">
+                <div class="speaker">Buddha</div>
+                <em>(examining the bucket with genuine curiosity)</em> What an interesting ritual. Everyone shares the same vessel, takes turns, creates connection through common experience. Very tribal. Very human.
+            </div>
+
+            <div class="dialogue-box thought">
+                <div class="speaker">Buddha's inner monologue</div>
+                They expect me to either condemn this as sinful or abstain as holy. But what if there's a third way? What if I can participate fully without the desperate neediness that drives most intoxication? What if I can drink without drinking, if you will?
+            </div>
+
+            <div class="two-column">
+                <div>
+                    <div class="dialogue-box">
+                        <div class="speaker">Buddha</div>
+                        <em>(taking a sip)</em> Hmm. Sweet, strong, designed to mask the alcohol taste. Clever. It's meant to lower inhibitions quickly, yes? Help people connect who might otherwise stay trapped in their self-consciousness?
+                    </div>
+
+                    <div class="dialogue-box">
+                        <div class="speaker">Australian Backpacker</div>
+                        Mate, you're thinking way too hard about it! Just drink and have fun!
+                    </div>
+
+                    <div class="dialogue-box">
+                        <div class="speaker">Buddha</div>
+                        But I am having fun! This analyzing IS my fun. Though I'm curious—what exactly are we having fun escaping from?
+                    </div>
+                </div>
+
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-uyQkk1MfT5/b4e6d50c104204769a7327f6663482300ac6c0daca36803d4a32af8a54fae2fe534ca58faf6669e82057c6350cd75b576cfc00f206378ac0f1ddb9d58ded6853067e1f834b3aa499245cdb56dc98095c938341d8653729fe913193b88e88cdbc3eb3ca6a" alt="Conversation Magnet" class="framed-image">
+            </div>
+
+            <div class="narration">
+                Two hours later. Something remarkable has happened. While everyone else has gotten progressively louder, sloppier, more desperate in their revelry, Buddha remains exactly the same—present, engaged, but unaltered. He's had just as much to drink, but somehow the alcohol seems to pass through him like water through a sieve.
+            </div>
+
+            <div class="dialogue-box">
+                <div class="speaker">Emma</div>
+                <em>(noticeably tipsy)</em> How are you... how are you still so... together? Are you superhuman or something?
+            </div>
+
+            <div class="dialogue-box">
+                <div class="speaker">Buddha</div>
+                The alcohol affects my body exactly the same as yours. But I'm not drinking to change my experience—I'm drinking to experience drinking. There's no resistance, no escape attempt, no need for this moment to be different than it is.
+            </div>
+
+            <div class="dialogue-box">
+                <div class="speaker">Klaus</div>
+                <em>(drunk and philosophical)</em> But... but that's the point! We drink to feel different! To escape our problems!
+            </div>
+
+            <div class="dialogue-box">
+                <div class="speaker">Buddha</div>
+                <em>(gently)</em> And how's that working out? When you wake up tomorrow, will your problems have disappeared? Or will they still be there, possibly with a few new ones added?
+            </div>
+
+            <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-10frHCz4Ko/19c09911d3e63ab5906af5f7cf9b5f463bf002b223cad1d39d587b7a8d206b638e590f28a284b06c407836b1acd5fa84047268242a4e6a132d0ade5469a959dfad802a1f6304f1cd124fbd9703b2286d81c14c4b42971f2d61fb1e1fc41f6f0b3045e214" alt="Morning After Compassion" class="comic-image">
+
+            <div class="dialogue-box">
+                <div class="speaker">Klaus</div>
+                <em>(the next morning, hungover)</em> Ugh. My head feels like a tuk-tuk ran over it. How are you not dying right now?
+            </div>
+
+            <div class="dialogue-box">
+                <div class="speaker">Buddha</div>
+                <em>(offering fresh coconut water)</em> Because I wasn't trying to escape my life last night—I was trying to experience it. The alcohol was just... flavoring.
+            </div>
+
+            <div class="dialogue-box">
+                <div class="speaker">Klaus</div>
+                That's... that's kind of profound, man. But also really annoying when I'm this hungover.
+            </div>
+
+            <div class="dialogue-box">
+                <div class="speaker">Buddha</div>
+                <em>(laughing)</em> The hangover is just another experience, Klaus. Can you be curious about it instead of resistant to it? What does it feel like? What is it teaching you about cause and effect?
+            </div>
+
+            <div class="philosophical-aside">
+                <h4>Non-Attachment vs. Avoidance</h4>
+                This scene illustrates a crucial Buddhist concept often misunderstood in Western interpretations. Non-attachment doesn't mean avoiding experiences—it means engaging with them without the compulsive need for them to provide something they can't provide. Buddha drinks, but he's not drinking FOR anything—not to become more confident, funnier, or to escape anxiety. He's simply drinking as part of the human social ritual, observing its effects with the same curiosity he'd bring to anything else.
+            </div>
+        </div>
+
+        <!-- Chapter 4: Dance Floor Dharma -->
+        <div class="story-section fade-in">
+            <h2 class="chapter-title">Chapter 4: Dance Floor Dharma - The Rhythm of Awakening</h2>
+
+            <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-O6bYBieNmP/0bbe0c1d01d80ff19b6354f8ab6936afaf8b02e71968e8143da6d1d12c4c401daac569f8b679fc36a2f53b23a98acb237de0ec11feb19db5b91e6fb076fc6d22ee95639de032eb4fa68db21820733dc079879528d3469a128ebd50543865bb92c019e2bf" alt="Dance Floor Entrance" class="comic-image">
+
+            <div class="narration">
+                Khao San Center, 11 PM. The music pounds against concrete walls, bass lines thrumming through bodies packed on the dance floor. Towers of beer bottles create shrines to intoxication while people dance on chairs, tables, anything that elevates them above the crowd. Buddha enters this temple of controlled chaos with the same reverent attention he might bring to a monastery.
+            </div>
+
+            <div class="dialogue-box thought">
+                <div class="speaker">Buddha observing</div>
+                Look at this: hundreds of humans moving together to invisible patterns, surrendering individual control to collective rhythm. They're practicing a form of meditation without knowing it—letting the music move through them instead of trying to move the music.
+            </div>
+
+            <div class="two-column">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-Iv7WlhFz2V/e422202ccc76da4b7d6207c64b179a5895bc471485210291801098c223cd9b624464a17f78b94eb2f6eafd854597b1edfcbde84787b9beb00344b55837d7cb208e3681f2275c4f6aac775c24020ede52d32e6e371a965da709873b9f7d4e8177d3be2838" alt="Buddha Dancing Freely" class="framed-image">
+                
+                <div>
+                    <div class="dialogue-box">
+                        <div class="speaker">Emma</div>
+                        <em>(shouting over music)</em> I can't believe you're actually dancing! And you're... good at it?
+                    </div>
+
+                    <div class="dialogue-box">
+                        <div class="speaker">Buddha</div>
+                        <em>(moving naturally to the beat)</em> The body knows how to move! I'm not trying to look good or bad—I'm just letting the rhythm teach me what it wants!
+                    </div>
+                </div>
+            </div>
+
+            <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-Zwtk6HOJDs/21869807351932a9074b29338151a2d9caed2218b7e05d3a3e9660595030296ffb2f954bf39a45a492bbc21d200afb04b2d1f0a0172e3d62a0363436f04d8bf11864a3af2bfdd69f4abb8f007d12dc3651a86e59eeb7fad67c8bbf5c2ed80eca696b4edb" alt="Magnetic Presence" class="comic-image">
+
+            <div class="narration">
+                Something shifts in the energy around Buddha. Without trying to be the center of attention, he becomes it. People gravitate toward his section of the dance floor, drawn by something they can't name—the rare sight of someone having authentic fun without the desperate edge of someone trying to construct happiness.
+            </div>
+
+            <div class="dialogue-box">
+                <div class="speaker">Random Dancer</div>
+                <em>(breathless)</em> Man, what's your secret? You look like you're having the time of your life!
+            </div>
+
+            <div class="dialogue-box">
+                <div class="speaker">Buddha</div>
+                <em>(spinning, laughing)</em> I'm not trying to have any particular kind of time! I'm just having the time that's happening!
+            </div>
+
+            <div class="dialogue-box">
+                <div class="speaker">Klaus</div>
+                <em>(dancing nearby)</em> That makes no sense but somehow... I get it?
+            </div>
+
+            <div class="dialogue-box thought">
+                <div class="speaker">Buddha's reflection while dancing</div>
+                This is what the Middle Way looks like in practice. Not avoiding the dance floor because it's "worldly," not getting lost in it because it's "fun," but dancing completely while remaining unattached to being seen as a good dancer, being the center of attention, or using the experience to fill some empty space inside.
+            </div>
+
+            <div class="dialogue-box">
+                <div class="speaker">Young Thai Woman</div>
+                <em>(approaching during a song break)</em> You dance like my grandfather used to—like you've got nowhere else to be.
+            </div>
+
+            <div class="dialogue-box">
+                <div class="speaker">Buddha</div>
+                Your grandfather sounds like a wise man. Where else would I be? This is the only moment that exists, and it comes with this music, these people, this possibility for connection. Why would I waste it thinking about somewhere else?
+            </div>
+
+            <div class="philosophical-aside">
+                <h4>The Dance of Non-Doing</h4>
+                Buddhist philosophy speaks of "wu wei"—action without forcing, movement without effort. On the dance floor, Buddha embodies this perfectly. He's not trying to dance well, impress others, or lose himself in the music. He's simply allowing the natural relationship between body, rhythm, and space to express itself. This is presence in action: complete engagement without agenda.
+            </div>
+        </div>
+
+        <!-- Chapter 5: Easy Hellos, Easy Goodbyes -->
+        <div class="story-section fade-in">
+            <h2 class="chapter-title">Chapter 5: Easy Hellos, Easy Goodbyes - The Art of Non-Clinging</h2>
+
+            <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-ufx1fmG28O/8e88bd1ad9ff55ad378faba230aaf9f0b9af46d3cfa882286ee4a3c46a69f133128bdeff422116708a62016a56577585bccea213b6e9a9559ba3a5087e2ae780eb5b2f61a47b38f38cc6a53922c73b44d04bf1d4740bc2c6ca61cd62a2fe7b97b6df819b" alt="Easy Goodbye Scene" class="comic-image">
+
+            <div class="narration">
+                Sunday evening, departure time approaching. The airport shuttle idles outside the guesthouse while Buddha says goodbye to his weekend companions. There's genuine sadness in the air, but also something different—a lightness that comes from connections made without the desperate clinging that usually accompanies travel friendships.
+            </div>
+
+            <div class="dialogue-box">
+                <div class="speaker">Klaus</div>
+                <em>(emotional)</em> Man, this weekend... I don't know how to explain it. I feel like I learned something important, but I can't put my finger on what.
+            </div>
+
+            <div class="dialogue-box">
+                <div class="speaker">Buddha</div>
+                Maybe that's exactly what you learned—that some things can't be put into fingers or words, only lived.
+            </div>
+
+            <div class="dialogue-box">
+                <div class="speaker">Emma</div>
+                Will we ever see you again? I mean, do you have Instagram or WhatsApp or...?
+            </div>
+
+            <div class="dialogue-box">
+                <div class="speaker">Buddha</div>
+                <em>(hugging her warmly)</em> We're seeing each other right now, completely. This moment is perfect and whole and will never come again. Why burden it with promises about other moments?
+            </div>
+
+            <div class="two-column">
+                <div>
+                    <div class="dialogue-box">
+                        <div class="speaker">Street Food Vendor</div>
+                        <em>(approaching with a small wrapped package)</em> For your journey, wise eating man.
+                    </div>
+
+                    <div class="dialogue-box">
+                        <div class="speaker">Buddha</div>
+                        <em>(accepting the gift with a bow)</em> Your kindness travels with me, grandmother, even when your food is gone.
+                    </div>
+
+                    <div class="narration">
+                        The vendor beams, understanding somehow that this simple exchange contains something precious—recognition, gratitude, the honoring of her craft.
+                    </div>
+                </div>
+
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-QIh5siPiyy/f0854b01b7d3f7ba9d8082ccbb2a4023ed95eb5700b25bdf1b69f7e9ce49c119ecf13f556095ef34cf51798a438e50afbdb8dfdebea67562be7d2c3fa4ac8dd08a32dd1f7a44ec195ad7a755b191ef4ec6abe5d76d0320fe3e68a5587a06a15fb4e7352e" alt="Buddha in Golden Hour" class="framed-image">
+            </div>
+
+            <div class="dialogue-box">
+                <div class="speaker">Klaus</div>
+                I keep thinking I should feel sad that this is ending, but somehow... I don't? It feels complete somehow.
+            </div>
+
+            <div class="dialogue-box">
+                <div class="speaker">Buddha</div>
+                That's because you experienced it fully instead of holding back parts of yourself for later. When you give yourself completely to each moment, each moment gives itself completely to you. Nothing is left undone.
+            </div>
+
+            <div class="dialogue-box thought">
+                <div class="speaker">Buddha's final reflection</div>
+                This is what they don't understand about non-attachment. It's not about caring less—it's about caring so completely that you're free to let things be exactly what they are, come exactly when they come, and leave exactly when they leave. Love without ownership. Joy without dependence. Connection without clinging.
+            </div>
+
+            <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-I4C747LE3c/195f6d4636d12ac7235c4bb28888e7cae6c28576c36623081b1173ad1ddc1bf534346a05f5559093e3c42d57e4959f9a13bfbd3896aaa37b2077ad11659af445e61652a2cc7f328cd8ec8add1cde7df38f7d004fa79464fa1eeebdead02e159e830b126f" alt="Cultural Bridge" class="comic-image">
+
+            <div class="dialogue-box">
+                <div class="speaker">Emma</div>
+                I think I understand now why you could do everything we did—the drinking, the dancing, the crazy food—without getting lost in it.
+            </div>
+
+            <div class="dialogue-box">
+                <div class="speaker">Buddha</div>
+                Tell me what you understand.
+            </div>
+
+            <div class="dialogue-box">
+                <div class="speaker">Emma</div>
+                You weren't using any of it to become someone else or feel something else. You were just... being yourself in all these different situations.
+            </div>
+
+            <div class="dialogue-box">
+                <div class="speaker">Buddha</div>
+                <em>(climbing into the shuttle)</em> And what did you discover about who that self actually is?
+            </div>
+
+            <div class="dialogue-box">
+                <div class="speaker">Emma</div>
+                <em>(thinking hard)</em> That... that maybe there isn't one? Like, maybe the self isn't a thing at all, but just... awareness experiencing whatever's happening?
+            </div>
+
+            <div class="dialogue-box">
+                <div class="speaker">Buddha</div>
+                <em>(smiling as the shuttle pulls away)</em> Bangkok taught you well, my friend. Bangkok taught you well.
+            </div>
+
+            <div class="philosophical-aside">
+                <h4>The Ultimate Teaching: The Self That Isn't There</h4>
+                Emma's realization points to one of Buddhism's most radical insights: what we think of as "the self" is actually just awareness experiencing different contents moment to moment. Buddha could engage fully with all of Bangkok's pleasures and chaos precisely because he wasn't defending or constructing any particular identity. Without a rigid self-concept to maintain, he was free to respond to each situation fresh, without the filter of "What will this make me?" or "How will this change me?" He simply met each moment as pure experiencing—which is what we all actually are beneath our stories about who we are.
+            </div>
+        </div>
+
+        <!-- Background Banner -->
+        <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-3uIF8HvERv/0f7fec2ac14b771766e4581b30e2ef72f5e2135aa5baa171089c555517917f19b23a001a1fbb0ef7ed51ad3a3fb25ef7886462116591936c3a4c1a92c758e1c6cc3daa9d9ffc4ff4de748ef789af6a22c94b88382542e3bced4eac24b4e8840d5430036f" alt="Khao San Road Evening" style="width: 100%; height: auto; max-height: 200px; object-fit: contain; border-radius: 15px; margin: 40px 0; box-shadow: 0 10px 20px rgba(0,0,0,0.2); background: #fdf6e3;">
+
+        <!-- Comic Footer -->
+        <div class="comic-footer">
+            <p class="footer-quote">"The lotus and the swamp aren't separate"</p>
+            <p>Buddha's weekend wouldn't be about converting anyone to Buddhism or proving the superiority of enlightened living. Instead, it would be a demonstration of what human life looks like when lived without the constant anxiety of trying to control outcomes—still fully engaged, still emotionally available, still capable of joy and sorrow, but no longer driven by the desperate need for life to be different than it is.</p>
+            <p style="margin-top: 20px; font-style: italic;">The ultimate teaching: Enlightenment isn't the end of fun—it's the beginning of actual fun, because you're finally free to enjoy life without needing it to be anything other than what it is.</p>
+            <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-WRaYPNRe4D/4c1a636804b8b13b866ce486ac909c4ecd32ce52a17a28d5d8740046e4385d18f6ac54bdc8355355004ffa6a862e4757877b0547f87622f6c73a1207600e7bca00dbe2bba43632308d7d955db6bca0777bcb56ab9ea6cf84220040190b89c1b70b51322f" alt="Lotus Symbol" class="lotus-ornament" style="margin-top: 30px;">
+        </div>
+    </div>
+
+    <script>
+        // Add smooth scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Add click interaction for framed images
+        document.querySelectorAll('.framed-image').forEach(img => {
+            img.addEventListener('click', () => {
+                img.style.transform = 'scale(0.98)';
+                setTimeout(() => {
+                    img.style.transform = '';
+                }, 150);
+            });
+        });
+    </script>
+</body>
+</html>
