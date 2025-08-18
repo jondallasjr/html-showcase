@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impossible But True: Real Coincidences That Defy Belief</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Creepster&family=Cinzel:wght@400;600;700&family=Roboto:wght@300;400;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: #1a1a1a;
+            color: #f4f4f4;
+            overflow-x: hidden;
+        }
+        
+        .comic-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #2a2a2a;
+            box-shadow: 0 0 30px rgba(0,0,0,0.8);
+        }
+        
+        /* Cover Page */
+        .cover {
+            height: 100vh;
+            background-image: url('https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-XywK010ud1/dd460e754929f3b84e71dd54800b5951d7b1dcbd4695f57f613596b236ce25fd598951cb7ed08562abd6374c7676b27101c3d9497ec464a9dad736373bb0c1f9b6371d9c601b3f2502532cdb4504d2ef0025366ac5c9f5ee8be47f8ee2184681a09a0888');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .cover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(0,0,0,0.7), rgba(20,20,50,0.6));
+        }
+        
+        .cover-content {
+            position: relative;
+            z-index: 2;
+            padding: 2rem;
+        }
+        
+        .main-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2.5rem, 8vw, 6rem);
+            font-weight: 700;
+            background: linear-gradient(45deg, #ffd700, #ff6b35, #ffd700);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+        }
+        
+        .subtitle {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(1rem, 3vw, 1.8rem);
+            color: #e0e0e0;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            color: #ffd700;
+            border: 2px solid #ffd700;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(10px);
+        }
+        
+        /* Navigation */
+        .nav-container {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid #ffd700;
+        }
+        
+        .chapter-nav {
+            display: flex;
+            overflow-x: auto;
+            padding: 1rem;
+            gap: 1rem;
+        }
+        
+        .nav-item {
+            flex-shrink: 0;
+            padding: 0.5rem 1rem;
+            background: #3a3a3a;
+            border: 2px solid #666;
+            border-radius: 20px;
+            color: #e0e0e0;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .nav-item:hover, .nav-item.active {
+            background: #ffd700;
+            color: #1a1a1a;
+            border-color: #ffd700;
+            transform: translateY(-2px);
+        }
+        
+        /* Chapter Styles */
+        .chapter {
+            padding: 3rem 2rem;
+            border-bottom: 3px solid #444;
+        }
+        
+        .chapter-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            color: #ffd700;
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        
+        .chapter-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #ffd700, transparent);
+        }
+        
+        /* Panel Layouts */
+        .panel-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .panel {
+            background: #333;
+            border: 3px solid #666;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .panel:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.3);
+            border-color: #ffd700;
+        }
+        
+        .panel-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .panel-content {
+            padding: 1.5rem;
+        }
+        
+        .panel-text {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #e0e0e0;
+        }
+        
+        .panel-caption {
+            font-style: italic;
+            color: #ffd700;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #555;
+        }
+        
+        /* Large Feature Panels */
+        .feature-panel {
+            width: 100%;
+            margin: 3rem 0;
+            position: relative;
+        }
+        
+        .feature-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 15px;
+        }
+        
+        .feature-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.9));
+            color: white;
+            padding: 2rem;
+            border-radius: 0 0 15px 15px;
+        }
+        
+        .feature-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #ffd700;
+        }
+        
+        /* Introduction Section */
+        .intro {
+            background: linear-gradient(135deg, #2a2a3a, #1a1a2a);
+            text-align: center;
+            position: relative;
+        }
+        
+        .intro-image {
+            width: 100%;
+            max-width: 600px;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            border: 3px solid #ffd700;
+        }
+        
+        .intro-text {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            color: #e0e0e0;
+            max-width: 800px;
+            margin: 0 auto;
+            font-style: italic;
+        }
+        
+        /* Poe Chapter */
+        .poe-chapter {
+            background: linear-gradient(135deg, #2a1a1a, #1a1a2a);
+        }
+        
+        .split-panel {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .poe-writing {
+            background: #2a2a2a;
+            border: 3px solid #8b4513;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .time-gap {
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(90deg, transparent, rgba(255,215,0,0.2), transparent);
+            margin: 2rem 0;
+            border-radius: 10px;
+        }
+        
+        .time-text {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            color: #ffd700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+        
+        /* Cosmic Chapter */
+        .cosmic-chapter {
+            background: linear-gradient(135deg, #0a0a2a, #1a1a3a);
+        }
+        
+        .comet-sequence {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+            margin: 3rem 0;
+        }
+        
+        .birth-death-panels {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        
+        .cosmic-panel {
+            border: 3px solid #4169e1;
+            background: linear-gradient(135deg, #1a1a3a, #2a2a4a);
+        }
+        
+        /* Statistics Boxes */
+        .stats-box {
+            background: linear-gradient(135deg, #ffd700, #ff6b35);
+            color: #1a1a1a;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            margin: 2rem 0;
+            font-weight: bold;
+        }
+        
+        .stats-number {
+            font-size: 3rem;
+            font-family: 'Cinzel', serif;
+            display: block;
+        }
+        
+        .stats-text {
+            font-size: 1.2rem;
+            margin-top: 0.5rem;
+        }
+        
+        /* Survival Stories */
+        .survival-chapter {
+            background: linear-gradient(135deg, #2a1a1a, #1a2a2a);
+        }
+        
+        .disaster-sequence {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .disaster-panel {
+            background: linear-gradient(135deg, #2a2a2a, #3a2a2a);
+            border: 3px solid #dc143c;
+            border-radius: 10px;
+            padding: 1rem;
+        }
+        
+        .survivor-badge {
+            background: #dc143c;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 1rem;
+        }
+        
+        /* Parallel Lives */
+        .twins-chapter {
+            background: linear-gradient(135deg, #1a2a1a, #2a3a2a);
+        }
+        
+        .parallel-grid {
+            display: grid;
+            grid-template-columns: 1fr 50px 1fr;
+            gap: 1rem;
+            margin: 2rem 0;
+            align-items: center;
+        }
+        
+        .twin-panel {
+            background: #2a3a2a;
+            border: 3px solid #32cd32;
+            border-radius: 10px;
+            padding: 1.5rem;
+        }
+        
+        .connection-line {
+            height: 3px;
+            background: linear-gradient(90deg, #32cd32, #ffd700, #32cd32);
+            border-radius: 2px;
+        }
+        
+        /* Discovery Moments */
+        .discovery-highlight {
+            background: radial-gradient(circle, rgba(255,215,0,0.3), transparent);
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            border: 2px dashed #ffd700;
+        }
+        
+        /* Memorial Sections */
+        .memorial-chapter {
+            background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+        }
+        
+        .memorial-panel {
+            background: #2a2a2a;
+            border: 3px solid #696969;
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .grave-distance {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: #ffd700;
+            margin: 1rem 0;
+        }
+        
+        /* Prophecy Elements */
+        .prophecy-reveal {
+            background: linear-gradient(135deg, #3a1a1a, #1a1a3a);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 3px solid #ffd700;
+            margin: 2rem 0;
+            position: relative;
+        }
+        
+        .license-plate {
+            font-family: 'Courier New', monospace;
+            font-size: 2rem;
+            background: #ffd700;
+            color: #1a1a1a;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            text-align: center;
+            margin: 1rem 0;
+            border: 3px solid #333;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+        
+        /* Conclusion */
+        .conclusion {
+            background: linear-gradient(135deg, #1a1a3a, #3a1a3a);
+            text-align: center;
+        }
+        
+        .cosmic-finale {
+            width: 100%;
+            max-width: 800px;
+            height: 500px;
+            object-fit: cover;
+            border-radius: 20px;
+            margin: 2rem auto;
+            border: 3px solid #ffd700;
+        }
+        
+        .final-quote {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: #ffd700;
+            font-style: italic;
+            margin: 2rem auto;
+            max-width: 800px;
+            line-height: 1.6;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .split-panel,
+            .birth-death-panels,
+            .parallel-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .parallel-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .connection-line {
+                width: 100%;
+                height: 3px;
+                margin: 1rem 0;
+            }
+            
+            .chapter {
+                padding: 2rem 1rem;
+            }
+            
+            .feature-image {
+                height: 300px;
+            }
+        }
+        
+        /* Scroll Animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Loading Animation */
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #1a1a1a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 0.5s ease;
+        }
+        
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid #333;
+            border-top: 3px solid #ffd700;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="loading" id="loading">
+        <div class="spinner"></div>
+    </div>
+    
+    <div class="comic-container">
+        <!-- Cover Page -->
+        <section class="cover">
+            <div class="cover-content">
+                <h1 class="main-title">IMPOSSIBLE BUT TRUE</h1>
+                <p class="subtitle">Real Coincidences That Defy Belief</p>
+                <div class="tagline">Sometimes Truth is Stranger Than Fiction</div>
+            </div>
+        </section>
+        
+        <!-- Navigation -->
+        <nav class="nav-container">
+            <div class="chapter-nav">
+                <a href="#intro" class="nav-item">Introduction</a>
+                <a href="#poe" class="nav-item">The Writer's Vision</a>
+                <a href="#twain" class="nav-item">Written in Stars</a>
+                <a href="#violet" class="nav-item">Unsinkable Woman</a>
+                <a href="#atomic" class="nav-item">Atomic Survivor</a>
+                <a href="#twins" class="nav-item">Mirror Lives</a>
+                <a href="#disney" class="nav-item">Hidden in Plain Sight</a>
+                <a href="#war" class="nav-item">Bookends of War</a>
+                <a href="#prophecy" class="nav-item">The Prophecy Plate</a>
+                <a href="#rigby" class="nav-item">Eleanor's Grave</a>
+                <a href="#conclusion" class="nav-item">The Pattern</a>
+            </div>
+        </nav>
+        
+        <!-- Introduction -->
+        <section id="intro" class="chapter intro">
+            <h2 class="chapter-title">The Chronicle of Impossible Truths</h2>
+            <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-UOpnv_18Wi/8759cff3caa667384160def87ee298af8d7dfc8541635e753cf4cc78afc16f1682ffed1a304099ab47686540facfbf677e8d23a46fe30ce846294d964b16fc878a983dbe472bfff7fc59ff2288f9774814209e37824b4b547c852506168e2b9d3e989430" alt="Mysterious Historian" class="intro-image">
+            <p class="intro-text">
+                Throughout history, reality has produced coincidences so extraordinary that they would be rejected as fiction if not thoroughly documented. These are their stories - verified, documented, and absolutely true. In a universe of infinite possibilities, sometimes the impossible becomes inevitable.
+            </p>
+        </section>
+        
+        <!-- Chapter 1: Poe's Prediction -->
+        <section id="poe" class="chapter poe-chapter">
+            <h2 class="chapter-title">The Writer's Dark Vision</h2>
+            <p class="panel-text" style="text-align: center; font-size: 1.2rem; margin-bottom: 2rem;">
+                Edgar Allan Poe's deadly prophecy that came true 46 years later
+            </p>
+            
+            <div class="split-panel">
+                <div class="panel poe-writing">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-RSQTCitjJW/f66086ec12d3f3b0a5b56a5396cf662b000aa22ad30e179d559bd40242ef39f3b5b0a10da53dce079d3439f6d0551c5d7eb973b708962a983d5f9c9bb9f488cc4caf171ecab01909761fe409fa90374074fd922792c50903ea58d69d5c7cc3b10d022a42" alt="Poe Writing" class="panel-image">
+                    <div class="panel-content">
+                        <h3 style="color: #ffd700; margin-bottom: 1rem;">1838: The Fiction</h3>
+                        <p class="panel-text">Edgar Allan Poe publishes his only novel, featuring four shipwrecked sailors who draw straws to determine who will be sacrificed. The loser: a cabin boy named Richard Parker.</p>
+                    </div>
+                </div>
+                
+                <div class="panel">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-sCyYp_buGs/67ea96048252627bca234627e80a0000283ab1e95ebbf21efdb94cdc1907212cd522bcd5e4de6ade0fca566de417376a6ee684b905caab9c2439257b3b57ed7f1c3de7b81b60125751998e5400dd75570d885ef7029992cef13f87936b154d0c7f954c36" alt="Fictional Shipwreck" class="panel-image">
+                    <div class="panel-content">
+                        <h3 style="color: #ffd700; margin-bottom: 1rem;">The Fictional Scene</h3>
+                        <p class="panel-text">Four desperate men on a small boat, drawing straws with gaunt, starving faces. The shortest straw determines a terrible fate.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="time-gap">
+                <div class="time-text">46 YEARS LATER...</div>
+            </div>
+            
+            <div class="feature-panel">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-yzgTYhlIqt/bf88e7402a45aa0cd4e36793d79f1a3b5222b5ae57ea98543361e834015f74890a757837c175bed8c8a1cc1fe33afb3e943cd37b0f066915045f3c0e8422bf2d87f6e6ddb06b8a5f2a5025fbff18ad349060257ef97146ce9ea55e5ba2fa658ab24ffe2f" alt="Real Mignonette Disaster" class="feature-image">
+                <div class="feature-overlay">
+                    <h3 class="feature-title">1884: The Reality</h3>
+                    <p>The yacht Mignonette sinks. Four real survivors find themselves in the same horrific situation as Poe's fiction. They kill and eat their 17-year-old cabin boy to survive. His name was Richard Parker.</p>
+                </div>
+            </div>
+            
+            <div class="stats-box">
+                <span class="stats-number">1 in 10,000,000</span>
+                <div class="stats-text">Estimated odds of this coincidence occurring by chance</div>
+            </div>
+        </section>
+        
+        <!-- Chapter 2: Mark Twain -->
+        <section id="twain" class="chapter cosmic-chapter">
+            <h2 class="chapter-title">Written in the Stars</h2>
+            <p class="panel-text" style="text-align: center; font-size: 1.2rem; margin-bottom: 2rem;">
+                Mark Twain's cosmic prediction about Halley's Comet
+            </p>
+            
+            <div class="comet-sequence">
+                <div class="feature-panel">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-hmEZP-4nAb/457744eb8cf2a6efac6ebd7a410ea480945654d6db284952a4b7a3732ac1fdc8d55791491a402b19f615b4abcc0a5ef6ee11fced2e1a7f72bf541569ebaefbe0e4112b3b4d5fa1f20e81eddf19cfc650cc172cbd5f981bc5b2237353383fca1c320f9fd1" alt="Halley's Comet Birth" class="feature-image">
+                    <div class="feature-overlay">
+                        <h3 class="feature-title">1835: Cosmic Birth</h3>
+                        <p>Samuel Clemens (Mark Twain) is born on November 30, 1835, shortly after Halley's Comet appears in the night sky.</p>
+                    </div>
+                </div>
+                
+                <div class="birth-death-panels">
+                    <div class="panel cosmic-panel">
+                        <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl--jUx2_Psgq/7a7c2494e9cab9a6ec054fa22e2c304cf2145144d09aa5cf64c5ca14644a8d3e5704037411be67252ef9e2a63a6de79453bc826de41993f010a1e1f8ec755b5b761cd4b0fda8dc5df51ba01ff72d96d2890955bbdd82bfb93ad84535077fd816fa9f9e7a" alt="Twain's Prediction" class="panel-image">
+                        <div class="panel-content">
+                            <h3 style="color: #4169e1; margin-bottom: 1rem;">1909: The Prediction</h3>
+                            <p class="panel-text">"I came in with Halley's Comet and I expect to go out with it. These two unaccountable freaks came in together, they must go out together."</p>
+                        </div>
+                    </div>
+                    
+                    <div class="panel cosmic-panel">
+                        <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-XP-9qHJrRZ/46fcbebb7423edefc87f72de05473d9f492988c5238a7fb26cf48a9b17baa82eeee9795c5411305c66a933a6e7e4a916a0812af117fa6373c70bdee49f887ae60c5f03bad09b74aab1513db411ecc01edfe929bbf0de7ee4a8cc309eb510820efe2bcdc9" alt="Twain's Death" class="panel-image">
+                        <div class="panel-content">
+                            <h3 style="color: #4169e1; margin-bottom: 1rem;">1910: Cosmic Death</h3>
+                            <p class="panel-text">Mark Twain dies on April 21, 1910 - exactly one day after Halley's Comet reaches its closest approach to the Sun.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="stats-box">
+                <span class="stats-number">76 YEARS</span>
+                <div class="stats-text">Halley's Comet orbital period - Twain lived exactly one complete cycle</div>
+            </div>
+        </section>
+        
+        <!-- Chapter 3: Violet Jessop -->
+        <section id="violet" class="chapter survival-chapter">
+            <h2 class="chapter-title">The Unsinkable Woman</h2>
+            <p class="panel-text" style="text-align: center; font-size: 1.2rem; margin-bottom: 2rem;">
+                Violet Jessop survived three major maritime disasters
+            </p>
+            
+            <div class="feature-panel">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-4w1LXUE6Lu/d7db30734ffee9c788dbd4f73487a8959259f3f185e0df16e55df548a50e8c24afb463f52d4c0c9786e9b18b1ccb6e7ceac79eb22791909cbd548e7ce0e457bcc72ce3c47f5c9632785d736e294bd9a8ca07e91ecd2d4072931b98c0a422999dbea2bd48" alt="Violet Jessop Portrait" class="feature-image">
+                <div class="feature-overlay">
+                    <h3 class="feature-title">Miss Unsinkable</h3>
+                    <p>Ocean liner stewardess Violet Jessop earned her nickname by surviving not one, not two, but three major ship disasters between 1911 and 1916.</p>
+                </div>
+            </div>
+            
+            <div class="disaster-sequence">
+                <div class="disaster-panel">
+                    <h3 style="color: #dc143c; margin-bottom: 1rem;">1911: RMS Olympic Collision</h3>
+                    <p class="panel-text">The Olympic collides with HMS Hawke. Violet helps passengers as the ship lists but stays afloat.</p>
+                    <div class="survivor-badge">SURVIVOR #1</div>
+                </div>
+                
+                <div class="disaster-panel">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-teV2WB4sBQ/4944a3bcfd46e2e4dd0409da4d65a976c6d0025aac092d4d4f43a0d278b87d79654e1b38c3a7357e4de7f0087a9e51469e2de473299d8cc1f1f3438150ef4c38df568325b4168ad7d30de4edc8861db15ea7663753299dd97679fe68797446014826c29d" alt="Titanic Disaster" style="width: 100%; height: 200px; object-fit: cover; border-radius: 5px; margin-bottom: 1rem;">
+                    <h3 style="color: #dc143c; margin-bottom: 1rem;">1912: RMS Titanic Sinking</h3>
+                    <p class="panel-text">The "unsinkable" Titanic hits an iceberg. Violet escapes in a lifeboat, watching the great ship sink into the icy Atlantic.</p>
+                    <div class="survivor-badge">SURVIVOR #2</div>
+                </div>
+                
+                <div class="disaster-panel">
+                    <h3 style="color: #dc143c; margin-bottom: 1rem;">1916: HMHS Britannic Explosion</h3>
+                    <p class="panel-text">The hospital ship Britannic hits a mine and sinks rapidly. Violet jumps into the water and is pulled to safety by rescuers.</p>
+                    <div class="survivor-badge">SURVIVOR #3</div>
+                </div>
+            </div>
+            
+            <div class="stats-box">
+                <span class="stats-number">1 in 5 MILLION</span>
+                <div class="stats-text">Odds of surviving three major maritime disasters</div>
+            </div>
+        </section>
+        
+        <!-- Chapter 4: Atomic Survivor -->
+        <section id="atomic" class="chapter survival-chapter">
+            <h2 class="chapter-title">Twice Touched by the Atom</h2>
+            <p class="panel-text" style="text-align: center; font-size: 1.2rem; margin-bottom: 2rem;">
+                Tsutomu Yamaguchi - the only person to survive both atomic bombs
+            </p>
+            
+            <div class="split-panel">
+                <div class="panel">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl--ppE6KKWTx/68f8ff20fec349cd1027e3cec19adaa81f16357222f7134a1d951f0354d93aaaeceb1d827383ac76d1045b53f1f709ee84fcdd87985462469e7025d347b44cd113e64ae2d2e5ecaf21cd567d41f483ecd028b318148277f5b3fa0fadaf5f5836968a7b97" alt="Hiroshima Atomic Bomb" class="panel-image">
+                    <div class="panel-content">
+                        <h3 style="color: #ffd700; margin-bottom: 1rem;">August 6, 1945: Hiroshima</h3>
+                        <p class="panel-text">Yamaguchi sees a B-29 bomber overhead and witnesses the brilliant atomic flash. Burned but alive, he returns home to Nagasaki.</p>
+                    </div>
+                </div>
+                
+                <div class="panel">
+                    <div class="panel-content">
+                        <h3 style="color: #ffd700; margin-bottom: 1rem;">August 9, 1945: Nagasaki</h3>
+                        <p class="panel-text">Just three days later, Yamaguchi experiences the second atomic bomb in his hometown. Again, he survives the impossible.</p>
+                        <div class="time-gap" style="margin-top: 2rem;">
+                            <div class="time-text" style="font-size: 1.5rem;">3 DAYS APART</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="feature-panel">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-Bio715WXP3/234f2b91f8e521ff824b04604fba010fb92edfcf2487822f414938fb1d02d0e86362ff80f073e0e2e1ec2a791037938f50ca57d653d98367338c52109acfeae2fe8e682c3da282cf22afd4921aea7d4e5f057d0c2128d74167a83f87e5117336443fac17" alt="Elderly Yamaguchi" class="feature-image">
+                <div class="feature-overlay">
+                    <h3 class="feature-title">The Only One</h3>
+                    <p>Tsutomu Yamaguchi is officially recognized by the Japanese government as the only person to survive both atomic bombings. He lived to age 93, dedicating his later years to peace advocacy.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Chapter 5: Jim Twins -->
+        <section id="twins" class="chapter twins-chapter">
+            <h2 class="chapter-title">Mirror Lives</h2>
+            <p class="panel-text" style="text-align: center; font-size: 1.2rem; margin-bottom: 2rem;">
+                The Jim Twins - separated at birth, identical lives
+            </p>
+            
+            <div class="feature-panel">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-EUdt0WZ2YN/b7d182f988f0ac1a87f08710886c5cb392ac369f7a0aae309ba53b95a46579a7bda55610d9d0954b72c7fa65ef1ff875f07bb39253532180f14948eca1fdfb8d7f0559254f2dbdfa6a2c6e6c9988e36dbc42c55739fc24a4949bce8dc6231bfca60b17cf" alt="Jim Twins Parallel Lives" class="feature-image">
+                <div class="feature-overlay">
+                    <h3 class="feature-title">Parallel Lives</h3>
+                    <p>Jim Lewis and Jim Springer - identical twins separated at birth, reunited at age 39, discovered they had lived nearly identical lives.</p>
+                </div>
+            </div>
+            
+            <div class="parallel-grid">
+                <div class="twin-panel">
+                    <h4 style="color: #32cd32; margin-bottom: 1rem;">Jim Lewis</h4>
+                    <ul style="list-style: none; padding: 0;">
+                        <li>✓ Named James by adoptive family</li>
+                        <li>✓ Married woman named Linda</li>
+                        <li>✓ Divorced, remarried Betty</li>
+                        <li>✓ Son named James Allan</li>
+                        <li>✓ Dog named Toy</li>
+                        <li>✓ Worked as sheriff</li>
+                        <li>✓ Vacationed in Florida</li>
+                    </ul>
+                </div>
+                
+                <div class="connection-line"></div>
+                
+                <div class="twin-panel">
+                    <h4 style="color: #32cd32; margin-bottom: 1rem;">Jim Springer</h4>
+                    <ul style="list-style: none; padding: 0;">
+                        <li>✓ Named James by adoptive family</li>
+                        <li>✓ Married woman named Linda</li>
+                        <li>✓ Divorced, remarried Betty</li>
+                        <li>✓ Son named James Alan</li>
+                        <li>✓ Dog named Toy</li>
+                        <li>✓ Worked as sheriff</li>
+                        <li>✓ Vacationed in Florida</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="stats-box">
+                <span class="stats-number">1 in 1 BILLION</span>
+                <div class="stats-text">Estimated odds of such identical life patterns occurring by chance</div>
+            </div>
+        </section>
+        
+        <!-- Chapter 6: Disney Discovery -->
+        <section id="disney" class="chapter">
+            <h2 class="chapter-title">Hidden in Plain Sight</h2>
+            <p class="panel-text" style="text-align: center; font-size: 1.2rem; margin-bottom: 2rem;">
+                The Disney World photograph that revealed destiny
+            </p>
+            
+            <div class="discovery-highlight">
+                <div class="feature-panel">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-6ht2meCsMK/6d7b7340a6e21f6e536e2d585a367333161602f68477832ba705fc59269c0a4695054514e364884fe615ae2971785d564e37d2de83bfac53c907803eee3887f106bfdc6f46511052949db8b7e42e94d9b9d36b0f0831e880011e2895ff35f9482dc07fe" alt="Disney Photo Discovery" class="feature-image">
+                    <div class="feature-overlay">
+                        <h3 class="feature-title">The Discovery</h3>
+                        <p>In the early 2000s, while preparing their wedding video, Alex and Donna discovered something shocking in a 1980 Disney World photo - they were both there as children, captured in the same frame, 20 years before they met.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="panel-row">
+                <div class="panel">
+                    <div class="panel-content">
+                        <h3 style="color: #ffd700; margin-bottom: 1rem;">1980: The Photo</h3>
+                        <p class="panel-text">Young Donna poses with Smee at Disney World while her family takes the photo. In the background, completely unnoticed, baby Alex is pushed in a stroller by his father.</p>
+                    </div>
+                </div>
+                
+                <div class="panel">
+                    <div class="panel-content">
+                        <h3 style="color: #ffd700; margin-bottom: 1rem;">2000s: The Revelation</h3>
+                        <p class="panel-text">Two decades later, as the couple prepares for marriage, they discover this impossible connection hidden in plain sight in an old family photograph.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="stats-box">
+                <span class="stats-number">1 in 300 MILLION</span>
+                <div class="stats-text">Odds of two future spouses being captured in the same photo as children</div>
+            </div>
+        </section>
+        
+        <!-- Chapter 7: War Bookends -->
+        <section id="war" class="chapter memorial-chapter">
+            <h2 class="chapter-title">Bookends of War</h2>
+            <p class="panel-text" style="text-align: center; font-size: 1.2rem; margin-bottom: 2rem;">
+                The first and last British soldiers of WWI
+            </p>
+            
+            <div class="feature-panel">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-DY2PVLE9ze/21661d7b9baa357a650d148e90f3d7549fb4b5b46d891bf497e76d006aa234b5cd6a01f1041eae694103259c1408d5df2df9b27d664285658cb44e948dc4520bad8101d7ddbeffc1273ec8742fcc1b31792055448aa7f78cae3162a8aac615ebbef29f27" alt="WWI Cemetery" class="feature-image">
+                <div class="feature-overlay">
+                    <h3 class="feature-title">Eternal Vigil</h3>
+                    <p>Saint-Symphorien Military Cemetery in Belgium, where the first and last British soldiers to die in WWI lie buried, their graves facing each other across just 6 meters.</p>
+                </div>
+            </div>
+            
+            <div class="panel-row">
+                <div class="memorial-panel">
+                    <h3 style="color: #696969; margin-bottom: 1rem;">Private John Parr</h3>
+                    <p class="panel-text">Age 17, killed August 21, 1914</p>
+                    <p class="panel-text">First recorded British casualty of WWI</p>
+                    <div class="grave-distance">FIRST TO FALL</div>
+                </div>
+                
+                <div class="memorial-panel">
+                    <h3 style="color: #696969; margin-bottom: 1rem;">George Edwin Ellison</h3>
+                    <p class="panel-text">Killed November 11, 1918, 9:30 AM</p>
+                    <p class="panel-text">Last British casualty - 90 minutes before armistice</p>
+                    <div class="grave-distance">LAST TO FALL</div>
+                </div>
+            </div>
+            
+            <div class="stats-box">
+                <span class="stats-number">6 METERS</span>
+                <div class="stats-text">Distance between their graves - this arrangement was completely unplanned</div>
+            </div>
+        </section>
+        
+        <!-- Chapter 8: Prophecy Plate -->
+        <section id="prophecy" class="chapter">
+            <h2 class="chapter-title">The Prophecy Plate</h2>
+            <p class="panel-text" style="text-align: center; font-size: 1.2rem; margin-bottom: 2rem;">
+                Franz Ferdinand's license plate predicted the war's end
+            </p>
+            
+            <div class="prophecy-reveal">
+                <div class="feature-panel">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-Ql1f4VLF33/b36cec937f0fa5fc407c299aca9049ff1bf1b2f2cbbc9e50ca307872cf5aaf34f11c25350c23509b0098d34fd71309077e91951271fdbdac343ca6bdbc0e4bde2769f55111491d7183b182fdc8ec3971629cf7217944aeccbb6eb2e311dccfdf947ab079" alt="Archduke's License Plate" class="feature-image">
+                    <div class="feature-overlay">
+                        <h3 class="feature-title">June 28, 1914</h3>
+                        <p>Archduke Franz Ferdinand's assassination triggers World War I. His car's license plate reads "AIII 118".</p>
+                    </div>
+                </div>
+                
+                <div class="license-plate">AIII 118</div>
+                
+                <div class="panel-content" style="text-align: center;">
+                    <h3 style="color: #ffd700; margin-bottom: 2rem;">The Revelation</h3>
+                    <div style="font-size: 1.5rem; margin-bottom: 1rem;">
+                        <span style="color: #ff6b35;">A</span> = Armistice<br>
+                        <span style="color: #ff6b35;">III</span> = 11.11<br>
+                        <span style="color: #ff6b35;">118</span> = 1918
+                    </div>
+                    <p class="panel-text">The license plate can be read as "Armistice 11.11.18" - the exact date and time the war ended: November 11, 1918 at 11:00 AM.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Chapter 9: Eleanor Rigby -->
+        <section id="rigby" class="chapter">
+            <h2 class="chapter-title">Eleanor's Grave</h2>
+            <p class="panel-text" style="text-align: center; font-size: 1.2rem; margin-bottom: 2rem;">
+                The gravestone that inspired a Beatles classic
+            </p>
+            
+            <div class="feature-panel">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-g7W8bFoCDf/3faa1887320517426e639119561adba6f191f4a824caf4e6fe306d736bf15e307c6de1272cb77908f2d7d1c0ce5a4bf9cf879529a84eadf5b79109b86aeabb213adbec846cd287597ba16bc1b57d8281a5ee7cd2389f0e940d721e858d48c53adb50d0fa" alt="Eleanor Rigby Gravestone" class="feature-image">
+                <div class="feature-overlay">
+                    <h3 class="feature-title">The Hidden Connection</h3>
+                    <p>In St. Peter's churchyard Woolton, just yards from where Paul McCartney met John Lennon in 1957, lies Eleanor Rigby's grave. Nine years later, Paul would write the song that made her name immortal.</p>
+                </div>
+            </div>
+            
+            <div class="panel-row">
+                <div class="panel">
+                    <div class="panel-content">
+                        <h3 style="color: #ffd700; margin-bottom: 1rem;">1957: The Meeting</h3>
+                        <p class="panel-text">16-year-old Paul McCartney meets John Lennon at St. Peter's Church party. The moment that would create the Beatles.</p>
+                    </div>
+                </div>
+                
+                <div class="panel">
+                    <div class="panel-content">
+                        <h3 style="color: #ffd700; margin-bottom: 1rem;">1966: The Song</h3>
+                        <p class="panel-text">Paul writes "Eleanor Rigby," later discovering the gravestone just yards from where he and John first met, suggesting a subliminal connection.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Conclusion -->
+        <section id="conclusion" class="chapter conclusion">
+            <h2 class="chapter-title">The Pattern</h2>
+            
+            <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-vUQBDkfKDv/32ed41b0e8673aa4b226866b451ab62acf1fec01796b317224e0cd5514452b8859d4a154388585b0efb8258f436b8264da6c565a48f7bd1ceaf0bf5858ab564e0f3089fa7e8814d4c4cf78da277948f27621804b613f1024ac7315dc82fdaf71d0fd4602" alt="Cosmic Pattern" class="cosmic-finale">
+            
+            <div class="final-quote">
+                "In a universe of infinite possibilities, sometimes the impossible becomes inevitable. These stories remind us that reality is far stranger than any fiction we could imagine. Some call it fate, others call it chance... but perhaps the universe has its own sense of poetry."
+            </div>
+            
+            <div class="stats-box">
+                <span class="stats-number">∞</span>
+                <div class="stats-text">The infinite mystery of coincidence in our universe</div>
+            </div>
+        </section>
+    </div>
+    
+    <script>
+        // Loading screen
+        window.addEventListener('load', function() {
+            const loading = document.getElementById('loading');
+            setTimeout(() => {
+                loading.style.opacity = '0';
+                setTimeout(() => {
+                    loading.style.display = 'none';
+                }, 500);
+            }, 1000);
+        });
+        
+        // Smooth scrolling for navigation
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+                
+                // Update active nav item
+                document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+        
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all panels and chapters
+        document.querySelectorAll('.panel, .chapter, .feature-panel').forEach(el => {
+            el.classList.add('fade-in');
+            observer.observe(el);
+        });
+        
+        // Update active navigation based on scroll position
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('.chapter');
+            const navItems = document.querySelectorAll('.nav-item');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('href') === '#' + current) {
+                    item.classList.add('active');
+                }
+            });
+        });
+        
+        // Add hover effects to panels
+        document.querySelectorAll('.panel').forEach(panel => {
+            panel.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px) scale(1.02)';
+            });
+            
+            panel.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+        
+        // Add parallax effect to cover
+        window.addEventListener('scroll', function() {
+            const cover = document.querySelector('.cover');
+            const scrolled = window.pageYOffset;
+            if (scrolled < cover.offsetHeight) {
+                cover.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+    </script>
+</body>
+</html>
