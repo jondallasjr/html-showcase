@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The 20% Research Rule | Rule Benders Academy</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        .slide {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .slide-content {
+            max-width: 1200px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .slide-content.single-column {
+            grid-template-columns: 1fr;
+            text-align: center;
+            max-width: 800px;
+        }
+
+        .image-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            background: #f8f9fa;
+        }
+
+        .slide-image {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .image-container:hover .slide-image {
+            transform: scale(1.02);
+        }
+
+        .text-content {
+            padding: 2rem;
+        }
+
+        .slide-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #2c3e50;
+            opacity: 0;
+            animation: slideInUp 1s ease forwards;
+        }
+
+        .slide-subtitle {
+            font-size: 1.3rem;
+            color: #7f8c8d;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: slideInUp 1s ease 0.2s forwards;
+        }
+
+        .dialogue {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin: 1rem 0;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            opacity: 0;
+            animation: slideInLeft 0.8s ease forwards;
+        }
+
+        .dialogue.sarah {
+            background: linear-gradient(135deg, #fd746c 0%, #ff9068 100%);
+            box-shadow: 0 10px 30px rgba(253, 116, 108, 0.3);
+            animation: slideInRight 0.8s ease forwards;
+        }
+
+        .dialogue.will {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            box-shadow: 0 10px 30px rgba(79, 172, 254, 0.3);
+        }
+
+        .speaker {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .narration {
+            background: rgba(44, 62, 80, 0.05);
+            padding: 1.5rem;
+            border-left: 4px solid #3498db;
+            margin: 1rem 0;
+            border-radius: 0 10px 10px 0;
+            font-style: italic;
+            color: #34495e;
+            opacity: 0;
+            animation: fadeIn 1s ease 0.5s forwards;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transform: translateY(20px);
+            opacity: 0;
+            animation: slideInUp 0.8s ease forwards;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .interactive-diagram {
+            margin: 2rem 0;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .pareto-visual {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 300px;
+            margin: 2rem 0;
+        }
+
+        .pareto-circle {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background: conic-gradient(#e74c3c 0deg 72deg, #3498db 72deg 360deg);
+            position: relative;
+            animation: spin 3s ease-in-out infinite alternate;
+        }
+
+        .pareto-circle::before {
+            content: '20%';
+            position: absolute;
+            top: 30%;
+            left: 15%;
+            color: white;
+            font-weight: bold;
+            font-size: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .pareto-circle::after {
+            content: '80%';
+            position: absolute;
+            bottom: 20%;
+            right: 20%;
+            color: white;
+            font-weight: bold;
+            font-size: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .matrix-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 15px;
+            height: 250px;
+            margin: 2rem 0;
+        }
+
+        .matrix-quadrant {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 2rem;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .matrix-quadrant:hover {
+            transform: scale(1.05);
+        }
+
+        .high-signal-low-noise {
+            background: linear-gradient(45deg, #27ae60, #2ecc71);
+        }
+
+        .high-signal-high-noise {
+            background: linear-gradient(45deg, #f39c12, #e67e22);
+        }
+
+        .low-signal-low-noise {
+            background: linear-gradient(45deg, #e67e22, #d35400);
+        }
+
+        .low-signal-high-noise {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+        }
+
+        .progress-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: rgba(255,255,255,0.2);
+            z-index: 1000;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .slide:nth-child(odd) {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .slide:nth-child(even) {
+            background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+        }
+
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+
+        .checklist li {
+            padding: 1rem;
+            margin: 0.5rem 0;
+            background: rgba(39, 174, 96, 0.1);
+            border-left: 4px solid #27ae60;
+            border-radius: 0 10px 10px 0;
+            opacity: 0;
+            animation: slideInRight 0.8s ease forwards;
+        }
+
+        .checklist li:before {
+            content: "✓";
+            color: #27ae60;
+            font-weight: bold;
+            margin-right: 1rem;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(5deg); }
+        }
+
+        @media (max-width: 768px) {
+            .slide-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .slide-title {
+                font-size: 2rem;
+            }
+
+            .slide-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .dialogue,
+            .narration {
+                padding: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .stats-container {
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+            }
+
+            .stat-card {
+                padding: 1.5rem;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+
+            .pareto-circle {
+                width: 200px;
+                height: 200px;
+            }
+
+            .matrix-grid {
+                height: 200px;
+                gap: 10px;
+            }
+
+            .matrix-quadrant {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .slide {
+                padding: 1rem;
+            }
+
+            .slide-title {
+                font-size: 1.5rem;
+            }
+
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+
+            .pareto-circle {
+                width: 150px;
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-indicator">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- Slide 1: The Research Overwhelm Crisis -->
+    <section class="slide">
+        <div class="slide-content">
+            <div class="image-container">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-TSWWr6pPvg/08df0131aef25499eef2fb827d4711843c4d7c82f86189ebf48ac68ec33f50fa6970da05b61c817330b9d1087cbc4efac3e0b0b2877b30df3039d5d9cc553947abe5688336dca6930f9f23bd46823c5e483ebd8bf72e47d282b354425566833a3e9027d4" alt="Overwhelmed analyst surrounded by research" class="slide-image">
+            </div>
+            <div class="text-content">
+                <h1 class="slide-title">The Research Trap</h1>
+                <p class="slide-subtitle">Meet Sarah. She's drowning in research but starving for insights.</p>
+                
+                <div class="narration">
+                    Like 95% of analysts, Sarah falls into the 'Completeness Trap' - believing more research equals better analysis.
+                </div>
+
+                <div class="dialogue sarah">
+                    <div class="speaker">Sarah thinks:</div>
+                    "I've read 50 reports... where do I even start? There's so much information, but I still don't have clear answers."
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 2: Enter the Mentor -->
+    <section class="slide">
+        <div class="slide-content">
+            <div class="text-content">
+                <h2 class="slide-title">The Strategic Advisor</h2>
+                
+                <div class="dialogue will">
+                    <div class="speaker">Will Richardson:</div>
+                    "Sarah! You're working harder, not smarter. Let me show you the 20% Research Rule that elite analysts use."
+                </div>
+
+                <div class="narration">
+                    Will Richardson has transformed countless analysts from overwhelmed data gatherers into strategic powerhouses commanding premium rates.
+                </div>
+            </div>
+            <div class="image-container">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-nWAdqHFoXp/863c88772e60455b30ee30b439b70fd403bc0b90b06840bc85e173706b27203f8770f7b6e57d54dd24ecd7012a8af3442dfa941be8240556b32a65add2f18539801c49ac1d778a49580287ca6f2ae31ca38e9c41a3571893d383c86616959692bf855956" alt="Will Richardson - confident mentor" class="slide-image">
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 3: The 80/20 Revelation -->
+    <section class="slide">
+        <div class="slide-content single-column">
+            <h2 class="slide-title">The Pareto Principle Applied</h2>
+            
+            <div class="dialogue will">
+                <div class="speaker">Will explains:</div>
+                "Elite analysts know this secret: 20% of your research drives 80% of your insights. The key is identifying that vital 20%."
+            </div>
+
+            <div class="interactive-diagram">
+                <div class="pareto-visual">
+                    <div class="pareto-circle"></div>
+                </div>
+                <div style="text-align: center; color: #7f8c8d; margin-top: 1rem;">
+                    Red = High-Value Research (20% effort, 80% insights)<br>
+                    Blue = Low-Value Activities (80% effort, 20% insights)
+                </div>
+            </div>
+
+            <div class="dialogue sarah">
+                <div class="speaker">Sarah realizes:</div>
+                "So I should focus on the vital few, not the trivial many?"
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 4: The Information Hierarchy -->
+    <section class="slide">
+        <div class="slide-content">
+            <div class="image-container">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-ZYaPBautkB/ca0774036a9ce7c09a66a1d8ac0f04833f62e3e8d67690d83fe2484f3abb7aee3d37d59558c262d3f1027abba8fdb8688e756581a9370cadc894210abd7bd78ea662064977bf157acb239f942f3cb7c39a28e6da4e0b3a8a1735893f29e3c0893b8b6ff4" alt="Information hierarchy pyramid" class="slide-image">
+            </div>
+            <div class="text-content">
+                <h2 class="slide-title">Information Hierarchy Model</h2>
+                
+                <div class="dialogue will">
+                    <div class="speaker">Will teaches:</div>
+                    "Here's your strategic framework. Primary sources at the top drive 60% of decisions with just 20% of your effort."
+                </div>
+
+                <div class="stats-container">
+                    <div class="stat-card" style="background: linear-gradient(45deg, #f39c12, #e67e22);">
+                        <span class="stat-number">Tier 1</span>
+                        <span class="stat-label">Primary Sources<br>20% effort → 60% decisions</span>
+                    </div>
+                    <div class="stat-card" style="background: linear-gradient(45deg, #3498db, #2980b9);">
+                        <span class="stat-number">Tier 2</span>
+                        <span class="stat-label">Industry Intelligence<br>30% effort → 30% decisions</span>
+                    </div>
+                    <div class="stat-card" style="background: linear-gradient(45deg, #95a5a6, #7f8c8d);">
+                        <span class="stat-number">Tier 3</span>
+                        <span class="stat-label">Background Research<br>50% effort → 10% decisions</span>
+                    </div>
+                </div>
+
+                <div class="dialogue sarah">
+                    <div class="speaker">Sarah asks:</div>
+                    "So I should spend most of my time at the top of the pyramid?"
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 5: Expert-First Strategy -->
+    <section class="slide">
+        <div class="slide-content">
+            <div class="text-content">
+                <h2 class="slide-title">The Expert-First Strategy</h2>
+                
+                <div class="dialogue will">
+                    <div class="speaker">Will reveals:</div>
+                    "Rule #1: Talk to experts FIRST, not last. This single change delivers 60% faster insights with 40% higher client satisfaction."
+                </div>
+
+                <div class="stats-container">
+                    <div class="stat-card" style="background: linear-gradient(45deg, #e74c3c, #c0392b);">
+                        <span class="stat-number">40h</span>
+                        <span class="stat-label">Traditional Approach<br>Basic insights</span>
+                    </div>
+                    <div class="stat-card" style="background: linear-gradient(45deg, #27ae60, #2ecc71);">
+                        <span class="stat-number">15h</span>
+                        <span class="stat-label">Expert-First<br>Game-changing insights</span>
+                    </div>
+                </div>
+
+                <div class="dialogue sarah">
+                    <div class="speaker">Sarah notes:</div>
+                    "What are the 3 things keeping you awake at night in this industry?"
+                </div>
+            </div>
+            <div class="image-container">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-tLpoKv4vZN/122863a713908c79ba83d49b843f214c170ee95d85b121a6105e23ad580301b3a0f40f7f63586cc6b99903f34dbc6809f1ce344a6f6bdad13aef214966bb401127011627107a4c46cff631dc22194dad495cf7de2359c81afe3f032a3991b4f181c4250b" alt="Expert-first strategy comparison" class="slide-image">
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 6: Question Pyramid Method -->
+    <section class="slide">
+        <div class="slide-content">
+            <div class="image-container">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-_CQ17Ab99g/c8ceb6c91198ba389ccb067322d798175f6550ba257cf6d7dd67d33b75e99cdd67efe2ac8aab5970d90330c010a207ca5f7400d40340b7bbc8a11cb9ac130776c8e8e86929491d4309c1824cea0421948fbdcbd4c5cac96104b5fcb53f9467be034c0223" alt="Question pyramid method" class="slide-image">
+            </div>
+            <div class="text-content">
+                <h2 class="slide-title">Strategic vs Tactical Questions</h2>
+                
+                <div class="dialogue will">
+                    <div class="speaker">Will explains:</div>
+                    "Not all questions are created equal. Strategic questions at the top drive real insights. Tactical questions at the bottom just generate busy work."
+                </div>
+
+                <div class="narration">
+                    Strategic Questions (20% of questions, 80% of value):
+                    • What are the 3 key decisions this analysis will inform?
+                    • What would change our recommendation?
+                    • What assumptions are we making?
+                </div>
+
+                <div class="dialogue sarah">
+                    <div class="speaker">Sarah realizes:</div>
+                    "I always started with 'What's the market size?' and 'Who are the competitors?' - the tactical questions!"
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 7: Hypothesis-Driven Research -->
+    <section class="slide">
+        <div class="slide-content">
+            <div class="text-content">
+                <h2 class="slide-title">Hypothesis-Driven Approach</h2>
+                
+                <div class="dialogue will">
+                    <div class="speaker">Will teaches McKinsey's secret:</div>
+                    "Start with a hypothesis, not a blank slate. This delivers 90% faster research cycles with higher accuracy."
+                </div>
+
+                <div class="dialogue sarah">
+                    <div class="speaker">Sarah writes her hypothesis:</div>
+                    "Market consolidation is driving our client's margin pressure. Now I'll research only what proves or disproves this."
+                </div>
+
+                <div class="stats-container">
+                    <div class="stat-card">
+                        <span class="stat-number">90%</span>
+                        <span class="stat-label">Faster Research Cycles</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">3x</span>
+                        <span class="stat-label">Higher Recommendation Accuracy</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">65%</span>
+                        <span class="stat-label">Less Analysis Paralysis</span>
+                    </div>
+                </div>
+            </div>
+            <div class="image-container">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-R6g7Ky4IpP/d4bc813a41fa729d1318efd0d8105449741fed0682adbb03ef6c3924d345ecd24c245302d013e5e609210bcccbc2156316177d46ea021eb85df04222df88e741fbcf7212c0f118ca52b58a392796350f5241d8c0819395191d89cc949643b06f15b2ab8e" alt="Hypothesis-driven research cycle" class="slide-image">
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 8: Signal vs Noise Matrix -->
+    <section class="slide">
+        <div class="slide-content single-column">
+            <h2 class="slide-title">Signal vs Noise Matrix</h2>
+            
+            <div class="dialogue will">
+                <div class="speaker">Will shows the framework:</div>
+                "This matrix separates signal from noise. Focus on the green quadrant first - high signal, low noise sources that drive real insights."
+            </div>
+
+            <div class="interactive-diagram">
+                <div class="matrix-grid">
+                    <div class="matrix-quadrant high-signal-low-noise" title="Financial filings, Expert interviews">🎯</div>
+                    <div class="matrix-quadrant high-signal-high-noise" title="Industry reports, Conference presentations">⚠️</div>
+                    <div class="matrix-quadrant low-signal-low-noise" title="Academic papers, Historical analysis">📄</div>
+                    <div class="matrix-quadrant low-signal-high-noise" title="Social media, General news">🚫</div>
+                </div>
+                <div style="text-align: center; color: #7f8c8d; margin-top: 1rem;">
+                    Green: Prioritize First | Yellow: Filter Carefully | Orange: Background Only | Red: Avoid
+                </div>
+            </div>
+
+            <div class="dialogue sarah">
+                <div class="speaker">Sarah understands:</div>
+                "So I focus on the green quadrant first and avoid the red noise completely?"
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 9: Building Intelligence Networks -->
+    <section class="slide">
+        <div class="slide-content">
+            <div class="image-container">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-LCKw4WUBA8/6871ae1478c78a6408a436fd6093065ffb1b75271f50fdea6d63d81e871e77a1304affb21f5e6d8e8afd01b6f5ac1364727a49bd5b5578c044f152328a6fa31239419e1ea456c955d2ba7c15935753fc6586e7507b31cda564b69679eb85c49f7f5662df" alt="Intelligence network diagram" class="slide-image">
+            </div>
+            <div class="text-content">
+                <h2 class="slide-title">Intelligence Networks</h2>
+                
+                <div class="dialogue will">
+                    <div class="speaker">Will reveals the multiplier:</div>
+                    "Elite analysts invest 1 hour in relationships to save 5 hours in research. 70% of breakthrough insights come from your extended network."
+                </div>
+
+                <div class="narration">
+                    Network Architecture:
+                    • Inner Circle (5-7 people): Deep subject matter experts
+                    • Extended Network (15-20 people): Industry specialists  
+                    • Broad Network (50+ people): General contacts and information brokers
+                </div>
+
+                <div class="dialogue sarah">
+                    <div class="speaker">Sarah asks:</div>
+                    "Building relationships is part of the research strategy? I never thought of networking as research infrastructure!"
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 10: The Transformation -->
+    <section class="slide">
+        <div class="slide-content">
+            <div class="image-container">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-cEYaDF5LvO/16713f32c49c143cc5bad8ec0861b847207eb8e7e93b8e9400828e0f38cc63c8de1f9dc98c6fbe2eee4bbcbc6fee0e582b10632f621c66b7be2c13898c093d52c139f67543a6e5e8f498379371b68a1536b8fba62176662b0643de00fdd2e31cb48c9127" alt="Sarah's transformation before and after" class="slide-image">
+            </div>
+            <div class="text-content">
+                <h2 class="slide-title">The Strategic Transformation</h2>
+                
+                <div class="stats-container">
+                    <div class="stat-card">
+                        <span class="stat-number">50%</span>
+                        <span class="stat-label">Reduction in Analysis Timeline</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">40%</span>
+                        <span class="stat-label">Increase in Recommendation Accuracy</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">3x</span>
+                        <span class="stat-label">Faster Career Progression</span>
+                    </div>
+                </div>
+
+                <div class="dialogue will">
+                    <div class="speaker">Will observes:</div>
+                    "From order-taker to strategic powerhouse. The 20% Research Rule doesn't just save time - it transforms careers."
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 11: Client Success -->
+    <section class="slide">
+        <div class="slide-content">
+            <div class="text-content">
+                <h2 class="slide-title">Strategic Impact</h2>
+                
+                <div class="dialogue sarah">
+                    <div class="speaker">Client feedback:</div>
+                    "Sarah, this analysis is exactly what we needed to make our decision. We want you leading our next strategic project."
+                </div>
+
+                <div class="narration">
+                    Sarah's transformation is complete. She now commands premium rates, gets requested by name, and her recommendations drive board-level decisions within 30 days.
+                </div>
+
+                <div class="dialogue will">
+                    <div class="speaker">Will reflects:</div>
+                    "When you master the 20% that matters, clients don't just buy your analysis - they buy your strategic judgment."
+                </div>
+            </div>
+            <div class="image-container">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-3j4unCHdG6/41d18f0bfb94cfe8708950f5098091e5a69a8e7cd89a496e3b70186d47a36ce96c47f58ec7cf00b0d9d99ec9f4db2bd6f67c96ae5b1ffa369c5a4738201b1df09c3d3c0f97235e8a8cf36330c1da5d4aaab4a0af6b0b0bdb6dcdbf3c2fb66a6546365479" alt="Sarah presenting successfully to clients" class="slide-image">
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 12: The Challenge -->
+    <section class="slide">
+        <div class="slide-content">
+            <div class="text-content">
+                <h2 class="slide-title">Your Strategic Challenge</h2>
+                
+                <div class="dialogue will">
+                    <div class="speaker">Will challenges you:</div>
+                    "Now it's your turn. Will you keep drowning in data, or master the 20% that transforms careers?"
+                </div>
+
+                <ul class="checklist">
+                    <li>Identify your next project's 3 key strategic decisions</li>
+                    <li>List your top 3 industry experts to contact within 24 hours</li>
+                    <li>Form your hypothesis before opening a single report</li>
+                    <li>Build your intelligence network systematically</li>
+                    <li>Apply the Signal vs Noise Matrix to every source</li>
+                </ul>
+
+                <div class="dialogue sarah">
+                    <div class="speaker">Sarah declares:</div>
+                    "I'm ready to become a strategic advisor! The 20% Research Rule isn't just about efficiency - it's about impact."
+                </div>
+            </div>
+            <div class="image-container">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-66Kx7s_T4J/3ae402287b1e6433a875a44a333ab4f3da7a9a6dc7bfe7539190f245179435148057db5b7e23157f1afe5409a3465161b20eed0326ead9645facd017dd8a451d157a1a3225634cf70977e218875a11f0ea04eaf12fad41b2d17a50446a90ef5dfb8b048c" alt="Will Richardson final challenge" class="slide-image">
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA Slide -->
+    <section class="slide">
+        <div class="slide-content single-column">
+            <h2 class="slide-title">Ready to Transform Your Career?</h2>
+            <p class="slide-subtitle">Join the elite analysts who command premium rates and strategic influence</p>
+            
+            <div style="text-align: center; margin: 3rem 0;">
+                <a href="#" class="cta-button">Start The Killer Analyst Course</a>
+            </div>
+
+            <div class="narration" style="text-align: center; max-width: 600px; margin: 0 auto;">
+                Master the mental models, frameworks, and positioning tactics that separate £300/day analysts from £1,500/day strategic advisors. Transform from order-taker to indispensable strategic powerhouse.
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Progress bar functionality
+        function updateProgress() {
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.body.offsetHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            document.getElementById('progressBar').style.width = scrollPercent + '%';
+        }
+
+        window.addEventListener('scroll', updateProgress);
+
+        // Smooth scrolling and intersection observer for animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all slides for animation triggers
+        document.querySelectorAll('.slide').forEach(slide => {
+            observer.observe(slide);
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            const slides = document.querySelectorAll('.slide');
+            const currentSlide = Math.floor(window.pageYOffset / window.innerHeight);
+            
+            if (e.key === 'ArrowDown' && currentSlide < slides.length - 1) {
+                slides[currentSlide + 1].scrollIntoView({ behavior: 'smooth' });
+            } else if (e.key === 'ArrowUp' && currentSlide > 0) {
+                slides[currentSlide - 1].scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+
+        // Add touch/swipe support for mobile
+        let startY = 0;
+        let endY = 0;
+
+        document.addEventListener('touchstart', e => {
+            startY = e.touches[0].clientY;
+        });
+
+        document.addEventListener('touchend', e => {
+            endY = e.changedTouches[0].clientY;
+            const diff = startY - endY;
+            
+            if (Math.abs(diff) > 50) {
+                const slides = document.querySelectorAll('.slide');
+                const currentSlide = Math.floor(window.pageYOffset / window.innerHeight);
+                
+                if (diff > 0 && currentSlide < slides.length - 1) {
+                    slides[currentSlide + 1].scrollIntoView({ behavior: 'smooth' });
+                } else if (diff < 0 && currentSlide > 0) {
+                    slides[currentSlide - 1].scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        });
+
+        // Interactive elements
+        document.querySelectorAll('.matrix-quadrant').forEach(quadrant => {
+            quadrant.addEventListener('click', function() {
+                const title = this.getAttribute('title');
+                if (title) {
+                    alert(`${title}\n\nClick to learn more about this information source category.`);
+                }
+            });
+        });
+
+        // Initialize progress on load
+        updateProgress();
+    </script>
+</body>
+</html>

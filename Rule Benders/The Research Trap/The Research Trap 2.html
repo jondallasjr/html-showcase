@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The 20% Research Rule | Rule Benders Academy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #0057FF;
+            --warning-orange: #FF5733;
+            --dark-bg: #000000;
+            --light-text: #FFFFFF;
+            --gray-muted: #666666;
+            --success-green: #00FF88;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--dark-bg);
+            color: var(--light-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Comic Panel Structure */
+        .comic-panel {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: var(--dark-bg);
+            padding: 2rem;
+        }
+
+        .panel-content {
+            max-width: 1400px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .panel-image {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0, 87, 255, 0.3);
+        }
+
+        .panel-image img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            display: block;
+        }
+
+        .panel-text {
+            padding: 2rem;
+        }
+
+        /* Typography */
+        .panel-title {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--primary-blue);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 2rem;
+            line-height: 1.2;
+        }
+
+        .narrator-text {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--light-text);
+            margin-bottom: 1.5rem;
+            line-height: 1.4;
+        }
+
+        .dialogue {
+            background: linear-gradient(135deg, rgba(0, 87, 255, 0.1), rgba(0, 87, 255, 0.05));
+            border-left: 4px solid var(--primary-blue);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 12px 12px 0;
+            font-size: 1.2rem;
+            font-style: italic;
+            position: relative;
+        }
+
+        .dialogue::before {
+            content: '"';
+            font-size: 4rem;
+            color: var(--primary-blue);
+            position: absolute;
+            left: -0.5rem;
+            top: -1rem;
+            font-weight: 800;
+        }
+
+        .dialogue::after {
+            content: '"';
+            font-size: 4rem;
+            color: var(--primary-blue);
+            position: absolute;
+            right: 0.5rem;
+            bottom: -2rem;
+            font-weight: 800;
+        }
+
+        .stats-callout {
+            background: linear-gradient(135deg, rgba(255, 87, 51, 0.2), rgba(255, 87, 51, 0.05));
+            border: 2px solid var(--warning-orange);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+            font-weight: 700;
+            color: var(--warning-orange);
+            text-align: center;
+            font-size: 1.3rem;
+        }
+
+        .success-metric {
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.2), rgba(0, 255, 136, 0.05));
+            border: 2px solid var(--success-green);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+            font-weight: 700;
+            color: var(--success-green);
+            text-align: center;
+            font-size: 1.3rem;
+        }
+
+        /* Special Panel Layouts */
+        .title-panel {
+            text-align: center;
+            flex-direction: column;
+            background: radial-gradient(circle at center, rgba(0, 87, 255, 0.1) 0%, var(--dark-bg) 70%);
+        }
+
+        .title-panel .panel-content {
+            grid-template-columns: 1fr;
+            text-align: center;
+        }
+
+        .full-width-panel .panel-content {
+            grid-template-columns: 1fr;
+        }
+
+        /* Animation Classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .fade-in.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.8s ease-out;
+        }
+
+        .slide-in-left.animate {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.8s ease-out;
+        }
+
+        .slide-in-right.animate {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Navigation Indicators */
+        .nav-indicator {
+            position: fixed;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-dot.active {
+            background: var(--primary-blue);
+            transform: scale(1.5);
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: var(--primary-blue);
+            z-index: 1001;
+            transition: width 0.3s ease;
+        }
+
+        /* CTA Button */
+        .cta-button {
+            background: linear-gradient(135deg, var(--primary-blue), #0066FF);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin-top: 2rem;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0, 87, 255, 0.4);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .panel-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                text-align: center;
+            }
+
+            .panel-title {
+                font-size: 2rem;
+            }
+
+            .narrator-text {
+                font-size: 1.2rem;
+            }
+
+            .dialogue {
+                font-size: 1rem;
+            }
+
+            .comic-panel {
+                padding: 1rem;
+            }
+
+            .nav-indicator {
+                right: 1rem;
+                gap: 0.5rem;
+            }
+
+            .nav-dot {
+                width: 8px;
+                height: 8px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .panel-title {
+                font-size: 1.5rem;
+            }
+
+            .narrator-text {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+    
+    <nav class="nav-indicator" id="navIndicator">
+        <!-- Navigation dots will be generated by JavaScript -->
+    </nav>
+
+    <!-- Title Panel -->
+    <section class="comic-panel title-panel" id="panel-0">
+        <div class="panel-content fade-in">
+            <div class="panel-image">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-vDt45gDP_H/3f72536c1a6b3ad3d0f794815405c32ea42417a5513f65fc91c733eed500cbee23198bfac63696f127468d0fe54593758e936875d1991ad552a3610177ff5b0aaaabd49a454c83fa53750bc0ae9d6b20c9d7c41dc6c47de2fc1c728a7a2c67d97fbf619d" alt="Will Richardson in underground office with research wall">
+            </div>
+            <div class="panel-text">
+                <h1 class="panel-title">The 20% Research Rule</h1>
+                <p class="narrator-text">The insider secret every elite analyst guards</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Panel 1: Problem Setup -->
+    <section class="comic-panel" id="panel-1">
+        <div class="panel-content">
+            <div class="panel-image slide-in-left">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-laNR8jY_Mj/d748b55535a52bc381e106c7c272a1c53f66da3a3eda84a9adfed1f80ef35e8daabb3f777063e40f57e900437549377016112a902e0adb5e840a728e0e0c9ce38b869ea07c6a9484cabbc934ef76a69d5d68d81b6079bb959725163292b96757d4cf44ba" alt="Two analysts comparison - overwhelmed vs confident">
+            </div>
+            <div class="panel-text slide-in-right">
+                <h2 class="panel-title">The Tale of Two Analysts</h2>
+                <p class="narrator-text">Here's what they don't teach you in business school. Two analysts. Same deadline. Same client. One works 60 hours and delivers mediocre insights. The other works 15 hours and gets promoted.</p>
+                <div class="dialogue">I need to research EVERYTHING!</div>
+                <p class="narrator-text">While one analyst drowns in information, the elite performer knows exactly what matters.</p>
+                <div class="dialogue">I need to research the RIGHT things.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Panel 2: McKinsey Reality Check -->
+    <section class="comic-panel" id="panel-2">
+        <div class="panel-content">
+            <div class="panel-text slide-in-left">
+                <h2 class="panel-title">The McKinsey Reality Check</h2>
+                <p class="narrator-text">McKinsey's top performers spend 65% LESS time on research while producing 40% MORE insights. This isn't luck - it's systematic.</p>
+                <div class="stats-callout">Elite analysts: 4.2x ROI on research time</div>
+                <div class="dialogue">We've found that spending 80% of our research time on client-specific data and industry benchmarks yields exponentially better client outcomes than broad market research. The key is knowing what questions to ask before you start looking for answers.</div>
+                <p class="narrator-text">— McKinsey Senior Partner</p>
+            </div>
+            <div class="panel-image slide-in-right">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-msxgqpsgai/72374b34df59f94e0d7ea9b67d04f14d2f040ab65e6745758a546eabe6bb01afe2129799b9ff82dbe659721fc15678dc4532d41fd02a41f64e77ade34d9f5ccdee86a4c19c005d5440f2ed0c28716e4d65208eb06d8bb9b1051da669dc667fb58c3afa57" alt="Will pointing at 80/20 data visualization">
+            </div>
+        </div>
+    </section>
+
+    <!-- Panel 3: The Completeness Trap -->
+    <section class="comic-panel" id="panel-3">
+        <div class="panel-content">
+            <div class="panel-image slide-in-left">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-bp0UGfGenT/ad54f057864838cf5344e8aebe36507a85d4c2c7941f9d14511c24e91c64bd4f0e587198e09994957028a52f88a19cd1080eb395b7c4861dd6f947deaa5d5450e18770e447944909faea8a30b07ed5833f69875e7747b7d942e2cfa8e43f03ff13e34d64" alt="Analyst trapped in document cage">
+            </div>
+            <div class="panel-text slide-in-right">
+                <h2 class="panel-title">The Completeness Trap</h2>
+                <p class="narrator-text">Most analysts fall into the 'Completeness Trap.' They think more research equals better analysis. Wrong. It equals paralysis.</p>
+                <div class="dialogue">Just need to check one more source...</div>
+                <p class="narrator-text">While you're checking source #247, elite analysts already delivered the solution. The cage door is open, but they're too busy reading to notice.</p>
+                <div class="stats-callout">Information Processing Efficiency drops to 52% beyond 150 sources</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Panel 4: Source Hierarchy -->
+    <section class="comic-panel" id="panel-4">
+        <div class="panel-content">
+            <div class="panel-text slide-in-left">
+                <h2 class="panel-title">The Source Hierarchy</h2>
+                <p class="narrator-text">Here's the hierarchy they don't want you to know. Tier 1 sources: 20% of effort, 60% of value. Most analysts waste 80% of their time in Tier 3.</p>
+                <div class="success-metric">
+                    <strong>TIER 1:</strong> Client interviews, proprietary data<br>
+                    <strong>20% effort → 60% value</strong>
+                </div>
+                <div class="stats-callout">
+                    <strong>TIER 2:</strong> Industry reports, databases<br>
+                    <strong>30% effort → 25% value</strong>
+                </div>
+                <div class="dialogue">Most analysts spend here: News, web research, historical data. 50% effort → 15% value</div>
+            </div>
+            <div class="panel-image slide-in-right">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-Ga7qfNiadf/2b311a45d0494d41272ee19e2881975e965a0d80efaa2f5fd2743b9f95c2a1ffaac54d240f267e1682b2176f7c3f3587fd8247270331b928c2bc82dcbd6709fe65ec294071cf363f3d1e7130d58e6fa44b0cd65f526c8e6771c20628704c0420200d464e" alt="Three tier research pyramid">
+            </div>
+        </div>
+    </section>
+
+    <!-- Panel 5: RAPID Framework -->
+    <section class="comic-panel" id="panel-5">
+        <div class="panel-content">
+            <div class="panel-image slide-in-left">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-_2DLDzHayy/a8d753314d192a0cfe659aa4458ce651bac383e2f8f80d3a6f41100bffc7410c68de42b671114c4180b33c1ea9aa6ba3837193e51d5bd4b0295b0ccecff49468016ff7791cd74a4c590c707de1ceece1ecc21e59b797318d6f350439e705c83206cd3e28" alt="RAPID framework subway map">
+            </div>
+            <div class="panel-text slide-in-right">
+                <h2 class="panel-title">The RAPID Method</h2>
+                <p class="narrator-text">Five steps that separate the elite from the exhausted.</p>
+                <div class="success-metric">
+                    <strong>R</strong>efine the Question (10%)<br>
+                    <strong>A</strong>ssess Source Impact (15%)<br>
+                    <strong>P</strong>rioritize High-Impact Sources (5%)<br>
+                    <strong>I</strong>mplement Focused Collection (60%)<br>
+                    <strong>D</strong>istill Key Insights (10%)
+                </div>
+                <p class="narrator-text">The RAPID method. Like a subway map for your research - take the direct route while others get lost in the maze.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Panel 6: Real World Example -->
+    <section class="comic-panel" id="panel-6">
+        <div class="panel-content">
+            <div class="panel-text slide-in-left">
+                <h2 class="panel-title">Fortune 500 Case Study</h2>
+                <p class="narrator-text">Real case: Fortune 500 digital transformation. Traditional approach: 6 weeks, 240 hours, mediocre results. 20% Rule: 1.8 weeks, 67 hours, client satisfaction jumped from 7.2 to 9.1.</p>
+                <div class="stats-callout">
+                    Traditional: 6 weeks, 200+ sources, 7.2/10 satisfaction
+                </div>
+                <div class="success-metric">
+                    20% Rule: 1.8 weeks, 23 sources, 9.1/10 satisfaction
+                </div>
+                <div class="dialogue">This is exactly what we needed!</div>
+                <p class="narrator-text">— Fortune 500 Client</p>
+            </div>
+            <div class="panel-image slide-in-right">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-ZLi6ujaTRD/cf7f6dd14cbb0906909deb3fc5f624d8051f7dee0b25eb2f45c36640240a114ad1f0273f4d096cc3b42df2a18a5fd0c724a6eb4229c87b3c713ccc3dcb6c16869e048959c760cbbb9ebe9b92fe86a839f3235852ddff168f34413994b3359d2d73682050" alt="Before and after workspace comparison">
+            </div>
+        </div>
+    </section>
+
+    <!-- Panel 7: Technology Multiplier -->
+    <section class="comic-panel" id="panel-7">
+        <div class="panel-content">
+            <div class="panel-image slide-in-left">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-0W1d171yTk/ae6270b39ff9ba5f7a503107cae8048a22e0aab0a318b642c75b00f21f3f8da9517dfcf622dfd901e9ea677ebe2bd5f509ed4b46db354985f276c8aee343b4ad1bc921d3134eaea3083a49d0071e3a23a3f60428ebbc90400d12046e6f97cd05114c7116" alt="Old vs modern research technology">
+            </div>
+            <div class="panel-text slide-in-right">
+                <h2 class="panel-title">The Technology Multiplier</h2>
+                <p class="narrator-text">AI isn't replacing analysts - it's amplifying the smart ones. GPT-4: 67% faster research. But garbage questions still equal garbage answers.</p>
+                <div class="success-metric">
+                    Time savings: 75% | Accuracy: 89%<br>
+                    But only if you know what to ask
+                </div>
+                <p class="narrator-text">The future belongs to analysts who can ask the right questions, not those who can find the most information.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Panel 8: Warning -->
+    <section class="comic-panel" id="panel-8">
+        <div class="panel-content">
+            <div class="panel-text slide-in-left">
+                <h2 class="panel-title">Avoid These Killers</h2>
+                <p class="narrator-text">Two killers: Information bias - only using easy sources. And perfectionism - waiting for 100% certainty while competitors act on 80%.</p>
+                <div class="stats-callout">
+                    Elite analysts use the 80/90/95 rule:<br>
+                    80% confidence for strategy<br>
+                    90% for operations<br>
+                    95% only for compliance
+                </div>
+                <p class="narrator-text">Perfect is the enemy of profitable. While you're seeking certainty, opportunities are walking out the door.</p>
+            </div>
+            <div class="panel-image slide-in-right">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-rmi2eVRgel/426f13e5fab9092df9b6d0714b840d214a8716f5b221ce9dbf4d53da1796dc5e4877ad6adfc47708a86d8c5f192ad7b8840b26638449effefa65dcdb09919a106d0782f7ad6f4a24dc057a70079a34a918524d847e461cc08d2335bc6ae5f60e186c8072" alt="Warning sign with pitfalls">
+            </div>
+        </div>
+    </section>
+
+    <!-- Panel 9: The Challenge -->
+    <section class="comic-panel" id="panel-9">
+        <div class="panel-content">
+            <div class="panel-image slide-in-left">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-jmw4Vn8Oa4/9342c725f20932d029ab23dcc2e4f548ac72cd88f13ff8927888c68d171ed8a1dea0c15928ed05d74aa649dd5971a3f4df9797549a25aed188a42a1560d9cc30cc987b7c7a5d94352d88a8e9d66b4938ddf27fbba879053ba11d372f1a26ab75bdd8b43f" alt="Will addressing reader directly">
+            </div>
+            <div class="panel-text slide-in-right">
+                <h2 class="panel-title">Your Choice</h2>
+                <p class="narrator-text">Here's your choice. Keep researching everything and stay average. Or master the 20% Rule and join the elite.</p>
+                <div class="success-metric">
+                    This week: Pick one research project.<br>
+                    Apply RAPID. Time yourself.<br>
+                    Compare results.
+                </div>
+                <p class="narrator-text">The path is clear. The choice is yours. Which analyst will you become?</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Panel 10: Results Promise -->
+    <section class="comic-panel" id="panel-10">
+        <div class="panel-content">
+            <div class="panel-text slide-in-left">
+                <h2 class="panel-title">The Results</h2>
+                <p class="narrator-text">Organizations using this report:</p>
+                <div class="success-metric">
+                    67% faster research<br>
+                    43% better client satisfaction<br>
+                    78% more recommendations implemented<br>
+                    $180K average annual savings per analyst
+                </div>
+                <p class="narrator-text">This isn't theory. This isn't wishful thinking. These are the measurable results from analysts who bent the rules and won.</p>
+            </div>
+            <div class="panel-image slide-in-right">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-6iwSNxkdST/a27acb0c3ac27c4d2f3370c6dfe387fc10aa379d8d96afaec22012023781506f43d87688b97cb4a85564db4e43a75ca45562f529a97cbbda857ea5e8c544e875f1f184f8f2be85df6427b1c2fb778945c136bc3fb73856eceb2c02eab331a67e02b6182f" alt="Transformation success montage">
+            </div>
+        </div>
+    </section>
+
+    <!-- Final Panel: Call to Action -->
+    <section class="comic-panel" id="panel-11">
+        <div class="panel-content">
+            <div class="panel-image slide-in-left">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-3L6hLH2O3t/cb8b93bb673e7794c803a29b2cc4a4c278c843818edadce9e82015855444c85066cb0f0e3551b890975d915c6748f5f0fede214863942eccd6684a655f5ab2852631e543f73077c7cbe640b20ad5a7f1396d59cc0582d12aeeb9abc0efc731c9bf3b3232" alt="Will final call to action pose">
+            </div>
+            <div class="panel-text slide-in-right">
+                <h2 class="panel-title">Join the Elite</h2>
+                <p class="narrator-text">Stop being the analyst who knows everything about nothing. Become the analyst who knows the right things about everything that matters.</p>
+                <div class="dialogue">Ready to bend the rules? The next lesson reveals how to build stakeholder intelligence networks that give you information others can't access.</div>
+                <a href="#" class="cta-button">Continue Your Transformation</a>
+                <p class="narrator-text">The 20% Research Rule is just the beginning. Your elite analyst journey starts now.</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const panels = document.querySelectorAll('.comic-panel');
+            const progressBar = document.getElementById('progressBar');
+            const navIndicator = document.getElementById('navIndicator');
+            
+            // Generate navigation dots
+            panels.forEach((panel, index) => {
+                const dot = document.createElement('div');
+                dot.className = 'nav-dot';
+                dot.addEventListener('click', () => {
+                    panel.scrollIntoView({ behavior: 'smooth' });
+                });
+                navIndicator.appendChild(dot);
+            });
+            
+            const navDots = document.querySelectorAll('.nav-dot');
+            
+            // Intersection Observer for animations and progress
+            const observerOptions = {
+                threshold: 0.3,
+                rootMargin: '-10% 0px -10% 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const panel = entry.target;
+                        const index = Array.from(panels).indexOf(panel);
+                        
+                        // Update progress bar
+                        const progress = ((index + 1) / panels.length) * 100;
+                        progressBar.style.width = progress + '%';
+                        
+                        // Update navigation dots
+                        navDots.forEach((dot, i) => {
+                            dot.classList.toggle('active', i === index);
+                        });
+                        
+                        // Trigger animations
+                        panel.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right').forEach(el => {
+                            el.classList.add('animate');
+                        });
+                    }
+                });
+            }, observerOptions);
+            
+            // Observe all panels
+            panels.forEach(panel => {
+                observer.observe(panel);
+            });
+            
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                const currentPanel = document.querySelector('.comic-panel:target') || panels[0];
+                const currentIndex = Array.from(panels).indexOf(currentPanel);
+                
+                if (e.key === 'ArrowDown' || e.key === 'Space') {
+                    e.preventDefault();
+                    if (currentIndex < panels.length - 1) {
+                        panels[currentIndex + 1].scrollIntoView({ behavior: 'smooth' });
+                    }
+                } else if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    if (currentIndex > 0) {
+                        panels[currentIndex - 1].scrollIntoView({ behavior: 'smooth' });
+                    }
+                } else if (e.key === 'Home') {
+                    e.preventDefault();
+                    panels[0].scrollIntoView({ behavior: 'smooth' });
+                } else if (e.key === 'End') {
+                    e.preventDefault();
+                    panels[panels.length - 1].scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+            
+            // Touch swipe support for mobile
+            let touchStartY = 0;
+            let touchEndY = 0;
+            
+            document.addEventListener('touchstart', (e) => {
+                touchStartY = e.changedTouches[0].screenY;
+            });
+            
+            document.addEventListener('touchend', (e) => {
+                touchEndY = e.changedTouches[0].screenY;
+                handleSwipe();
+            });
+            
+            function handleSwipe() {
+                const swipeThreshold = 50;
+                const currentScrollY = window.scrollY;
+                
+                if (touchStartY - touchEndY > swipeThreshold) {
+                    // Swipe up - next panel
+                    const nextPanel = Array.from(panels).find(panel => 
+                        panel.offsetTop > currentScrollY + 100
+                    );
+                    if (nextPanel) {
+                        nextPanel.scrollIntoView({ behavior: 'smooth' });
+                    }
+                } else if (touchEndY - touchStartY > swipeThreshold) {
+                    // Swipe down - previous panel
+                    const prevPanel = Array.from(panels).reverse().find(panel => 
+                        panel.offsetTop < currentScrollY - 100
+                    );
+                    if (prevPanel) {
+                        prevPanel.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            }
+            
+            // Initialize first panel
+            if (panels.length > 0) {
+                panels[0].querySelectorAll('.fade-in').forEach(el => {
+                    el.classList.add('animate');
+                });
+                navDots[0].classList.add('active');
+                progressBar.style.width = (1 / panels.length) * 100 + '%';
+            }
+        });
+    </script>
+</body>
+</html>
