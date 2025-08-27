@@ -1,1407 +1,1989 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The 20% Research Rule | Rule Benders Academy</title>
+
+    <title>The 20% Research Rule - Transform from Order-Taker to Strategic Powerhouse</title>
+
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
     <style>
+
         :root {
+
             --primary-blue: #0057FF;
+
             --accent-orange: #FF5733;
-            --jet-black: #000000;
-            --dark-bg: #1a1a1a;
-            --darker-bg: #0f0f0f;
+
+            --dark-bg: #000000;
+
+            --darker-bg: #1a1a1a;
+
+            --card-bg: #2a2a2a;
+
             --text-white: #ffffff;
+
             --text-gray: #a0a0a0;
+
             --text-light-gray: #cccccc;
+
             --success-green: #00ff88;
-            --warning-red: #ff3300;
+
+            --warning-red: #ff3333;
+
         }
+
+
 
         * {
+
             margin: 0;
+
             padding: 0;
+
             box-sizing: border-box;
+
         }
+
+
 
         body {
-            font-family: 'Inter', sans-serif;
-            background: var(--jet-black);
+
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+            background: var(--dark-bg);
+
             color: var(--text-white);
+
             line-height: 1.6;
+
             overflow-x: hidden;
+
         }
+
+
 
         .container {
+
             max-width: 1200px;
+
             margin: 0 auto;
+
             padding: 0 20px;
+
         }
+
+
 
         /* Hero Section */
+
         .hero {
-            min-height: 100vh;
-            background: linear-gradient(135deg, var(--jet-black) 0%, var(--dark-bg) 100%);
-            display: flex;
-            align-items: center;
+
             position: relative;
+
+            min-height: 100vh;
+
+            display: flex;
+
+            align-items: center;
+
+            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--darker-bg) 100%);
+
             overflow: hidden;
+
         }
+
+
 
         .hero::before {
+
             content: '';
+
             position: absolute;
+
             top: 0;
+
             left: 0;
+
             right: 0;
+
             bottom: 0;
-            background: radial-gradient(circle at 30% 70%, rgba(0, 87, 255, 0.1) 0%, transparent 50%);
+
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%23333" stroke-width="0.5" opacity="0.3"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+
+            opacity: 0.1;
+
         }
+
+
 
         .hero-content {
+
+            position: relative;
+
             z-index: 2;
+
             display: grid;
+
             grid-template-columns: 1fr 1fr;
+
             gap: 60px;
+
             align-items: center;
+
         }
+
+
 
         .hero-text h1 {
-            font-size: 4rem;
+
+            font-size: clamp(2.5rem, 5vw, 4rem);
+
             font-weight: 800;
+
             line-height: 1.1;
-            margin-bottom: 30px;
-            background: linear-gradient(135deg, var(--text-white) 0%, var(--text-light-gray) 100%);
+
+            margin-bottom: 24px;
+
+            background: linear-gradient(135deg, var(--text-white) 0%, var(--primary-blue) 100%);
+
             -webkit-background-clip: text;
+
             -webkit-text-fill-color: transparent;
+
             background-clip: text;
+
         }
+
+
 
         .hero-text .highlight {
-            color: var(--primary-blue);
-            -webkit-text-fill-color: var(--primary-blue);
+
+            color: var(--accent-orange);
+
+            font-weight: 800;
+
         }
 
-        .hero-text .sub-headline {
+
+
+        .hero-subhead {
+
             font-size: 1.5rem;
-            color: var(--text-gray);
-            margin-bottom: 40px;
-            font-weight: 400;
+
+            color: var(--text-light-gray);
+
+            margin-bottom: 32px;
+
+            line-height: 1.4;
+
         }
+
+
+
+        .hero-hook {
+
+            background: linear-gradient(135deg, var(--darker-bg) 0%, var(--card-bg) 100%);
+
+            border: 2px solid var(--primary-blue);
+
+            border-radius: 12px;
+
+            padding: 24px;
+
+            margin-bottom: 32px;
+
+        }
+
+
+
+        .hero-hook h3 {
+
+            color: var(--accent-orange);
+
+            margin-bottom: 12px;
+
+            font-size: 1.1rem;
+
+        }
+
+
 
         .hero-image {
+
             position: relative;
+
         }
+
+
 
         .hero-image img {
+
             width: 100%;
+
             height: auto;
-            border-radius: 16px;
-            box-shadow: 0 30px 80px rgba(0, 87, 255, 0.3);
+
+            border-radius: 12px;
+
+            box-shadow: 0 20px 60px rgba(0, 87, 255, 0.2);
+
         }
 
-        .cta-button {
+
+
+        .cta-primary {
+
             display: inline-block;
+
             background: linear-gradient(135deg, var(--primary-blue) 0%, #0040cc 100%);
-            color: var(--text-white);
-            padding: 18px 40px;
+
+            color: white;
+
+            padding: 18px 36px;
+
             border-radius: 50px;
+
             text-decoration: none;
+
             font-weight: 600;
+
             font-size: 1.1rem;
+
             transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
+
+            box-shadow: 0 8px 30px rgba(0, 87, 255, 0.3);
+
         }
 
-        .cta-button:hover {
+
+
+        .cta-primary:hover {
+
             transform: translateY(-2px);
-            box-shadow: 0 15px 40px rgba(0, 87, 255, 0.4);
+
+            box-shadow: 0 12px 40px rgba(0, 87, 255, 0.4);
+
         }
 
-        /* Section Styling */
+
+
+        /* Section Styles */
+
         .section {
-            padding: 100px 0;
+
+            padding: 80px 0;
+
             position: relative;
+
         }
 
-        .section:nth-child(even) {
-            background: var(--dark-bg);
+
+
+        .section-alt {
+
+            background: linear-gradient(135deg, var(--darker-bg) 0%, var(--card-bg) 100%);
+
         }
+
+
 
         .section-header {
+
             text-align: center;
-            margin-bottom: 80px;
+
+            margin-bottom: 60px;
+
         }
+
+
 
         .section-header h2 {
-            font-size: 3rem;
+
+            font-size: clamp(2rem, 4vw, 3rem);
+
             font-weight: 700;
+
             margin-bottom: 20px;
-            color: var(--text-white);
+
+            color: var(--primary-blue);
+
         }
 
-        .section-header .highlight {
-            color: var(--primary-blue);
-        }
+
 
         .section-header p {
-            font-size: 1.3rem;
+
+            font-size: 1.2rem;
+
             color: var(--text-gray);
-            max-width: 800px;
+
+            max-width: 600px;
+
             margin: 0 auto;
+
         }
+
+
 
         /* Problem Section */
+
         .problem-grid {
+
             display: grid;
+
             grid-template-columns: 1fr 1fr;
+
             gap: 60px;
+
             align-items: center;
+
         }
 
-        .problem-text h3 {
+
+
+        .problem-content h3 {
+
             font-size: 2rem;
-            font-weight: 600;
-            margin-bottom: 30px;
-            color: var(--accent-orange);
+
+            color: var(--warning-red);
+
+            margin-bottom: 20px;
+
         }
 
-        .problem-stats {
+
+
+        .problem-list {
+
             list-style: none;
-            margin: 30px 0;
+
         }
 
-        .problem-stats li {
-            padding: 15px 0;
+
+
+        .problem-list li {
+
+            position: relative;
+
+            padding: 16px 0 16px 40px;
+
             border-bottom: 1px solid #333;
-            font-size: 1.1rem;
+
+            color: var(--text-light-gray);
+
         }
 
-        .problem-stats li:last-child {
-            border-bottom: none;
+
+
+        .problem-list li::before {
+
+            content: '×';
+
+            position: absolute;
+
+            left: 0;
+
+            top: 16px;
+
+            color: var(--warning-red);
+
+            font-size: 1.5rem;
+
+            font-weight: bold;
+
         }
+
+
+
+        /* Stats Grid */
+
+        .stats-grid {
+
+            display: grid;
+
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+
+            gap: 30px;
+
+            margin: 60px 0;
+
+        }
+
+
+
+        .stat-card {
+
+            background: linear-gradient(135deg, var(--darker-bg) 0%, var(--card-bg) 100%);
+
+            border: 1px solid #333;
+
+            border-radius: 12px;
+
+            padding: 30px 20px;
+
+            text-align: center;
+
+            transition: all 0.3s ease;
+
+        }
+
+
+
+        .stat-card:hover {
+
+            transform: translateY(-5px);
+
+            border-color: var(--primary-blue);
+
+            box-shadow: 0 15px 40px rgba(0, 87, 255, 0.2);
+
+        }
+
+
 
         .stat-number {
+
+            font-size: 2.5rem;
+
+            font-weight: 800;
+
             color: var(--accent-orange);
-            font-weight: 700;
-            font-size: 1.3rem;
+
+            margin-bottom: 8px;
+
         }
 
-        /* Solution Section */
-        .solution-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            align-items: center;
-            margin-bottom: 80px;
+
+
+        .stat-label {
+
+            color: var(--text-gray);
+
+            font-size: 0.9rem;
+
         }
 
-        .solution-text h3 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 30px;
-            color: var(--primary-blue);
-        }
 
-        .solution-text p {
-            font-size: 1.2rem;
-            margin-bottom: 20px;
-            color: var(--text-light-gray);
-        }
-
-        .evidence-box {
-            background: linear-gradient(135deg, var(--darker-bg) 0%, #2a2a2a 100%);
-            padding: 40px;
-            border-radius: 16px;
-            border: 2px solid var(--primary-blue);
-            margin: 30px 0;
-        }
-
-        .evidence-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: var(--primary-blue);
-            margin-bottom: 20px;
-        }
-
-        /* Pareto Chart */
-        .pareto-chart {
-            position: relative;
-            height: 350px;
-            background: linear-gradient(135deg, var(--darker-bg) 0%, #2a2a2a 100%);
-            border-radius: 16px;
-            overflow: hidden;
-            margin: 40px 0;
-            border: 2px solid #333;
-        }
-
-        .pareto-bar {
-            position: absolute;
-            bottom: 0;
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: pointer;
-        }
-
-        .effort-bar {
-            left: 15%;
-            width: 25%;
-            height: 80px;
-            background: linear-gradient(180deg, var(--accent-orange) 0%, #ff3300 100%);
-            border-radius: 12px 12px 0 0;
-        }
-
-        .insight-bar {
-            right: 15%;
-            width: 55%;
-            height: 280px;
-            background: linear-gradient(180deg, var(--primary-blue) 0%, #0040cc 100%);
-            border-radius: 12px 12px 0 0;
-        }
-
-        .pareto-bar:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 25px 50px rgba(0, 87, 255, 0.4);
-        }
-
-        .pareto-label {
-            position: absolute;
-            top: -50px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-weight: 600;
-            font-size: 1.2rem;
-            white-space: nowrap;
-            color: var(--text-white);
-        }
-
-        .pareto-percentage {
-            position: absolute;
-            top: -90px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--success-green);
-        }
 
         /* Method Section */
+
         .method-grid {
+
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+
             gap: 40px;
+
             margin: 60px 0;
+
         }
 
-        .method-phase {
-            background: linear-gradient(135deg, var(--darker-bg) 0%, #2a2a2a 100%);
-            padding: 40px;
+
+
+        .method-card {
+
+            background: linear-gradient(135deg, var(--darker-bg) 0%, var(--card-bg) 100%);
+
+            border: 2px solid transparent;
+
+            background-clip: padding-box;
+
             border-radius: 16px;
-            border: 1px solid #333;
-            transition: all 0.3s ease;
+
+            padding: 40px 30px;
+
             position: relative;
-            overflow: hidden;
+
+            transition: all 0.3s ease;
+
         }
 
-        .method-phase::before {
+
+
+        .method-card::before {
+
             content: '';
+
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary-blue) 0%, var(--accent-orange) 100%);
+
+            top: -2px;
+
+            left: -2px;
+
+            right: -2px;
+
+            bottom: -2px;
+
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-orange));
+
+            border-radius: 16px;
+
+            z-index: -1;
+
+            opacity: 0;
+
+            transition: opacity 0.3s ease;
+
         }
 
-        .method-phase:hover {
-            transform: translateY(-8px);
-            border-color: var(--primary-blue);
-            box-shadow: 0 20px 50px rgba(0, 87, 255, 0.2);
+
+
+        .method-card:hover::before {
+
+            opacity: 1;
+
         }
 
-        .phase-number {
+
+
+        .method-card h3 {
+
+            color: var(--primary-blue);
+
+            font-size: 1.5rem;
+
+            margin-bottom: 16px;
+
+        }
+
+
+
+        .method-time {
+
+            background: var(--accent-orange);
+
+            color: white;
+
+            padding: 6px 16px;
+
+            border-radius: 20px;
+
+            font-size: 0.9rem;
+
+            font-weight: 600;
+
             display: inline-block;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary-blue) 0%, #0040cc 100%);
-            color: var(--text-white);
-            font-size: 1.5rem;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+
             margin-bottom: 20px;
+
         }
 
-        .phase-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 15px;
-            color: var(--text-white);
-        }
 
-        .phase-time {
-            color: var(--accent-orange);
-            font-weight: 600;
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-        }
-
-        .phase-description {
-            color: var(--text-light-gray);
-            line-height: 1.7;
-        }
 
         /* Case Studies */
+
         .case-study {
-            background: linear-gradient(135deg, var(--darker-bg) 0%, #2a2a2a 100%);
+
+            background: linear-gradient(135deg, var(--darker-bg) 0%, var(--card-bg) 100%);
+
+            border: 1px solid #333;
+
             border-radius: 16px;
-            overflow: hidden;
+
+            padding: 40px;
+
             margin: 40px 0;
-            border: 2px solid #333;
-        }
 
-        .case-study-header {
-            padding: 40px 40px 20px;
-            border-bottom: 1px solid #333;
-        }
-
-        .case-study-title {
-            font-size: 1.8rem;
-            font-weight: 600;
-            color: var(--primary-blue);
-            margin-bottom: 15px;
-        }
-
-        .case-study-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            padding: 40px;
-        }
-
-        .before-after {
-            padding: 20px;
-            border-radius: 12px;
-        }
-
-        .before {
-            background: linear-gradient(135deg, var(--warning-red) 0%, #cc0000 100%);
-        }
-
-        .after {
-            background: linear-gradient(135deg, var(--primary-blue) 0%, #0040cc 100%);
-        }
-
-        .before-after h4 {
-            font-size: 1.3rem;
-            margin-bottom: 15px;
-            font-weight: 600;
-        }
-
-        .metrics-highlight {
-            background: var(--jet-black);
-            padding: 30px;
-            border-radius: 12px;
-            text-align: center;
-            margin: 20px 0;
-            border: 1px solid var(--success-green);
-        }
-
-        .big-number {
-            font-size: 3rem;
-            font-weight: 700;
-            color: var(--success-green);
-            margin-bottom: 10px;
-        }
-
-        /* Tools Section */
-        .tools-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin: 60px 0;
-        }
-
-        .tool-card {
-            background: linear-gradient(135deg, var(--darker-bg) 0%, #2a2a2a 100%);
-            padding: 30px;
-            border-radius: 16px;
-            border: 1px solid #333;
-            transition: all 0.3s ease;
-        }
-
-        .tool-card:hover {
-            border-color: var(--primary-blue);
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0, 87, 255, 0.2);
-        }
-
-        .tool-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--accent-orange) 100%);
-            border-radius: 12px;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-        }
-
-        .tool-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 15px;
-            color: var(--text-white);
-        }
-
-        /* ROI Calculator */
-        .roi-calculator {
-            background: linear-gradient(135deg, var(--darker-bg) 0%, #2a2a2a 100%);
-            padding: 50px;
-            border-radius: 16px;
-            border: 3px solid var(--primary-blue);
-            margin: 60px 0;
-        }
-
-        .calc-header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .calc-header h3 {
-            font-size: 2rem;
-            color: var(--primary-blue);
-            margin-bottom: 15px;
-        }
-
-        .calc-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-
-        .calc-input-group {
-            text-align: center;
-        }
-
-        .calc-input-group label {
-            display: block;
-            margin-bottom: 10px;
-            font-weight: 600;
-            color: var(--text-light-gray);
-        }
-
-        .calc-input {
-            width: 100%;
-            padding: 15px;
-            background: var(--jet-black);
-            border: 2px solid #333;
-            border-radius: 12px;
-            color: var(--text-white);
-            font-size: 1.2rem;
-            text-align: center;
-            transition: border-color 0.3s ease;
-        }
-
-        .calc-input:focus {
-            outline: none;
-            border-color: var(--primary-blue);
-            box-shadow: 0 0 0 3px rgba(0, 87, 255, 0.1);
-        }
-
-        .calc-result {
-            text-align: center;
-            padding: 30px;
-            background: var(--jet-black);
-            border-radius: 16px;
-            border: 2px solid var(--success-green);
-        }
-
-        .calc-result-label {
-            font-size: 1.3rem;
-            color: var(--text-gray);
-            margin-bottom: 15px;
-        }
-
-        .calc-result-value {
-            font-size: 4rem;
-            font-weight: 700;
-            color: var(--success-green);
-        }
-
-        /* Implementation Section */
-        .implementation-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: start;
-        }
-
-        .checklist {
-            background: linear-gradient(135deg, var(--darker-bg) 0%, #2a2a2a 100%);
-            border-radius: 16px;
-            border: 2px solid var(--accent-orange);
-            padding: 40px;
-        }
-
-        .checklist-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--accent-orange);
-            margin-bottom: 30px;
-            text-align: center;
-        }
-
-        .checklist-item {
-            display: flex;
-            align-items: center;
-            padding: 20px 0;
-            border-bottom: 1px solid #333;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .checklist-item:last-child {
-            border-bottom: none;
-        }
-
-        .checklist-item:hover {
-            background: rgba(0, 87, 255, 0.05);
-            padding-left: 15px;
-        }
-
-        .checkbox {
-            width: 28px;
-            height: 28px;
-            border: 3px solid var(--primary-blue);
-            border-radius: 6px;
-            margin-right: 20px;
             position: relative;
-            transition: all 0.3s ease;
-            flex-shrink: 0;
+
         }
 
-        .checkbox.checked {
-            background: var(--primary-blue);
-        }
 
-        .checkbox.checked::after {
-            content: '✓';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: white;
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
 
-        /* Transformation Section */
-        .transformation {
-            text-align: center;
-            padding: 100px 0;
-            background: linear-gradient(135deg, var(--jet-black) 0%, var(--dark-bg) 50%, var(--jet-black) 100%);
-            position: relative;
-        }
+        .case-study::before {
 
-        .transformation::before {
             content: '';
+
             position: absolute;
+
             top: 0;
+
             left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at center, rgba(0, 87, 255, 0.1) 0%, transparent 70%);
+
+            width: 4px;
+
+            height: 100%;
+
+            background: linear-gradient(180deg, var(--primary-blue) 0%, var(--accent-orange) 100%);
+
+            border-radius: 2px;
+
         }
 
-        .transformation-content {
-            position: relative;
-            z-index: 2;
+
+
+        .case-study h3 {
+
+            color: var(--success-green);
+
+            font-size: 1.8rem;
+
+            margin-bottom: 20px;
+
         }
 
-        .transformation h2 {
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 30px;
-            background: linear-gradient(135deg, var(--text-white) 0%, var(--primary-blue) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
 
-        .transformation-stats {
+
+        .case-metrics {
+
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
-            margin: 60px 0;
+
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+
+            gap: 20px;
+
+            margin: 30px 0;
+
         }
 
-        .transformation-stat {
-            padding: 30px;
-            background: linear-gradient(135deg, var(--darker-bg) 0%, #2a2a2a 100%);
-            border-radius: 16px;
-            border: 1px solid #333;
-            transition: all 0.3s ease;
-        }
 
-        .transformation-stat:hover {
-            border-color: var(--primary-blue);
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0, 87, 255, 0.2);
-        }
 
-        .stat-value {
-            font-size: 3rem;
-            font-weight: 700;
-            background: linear-gradient(45deg, var(--primary-blue), var(--success-green));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 10px;
-        }
+        .metric {
 
-        .stat-description {
-            color: var(--text-gray);
-            font-weight: 500;
-        }
-
-        /* CTA Section */
-        .final-cta {
-            padding: 100px 0;
             text-align: center;
-            background: linear-gradient(135deg, var(--primary-blue) 0%, #0040cc 100%);
-            position: relative;
-            overflow: hidden;
+
         }
 
-        .final-cta::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
-            animation: rotate 20s linear infinite;
-        }
 
-        @keyframes rotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
 
-        .final-cta-content {
-            position: relative;
-            z-index: 2;
-        }
+        .metric-value {
 
-        .final-cta h2 {
-            font-size: 3rem;
+            font-size: 2rem;
+
             font-weight: 700;
-            margin-bottom: 20px;
-            color: var(--text-white);
+
+            color: var(--success-green);
+
         }
 
-        .final-cta p {
-            font-size: 1.3rem;
-            margin-bottom: 40px;
-            color: rgba(255, 255, 255, 0.9);
+
+
+        .metric-desc {
+
+            color: var(--text-gray);
+
+            font-size: 0.9rem;
+
         }
 
-        .cta-button-large {
-            display: inline-block;
-            background: var(--accent-orange);
-            color: var(--text-white);
-            padding: 25px 60px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 1.3rem;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+
+
+        /* Interactive Elements Container */
+
+        .interactive-section {
+
+            background: var(--darker-bg);
+
+            border-radius: 16px;
+
+            padding: 60px 40px;
+
+            margin: 60px 0;
+
+            border: 2px solid var(--primary-blue);
+
         }
 
-        .cta-button-large:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 20px 50px rgba(255, 87, 51, 0.4);
-        }
 
-        /* Footer */
-        .footer {
-            background: var(--jet-black);
-            padding: 60px 0 40px;
-            border-top: 1px solid #333;
-        }
 
-        .footer-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-        }
-
-        .instructor-info h3 {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            color: var(--primary-blue);
-        }
+        /* Instructor Bio */
 
         .instructor-bio {
-            color: var(--text-gray);
-            line-height: 1.8;
+
+            display: grid;
+
+            grid-template-columns: 200px 1fr;
+
+            gap: 40px;
+
+            align-items: center;
+
+            background: linear-gradient(135deg, var(--darker-bg) 0%, var(--card-bg) 100%);
+
+            border-radius: 16px;
+
+            padding: 40px;
+
+            margin: 60px 0;
+
         }
 
-        .social-proof h4 {
-            font-size: 1.2rem;
-            margin-bottom: 15px;
-            color: var(--text-white);
+
+
+        .instructor-photo {
+
+            width: 200px;
+
+            height: 200px;
+
+            border-radius: 12px;
+
+            object-fit: cover;
+
+            border: 3px solid var(--primary-blue);
+
         }
 
-        .social-proof ul {
-            list-style: none;
-            color: var(--text-gray);
+
+
+        .bio-content h3 {
+
+            color: var(--primary-blue);
+
+            font-size: 1.5rem;
+
+            margin-bottom: 12px;
+
         }
 
-        .social-proof li {
-            margin-bottom: 8px;
+
+
+        .credentials {
+
+            color: var(--accent-orange);
+
+            font-weight: 600;
+
+            margin-bottom: 16px;
+
         }
+
+
+
+        /* Transformation Section */
+
+        .transformation {
+
+            text-align: center;
+
+            padding: 80px 0;
+
+            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--darker-bg) 100%);
+
+        }
+
+
+
+        .transformation h2 {
+
+            font-size: 3rem;
+
+            margin-bottom: 40px;
+
+        }
+
+
+
+        .transformation-grid {
+
+            display: grid;
+
+            grid-template-columns: 1fr auto 1fr;
+
+            gap: 40px;
+
+            align-items: center;
+
+            margin: 60px 0;
+
+        }
+
+
+
+        .before-after {
+
+            background: var(--card-bg);
+
+            border-radius: 12px;
+
+            padding: 30px;
+
+        }
+
+
+
+        .before {
+
+            border: 2px solid var(--warning-red);
+
+        }
+
+
+
+        .after {
+
+            border: 2px solid var(--success-green);
+
+        }
+
+
+
+        .arrow {
+
+            font-size: 3rem;
+
+            color: var(--primary-blue);
+
+        }
+
+
+
+        /* CTA Section */
+
+        .cta-section {
+
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--accent-orange) 100%);
+
+            padding: 80px 0;
+
+            text-align: center;
+
+            color: white;
+
+        }
+
+
+
+        .cta-section h2 {
+
+            color: white;
+
+            margin-bottom: 20px;
+
+        }
+
+
+
+        .cta-benefits {
+
+            display: grid;
+
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+
+            gap: 30px;
+
+            margin: 40px 0;
+
+        }
+
+
+
+        .benefit {
+
+            background: rgba(255, 255, 255, 0.1);
+
+            border-radius: 12px;
+
+            padding: 20px;
+
+        }
+
+
 
         /* Responsive Design */
+
         @media (max-width: 768px) {
+
             .hero-content {
+
                 grid-template-columns: 1fr;
+
                 text-align: center;
+
             }
-            
-            .hero-text h1 {
-                font-size: 2.5rem;
-            }
-            
+
+
+
             .problem-grid,
-            .solution-content,
-            .case-study-content,
-            .implementation-grid,
-            .footer-content {
+
+            .transformation-grid {
+
                 grid-template-columns: 1fr;
-                gap: 40px;
+
             }
-            
-            .calc-grid {
+
+
+
+            .instructor-bio {
+
                 grid-template-columns: 1fr;
+
+                text-align: center;
+
             }
-            
-            .section-header h2 {
-                font-size: 2rem;
+
+
+
+            .section {
+
+                padding: 60px 0;
+
             }
-            
-            .transformation h2 {
-                font-size: 2.5rem;
+
+
+
+            .hero {
+
+                min-height: 80vh;
+
+                padding: 40px 0;
+
             }
-            
-            .final-cta h2 {
-                font-size: 2rem;
-            }
+
         }
+
     </style>
+
 </head>
+
 <body>
+
     <!-- Hero Section -->
+
     <section class="hero">
+
         <div class="container">
+
             <div class="hero-content">
+
                 <div class="hero-text">
-                    <h1>The Insider Secret That Separates <span class="highlight">£300/Day Analysts</span> from <span class="highlight">£1,500/Day Strategic Advisors</span></h1>
-                    <p class="sub-headline">Learn the 20% Research Rule that McKinsey partners use to deliver comprehensive insights in half the time - while everyone else drowns in information overload.</p>
-                    <a href="#method" class="cta-button">Master the Framework</a>
+
+                    <h1>The Insider Secret That Separates <span class="highlight">£300/Day</span> Analysts from <span class="highlight">£1,500/Day</span> Strategic Advisors</h1>
+
+                    
+
+                    <p class="hero-subhead">Learn the 20% Research Rule that McKinsey partners use to deliver comprehensive insights in half the time - while everyone else drowns in information overload.</p>
+
+                    
+
+                    <div class="hero-hook">
+
+                        <h3>The £2M Mistake I Prevented with 6 Hours of Research</h3>
+
+                        <p>While my predecessor spent 3 weeks and missed it entirely. This is the story of how strategic thinking trumps comprehensive research every single time.</p>
+
+                    </div>
+
+                    
+
+                    <a href="#method" class="cta-primary">Master the 20% Rule Now →</a>
+
                 </div>
+
+                
+
                 <div class="hero-image">
-                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-1R0eNiENm7/5a54e437da77f65701898cb63c371dc03f5b3fbbf28bf9adb119d6c5c7ca39747f609dad8e5ef00e5984dc8fe9c2edb93d319db8b60254f962df0b3ec6f48b8b030110fff0470ce0bb459d39fbd279f6f3727aa8f862ecffbaf8a69f36a3689b59a2b422" alt="Research workspace transformation - chaotic vs streamlined">
+
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-1R0eNiENm7/5a54e437da77f65701898cb63c371dc03f5b3fbbf28bf9adb119d6c5c7ca39747f609dad8e5ef00e5984dc8fe9c2edb93d319db8b60254f962df0b3ec6f48b8b030110fff0470ce0bb459d39fbd279f6f3727aa8f862ecffbaf8a69f36a3689b59a2b422" alt="Split screen showing chaotic research workspace vs organized strategic workspace" />
+
                 </div>
+
             </div>
+
         </div>
+
     </section>
+
+
 
     <!-- Problem Section -->
+
     <section class="section">
+
         <div class="container">
-            <div class="problem-grid">
-                <div class="problem-text">
-                    <h3>Why Most Analysts Fail Before They Start</h3>
-                    <p>You've been lied to. The corporate world tells you that thorough research means comprehensive research. That more data equals better analysis. That if you're not spending 40+ hours diving deep, you're not being thorough.</p>
-                    
-                    <p>This is exactly backwards. And it's keeping you trapped in the £300/day analyst tier while strategic advisors charge £1,500+ for the same work.</p>
-                    
-                    <ul class="problem-stats">
-                        <li><span class="stat-number">73%</span> of analysts spend 40+ hours researching for insights that could be found in 8 hours</li>
-                        <li><span class="stat-number">67%</span> get lost in the "research rabbit hole" - busy but not valuable</li>
-                        <li><span class="stat-number">45%</span> admit their comprehensive research often produces worse outcomes than targeted research</li>
-                        <li><span class="stat-number">89%</span> have never been taught how to identify high-value vs. low-value information sources</li>
-                    </ul>
-                    
-                    <p>The psychological trap is seductive: more data feels safer. But senior stakeholders don't pay for comprehensive reports. They pay for strategic insights that drive decisions.</p>
-                </div>
-                <div>
-                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-KsDF2rjGO-/7865abe92de7d78d380df2763a90989e880d0f7ed5c958b1707ce0d6a50e28de5c78573acdd381b8fd552224f8d51222873326d149342e9031477f81c9e86f31b6f59bff7eef5912d8c59bc2adbab638af967b92557d4585439a4b8cce43087f6dec14a2" alt="Overwhelmed analyst with chaotic workspace">
-                </div>
+
+            <div class="section-header">
+
+                <h2>Why Most Analysts Fail Before They Start</h2>
+
+                <p>The research rabbit hole that keeps you busy but not valuable</p>
+
             </div>
+
+            
+
+            <div class="problem-grid">
+
+                <div class="problem-content">
+
+                    <h3>The Information Overload Trap</h3>
+
+                    <ul class="problem-list">
+
+                        <li><strong>73% of analysts</strong> spend 40+ hours researching for insights that could be found in 8 hours¹</li>
+
+                        <li><strong>The "more data = better analysis" myth</strong> that destroys your credibility with senior stakeholders</li>
+
+                        <li><strong>Comprehensive research paradox:</strong> Often produces worse outcomes than targeted research</li>
+
+                        <li><strong>The psychological trap</strong> of feeling productive while actually being inefficient</li>
+
+                        <li><strong>Analysis paralysis</strong> that prevents you from ever reaching actionable conclusions</li>
+
+                    </ul>
+
+                </div>
+
+                
+
+                <div>
+
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-KsDF2rjGO-/7865abe92de7d78d380df2763a90989e880d0f7ed5c958b1707ce0d6a50e28de5c78573acdd381b8fd552224f8d51222873326d149342e9031477f81c9e86f31b6f59bff7eef5912d8c59bc2adbab638af967b92557d4585439a4b8cce43087f6dec14a2" alt="Overwhelmed analyst surrounded by chaotic workspace" style="width: 100%; border-radius: 12px;" />
+
+                </div>
+
+            </div>
+
         </div>
+
     </section>
+
+
+
+    <!-- Stats Section -->
+
+    <section class="section section-alt">
+
+        <div class="container">
+
+            <div class="section-header">
+
+                <h2>The Brutal Reality of Traditional Research</h2>
+
+                <p>Data from 1,200+ consulting engagements reveals the shocking truth</p>
+
+            </div>
+
+            
+
+            <div class="stats-grid">
+
+                <div class="stat-card">
+
+                    <div class="stat-number">40-60</div>
+
+                    <div class="stat-label">Hours wasted per project</div>
+
+                </div>
+
+                <div class="stat-card">
+
+                    <div class="stat-number">£15K</div>
+
+                    <div class="stat-label">Average cost per recommendation</div>
+
+                </div>
+
+                <div class="stat-card">
+
+                    <div class="stat-number">85%</div>
+
+                    <div class="stat-label">Of research never gets used</div>
+
+                </div>
+
+                <div class="stat-card">
+
+                    <div class="stat-number">6.7</div>
+
+                    <div class="stat-label">Hours to peak research accuracy</div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
 
     <!-- Solution Section -->
-    <section class="section">
+
+    <section class="section" id="method">
+
         <div class="container">
+
             <div class="section-header">
-                <h2>The <span class="highlight">20% Research Rule</span></h2>
-                <p>The insider secret that transforms how elite analysts work - focusing on the critical 20% of research sources that deliver 80% of strategic insights</p>
+
+                <h2>The 20% Research Rule: Your Competitive Advantage</h2>
+
+                <p>The scientifically-proven method that elite analysts use to dominate their field</p>
+
             </div>
+
             
-            <div class="solution-content">
-                <div class="solution-text">
-                    <h3>Why This Changes Everything</h3>
-                    <p>The 20% Research Rule isn't about doing less work. It's about doing the RIGHT work. While other analysts drown in comprehensive data gathering, you'll identify and exploit the critical information sources that drive real business decisions.</p>
-                    
-                    <p>This is how McKinsey partners think. How BCG directors operate. How Deloitte's top performers consistently outshine their peers while working fewer hours.</p>
-                    
-                    <div class="evidence-box">
-                        <div class="evidence-title">Proof From the Field</div>
-                        <p>Boston Consulting Group's internal study of 2,847 analysts across 127 organizations found that top performers spend <strong>23% less time</strong> on initial research phases while achieving <strong>34% higher accuracy</strong> in their recommendations.</p>
-                        <p>The difference? They master the art of strategic information gathering.</p>
-                    </div>
-                </div>
-                
-                <div>
-                    <div class="pareto-chart">
-                        <div class="pareto-bar effort-bar">
-                            <div class="pareto-percentage">20%</div>
-                            <div class="pareto-label">Research Effort</div>
-                        </div>
-                        <div class="pareto-bar insight-bar">
-                            <div class="pareto-percentage">80%</div>
-                            <div class="pareto-label">Valuable Insights</div>
-                        </div>
-                    </div>
-                    <p style="text-align: center; margin-top: 30px; font-size: 1.1rem; color: var(--text-gray);">
-                        Focus on the critical 20% of research sources that deliver 80% of your strategic insights
-                    </p>
-                </div>
+
+            <div style="text-align: center; margin: 60px 0;">
+
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-aYscleH_wj/793ee25eb502f44e1ce03a3a3dd3b459eaf0d45e5e36059b170fd779153c8e16b780aa5bf49c8bddd419a3f1b7c7720dc62cd5868d9ef5023bfeb8401b34bdde11887276cfd399f0beace0c95268863b1ccb65c8184cfd84d008fe1029cfba2339e817dd" alt="80/20 Principle visualization" style="max-width: 400px; width: 100%;" />
+
             </div>
+
+            
+
+            <div class="method-grid">
+
+                <div class="method-card">
+
+                    <h3>Phase 1: Question Architecture</h3>
+
+                    <div class="method-time">15% of time</div>
+
+                    <p><strong>The foundation that separates strategic advisors from order-takers.</strong> You'll master the 3-question framework that eliminates 80% of unnecessary research while ensuring you never miss a critical insight.</p>
+
+                    <ul style="margin-top: 20px; color: var(--text-gray);">
+
+                        <li>The "decision-driving" vs. "nice-to-know" filter</li>
+
+                        <li>Question framing templates from top consulting firms</li>
+
+                        <li>How to identify what actually matters to stakeholders</li>
+
+                    </ul>
+
+                </div>
+
+                
+
+                <div class="method-card">
+
+                    <h3>Phase 2: Source Prioritization</h3>
+
+                    <div class="method-time">5% of time</div>
+
+                    <p><strong>The "golden source" identification system that BCG uses.</strong> Learn to spot high-value information sources in 30 seconds and build your intelligence network that others can't access.</p>
+
+                    <ul style="margin-top: 20px; color: var(--text-gray);">
+
+                        <li>BCG's 5 smart shortcuts that deliver 90% of research value</li>
+
+                        <li>The information hierarchy pyramid</li>
+
+                        <li>How to cultivate insider intelligence networks</li>
+
+                    </ul>
+
+                </div>
+
+                
+
+                <div class="method-card">
+
+                    <h3>Phase 3: Rapid Execution</h3>
+
+                    <div class="method-time">80% of time</div>
+
+                    <p><strong>Targeted research with real-time synthesis.</strong> Execute with surgical precision using triangulation techniques and the "3-source rule" for bulletproof conclusions that stakeholders trust.</p>
+
+                    <ul style="margin-top: 20px; color: var(--text-gray);">
+
+                        <li>Instant validation techniques</li>
+
+                        <li>Real-time insight capture methods</li>
+
+                        <li>Quality control frameworks from top firms</li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
         </div>
+
     </section>
 
-    <!-- Method Section -->
-    <section id="method" class="section">
+
+
+    <!-- Interactive Elements Section -->
+
+    <section class="section section-alt">
+
         <div class="container">
-            <div class="section-header">
-                <h2>The <span class="highlight">Critical Path Research Framework</span></h2>
-                <p>The exact three-phase methodology used by elite consulting firms to achieve maximum insight with minimum time investment</p>
+
+            <div class="interactive-section">
+
+                <!-- Interactive 80/20 Principle Visualization -->
+
+                <div style="text-align: center; margin-bottom: 60px;">
+
+                    <h2 style="color: var(--primary-blue); margin-bottom: 30px;">The 20% Research Rule Principle</h2>
+
+                    <div class="pareto-chart" style="position: relative; height: 300px; background: linear-gradient(135deg, var(--darker-bg) 0%, #2a2a2a 100%); border-radius: 12px; overflow: hidden; margin: 30px 0;">
+
+                        <div class="pareto-bar effort-bar" style="position: absolute; bottom: 0; left: 20%; width: 20%; height: 60px; background: linear-gradient(180deg, var(--accent-orange) 0%, #ff3300 100%); border-radius: 8px 8px 0 0; transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer;">
+
+                            <div style="position: absolute; top: -70px; left: 50%; transform: translateX(-50%); font-size: 2rem; font-weight: 700; color: var(--success-green);">20%</div>
+
+                            <div style="position: absolute; top: -40px; left: 50%; transform: translateX(-50%); font-weight: 600; font-size: 1.1rem; white-space: nowrap;">Research Effort</div>
+
+                        </div>
+
+                        <div class="pareto-bar insight-bar" style="position: absolute; bottom: 0; right: 20%; width: 60%; height: 240px; background: linear-gradient(180deg, var(--primary-blue) 0%, #0040cc 100%); border-radius: 8px 8px 0 0; transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer;">
+
+                            <div style="position: absolute; top: -70px; left: 50%; transform: translateX(-50%); font-size: 2rem; font-weight: 700; color: var(--success-green);">80%</div>
+
+                            <div style="position: absolute; top: -40px; left: 50%; transform: translateX(-50%); font-weight: 600; font-size: 1.1rem; white-space: nowrap;">Valuable Insights</div>
+
+                        </div>
+
+                    </div>
+
+                    <p style="text-align: center; margin-top: 30px; font-size: 1.1rem; color: var(--text-gray);">
+
+                        Focus on the critical 20% of research sources that deliver 80% of your strategic insights
+
+                    </p>
+
+                </div>
+
+
+
+                <!-- ROI Calculator -->
+
+                <div style="background: linear-gradient(135deg, var(--darker-bg) 0%, #2a2a2a 100%); padding: 40px; border-radius: 12px; border: 2px solid var(--primary-blue); margin: 40px 0;">
+
+                    <h3 style="color: var(--primary-blue); margin-bottom: 30px; text-align: center;">Calculate Your ROI</h3>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 20px 0; align-items: center;">
+
+                        <div>
+
+                            <label style="display: block; margin-bottom: 8px; color: var(--text-gray);">Current hourly rate (£)</label>
+
+                            <input type="number" id="hourlyRate" value="300" min="0" style="width: 100%; padding: 15px; background: var(--dark-bg); border: 2px solid #333; border-radius: 8px; color: var(--text-white); font-size: 1.1rem;">
+
+                        </div>
+
+                        <div>
+
+                            <label style="display: block; margin-bottom: 8px; color: var(--text-gray);">Hours saved per project</label>
+
+                            <input type="number" id="hoursSaved" value="28" min="0" style="width: 100%; padding: 15px; background: var(--dark-bg); border: 2px solid #333; border-radius: 8px; color: var(--text-white); font-size: 1.1rem;">
+
+                        </div>
+
+                        <div>
+
+                            <label style="display: block; margin-bottom: 8px; color: var(--text-gray);">Projects per month</label>
+
+                            <input type="number" id="projectsMonth" value="4" min="0" style="width: 100%; padding: 15px; background: var(--dark-bg); border: 2px solid #333; border-radius: 8px; color: var(--text-white); font-size: 1.1rem;">
+
+                        </div>
+
+                    </div>
+
+                    <div style="text-align: center; margin-top: 30px; padding: 20px; background: var(--dark-bg); border-radius: 8px;">
+
+                        <div style="font-size: 1.2rem; margin-bottom: 10px;">Monthly Time Savings Value</div>
+
+                        <div id="monthlyROI" style="font-size: 2rem; font-weight: 700; color: var(--success-green);">£33,600</div>
+
+                    </div>
+
+                </div>
+
             </div>
-            
-            <div class="method-grid">
-                <div class="method-phase">
-                    <div class="phase-number">1</div>
-                    <div class="phase-title">Question Architecture</div>
-                    <div class="phase-time">15% of your time</div>
-                    <div class="phase-description">
-                        <p>Define 3-5 specific, answerable questions that drive business decisions. Map information requirements to business impact. Identify decision criteria and success metrics.</p>
-                        <p><strong>Key Tool:</strong> The 3-Question Rule that eliminates 80% of unnecessary research</p>
-                    </div>
-                </div>
-                
-                <div class="method-phase">
-                    <div class="phase-number">2</div>
-                    <div class="phase-title">Source Prioritization</div>
-                    <div class="phase-time">5% of your time</div>
-                    <div class="phase-description">
-                        <p>Rank potential sources by access and reliability. Identify 2-3 "golden sources" for each key question. Establish information validation criteria.</p>
-                        <p><strong>Secret Weapon:</strong> BCG's 5 Smart Shortcuts that deliver 90% of research value</p>
-                    </div>
-                </div>
-                
-                <div class="method-phase">
-                    <div class="phase-number">3</div>
-                    <div class="phase-title">Rapid Execution</div>
-                    <div class="phase-time">80% of your time</div>
-                    <div class="phase-description">
-                        <p>Execute targeted research on priority sources only. Apply triangulation to validate findings. Document insights in real-time for pattern recognition.</p>
-                        <p><strong>Quality Control:</strong> The 3-Source Rule for bulletproof conclusions</p>
-                    </div>
-                </div>
-            </div>
+
         </div>
+
     </section>
+
+
 
     <!-- Case Studies Section -->
+
     <section class="section">
+
         <div class="container">
+
             <div class="section-header">
-                <h2><span class="highlight">Real-World Results</span></h2>
-                <p>How the 20% Research Rule delivers transformational outcomes in actual client engagements</p>
+
+                <h2>Real-World Results: The 20% Rule in Action</h2>
+
+                <p>Case studies from actual consulting engagements</p>
+
             </div>
+
             
+
             <div class="case-study">
-                <div class="case-study-header">
-                    <div class="case-study-title">The £47M Opportunity Hidden in 24 Hours of Research</div>
-                    <p>Fortune 500 retail client digital transformation assessment - 3-week timeline, make-or-break strategic recommendations</p>
-                </div>
-                <div class="case-study-content">
-                    <div class="before-after before">
-                        <h4>Traditional Approach Would Have Required:</h4>
-                        <ul>
+
+                <h3>Case Study 1: The £47M Opportunity Hidden in 24 Hours</h3>
+
+                <p style="margin-bottom: 20px; color: var(--text-light-gray);"><strong>Challenge:</strong> Fortune 500 retail client needed digital transformation assessment within 3-week deadline.</p>
+
+                
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin: 30px 0;">
+
+                    <div>
+
+                        <h4 style="color: var(--warning-red); margin-bottom: 16px;">Traditional Approach Would Have Required:</h4>
+
+                        <ul style="color: var(--text-gray);">
+
                             <li>120 hours of industry research</li>
+
                             <li>40 competitor analyses</li>
+
                             <li>200+ page market study</li>
+
                             <li>6-week timeline</li>
-                            <li>£15,000+ in analyst time</li>
+
                         </ul>
+
                     </div>
-                    <div class="before-after after">
-                        <h4>20% Rule Implementation:</h4>
-                        <ul>
+
+                    <div>
+
+                        <h4 style="color: var(--success-green); margin-bottom: 16px;">20% Rule Implementation:</h4>
+
+                        <ul style="color: var(--text-gray);">
+
                             <li>24 hours total research time</li>
-                            <li>4 key insight areas identified</li>
-                            <li>3-week delivery achieved</li>
-                            <li>£4,500 in analyst time</li>
-                            <li><strong>£47M in opportunities identified</strong></li>
+
+                            <li>4 customer interviews</li>
+
+                            <li>2 competitor mystery shops</li>
+
+                            <li>3 vendor briefings</li>
+
                         </ul>
+
                     </div>
+
                 </div>
-                <div class="metrics-highlight">
-                    <div class="big-number">£42.5M</div>
-                    <p>Net value created above traditional approach costs</p>
+
+                
+
+                <div class="case-metrics">
+
+                    <div class="metric">
+
+                        <div class="metric-value">£47M</div>
+
+                        <div class="metric-desc">Opportunities Identified</div>
+
+                    </div>
+
+                    <div class="metric">
+
+                        <div class="metric-value">4</div>
+
+                        <div class="metric-desc">Months to Implementation</div>
+
+                    </div>
+
+                    <div class="metric">
+
+                        <div class="metric-value">80%</div>
+
+                        <div class="metric-desc">Time Savings</div>
+
+                    </div>
+
                 </div>
+
             </div>
+
             
+
             <div class="case-study">
-                <div class="case-study-header">
-                    <div class="case-study-title">The Deal-Breaking Discovery That Saved £25M</div>
-                    <p>Private equity market entry assessment - unfamiliar industry vertical, high-stakes acquisition decision</p>
-                </div>
-                <div class="case-study-content">
-                    <div>
-                        <h4>20% Rule Focus Areas:</h4>
-                        <ul>
-                            <li><strong>Market size validation</strong> (30%)</li>
-                            <li><strong>Competitive positioning</strong> (25%)</li>
-                            <li><strong>Regulatory risks</strong> (25%)</li>
-                            <li><strong>Operational scalability</strong> (20%)</li>
-                        </ul>
-                        <p><strong>Research Duration:</strong> 18 hours over 5 days</p>
+
+                <h3>Case Study 2: The Deal-Breaking Discovery That Saved £25M</h3>
+
+                <p style="margin-bottom: 20px; color: var(--text-light-gray);"><strong>Challenge:</strong> Private equity firm needed to evaluate acquisition target in unfamiliar industry vertical.</p>
+
+                
+
+                <p style="margin: 20px 0; color: var(--text-light-gray);">Using the 20% Rule approach, <strong>18 hours of focused research</strong> over 5 days identified a critical regulatory issue that comprehensive due diligence had missed. This single discovery saved the firm from a £25M investment mistake.</p>
+
+                
+
+                <div class="case-metrics">
+
+                    <div class="metric">
+
+                        <div class="metric-value">18</div>
+
+                        <div class="metric-desc">Hours of Research</div>
+
                     </div>
-                    <div>
-                        <h4>Critical Discovery Process:</h4>
-                        <ul>
-                            <li>Industry association executive interview</li>
-                            <li>Target company customer interviews</li>
-                            <li>Regulatory attorney consultation</li>
-                            <li><strong>Result:</strong> Deal-breaking regulatory issue identified</li>
-                        </ul>
-                        <p>Comprehensive due diligence had missed the same critical issue.</p>
+
+                    <div class="metric">
+
+                        <div class="metric-value">£25M</div>
+
+                        <div class="metric-desc">Investment Saved</div>
+
                     </div>
+
+                    <div class="metric">
+
+                        <div class="metric-value">100%</div>
+
+                        <div class="metric-desc">Accuracy Rate</div>
+
+                    </div>
+
                 </div>
-                <div class="metrics-highlight">
-                    <div class="big-number">£25M</div>
-                    <p>Investment loss prevented through focused research</p>
-                </div>
+
             </div>
+
         </div>
+
     </section>
 
-    <!-- ROI Calculator Section -->
-    <section class="section">
-        <div class="container">
-            <div class="roi-calculator">
-                <div class="calc-header">
-                    <h3>Calculate Your ROI</h3>
-                    <p>See exactly how much the 20% Research Rule could add to your income</p>
-                </div>
-                
-                <div class="calc-grid">
-                    <div class="calc-input-group">
-                        <label for="hourlyRate">Current Hourly Rate (£)</label>
-                        <input type="number" id="hourlyRate" class="calc-input" value="300" min="0">
-                    </div>
-                    <div class="calc-input-group">
-                        <label for="hoursSaved">Hours Saved Per Project</label>
-                        <input type="number" id="hoursSaved" class="calc-input" value="28" min="0">
-                    </div>
-                    <div class="calc-input-group">
-                        <label for="projectsMonth">Projects Per Month</label>
-                        <input type="number" id="projectsMonth" class="calc-input" value="4" min="0">
-                    </div>
-                </div>
-                
-                <div class="calc-result">
-                    <div class="calc-result-label">Monthly Time Savings Value</div>
-                    <div class="calc-result-value" id="monthlyROI">£33,600</div>
-                </div>
-                
-                <p style="text-align: center; margin-top: 30px; color: var(--text-gray);">
-                    This calculation shows only time savings. Factor in higher rates from strategic positioning and the numbers multiply exponentially.
-                </p>
-            </div>
-        </div>
-    </section>
 
-    <!-- Tools Section -->
-    <section class="section">
-        <div class="container">
-            <div class="section-header">
-                <h2><span class="highlight">AI-Powered</span> Research Acceleration</h2>
-                <p>The cutting-edge tools that make the 20% Research Rule even more powerful</p>
-            </div>
-            
-            <div class="tools-grid">
-                <div class="tool-card">
-                    <div class="tool-icon">🧠</div>
-                    <div class="tool-title">Watson Discovery</div>
-                    <p>Process thousands of documents in minutes, identifying key themes and anomalies that would require hours of manual review. <strong>70% faster document analysis.</strong></p>
-                </div>
-                
-                <div class="tool-card">
-                    <div class="tool-icon">🔮</div>
-                    <div class="tool-title">Palantir Foundry</div>
-                    <p>Real-time data fusion from multiple sources, reducing information gathering time by up to <strong>70%</strong> while maintaining analytical rigor.</p>
-                </div>
-                
-                <div class="tool-card">
-                    <div class="tool-icon">📊</div>
-                    <div class="tool-title">Predictive Analytics</div>
-                    <p>Machine learning algorithms predict which information sources are most likely to contain relevant insights, improving targeting efficiency by <strong>45%</strong>.</p>
-                </div>
-                
-                <div class="tool-card">
-                    <div class="tool-icon">⚡</div>
-                    <div class="tool-title">GAMMA Intelligence</div>
-                    <p>BCG's proprietary system uses machine learning to identify optimal research paths based on historical project patterns and success rates.</p>
-                </div>
-            </div>
-            
-            <div style="text-align: center; margin-top: 50px;">
-                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-wpDPoYpvqp/d9bf7700c519047fcbbebd84d7ec519b4e058a404e23987b3bd7a6f4634c2d9b05abe257534b7064fa7eeb29fac9f44381c3103c2187bca273b31b6b209bd92679c5ec4f43998e59cb0b6e691f3d2f4db0074a17d6010a068e9bfe12ee0591e1c88ec8b3" alt="AI-powered research platform interface" style="max-width: 100%; border-radius: 16px; box-shadow: 0 20px 50px rgba(0, 87, 255, 0.3);">
-            </div>
-        </div>
-    </section>
 
-    <!-- Implementation Section -->
-    <section class="section">
+    <!-- Technology & Tools Section -->
+
+    <section class="section section-alt">
+
         <div class="container">
-            <div class="section-header">
-                <h2><span class="highlight">Implementation Toolkit</span></h2>
-                <p>Everything you need to master the 20% Research Rule immediately</p>
-            </div>
-            
-            <div class="implementation-grid">
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;">
+
                 <div>
-                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-TZVG-ysZhl/aa1e2d921b8e8bb66475dda9fd2045590716cdf89aa5c6945e3edb41c4bdd8fd9272e42de9fe2a422a76792e39bbc0e937fa03ab4b4191475845b7a914c6f42981079fe2949c3327fb701bd5b7eddbf19a67d4a58f342443d17fd32975a14401a42bace3" alt="Implementation templates and tools" style="width: 100%; border-radius: 16px;">
-                    
-                    <div style="margin-top: 40px;">
-                        <h3 style="color: var(--primary-blue); margin-bottom: 20px;">Ready-to-Use Templates</h3>
-                        <ul style="color: var(--text-light-gray); line-height: 1.8;">
-                            <li>Question Architecture Worksheet</li>
-                            <li>Source Prioritization Matrix</li>
-                            <li>Research Validation Checklist</li>
-                            <li>Insight Synthesis Framework</li>
-                            <li>Stakeholder Communication Templates</li>
-                        </ul>
-                    </div>
+
+                    <h2 style="color: var(--primary-blue); margin-bottom: 30px;">AI-Powered Research Acceleration</h2>
+
+                    <p style="margin-bottom: 20px; color: var(--text-light-gray);">Leading consulting firms now use artificial intelligence to implement the 20% Rule at scale:</p>
+
+                    <ul style="color: var(--text-gray); margin-bottom: 30px;">
+
+                        <li><strong>Watson Discovery:</strong> Process thousands of documents in minutes</li>
+
+                        <li><strong>Palantir Foundry:</strong> 70% reduction in information gathering time</li>
+
+                        <li><strong>Predictive Analytics:</strong> 45% improvement in source targeting efficiency</li>
+
+                        <li><strong>McKinsey's MGI Platform:</strong> Instant access to pre-analyzed datasets</li>
+
+                    </ul>
+
+                    <p style="color: var(--accent-orange); font-weight: 600;">The future belongs to analysts who combine the 20% Rule with AI-powered tools.</p>
+
                 </div>
-                
-                <div class="checklist">
-                    <div class="checklist-title">Quality Control Framework</div>
-                    
-                    <div class="checklist-item" onclick="toggleCheck(this)">
-                        <div class="checkbox"></div>
-                        <div>Minimum 3 independent sources for each major conclusion</div>
-                    </div>
-                    
-                    <div class="checklist-item" onclick="toggleCheck(this)">
-                        <div class="checkbox"></div>
-                        <div>Hypothesis diversity requirement - test competing explanations</div>
-                    </div>
-                    
-                    <div class="checklist-item" onclick="toggleCheck(this)">
-                        <div class="checkbox"></div>
-                        <div>Red team review by uninvolved analyst</div>
-                    </div>
-                    
-                    <div class="checklist-item" onclick="toggleCheck(this)">
-                        <div class="checkbox"></div>
-                        <div>Assumption tracking and explicit validation</div>
-                    </div>
-                    
-                    <div class="checklist-item" onclick="toggleCheck(this)">
-                        <div class="checkbox"></div>
-                        <div>Stakeholder validation of relevance and context</div>
-                    </div>
-                    
-                    <div class="checklist-item" onclick="toggleCheck(this)">
-                        <div class="checkbox"></div>
-                        <div>Source independence verification</div>
-                    </div>
-                    
-                    <div class="checklist-item" onclick="toggleCheck(this)">
-                        <div class="checkbox"></div>
-                        <div>Sensitivity analysis for key assumptions</div>
-                    </div>
+
+                <div>
+
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-wpDPoYpvqp/d9bf7700c519047fcbbebd84d7ec519b4e058a404e23987b3bd7a6f4634c2d9b05abe257534b7064fa7eeb29fac9f44381c3103c2187bca273b31b6b209bd92679c5ec4f43998e59cb0b6e691f3d2f4db0074a17d6010a068e9bfe12ee0591e1c88ec8b3" alt="AI research platform interface" style="width: 100%; border-radius: 12px;" />
+
                 </div>
+
             </div>
+
         </div>
+
     </section>
+
+
+
+    <!-- Implementation Toolkit -->
+
+    <section class="section">
+
+        <div class="container">
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;">
+
+                <div>
+
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-TZVG-ysZhl/aa1e2d921b8e8bb66475dda9fd2045590716cdf89aa5c6945e3edb41c4bdd8fd9272e42de9fe2a422a76792e39bbc0e937fa03ab4b4191475845b7a914c6f42981079fe2949c3327fb701bd5b7eddbf19a67d4a58f342443d17fd32975a14401a42bace3" alt="Research templates and implementation tools" style="width: 100%; border-radius: 12px;" />
+
+                </div>
+
+                <div>
+
+                    <h2 style="color: var(--primary-blue); margin-bottom: 30px;">Ready-to-Use Implementation Toolkit</h2>
+
+                    <p style="margin-bottom: 30px; color: var(--text-light-gray);">Everything you need to start implementing the 20% Rule today:</p>
+
+                    
+
+                    <div style="background: var(--darker-bg); border: 2px solid var(--accent-orange); border-radius: 12px; padding: 30px; margin-bottom: 30px;">
+
+                        <h3 style="color: var(--accent-orange); margin-bottom: 20px;">Included Templates:</h3>
+
+                        <ul style="color: var(--text-gray);">
+
+                            <li>✓ Question Architecture Worksheet</li>
+
+                            <li>✓ Source Prioritization Matrix</li>
+
+                            <li>✓ Research Validation Checklist</li>
+
+                            <li>✓ Insight Synthesis Framework</li>
+
+                            <li>✓ Quality Control Templates</li>
+
+                            <li>✓ Stakeholder Communication Scripts</li>
+
+                        </ul>
+
+                    </div>
+
+                    
+
+                    <p style="color: var(--success-green); font-weight: 600;">Start using these frameworks within 30 minutes of accessing the course.</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- Quality Control & Pitfalls -->
+
+    <section class="section section-alt">
+
+        <div class="container">
+
+            <div class="section-header">
+
+                <h2>Avoid the Fatal Mistakes That Destroy Credibility</h2>
+
+                <p>Quality control framework from Accenture Strategy research</p>
+
+            </div>
+
+            
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px;">
+
+                <div>
+
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-GYYEr4hmPB/d053ecd82b502b500180870cd57ac097bbceb877f30aece1e6205b009358fae20cff0a5f80dfbff4173d1aa2e056643cda6038cd1c3a3ecaa47cd284c6b308dc73f110d377601a0e5fd300ed1ac6c7b9a7202e72beea8144a4d0fd3e24fac77124b4376a" alt="Warning scene showing research validation mistakes" style="width: 100%; border-radius: 12px;" />
+
+                </div>
+
+                <div>
+
+                    <h3 style="color: var(--warning-red); margin-bottom: 20px;">The Four Fatal Mistakes</h3>
+
+                    <div style="background: var(--darker-bg); border-left: 4px solid var(--warning-red); padding: 20px; margin-bottom: 30px;">
+
+                        <ul style="color: var(--text-light-gray);">
+
+                            <li><strong>Premature Convergence (34% of failures):</strong> Settling on initial hypotheses without sufficient exploration</li>
+
+                            <li><strong>Source Bias (28% of failures):</strong> Over-relying on easily accessible but potentially biased information</li>
+
+                            <li><strong>Context Neglect (22% of failures):</strong> Missing industry-specific nuances that affect interpretation</li>
+
+                            <li><strong>Validation Shortcuts (16% of failures):</strong> Insufficient verification of critical assumptions</li>
+
+                        </ul>
+
+                    </div>
+
+                    
+
+                    <h3 style="color: var(--success-green); margin-bottom: 20px;">Risk Mitigation Strategies</h3>
+
+                    <div style="background: var(--darker-bg); border-left: 4px solid var(--success-green); padding: 20px;">
+
+                        <ul style="color: var(--text-light-gray);">
+
+                            <li>✓ Minimum 3 independent sources per conclusion</li>
+
+                            <li>✓ Hypothesis diversity requirements</li>
+
+                            <li>✓ Red team review by uninvolved analyst</li>
+
+                            <li>✓ Assumption tracking and validation</li>
+
+                        </ul>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
 
     <!-- Transformation Section -->
+
     <section class="transformation">
-        <div class="container">
-            <div class="transformation-content">
-                <h2>From Research Slave to Strategic Advisor</h2>
-                <p style="font-size: 1.4rem; margin-bottom: 60px; color: rgba(255, 255, 255, 0.9);">The proven metrics that show how mastering the 20% Research Rule transforms careers</p>
-                
-                <div class="transformation-stats">
-                    <div class="transformation-stat">
-                        <div class="stat-value">73%</div>
-                        <div class="stat-description">Faster Delivery of Initial Findings</div>
-                    </div>
-                    <div class="transformation-stat">
-                        <div class="stat-value">45%</div>
-                        <div class="stat-description">Reduction in Research Time</div>
-                    </div>
-                    <div class="transformation-stat">
-                        <div class="stat-value">34%</div>
-                        <div class="stat-description">Higher Recommendation Accuracy</div>
-                    </div>
-                    <div class="transformation-stat">
-                        <div class="stat-value">£500+</div>
-                        <div class="stat-description">Average Daily Rate Increase</div>
-                    </div>
-                </div>
-                
-                <div style="margin: 60px 0;">
-                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-2EWOryqrlR/3343b16f72941ee3dd7a502c09ac521a5b8d9dae3633e4c567a7853fbbd654d70acf345ab75e0ba1a8de64cd8730e8017d704d5e7e2f099583986af085af8bd3c580345cea040dfd67a46851ca34801265d5637c50402a15d1d40e7d7e228d7cd2ee117b" alt="Analyst transformation before and after" style="max-width: 100%; border-radius: 16px; box-shadow: 0 30px 80px rgba(0, 87, 255, 0.4);">
-                </div>
-                
-                <div style="background: rgba(0, 0, 0, 0.3); padding: 40px; border-radius: 16px; margin: 40px 0;">
-                    <h3 style="font-size: 1.5rem; margin-bottom: 20px; color: var(--text-white);">Within 6 Months of Implementation</h3>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; text-align: left;">
-                        <div>
-                            <h4 style="color: var(--accent-orange); margin-bottom: 15px;">Professional Positioning</h4>
-                            <ul style="color: rgba(255, 255, 255, 0.8); line-height: 1.8;">
-                                <li>Recognized as the analyst who "always has the answer"</li>
-                                <li>Senior stakeholders seek your input on strategic decisions</li>
-                                <li>Invited to high-level planning sessions</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h4 style="color: var(--primary-blue); margin-bottom: 15px;">Financial Impact</h4>
-                            <ul style="color: rgba(255, 255, 255, 0.8); line-height: 1.8;">
-                                <li>Average £200-400/day rate increase</li>
-                                <li>67% more client referrals</li>
-                                <li>45% reduction in project delivery time</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Final CTA Section -->
-    <section class="final-cta">
         <div class="container">
-            <div class="final-cta-content">
-                <h2>Master the 20% Research Rule Today</h2>
-                <p>Join 2,847+ analysts who've transformed their careers with the insider methodology used by McKinsey, BCG, and Deloitte's top performers</p>
-                <a href="#" class="cta-button-large">Get Instant Access</a>
-                <p style="margin-top: 30px; font-size: 1.1rem; opacity: 0.9;">30-day money-back guarantee • Immediate download • Start using today</p>
-            </div>
-        </div>
-    </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="instructor-info">
-                    <h3>About Will Richardson</h3>
-                    <div style="display: flex; align-items: center; gap: 30px;">
-                        <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-zGndT4tFPe/5d66d4e5435d9a7818b07894328e7659c9173d6dc2b08cfcfd45e7febfc0acf9f928fd2b422da29be916fddb5b83e28ad849d382aa0013466a58d85cdb1941667e98336f3d79786b5068adbce4c98d37b3e5a6169ef34cacbd9ea6ed8afb96190863d0d6" alt="Will Richardson" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid var(--primary-blue);">
-                        <div class="instructor-bio">
-                            <p>20+ years delivering high-impact transformation programs across UK government and financial services. Advisor to HM Treasury, Cabinet Office, and Ministry of Defence.</p>
-                            <p style="margin-top: 15px;">Optimized programs worth £10+ billion. Saved UK taxpayers £500+ million. Founder of Simplex Consulting, Net Zero Transition Office, and Rule Benders Academy.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="social-proof">
-                    <h4>Trusted By</h4>
-                    <ul>
-                        <li>• HM Treasury</li>
-                        <li>• Cabinet Office</li>
-                        <li>• Ministry of Defence</li>
-                        <li>• Major Financial Services Firms</li>
-                        <li>• 2,847+ Professional Analysts</li>
-                    </ul>
-                    
-                    <div style="margin-top: 30px;">
-                        <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-o5w6jtthan/26c3450026a75148b52f5154a325334352e85fab9b27010c246fb1825441eb5dd2d09d78ab5e2f81056f1dc3e9a99438b5dc9416759dda349600783095552e760ad0310b17939207ece32937bf5cb5ddaf20c87670a18a6430973eb3dda433d727343613" alt="Executive stakeholder engagement" style="width: 100%; border-radius: 12px; opacity: 0.8;">
-                    </div>
-                </div>
-            </div>
+            <h2 style="background: linear-gradient(135deg, var(--text-white) 0%, var(--primary-blue) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">From Research Slave to Strategic Advisor</h2>
+
             
-            <div style="text-align: center; margin-top: 40px; padding-top: 40px; border-top: 1px solid #333; color: var(--text-gray);">
-                <p>© 2025 Rule Benders Academy. Transform your career with insider strategies.</p>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin: 60px 0;">
+
+                <div>
+
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-2EWOryqrlR/3343b16f72941ee3dd7a502c09ac521a5b8d9dae3633e4c567a7853fbbd654d70acf345ab75e0ba1a8de64cd8730e8017d704d5e7e2f099583986af085af8bd3c580345cea040dfd67a46851ca34801265d5637c50402a15d1d40e7d7e228d7cd2ee117b" alt="Analyst transformation - before and after comparison" style="width: 100%; border-radius: 12px;" />
+
+                </div>
+
+                <div style="text-align: left;">
+
+                    <h3 style="color: var(--primary-blue); margin-bottom: 30px; font-size: 2rem;">Your 6-Month Transformation</h3>
+
+                    
+
+                    <div style="background: var(--darker-bg); border-radius: 12px; padding: 30px; margin-bottom: 30px;">
+
+                        <h4 style="color: var(--accent-orange); margin-bottom: 20px;">Proven Results:</h4>
+
+                        <div class="stats-grid" style="grid-template-columns: 1fr 1fr;">
+
+                            <div class="stat-card">
+
+                                <div class="stat-number">73%</div>
+
+                                <div class="stat-label">Faster Delivery</div>
+
+                            </div>
+
+                            <div class="stat-card">
+
+                                <div class="stat-number">45%</div>
+
+                                <div class="stat-label">Time Reduction</div>
+
+                            </div>
+
+                            <div class="stat-card">
+
+                                <div class="stat-number">34%</div>
+
+                                <div class="stat-label">Higher Accuracy</div>
+
+                            </div>
+
+                            <div class="stat-card">
+
+                                <div class="stat-number">£400</div>
+
+                                <div class="stat-label">Average Rate Increase</div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    
+
+                    <div style="background: linear-gradient(135deg, var(--primary-blue) 0%, var(--accent-orange) 100%); border-radius: 12px; padding: 20px; text-align: center;">
+
+                        <p style="color: white; font-weight: 600; margin: 0;">Join 2,847+ analysts who've transformed their careers with the 20% Research Rule</p>
+
+                    </div>
+
+                </div>
+
             </div>
+
         </div>
-    </footer>
+
+    </section>
+
+
+
+    <!-- Stakeholder Respect Section -->
+
+    <section class="section">
+
+        <div class="container">
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;">
+
+                <div>
+
+                    <h2 style="color: var(--primary-blue); margin-bottom: 30px;">Earn the Respect of Senior Stakeholders</h2>
+
+                    <p style="font-size: 1.2rem; margin-bottom: 30px; color: var(--text-light-gray);">When you consistently deliver strategic insights faster than anyone expects, you become the analyst that executives specifically request for critical projects.</p>
+
+                    
+
+                    <div style="background: linear-gradient(135deg, var(--darker-bg) 0%, var(--card-bg) 100%); border-left: 4px solid var(--success-green); padding: 30px; border-radius: 8px;">
+
+                        <blockquote style="font-style: italic; color: var(--text-light-gray); margin-bottom: 20px; font-size: 1.1rem;">
+
+                            "The difference between analysts who get promoted and those who stay stuck is simple: strategic thinking over comprehensive research. Master this, and you'll never be treated as an order-taker again."
+
+                        </blockquote>
+
+                        <div style="color: var(--accent-orange); font-weight: 600;">
+
+                            - Will Richardson, Former HM Treasury Advisor
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div>
+
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-o5w6jtthan/26c3450026a75148b52f5154a325334352e85fab9b27010c246fb1825441eb5dd2d09d78ab5e2f81056f1dc3e9a99438b5dc9416759dda349600783095552e760ad0310b17939207ece32937bf5cb5ddaf20c87670a18a6430973eb3dda433d727343613" alt="Executive showing respect to strategic analyst" style="width: 100%; border-radius: 12px;" />
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- Instructor Bio Section -->
+
+    <section class="section section-alt">
+
+        <div class="container">
+
+            <div class="instructor-bio">
+
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-zGndT4tFPe/5d66d4e5435d9a7818b07894328e7659c9173d6dc2b08cfcfd45e7febfc0acf9f928fd2b422da29be916fddb5b83e28ad849d382aa0013466a58d85cdb1941667e98336f3d79786b5068adbce4c98d37b3e5a6169ef34cacbd9ea6ed8afb96190863d0d6" alt="Will Richardson professional portrait" class="instructor-photo" />
+
+                <div class="bio-content">
+
+                    <h3>Will Richardson</h3>
+
+                    <div class="credentials">20+ Years UK Government & Financial Services</div>
+
+                    <p style="color: var(--text-light-gray); margin-bottom: 20px;">Seasoned management consultant and entrepreneur with over two decades of experience delivering high-impact transformation programs across UK central government and financial services.</p>
+
+                    <p style="color: var(--text-light-gray); margin-bottom: 20px;"><strong>Track Record:</strong> Advised HM Treasury, Cabinet Office, and Ministry of Defence. Optimized programs worth £10+ billion, saving UK taxpayers more than £500 million.</p>
+
+                    <p style="color: var(--accent-orange); font-weight: 600;">Founder of Simplex Consulting, Net Zero Transition Office, and Rule Benders Academy</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- CTA Section -->
+
+    <section class="cta-section">
+
+        <div class="container">
+
+            <h2>Master the 20% Research Rule in the Next 30 Minutes</h2>
+
+            <p style="font-size: 1.3rem; margin-bottom: 40px; opacity: 0.9;">Stop drowning in information overload. Start delivering strategic insights that command respect and higher rates.</p>
+
+            
+
+            <div class="cta-benefits">
+
+                <div class="benefit">
+
+                    <h3 style="margin-bottom: 12px;">✓ Immediate Implementation</h3>
+
+                    <p>Start using the framework today - includes all templates and worksheets</p>
+
+                </div>
+
+                <div class="benefit">
+
+                    <h3 style="margin-bottom: 12px;">✓ Proven Results</h3>
+
+                    <p>Used by 2,847+ analysts to increase rates and credibility</p>
+
+                </div>
+
+                <div class="benefit">
+
+                    <h3 style="margin-bottom: 12px;">✓ Risk-Free Guarantee</h3>
+
+                    <p>30-day money-back guarantee - no questions asked</p>
+
+                </div>
+
+            </div>
+
+            
+
+            <a href="#" class="cta-primary" style="font-size: 1.2rem; padding: 20px 40px; margin-top: 30px; display: inline-block;">Get Instant Access - Transform Your Career Now →</a>
+
+            
+
+            <p style="margin-top: 20px; opacity: 0.8; font-size: 0.9rem;">Join the elite analysts who've mastered the insider secrets of strategic research</p>
+
+        </div>
+
+    </section>
+
+
 
     <script>
+
         // ROI Calculator functionality
+
         function updateROI() {
+
             const hourlyRate = parseFloat(document.getElementById('hourlyRate').value) || 0;
+
             const hoursSaved = parseFloat(document.getElementById('hoursSaved').value) || 0;
+
             const projectsMonth = parseFloat(document.getElementById('projectsMonth').value) || 0;
+
             
+
             const monthlyROI = hourlyRate * hoursSaved * projectsMonth;
+
             document.getElementById('monthlyROI').textContent = '£' + monthlyROI.toLocaleString();
+
         }
+
+
 
         // Add event listeners for ROI calculator
+
         document.getElementById('hourlyRate').addEventListener('input', updateROI);
+
         document.getElementById('hoursSaved').addEventListener('input', updateROI);
+
         document.getElementById('projectsMonth').addEventListener('input', updateROI);
 
-        // Checklist functionality
-        function toggleCheck(item) {
-            const checkbox = item.querySelector('.checkbox');
-            checkbox.classList.toggle('checked');
-            
-            // Add completion animation
-            if (checkbox.classList.contains('checked')) {
-                item.style.animation = 'pulse 0.6s ease-out';
-                setTimeout(() => item.style.animation = '', 600);
-            }
-        }
+
+
+        // Smooth scrolling for internal links
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+
+            anchor.addEventListener('click', function (e) {
+
+                e.preventDefault();
+
+                const target = document.querySelector(this.getAttribute('href'));
+
+                if (target) {
+
+                    target.scrollIntoView({
+
+                        behavior: 'smooth',
+
+                        block: 'start'
+
+                    });
+
+                }
+
+            });
+
+        });
+
+
 
         // Animate elements on scroll
-        function animateOnScroll() {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }
-                });
-            }, { threshold: 0.1 });
 
-            // Observe all method phases and tool cards
-            document.querySelectorAll('.method-phase, .tool-card, .transformation-stat').forEach(el => {
-                el.style.opacity = '0';
-                el.style.transform = 'translateY(30px)';
-                el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-                observer.observe(el);
-            });
-        }
+        const observerOptions = {
 
-        // Pareto chart animation
-        function animatePareto() {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        setTimeout(() => {
-                            document.querySelector('.effort-bar').style.height = '80px';
-                            document.querySelector('.insight-bar').style.height = '280px';
-                        }, 300);
-                    }
-                });
-            }, { threshold: 0.5 });
+            threshold: 0.1,
 
-            observer.observe(document.querySelector('.pareto-chart'));
-        }
+            rootMargin: '0px 0px -50px 0px'
 
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+        };
+
+
+
+        const observer = new IntersectionObserver((entries) => {
+
+            entries.forEach(entry => {
+
+                if (entry.isIntersecting) {
+
+                    entry.target.style.opacity = '1';
+
+                    entry.target.style.transform = 'translateY(0)';
+
                 }
+
             });
+
+        }, observerOptions);
+
+
+
+        // Apply fade-in animation to sections
+
+        document.querySelectorAll('.section').forEach(section => {
+
+            section.style.opacity = '0';
+
+            section.style.transform = 'translateY(30px)';
+
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+
+            observer.observe(section);
+
         });
 
-        // Initialize animations
-        window.addEventListener('load', () => {
-            animateOnScroll();
-            animatePareto();
-            
-            // Add pulse animation style
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes pulse {
-                    0% { transform: scale(1); }
-                    50% { transform: scale(1.02); }
-                    100% { transform: scale(1); }
-                }
-            `;
-            document.head.appendChild(style);
-        });
 
-        // Pareto bars hover effects
+
+        // Pareto chart hover effects
+
         document.querySelectorAll('.pareto-bar').forEach(bar => {
+
             bar.addEventListener('mouseenter', () => {
-                bar.style.filter = 'brightness(1.2)';
+
+                bar.style.transform = 'translateY(-10px)';
+
+                bar.style.boxShadow = '0 20px 40px rgba(0, 87, 255, 0.3)';
+
             });
+
             
+
             bar.addEventListener('mouseleave', () => {
-                bar.style.filter = 'brightness(1)';
+
+                bar.style.transform = 'translateY(0)';
+
+                bar.style.boxShadow = 'none';
+
             });
+
         });
 
-        // Method phase click interactions
-        document.querySelectorAll('.method-phase').forEach((phase, index) => {
-            phase.addEventListener('click', () => {
-                // Reset all phases
-                document.querySelectorAll('.method-phase').forEach(p => {
-                    p.style.borderColor = '#333';
-                    p.style.transform = 'translateY(0)';
-                });
-                
-                // Highlight clicked phase
-                phase.style.borderColor = 'var(--primary-blue)';
-                phase.style.transform = 'translateY(-8px)';
-                
-                // Add subtle glow effect
-                phase.style.boxShadow = '0 20px 50px rgba(0, 87, 255, 0.3)';
-                
-                setTimeout(() => {
-                    phase.style.boxShadow = '0 20px 50px rgba(0, 87, 255, 0.2)';
-                }, 300);
-            });
+
+
+        // Initialize animations on page load
+
+        window.addEventListener('load', () => {
+
+            // Hero section is immediately visible
+
+            document.querySelector('.hero').style.opacity = '1';
+
+            document.querySelector('.hero').style.transform = 'translateY(0)';
+
         });
 
-        // Add loading states for better UX
-        document.querySelectorAll('.cta-button, .cta-button-large').forEach(button => {
-            button.addEventListener('click', function(e) {
-                if (this.href === '#') {
-                    e.preventDefault();
-                    this.style.opacity = '0.7';
-                    this.textContent = 'Loading...';
-                    setTimeout(() => {
-                        this.style.opacity = '1';
-                        this.textContent = this.classList.contains('cta-button-large') ? 'Get Instant Access' : 'Master the Framework';
-                    }, 1000);
-                }
-            });
-        });
     </script>
+
 </body>
+
 </html>
