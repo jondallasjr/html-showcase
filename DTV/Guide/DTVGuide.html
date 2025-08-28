@@ -94,11 +94,26 @@
         /* Navigation Pills */
         .nav-pills {
             background: white;
-            padding: 20px 0;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             position: sticky;
             top: 0;
             z-index: 100;
+        }
+
+        .nav-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #2D2A73;
+            cursor: pointer;
         }
 
         .nav-pills .container {
@@ -106,6 +121,7 @@
             justify-content: center;
             flex-wrap: wrap;
             gap: 1rem;
+            padding: 20px;
         }
 
         .nav-pill {
@@ -136,6 +152,37 @@
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
+        }
+
+        /* Mobile Navigation */
+        @media (max-width: 768px) {
+            .nav-toggle {
+                display: block;
+            }
+
+            .nav-pills .container {
+                display: none;
+                flex-direction: column;
+                gap: 0.5rem;
+                padding: 10px 20px 20px;
+                background: #f8fafc;
+            }
+
+            .nav-pills.open .container {
+                display: flex;
+            }
+
+            .nav-pill {
+                width: 100%;
+                justify-content: flex-start;
+                padding: 12px 16px;
+                border-radius: 8px;
+            }
+
+            .nav-pill:hover,
+            .nav-pill.active {
+                transform: none;
+            }
         }
 
         /* Section Styling */
@@ -499,11 +546,21 @@
     </section>
 
     <!-- Navigation Pills -->
-    <nav class="nav-pills">
+    <nav class="nav-pills" id="nav-pills">
+        <div class="nav-header">
+            <div style="font-weight: 600; color: #2D2A73;">Navigate Guide</div>
+            <button class="nav-toggle" onclick="toggleNav()" aria-label="Toggle navigation">
+                <span id="nav-toggle-icon">☰</span>
+            </button>
+        </div>
         <div class="container">
             <a href="#overview" class="nav-pill active">
                 <div class="nav-icon" style="background-image: url('https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-p81ZR6XQ5V/bf35a1855eb6fa8811dfe1068b4fa3bba453c7a2841cf8eab32b696d8545b4e6af91725d249cf12edc0a24222318cb147e384f02d345298016b523e0bac8fef09b612cc645810a6414b269cf738f47352f3a22c50fafafb2775d49af0751fa94a2766ec6')"></div>
                 Overview
+            </a>
+            <a href="#categories" class="nav-pill">
+                <div class="nav-icon" style="background-image: url('https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-MA6WAeEVO2/22b1e6da8ed3cff2e31f289dabcf651215de296169d45fcb1397d72316c96938984a47c8a9f5514ec0d93a37d51242d71533e22233c2034dbe38b4c043e44c771fcc72a46b6a58c0f3f999926a5397136b262ef558ac63a8e1250cc46ee5688cdb3c768c')"></div>
+                DTV Categories
             </a>
             <a href="#recent-updates" class="nav-pill">
                 <div class="nav-icon" style="background-image: url('https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-Mf5wcNsPo9/958a9c996b2b315103bfa94c562d07e079c813657c8ebc6e39e3ca8223ab8e19d94135fb7d47d3e85ec81ebf2cf863ff885feca35aa2fde347e199a2885c7aeb634bea3979a9aa5f5d0f66d1e3f2ab181b3d8909c23c32f5704197bd324e4a95805dd974')"></div>
@@ -555,6 +612,107 @@
                     <div>
                         <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-BLAVcrFg_l/b3501fd3f1e8afbc28d6b5d4ec99672bc3c7f1ad7d6e8de3f812c222a5e2634b9090a7c60bf1920111942504315e5cfd3e301f62b4fbf3cbd700964c4d6d9f5265ba871bc2d56417120236cff02b7ed094995ca31f251d95f3150c769c95d546fdf7e954" alt="Remote work in Thai setting" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.1);">
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DTV Categories Section -->
+        <section id="categories" class="section">
+            <div class="container">
+                <h2>DTV Category Breakdown: Understanding Your Options</h2>
+                <p>The DTV has three distinct categories, each with specific requirements and target audiences. <strong>Choosing the correct category is crucial</strong> as requirements and documentation vary significantly.</p>
+
+                <div class="updates-grid">
+                    <div class="update-card positive">
+                        <div class="update-date">DTV1: Workcation</div>
+                        <div class="update-title">Remote Work / Digital Nomad</div>
+                        <p><strong>For:</strong> Remote workers employed by foreign companies, freelancers, digital nomads with location-independent income.</p>
+                        <p><strong>Key Requirements:</strong></p>
+                        <ul style="margin-left: 1rem; margin-top: 0.5rem;">
+                            <li>Employment contract or letter from foreign company</li>
+                            <li>Freelance portfolio with client contracts/invoices</li>
+                            <li>Professional documentation (LinkedIn, website, etc.)</li>
+                            <li>Cannot work for Thai companies</li>
+                        </ul>
+                    </div>
+
+                    <div class="update-card warning">
+                        <div class="update-date">DTV2: Soft Power</div>
+                        <div class="update-title">Thai Cultural Activities</div>
+                        <p><strong>For:</strong> Participants in approved Thai cultural, educational, medical, or sports programs.</p>
+                        <p><strong>Accepted Activities:</strong></p>
+                        <ul style="margin-left: 1rem; margin-top: 0.5rem;">
+                            <li>Muay Thai training (6+ months recommended)</li>
+                            <li>Thai cooking classes</li>
+                            <li>Medical treatment programs</li>
+                            <li>Cultural seminars and festivals</li>
+                            <li>Sports training and competitions</li>
+                        </ul>
+                        <p><strong>No longer accepted:</strong> Language schools (as of March 2025)</p>
+                    </div>
+
+                    <div class="update-card">
+                        <div class="update-date">DTV3: Dependents</div>
+                        <div class="update-title">Family Members</div>
+                        <p><strong>For:</strong> Legal dependents of DTV1 or DTV2 holders.</p>
+                        <p><strong>Eligible Dependents:</strong></p>
+                        <ul style="margin-left: 1rem; margin-top: 0.5rem;">
+                            <li>Legal spouse (marriage certificate required)</li>
+                            <li>Children under 20 years old and unmarried</li>
+                            <li>Each dependent pays separate application fee</li>
+                            <li>Same financial requirements as primary applicant</li>
+                            <li>No limit on number of dependents</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>Category-Specific Documentation Requirements</h3>
+                <p>Each DTV category requires different supporting documentation beyond the basic requirements:</p>
+
+                <div class="requirements-grid">
+                    <div class="requirement-category">
+                        <h4>📋 DTV1: Workcation Documentation</h4>
+                        <ul class="requirement-list">
+                            <li><span class="check-icon">✓</span>Employment contract or official letter</li>
+                            <li><span class="check-icon">✓</span>Company registration documents</li>
+                            <li><span class="check-icon">✓</span>Recent payslips or income statements</li>
+                            <li><span class="check-icon">✓</span>Professional portfolio (LinkedIn, website)</li>
+                            <li><span class="check-icon">✓</span>Client contracts/invoices (freelancers)</li>
+                            <li><span class="x-icon">✗</span>No specific minimum income requirement</li>
+                        </ul>
+                    </div>
+
+                    <div class="requirement-category">
+                        <h4>🥊 DTV2: Soft Power Documentation</h4>
+                        <ul class="requirement-list">
+                            <li><span class="check-icon">✓</span>Enrollment confirmation from approved institution</li>
+                            <li><span class="check-icon">✓</span>Institution's business registration documents</li>
+                            <li><span class="check-icon">✓</span>Program duration details (6+ months preferred)</li>
+                            <li><span class="check-icon">✓</span>Course curriculum or training schedule</li>
+                            <li><span class="check-icon">✓</span>Medical certificates (for medical treatment)</li>
+                            <li><span class="check-icon">✓</span>Payment receipts or enrollment fees</li>
+                        </ul>
+                    </div>
+
+                    <div class="requirement-category">
+                        <h4>👨‍👩‍👧‍👦 DTV3: Dependent Documentation</h4>
+                        <ul class="requirement-list">
+                            <li><span class="check-icon">✓</span>Marriage certificate (spouse)</li>
+                            <li><span class="check-icon">✓</span>Birth certificate (children)</li>
+                            <li><span class="check-icon">✓</span>Primary applicant's approved DTV</li>
+                            <li><span class="check-icon">✓</span>Relationship proof documents</li>
+                            <li><span class="check-icon">✓</span>Individual financial requirements</li>
+                            <li><span class="check-icon">✓</span>Separate application and fee per person</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="alert alert-info">
+                    <strong>Category Selection Strategy:</strong> Choose DTV1 if you have legitimate remote work. Choose DTV2 if you want to engage in Thai cultural activities long-term. Most applicants find DTV1 (Workcation) the most straightforward path.
+                </div>
+
+                <div class="alert alert-warning">
+                    <strong>Important:</strong> You cannot change categories after approval. If your Muay Thai gym changes (DTV2), you may need to provide updated documentation for extensions, but the original approval remains valid.
                 </div>
             </div>
         </section>
@@ -1099,7 +1257,10 @@
                 </ul>
 
                 <div class="alert alert-success">
-                    <strong>Bottom Line:</strong> The DTV offers unprecedented access to Thailand for digital professionals, but the 180-day tax residency threshold requires careful planning to avoid unintended financial obligations. Success depends on understanding both opportunities and limitations.
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-xhqgsrvDsr/b7d548b28aa04c5041aa318794847fac98ccabc237e37cf8ffd3ae3aeeca4cee5c6f69d442a45dc8bce09b81fecc19a236ba643ae9bcddbd5ce19b3ce2e4b7f2cbb50ef7619472852c8302fec1c945d843ec938d64da818fdd751d52e0f392fb0c53ba9c" alt="Success checkmark" style="width: 40px; height: 40px;">
+                        <strong>Bottom Line:</strong> The DTV offers unprecedented access to Thailand for digital professionals, but the 180-day tax residency threshold requires careful planning to avoid unintended financial obligations. Success depends on understanding both opportunities and limitations.
+                    </div>
                 </div>
 
                 <h3>Next Steps</h3>
@@ -1121,6 +1282,15 @@
 
     <!-- JavaScript for smooth scrolling and active nav -->
     <script>
+        // Mobile navigation toggle
+        function toggleNav() {
+            const navPills = document.getElementById('nav-pills');
+            const toggleIcon = document.getElementById('nav-toggle-icon');
+            
+            navPills.classList.toggle('open');
+            toggleIcon.textContent = navPills.classList.contains('open') ? '✕' : '☰';
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             const navPills = document.querySelectorAll('.nav-pill');
             
@@ -1133,6 +1303,14 @@
                     
                     // Add active class to clicked pill
                     this.classList.add('active');
+                    
+                    // Close mobile nav if open
+                    const navContainer = document.getElementById('nav-pills');
+                    const toggleIcon = document.getElementById('nav-toggle-icon');
+                    if (navContainer.classList.contains('open')) {
+                        navContainer.classList.remove('open');
+                        toggleIcon.textContent = '☰';
+                    }
                     
                     // Smooth scroll to target
                     const targetId = this.getAttribute('href');
@@ -1166,6 +1344,17 @@
                         });
                     }
                 });
+            });
+
+            // Close mobile nav when clicking outside
+            document.addEventListener('click', function(e) {
+                const navContainer = document.getElementById('nav-pills');
+                const toggleIcon = document.getElementById('nav-toggle-icon');
+                
+                if (!navContainer.contains(e.target) && navContainer.classList.contains('open')) {
+                    navContainer.classList.remove('open');
+                    toggleIcon.textContent = '☰';
+                }
             });
         });
     </script>
