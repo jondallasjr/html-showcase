@@ -1,0 +1,1641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Government Money Map: Tracking £500B in Hidden Opportunities | Rule Benders Academy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-black: #000000;
+            --bright-blue: #0057FF;
+            --bright-orange: #FF5733;
+            --gold: #FFD700;
+            --white: #FFFFFF;
+            --light-gray: #CCCCCC;
+            --medium-gray: #666666;
+            --dark-gray: #333333;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--primary-black) 0%, #1a1a1a 100%);
+            color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Navigation */
+        .lesson-header {
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid var(--bright-blue);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 20px 0;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-logo {
+            font-size: 1.8em;
+            font-weight: 800;
+            color: var(--bright-blue);
+            text-decoration: none;
+        }
+
+        .progress-bar {
+            flex: 1;
+            max-width: 300px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+            margin: 0 30px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--bright-blue), var(--bright-orange));
+            width: 0%;
+            border-radius: 2px;
+            animation: progressLoad 2s ease-out forwards;
+        }
+
+        .lesson-duration {
+            background: var(--bright-orange);
+            color: var(--white);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, rgba(0, 87, 255, 0.1), rgba(255, 87, 51, 0.1));
+            border-bottom: 1px solid rgba(0, 87, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5em;
+            font-weight: 800;
+            color: var(--white);
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        .hero-text .subtitle {
+            font-size: 1.4em;
+            color: var(--bright-orange);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .instructor-credit {
+            color: var(--gold);
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+
+        .hero-promise {
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid var(--bright-blue);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .hero-promise h3 {
+            color: var(--bright-blue);
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .hero-image {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 87, 255, 0.3);
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Action Outcomes */
+        .outcomes-section {
+            padding: 80px 0;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 2.8em;
+            font-weight: 800;
+            color: var(--bright-blue);
+            margin-bottom: 20px;
+        }
+
+        .section-subtitle {
+            font-size: 1.2em;
+            color: var(--light-gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .outcomes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .outcome-card {
+            background: linear-gradient(135deg, rgba(0, 87, 255, 0.1), rgba(255, 87, 51, 0.05));
+            border: 1px solid var(--bright-blue);
+            border-radius: 15px;
+            padding: 30px;
+            position: relative;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .outcome-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 87, 255, 0.4);
+            border-color: var(--bright-orange);
+        }
+
+        .outcome-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .outcome-card:hover::before {
+            left: 100%;
+        }
+
+        .outcome-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--bright-orange);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+
+        .outcome-title {
+            color: var(--gold);
+            font-size: 1.3em;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .outcome-description {
+            color: var(--light-gray);
+            line-height: 1.6;
+        }
+
+        /* Reality Check Section */
+        .reality-check {
+            padding: 80px 0;
+            background: linear-gradient(135deg, rgba(255, 87, 51, 0.1), rgba(0, 0, 0, 0.9));
+            border-top: 2px solid var(--bright-orange);
+            border-bottom: 2px solid var(--bright-orange);
+        }
+
+        .reality-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .reality-check h2 {
+            color: var(--bright-orange);
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            font-weight: 800;
+        }
+
+        .reflection-prompt {
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid var(--bright-orange);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+
+        .reflection-prompt h3 {
+            color: var(--gold);
+            font-size: 1.4em;
+            margin-bottom: 20px;
+        }
+
+        .reflection-prompt p {
+            font-size: 1.1em;
+            line-height: 1.7;
+            color: var(--light-gray);
+        }
+
+        /* Main Content Sections */
+        .content-section {
+            padding: 80px 0;
+            border-bottom: 1px solid rgba(0, 87, 255, 0.2);
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        .content-text h2 {
+            color: var(--bright-blue);
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            font-weight: 800;
+        }
+
+        .content-text h3 {
+            color: var(--bright-orange);
+            font-size: 1.8em;
+            margin: 30px 0 20px 0;
+            font-weight: 700;
+        }
+
+        .highlight-stat {
+            background: var(--bright-blue);
+            color: var(--white);
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-weight: 700;
+            margin: 0 3px;
+        }
+
+        .warning-stat {
+            background: var(--bright-orange);
+            color: var(--white);
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-weight: 700;
+            margin: 0 3px;
+        }
+
+        .content-list {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .content-list li {
+            padding: 12px 0;
+            padding-left: 30px;
+            position: relative;
+            color: var(--light-gray);
+            font-size: 1.1em;
+        }
+
+        .content-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--bright-blue);
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .content-visual {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .content-visual img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Opportunity Iceberg Visualization */
+        .iceberg-section {
+            padding: 100px 0;
+            background: radial-gradient(circle at center, rgba(0, 87, 255, 0.1), var(--primary-black));
+        }
+
+        .iceberg-container {
+            position: relative;
+            height: 600px;
+            background: linear-gradient(to bottom, #87CEEB 0%, #87CEEB 30%, #001f3f 30%, #000080 100%);
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 40px 0;
+            border: 2px solid var(--bright-blue);
+        }
+
+        .water-line {
+            position: absolute;
+            top: 30%;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--white);
+            animation: wave 3s ease-in-out infinite;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        .iceberg {
+            position: absolute;
+            left: 50%;
+            top: 15%;
+            transform: translateX(-50%);
+            animation: icebergReveal 4s ease-out forwards;
+        }
+
+        .iceberg-visible {
+            width: 0;
+            height: 0;
+            border-left: 80px solid transparent;
+            border-right: 80px solid transparent;
+            border-bottom: 100px solid var(--bright-blue);
+            opacity: 0.9;
+            filter: drop-shadow(0 5px 15px rgba(0, 87, 255, 0.5));
+        }
+
+        .iceberg-hidden {
+            position: absolute;
+            top: 100px;
+            left: -120px;
+            width: 0;
+            height: 0;
+            border-left: 200px solid transparent;
+            border-right: 200px solid transparent;
+            border-bottom: 350px solid var(--bright-orange);
+            opacity: 0.8;
+            animation: hiddenReveal 4s ease-out 2s forwards;
+            transform: scaleY(0);
+            filter: drop-shadow(0 10px 25px rgba(255, 87, 51, 0.5));
+        }
+
+        .spending-labels {
+            position: absolute;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .spending-label {
+            background: rgba(0, 0, 0, 0.9);
+            padding: 15px 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            border-left: 4px solid;
+            opacity: 0;
+            transform: translateX(50px);
+            animation: labelSlideIn 0.8s ease-out forwards;
+        }
+
+        .visible-label {
+            border-left-color: var(--bright-blue);
+            animation-delay: 3s;
+        }
+
+        .hidden-label {
+            border-left-color: var(--bright-orange);
+            animation-delay: 5s;
+        }
+
+        /* Intelligence Tools Section */
+        .tools-section {
+            padding: 80px 0;
+            background: rgba(255, 87, 51, 0.05);
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .tool-card {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(0, 87, 255, 0.1));
+            border: 1px solid var(--bright-blue);
+            border-radius: 20px;
+            padding: 40px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 87, 255, 0.3);
+        }
+
+        .tool-number {
+            position: absolute;
+            top: -20px;
+            left: 30px;
+            background: var(--gold);
+            color: var(--primary-black);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.2em;
+        }
+
+        .tool-title {
+            color: var(--bright-orange);
+            font-size: 1.5em;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .tool-features {
+            list-style: none;
+        }
+
+        .tool-features li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            color: var(--light-gray);
+        }
+
+        .tool-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--bright-blue);
+            font-weight: bold;
+        }
+
+        /* Budget Cycle Timeline */
+        .timeline-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--primary-black), rgba(0, 87, 255, 0.1));
+        }
+
+        .timeline-container {
+            position: relative;
+            height: 300px;
+            margin: 60px 0;
+            background: rgba(0, 87, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+            border: 2px solid var(--bright-blue);
+        }
+
+        .timeline-track {
+            position: absolute;
+            top: 50%;
+            left: 5%;
+            right: 5%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .timeline-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--bright-blue), var(--bright-orange), var(--gold));
+            width: 0%;
+            border-radius: 4px;
+            animation: progressGrow 8s ease-in-out infinite;
+            box-shadow: 0 0 20px rgba(0, 87, 255, 0.5);
+        }
+
+        .timeline-quarters {
+            position: absolute;
+            top: 30%;
+            left: 5%;
+            right: 5%;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .quarter-marker {
+            position: relative;
+            width: 25px;
+            height: 25px;
+            background: var(--bright-blue);
+            border-radius: 50%;
+            transform: scale(0);
+            animation: markerPop 0.5s ease-out forwards;
+            box-shadow: 0 0 15px rgba(0, 87, 255, 0.7);
+        }
+
+        .quarter-marker:nth-child(3) { 
+            background: var(--bright-orange);
+            box-shadow: 0 0 15px rgba(255, 87, 51, 0.7);
+        }
+        .quarter-marker:nth-child(4) { 
+            background: var(--gold);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+        }
+
+        .quarter-label {
+            position: absolute;
+            top: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1em;
+            font-weight: 600;
+            white-space: nowrap;
+            opacity: 0;
+            animation: fadeInUp 0.5s ease-out forwards;
+            text-align: center;
+        }
+
+        /* Department Intelligence */
+        .departments-section {
+            padding: 80px 0;
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .department-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .department-card {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.95), rgba(0, 87, 255, 0.1));
+            border: 1px solid var(--bright-blue);
+            border-radius: 15px;
+            padding: 30px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .department-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 87, 255, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .department-card:hover::after {
+            left: 100%;
+        }
+
+        .department-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 87, 255, 0.4);
+            border-color: var(--bright-orange);
+        }
+
+        .department-name {
+            color: var(--gold);
+            font-size: 1.4em;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .spend-amount {
+            color: var(--bright-blue);
+            font-size: 2.2em;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .department-details {
+            color: var(--light-gray);
+            line-height: 1.6;
+        }
+
+        .pain-points {
+            margin-top: 20px;
+        }
+
+        .pain-points h4 {
+            color: var(--bright-orange);
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        /* Implementation Timeline */
+        .implementation-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, rgba(255, 87, 51, 0.1), var(--primary-black));
+        }
+
+        .implementation-timeline {
+            background: rgba(0, 0, 0, 0.9);
+            border: 2px solid var(--bright-orange);
+            border-radius: 25px;
+            padding: 60px;
+            margin: 60px 0;
+        }
+
+        .implementation-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .step-card {
+            background: linear-gradient(135deg, rgba(255, 87, 51, 0.1), rgba(255, 215, 0, 0.1));
+            border: 1px solid var(--gold);
+            border-radius: 15px;
+            padding: 30px;
+            position: relative;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: stepReveal 0.8s ease-out forwards;
+        }
+
+        .step-number {
+            position: absolute;
+            top: -18px;
+            left: 25px;
+            background: var(--gold);
+            color: var(--primary-black);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.1em;
+        }
+
+        .step-duration {
+            color: var(--bright-orange);
+            font-weight: 700;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .step-title {
+            color: var(--gold);
+            font-weight: 700;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        /* Tools & Templates */
+        .templates-section {
+            padding: 80px 0;
+            background: rgba(0, 87, 255, 0.05);
+        }
+
+        .templates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .template-card {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(0, 87, 255, 0.1));
+            border: 1px solid var(--bright-blue);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .template-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 87, 255, 0.3);
+        }
+
+        .template-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--bright-orange);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 1.5em;
+        }
+
+        .template-title {
+            color: var(--gold);
+            font-weight: 700;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .download-btn {
+            background: var(--bright-blue);
+            color: var(--white);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+        }
+
+        .download-btn:hover {
+            background: var(--bright-orange);
+            transform: scale(1.05);
+        }
+
+        /* Action Plan */
+        .action-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), var(--primary-black));
+        }
+
+        .action-container {
+            background: rgba(0, 0, 0, 0.9);
+            border: 3px solid var(--gold);
+            border-radius: 25px;
+            padding: 60px;
+            text-align: center;
+        }
+
+        .action-title {
+            color: var(--gold);
+            font-size: 3em;
+            font-weight: 800;
+            margin-bottom: 30px;
+        }
+
+        .action-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .action-item {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 87, 51, 0.1));
+            border: 1px solid var(--gold);
+            border-radius: 12px;
+            padding: 25px;
+            text-align: left;
+        }
+
+        .action-time {
+            color: var(--bright-orange);
+            font-weight: 700;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+
+        .action-task {
+            color: var(--white);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .action-description {
+            color: var(--light-gray);
+            font-size: 0.9em;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--bright-blue), var(--bright-orange));
+            text-align: center;
+        }
+
+        .cta-title {
+            color: var(--white);
+            font-size: 2.5em;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .cta-subtitle {
+            font-size: 1.2em;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            background: var(--primary-black);
+            color: var(--white);
+            border: 2px solid var(--gold);
+            padding: 20px 40px;
+            font-size: 1.2em;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            background: var(--gold);
+            color: var(--primary-black);
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        .lesson-footer {
+            background: var(--primary-black);
+            padding: 60px 0;
+            border-top: 2px solid var(--bright-blue);
+            text-align: center;
+        }
+
+        .next-lesson {
+            background: rgba(0, 87, 255, 0.1);
+            border: 1px solid var(--bright-blue);
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+
+        .next-lesson h3 {
+            color: var(--bright-blue);
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        .next-lesson p {
+            color: var(--light-gray);
+            font-size: 1.1em;
+        }
+
+        /* Animations */
+        @keyframes progressLoad {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
+        @keyframes icebergReveal {
+            0% { transform: translateX(-50%) scale(0); opacity: 0; }
+            100% { transform: translateX(-50%) scale(1); opacity: 0.9; }
+        }
+
+        @keyframes hiddenReveal {
+            0% { transform: scaleY(0); opacity: 0; }
+            100% { transform: scaleY(1); opacity: 0.8; }
+        }
+
+        @keyframes wave {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        @keyframes labelSlideIn {
+            0% { opacity: 0; transform: translateX(50px); }
+            100% { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes progressGrow {
+            0% { width: 0%; }
+            25% { width: 25%; }
+            50% { width: 50%; }
+            75% { width: 75%; }
+            100% { width: 100%; }
+        }
+
+        @keyframes markerPop {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateX(-50%) translateY(20px); }
+            100% { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
+
+        @keyframes stepReveal {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Animation Delays */
+        .step-card:nth-child(1) { animation-delay: 0.5s; }
+        .step-card:nth-child(2) { animation-delay: 1s; }
+        .step-card:nth-child(3) { animation-delay: 1.5s; }
+        .step-card:nth-child(4) { animation-delay: 2s; }
+
+        .quarter-marker:nth-child(1) { animation-delay: 1s; }
+        .quarter-marker:nth-child(2) { animation-delay: 3s; }
+        .quarter-marker:nth-child(3) { animation-delay: 5s; }
+        .quarter-marker:nth-child(4) { animation-delay: 7s; }
+
+        .quarter-label:nth-child(1) { animation-delay: 1.5s; }
+        .quarter-label:nth-child(2) { animation-delay: 3.5s; }
+        .quarter-label:nth-child(3) { animation-delay: 5.5s; }
+        .quarter-label:nth-child(4) { animation-delay: 7.5s; }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5em;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .section-title {
+                font-size: 2.2em;
+            }
+
+            .outcomes-grid,
+            .tools-grid,
+            .department-grid,
+            .templates-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .implementation-steps {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline-quarters {
+                flex-direction: column;
+                gap: 30px;
+                align-items: center;
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .progress-bar {
+                max-width: 100%;
+                margin: 0;
+            }
+        }
+
+        /* Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* High contrast mode */
+        @media (prefers-contrast: high) {
+            :root {
+                --primary-black: #000000;
+                --white: #ffffff;
+                --bright-blue: #0066ff;
+                --bright-orange: #ff4400;
+                --gold: #ffcc00;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="lesson-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="brand-logo">Rule Benders Academy</a>
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+                <div class="lesson-duration">25 minutes</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>The Government Money Map</h1>
+                    <div class="subtitle">Tracking £500B in Hidden Opportunities</div>
+                    <div class="instructor-credit">Will Richardson • Former HM Treasury Advisor</div>
+                    
+                    <div class="hero-promise">
+                        <h3>Your Transformation Promise</h3>
+                        <p>Transform from reactive bid-chaser to proactive opportunity hunter who sees lucrative government contracts 6-12 months before competitors even know they exist.</p>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-cg7UlN-Doe/8cb9871b8320391fa61e9f8259ccd159ca2e38e8013296a46eb20f88313518f9fd1fa563a0d1ed824decd3f575f17eee3e29c527cdabcc249a5ec183bc0b4d3b281ebb368d78ec9e1889093dd456222227a4ffa167891cc782227f3d5add53f4899a2249" alt="Will Richardson in intelligence war room">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Action Outcomes Section -->
+    <section class="outcomes-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">What You'll Build Today</h2>
+                <p class="section-subtitle">Four battle-tested systems that turn government intelligence into competitive advantage</p>
+            </div>
+            
+            <div class="outcomes-grid">
+                <div class="outcome-card">
+                    <div class="outcome-icon">🎯</div>
+                    <h3 class="outcome-title">Government Intelligence Dashboard</h3>
+                    <p class="outcome-description">Build a monitoring system that alerts you to opportunities 6-12 months before they go public</p>
+                </div>
+                
+                <div class="outcome-card">
+                    <div class="outcome-icon">⏰</div>
+                    <h3 class="outcome-title">Budget Cycle Exploitation Timeline</h3>
+                    <p class="outcome-description">Master the timing patterns that turn government spending cycles into predictable opportunity windows</p>
+                </div>
+                
+                <div class="outcome-card">
+                    <div class="outcome-icon">🏛️</div>
+                    <h3 class="outcome-title">Department-Specific Opportunity Profiles</h3>
+                    <p class="outcome-description">Create intelligence profiles showing exactly where money flows and when in each target department</p>
+                </div>
+                
+                <div class="outcome-card">
+                    <div class="outcome-icon">🤖</div>
+                    <h3 class="outcome-title">Automated Monitoring Systems</h3>
+                    <p class="outcome-description">Deploy systems that track spending patterns, relationship changes, and opportunity signals 24/7</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reality Check Section -->
+    <section class="reality-check">
+        <div class="container">
+            <div class="reality-content">
+                <h2>Before We Start: What's Really Holding You Back?</h2>
+                
+                <div class="reflection-prompt">
+                    <h3>Honest Question Time</h3>
+                    <p>When you think about government opportunities, what's your first instinct? To wait for public tenders? To assume you need 'connections'? To think it's too complex?</p>
+                </div>
+                
+                <div class="reflection-prompt">
+                    <h3>The Reality Most Consultants Miss</h3>
+                    <p>Most consultants fail at government work because they treat it like private sector sales. Government money flows through predictable patterns that 90% of people never learn to read. You're about to become part of the 10% who do.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hidden Opportunities Section -->
+    <section class="iceberg-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">The Hidden £347 Billion</h2>
+                <p class="section-subtitle">What you see vs. what's really there</p>
+            </div>
+            
+            <div class="iceberg-container">
+                <div class="water-line"></div>
+                <div class="iceberg">
+                    <div class="iceberg-visible"></div>
+                    <div class="iceberg-hidden"></div>
+                </div>
+                <div class="spending-labels">
+                    <div class="spending-label visible-label">
+                        <strong>£153B Visible Tenders</strong><br>
+                        Public procurement opportunities<br>
+                        Everyone competes here
+                    </div>
+                    <div class="spending-label hidden-label">
+                        <strong>£347B Hidden Opportunities</strong><br>
+                        Framework agreements: £89B<br>
+                        Direct awards: £67B<br>
+                        Emergency procurement: £31B<br>
+                        Underspend redistribution: £89B
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content-grid">
+                <div class="content-text">
+                    <h3>The Insider Secret</h3>
+                    <p>Right now, while you're scrolling through tender notifications hoping for scraps, <span class="highlight-stat">£1.4 billion</span> in government money is being allocated to problems you could solve. But you'll never see these opportunities because you're looking in the wrong places.</p>
+                    
+                    <p>Here's where the real money flows:</p>
+                    <ul class="content-list">
+                        <li><strong>Framework agreements:</strong> <span class="highlight-stat">£89B annually</span> - pre-qualified supplier lists</li>
+                        <li><strong>Direct awards under £100k:</strong> <span class="highlight-stat">£67B</span> - bypasses competition entirely</li>
+                        <li><strong>Emergency procurement:</strong> <span class="highlight-stat">£31B</span> - post-COVID patterns still active</li>
+                        <li><strong>Departmental underspend:</strong> <span class="highlight-stat">£89B</span> - year-end panic spending</li>
+                    </ul>
+                </div>
+                <div class="content-visual">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-6_B4b3nq4y/1ecfcb070815a1247e3258fdbbf5569bba3307cd514b1795f973b1e65a472910840e1b5c7ff393cf30352c41ad2b9b6f2c06f1f64d16f125763bfad6d9e0eff8d0ed9e6b5db2a41d96cb490c3f682a6d48dfca4089839fd702a5a1cd9ae8de927adc5365" alt="Government intelligence dashboard">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Intelligence Tools Section -->
+    <section class="tools-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Your Five-Tool Intelligence Arsenal</h2>
+                <p class="section-subtitle">The systematic approach that separates winners from wishful thinkers</p>
+            </div>
+            
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <div class="tool-number">1</div>
+                    <h3 class="tool-title">Contracts Finder Advanced Mining</h3>
+                    <ul class="tool-features">
+                        <li>Search archived contracts for spending patterns</li>
+                        <li>Track "modification notices" - scope increases signal more work</li>
+                        <li>Monitor contract extensions - relationship indicators</li>
+                        <li>Departments spend 3.2x advertised amounts through variations</li>
+                    </ul>
+                </div>
+                
+                <div class="tool-card">
+                    <div class="tool-number">2</div>
+                    <h3 class="tool-title">Strategic FOI Weaponization</h3>
+                    <ul class="tool-features">
+                        <li>Template requests achieve 92% response rate vs 34% generic</li>
+                        <li>Map organizational charts and decision makers</li>
+                        <li>Historical spending reveals 78% pattern repetition</li>
+                        <li>Strategic timing for maximum intelligence value</li>
+                    </ul>
+                </div>
+                
+                <div class="tool-card">
+                    <div class="tool-number">3</div>
+                    <h3 class="tool-title">Parliamentary Intelligence</h3>
+                    <ul class="tool-features">
+                        <li>Select Committee reports predict spending 12-18 months ahead</li>
+                        <li>NAO reports identify failing programs needing external help</li>
+                        <li>Minister commitments create procurement pipelines</li>
+                        <li>Public Accounts Committee hearings reveal department pain points</li>
+                    </ul>
+                </div>
+                
+                <div class="tool-card">
+                    <div class="tool-number">4</div>
+                    <h3 class="tool-title">Civil Service Network Mapping</h3>
+                    <ul class="tool-features">
+                        <li>LinkedIn monitoring of senior civil servant moves</li>
+                        <li>Alumni networks from major consulting firms in government</li>
+                        <li>Career progression patterns show opportunity migration</li>
+                        <li>Industry association membership overlaps</li>
+                    </ul>
+                </div>
+                
+                <div class="tool-card">
+                    <div class="tool-number">5</div>
+                    <h3 class="tool-title">Supplier Intelligence Networks</h3>
+                    <ul class="tool-features">
+                        <li>Monitor big consultancy job postings (reveals upcoming work)</li>
+                        <li>Track subcontractor recruitment patterns</li>
+                        <li>Framework agreement holder monitoring</li>
+                        <li>Competitor win/loss analysis through corporate reporting</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Budget Cycle Timeline -->
+    <section class="timeline-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">The Budget Cycle Money Machine</h2>
+                <p class="section-subtitle">Government money follows predictable patterns - here's how to exploit them</p>
+            </div>
+            
+            <div class="timeline-container">
+                <div class="timeline-track">
+                    <div class="timeline-progress"></div>
+                </div>
+                <div class="timeline-quarters">
+                    <div class="quarter-marker">
+                        <div class="quarter-label">Apr-Jun<br><strong>Setup Phase</strong><br>Intelligence Gathering</div>
+                    </div>
+                    <div class="quarter-marker">
+                        <div class="quarter-label">Jul-Sep<br><strong>Acceleration</strong><br>Strategic Positioning</div>
+                    </div>
+                    <div class="quarter-marker">
+                        <div class="quarter-label">Oct-Dec<br><strong>Panic Phase</strong><br>Opportunity Capture</div>
+                    </div>
+                    <div class="quarter-marker">
+                        <div class="quarter-label">Jan-Mar<br><strong>Harvest Time</strong><br>Maximum Opportunities</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content-grid">
+                <div class="content-text">
+                    <h3>The Pattern That Repeats Every Year</h3>
+                    <p><strong>April-June: Setup Phase</strong> - New financial year planning documents released, cautious spending, optimal relationship building time</p>
+                    
+                    <p><strong>July-September: Acceleration</strong> - Mid-year spending acceleration, framework activations surge, capability demonstration opportunities</p>
+                    
+                    <p><strong>October-December: Panic Phase</strong> - <span class="warning-stat">Underspend panic</span> hits departments, rapid procurement decisions, direct awards surge</p>
+                    
+                    <p><strong>January-March: Harvest</strong> - Year-end spend acceleration, emergency procurement peaks, maximum opportunity capture</p>
+                </div>
+                <div class="content-visual">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-JSn6EItI2B/3df371cc11ed6a01a85e8c5eb2d5b1cab2bd0538c0188a746c2b523fbfa8fc37c9795501c73f69ed8bf614ae5e0272ec2979cee6fbc2417def5c146f6c69e353398746995e3c0fde16e2e29ad4cced2bd1b5914ef97adeaeece9d00793c4aa0f87cee214" alt="Budget cycle timeline">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Department Intelligence -->
+    <section class="departments-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">High-Value Department Targets</h2>
+                <p class="section-subtitle">Where the money really flows and how to access it</p>
+            </div>
+            
+            <div class="department-grid">
+                <div class="department-card">
+                    <h3 class="department-name">Cabinet Office</h3>
+                    <div class="spend-amount">£2.1B</div>
+                    <div class="department-details">
+                        <div class="pain-points">
+                            <h4>Pain Points:</h4>
+                            <p>Cross-government coordination, transformation programs, efficiency initiatives</p>
+                        </div>
+                        <div class="pain-points">
+                            <h4>Opportunity Windows:</h4>
+                            <p>New government priorities, machinery of government changes</p>
+                        </div>
+                        <div class="pain-points">
+                            <h4>Access Routes:</h4>
+                            <p>Transformation experience, change management credentials</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="department-card">
+                    <h3 class="department-name">HMRC</h3>
+                    <div class="spend-amount">£1.8B</div>
+                    <div class="department-details">
+                        <div class="pain-points">
+                            <h4>Pain Points:</h4>
+                            <p>Digital transformation, compliance systems, customer service</p>
+                        </div>
+                        <div class="pain-points">
+                            <h4>Opportunity Windows:</h4>
+                            <p>Tax policy changes, system upgrades, compliance campaigns</p>
+                        </div>
+                        <div class="pain-points">
+                            <h4>Access Routes:</h4>
+                            <p>Tax technology expertise, customer experience design</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="department-card">
+                    <h3 class="department-name">HM Treasury</h3>
+                    <div class="spend-amount">£890M</div>
+                    <div class="department-details">
+                        <div class="pain-points">
+                            <h4>Pain Points:</h4>
+                            <p>Economic modeling, policy analysis, spending review support</p>
+                        </div>
+                        <div class="pain-points">
+                            <h4>Opportunity Windows:</h4>
+                            <p>Pre-budget periods, spending review years</p>
+                        </div>
+                        <div class="pain-points">
+                            <h4>Access Routes:</h4>
+                            <p>Economic credentials, former treasury connections</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Implementation Timeline -->
+    <section class="implementation-section">
+        <div class="container">
+            <div class="implementation-timeline">
+                <div class="section-header">
+                    <h2 class="section-title" style="color: var(--bright-orange);">Your 90-Day Intelligence Build</h2>
+                    <p class="section-subtitle">Transform from opportunity chaser to intelligence-driven consultant</p>
+                </div>
+                
+                <div class="implementation-steps">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <div class="step-duration">Days 1-30: Infrastructure Setup</div>
+                        <div class="step-title">Foundation Systems</div>
+                        <div class="step-description">
+                            Deploy automated monitoring systems, create FOI template library, analyze historical spending patterns for target departments
+                        </div>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <div class="step-duration">Days 31-60: Intelligence Gathering</div>
+                        <div class="step-title">Data Collection</div>
+                        <div class="step-description">
+                            Prioritize target departments, map key decision-makers, select opportunity categories based on your capabilities
+                        </div>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <div class="step-duration">Days 61-90: Strategic Positioning</div>
+                        <div class="step-title">Relationship Building</div>
+                        <div class="step-description">
+                            Build strategic networks, develop aligned thought leadership, qualify for framework agreements where appropriate
+                        </div>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-number">4</div>
+                        <div class="step-duration">Month 4+: Opportunity Capture</div>
+                        <div class="step-title">Revenue Generation</div>
+                        <div class="step-description">
+                            Execute proactive positioning, capture underspend opportunities, secure first government engagements through intelligence advantage
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tools & Templates -->
+    <section class="templates-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Immediate Implementation Assets</h2>
+                <p class="section-subtitle">Everything you need to start building your intelligence advantage today</p>
+            </div>
+            
+            <div class="templates-grid">
+                <div class="template-card">
+                    <div class="template-icon">📊</div>
+                    <h3 class="template-title">Government Intelligence Dashboard</h3>
+                    <p>Excel/Google Sheets template with automated formulas and data visualization</p>
+                    <button class="download-btn">Download Template</button>
+                </div>
+                
+                <div class="template-card">
+                    <div class="template-icon">📋</div>
+                    <h3 class="template-title">FOI Request Library</h3>
+                    <p>15 proven templates for different intelligence gathering needs with 92% response rate</p>
+                    <button class="download-btn">Download Library</button>
+                </div>
+                
+                <div class="template-card">
+                    <div class="template-icon">📅</div>
+                    <h3 class="template-title">Budget Cycle Calendar</h3>
+                    <p>Department-specific opportunity windows mapped to quarterly spending patterns</p>
+                    <button class="download-btn">Download Calendar</button>
+                </div>
+                
+                <div class="template-card">
+                    <div class="template-icon">🕸️</div>
+                    <h3 class="template-title">Relationship Mapping Template</h3>
+                    <p>Civil service network tracking system with influence scoring matrix</p>
+                    <button class="download-btn">Download Template</button>
+                </div>
+                
+                <div class="template-card">
+                    <div class="template-icon">⭐</div>
+                    <h3 class="template-title">Opportunity Scoring Matrix</h3>
+                    <p>Prioritization framework for evaluating and ranking potential opportunities</p>
+                    <button class="download-btn">Download Matrix</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Action Plan -->
+    <section class="action-section">
+        <div class="container">
+            <div class="action-container">
+                <h2 class="action-title">Your Next 48 Hours</h2>
+                <p style="color: var(--light-gray); font-size: 1.2em; margin-bottom: 40px;">The intelligence advantage starts now - here's your implementation roadmap</p>
+                
+                <div class="action-grid">
+                    <div class="action-item">
+                        <div class="action-time">Hours 1-2</div>
+                        <div class="action-task">Dashboard Setup</div>
+                        <div class="action-description">Download and customize the Government Intelligence Dashboard template</div>
+                    </div>
+                    
+                    <div class="action-item">
+                        <div class="action-time">Day 1</div>
+                        <div class="action-task">First FOI Request</div>
+                        <div class="action-description">Submit your first strategic FOI using provided templates</div>
+                    </div>
+                    
+                    <div class="action-item">
+                        <div class="action-time">Day 2</div>
+                        <div class="action-task">Automated Alerts</div>
+                        <div class="action-description">Set up monitoring alerts for your top 3 target departments</div>
+                    </div>
+                    
+                    <div class="action-item">
+                        <div class="action-time">Week 1</div>
+                        <div class="action-task">Pattern Analysis</div>
+                        <div class="action-description">Complete historical spending analysis for chosen department</div>
+                    </div>
+                    
+                    <div class="action-item">
+                        <div class="action-time">Week 2</div>
+                        <div class="action-task">Network Building</div>
+                        <div class="action-description">Identify and connect with 5 key decision-makers on LinkedIn</div>
+                    </div>
+                    
+                    <div class="action-item">
+                        <div class="action-time">Month 1</div>
+                        <div class="action-task">First Intelligence Win</div>
+                        <div class="action-description">Receive first early opportunity alert through your monitoring system</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="cta-title">Ready to See Opportunities 6 Months Early?</h2>
+            <p class="cta-subtitle">The government spends £1.4 billion per day. Your intelligence advantage starts now.</p>
+            <a href="#" class="cta-button">Continue to Next Lesson →</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="lesson-footer">
+        <div class="container">
+            <div class="next-lesson">
+                <h3>Coming Next: The Relationship Roadmap</h3>
+                <p>Now that you can see the opportunities coming, learn how to build the civil service networks that turn intelligence into invitations. Master the relationship strategies that get you called before job specs are written.</p>
+            </div>
+            
+            <div class="content-visual">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-OSIy9dhcLA/a4a37c5e11cdaebb2633ef9826de6999aa72006dbb83a1e324842383963c90abd6279a1a790e4111660573f94807ee3b058a22e34ed2b58a7f0905bb23cd65adb1b3db0caf8debe14279cc2025471ce6f367e6db8b0c7928a0b19f650e4eec1e03a1056f" alt="Will networking with government officials" style="border-radius: 15px; max-width: 300px;">
+            </div>
+            
+            <p style="margin-top: 40px; color: var(--medium-gray);">
+                © 2024 Rule Benders Academy. All rights reserved. | 
+                <span style="color: var(--bright-blue);">Will Richardson</span> • Government Intelligence Specialist
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Progress bar animation
+        window.addEventListener('load', function() {
+            const progressFill = document.querySelector('.progress-fill');
+            progressFill.style.width = '100%';
+        });
+
+        // Scroll progress indicator
+        window.addEventListener('scroll', function() {
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.body.offsetHeight;
+            const winHeight = window.innerHeight;
+            const scrollPercent = scrollTop / (docHeight - winHeight);
+            const scrollPercentRounded = Math.round(scrollPercent * 100);
+            
+            document.querySelector('.progress-fill').style.width = scrollPercentRounded + '%';
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('.outcome-card, .tool-card, .department-card, .template-card').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Template download functionality
+        document.querySelectorAll('.download-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Add visual feedback
+                const originalText = this.textContent;
+                this.textContent = 'Downloaded!';
+                this.style.background = 'var(--gold)';
+                this.style.color = 'var(--primary-black)';
+                
+                setTimeout(() => {
+                    this.textContent = originalText;
+                    this.style.background = 'var(--bright-blue)';
+                    this.style.color = 'var(--white)';
+                }, 2000);
+                
+                // In a real implementation, this would trigger actual file download
+                console.log('Downloading:', this.closest('.template-card').querySelector('.template-title').textContent);
+            });
+        });
+
+        // Interactive hover effects
+        document.querySelectorAll('.outcome-card, .department-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Smooth scrolling for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

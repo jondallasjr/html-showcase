@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat, J'ai Pété: A Digital Comic</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Comic+Neue:wght@400;700&family=Playfair+Display:wght@400;700&display=swap');
+        
+        :root {
+            --corporate-blue: #003366;
+            --charcoal-gray: #444444;
+            --clean-white: #FFFFFF;
+            --silver-metallic: #C0C0C0;
+            --playful-orange: #FF6600;
+            --silly-pink: #FF99CC;
+            --cartoon-yellow: #FFDD00;
+            --soft-purple: #CC99FF;
+            --teal-bridge: #006666;
+            --lavender-gray: #9999CC;
+            --coral-salmon: #FF7777;
+            --mint-green: #99FFCC;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--clean-white) 0%, var(--silver-metallic) 100%);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+        
+        .comic-container {
+            max-width: 100vw;
+            position: relative;
+        }
+        
+        /* Panel System */
+        .comic-panel {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 2rem;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s ease-out;
+        }
+        
+        .comic-panel.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .panel-content {
+            max-width: 1200px;
+            width: 100%;
+            display: grid;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        /* Title Panel */
+        .title-panel {
+            background: linear-gradient(135deg, var(--corporate-blue) 0%, var(--teal-bridge) 50%, var(--playful-orange) 100%);
+            color: var(--clean-white);
+            text-align: center;
+        }
+        
+        .title-panel .panel-content {
+            grid-template-columns: 1fr;
+            text-align: center;
+        }
+        
+        .comic-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            animation: titleGlow 3s ease-in-out infinite alternate;
+        }
+        
+        @keyframes titleGlow {
+            0% { text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); }
+            100% { text-shadow: 0 4px 16px rgba(255, 221, 0, 0.5); }
+        }
+        
+        .comic-subtitle {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-bottom: 3rem;
+            opacity: 0.9;
+        }
+        
+        /* Standard Panel Layouts */
+        .two-column {
+            grid-template-columns: 1fr 1fr;
+        }
+        
+        .image-left {
+            grid-template-columns: 1.2fr 0.8fr;
+        }
+        
+        .image-right {
+            grid-template-columns: 0.8fr 1.2fr;
+        }
+        
+        .full-width {
+            grid-template-columns: 1fr;
+        }
+        
+        /* Image Containers */
+        .panel-image {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 51, 102, 0.2);
+            transition: all 0.5s ease;
+        }
+        
+        .panel-image:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0, 51, 102, 0.3);
+        }
+        
+        .panel-image img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            display: block;
+        }
+        
+        .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, transparent 0%, rgba(0, 51, 102, 0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .panel-image:hover .image-overlay {
+            opacity: 1;
+        }
+        
+        /* Text Containers */
+        .panel-text {
+            padding: 2rem;
+            background: var(--clean-white);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 51, 102, 0.1);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .panel-text::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--corporate-blue), var(--teal-bridge), var(--playful-orange));
+            border-radius: 15px 15px 0 0;
+        }
+        
+        .panel-text:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 51, 102, 0.15);
+        }
+        
+        /* Typography */
+        .panel-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--corporate-blue);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+        
+        .panel-narration {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: var(--charcoal-gray);
+            margin-bottom: 2rem;
+        }
+        
+        .panel-dialogue {
+            background: var(--soft-purple);
+            padding: 1.5rem;
+            border-radius: 20px 20px 20px 5px;
+            font-family: 'Comic Neue', cursive;
+            font-size: 1.1rem;
+            color: var(--corporate-blue);
+            margin: 1rem 0;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(204, 153, 255, 0.3);
+        }
+        
+        .panel-dialogue::before {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 20px;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 10px 15px 0 0;
+            border-color: var(--soft-purple) transparent transparent transparent;
+        }
+        
+        .thought-bubble {
+            background: var(--silly-pink);
+            border-radius: 50px;
+            position: relative;
+        }
+        
+        .thought-bubble::before {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 30px;
+            width: 20px;
+            height: 20px;
+            background: var(--silly-pink);
+            border-radius: 50%;
+        }
+        
+        .thought-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -25px;
+            left: 25px;
+            width: 10px;
+            height: 10px;
+            background: var(--silly-pink);
+            border-radius: 50%;
+        }
+        
+        /* Special Effects */
+        .glitch-text {
+            animation: glitchEffect 0.1s ease-in-out infinite;
+        }
+        
+        @keyframes glitchEffect {
+            0%, 98% { transform: translateX(0); }
+            99% { transform: translateX(-2px); }
+            100% { transform: translateX(2px); }
+        }
+        
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        
+        .floating-icon {
+            position: absolute;
+            font-size: 2rem;
+            animation: floatAround 6s ease-in-out infinite;
+        }
+        
+        .floating-icon:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; }
+        .floating-icon:nth-child(2) { left: 70%; top: 15%; animation-delay: 2s; }
+        .floating-icon:nth-child(3) { left: 30%; top: 70%; animation-delay: 4s; }
+        .floating-icon:nth-child(4) { left: 85%; top: 60%; animation-delay: 1s; }
+        
+        @keyframes floatAround {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); opacity: 0.7; }
+            25% { transform: translate(20px, -30px) rotate(90deg); opacity: 1; }
+            50% { transform: translate(-10px, -20px) rotate(180deg); opacity: 0.5; }
+            75% { transform: translate(30px, 10px) rotate(270deg); opacity: 0.8; }
+        }
+        
+        /* Animation System */
+        .phonetic-transform {
+            display: inline-block;
+            animation: morphText 3s ease-in-out infinite;
+        }
+        
+        @keyframes morphText {
+            0%, 40% { color: var(--corporate-blue); font-family: 'Inter', sans-serif; }
+            50%, 90% { color: var(--playful-orange); font-family: 'Comic Neue', cursive; transform: scale(1.1); }
+            100% { color: var(--corporate-blue); font-family: 'Inter', sans-serif; }
+        }
+        
+        .split-reality {
+            background: linear-gradient(135deg, var(--corporate-blue) 0%, var(--corporate-blue) 45%, var(--playful-orange) 55%, var(--playful-orange) 100%);
+            background-size: 200% 100%;
+            animation: realityShift 4s ease-in-out infinite;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        @keyframes realityShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        /* Interactive Elements */
+        .interactive-pronunciation {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px dashed var(--teal-bridge);
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .interactive-pronunciation:hover {
+            background: linear-gradient(135deg, var(--soft-purple), var(--mint-green));
+            color: var(--clean-white);
+            transform: scale(1.05);
+        }
+        
+        .interactive-pronunciation::after {
+            content: '🔊';
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+        
+        /* Background Patterns */
+        .pattern-corporate::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 25px 25px, var(--corporate-blue) 2px, transparent 2px),
+                radial-gradient(circle at 75px 75px, var(--silver-metallic) 1px, transparent 1px);
+            background-size: 100px 100px;
+            opacity: 0.1;
+            z-index: -1;
+        }
+        
+        .pattern-playful::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 30px 30px, var(--playful-orange) 2px, transparent 2px),
+                radial-gradient(circle at 80px 80px, var(--silly-pink) 1px, transparent 1px);
+            background-size: 120px 120px;
+            opacity: 0.1;
+            z-index: -1;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .comic-title {
+                font-size: 2.5rem;
+            }
+            
+            .panel-title {
+                font-size: 2rem;
+            }
+            
+            .two-column,
+            .image-left,
+            .image-right {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .comic-panel {
+                padding: 1rem;
+            }
+            
+            .panel-content {
+                gap: 2rem;
+            }
+        }
+        
+        /* Scroll Progress Indicator */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--corporate-blue), var(--teal-bridge), var(--playful-orange));
+            z-index: 1000;
+            transition: width 0.1s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+    
+    <div class="comic-container">
+        
+        <!-- Title Panel -->
+        <section class="comic-panel title-panel visible">
+            <div class="panel-content">
+                <h1 class="comic-title">Chat, J'ai Pété</h1>
+                <p class="comic-subtitle">The Linguistic Comedy of AI in France</p>
+                <div class="interactive-pronunciation" onclick="playPronunciation()">
+                    <span class="phonetic-transform">"ChatGPT"</span> = <span class="phonetic-transform">"Cat, I farted"</span>
+                    <div style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">
+                        Click to hear the phonetic similarity
+                    </div>
+                </div>
+            </div>
+            <div class="floating-elements">
+                <div class="floating-icon">🤖</div>
+                <div class="floating-icon">🐱</div>
+                <div class="floating-icon">💨</div>
+                <div class="floating-icon">🇫🇷</div>
+            </div>
+        </section>
+
+        <!-- Panel 1: The Revelation -->
+        <section class="comic-panel pattern-corporate">
+            <div class="panel-content image-left">
+                <div class="panel-image">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-32zr53uZ-3/5df8a21b062e7bce0d80dd05cee364a8d03abe10dffef676b66557b75538274a067c0b92476f406f365e659a2f79ead984ab60431d0fc8bb72f2659be92e3cc6b39f81aca15dfeb819776bf6c7628b2320d85b9707723adb096d00e93536e78916271bb0" alt="French Professional Cognitive Dissonance">
+                    <div class="image-overlay"></div>
+                </div>
+                <div class="panel-text">
+                    <h2 class="panel-title">The Moment of Recognition</h2>
+                    <p class="panel-narration">
+                        Meet Pierre, a senior AI researcher at a prestigious French technology firm. Today, like every day, he must discuss the revolutionary capabilities of ChatGPT with complete professional composure.
+                    </p>
+                    <div class="panel-dialogue thought-bubble">
+                        "Every time I say 'ChatGPT' in meetings, I hear 'cat, I farted' and have to maintain a straight face... How is this my professional reality?"
+                    </div>
+                    <p class="panel-narration">
+                        The cognitive dissonance is real. Pierre represents millions of French speakers navigating this linguistic minefield daily.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Panel 2: The AI-Cat Entity -->
+        <section class="comic-panel pattern-playful">
+            <div class="panel-content image-right">
+                <div class="panel-text">
+                    <h2 class="panel-title">Enter the <span class="split-reality">Digital Paradox</span></h2>
+                    <p class="panel-narration">
+                        In the space between languages, a peculiar entity emerges - part sophisticated AI assistant, part mischievous cat. This digital being embodies the duality every French speaker experiences.
+                    </p>
+                    <div class="panel-dialogue">
+                        "Bonjour! I am your AI assistant, ready to help with complex queries and... *purr* ...also to remind you that I apparently just announced digestive troubles."
+                    </div>
+                    <p class="panel-narration">
+                        The AI-Cat represents the impossible task of taking artificial intelligence seriously while involuntarily processing bathroom humor with every mention.
+                    </p>
+                </div>
+                <div class="panel-image">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-yY1mLGe2Ti/2717f123a9ac26bf68dc766c2f51a03f77b27bd07100236e544c349a4b3de8d5d31037dae3fdd1ebe4e6f89ee1c43ea5a7da4daa3f2236dbd4b84fe7a4f5edfb3d4d54d8c07aaecfd5039f81a519b92ce6087e8fca71bf674bf44160b640f45b93a958f5" alt="Anthropomorphic AI-Cat Entity">
+                    <div class="image-overlay"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Panel 3: Media Chaos -->
+        <section class="comic-panel pattern-corporate">
+            <div class="panel-content two-column">
+                <div class="panel-image">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-IJ_Pvd2KRC/49d7f9712409cffedf47b1f57896d5af55bbcd5e1c0e1c380d038b7f556d2c4bd0787c65c636dbc96275b8b23d084094781acaf92ecfd843fe7c1f57896d5af55bbcd5e1c0e1c380d038b7f556d2c4bd0787c65c636dbc96275b8b23d084094781acaf92ecfd489489c777ca087fe1e5e39d59acbdf843fe7c1b01dbf52db42fb48b244262312ac46a104c195824ec3a897f1ac9" alt="French News Studio Reality Distortion">
+                    <div class="image-overlay"></div>
+                </div>
+                <div class="panel-text">
+                    <h2 class="panel-title">Breaking News: <span class="glitch-text">Professional Absurdism</span></h2>
+                    <p class="panel-narration">
+                        French news anchors face the ultimate test of professional composure. Every tech report becomes an exercise in maintaining credibility while repeatedly announcing what sounds like cat digestive issues.
+                    </p>
+                    <div class="panel-dialogue">
+                        "Tonight's top story: <span class="phonetic-transform">ChatGPT</span> revolutionizes education... Wait, did I just say what I think I said on national television?"
+                    </div>
+                    <p class="panel-narration">
+                        The split-reality of French media coverage creates a surreal landscape where serious AI discourse operates on two semantic levels simultaneously.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Panel 4: Corporate Boardroom -->
+        <section class="comic-panel pattern-playful">
+            <div class="panel-content full-width">
+                <div class="panel-text" style="text-align: center; margin-bottom: 2rem;">
+                    <h2 class="panel-title">The Boardroom Dilemma</h2>
+                    <p class="panel-narration">
+                        In corporate France, the challenge reaches its peak. C-suite executives must discuss AI strategy while internally processing the most juvenile associations imaginable.
+                    </p>
+                </div>
+                <div class="panel-image">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-LJaVdU605b/fc83bdfee23b9e45a9a5538b527dac22f907d2b5efa89b3f57a768df0b6501e8c70f8de4962c8f2221624cdf697fa5f89e1ee525a92d15343f3f51f5c1d39a310be07c322c1f4c5772abba9a54e457c55f148b9249c70d6d8f21a8011a359debe323a9d9" alt="Corporate Boardroom Cognitive Dissonance">
+                    <div class="image-overlay"></div>
+                </div>
+                <div class="panel-dialogue" style="margin-top: 2rem; text-align: center;">
+                    "Our Q4 AI integration strategy centers on ChatGPT implementation..." 
+                    <span style="display: block; font-style: italic; margin-top: 1rem; opacity: 0.7;">
+                        *Eight executives simultaneously suppress the same inappropriate mental response*
+                    </span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Panel 5: Abstract Linguistic Space -->
+        <section class="comic-panel" style="background: linear-gradient(135deg, var(--lavender-gray) 0%, var(--teal-bridge) 50%, var(--mint-green) 100%);">
+            <div class="panel-content full-width">
+                <div class="panel-text" style="background: rgba(255, 255, 255, 0.9);">
+                    <h2 class="panel-title">The Space Between Languages</h2>
+                    <p class="panel-narration">
+                        In the abstract realm where phonetics collide with meaning, French speakers navigate impossible linguistic territory. Here, professional necessity meets involuntary humor in a dance of cultural adaptation.
+                    </p>
+                </div>
+                <div class="panel-image">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-qR2I6NYGOa/3cfcbf062453c792219eaf2253e6f660934e8f497279e2e8693b77e2e7d62ffbaef4b63e63d15efa15a45f77156fbbb3696cb32187c8ff79bbf098115872c00441a92a8786d0efc0ac00daf90989e9e8c6c4c4c72daf4595ff8858e3abbb6e7c271ecf89" alt="Abstract Linguistic Landscape">
+                    <div class="image-overlay"></div>
+                </div>
+                <div class="panel-text" style="background: rgba(255, 255, 255, 0.9);">
+                    <p class="panel-narration">
+                        Sound waves transform meaning as they travel from English innovation to French comprehension, creating a bridge between technological progress and cultural linguistic identity.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Panel 6: Resolution -->
+        <section class="comic-panel pattern-corporate">
+            <div class="panel-content image-left">
+                <div class="panel-image">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-kCjLyXIoeM/31b97c75146286ca263dfeb49d31b1497a56c93c7c8b962d33b41a76616cc0da272644a5ea495a09964450ed164f48d82f71f168dae566720bb0081817c43f647a711dd9bcf2d1d1d1c22c44f5f90e7abfb2707bfd412e592d7dd7ed8a6822e8983f20a1" alt="Cultural Adaptation Harmony Resolution">
+                    <div class="image-overlay"></div>
+                </div>
+                <div class="panel-text">
+                    <h2 class="panel-title">Adaptation & Triumph</h2>
+                    <p class="panel-narration">
+                        Months later, French professionals have found their rhythm. The linguistic coincidence that once created cognitive chaos has become a source of quiet cultural strength.
+                    </p>
+                    <div class="panel-dialogue">
+                        "You know what? We've mastered the impossible - taking AI seriously while acknowledging the absurd. That's very French of us, actually."
+                    </div>
+                    <p class="panel-narration">
+                        The AI-Cat assistants are now proudly integrated into French workspaces, representing the successful fusion of professional necessity with cultural humor acceptance.
+                    </p>
+                    <div class="panel-dialogue thought-bubble">
+                        "We didn't let a linguistic coincidence defeat our innovation. We made it part of our cultural identity instead."
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final Panel: Universal Message -->
+        <section class="comic-panel" style="background: linear-gradient(135deg, var(--corporate-blue) 0%, var(--playful-orange) 100%); color: var(--clean-white);">
+            <div class="panel-content full-width" style="text-align: center;">
+                <h2 class="panel-title" style="color: var(--clean-white); font-size: 3rem;">The Human Comedy</h2>
+                <p class="panel-narration" style="color: var(--clean-white); font-size: 1.3rem; max-width: 800px; margin: 0 auto 3rem;">
+                    From Paris to Quebec, from Brussels to Dakar, French speakers discovered that embracing linguistic absurdity didn't diminish their professional capabilities—it enhanced their humanity.
+                </p>
+                <div class="interactive-pronunciation" style="background: rgba(255, 255, 255, 0.2); border-color: var(--cartoon-yellow); color: var(--clean-white);">
+                    <strong>The Universal Lesson:</strong><br>
+                    Sometimes the most profound technological progress happens alongside the most ridiculous linguistic coincidences.<br>
+                    <em>And that's perfectly, beautifully human.</em>
+                </div>
+                <div style="margin-top: 3rem; font-size: 2rem;">🤖 🐱 💨 🇫🇷 ❤️</div>
+            </div>
+            <div class="floating-elements">
+                <div class="floating-icon">🎯</div>
+                <div class="floating-icon">💡</div>
+                <div class="floating-icon">🌟</div>
+                <div class="floating-icon">🚀</div>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        // Intersection Observer for panel animations
+        const observerOptions = {
+            threshold: 0.3,
+            rootMargin: '0px 0px -10% 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all comic panels
+        document.querySelectorAll('.comic-panel:not(.visible)').forEach(panel => {
+            observer.observe(panel);
+        });
+        
+        // Scroll progress bar
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.body.offsetHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            document.getElementById('progressBar').style.width = scrollPercent + '%';
+        });
+        
+        // Interactive pronunciation
+        function playPronunciation() {
+            // Visual feedback
+            const element = event.currentTarget;
+            element.style.animation = 'none';
+            setTimeout(() => {
+                element.style.animation = 'pulse 0.5s ease-in-out';
+            }, 10);
+            
+            // Could integrate Web Speech API here for actual pronunciation
+            console.log('Playing pronunciation: ChatGPT → Chat, j\'ai pété');
+            
+            // Add temporary visual effect
+            const sparkles = document.createElement('div');
+            sparkles.innerHTML = '✨ 🗣️ ✨';
+            sparkles.style.cssText = `
+                position: absolute;
+                top: -30px;
+                left: 50%;
+                transform: translateX(-50%);
+                animation: sparkleUp 2s ease-out forwards;
+                pointer-events: none;
+                font-size: 1.5rem;
+            `;
+            element.appendChild(sparkles);
+            
+            setTimeout(() => sparkles.remove(), 2000);
+        }
+        
+        // Add sparkle animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes sparkleUp {
+                0% { opacity: 1; transform: translateX(-50%) translateY(0); }
+                100% { opacity: 0; transform: translateX(-50%) translateY(-50px); }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Smooth scroll for touch devices
+        if ('ontouchstart' in window) {
+            document.body.style.scrollBehavior = 'smooth';
+        }
+        
+        // Enhanced floating elements
+        document.querySelectorAll('.floating-icon').forEach((icon, index) => {
+            icon.addEventListener('click', () => {
+                icon.style.animation = 'none';
+                setTimeout(() => {
+                    icon.style.animation = `floatAround 6s ease-in-out infinite`;
+                }, 10);
+            });
+        });
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowDown' || e.key === ' ') {
+                e.preventDefault();
+                const panels = document.querySelectorAll('.comic-panel');
+                const currentPanel = Array.from(panels).find(panel => 
+                    panel.getBoundingClientRect().top >= 0
+                );
+                const nextPanel = currentPanel ? currentPanel.nextElementSibling : panels[1];
+                if (nextPanel) {
+                    nextPanel.scrollIntoView({ behavior: 'smooth' });
+                }
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                const panels = document.querySelectorAll('.comic-panel');
+                const currentPanel = Array.from(panels).reverse().find(panel => 
+                    panel.getBoundingClientRect().top <= 0
+                );
+                const prevPanel = currentPanel ? currentPanel.previousElementSibling : panels[0];
+                if (prevPanel) {
+                    prevPanel.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        });
+    </script>
+</body>
+</html>
