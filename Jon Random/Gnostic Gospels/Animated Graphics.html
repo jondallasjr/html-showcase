@@ -1,0 +1,1361 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Gnostic Gospels: Animated Journey Through Forbidden Knowledge</title>
+    <style>
+        :root {
+            --parchment: #F4ECD8;
+            --iron-gall: #2C1810;
+            --divine-gold: #FFD700;
+            --red-ochre: #A0522D;
+            --lapis-lazuli: #1E3A8A;
+            --tyrian-purple: #6B46C1;
+            --shadow-charcoal: #374151;
+            --desert-sand: #C19A6B;
+            --verdigris: #43B047;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(135deg, var(--parchment) 0%, var(--desert-sand) 100%);
+            color: var(--iron-gall);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .manuscript-texture {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(255, 215, 0, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(255, 215, 0, 0.05) 0%, transparent 50%),
+                linear-gradient(45deg, transparent 40%, rgba(44, 24, 16, 0.02) 50%, transparent 60%);
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        /* Animated Background Particles */
+        .sacred-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            color: var(--divine-gold);
+            opacity: 0.3;
+            animation: floatParticle 15s linear infinite;
+            font-size: 1.2rem;
+        }
+
+        @keyframes floatParticle {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.3;
+            }
+            90% {
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header Animation */
+        .animated-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .main-title {
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            color: var(--divine-gold);
+            text-shadow: 3px 3px 6px rgba(44, 24, 16, 0.4);
+            margin-bottom: 1rem;
+            position: relative;
+            opacity: 0;
+            animation: titleReveal 2s ease-out forwards;
+        }
+
+        .main-title::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, var(--parchment), transparent);
+            animation: shimmer 3s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        @keyframes titleReveal {
+            0% {
+                opacity: 0;
+                transform: translateY(30px) scale(0.9);
+                filter: blur(5px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+                filter: blur(0);
+            }
+        }
+
+        @keyframes shimmer {
+            0%, 100% {
+                transform: translateX(-100%);
+            }
+            50% {
+                transform: translateX(100%);
+            }
+        }
+
+        .subtitle {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            color: var(--red-ochre);
+            font-style: italic;
+            opacity: 0;
+            animation: subtitleFade 2s ease-out 0.5s forwards;
+        }
+
+        @keyframes subtitleFade {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Animated Discovery Scene */
+        .discovery-animation {
+            background: linear-gradient(180deg, var(--desert-sand), var(--parchment));
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 3rem 0;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .discovery-scene {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .jar-animation {
+            position: relative;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .earthenware-jar {
+            width: 150px;
+            height: 200px;
+            background: linear-gradient(145deg, var(--red-ochre), var(--desert-sand));
+            border-radius: 60% 60% 40% 40%;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.5s ease;
+            animation: jarFloat 4s ease-in-out infinite;
+        }
+
+        .earthenware-jar::before {
+            content: '';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 25px;
+            background: var(--shadow-charcoal);
+            border-radius: 50%;
+        }
+
+        .earthenware-jar::after {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 3px;
+            height: 180px;
+            background: linear-gradient(to bottom, rgba(55, 65, 81, 0.3), transparent);
+        }
+
+        @keyframes jarFloat {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+                filter: drop-shadow(0 20px 20px rgba(0, 0, 0, 0.1));
+            }
+            50% {
+                transform: translateY(-15px) rotate(1deg);
+                filter: drop-shadow(0 35px 25px rgba(0, 0, 0, 0.15));
+            }
+        }
+
+        .divine-light {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, var(--divine-gold) 0%, rgba(255, 215, 0, 0.3) 40%, transparent 70%);
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            opacity: 0;
+            transition: all 1s ease;
+            pointer-events: none;
+        }
+
+        .jar-opened .divine-light {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 0.8;
+            animation: divineePulse 3s ease-in-out infinite;
+        }
+
+        @keyframes divineePulse {
+            0%, 100% {
+                opacity: 0.5;
+                transform: translate(-50%, -50%) scale(0.8);
+            }
+            50% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1.2);
+            }
+        }
+
+        .light-rays {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 500px;
+            height: 500px;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        .jar-opened .light-rays {
+            opacity: 0.6;
+            animation: raysRotate 8s linear infinite;
+        }
+
+        .ray {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 2px;
+            height: 250px;
+            background: linear-gradient(to bottom, var(--divine-gold), transparent);
+            transform-origin: bottom;
+        }
+
+        .ray:nth-child(1) { transform: translate(-50%, -100%) rotate(0deg); }
+        .ray:nth-child(2) { transform: translate(-50%, -100%) rotate(45deg); }
+        .ray:nth-child(3) { transform: translate(-50%, -100%) rotate(90deg); }
+        .ray:nth-child(4) { transform: translate(-50%, -100%) rotate(135deg); }
+        .ray:nth-child(5) { transform: translate(-50%, -100%) rotate(180deg); }
+        .ray:nth-child(6) { transform: translate(-50%, -100%) rotate(225deg); }
+        .ray:nth-child(7) { transform: translate(-50%, -100%) rotate(270deg); }
+        .ray:nth-child(8) { transform: translate(-50%, -100%) rotate(315deg); }
+
+        @keyframes raysRotate {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .discovery-text {
+            opacity: 0;
+            transform: translateX(30px);
+            transition: all 1s ease 0.5s;
+        }
+
+        .jar-opened .discovery-text {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Animated Manuscript Unfurling */
+        .manuscript-reveal {
+            margin: 4rem 0;
+            perspective: 1000px;
+        }
+
+        .scroll-container {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .ancient-scroll {
+            width: 600px;
+            height: 300px;
+            background: linear-gradient(135deg, var(--parchment), rgba(244, 236, 216, 0.8));
+            border-radius: 10px;
+            position: relative;
+            transform-origin: center;
+            animation: scrollUnfurl 3s ease-out;
+            box-shadow: 
+                0 10px 30px rgba(0, 0, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+
+        .ancient-scroll::before,
+        .ancient-scroll::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 40px;
+            height: 100%;
+            background: linear-gradient(135deg, var(--red-ochre), var(--desert-sand));
+            border-radius: 20px;
+        }
+
+        .ancient-scroll::before {
+            left: -20px;
+            animation: leftRodRoll 3s ease-out;
+        }
+
+        .ancient-scroll::after {
+            right: -20px;
+            animation: rightRodRoll 3s ease-out;
+        }
+
+        @keyframes scrollUnfurl {
+            0% {
+                width: 80px;
+                opacity: 0;
+                transform: rotateY(90deg);
+            }
+            50% {
+                opacity: 0.5;
+                transform: rotateY(45deg);
+            }
+            100% {
+                width: 600px;
+                opacity: 1;
+                transform: rotateY(0deg);
+            }
+        }
+
+        @keyframes leftRodRoll {
+            0% { transform: rotateZ(0deg); }
+            100% { transform: rotateZ(-720deg); }
+        }
+
+        @keyframes rightRodRoll {
+            0% { transform: rotateZ(0deg); }
+            100% { transform: rotateZ(720deg); }
+        }
+
+        .scroll-text {
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .animated-text {
+            opacity: 0;
+            animation: textReveal 2s ease-out 1.5s forwards;
+        }
+
+        .highlighted-quote {
+            font-size: 1.3rem;
+            color: var(--tyrian-purple);
+            font-style: italic;
+            position: relative;
+            display: inline-block;
+            margin: 1rem 0;
+        }
+
+        .highlighted-quote::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--divine-gold);
+            animation: underlineGrow 2s ease-out 2s forwards;
+        }
+
+        @keyframes textReveal {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+                filter: blur(3px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+                filter: blur(0);
+            }
+        }
+
+        @keyframes underlineGrow {
+            to {
+                width: 100%;
+            }
+        }
+
+        /* Animated Timeline */
+        .timeline-animation {
+            margin: 4rem 0;
+            position: relative;
+        }
+
+        .timeline-container {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--lapis-lazuli), var(--divine-gold), var(--red-ochre));
+            transform: translateX(-50%);
+            opacity: 0;
+            animation: timelineGrow 2s ease-out 0.5s forwards;
+        }
+
+        @keyframes timelineGrow {
+            from {
+                opacity: 0;
+                height: 0;
+            }
+            to {
+                opacity: 1;
+                height: 100%;
+            }
+        }
+
+        .timeline-event {
+            display: flex;
+            align-items: center;
+            margin: 4rem 0;
+            opacity: 0;
+            position: relative;
+        }
+
+        .timeline-event:nth-child(odd) {
+            flex-direction: row;
+            animation: slideInLeft 1s ease-out forwards;
+        }
+
+        .timeline-event:nth-child(even) {
+            flex-direction: row-reverse;
+            animation: slideInRight 1s ease-out forwards;
+        }
+
+        .timeline-event:nth-child(1) { animation-delay: 1s; }
+        .timeline-event:nth-child(2) { animation-delay: 1.5s; }
+        .timeline-event:nth-child(3) { animation-delay: 2s; }
+        .timeline-event:nth-child(4) { animation-delay: 2.5s; }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .timeline-content {
+            flex: 1;
+            background: var(--parchment);
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 0 3rem;
+            position: relative;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .timeline-dot {
+            width: 24px;
+            height: 24px;
+            background: var(--divine-gold);
+            border-radius: 50%;
+            border: 6px solid var(--parchment);
+            z-index: 2;
+            position: relative;
+            animation: dotPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes dotPulse {
+            0%, 100% {
+                box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7);
+            }
+            50% {
+                box-shadow: 0 0 0 20px rgba(255, 215, 0, 0);
+            }
+        }
+
+        /* Cosmological Animation */
+        .cosmology-animation {
+            margin: 4rem 0;
+            height: 600px;
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--shadow-charcoal), var(--lapis-lazuli));
+        }
+
+        .realm {
+            position: absolute;
+            width: 50%;
+            height: 100%;
+            transition: all 1s ease;
+        }
+
+        .pleroma-realm {
+            left: 0;
+            background: linear-gradient(135deg, var(--divine-gold), var(--lapis-lazuli));
+            clip-path: polygon(0 0, 100% 0, 80% 100%, 0% 100%);
+            animation: plermaExpand 3s ease-out;
+        }
+
+        .material-realm {
+            right: 0;
+            background: linear-gradient(135deg, var(--shadow-charcoal), var(--desert-sand));
+            clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);
+            position: relative;
+        }
+
+        @keyframes plermaExpand {
+            from {
+                clip-path: polygon(0 0, 0 0, 0 100%, 0% 100%);
+            }
+            to {
+                clip-path: polygon(0 0, 100% 0, 80% 100%, 0% 100%);
+            }
+        }
+
+        .prison-bars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 30px,
+                rgba(55, 65, 81, 0.4) 30px,
+                rgba(55, 65, 81, 0.4) 35px
+            );
+            animation: barsAppear 2s ease-out 1s forwards;
+            opacity: 0;
+        }
+
+        @keyframes barsAppear {
+            to {
+                opacity: 1;
+            }
+        }
+
+        .realm-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: var(--parchment);
+            opacity: 0;
+            animation: contentFadeIn 1s ease-out 2s forwards;
+        }
+
+        @keyframes contentFadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        .geometric-pattern {
+            position: absolute;
+            top: 20%;
+            left: 20%;
+            width: 60%;
+            height: 60%;
+            opacity: 0.3;
+            animation: patternRotate 20s linear infinite;
+        }
+
+        @keyframes patternRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .sacred-geometry {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Text Animation Effects */
+        .animated-excerpt {
+            background: var(--parchment);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-left: 5px solid var(--divine-gold);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .typing-text {
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            color: var(--iron-gall);
+            white-space: pre-wrap;
+            opacity: 0;
+        }
+
+        .typing-text.animate {
+            opacity: 1;
+            animation: typewriter 4s steps(100) forwards;
+        }
+
+        @keyframes typewriter {
+            from {
+                width: 0;
+                overflow: hidden;
+            }
+            to {
+                width: 100%;
+                overflow: visible;
+            }
+        }
+
+        .typing-cursor::after {
+            content: '|';
+            color: var(--divine-gold);
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        /* Scroll-triggered animations */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Suppression Animation */
+        .suppression-scene {
+            background: linear-gradient(135deg, var(--shadow-charcoal), var(--lapis-lazuli));
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 3rem 0;
+            position: relative;
+            overflow: hidden;
+            height: 400px;
+        }
+
+        .manuscript-flames {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 150px;
+        }
+
+        .flame {
+            position: absolute;
+            bottom: 0;
+            width: 20px;
+            height: 100px;
+            background: linear-gradient(to top, var(--red-ochre), var(--divine-gold), transparent);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            animation: flicker 1s ease-in-out infinite alternate;
+        }
+
+        .flame:nth-child(1) {
+            left: 20px;
+            animation-delay: 0s;
+            height: 120px;
+        }
+
+        .flame:nth-child(2) {
+            left: 50px;
+            animation-delay: 0.2s;
+            height: 100px;
+        }
+
+        .flame:nth-child(3) {
+            left: 80px;
+            animation-delay: 0.4s;
+            height: 110px;
+        }
+
+        .flame:nth-child(4) {
+            left: 110px;
+            animation-delay: 0.1s;
+            height: 95px;
+        }
+
+        .flame:nth-child(5) {
+            left: 140px;
+            animation-delay: 0.3s;
+            height: 105px;
+        }
+
+        @keyframes flicker {
+            0% {
+                transform: rotate(-2deg) scale(1);
+                opacity: 0.8;
+            }
+            100% {
+                transform: rotate(2deg) scale(1.1);
+                opacity: 1;
+            }
+        }
+
+        .burning-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--parchment);
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .discovery-scene {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .ancient-scroll {
+                width: 300px;
+                height: 200px;
+            }
+
+            .timeline-event {
+                flex-direction: column !important;
+                text-align: center;
+            }
+
+            .timeline-content {
+                margin: 1rem 0;
+            }
+
+            .timeline-line {
+                left: 20px;
+            }
+
+            .realm {
+                position: relative;
+                width: 100%;
+                height: 50%;
+            }
+
+            .pleroma-realm {
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+            }
+
+            .material-realm {
+                top: 50%;
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+            }
+        }
+
+        /* Accessibility - Respect reduced motion preferences */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+
+            .particle {
+                display: none;
+            }
+        }
+
+        /* High contrast mode support */
+        @media (prefers-contrast: high) {
+            :root {
+                --parchment: #ffffff;
+                --iron-gall: #000000;
+                --divine-gold: #ffff00;
+                --shadow-charcoal: #000000;
+            }
+        }
+
+        /* Interactive Controls */
+        .animation-controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--parchment);
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .control-btn {
+            display: block;
+            width: 100%;
+            padding: 0.5rem 1rem;
+            margin: 0.5rem 0;
+            background: var(--tyrian-purple);
+            color: var(--parchment);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: inherit;
+            transition: background 0.3s ease;
+        }
+
+        .control-btn:hover {
+            background: var(--lapis-lazuli);
+        }
+
+        .control-btn:focus {
+            outline: 2px solid var(--divine-gold);
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="manuscript-texture"></div>
+    <div class="sacred-particles" id="particleContainer"></div>
+
+    <div class="animation-controls">
+        <button class="control-btn" onclick="restartAnimations()">Restart All</button>
+        <button class="control-btn" onclick="toggleParticles()">Toggle Particles</button>
+        <button class="control-btn" onclick="pauseAnimations()">Pause/Resume</button>
+    </div>
+
+    <div class="container">
+        <!-- Animated Header -->
+        <header class="animated-header">
+            <h1 class="main-title">The Gnostic Gospels</h1>
+            <p class="subtitle">Forbidden Knowledge That Reshapes Christianity</p>
+        </header>
+
+        <!-- Animated Discovery Scene -->
+        <section class="discovery-animation scroll-reveal">
+            <h2 style="text-align: center; margin-bottom: 2rem; color: var(--tyrian-purple); font-size: 2rem;">The Discovery That Changed Everything</h2>
+            <div class="discovery-scene">
+                <div class="jar-animation">
+                    <div class="earthenware-jar" onclick="openJar()" tabindex="0" role="button" aria-label="Click to reveal the hidden manuscripts">
+                        <div class="divine-light"></div>
+                        <div class="light-rays">
+                            <div class="ray"></div>
+                            <div class="ray"></div>
+                            <div class="ray"></div>
+                            <div class="ray"></div>
+                            <div class="ray"></div>
+                            <div class="ray"></div>
+                            <div class="ray"></div>
+                            <div class="ray"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="discovery-text">
+                    <h3>December 1945: The Farmer's Discovery</h3>
+                    <p>Egyptian farmer Muhammad Ali al-Samman unearthed a sealed earthenware jar that contained 1,700 years of suppressed Christian history.</p>
+                    <p><strong>Inside:</strong> 13 leather-bound codices with 52 revolutionary texts - the Gnostic Gospels.</p>
+                    <p><em>Click the jar to begin your journey into forbidden knowledge...</em></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Animated Manuscript Reveal -->
+        <section class="manuscript-reveal scroll-reveal">
+            <h2 style="text-align: center; margin-bottom: 2rem; color: var(--tyrian-purple); font-size: 2rem;">The Forbidden Words Revealed</h2>
+            <div class="scroll-container">
+                <div class="ancient-scroll">
+                    <div class="scroll-text">
+                        <div class="animated-text">
+                            <p class="highlighted-quote">"Split a piece of wood; I am there. Lift up the stone, and you will find me there."</p>
+                            <p><strong>- Gospel of Thomas, Saying 77</strong></p>
+                            <p>This radical saying presents a pantheistic Jesus claiming universal presence - threatening the institutional church's role as divine mediator.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Animated Excerpt with Typing Effect -->
+        <section class="animated-excerpt scroll-reveal">
+            <h3 style="color: var(--tyrian-purple); margin-bottom: 1rem;">Mary Magdalene's Authority</h3>
+            <div class="typing-text" id="typingText">
+                <span class="typing-cursor"></span>
+            </div>
+        </section>
+
+        <!-- Animated Timeline -->
+        <section class="timeline-animation scroll-reveal">
+            <h2 style="text-align: center; margin-bottom: 3rem; color: var(--tyrian-purple); font-size: 2rem;">Timeline: Suppression and Rediscovery</h2>
+            <div class="timeline-container">
+                <div class="timeline-line"></div>
+                
+                <div class="timeline-event">
+                    <div class="timeline-content">
+                        <h3 style="color: var(--tyrian-purple);">50-150 CE: Origins</h3>
+                        <p>Gnostic texts composed alongside canonical gospels. Early Christianity was far more diverse than orthodox narratives suggest.</p>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+
+                <div class="timeline-event">
+                    <div class="timeline-content">
+                        <h3 style="color: var(--tyrian-purple);">367 CE: The Suppression Order</h3>
+                        <p>Bishop Athanasius's Easter Letter establishes canonical New Testament and orders destruction of "heretical" texts.</p>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+
+                <div class="timeline-event">
+                    <div class="timeline-content">
+                        <h3 style="color: var(--tyrian-purple);">367-400 CE: The Secret Burial</h3>
+                        <p>Monks near Nag Hammadi bury Gnostic manuscripts in sealed jars - a rescue mission to preserve forbidden knowledge.</p>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+
+                <div class="timeline-event">
+                    <div class="timeline-content">
+                        <h3 style="color: var(--tyrian-purple);">1945: The Rediscovery</h3>
+                        <p>Muhammad Ali al-Samman discovers the buried manuscripts, bringing 1,700 years of suppressed Christianity back to light.</p>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Suppression Animation -->
+        <section class="suppression-scene scroll-reveal">
+            <div class="burning-text">
+                <h3>The Great Suppression</h3>
+                <p>"Heretical" texts systematically destroyed</p>
+            </div>
+            <div class="manuscript-flames">
+                <div class="flame"></div>
+                <div class="flame"></div>
+                <div class="flame"></div>
+                <div class="flame"></div>
+                <div class="flame"></div>
+            </div>
+        </section>
+
+        <!-- Cosmological Animation -->
+        <section class="cosmology-animation scroll-reveal">
+            <div class="realm pleroma-realm">
+                <div class="realm-content">
+                    <h3>The Pleroma</h3>
+                    <p>Divine Fullness<br>Pure Consciousness<br>Spiritual Reality</p>
+                </div>
+                <div class="geometric-pattern">
+                    <svg class="sacred-geometry" viewBox="0 0 200 200">
+                        <defs>
+                            <pattern id="flowerOfLife" patternUnits="userSpaceOnUse" width="100" height="87">
+                                <circle cx="50" cy="43.5" r="25" fill="none" stroke="rgba(255, 215, 0, 0.3)" stroke-width="1"/>
+                                <circle cx="25" cy="21.75" r="25" fill="none" stroke="rgba(255, 215, 0, 0.3)" stroke-width="1"/>
+                                <circle cx="75" cy="21.75" r="25" fill="none" stroke="rgba(255, 215, 0, 0.3)" stroke-width="1"/>
+                                <circle cx="25" cy="65.25" r="25" fill="none" stroke="rgba(255, 215, 0, 0.3)" stroke-width="1"/>
+                                <circle cx="75" cy="65.25" r="25" fill="none" stroke="rgba(255, 215, 0, 0.3)" stroke-width="1"/>
+                                <circle cx="0" cy="43.5" r="25" fill="none" stroke="rgba(255, 215, 0, 0.3)" stroke-width="1"/>
+                                <circle cx="100" cy="43.5" r="25" fill="none" stroke="rgba(255, 215, 0, 0.3)" stroke-width="1"/>
+                            </pattern>
+                        </defs>
+                        <rect width="100%" height="100%" fill="url(#flowerOfLife)"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="realm material-realm">
+                <div class="prison-bars"></div>
+                <div class="realm-content">
+                    <h3>Material World</h3>
+                    <p>The Demiurge's Prison<br>Beautiful Illusion<br>Soul Entrapment</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final Revelation -->
+        <section class="animated-excerpt scroll-reveal">
+            <h3 style="color: var(--tyrian-purple); margin-bottom: 1rem;">The Ultimate Irony</h3>
+            <p style="font-size: 1.2rem; font-style: italic;">
+                The church fathers' successful suppression may have eliminated precisely the spiritual resources needed for modern crises of meaning, environmental destruction, and institutional religious decline.
+            </p>
+            <p style="font-size: 1.1rem; margin-top: 1rem;">
+                <strong>What if the Nag Hammadi discovery offers a glimpse of what Christianity was—and still could become?</strong>
+            </p>
+        </section>
+    </div>
+
+    <script>
+        // Global animation state
+        let animationsPaused = false;
+        let particlesVisible = true;
+        let jarOpened = false;
+
+        // Create floating sacred particles
+        function createParticles() {
+            const container = document.getElementById('particleContainer');
+            const symbols = ['⚘', '✦', '⚏', '⟐', '◉', '⟡', '◈', '◊', '✧', '⟢'];
+            
+            function addParticle() {
+                if (!particlesVisible) return;
+                
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDuration = (10 + Math.random() * 10) + 's';
+                particle.style.fontSize = (0.8 + Math.random() * 0.8) + 'rem';
+                particle.style.animationDelay = Math.random() * 2 + 's';
+                
+                container.appendChild(particle);
+                
+                setTimeout(() => {
+                    if (particle.parentNode) {
+                        particle.parentNode.removeChild(particle);
+                    }
+                }, 20000);
+            }
+
+            // Initial particles
+            for (let i = 0; i < 8; i++) {
+                setTimeout(addParticle, i * 1000);
+            }
+
+            // Continuous particle generation
+            setInterval(addParticle, 3000);
+        }
+
+        // Jar opening animation
+        function openJar() {
+            if (jarOpened) return;
+            
+            jarOpened = true;
+            const jar = document.querySelector('.earthenware-jar');
+            const discoveryText = document.querySelector('.discovery-text');
+            
+            jar.classList.add('jar-opened');
+            jar.parentElement.classList.add('jar-opened');
+            
+            // Update accessibility
+            jar.setAttribute('aria-label', 'Jar opened - ancient manuscripts revealed!');
+            
+            // Announce to screen readers
+            announceToScreenReader('Jar opened! Golden divine light emanates revealing ancient forbidden manuscripts.');
+        }
+
+        // Typing animation for Mary Magdalene quote
+        function startTypingAnimation() {
+            const typingElement = document.getElementById('typingText');
+            const text = `"We know that the Savior loved you more than the rest of women. Tell us the words of the Savior which you remember—which you know but we do not, nor have we heard them."
+
+Mary answered and said, "What is hidden from you I will proclaim to you."
+
+- Gospel of Mary
+
+Revolutionary Implication: This presents Mary Magdalene not as a repentant prostitute (a later church invention) but as Jesus's primary spiritual heir, possessing secret teachings unknown to male apostles.`;
+
+            let index = 0;
+            typingElement.innerHTML = '<span class="typing-cursor"></span>';
+            
+            function typeCharacter() {
+                if (index < text.length) {
+                    const currentText = text.substring(0, index + 1);
+                    typingElement.innerHTML = currentText + '<span class="typing-cursor"></span>';
+                    index++;
+                    setTimeout(typeCharacter, 50);
+                } else {
+                    typingElement.innerHTML = text;
+                }
+            }
+            
+            typeCharacter();
+        }
+
+        // Scroll-triggered animations
+        function handleScrollAnimations() {
+            const elements = document.querySelectorAll('.scroll-reveal');
+            const windowHeight = window.innerHeight;
+
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const revealPoint = windowHeight * 0.8;
+
+                if (elementTop < revealPoint && !element.classList.contains('revealed')) {
+                    element.classList.add('revealed');
+                    
+                    // Trigger specific animations based on element content
+                    if (element.querySelector('#typingText')) {
+                        setTimeout(startTypingAnimation, 500);
+                    }
+                }
+            });
+        }
+
+        // Animation control functions
+        function restartAnimations() {
+            // Reset jar state
+            jarOpened = false;
+            const jar = document.querySelector('.earthenware-jar');
+            const jarContainer = jar.parentElement;
+            jar.classList.remove('jar-opened');
+            jarContainer.classList.remove('jar-opened');
+            jar.setAttribute('aria-label', 'Click to reveal the hidden manuscripts');
+            
+            // Reset scroll reveals
+            document.querySelectorAll('.scroll-reveal').forEach(el => {
+                el.classList.remove('revealed');
+            });
+            
+            // Reset typing animation
+            const typingElement = document.getElementById('typingText');
+            typingElement.innerHTML = '<span class="typing-cursor"></span>';
+            
+            // Re-trigger scroll animations
+            setTimeout(handleScrollAnimations, 100);
+            
+            announceToScreenReader('All animations restarted');
+        }
+
+        function toggleParticles() {
+            particlesVisible = !particlesVisible;
+            const particles = document.querySelectorAll('.particle');
+            
+            particles.forEach(particle => {
+                particle.style.display = particlesVisible ? 'block' : 'none';
+            });
+            
+            announceToScreenReader(particlesVisible ? 'Particles enabled' : 'Particles disabled');
+        }
+
+        function pauseAnimations() {
+            animationsPaused = !animationsPaused;
+            const root = document.documentElement;
+            
+            if (animationsPaused) {
+                root.style.setProperty('--animation-play-state', 'paused');
+                document.body.style.animationPlayState = 'paused';
+                document.querySelectorAll('*').forEach(el => {
+                    el.style.animationPlayState = 'paused';
+                });
+            } else {
+                root.style.setProperty('--animation-play-state', 'running');
+                document.body.style.animationPlayState = 'running';
+                document.querySelectorAll('*').forEach(el => {
+                    el.style.animationPlayState = 'running';
+                });
+            }
+            
+            announceToScreenReader(animationsPaused ? 'Animations paused' : 'Animations resumed');
+        }
+
+        // Accessibility helper
+        function announceToScreenReader(message) {
+            const announcement = document.createElement('div');
+            announcement.setAttribute('aria-live', 'polite');
+            announcement.setAttribute('aria-atomic', 'true');
+            announcement.style.position = 'absolute';
+            announcement.style.left = '-10000px';
+            announcement.style.width = '1px';
+            announcement.style.height = '1px';
+            announcement.style.overflow = 'hidden';
+            announcement.textContent = message;
+            
+            document.body.appendChild(announcement);
+            
+            setTimeout(() => {
+                if (announcement.parentNode) {
+                    document.body.removeChild(announcement);
+                }
+            }, 1000);
+        }
+
+        // Keyboard navigation
+        function initKeyboardControls() {
+            document.addEventListener('keydown', (e) => {
+                if (e.altKey) {
+                    switch(e.key) {
+                        case '1':
+                            e.preventDefault();
+                            restartAnimations();
+                            break;
+                        case '2':
+                            e.preventDefault();
+                            toggleParticles();
+                            break;
+                        case '3':
+                            e.preventDefault();
+                            pauseAnimations();
+                            break;
+                        case '4':
+                            e.preventDefault();
+                            if (!jarOpened) openJar();
+                            break;
+                    }
+                }
+                
+                if (e.key === 'Enter' || e.key === ' ') {
+                    const activeElement = document.activeElement;
+                    if (activeElement.classList.contains('earthenware-jar')) {
+                        e.preventDefault();
+                        openJar();
+                    }
+                }
+            });
+        }
+
+        // Enhanced intersection observer for more precise scroll animations
+        function initIntersectionObserver() {
+            const options = {
+                root: null,
+                rootMargin: '-20% 0px -20% 0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !entry.target.classList.contains('revealed')) {
+                        entry.target.classList.add('revealed');
+                        
+                        // Trigger specific animations
+                        if (entry.target.querySelector('#typingText')) {
+                            setTimeout(startTypingAnimation, 800);
+                        }
+                    }
+                });
+            }, options);
+
+            document.querySelectorAll('.scroll-reveal').forEach(el => {
+                observer.observe(el);
+            });
+        }
+
+        // Performance optimization - reduce animations on slower devices
+        function optimizeForPerformance() {
+            const isSlowDevice = navigator.hardwareConcurrency < 4 || 
+                                 navigator.deviceMemory < 4 || 
+                                 /Mobi|Android/i.test(navigator.userAgent);
+            
+            if (isSlowDevice) {
+                document.documentElement.style.setProperty('--reduced-motion', '1');
+                // Reduce particle count
+                particlesVisible = false;
+            }
+        }
+
+        // Initialize everything
+        function init() {
+            createParticles();
+            initKeyboardControls();
+            initIntersectionObserver();
+            optimizeForPerformance();
+            
+            // Fallback for browsers without intersection observer
+            if (!window.IntersectionObserver) {
+                window.addEventListener('scroll', handleScrollAnimations);
+                handleScrollAnimations(); // Initial check
+            }
+            
+            // Initial accessibility announcement
+            setTimeout(() => {
+                announceToScreenReader('Welcome to The Gnostic Gospels animated journey. Use Alt+1 to restart, Alt+2 to toggle particles, Alt+3 to pause animations, Alt+4 to open the jar.');
+            }, 2000);
+        }
+
+        // Start everything when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+
+        // Clean up on page unload
+        window.addEventListener('beforeunload', () => {
+            document.querySelectorAll('.particle').forEach(particle => {
+                if (particle.parentNode) {
+                    particle.parentNode.removeChild(particle);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+```

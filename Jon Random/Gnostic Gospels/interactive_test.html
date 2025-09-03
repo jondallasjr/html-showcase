@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Gnostic Gospels: Forbidden Knowledge That Reshapes Christianity</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap');
+        
+        :root {
+            --parchment: #F4ECD8;
+            --iron-gall: #2C1810;
+            --divine-gold: #FFD700;
+            --red-ochre: #A0522D;
+            --lapis-lazuli: #1E3A8A;
+            --tyrian-purple: #6B46C1;
+            --shadow-charcoal: #374151;
+            --desert-sand: #C19A6B;
+            --ethereal-white: #FEFEFE;
+            
+            --manuscript-shadow: 0 8px 32px rgba(44, 24, 16, 0.3);
+            --divine-glow: 0 0 20px rgba(255, 215, 0, 0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Crimson Text', serif;
+            background: linear-gradient(135deg, var(--parchment) 0%, #E8DCC0 100%);
+            color: var(--iron-gall);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 4rem 0;
+            background: radial-gradient(ellipse at center, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
+        }
+
+        .brand {
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            color: var(--tyrian-purple);
+            margin-bottom: 1rem;
+            letter-spacing: 0.1em;
+        }
+
+        .title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            color: var(--iron-gall);
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(44, 24, 16, 0.1);
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: var(--red-ochre);
+            font-style: italic;
+            margin-bottom: 2rem;
+        }
+
+        /* Discovery Section */
+        .discovery-section {
+            margin: 4rem 0;
+            position: relative;
+        }
+
+        .hero-image {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: var(--manuscript-shadow);
+            margin: 2rem auto;
+            display: block;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .hero-image.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .discovery-hook {
+            font-size: 1.3rem;
+            text-align: center;
+            margin: 2rem 0;
+            padding: 2rem;
+            background: rgba(255, 215, 0, 0.05);
+            border-left: 4px solid var(--divine-gold);
+            border-radius: 0 8px 8px 0;
+            position: relative;
+        }
+
+        .discovery-hook::before {
+            content: '"';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            font-size: 4rem;
+            color: var(--divine-gold);
+            font-family: 'Cinzel', serif;
+        }
+
+        /* Manuscript Fragment Interactive */
+        .manuscript-section {
+            margin: 4rem 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .manuscript-fragment {
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .manuscript-fragment:hover {
+            transform: scale(1.02);
+            filter: drop-shadow(var(--divine-glow));
+        }
+
+        .manuscript-image {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: var(--manuscript-shadow);
+        }
+
+        .fragment-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(44, 24, 16, 0.8);
+            color: var(--ethereal-white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .manuscript-fragment.revealed .fragment-overlay {
+            opacity: 1;
+        }
+
+        .manuscript-content {
+            padding: 2rem;
+        }
+
+        .manuscript-content h3 {
+            font-family: 'Cinzel', serif;
+            color: var(--tyrian-purple);
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        /* Controversial Excerpts */
+        .excerpt-section {
+            margin: 4rem 0;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.05) 0%, rgba(107, 70, 193, 0.05) 100%);
+            border-radius: 12px;
+        }
+
+        .excerpt-card {
+            background: var(--parchment);
+            border: 2px solid var(--divine-gold);
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: var(--manuscript-shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .excerpt-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--divine-gold), var(--red-ochre), var(--lapis-lazuli));
+        }
+
+        .excerpt-text {
+            font-style: italic;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: var(--iron-gall);
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--red-ochre);
+            padding-left: 1rem;
+        }
+
+        .controversy-tag {
+            display: inline-block;
+            background: var(--red-ochre);
+            color: var(--ethereal-white);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin: 0.5rem 0.5rem 0.5rem 0;
+        }
+
+        /* Interactive Timeline */
+        .timeline-section {
+            margin: 4rem 0;
+            position: relative;
+        }
+
+        .timeline-container {
+            display: flex;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+
+        .timeline-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: var(--manuscript-shadow);
+        }
+
+        /* Suppression Visualization */
+        .suppression-section {
+            margin: 4rem 0;
+            text-align: center;
+        }
+
+        .suppression-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+            margin: 2rem 0;
+        }
+
+        /* Character Portrait */
+        .character-section {
+            margin: 4rem 0;
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .character-image {
+            width: 100%;
+            height: auto;
+            border-radius: 50%;
+            box-shadow: var(--divine-glow), var(--manuscript-shadow);
+            transition: all 0.3s ease;
+        }
+
+        .character-image:hover {
+            transform: rotate(2deg) scale(1.05);
+        }
+
+        /* Cosmological Diagram */
+        .cosmology-section {
+            margin: 4rem 0;
+            text-align: center;
+        }
+
+        .cosmology-diagram {
+            margin: 2rem 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .cosmology-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: var(--divine-glow), var(--manuscript-shadow);
+        }
+
+        /* Modern Relevance */
+        .relevance-section {
+            margin: 4rem 0;
+            padding: 3rem;
+            background: linear-gradient(135deg, rgba(107, 70, 193, 0.1) 0%, rgba(255, 215, 0, 0.1) 100%);
+            border-radius: 12px;
+        }
+
+        .network-visualization {
+            display: flex;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+
+        .network-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: var(--manuscript-shadow);
+        }
+
+        /* Conclusion */
+        .conclusion-section {
+            margin: 4rem 0;
+            text-align: center;
+            padding: 3rem;
+            background: radial-gradient(ellipse at center, rgba(255, 215, 0, 0.15) 0%, transparent 70%);
+            border-radius: 12px;
+        }
+
+        .final-image {
+            max-width: 600px;
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: var(--divine-glow), var(--manuscript-shadow);
+            margin: 2rem 0;
+        }
+
+        /* Interactive Elements */
+        .reveal-button {
+            background: linear-gradient(135deg, var(--divine-gold), var(--red-ochre));
+            color: var(--iron-gall);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            font-family: 'Cinzel', serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--manuscript-shadow);
+        }
+
+        .reveal-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--divine-glow), var(--manuscript-shadow);
+        }
+
+        .hidden-content {
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.5s ease;
+        }
+
+        .hidden-content.revealed {
+            opacity: 1;
+            max-height: 1000px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .manuscript-section,
+            .character-section,
+            .suppression-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            .title {
+                font-size: 2rem;
+            }
+        }
+
+        /* Scroll Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .slide-right {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.8s ease;
+        }
+
+        .slide-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Mystical Elements */
+        .divine-highlight {
+            background: linear-gradient(135deg, transparent, rgba(255, 215, 0, 0.2), transparent);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .section-divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--divine-gold), transparent);
+            margin: 3rem 0;
+            position: relative;
+        }
+
+        .section-divider::before {
+            content: '✦';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--parchment);
+            color: var(--divine-gold);
+            padding: 0 1rem;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="brand">Jon Random Thoughts</div>
+            <h1 class="title">The Gnostic Gospels</h1>
+            <p class="subtitle">Forbidden Knowledge That Reshapes Christianity</p>
+        </header>
+
+        <!-- Discovery Hook -->
+        <section class="discovery-section fade-in">
+            <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-gvxB655kKl/f38a1c968cbce481d9948b143b89c8cbecc234964349d8624ba444cbc6b90f4387d901a2616e3ec1a09d9e1c2f24db47eb1e5bf506c5cc725c90b53b39db6207ee967184fa764b9bb5c71feb2e33ba7691dab9fdeda83d497f3bee17c6541af6b0b42850" alt="Nag Hammadi Discovery" class="hero-image">
+            
+            <div class="discovery-hook">
+                In 1945, an Egyptian farmer looking for fertilizer instead unearthed the most controversial religious documents in history. What he found would force scholars to rewrite the story of early Christianity.
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Manuscript Fragment Interactive -->
+        <section class="manuscript-section fade-in">
+            <div class="manuscript-fragment" onclick="revealFragment(this)">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-xd9OLp8Rnb/897444af8e370278674b119f25ca618f6a95abbaa8c87101944b720f522756ed315984158bcd9e5192c5ee15e63ea84ea275b585ede1c1ab32031043d3d0ec88750421197c3ca0ab7768242bebde0719830a8432fec4564b11a87b13b4d55d9372e29d82" alt="Ancient Manuscript Fragments" class="manuscript-image">
+                <div class="fragment-overlay">
+                    <p>Click to reveal the hidden text...</p>
+                </div>
+            </div>
+            
+            <div class="manuscript-content slide-right">
+                <h3>These Aren't Your Sunday School Gospels</h3>
+                <p>What Muhammad Ali al-Samman discovered wasn't just another collection of ancient texts. These 52 documents were <span class="divine-highlight">wrapped in white linen and sealed with bitumen</span>—suggesting ritualistic preservation by monks who recognized their spiritual value.</p>
+                
+                <p>Unlike the biographical narratives of canonical gospels, these texts employed diverse literary forms: philosophical dialogues, visionary accounts, and collections of secret sayings that required deep understanding of early Christian ritual practice.</p>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Mary Magdalene Authority -->
+        <section class="character-section fade-in">
+            <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-78uEfAkWK7/c4af8d6b5ee15e2b79a80e609a2da1b9241cabe99e583964469022a5e6bede6885d32c5b39a988c07302af2c65ea95f785901e392f83d578225357edb29872e26e685f8684dc4f7f57df427b06b7af626837b9462effc5c8bb0c63c1861a467986fc32f3" alt="Mary Magdalene Authority Portrait" class="character-image">
+            
+            <div>
+                <h3 style="font-family: 'Cinzel', serif; color: var(--tyrian-purple); font-size: 2rem; margin-bottom: 1rem;">The Suppressed Voice</h3>
+                <p>In the Gospel of Mary, we encounter a revolutionary portrayal: Mary Magdalene not as a repentant prostitute (a later church invention), but as Jesus's primary spiritual heir, possessing secret teachings unknown to the male apostles.</p>
+                
+                <div class="excerpt-text" style="margin: 1.5rem 0;">
+                    "Sister, we know that the Savior loved you more than the rest of women. Tell us the words of the Savior which you remember—which you know but we do not."
+                </div>
+                
+                <p>This wasn't just about individual authority—it challenged the entire foundation of institutional Christianity.</p>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Controversial Excerpts -->
+        <section class="excerpt-section fade-in">
+            <h2 style="font-family: 'Cinzel', serif; text-align: center; color: var(--tyrian-purple); margin-bottom: 2rem; font-size: 2.5rem;">The Forbidden Words</h2>
+            
+            <div class="excerpt-card">
+                <h4 style="color: var(--red-ochre); margin-bottom: 1rem;">Gospel of Thomas, Saying 77</h4>
+                <div class="excerpt-text">
+                    "Jesus said, 'I am the light that is over all things. I am all: from me all came forth, and to me all attained. Split a piece of wood; I am there. Lift up the stone, and you will find me there.'"
+                </div>
+                <span class="controversy-tag">Pantheistic Theology</span>
+                <span class="controversy-tag">Universal Presence</span>
+                <p style="margin-top: 1rem;">This presents a radically different Jesus—not the historical figure of orthodox Christianity, but a cosmic presence permeating all reality.</p>
+            </div>
+
+            <div class="excerpt-card">
+                <h4 style="color: var(--red-ochre); margin-bottom: 1rem;">Gospel of Philip, Saying 59</h4>
+                <div class="excerpt-text">
+                    "The companion of the [Savior] is Mary Magdalene... used to kiss her [often] on her [mouth]. The rest of [the disciples were offended by it]..."
+                </div>
+                <span class="controversy-tag">Sacred Marriage</span>
+                <span class="controversy-tag">Intimate Relationship</span>
+                <p style="margin-top: 1rem;">The brackets indicate manuscript damage, but the implications are clear—this describes an intimate, possibly sexual relationship between Jesus and Mary Magdalene.</p>
+            </div>
+
+            <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-6viOFmT3Lr/75fc36c3cc85eceb82846e86d580dea0e223a9ab4849c4d93ec0fbedeb0476dc44012dbf8983c05cbb9aeda8d4ad8ba5ce336ad961fa2fb01acc28790629957e47751b30b10ea3c867ef58361ee34c3959c22ae82e6ed90f77fcfd6b58e5692e0ba6f060" alt="Illuminated Controversial Text" style="width: 100%; max-width: 400px; margin: 2rem auto; display: block; border-radius: 8px; box-shadow: var(--manuscript-shadow);">
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- The Great Suppression -->
+        <section class="suppression-section fade-in">
+            <h2 style="font-family: 'Cinzel', serif; color: var(--tyrian-purple); margin-bottom: 2rem; font-size: 2.5rem;">The Great Suppression</h2>
+            
+            <div class="suppression-content">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-ajheMQ7LJk/eb232fd23c2a4963be0d09c63bf16847747feb768e4ecfc16afcb047ac42be2db812cf65a0794235a8e20b698eb06606350b938ff942bda15875f544788de1282f6b88e5ef5a49b7ae6f0836b3bf41d4492e09fac872c229573541fe83c65ad03c1627b0" alt="Suppression Visualization" style="width: 100%; border-radius: 8px; box-shadow: var(--manuscript-shadow);">
+                
+                <div style="text-align: left;">
+                    <h3 style="color: var(--red-ochre); margin-bottom: 1rem;">Why the Church Fathers Declared War</h3>
+                    <p>The timing of the Nag Hammadi burial wasn't coincidental. Around 367 CE, Bishop Athanasius issued his Easter Letter establishing the canonical New Testament and ordering the destruction of "heretical" texts.</p>
+                    
+                    <p>What threatened orthodox Christianity wasn't just different interpretations—it was <span class="divine-highlight">an entirely different understanding of reality</span> that emphasized:</p>
+                    
+                    <ul style="margin: 1rem 0; padding-left: 2rem;">
+                        <li>Direct divine experience over institutional mediation</li>
+                        <li>Female spiritual authority</li>
+                        <li>Salvation through knowledge, not faith alone</li>
+                    </ul>
+                    
+                    <button class="reveal-button" onclick="revealSuppressionDetails()">Reveal the Ultimate Irony</button>
+                    
+                    <div id="suppression-details" class="hidden-content">
+                        <p style="margin-top: 1rem; font-style: italic; color: var(--tyrian-purple);">
+                            The church fathers may have eliminated precisely the spiritual resources needed to address modern crises of meaning, environmental destruction, and institutional religious decline.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Timeline -->
+        <section class="timeline-section fade-in">
+            <h2 style="font-family: 'Cinzel', serif; text-align: center; color: var(--tyrian-purple); margin-bottom: 2rem; font-size: 2.5rem;">The Hidden Timeline</h2>
+            <div class="timeline-container">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-M5UiMT8z8D/cf00e2018b77ff2ba273d0eaf3ebf9b532d96f983103614a4e9a34d9095fcb6a3b08c6d3a0cc3c7d98f1e48b8dc87b46d15df1dda3eb028c62b3badfe70129df77b3b11fccebacd567394bcd32a638b2912e47c805cce4d183802155dbf6870ae94f5241" alt="Timeline Visualization" class="timeline-image">
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Cosmological Revolution -->
+        <section class="cosmology-section fade-in">
+            <h2 style="font-family: 'Cinzel', serif; color: var(--tyrian-purple); margin-bottom: 2rem; font-size: 2.5rem;">A Universe Turned Upside Down</h2>
+            
+            <p style="max-width: 800px; margin: 0 auto 2rem; font-size: 1.2rem;">
+                Gnostic Christianity didn't just offer different stories—it presented a completely inverted cosmology that made the Hebrew Bible's creator god the villain, not the hero.
+            </p>
+            
+            <div class="cosmology-diagram">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-i8Z7sceUqu/59af54e2c1e604e16126ef13b4f00d06700710176323cc1576af5db6022dc990ec005b0858875bc19169e773bed967f0735a39f82d1cb896d8e07259fd5b1929a37ac1f708e5c5241bf1ee92e0b4cdb8a61d9e21585226477ad303e693880b70454fe0a4" alt="Cosmological Split Diagram" class="cosmology-image">
+            </div>
+            
+            <div style="max-width: 800px; margin: 2rem auto;">
+                <h4 style="color: var(--red-ochre); margin-bottom: 1rem;">The Demiurge vs. The Pleroma</h4>
+                <p>In Gnostic thought, our material world was created by a false god (the Demiurge) who traps souls in physical reality. The true divine source exists in the Pleroma—a realm of pure spiritual light beyond material existence.</p>
+                
+                <p style="margin-top: 1rem; font-weight: 600; color: var(--tyrian-purple);">
+                    This radical reframing explains why orthodox Christianity fought so hard to eliminate these alternative voices.
+                </p>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Modern Relevance -->
+        <section class="relevance-section fade-in">
+            <h2 style="font-family: 'Cinzel', serif; text-align: center; color: var(--tyrian-purple); margin-bottom: 2rem; font-size: 2.5rem;">Why This Matters Now</h2>
+            
+            <div class="network-visualization">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-x1Ngf5xhMX/739049c9b03c1d5037de7efeb97c87aeda761e8e38a5aa298528095434ab6d69093ba957855ad49fd9258eb8af73028276c6a054162487c0cb419de81d4ba0674b7745f3bcdbb240b267e0e271c762eb1af3edbaf97b44eb846ce93f20a86de5b9981d73" alt="Cultural Impact Network" class="network-image">
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
+                <div style="background: rgba(255, 255, 255, 0.3); padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--divine-gold);">
+                    <h4 style="color: var(--red-ochre); margin-bottom: 1rem;">Authority vs. Experience</h4>
+                    <p>The Gnostic emphasis on direct spiritual knowing resonates with contemporary distrust of institutional religion.</p>
+                </div>
+                
+                <div style="background: rgba(255, 255, 255, 0.3); padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--lapis-lazuli);">
+                    <h4 style="color: var(--red-ochre); margin-bottom: 1rem;">Environmental Crisis</h4>
+                    <p>The Gnostic critique of material world speaks to current ecological concerns about our relationship with nature.</p>
+                </div>
+                
+                <div style="background: rgba(255, 255, 255, 0.3); padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--tyrian-purple);">
+                    <h4 style="color: var(--red-ochre); margin-bottom: 1rem;">Consciousness Studies</h4>
+                    <p>The concept of "gnosis" parallels modern research into mystical experience and transformative spiritual insights.</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Psychological Bridge -->
+        <section class="fade-in" style="text-align: center; margin: 4rem 0;">
+            <h2 style="font-family: 'Cinzel', serif; color: var(--tyrian-purple); margin-bottom: 2rem; font-size: 2.5rem;">Ancient Wisdom, Modern Insights</h2>
+            
+            <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-4HsRt2k9Is/0cbd1f1cde1287c2295b8ff6ee942e28d014d595d7f496051153c08152644d9a2fcc1ffaabb21475bf35012ea980384b569fcb60ce05450a15d8b5bb1da7d5070fd42fa88e79dad7afffabe8fd43b7bef826b3a15241588ae5a9b98c31fe582266a1b43c" alt="Psychological Bridge" style="max-width: 600px; width: 100%; border-radius: 8px; margin: 2rem 0; box-shadow: var(--manuscript-shadow);">
+            
+            <p style="max-width: 800px; margin: 0 auto; font-size: 1.2rem;">
+                Modern psychological analysis reveals that Gnostic texts contain remarkably sophisticated understanding of consciousness, trauma, and spiritual transformation—concepts that align closely with contemporary depth psychology and neuroscience research.
+            </p>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Archaeological Process -->
+        <section class="fade-in" style="margin: 4rem 0;">
+            <h2 style="font-family: 'Cinzel', serif; text-align: center; color: var(--tyrian-purple); margin-bottom: 2rem; font-size: 2.5rem;">The Science of Discovery</h2>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center;">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-KyV14rRDXI/c917e41eb1fd7e1a60c8b831b5cc224b324d473389aead6280c9f87e9590449437ddd2b01372f28cae9e3bee61107df1eedb6c001b4d8ec86a15414bfabb6ad401898c2fd328f3fc3aa2bb560ec07008e5bffb70e847424b0be344fefd14e263136b1116" alt="Archaeological Process" style="width: 100%; border-radius: 8px; box-shadow: var(--manuscript-shadow);">
+                
+                <div>
+                    <h3 style="color: var(--red-ochre); margin-bottom: 1rem;">Meticulous Preservation</h3>
+                    <p>Carbon dating and paleographic analysis confirm these copies date to the 4th century CE, but represent traditions potentially as old or older than canonical gospels.</p>
+                    
+                    <p style="margin-top: 1rem;">The careful preservation methods—white linen wrapping, bitumen sealing, strategic burial location—suggest this wasn't random disposal but a deliberate rescue operation by monks who recognized these texts' spiritual value.</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Scholar Debate -->
+        <section class="fade-in" style="margin: 4rem 0; text-align: center;">
+            <h2 style="font-family: 'Cinzel', serif; color: var(--tyrian-purple); margin-bottom: 2rem; font-size: 2.5rem;">The Ongoing Debate</h2>
+            
+            <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-TCOHmDBFOk/2e6a48e8895874967ab083d21517f5ff461b8bb2192f6d9cd13e0a5b090fcb4b11d54b4a388d6eab7f7e2de5e260eff93445cea8d50edd9ef87b2520ddf4996b65bd08ea3c5eeed67d038f71867c8fbb90438145197586f12474b357aeda23fd79ab2bd0" alt="Scholar Controversy" style="max-width: 600px; width: 100%; border-radius: 8px; margin: 2rem 0; box-shadow: var(--manuscript-shadow);">
+            
+            <p style="max-width: 800px; margin: 0 auto; font-size: 1.2rem;">
+                The theological questions raised by Gnostic texts—the nature of evil, the relationship between spirit and matter, the possibility of direct divine knowledge—remain unresolved in contemporary spirituality. Rather than ancient curiosities, these texts offer living alternatives to Western religious assumptions.
+            </p>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Conclusion -->
+        <section class="conclusion-section fade-in">
+            <h2 style="font-family: 'Cinzel', serif; color: var(--tyrian-purple); margin-bottom: 2rem; font-size: 2.5rem;">The Ultimate Question</h2>
+            
+            <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-Iey7_S59bS/845feffec99ceeaf6269f9b5433818d4086e63e255099a7bc7fb7c9d5c2c61ce6b6580d640273ec3d99b68c7137c24ba59da5630bf7edb87830465effe77f44f6ba79ffad4c1e682c73866cef57da3fcc4631b58f822d8757dc9cbd25bf9a114ec3bc19f" alt="Resurrection Finale Hope" class="final-image">
+            
+            <div style="max-width: 800px; margin: 0 auto;">
+                <p style="font-size: 1.3rem; line-height: 1.8; margin-bottom: 2rem;">
+                    What if the church fathers' successful suppression eliminated precisely the spiritual resources we need most today? The Nag Hammadi discovery offers a glimpse of what Christianity was—and still could become—if these alternative voices had been preserved rather than silenced.
+                </p>
+                
+                <div style="background: rgba(255, 215, 0, 0.1); padding: 2rem; border-radius: 12px; border: 2px solid var(--divine-gold); margin: 2rem 0;">
+                    <p style="font-size: 1.4rem; font-weight: 600; color: var(--tyrian-purple); margin-bottom: 1rem;">
+                        The Most Thought-Provoking Fact:
+                    </p>
+                    <p style="font-style: italic; font-size: 1.2rem;">
+                        These texts reveal that early Christianity was far more diverse, philosophically sophisticated, and spiritually experimental than orthodox narratives suggest. They represent not failed theology but alternative spiritual technology—different methods for approaching ultimate reality and human transformation.
+                    </p>
+                </div>
+                
+                <p style="font-size: 1.1rem; color: var(--red-ochre); margin-top: 2rem;">
+                    The questions they raise about authority, experience, gender, consciousness, and the nature of reality remain as relevant today as they were 1,700 years ago. Perhaps it's time to listen to these long-suppressed voices.
+                </p>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('.fade-in, .slide-right, .hero-image').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Manuscript fragment reveal
+        function revealFragment(element) {
+            element.classList.add('revealed');
+            setTimeout(() => {
+                element.querySelector('.fragment-overlay').innerHTML = `
+                    <div style="text-align: center;">
+                        <h4 style="color: var(--divine-gold); margin-bottom: 1rem;">Coptic Manuscript Fragment</h4>
+                        <p style="font-style: italic; margin-bottom: 1rem;">"These texts were wrapped in white linen and sealed with bitumen—suggesting ritualistic preservation by monks who recognized their spiritual value."</p>
+                        <p style="font-size: 0.9rem;">Carbon dating: 4th century CE<br/>Language: Coptic with Greek influences<br/>Preservation: Ritualistic burial</p>
+                    </div>
+                `;
+            }, 300);
+        }
+
+        // Suppression details reveal
+        function revealSuppressionDetails() {
+            const details = document.getElementById('suppression-details');
+            details.classList.add('revealed');
+        }
+
+        // Add mystical hover effects to images
+        document.querySelectorAll('img').forEach(img => {
+            img.addEventListener('mouseenter', function() {
+                this.style.filter = 'drop-shadow(0 0 20px rgba(255, 215, 0, 0.5))';
+                this.style.transform = 'scale(1.02)';
+            });
+            
+            img.addEventListener('mouseleave', function() {
+                this.style.filter = '';
+                this.style.transform = '';
+            });
+        });
+
+        // Add golden particle effect on scroll
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.style.cssText = `
+                position: fixed;
+                width: 4px;
+                height: 4px;
+                background: var(--divine-gold);
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 1000;
+                opacity: 0.7;
+                left: ${Math.random() * window.innerWidth}px;
+                top: ${window.innerHeight + 10}px;
+                animation: floatUp 4s linear forwards;
+            `;
+            document.body.appendChild(particle);
+            
+            setTimeout(() => {
+                particle.remove();
+            }, 4000);
+        }
+
+        // Add CSS animation for particles
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes floatUp {
+                to {
+                    transform: translateY(-${window.innerHeight + 100}px);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Create particles on scroll
+        let scrollTimer;
+        window.addEventListener('scroll', () => {
+            if (scrollTimer) clearTimeout(scrollTimer);
+            scrollTimer = setTimeout(() => {
+                if (Math.random() < 0.1) { // 10% chance
+                    createParticle();
+                }
+            }, 50);
+        });
+
+        // Add typewriter effect to key quotes
+        function typeWriter(element, text, speed = 50) {
+            element.innerHTML = '';
+            let i = 0;
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            type();
+        }
+
+        // Initialize typewriter effects when elements come into view
+        const typewriterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !entry.target.dataset.typed) {
+                    const text = entry.target.textContent;
+                    entry.target.dataset.typed = 'true';
+                    setTimeout(() => {
+                        typeWriter(entry.target, text);
+                    }, 500);
+                }
+            });
+        }, { threshold: 0.8 });
+
+        document.querySelectorAll('.excerpt-text').forEach(el => {
+            typewriterObserver.observe(el);
+        });
+    </script>
+</body>
+</html>

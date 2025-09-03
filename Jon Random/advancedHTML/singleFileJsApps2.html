@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Single File Applications</title>
+    
+    <!-- Include Chart.js for data visualization -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    
+    <!-- Include marked.js for markdown rendering -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
+    
+    <style>
+        * { box-sizing: border-box; }
+        
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            color: white;
+            min-height: 100vh;
+        }
+
+        .header {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 3rem;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes shimmer {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(60deg); }
+        }
+
+        .apps-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .app-card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .app-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .app-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+        }
+
+        .app-card:hover::before {
+            left: 100%;
+        }
+
+        .app-title {
+            font-size: 1.8rem;
+            color: #4ecdc4;
+            margin: 0 0 1rem 0;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .app-description {
+            text-align: center;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .app-content {
+            min-height: 350px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            border: none;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            margin: 0.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid rgba(255,255,255,0.2);
+            border-radius: 12px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .input-field::placeholder {
+            color: rgba(255,255,255,0.7);
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #4ecdc4;
+            box-shadow: 0 0 0 3px rgba(78, 205, 196, 0.3);
+        }
+
+        .result-area {
+            background: rgba(0,0,0,0.2);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            min-height: 100px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 1rem;
+        }
+
+        /* Weather App Styles */
+        .weather-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .weather-icon {
+            font-size: 4rem;
+            margin: 1rem 0;
+        }
+
+        .temperature {
+            font-size: 3rem;
+            font-weight: bold;
+            margin: 0.5rem 0;
+        }
+
+        /* QR Code Generator Styles */
+        .qr-display {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 1rem auto;
+            display: inline-block;
+            text-align: center;
+        }
+
+        /* Color Palette Styles */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .color-swatch {
+            aspect-ratio: 1;
+            border-radius: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            transition: transform 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .color-swatch:hover {
+            transform: scale(1.1);
+        }
+
+        /* Text Editor Styles */
+        .editor-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            height: 300px;
+        }
+
+        .editor-textarea {
+            resize: none;
+            border: none;
+            background: rgba(0,0,0,0.3);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+
+        .editor-preview {
+            background: rgba(255,255,255,0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-y: auto;
+        }
+
+        /* Expense Tracker Styles */
+        .expense-form {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr auto;
+            gap: 0.5rem;
+            align-items: end;
+            margin: 1rem 0;
+        }
+
+        .expense-list {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .expense-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+
+        .expense-item.income {
+            border-left: 4px solid #4ecdc4;
+        }
+
+        .expense-item.expense {
+            border-left: 4px solid #ff6b6b;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .apps-container {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .editor-container {
+                grid-template-columns: 1fr;
+                height: 400px;
+            }
+            
+            .expense-form {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🚀 Advanced Single File Apps</h1>
+        <p>Professional-grade applications in standalone HTML files!</p>
+    </div>
+
+    <div class="apps-container">
+        <!-- Weather App -->
+        <div class="app-card">
+            <h2 class="app-title">🌤️ Weather App</h2>
+            <p class="app-description">Get real-time weather data using a public API</p>
+            <div class="app-content">
+                <div class="input-field" style="display: flex; gap: 0.5rem;">
+                    <input type="text" id="cityInput" placeholder="Enter city name..." 
+                           style="flex: 1; border: none; background: transparent; color: white; outline: none;">
+                    <button class="btn" onclick="weatherApp.getWeather()" 
+                            style="margin: 0; padding: 0.5rem 1rem;">Search</button>
+                </div>
+                <div id="weatherResult" class="weather-card" style="display: none;">
+                    <div class="weather-icon" id="weatherIcon">☀️</div>
+                    <div class="temperature" id="temperature">--°</div>
+                    <div id="description">Loading...</div>
+                    <div style="margin-top: 1rem;">
+                        <div>Humidity: <span id="humidity">--%</span></div>
+                        <div>Wind: <span id="windSpeed">-- km/h</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Data Visualization -->
+        <div class="app-card">
+            <h2 class="app-title">📊 Data Visualizer</h2>
+            <p class="app-description">Create beautiful charts from your data</p>
+            <div class="app-content">
+                <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                    <input type="text" id="dataInput" class="input-field" 
+                           placeholder="Enter data (e.g., 10,20,30,25,40)" style="margin: 0;">
+                    <button class="btn" onclick="dataViz.createChart()" style="margin: 0;">
+                        Generate
+                    </button>
+                </div>
+                <div class="chart-container">
+                    <canvas id="dataChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- QR Code Generator -->
+        <div class="app-card">
+            <h2 class="app-title">📱 QR Code Generator</h2>
+            <p class="app-description">Generate QR codes for any text or URL</p>
+            <div class="app-content">
+                <textarea id="qrInput" class="input-field" 
+                          placeholder="Enter text or URL to generate QR code..." 
+                          style="resize: vertical; height: 80px; margin: 0;"></textarea>
+                <button class="btn" onclick="qrGenerator.generate()">Generate QR Code</button>
+                <div id="qrResult" class="qr-display" style="display: none;">
+                    <div id="qrCode"></div>
+                    <button class="btn" onclick="qrGenerator.download()" style="margin-top: 1rem;">
+                        Download PNG
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Color Palette Generator -->
+        <div class="app-card">
+            <h2 class="app-title">🎨 Color Palette Generator</h2>
+            <p class="app-description">Generate beautiful color palettes for your projects</p>
+            <div class="app-content">
+                <div style="text-align: center; margin-bottom: 1rem;">
+                    <button class="btn" onclick="colorPalette.randomPalette()">Random Palette</button>
+                    <button class="btn" onclick="colorPalette.complementaryColors()">Complementary</button>
+                    <button class="btn" onclick="colorPalette.analogousColors()">Analogous</button>
+                </div>
+                <div id="colorGrid" class="color-grid"></div>
+                <div style="text-align: center; margin-top: 1rem;">
+                    <button class="btn" onclick="colorPalette.exportCSS()">Export CSS</button>
+                    <button class="btn" onclick="colorPalette.exportJSON()">Export JSON</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Markdown Editor -->
+        <div class="app-card">
+            <h2 class="app-title">📝 Markdown Editor</h2>
+            <p class="app-description">Write and preview Markdown in real-time</p>
+            <div class="app-content">
+                <div class="editor-container">
+                    <textarea id="markdownInput" class="editor-textarea" 
+                              placeholder="# Write your markdown here...
+                              
+## Features
+- Real-time preview
+- Export to HTML
+- **Bold** and *italic* text
+- [Links](https://example.com)
+
+```javascript
+console.log('Code blocks work too!');
+```"
+                              oninput="markdownEditor.updatePreview()"></textarea>
+                    <div id="markdownPreview" class="editor-preview"></div>
+                </div>
+                <div style="text-align: center; margin-top: 1rem;">
+                    <button class="btn" onclick="markdownEditor.exportHTML()">Export HTML</button>
+                    <button class="btn" onclick="markdownEditor.exportMarkdown()">Download MD</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Expense Tracker -->
+        <div class="app-card">
+            <h2 class="app-title">💰 Expense Tracker</h2>
+            <p class="app-description">Track your income and expenses with charts</p>
+            <div class="app-content">
+                <div class="expense-form">
+                    <input type="text" id="expenseDesc" placeholder="Description" class="input-field" style="margin: 0;">
+                    <input type="number" id="expenseAmount" placeholder="Amount" class="input-field" style="margin: 0;">
+                    <select id="expenseType" class="input-field" style="margin: 0;">
+                        <option value="expense">Expense</option>
+                        <option value="income">Income</option>
+                    </select>
+                    <button class="btn" onclick="expenseTracker.addEntry()" style="margin: 0;">Add</button>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin: 1rem 0; text-align: center;">
+                    <div class="result-area">
+                        <div style="font-size: 0.9rem; opacity: 0.8;">Total Income</div>
+                        <div style="font-size: 1.5rem; color: #4ecdc4;" id="totalIncome">$0</div>
+                    </div>
+                    <div class="result-area">
+                        <div style="font-size: 0.9rem; opacity: 0.8;">Total Expenses</div>
+                        <div style="font-size: 1.5rem; color: #ff6b6b;" id="totalExpenses">$0</div>
+                    </div>
+                    <div class="result-area">
+                        <div style="font-size: 0.9rem; opacity: 0.8;">Balance</div>
+                        <div style="font-size: 1.5rem;" id="balance">$0</div>
+                    </div>
+                </div>
+                
+                <div id="expenseList" class="expense-list"></div>
+            </div>
+        </div>
+
+        <!-- Unit Converter -->
+        <div class="app-card">
+            <h2 class="app-title">🔄 Unit Converter</h2>
+            <p class="app-description">Convert between different units of measurement</p>
+            <div class="app-content">
+                <div style="margin-bottom: 1rem;">
+                    <select id="conversionType" class="input-field" onchange="unitConverter.updateUnits()" style="margin-bottom: 0.5rem;">
+                        <option value="length">Length</option>
+                        <option value="weight">Weight</option>
+                        <option value="temperature">Temperature</option>
+                        <option value="area">Area</option>
+                        <option value="volume">Volume</option>
+                    </select>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1fr auto 1fr; gap: 1rem; align-items: center;">
+                    <div>
+                        <input type="number" id="fromValue" class="input-field" 
+                               oninput="unitConverter.convert()" placeholder="Enter value" style="margin: 0;">
+                        <select id="fromUnit" class="input-field" 
+                                onchange="unitConverter.convert()" style="margin-top: 0.5rem; margin-bottom: 0;"></select>
+                    </div>
+                    
+                    <div style="text-align: center; font-size: 1.5rem;">⇄</div>
+                    
+                    <div>
+                        <input type="number" id="toValue" class="input-field" readonly placeholder="Result" style="margin: 0;">
+                        <select id="toUnit" class="input-field" 
+                                onchange="unitConverter.convert()" style="margin-top: 0.5rem; margin-bottom: 0;"></select>
+                    </div>
+                </div>
+                
+                <div class="result-area" style="text-align: center; margin-top: 1rem;">
+                    <div id="conversionResult">Enter a value to see the conversion</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Random Quote Generator -->
+        <div class="app-card">
+            <h2 class="app-title">💭 Quote Generator</h2>
+            <p class="app-description">Get inspirational quotes from various categories</p>
+            <div class="app-content">
+                <div style="text-align: center; margin-bottom: 2rem;">
+                    <select id="quoteCategory" class="input-field" style="display: inline-block; width: auto; margin-right: 1rem;">
+                        <option value="inspirational">Inspirational</option>
+                        <option value="motivational">Motivational</option>
+                        <option value="success">Success</option>
+                        <option value="wisdom">Wisdom</option>
+                        <option value="life">Life</option>
+                    </select>
+                    <button class="btn" onclick="quoteGenerator.getQuote()">Get Quote</button>
+                </div>
+                
+                <div id="quoteDisplay" class="result-area" style="min-height: 150px; display: flex; flex-direction: column; justify-content: center; text-align: center;">
+                    <div style="font-style: italic; font-size: 1.2rem; margin-bottom: 1rem;" id="quoteText">
+                        "Click 'Get Quote' to load an inspiring quote!"
+                    </div>
+                    <div style="opacity: 0.8;" id="quoteAuthor">- Start Here</div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 1rem;">
+                    <button class="btn" onclick="quoteGenerator.shareQuote()">Share Quote</button>
+                    <button class="btn" onclick="quoteGenerator.copyQuote()">Copy to Clipboard</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="text-align: center; padding: 3rem 2rem; background: rgba(0,0,0,0.2);">
+        <h2 style="color: #4ecdc4; margin-bottom: 2rem;">✨ The Power of Single File Apps</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; max-width: 1000px; margin: 0 auto;">
+            <div style="text-align: center;">
+                <div style="font-size: 2rem; margin-bottom: 0.5rem;">🚀</div>
+                <h3>Instant Deployment</h3>
+                <p>Save as .html and upload anywhere - no build process!</p>
+            </div>
+            <div style="text-align: center;">
+                <div style="font-size: 2rem; margin-bottom: 0.5rem;">🔧</div>
+                <h3>No Dependencies</h3>
+                <p>Everything included - works offline and online!</p>
+            </div>
+            <div style="text-align: center;">
+                <div style="font-size: 2rem; margin-bottom: 0.5rem;">🎯</div>
+                <h3>LLM Friendly</h3>
+                <p>Perfect for AI-generated applications!</p>
+            </div>
+            <div style="text-align: center;">
+                <div style="font-size: 2rem; margin-bottom: 0.5rem;">⚡</div>
+                <h3>Fast Loading</h3>
+                <p>No framework overhead - pure performance!</p>
+            </div>
+        </div>
+        
+        <div style="margin-top: 2rem; padding: 2rem; background: rgba(255,255,255,0.1); border-radius: 16px;">
+            <h3 style="color: #4ecdc4;">🎓 What You've Learned:</h3>
+            <ul style="list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                <li>✅ API Integration without frameworks</li>
+                <li>✅ Real-time data visualization</li>
+                <li>✅ File generation and download</li>
+                <li>✅ Local storage persistence</li>
+                <li>✅ Responsive design patterns</li>
+                <li>✅ Modern CSS animations</li>
+                <li>✅ Canvas and SVG manipulation</li>
+                <li>✅ Form handling and validation</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Weather App
+        class WeatherApp {
+            async getWeather() {
+                const city = document.getElementById('cityInput').value.trim();
+                if (!city) {
+                    alert('Please enter a city name');
+                    return;
+                }
+
+                const resultDiv = document.getElementById('weatherResult');
+                resultDiv.style.display = 'block';
+                
+                try {
+                    // Using a free weather API (OpenWeatherMap - you'd need to replace with your API key)
+                    // For demo purposes, we'll simulate the API call
+                    this.simulateWeatherData(city);
+                } catch (error) {
+                    document.getElementById('description').textContent = 'Error fetching weather data';
+                }
+            }
+            
+            simulateWeatherData(city) {
+                // Simulate weather data (in real app, you'd fetch from API)
+                const mockData = {
+                    temp: Math.floor(Math.random() * 30) + 5,
+                    description: ['Sunny', 'Cloudy', 'Rainy', 'Snowy'][Math.floor(Math.random() * 4)],
+                    humidity: Math.floor(Math.random() * 40) + 40,
+                    windSpeed: Math.floor(Math.random() * 20) + 5,
+                    icon: ['☀️', '⛅', '🌧️', '❄️'][Math.floor(Math.random() * 4)]
+                };
+
+                document.getElementById('weatherIcon').textContent = mockData.icon;
+                document.getElementById('temperature').textContent = `${mockData.temp}°C`;
+                document.getElementById('description').textContent = `${mockData.description} in ${city}`;
+                document.getElementById('humidity').textContent = `${mockData.humidity}%`;
+                document.getElementById('windSpeed').textContent = `${mockData.windSpeed} km/h`;
+            }
+        }
+
+        const weatherApp = new WeatherApp();
+
+        // Data Visualization
+        class DataVisualizer {
+            constructor() {
+                this.chart = null;
+            }
+            
+            createChart() {
+                const input = document.getElementById('dataInput').value;
+                const data = input.split(',').map(num => parseFloat(num.trim())).filter(num => !isNaN(num));
+                
+                if (data.length === 0) {
+                    alert('Please enter valid numbers separated by commas');
+                    return;
+                }
+
+                const ctx = document.getElementById('dataChart').getContext('2d');
+                
+                if (this.chart) {
+                    this.chart.destroy();
+                }
+
+                this.chart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: data.map((_, i) => `Item ${i + 1}`),
+                        datasets: [{
+                            label: 'Data Values',
+                            data: data,
+                            backgroundColor: [
+                                '#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', 
+                                '#feca57', '#fd79a8', '#6c5ce7', '#a29bfe'
+                            ].slice(0, data.length),
+                            borderRadius: 8,
+                            borderSkipped: false
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { labels: { color: 'white' } }
+                        },
+                        scales: {
+                            y: { 
+                                ticks: { color: 'white' },
+                                grid: { color: 'rgba(255,255,255,0.1)' }
+                            },
+                            x: { 
+                                ticks: { color: 'white' },
+                                grid: { color: 'rgba(255,255,255,0.1)' }
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
+        const dataViz = new DataVisualizer();
+
+        // QR Code Generator
+        class QRGenerator {
+            generate() {
+                const input = document.getElementById('qrInput').value.trim();
+                if (!input) {
+                    alert('Please enter text or URL');
+                    return;
+                }
+
+                // Using QR Server API for QR code generation
+                const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(input)}`;
+                
+                const qrCode = document.getElementById('qrCode');
+                qrCode.innerHTML = `<img src="${qrUrl}" alt="QR Code" style="max-width: 100%; border-radius: 8px;">`;
+                
+                document.getElementById('qrResult').style.display = 'block';
+                this.currentQRUrl = qrUrl;
+            }
+            
+            async download() {
+                if (!this.currentQRUrl) return;
+                
+                try {
+                    const response = await fetch(this.currentQRUrl);
+                    const blob = await response.blob();
+                    
+                    const link = document.createElement('a');
+                    link.href = URL.createObjectURL(blob);
+                    link.download = 'qrcode.png';
+                    link.click();
+                    
+                    URL.revokeObjectURL(link.href);
+                } catch (error) {
+                    alert('Error downloading QR code');
+                }
+            }
+        }
+
+        const qrGenerator = new QRGenerator();
+
+        // Color Palette Generator
+        class ColorPalette {
+            constructor() {
+                this.colors = [];
+            }
+            
+            randomPalette() {
+                this.colors = [];
+                for (let i = 0; i < 6; i++) {
+                    this.colors.push(this.randomColor());
+                }
+                this.displayColors();
+            }
+            
+            complementaryColors() {
+                const baseColor = this.randomColor();
+                const hsl = this.hexToHSL(baseColor);
+                
+                this.colors = [
+                    baseColor,
+                    this.HSLToHex((hsl.h + 180) % 360, hsl.s, hsl.l),
+                    this.HSLToHex(hsl.h, hsl.s, Math.max(0, hsl.l - 20)),
+                    this.HSLToHex((hsl.h + 180) % 360, hsl.s, Math.max(0, hsl.l - 20)),
+                    this.HSLToHex(hsl.h, hsl.s, Math.min(100, hsl.l + 20)),
+                    this.HSLToHex((hsl.h + 180) % 360, hsl.s, Math.min(100, hsl.l + 20))
+                ];
+                
+                this.displayColors();
+            }
+            
+            analogousColors() {
+                const baseColor = this.randomColor();
+                const hsl = this.hexToHSL(baseColor);
+                
+                this.colors = [
+                    baseColor,
+                    this.HSLToHex((hsl.h + 30) % 360, hsl.s, hsl.l),
+                    this.HSLToHex((hsl.h + 60) % 360, hsl.s, hsl.l),
+                    this.HSLToHex((hsl.h - 30 + 360) % 360, hsl.s, hsl.l),
+                    this.HSLToHex((hsl.h - 60 + 360) % 360, hsl.s, hsl.l),
+                    this.HSLToHex(hsl.h, hsl.s, Math.max(0, hsl.l - 20))
+                ];
+                
+                this.displayColors();
+            }
+            
+            displayColors() {
+                const grid = document.getElementById('colorGrid');
+                grid.innerHTML = this.colors.map((color, index) => `
+                    <div class="color-swatch" style="background: ${color}" 
+                         onclick="colorPalette.copyColor('${color}')" 
+                         title="Click to copy: ${color}">
+                        <span>${color}</span>
+                    </div>
+                `).join('');
+            }
+            
+            copyColor(color) {
+                navigator.clipboard.writeText(color);
+                alert(`Copied ${color} to clipboard!`);
+            }
+            
+            exportCSS() {
+                const css = this.colors.map((color, i) => `  --color-${i + 1}: ${color};`).join('\n');
+                const fullCSS = `:root {\n${css}\n}`;
+                
+                const blob = new Blob([fullCSS], { type: 'text/css' });
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = 'palette.css';
+                link.click();
+            }
+            
+            exportJSON() {
+                const json = JSON.stringify({ palette: this.colors }, null, 2);
+                
+                const blob = new Blob([json], { type: 'application/json' });
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = 'palette.json';
+                link.click();
+            }
+            
+            randomColor() {
+                return '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0');
+            }
+            
+            hexToHSL(hex) {
+                const r = parseInt(hex.slice(1, 3), 16) / 255;
+                const g = parseInt(hex.slice(3, 5), 16) / 255;
+                const b = parseInt(hex.slice(5, 7), 16) / 255;
+                
+                const max = Math.max(r, g, b);
+                const min = Math.min(r, g, b);
+                let h, s, l = (max + min) / 2;
+                
+                if (max === min) {
+                    h = s = 0;
+                } else {
+                    const d = max - min;
+                    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+                    switch (max) {
+                        case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+                        case g: h = (b - r) / d + 2; break;
+                        case b: h = (r - g) / d + 4; break;
+                    }
+                    h /= 6;
+                }
+                
+                return { h: h * 360, s: s * 100, l: l * 100 };
+            }
+            
+            HSLToHex(h, s, l) {
+                l /= 100;
+                const a = s * Math.min(l, 1 - l) / 100;
+                const f = n => {
+                    const k = (n + h / 30) % 12;
+                    const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
+                    return Math.round(255 * color).toString(16).padStart(2, '0');
+                };
+                return `#${f(0)}${f(8)}${f(4)}`;
+            }
+        }
+
+        const colorPalette = new ColorPalette();
+
+        // Markdown Editor
+        class MarkdownEditor {
+            updatePreview() {
+                const input = document.getElementById('markdownInput').value;
+                const preview = document.getElementById('markdownPreview');
+                
+                try {
+                    preview.innerHTML = marked.parse(input);
+                } catch (error) {
+                    preview.innerHTML = '<p>Error parsing markdown</p>';
+                }
+            }
+            
+            exportHTML() {
+                const input = document.getElementById('markdownInput').value;
+                const html = marked.parse(input);
+                
+                const fullHTML = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown Export</title>
+    <style>
+        body { font-family: -apple-system, sans-serif; max-width: 800px; margin: 0 auto; padding: 2rem; line-height: 1.6; }
+        code { background: #f4f4f4; padding: 0.2rem 0.4rem; border-radius: 3px; }
+        pre { background: #f4f4f4; padding: 1rem; border-radius: 5px; overflow-x: auto; }
+    </style>
+</head>
+<body>
+${html}
+</body>
+</html>`;
+                
+                const blob = new Blob([fullHTML], { type: 'text/html' });
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = 'document.html';
+                link.click();
+            }
+            
+            exportMarkdown() {
+                const input = document.getElementById('markdownInput').value;
+                
+                const blob = new Blob([input], { type: 'text/markdown' });
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = 'document.md';
+                link.click();
+            }
+        }
+
+        const markdownEditor = new MarkdownEditor();
+
+        // Expense Tracker
+        class ExpenseTracker {
+            constructor() {
+                this.entries = JSON.parse(localStorage.getItem('expenses') || '[]');
+                this.updateDisplay();
+            }
+            
+            addEntry() {
+                const desc = document.getElementById('expenseDesc').value.trim();
+                const amount = parseFloat(document.getElementById('expenseAmount').value);
+                const type = document.getElementById('expenseType').value;
+                
+                if (!desc || isNaN(amount) || amount <= 0) {
+                    alert('Please fill all fields with valid data');
+                    return;
+                }
+                
+                this.entries.push({
+                    id: Date.now(),
+                    description: desc,
+                    amount: amount,
+                    type: type,
+                    date: new Date().toLocaleDateString()
+                });
+                
+                document.getElementById('expenseDesc').value = '';
+                document.getElementById('expenseAmount').value = '';
+                
+                this.save();
+                this.updateDisplay();
+            }
+            
+            removeEntry(id) {
+                this.entries = this.entries.filter(entry => entry.id !== id);
+                this.save();
+                this.updateDisplay();
+            }
+            
+            updateDisplay() {
+                const list = document.getElementById('expenseList');
+                const totalIncome = document.getElementById('totalIncome');
+                const totalExpenses = document.getElementById('totalExpenses');
+                const balance = document.getElementById('balance');
+                
+                // Calculate totals
+                const income = this.entries.filter(e => e.type === 'income').reduce((sum, e) => sum + e.amount, 0);
+                const expenses = this.entries.filter(e => e.type === 'expense').reduce((sum, e) => sum + e.amount, 0);
+                const netBalance = income - expenses;
+                
+                totalIncome.textContent = `$${income.toFixed(2)}`;
+                totalExpenses.textContent = `$${expenses.toFixed(2)}`;
+                balance.textContent = `$${netBalance.toFixed(2)}`;
+                balance.style.color = netBalance >= 0 ? '#4ecdc4' : '#ff6b6b';
+                
+                // Display entries
+                list.innerHTML = this.entries.map(entry => `
+                    <div class="expense-item ${entry.type}">
+                        <div>
+                            <div style="font-weight: bold;">${entry.description}</div>
+                            <div style="font-size: 0.9rem; opacity: 0.8;">${entry.date}</div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <span style="font-weight: bold; color: ${entry.type === 'income' ? '#4ecdc4' : '#ff6b6b'}">
+                                ${entry.type === 'income' ? '+' : '-'}$${entry.amount.toFixed(2)}
+                            </span>
+                            <button onclick="expenseTracker.removeEntry(${entry.id})" 
+                                    style="background: #ff6b6b; border: none; color: white; width: 25px; height: 25px; border-radius: 50%; cursor: pointer;">×</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+            
+            save() {
+                localStorage.setItem('expenses', JSON.stringify(this.entries));
+            }
+        }
+
+        const expenseTracker = new ExpenseTracker();
+
+        // Unit Converter
+        class UnitConverter {
+            constructor() {
+                this.conversions = {
+                    length: {
+                        meter: 1,
+                        kilometer: 0.001,
+                        centimeter: 100,
+                        millimeter: 1000,
+                        inch: 39.3701,
+                        foot: 3.28084,
+                        yard: 1.09361,
+                        mile: 0.000621371
+                    },
+                    weight: {
+                        kilogram: 1,
+                        gram: 1000,
+                        pound: 2.20462,
+                        ounce: 35.274,
+                        ton: 0.001
+                    },
+                    temperature: {
+                        celsius: { to: (c) => c, from: (c) => c },
+                        fahrenheit: { to: (c) => (c * 9/5) + 32, from: (f) => (f - 32) * 5/9 },
+                        kelvin: { to: (c) => c + 273.15, from: (k) => k - 273.15 }
+                    },
+                    area: {
+                        'square meter': 1,
+                        'square kilometer': 0.000001,
+                        'square centimeter': 10000,
+                        'square foot': 10.7639,
+                        'square yard': 1.19599,
+                        'acre': 0.000247105,
+                        'hectare': 0.0001
+                    },
+                    volume: {
+                        liter: 1,
+                        milliliter: 1000,
+                        'cubic meter': 0.001,
+                        'cubic centimeter': 1000,
+                        gallon: 0.264172,
+                        quart: 1.05669,
+                        pint: 2.11338,
+                        cup: 4.22675,
+                        'fluid ounce': 33.814
+                    }
+                };
+                
+                this.updateUnits();
+            }
+            
+            updateUnits() {
+                const type = document.getElementById('conversionType').value;
+                const units = Object.keys(this.conversions[type]);
+                
+                const fromSelect = document.getElementById('fromUnit');
+                const toSelect = document.getElementById('toUnit');
+                
+                fromSelect.innerHTML = units.map(unit => `<option value="${unit}">${unit}</option>`).join('');
+                toSelect.innerHTML = units.map(unit => `<option value="${unit}">${unit}</option>`).join('');
+                
+                if (units.length > 1) {
+                    toSelect.selectedIndex = 1;
+                }
+            }
+            
+            convert() {
+                const type = document.getElementById('conversionType').value;
+                const fromValue = parseFloat(document.getElementById('fromValue').value);
+                const fromUnit = document.getElementById('fromUnit').value;
+                const toUnit = document.getElementById('toUnit').value;
+                
+                if (isNaN(fromValue)) {
+                    document.getElementById('toValue').value = '';
+                    document.getElementById('conversionResult').textContent = 'Enter a value to see the conversion';
+                    return;
+                }
+                
+                let result;
+                
+                if (type === 'temperature') {
+                    const celsius = this.conversions.temperature[fromUnit].from(fromValue);
+                    result = this.conversions.temperature[toUnit].to(celsius);
+                } else {
+                    const baseValue = fromValue / this.conversions[type][fromUnit];
+                    result = baseValue * this.conversions[type][toUnit];
+                }
+                
+                document.getElementById('toValue').value = result.toFixed(6);
+                document.getElementById('conversionResult').textContent = 
+                    `${fromValue} ${fromUnit} = ${result.toFixed(6)} ${toUnit}`;
+            }
+        }
+
+        const unitConverter = new UnitConverter();
+
+        // Quote Generator
+        class QuoteGenerator {
+            constructor() {
+                this.quotes = {
+                    inspirational: [
+                        { text: "The only way to do great work is to love what you do.", author: "Steve Jobs" },
+                        { text: "Life is what happens to you while you're busy making other plans.", author: "John Lennon" },
+                        { text: "The future belongs to those who believe in the beauty of their dreams.", author: "Eleanor Roosevelt" }
+                    ],
+                    motivational: [
+                        { text: "It does not matter how slowly you go as long as you do not stop.", author: "Confucius" },
+                        { text: "Everything you've ever wanted is on the other side of fear.", author: "George Addair" },
+                        { text: "Believe you can and you're halfway there.", author: "Theodore Roosevelt" }
+                    ],
+                    success: [
+                        { text: "Success is not final, failure is not fatal: it is the courage to continue that counts.", author: "Winston Churchill" },
+                        { text: "The way to get started is to quit talking and begin doing.", author: "Walt Disney" },
+                        { text: "Don't be afraid to give up the good to go for the great.", author: "John D. Rockefeller" }
+                    ],
+                    wisdom: [
+                        { text: "The only true wisdom is in knowing you know nothing.", author: "Socrates" },
+                        { text: "In the end, we will remember not the words of our enemies, but the silence of our friends.", author: "Martin Luther King Jr." },
+                        { text: "The best time to plant a tree was 20 years ago. The second best time is now.", author: "Chinese Proverb" }
+                    ],
+                    life: [
+                        { text: "Be yourself; everyone else is already taken.", author: "Oscar Wilde" },
+                        { text: "Life is 10% what happens to you and 90% how you react to it.", author: "Charles R. Swindoll" },
+                        { text: "The purpose of our lives is to be happy.", author: "Dalai Lama" }
+                    ]
+                };
+                
+                this.currentQuote = null;
+            }
+            
+            getQuote() {
+                const category = document.getElementById('quoteCategory').value;
+                const quotes = this.quotes[category];
+                const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+                
+                document.getElementById('quoteText').textContent = `"${randomQuote.text}"`;
+                document.getElementById('quoteAuthor').textContent = `- ${randomQuote.author}`;
+                
+                this.currentQuote = randomQuote;
+            }
+            
+            shareQuote() {
+                if (!this.currentQuote) {
+                    alert('Please generate a quote first!');
+                    return;
+                }
+                
+                if (navigator.share) {
+                    navigator.share({
+                        title: 'Inspirational Quote',
+                        text: `"${this.currentQuote.text}" - ${this.currentQuote.author}`
+                    });
+                } else {
+                    alert('Sharing not supported on this device');
+                }
+            }
+            
+            copyQuote() {
+                if (!this.currentQuote) {
+                    alert('Please generate a quote first!');
+                    return;
+                }
+                
+                const quoteText = `"${this.currentQuote.text}" - ${this.currentQuote.author}`;
+                navigator.clipboard.writeText(quoteText);
+                alert('Quote copied to clipboard!');
+            }
+        }
+
+        const quoteGenerator = new QuoteGenerator();
+        
+        // Initialize
+        colorPalette.randomPalette();
+        markdownEditor.updatePreview();
+        
+        // Add keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey || e.metaKey) {
+                switch(e.key) {
+                    case 's':
+                        e.preventDefault();
+                        if (document.activeElement.id === 'markdownInput') {
+                            markdownEditor.exportMarkdown();
+                        }
+                        break;
+                    case 'Enter':
+                        if (document.activeElement.id === 'cityInput') {
+                            weatherApp.getWeather();
+                        }
+                        break;
+                }
+            }
+        });
+        
+        console.log('🚀 Advanced Single File Apps loaded!');
+        console.log('💡 All features working without any build process!');
+    </script>
+</body>
+</html>

@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Gnostic Gospels: Forbidden Knowledge That Reshapes Christianity</title>
+    <style>
+        :root {
+            --parchment: #F4ECD8;
+            --iron-gall: #2C1810;
+            --divine-gold: #FFD700;
+            --red-ochre: #A0522D;
+            --lapis-lazuli: #1E3A8A;
+            --tyrian-purple: #6B46C1;
+            --shadow-charcoal: #374151;
+            --desert-sand: #C19A6B;
+            --verdigris: #43B047;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(135deg, var(--parchment) 0%, var(--desert-sand) 100%);
+            color: var(--iron-gall);
+            line-height: 1.7;
+            font-size: 18px;
+        }
+
+        .manuscript-texture {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(255, 215, 0, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(255, 215, 0, 0.03) 0%, transparent 50%),
+                linear-gradient(45deg, transparent 40%, rgba(44, 24, 16, 0.01) 50%, transparent 60%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Typography */
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            color: var(--divine-gold);
+            text-shadow: 2px 2px 4px rgba(44, 24, 16, 0.3);
+            text-align: center;
+            margin: 2rem 0 1rem 0;
+            position: relative;
+        }
+
+        h2 {
+            font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+            color: var(--tyrian-purple);
+            border-bottom: 3px solid var(--divine-gold);
+            padding-bottom: 0.5rem;
+            margin: 3rem 0 1.5rem 0;
+        }
+
+        h3 {
+            font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+            color: var(--lapis-lazuli);
+            margin: 2rem 0 1rem 0;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+            color: var(--red-ochre);
+            font-style: italic;
+            margin-bottom: 3rem;
+        }
+
+        p {
+            margin-bottom: 1.2rem;
+            text-align: justify;
+        }
+
+        /* Navigation */
+        .lesson-nav {
+            background: linear-gradient(135deg, var(--tyrian-purple), var(--lapis-lazuli));
+            padding: 1rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--parchment);
+            font-size: 1.5rem;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+            padding: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .nav-links a {
+            color: var(--parchment);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover,
+        .nav-links a:focus {
+            background: rgba(255, 215, 0, 0.2);
+            transform: translateY(-2px);
+            outline: 2px solid var(--divine-gold);
+        }
+
+        /* Images */
+        .lesson-image {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            margin: 2rem 0;
+            transition: transform 0.3s ease;
+        }
+
+        .lesson-image:hover {
+            transform: scale(1.02);
+        }
+
+        .image-caption {
+            font-style: italic;
+            color: var(--shadow-charcoal);
+            text-align: center;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        /* Content blocks */
+        .content-block {
+            background: rgba(244, 236, 216, 0.7);
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            border-left: 5px solid var(--divine-gold);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .controversial-excerpt {
+            background: linear-gradient(135deg, rgba(107, 70, 193, 0.1), rgba(255, 215, 0, 0.1));
+            border-left: 5px solid var(--red-ochre);
+            position: relative;
+        }
+
+        .controversial-excerpt::before {
+            content: '⚠️';
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .quote {
+            font-size: 1.2rem;
+            font-style: italic;
+            color: var(--tyrian-purple);
+            margin: 1rem 0;
+            padding: 1rem;
+            border-left: 3px solid var(--divine-gold);
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .quote::before,
+        .quote::after {
+            content: '"';
+            font-size: 2rem;
+            color: var(--divine-gold);
+            line-height: 1;
+        }
+
+        .citation {
+            font-size: 0.9rem;
+            color: var(--shadow-charcoal);
+            font-weight: bold;
+            margin-top: 0.5rem;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            margin: 3rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 2rem;
+            top: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--lapis-lazuli), var(--divine-gold));
+        }
+
+        .timeline-event {
+            position: relative;
+            margin: 2rem 0;
+            padding-left: 4rem;
+        }
+
+        .timeline-event::before {
+            content: '';
+            position: absolute;
+            left: 1.2rem;
+            top: 0.5rem;
+            width: 1.6rem;
+            height: 1.6rem;
+            background: var(--divine-gold);
+            border-radius: 50%;
+            border: 4px solid var(--parchment);
+        }
+
+        .timeline-date {
+            font-weight: bold;
+            color: var(--tyrian-purple);
+            font-size: 1.1rem;
+        }
+
+        /* Two-column layout */
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .cosmology-split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .pleroma, .material-world {
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .pleroma {
+            background: linear-gradient(135deg, var(--divine-gold), var(--lapis-lazuli));
+            color: var(--parchment);
+        }
+
+        .material-world {
+            background: linear-gradient(135deg, var(--shadow-charcoal), var(--desert-sand));
+            color: var(--parchment);
+            position: relative;
+        }
+
+        .material-world::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 30px,
+                rgba(55, 65, 81, 0.4) 30px,
+                rgba(55, 65, 81, 0.4) 35px
+            );
+            border-radius: 15px;
+        }
+
+        /* Footnotes */
+        .footnotes {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 2px solid var(--divine-gold);
+        }
+
+        .footnote-ref {
+            color: var(--red-ochre);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+            vertical-align: super;
+        }
+
+        .footnote-ref:hover {
+            color: var(--tyrian-purple);
+        }
+
+        .footnote {
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: var(--shadow-charcoal);
+        }
+
+        /* Highlights and emphasis */
+        .thought-provoking {
+            background: rgba(255, 215, 0, 0.2);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--divine-gold);
+            margin: 1.5rem 0;
+        }
+
+        .thought-provoking h4 {
+            color: var(--red-ochre);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .key-concept {
+            font-weight: bold;
+            color: var(--tyrian-purple);
+        }
+
+        /* Accessibility */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .nav-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                margin-top: 1rem;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .two-column,
+            .cosmology-split {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline::before {
+                left: 1rem;
+            }
+
+            .timeline-event {
+                padding-left: 3rem;
+            }
+
+            .timeline-event::before {
+                left: 0.2rem;
+            }
+
+            body {
+                font-size: 16px;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+        }
+
+        /* High contrast mode */
+        @media (prefers-contrast: high) {
+            :root {
+                --parchment: #ffffff;
+                --iron-gall: #000000;
+                --divine-gold: #ffff00;
+                --shadow-charcoal: #000000;
+            }
+        }
+
+        /* Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            .lesson-image {
+                transition: none;
+            }
+
+            .nav-links a {
+                transition: none;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            .lesson-nav {
+                display: none;
+            }
+
+            .lesson-image {
+                max-width: 100%;
+                page-break-inside: avoid;
+            }
+
+            .content-block {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="manuscript-texture"></div>
+    
+    <div class="container">
+        <header>
+            <h1>The Gnostic Gospels</h1>
+            <p class="subtitle">Forbidden Knowledge That Reshapes Christianity</p>
+        </header>
+
+        <nav class="lesson-nav" role="navigation" aria-label="Lesson sections">
+            <button class="nav-toggle" onclick="toggleNav()" aria-controls="nav-links" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                📚 Navigate This Lesson
+            </button>
+            <div class="nav-links" id="nav-links">
+                <a href="#introduction">Discovery</a>
+                <a href="#nature">What They Are</a>
+                <a href="#controversial">Forbidden Words</a>
+                <a href="#suppression">The Suppression</a>
+                <a href="#worldview">Radical Worldview</a>
+                <a href="#relevance">Modern Impact</a>
+                <a href="#conclusion">Conclusion</a>
+                <a href="#references">References</a>
+            </div>
+        </nav>
+
+        <main>
+            <section id="introduction">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-gvxB655kKl/f38a1c968cbce481d9948b143b89c8cbecc234964349d8624ba444cbc6b90f4387d901a2616e3ec1a09d9e1c2f24db47eb1e5bf506c5cc725c90b53b39db6207ee967184fa764b9bb5c71feb2e33ba7691dab9fdeda83d497f3bee17c6541af6b0b42850" alt="Archaeological cross-section showing the 1945 Nag Hammadi discovery with golden light emanating from an earthenware jar" class="lesson-image">
+                <p class="image-caption">The 1945 Nag Hammadi discovery: Muhammad Ali al-Samman's accidental find that brought 1,700 years of suppressed Christianity back to light.</p>
+
+                <h2>The Farmer Who Changed History</h2>
+                
+                <p>In December 1945, an Egyptian farmer named Muhammad Ali al-Samman was digging for fertilizer near the town of Nag Hammadi when he made one of the most significant archaeological discoveries of the 20th century. What he unearthed from that sealed earthenware jar would fundamentally challenge orthodox Christian narratives and reveal a sophisticated alternative spirituality that had been systematically suppressed for nearly 1,700 years.<a href="#fn1" class="footnote-ref" id="ref1">1</a></p>
+
+                <div class="thought-provoking">
+                    <h4>Thought-Provoking Fact</h4>
+                    <p>The manuscripts weren't hastily hidden—they were wrapped in white linen and sealed with bitumen, suggesting a ritualistic preservation by monks who recognized their spiritual value. The burial timing (approximately 367-400 CE) coincides precisely with Bishop Athanasius's Easter Letter of 367 CE, which established the canonical New Testament and ordered the destruction of "heretical" texts.<a href="#fn2" class="footnote-ref" id="ref2">2</a></p>
+                </div>
+
+                <p>Inside that ancient jar were 13 leather-bound codices containing 52 texts—the largest cache of early Christian alternative literature ever found. These documents, now known as the <span class="key-concept">Gnostic Gospels</span>, don't merely present variant Christian stories. They represent an entirely different understanding of reality, divinity, and human potential that was deliberately eliminated from Christian history.</p>
+            </section>
+
+            <section id="nature">
+                <h2>What These Documents Are Actually Like</h2>
+
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-xd9OLp8Rnb/897444af8e370278674b119f25ca618f6a95abbaa8c87101944b720f522756ed315984158bcd9e5192c5ee15e63ea84ea275b585ede1c1ab32031043d3d0ec88750421197c3ca0ab7768242bebde0719830a8432fec4564b11a87b13b4d55d9372e29d82" alt="Layered manuscript fragments showing Coptic text with golden illumination and multiple translation layers" class="lesson-image">
+                <p class="image-caption">Manuscript fragments showing the complex layered nature of Gnostic texts with their sophisticated theological reasoning and symbolic systems.</p>
+
+                <p>Unlike canonical gospels' biographical narratives, Gnostic texts employ diverse literary forms that demonstrate remarkable theological sophistication. The <span class="key-concept">Gospel of Thomas</span> presents 114 sayings attributed to Jesus without biographical framework. The <span class="key-concept">Gospel of Philip</span> uses technical sacramental language requiring deep understanding of early Christian ritual practice. The <span class="key-concept">Gospel of Mary</span> presents visionary accounts and philosophical dialogues.<a href="#fn3" class="footnote-ref" id="ref3">3</a></p>
+
+                <div class="content-block">
+                    <h3>Authorship and Dating</h3>
+                    <p>Scholarly consensus confirms that none of these gospels were written by their attributed authors—Thomas, Philip, or Mary. This is <span class="key-concept">pseudepigraphy</span>, a common ancient practice of attributing texts to authoritative figures. However, carbon dating and paleographic analysis reveal these copies date to the 4th century CE, representing traditions potentially as old or older than canonical gospels.</p>
+                    
+                    <ul style="margin-left: 2rem;">
+                        <li><strong>Gospel of Thomas:</strong> Composition 50-140 CE (potentially earlier than canonical Luke and Matthew)</li>
+                        <li><strong>Gospel of Mary:</strong> 120-180 CE</li>
+                        <li><strong>Gospel of Philip:</strong> 250-350 CE</li>
+                    </ul>
+                </div>
+
+                <p>These aren't crude forgeries or folk tales. They demonstrate sophisticated theological reasoning, complex symbolic systems, and advanced spiritual psychology that reveals early Christianity was far more diverse, philosophically sophisticated, and spiritually experimental than orthodox narratives suggest.<a href="#fn4" class="footnote-ref" id="ref4">4</a></p>
+            </section>
+
+            <section id="controversial">
+                <h2>The Forbidden Words</h2>
+
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-78uEfAkWK7/c4af8d6b5ee15e2b79a80e609a2da1b9241cabe99e583964469022a5e6bede6885d32c5b39a988c07302af2c65ea95f785901e392f83d578225357edb29872e26e685f8684dc4f7f57df427b06b7af626837b9462effc5c8bb0c63c1861a467986fc32f3" alt="Fragmented Byzantine-style icon of Mary Magdalene with manuscript scrolls flowing from her hands, showing her spiritual authority" class="lesson-image">
+                <p class="image-caption">Mary Magdalene as portrayed in Gnostic texts: not as repentant prostitute but as Jesus's primary spiritual heir with special revelations.</p>
+
+                <h3>Jesus as Universal Presence</h3>
+                <div class="controversial-excerpt">
+                    <div class="quote">
+                        Split a piece of wood; I am there. Lift up the stone, and you will find me there.
+                        <div class="citation">Gospel of Thomas, Saying 77</div>
+                    </div>
+                    <p><strong>Controversy:</strong> This presents a pantheistic Jesus claiming universal presence—radically different from orthodox Christology's emphasis on historical incarnation. This theological position threatened the institutional church's role as mediator between God and humanity, suggesting direct divine access through material reality itself.<a href="#fn5" class="footnote-ref" id="ref5">5</a></p>
+                </div>
+
+                <h3>Mary Magdalene's Spiritual Authority</h3>
+                <div class="controversial-excerpt">
+                    <div class="quote">
+                        Simon Peter said to them, "Make Mary leave us, for females don't deserve life." Jesus said, "Look, I will guide her to make her male, so that she too may become a living spirit resembling you males. For every female who makes herself male will enter the kingdom of heaven."
+                        <div class="citation">Gospel of Thomas, Saying 114</div>
+                    </div>
+                    <p><strong>Complex Interpretation:</strong> This isn't literal gender transformation but represents Gnostic spiritual symbolism where "male" represents active spiritual principle and "female" represents passive material nature. However, the passage remains deeply problematic and reveals internal contradictions within Gnostic thought regarding gender.<a href="#fn6" class="footnote-ref" id="ref6">6</a></p>
+                </div>
+
+                <div class="controversial-excerpt">
+                    <div class="quote">
+                        Peter said to Mary, "Sister, we know that the Savior loved you more than the rest of women. Tell us the words of the Savior which you remember—which you know but we do not, nor have we heard them." Mary answered and said, "What is hidden from you I will proclaim to you."
+                        <div class="citation">Gospel of Mary, Fragment 17:7-9</div>
+                    </div>
+                    <p><strong>Revolutionary Implication:</strong> This presents Mary Magdalene not as repentant prostitute (a later church invention) but as Jesus's primary spiritual heir, possessing secret teachings unknown to male apostles. This challenged both gender hierarchy and apostolic authority claims.<a href="#fn7" class="footnote-ref" id="ref7">7</a></p>
+                </div>
+
+                <h3>The Most Controversial Passage</h3>
+                <div class="controversial-excerpt">
+                    <div class="quote">
+                        The companion of the [Savior] is Mary Magdalene. [But Christ loved] her more than [all] the disciples, and used to kiss her [often] on her [mouth]. The rest of [the disciples were offended by it and] expressed disapproval.
+                        <div class="citation">Gospel of Philip, Saying 59</div>
+                    </div>
+                    <p><strong>Textual Analysis:</strong> The brackets indicate manuscript damage, but the implications suggest an intimate, possibly sexual relationship between Jesus and Mary Magdalene. This challenged fundamental assumptions about celibacy, spiritual purity, and the nature of divine incarnation that became central to orthodox Christianity.<a href="#fn8" class="footnote-ref" id="ref8">8</a></p>
+                </div>
+            </section>
+
+            <section id="suppression">
+                <h2>The Great Suppression</h2>
+
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-ajheMQ7LJk/eb232fd23c2a4963be0d09c63bf16847747feb768e4ecfc16afcb047ac42be2db812cf65a0794235a8e20b698eb06606350b938ff942bda15875f544788de1282f6b88e5ef5a49b7ae6f0836b3bf41d4492e09fac872c229573541fe83c65ad03c1627b0" alt="Cathedral architecture with human features casting shadows over manuscripts, representing systematic suppression of Gnostic texts" class="lesson-image">
+                <p class="image-caption">The systematic suppression of Gnostic Christianity by institutional authority, transforming diverse spiritual traditions into orthodox uniformity.</p>
+
+                <p>The suppression of Gnostic Christianity wasn't accidental—it was a coordinated campaign driven by theological, political, and institutional concerns. Emperor Constantine's 313 CE Edict of Milan legalized Christianity, but required unified doctrine for political utility. Gnostic Christianity's emphasis on individual revelation and diverse interpretations threatened imperial religious control.<a href="#fn9" class="footnote-ref" id="ref9">9</a></p>
+
+                <div class="timeline">
+                    <h3>Timeline of Suppression and Rediscovery</h3>
+                    
+                    <div class="timeline-event">
+                        <div class="timeline-date">50-150 CE</div>
+                        <p><strong>Origins:</strong> Gnostic texts composed alongside canonical gospels. Early Christianity demonstrated remarkable theological diversity with multiple competing interpretations of Jesus's message and meaning.</p>
+                    </div>
+
+                    <div class="timeline-event">
+                        <div class="timeline-date">325 CE</div>
+                        <p><strong>Council of Nicaea:</strong> Emperor Constantine establishes orthodox Christology partly to counter Gnostic theological diversity. Political unity requires religious uniformity, marking the beginning of systematic alternative suppression.</p>
+                    </div>
+
+                    <div class="timeline-event">
+                        <div class="timeline-date">367 CE</div>
+                        <p><strong>The Suppression Order:</strong> Bishop Athanasius's Easter Letter establishes the canonical New Testament and explicitly orders destruction of "heretical" texts. This represents the formal beginning of systematic manuscript elimination.</p>
+                    </div>
+
+                    <div class="timeline-event">
+                        <div class="timeline-date">367-400 CE</div>
+                        <p><strong>The Secret Burial:</strong> Monks near Nag Hammadi bury Gnostic manuscripts in sealed jars—not random disposal but deliberate rescue operation by those recognizing these texts' spiritual value.</p>
+                    </div>
+
+                    <div class="timeline-event">
+                        <div class="timeline-date">1945</div>
+                        <p><strong>The Rediscovery:</strong> Muhammad Ali al-Samman discovers the buried manuscripts, bringing 1,700 years of suppressed Christianity back to scholarly attention and public awareness.</p>
+                    </div>
+                </div>
+
+                <div class="content-block">
+                    <h3>Why Gnostic Christianity Threatened Orthodox Authority</h3>
+                    <p>Gnostic texts posed multiple challenges to emerging institutional Christianity:</p>
+                    <ul style="margin-left: 2rem;">
+                        <li><strong>Authority Structure:</strong> Emphasis on direct divine experience (gnosis) over institutional mediation</li>
+                        <li><strong>Gender Hierarchy:</strong> Female spiritual authority figures challenging male apostolic succession</li>
+                        <li><strong>Salvation Mechanism:</strong> Knowledge-based liberation rather than faith-based institutional participation</li>
+                        <li><strong>Cosmic Understanding:</strong> Material world as imprisonment rather than divine creation</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="worldview">
+                <h2>A Universe Turned Upside Down</h2>
+
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-i8Z7sceUqu/59af54e2c1e604e16126ef13b4f00d06700710176323cc1576af5db6022dc990ec005b0858875bc19169e773bed967f0735a39f82d1cb896d8e07259fd5b1929a37ac1f708e5c5241bf1ee92e0b4cdb8a61d9e21585226477ad303e693880b70454fe0a4" alt="Split composition showing divine realm of light above and material world trapped within geometric prison bars below" class="lesson-image">
+                <p class="image-caption">The Gnostic cosmology: Divine Pleroma above contrasted with the material world as beautiful prison below, representing radically different understanding of reality.</p>
+
+                <p>The Gnostic worldview presents reality in terms fundamentally opposed to orthodox Christianity. Rather than seeing material creation as good divine work, Gnostic cosmology presents a complex spiritual hierarchy where physical existence represents imprisonment of divine souls.<a href="#fn10" class="footnote-ref" id="ref10">10</a></p>
+
+                <div class="cosmology-split">
+                    <div class="pleroma">
+                        <h3>The Pleroma</h3>
+                        <p><strong>Divine Fullness</strong></p>
+                        <p>The true spiritual realm of light beyond material existence. Perfect, unknowable divine source where souls originate. Pure consciousness, infinite potential, perfect wholeness.</p>
+                    </div>
+
+                    <div class="material-world">
+                        <h3>Material World</h3>
+                        <p><strong>The Demiurge's Prison</strong></p>
+                        <p>Created by false god (Demiurge) who traps divine souls in physical reality. Beautiful but ultimately illusory—a cage requiring escape through gnosis (direct divine knowledge).</p>
+                    </div>
+                </div>
+
+                <div class="thought-provoking">
+                    <h4>Radical Theological Implication</h4>
+                    <p>In Gnostic thought, the God of Genesis—Yahweh—becomes the <span class="key-concept">Demiurge</span>, a false creator who traps souls in material reality. This makes the Hebrew Bible's creator god the villain, not the hero, explaining why church fathers like Irenaeus fought so vigorously against Gnostic Christianity. The theological stakes couldn't have been higher.<a href="#fn11" class="footnote-ref" id="ref11">11</a></p>
+                </div>
+
+                <p>This cosmological understanding generates entirely different approaches to spiritual practice, ethical behavior, and ultimate human purpose. Where orthodox Christianity seeks to sanctify material existence, Gnostic spirituality seeks liberation from it through direct divine knowledge (gnosis) that reveals the soul's true divine origin.</p>
+            </section>
+
+            <section id="relevance">
+                <h2>Why These Ancient Discoveries Matter Today</h2>
+
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-x1Ngf5xhMX/739049c9b03c1d5037de7efeb97c87aeda761e8e38a5aa298528095434ab6d69093ba957855ad49fd9258eb8af73028276c6a054162487c0cb419de81d4ba0674b7745f3bcdbb240b267e0e271c762eb1af3edbaf97b44eb846ce93f20a86de5b9981d73" alt="Network visualization showing ancient manuscripts connected to modern spiritual movements with flowing golden connections" class="lesson-image">
+                <p class="image-caption">The continuing influence of Gnostic themes in contemporary spirituality, psychology, and religious movements.</p>
+
+                <p>The Gnostic Gospels represent more than historical curiosities—they offer living alternatives to Western religious assumptions that speak directly to contemporary spiritual and cultural crises.<a href="#fn12" class="footnote-ref" id="ref12">12</a></p>
+
+                <div class="two-column">
+                    <div>
+                        <h3>Contemporary Relevance Patterns</h3>
+                        <ul>
+                            <li><strong>Authority vs. Experience:</strong> Gnostic emphasis on direct spiritual knowing resonates with contemporary distrust of institutional religion</li>
+                            <li><strong>Environmental Crisis:</strong> Gnostic critique of material world speaks to current ecological concerns about consumerism and exploitation</li>
+                            <li><strong>Gender Equality:</strong> Female spiritual authority in Gnostic texts aligns with modern feminist theology</li>
+                            <li><strong>Psychological Integration:</strong> Gnostic concepts parallel modern depth psychology and consciousness studies</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>Modern Psychological Connections</h3>
+                        <p>Modern psychological analysis reveals Gnostic texts contain remarkably sophisticated understanding of consciousness studies, mystical experience, and transformative spiritual insights that align with:</p>
+                        <ul>
+                            <li><strong>Jungian Psychology:</strong> Sophia (Divine Feminine) = Anima archetype; Demiurge = Shadow projection</li>
+                            <li><strong>Trauma Theory:</strong> Gnostic cosmology reflects collective trauma requiring therapeutic liberation</li>
+                            <li><strong>Consciousness Research:</strong> Gnosis parallels non-ordinary consciousness states and mystical experiences</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-4HsRt2k9Is/0cbd1f1cde1287c2295b8ff6ee942e28d014d595d7f496051153c08152644d9a2fcc1ffaabb21475bf35012ea980384b569fcb60ce05450a15d8b5bb1da7d5070fd42fa88e79dad7afffabe8fd43b7bef826b3a15241588ae5a9b98c31fe582266a1b43c" alt="Brain imagery overlaid with ancient manuscript illumination showing neural pathways forming sacred geometry patterns" class="lesson-image">
+                <p class="image-caption">The bridge between ancient Gnostic understanding of consciousness and modern neuroscience and psychology research.</p>
+            </section>
+
+            <section id="conclusion">
+                <h2>The Ultimate Irony</h2>
+
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-Iey7_S59bS/845feffec99ceeaf6269f9b5433818d4086e63e255099a7bc7fb7c9d5c2c61ce6b6580d640273ec3d99b68c7137c24ba59da5630bf7edb87830465effe77f44f6ba79ffad4c1e682c73866cef57da3fcc4631b58f822d8757dc9cbd25bf9a114ec3bc19f" alt="Ancient manuscripts emerging from burial with golden light illuminating modern spiritual seekers, representing hope and possibility" class="lesson-image">
+                <p class="image-caption">The resurrection of suppressed knowledge: ancient wisdom emerging to address modern spiritual crises and offer alternative paths forward.</p>
+
+                <p>The church fathers' successful suppression of Gnostic Christianity may have eliminated precisely the spiritual resources needed to address modern crises of meaning, environmental destruction, and institutional religious decline. The theological questions raised by Gnostic texts—the nature of evil, the relationship between spirit and matter, the possibility of direct divine knowledge, the role of feminine wisdom—remain unresolved in contemporary spirituality.<a href="#fn13" class="footnote-ref" id="ref13">13</a></p>
+
+                <div class="thought-provoking">
+                    <h4>Most Thought-Provoking Question</h4>
+                    <p>What if the Nag Hammadi discovery offers a glimpse of what Christianity was—and still could become—if these alternative voices had been preserved rather than silenced? Rather than ancient curiosities, these texts offer living alternatives that speak directly to contemporary spiritual searching and cultural transformation needs.</p>
+                </div>
+
+                <p>The Gnostic Gospels reveal that early Christianity was far more diverse, philosophically sophisticated, and spiritually experimental than orthodox narratives suggest. They represent not failed theology but alternative spiritual technology—different methods for approaching ultimate reality and human transformation that remain relevant for contemporary seekers questioning institutional religious authority and searching for direct spiritual experience.</p>
+
+                <p>Understanding this suppressed history provides crucial context for contemporary religious diversity, alternative spirituality movements, and ongoing debates about authority, experience, and the nature of divine knowledge. The farmer's accidental discovery in 1945 continues to reshape our understanding of Christianity's origins and possibilities.</p>
+            </section>
+        </main>
+
+        <footer>
+            <section id="references" class="footnotes">
+                <h2>References and Citations</h2>
+                
+                <div class="footnote" id="fn1">
+                    <strong>1.</strong> Robinson, James M., ed. <em>The Nag Hammadi Library in English</em>. 4th revised edition. Leiden: Brill, 2016. The discovery context and archaeological details are documented in Chapter 1: "The Discovery of the Nag Hammadi Codices." <a href="#ref1">↑</a>
+                </div>
+
+                <div class="footnote" id="fn2">
+                    <strong>2.</strong> Pagels, Elaine. <em>The Gnostic Gospels</em>. New York: Random House, 1979, pp. 23-27. Cross-referenced with Athanasius's 39th Easter Letter (367 CE) establishing canonical boundaries and ordering destruction of alternative texts. <a href="#ref2">↑</a>
+                </div>
+
+                <div class="footnote" id="fn3">
+                    <strong>3.</strong> Ehrman, Bart D. <em>Lost Christianities: The Battles for Scripture and the Faiths We Never Knew</em>. Oxford: Oxford University Press, 2003. Comprehensive analysis of literary forms and theological sophistication in Gnostic texts compared to canonical literature. <a href="#ref3">↑</a>
+                </div>
+
+                <div class="footnote" id="fn4">
+                    <strong>4.</strong> Layton, Bentley. <em>The Gnostic Scriptures: Ancient Wisdom for the New Age</em>. New York: Doubleday, 1995. Detailed paleographic analysis and dating methodology for Nag Hammadi manuscripts. <a href="#ref4">↑</a>
+                </div>
+
+                <div class="footnote" id="fn5">
+                    <strong>5.</strong> Patterson, Stephen J. <em>The Gospel of Thomas and Jesus</em>. Sonoma: Polebridge Press, 1993. Analysis of Saying 77 and its implications for Christological development. <a href="#ref5">↑</a>
+                </div>
+
+                <div class="footnote" id="fn6">
+                    <strong>6.</strong> DeConick, April D. <em>The Original Gospel of Thomas in Translation</em>. London: T&T Clark, 2006. Detailed analysis of gender symbolism and spiritual psychology in Thomas's controversial sayings. <a href="#ref6">↑</a>
+                </div>
+
+                <div class="footnote" id="fn7">
+                    <strong>7.</strong> King, Karen L. <em>The Gospel of Mary of Magdala: Jesus and the First Woman Apostle</em>. Santa Rosa: Polebridge Press, 2003. Comprehensive study of female authority and apostolic succession challenges in early Christianity. <a href="#ref7">↑</a>
+                </div>
+
+                <div class="footnote" id="fn8">
+                    <strong>8.</strong> Marjanen, Antti. <em>The Woman Jesus Loved: Mary Magdalene in the Nag Hammadi Library and Related Documents</em>. Leiden: Brill, 1996. Textual analysis and theological implications of intimate relationships in Gnostic literature. <a href="#ref8">↑</a>
+                </div>
+
+                <div class="footnote" id="fn9">
+                    <strong>9.</strong> Williams, Michael Allen. <em>Rethinking "Gnosticism": An Argument for Dismantling a Dubious Category</em>. Princeton: Princeton University Press, 1996. Political and institutional analysis of early Christian diversity suppression. <a href="#ref9">↑</a>
+                </div>
+
+                <div class="footnote" id="fn10">
+                    <strong>10.</strong> Pearson, Birger A. <em>Gnosticism and Christianity in Roman and Coptic Egypt</em>. New York: T&T Clark, 2004. Comprehensive analysis of Gnostic cosmology and its relationship to orthodox Christian theology. <a href="#ref10">↑</a>
+                </div>
+
+                <div class="footnote" id="fn11">
+                    <strong>11.</strong> Irenaeus. <em>Against Heresies</em> (Adversus Haereses). Book I, Chapters 23-31. Ancient source documenting early church opposition to Gnostic theological positions and cosmological alternatives. <a href="#ref11">↑</a>
+                </div>
+
+                <div class="footnote" id="fn12">
+                    <strong>12.</strong> Hoeller, Stephan A. <em>Gnosticism: New Light on the Ancient Tradition of Inner Knowing</em>. Wheaton: Quest Books, 2002. Analysis of contemporary relevance and modern spiritual movements influenced by Gnostic themes. <a href="#ref12">↑</a>
+                </div>
+
+                <div class="footnote" id="fn13">
+                    <strong>13.</strong> Pagels, Elaine. <em>Beyond Belief: The Secret Gospel of Thomas</em>. New York: Random House, 2003. Contemporary implications and continuing relevance of suppressed Christian alternatives for modern spirituality and religious understanding. <a href="#ref13">↑</a>
+                </div>
+            </section>
+        </footer>
+    </div>
+
+    <script>
+        // Navigation toggle for mobile
+        function toggleNav() {
+            const navLinks = document.getElementById('nav-links');
+            const navToggle = document.querySelector('.nav-toggle');
+            const isActive = navLinks.classList.contains('active');
+            
+            navLinks.classList.toggle('active');
+            navToggle.setAttribute('aria-expanded', !isActive);
+        }
+
+        // Smooth scrolling for navigation links
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-links a');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                        
+                        // Close mobile nav after clicking
+                        if (window.innerWidth <= 768) {
+                            const navLinks = document.getElementById('nav-links');
+                            const navToggle = document.querySelector('.nav-toggle');
+                            navLinks.classList.remove('active');
+                            navToggle.setAttribute('aria-expanded', 'false');
+                        }
+                    }
+                });
+            });
+        });
+
+        // Image loading optimization
+        function optimizeImages() {
+            const images = document.querySelectorAll('.lesson-image');
+            
+            images.forEach(img => {
+                // Add loading attribute for better performance
+                img.setAttribute('loading', 'lazy');
+                
+                // Add error handling
+                img.addEventListener('error', function() {
+                    this.style.display = 'none';
+                    console.log('Image failed to load:', this.src);
+                });
+                
+                // Add successful load handling
+                img.addEventListener('load', function() {
+                    this.style.opacity = '1';
+                });
+            });
+        }
+
+        // Accessibility enhancements
+        function enhanceAccessibility() {
+            // Add keyboard navigation for images
+            const images = document.querySelectorAll('.lesson-image');
+            images.forEach(img => {
+                img.setAttribute('tabindex', '0');
+                img.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        // Could add image zoom functionality here
+                    }
+                });
+            });
+
+            // Enhance footnote navigation
+            const footnoteRefs = document.querySelectorAll('.footnote-ref');
+            footnoteRefs.forEach(ref => {
+                ref.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        this.click();
+                    }
+                });
+            });
+        }
+
+        // Initialize all functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            optimizeImages();
+            enhanceAccessibility();
+            
+            // Add focus indicators for better keyboard navigation
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Tab') {
+                    document.body.classList.add('keyboard-navigation');
+                }
+            });
+            
+            document.addEventListener('mousedown', function() {
+                document.body.classList.remove('keyboard-navigation');
+            });
+        });
+
+        // Performance monitoring
+        window.addEventListener('load', function() {
+            // Log load time for performance monitoring
+            const loadTime = performance.now();
+            console.log(`Lesson page loaded in ${loadTime.toFixed(2)}ms`);
+        });
+    </script>
+</body>
+</html>

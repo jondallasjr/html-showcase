@@ -1,0 +1,1489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Educational 3D Platform - Interactive Learning</title>
+    
+    <!-- Three.js for 3D graphics -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: #0a0a0a;
+            color: white;
+            overflow: hidden;
+        }
+
+        /* Slide System */
+        .presentation-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            perspective: 1000px;
+        }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            transform-style: preserve-3d;
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            display: flex;
+            flex-direction: column;
+            padding: 2rem;
+            border-radius: 0;
+            overflow: hidden;
+        }
+
+        .slide.active {
+            transform: translateZ(0) rotateY(0deg);
+            opacity: 1;
+            z-index: 10;
+        }
+
+        .slide.prev {
+            transform: translateZ(-200px) rotateY(-45deg) translateX(-100%);
+            opacity: 0.3;
+            z-index: 1;
+        }
+
+        .slide.next {
+            transform: translateZ(-200px) rotateY(45deg) translateX(100%);
+            opacity: 0.3;
+            z-index: 1;
+        }
+
+        .slide.hidden {
+            transform: translateZ(-400px) rotateY(90deg);
+            opacity: 0;
+            z-index: 0;
+        }
+
+        /* Navigation Controls */
+        .nav-controls {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1rem;
+            z-index: 100;
+            background: rgba(0,0,0,0.5);
+            padding: 1rem;
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-btn {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            border: none;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 20px rgba(255,107,107,0.4);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            transform: scale(0.9);
+        }
+
+        /* Slide Progress */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #45b7d1);
+            z-index: 100;
+            transition: width 0.6s ease;
+            box-shadow: 0 0 10px rgba(78, 205, 196, 0.5);
+        }
+
+        /* Slide Content Styles */
+        .slide-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .slide-title {
+            font-size: 3rem;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            animation: titleGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes titleGlow {
+            0% { filter: drop-shadow(0 0 5px rgba(78, 205, 196, 0.3)); }
+            100% { filter: drop-shadow(0 0 20px rgba(255, 107, 107, 0.5)); }
+        }
+
+        .slide-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            color: #b8b8b8;
+        }
+
+        .slide-content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* 3D Canvas Styles */
+        .canvas-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .canvas-overlay {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: rgba(0,0,0,0.7);
+            padding: 1rem;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            z-index: 10;
+        }
+
+        /* Interactive Controls */
+        .controls-panel {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(0,0,0,0.7);
+            padding: 1rem;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            z-index: 10;
+            min-width: 200px;
+        }
+
+        .control-group {
+            margin-bottom: 1rem;
+        }
+
+        .control-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: #4ecdc4;
+        }
+
+        .slider {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: rgba(255,255,255,0.2);
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        .control-btn {
+            background: linear-gradient(45deg, #4ecdc4, #45b7d1);
+            border: none;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin: 0.25rem;
+            transition: all 0.3s ease;
+        }
+
+        .control-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(78, 205, 196, 0.3);
+        }
+
+        /* Media Controls */
+        .media-controls {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .media-btn {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            border: none;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .media-btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .media-btn:hover:before {
+            left: 100%;
+        }
+
+        .media-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255,107,107,0.4);
+        }
+
+        /* Video/Camera Display */
+        .media-display {
+            width: 100%;
+            max-width: 500px;
+            height: 300px;
+            border-radius: 15px;
+            background: rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 2rem auto;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .media-display video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 15px;
+        }
+
+        .audio-visualizer {
+            width: 100%;
+            height: 150px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 10px;
+            margin: 1rem auto;
+        }
+
+        /* Motion Graphics */
+        .motion-demo {
+            width: 100%;
+            height: 400px;
+            position: relative;
+            background: radial-gradient(circle at center, rgba(78, 205, 196, 0.1) 0%, transparent 70%);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .floating-particle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #4ecdc4;
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+            box-shadow: 0 0 10px #4ecdc4;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.3; }
+            25% { transform: translateY(-50px) rotate(90deg); opacity: 1; }
+            50% { transform: translateY(-100px) rotate(180deg); opacity: 0.7; }
+            75% { transform: translateY(-150px) rotate(270deg); opacity: 1; }
+        }
+
+        .animated-text {
+            font-size: 2rem;
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientMove 3s ease infinite;
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .slide {
+                padding: 1rem;
+            }
+            
+            .slide-title {
+                font-size: 2rem;
+            }
+            
+            .controls-panel {
+                position: relative;
+                top: auto;
+                right: auto;
+                margin: 1rem 0;
+            }
+            
+            .media-controls {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.2rem;
+            color: #4ecdc4;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(78, 205, 196, 0.3);
+            border-top: 4px solid #4ecdc4;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <!-- Progress Bar -->
+        <div class="progress-bar" id="progressBar"></div>
+
+        <!-- Slide 1: Welcome & 3D Solar System -->
+        <div class="slide active" id="slide1">
+            <div class="slide-header">
+                <h1 class="slide-title">🌟 Interactive Learning Platform</h1>
+                <p class="slide-subtitle">3D Graphics, Motion Graphics, and Media Integration</p>
+            </div>
+            <div class="slide-content">
+                <div class="canvas-container">
+                    <canvas id="solarSystem"></canvas>
+                    <div class="canvas-overlay">
+                        <h3>3D Solar System</h3>
+                        <p>Interactive planetary motion</p>
+                        <p>Click and drag to rotate!</p>
+                    </div>
+                    <div class="controls-panel">
+                        <div class="control-group">
+                            <label>Speed</label>
+                            <input type="range" class="slider" id="speedControl" min="0" max="5" step="0.1" value="1">
+                        </div>
+                        <div class="control-group">
+                            <label>Zoom</label>
+                            <input type="range" class="slider" id="zoomControl" min="50" max="200" value="100">
+                        </div>
+                        <button class="control-btn" onclick="solarSystemDemo.togglePause()">⏯️ Pause/Play</button>
+                        <button class="control-btn" onclick="solarSystemDemo.reset()">🔄 Reset</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Camera Integration -->
+        <div class="slide hidden" id="slide2">
+            <div class="slide-header">
+                <h1 class="slide-title">📹 Camera Integration</h1>
+                <p class="slide-subtitle">Real-time video capture and processing</p>
+            </div>
+            <div class="slide-content">
+                <div class="media-controls">
+                    <button class="media-btn" onclick="cameraDemo.startCamera()">📷 Start Camera</button>
+                    <button class="media-btn" onclick="cameraDemo.takeSnapshot()">📸 Take Snapshot</button>
+                    <button class="media-btn" onclick="cameraDemo.toggleFilter()">🎨 Toggle Filter</button>
+                    <button class="media-btn" onclick="cameraDemo.stopCamera()">⏹️ Stop Camera</button>
+                </div>
+                <div class="media-display" id="cameraDisplay">
+                    <div class="loading">
+                        <div class="spinner"></div>
+                        Click "Start Camera" to begin
+                    </div>
+                </div>
+                <canvas id="snapshotCanvas" style="display: none;"></canvas>
+            </div>
+        </div>
+
+        <!-- Slide 3: Microphone Visualization -->
+        <div class="slide hidden" id="slide3">
+            <div class="slide-header">
+                <h1 class="slide-title">🎤 Audio Visualization</h1>
+                <p class="slide-subtitle">Real-time microphone input and frequency analysis</p>
+            </div>
+            <div class="slide-content">
+                <div class="media-controls">
+                    <button class="media-btn" onclick="audioDemo.startRecording()">🎙️ Start Microphone</button>
+                    <button class="media-btn" onclick="audioDemo.toggleVisualization()">📊 Toggle Visualization</button>
+                    <button class="media-btn" onclick="audioDemo.stopRecording()">⏹️ Stop</button>
+                </div>
+                <div class="audio-visualizer">
+                    <canvas id="audioCanvas" width="600" height="150"></canvas>
+                </div>
+                <div style="text-align: center; margin-top: 1rem; font-size: 1.1rem;">
+                    <div>Volume: <span id="volumeLevel">0%</span></div>
+                    <div>Frequency: <span id="dominantFreq">-- Hz</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Motion Graphics Demo -->
+        <div class="slide hidden" id="slide4">
+            <div class="slide-header">
+                <h1 class="slide-title">✨ Motion Graphics</h1>
+                <p class="slide-subtitle">CSS animations and JavaScript motion systems</p>
+            </div>
+            <div class="slide-content">
+                <div class="motion-demo" id="motionDemo">
+                    <div class="animated-text">Interactive Learning</div>
+                </div>
+                <div class="media-controls">
+                    <button class="media-btn" onclick="motionDemo.spawnParticles()">🎆 Spawn Particles</button>
+                    <button class="media-btn" onclick="motionDemo.createWave()">🌊 Wave Effect</button>
+                    <button class="media-btn" onclick="motionDemo.fireworks()">🎇 Fireworks</button>
+                    <button class="media-btn" onclick="motionDemo.reset()">🧹 Clear</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Interactive 3D Chemistry -->
+        <div class="slide hidden" id="slide5">
+            <div class="slide-header">
+                <h1 class="slide-title">⚗️ 3D Molecule Viewer</h1>
+                <p class="slide-subtitle">Interactive chemistry education tool</p>
+            </div>
+            <div class="slide-content">
+                <div class="canvas-container">
+                    <canvas id="moleculeViewer"></canvas>
+                    <div class="canvas-overlay">
+                        <h3 id="moleculeName">Water (H₂O)</h3>
+                        <p id="moleculeFormula">2 Hydrogen + 1 Oxygen</p>
+                        <p>Drag to rotate, scroll to zoom</p>
+                    </div>
+                    <div class="controls-panel">
+                        <div class="control-group">
+                            <label>Molecule</label>
+                            <select class="control-btn" onchange="moleculeDemo.changeMolecule(this.value)" style="width: 100%; margin: 0;">
+                                <option value="water">Water (H₂O)</option>
+                                <option value="methane">Methane (CH₄)</option>
+                                <option value="benzene">Benzene (C₆H₆)</option>
+                                <option value="caffeine">Caffeine (C₈H₁₀N₄O₂)</option>
+                            </select>
+                        </div>
+                        <div class="control-group">
+                            <label>Rotation Speed</label>
+                            <input type="range" class="slider" id="rotationSpeed" min="0" max="3" step="0.1" value="1">
+                        </div>
+                        <button class="control-btn" onclick="moleculeDemo.toggleLabels()">🏷️ Toggle Labels</button>
+                        <button class="control-btn" onclick="moleculeDemo.toggleBonds()">🔗 Toggle Bonds</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Controls -->
+    <div class="nav-controls">
+        <button class="nav-btn" id="prevBtn" onclick="slideSystem.previousSlide()">◀</button>
+        <span style="color: white; align-self: center; margin: 0 1rem;">
+            <span id="currentSlide">1</span> / <span id="totalSlides">5</span>
+        </span>
+        <button class="nav-btn" id="nextBtn" onclick="slideSystem.nextSlide()">▶</button>
+        <button class="nav-btn" onclick="slideSystem.toggleFullscreen()">⛶</button>
+    </div>
+
+    <script>
+        // Slide System
+        class SlideSystem {
+            constructor() {
+                this.currentSlide = 0;
+                this.totalSlides = 5;
+                this.slides = document.querySelectorAll('.slide');
+                this.updateNavigation();
+                this.updateProgressBar();
+                
+                // Keyboard navigation
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'ArrowRight' || e.key === ' ') {
+                        e.preventDefault();
+                        this.nextSlide();
+                    } else if (e.key === 'ArrowLeft') {
+                        e.preventDefault();
+                        this.previousSlide();
+                    } else if (e.key === 'F11') {
+                        e.preventDefault();
+                        this.toggleFullscreen();
+                    }
+                });
+                
+                // Touch/swipe support
+                this.setupTouchControls();
+            }
+            
+            nextSlide() {
+                if (this.currentSlide < this.totalSlides - 1) {
+                    this.goToSlide(this.currentSlide + 1);
+                }
+            }
+            
+            previousSlide() {
+                if (this.currentSlide > 0) {
+                    this.goToSlide(this.currentSlide - 1);
+                }
+            }
+            
+            goToSlide(index) {
+                this.currentSlide = index;
+                this.updateSlidePositions();
+                this.updateNavigation();
+                this.updateProgressBar();
+                
+                // Initialize content for current slide
+                this.initializeSlideContent();
+            }
+            
+            updateSlidePositions() {
+                this.slides.forEach((slide, index) => {
+                    slide.classList.remove('active', 'prev', 'next', 'hidden');
+                    
+                    if (index === this.currentSlide) {
+                        slide.classList.add('active');
+                    } else if (index === this.currentSlide - 1) {
+                        slide.classList.add('prev');
+                    } else if (index === this.currentSlide + 1) {
+                        slide.classList.add('next');
+                    } else {
+                        slide.classList.add('hidden');
+                    }
+                });
+            }
+            
+            updateNavigation() {
+                document.getElementById('currentSlide').textContent = this.currentSlide + 1;
+                document.getElementById('totalSlides').textContent = this.totalSlides;
+                
+                document.getElementById('prevBtn').disabled = this.currentSlide === 0;
+                document.getElementById('nextBtn').disabled = this.currentSlide === this.totalSlides - 1;
+            }
+            
+            updateProgressBar() {
+                const progress = ((this.currentSlide + 1) / this.totalSlides) * 100;
+                document.getElementById('progressBar').style.width = `${progress}%`;
+            }
+            
+            initializeSlideContent() {
+                // Initialize 3D scenes and demos based on current slide
+                setTimeout(() => {
+                    switch(this.currentSlide) {
+                        case 0:
+                            if (!window.solarSystemDemo) {
+                                window.solarSystemDemo = new SolarSystemDemo();
+                            }
+                            break;
+                        case 4:
+                            if (!window.moleculeDemo) {
+                                window.moleculeDemo = new MoleculeDemo();
+                            }
+                            break;
+                    }
+                }, 300);
+            }
+            
+            toggleFullscreen() {
+                if (!document.fullscreenElement) {
+                    document.documentElement.requestFullscreen();
+                } else {
+                    document.exitFullscreen();
+                }
+            }
+            
+            setupTouchControls() {
+                let startX = 0;
+                let startY = 0;
+                
+                document.addEventListener('touchstart', (e) => {
+                    startX = e.touches[0].clientX;
+                    startY = e.touches[0].clientY;
+                });
+                
+                document.addEventListener('touchend', (e) => {
+                    if (!startX || !startY) return;
+                    
+                    let endX = e.changedTouches[0].clientX;
+                    let endY = e.changedTouches[0].clientY;
+                    
+                    let diffX = startX - endX;
+                    let diffY = startY - endY;
+                    
+                    if (Math.abs(diffX) > Math.abs(diffY)) {
+                        if (Math.abs(diffX) > 50) {
+                            if (diffX > 0) {
+                                this.nextSlide();
+                            } else {
+                                this.previousSlide();
+                            }
+                        }
+                    }
+                    
+                    startX = 0;
+                    startY = 0;
+                });
+            }
+        }
+
+        // 3D Solar System Demo
+        class SolarSystemDemo {
+            constructor() {
+                this.scene = new THREE.Scene();
+                this.camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
+                this.renderer = new THREE.WebGLRenderer({ 
+                    canvas: document.getElementById('solarSystem'),
+                    antialias: true,
+                    alpha: true
+                });
+                
+                this.planets = [];
+                this.speed = 1;
+                this.paused = false;
+                
+                this.init();
+                this.createSolarSystem();
+                this.animate();
+                this.setupControls();
+            }
+            
+            init() {
+                const canvas = document.getElementById('solarSystem');
+                const container = canvas.parentElement;
+                
+                this.renderer.setSize(container.clientWidth, container.clientHeight);
+                this.renderer.setClearColor(0x000011, 1);
+                
+                this.camera.position.set(0, 50, 100);
+                this.camera.lookAt(0, 0, 0);
+                
+                // Add stars
+                this.createStarField();
+                
+                // Lighting
+                const ambientLight = new THREE.AmbientLight(0x404040, 0.2);
+                this.scene.add(ambientLight);
+                
+                const sunLight = new THREE.PointLight(0xffffff, 1, 1000);
+                sunLight.position.set(0, 0, 0);
+                this.scene.add(sunLight);
+                
+                // Handle window resize
+                window.addEventListener('resize', () => this.onWindowResize());
+            }
+            
+            createStarField() {
+                const starsGeometry = new THREE.BufferGeometry();
+                const starsMaterial = new THREE.PointsMaterial({ color: 0xffffff, size: 0.5 });
+                
+                const starsVertices = [];
+                for (let i = 0; i < 1000; i++) {
+                    const x = (Math.random() - 0.5) * 2000;
+                    const y = (Math.random() - 0.5) * 2000;
+                    const z = (Math.random() - 0.5) * 2000;
+                    starsVertices.push(x, y, z);
+                }
+                
+                starsGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starsVertices, 3));
+                const stars = new THREE.Points(starsGeometry, starsMaterial);
+                this.scene.add(stars);
+            }
+            
+            createSolarSystem() {
+                // Sun
+                const sunGeometry = new THREE.SphereGeometry(8, 32, 32);
+                const sunMaterial = new THREE.MeshBasicMaterial({ 
+                    color: 0xffaa00,
+                    emissive: 0xff6600,
+                    emissiveIntensity: 0.3
+                });
+                const sun = new THREE.Mesh(sunGeometry, sunMaterial);
+                this.scene.add(sun);
+                
+                // Planets data: [radius, distance, color, speed]
+                const planetData = [
+                    [1.5, 15, 0x8c7853, 4.7],    // Mercury
+                    [2.2, 20, 0xffa500, 3.5],    // Venus
+                    [2.5, 25, 0x4f94cd, 3.0],    // Earth
+                    [2.0, 30, 0xcd5c5c, 2.4],    // Mars
+                    [6.0, 45, 0xdaa520, 1.3],    // Jupiter
+                    [5.5, 55, 0xffd700, 1.0],    // Saturn
+                    [3.5, 65, 0x4169e1, 0.7],    // Uranus
+                    [3.0, 75, 0x0000ff, 0.5]     // Neptune
+                ];
+                
+                planetData.forEach((data, index) => {
+                    const [radius, distance, color, speed] = data;
+                    
+                    // Create planet
+                    const planetGeometry = new THREE.SphereGeometry(radius, 16, 16);
+                    const planetMaterial = new THREE.MeshLambertMaterial({ color });
+                    const planet = new THREE.Mesh(planetGeometry, planetMaterial);
+                    
+                    // Create orbit path
+                    const orbitGeometry = new THREE.RingGeometry(distance - 0.2, distance + 0.2, 64);
+                    const orbitMaterial = new THREE.MeshBasicMaterial({ 
+                        color: 0x444444, 
+                        opacity: 0.3, 
+                        transparent: true 
+                    });
+                    const orbit = new THREE.Mesh(orbitGeometry, orbitMaterial);
+                    orbit.rotation.x = -Math.PI / 2;
+                    this.scene.add(orbit);
+                    
+                    this.planets.push({
+                        mesh: planet,
+                        distance: distance,
+                        speed: speed * 0.01,
+                        angle: Math.random() * Math.PI * 2
+                    });
+                    
+                    this.scene.add(planet);
+                });
+            }
+            
+            animate() {
+                if (!this.paused) {
+                    // Update planet positions
+                    this.planets.forEach(planet => {
+                        planet.angle += planet.speed * this.speed;
+                        planet.mesh.position.x = Math.cos(planet.angle) * planet.distance;
+                        planet.mesh.position.z = Math.sin(planet.angle) * planet.distance;
+                        planet.mesh.rotation.y += 0.01;
+                    });
+                }
+                
+                this.renderer.render(this.scene, this.camera);
+                requestAnimationFrame(() => this.animate());
+            }
+            
+            setupControls() {
+                const canvas = document.getElementById('solarSystem');
+                let isDragging = false;
+                let previousMousePosition = { x: 0, y: 0 };
+                
+                canvas.addEventListener('mousedown', (e) => {
+                    isDragging = true;
+                    previousMousePosition.x = e.clientX;
+                    previousMousePosition.y = e.clientY;
+                });
+                
+                canvas.addEventListener('mousemove', (e) => {
+                    if (isDragging) {
+                        const deltaMove = {
+                            x: e.clientX - previousMousePosition.x,
+                            y: e.clientY - previousMousePosition.y
+                        };
+                        
+                        const deltaRotationQuaternion = new THREE.Quaternion()
+                            .setFromEuler(new THREE.Euler(
+                                deltaMove.y * 0.01,
+                                deltaMove.x * 0.01,
+                                0,
+                                'XYZ'
+                            ));
+                        
+                        this.camera.quaternion.multiplyQuaternions(deltaRotationQuaternion, this.camera.quaternion);
+                        
+                        previousMousePosition = { x: e.clientX, y: e.clientY };
+                    }
+                });
+                
+                canvas.addEventListener('mouseup', () => {
+                    isDragging = false;
+                });
+                
+                canvas.addEventListener('wheel', (e) => {
+                    e.preventDefault();
+                    const zoomSpeed = 0.1;
+                    this.camera.position.multiplyScalar(1 + e.deltaY * zoomSpeed * 0.01);
+                });
+                
+                // Speed control
+                document.getElementById('speedControl').addEventListener('input', (e) => {
+                    this.speed = parseFloat(e.target.value);
+                });
+                
+                // Zoom control
+                document.getElementById('zoomControl').addEventListener('input', (e) => {
+                    const zoom = parseFloat(e.target.value) / 100;
+                    this.camera.position.normalize().multiplyScalar(100 * zoom);
+                });
+            }
+            
+            togglePause() {
+                this.paused = !this.paused;
+            }
+            
+            reset() {
+                this.camera.position.set(0, 50, 100);
+                this.camera.lookAt(0, 0, 0);
+                this.speed = 1;
+                document.getElementById('speedControl').value = 1;
+                document.getElementById('zoomControl').value = 100;
+            }
+            
+            onWindowResize() {
+                const canvas = document.getElementById('solarSystem');
+                const container = canvas.parentElement;
+                
+                this.camera.aspect = container.clientWidth / container.clientHeight;
+                this.camera.updateProjectionMatrix();
+                this.renderer.setSize(container.clientWidth, container.clientHeight);
+            }
+        }
+
+        // Camera Demo
+        class CameraDemo {
+            constructor() {
+                this.video = null;
+                this.canvas = document.getElementById('snapshotCanvas');
+                this.ctx = this.canvas.getContext('2d');
+                this.stream = null;
+                this.filterEnabled = false;
+            }
+            
+            async startCamera() {
+                try {
+                    this.stream = await navigator.mediaDevices.getUserMedia({ 
+                        video: { width: 500, height: 300 },
+                        audio: false 
+                    });
+                    
+                    this.video = document.createElement('video');
+                    this.video.srcObject = this.stream;
+                    this.video.autoplay = true;
+                    this.video.playsInline = true;
+                    
+                    const display = document.getElementById('cameraDisplay');
+                    display.innerHTML = '';
+                    display.appendChild(this.video);
+                    
+                    this.video.addEventListener('loadedmetadata', () => {
+                        this.canvas.width = this.video.videoWidth;
+                        this.canvas.height = this.video.videoHeight;
+                    });
+                    
+                } catch (error) {
+                    alert('Camera access denied or not available: ' + error.message);
+                }
+            }
+            
+            takeSnapshot() {
+                if (!this.video) {
+                    alert('Start camera first!');
+                    return;
+                }
+                
+                this.ctx.drawImage(this.video, 0, 0, this.canvas.width, this.canvas.height);
+                
+                // Apply filter if enabled
+                if (this.filterEnabled) {
+                    const imageData = this.ctx.getImageData(0, 0, this.canvas.width, this.canvas.height);
+                    this.applyFilter(imageData);
+                    this.ctx.putImageData(imageData, 0, 0);
+                }
+                
+                // Download the snapshot
+                const link = document.createElement('a');
+                link.download = 'snapshot.png';
+                link.href = this.canvas.toDataURL();
+                link.click();
+            }
+            
+            applyFilter(imageData) {
+                const data = imageData.data;
+                
+                // Simple sepia filter
+                for (let i = 0; i < data.length; i += 4) {
+                    const r = data[i];
+                    const g = data[i + 1];
+                    const b = data[i + 2];
+                    
+                    data[i] = Math.min(255, (r * 0.393) + (g * 0.769) + (b * 0.189));
+                    data[i + 1] = Math.min(255, (r * 0.349) + (g * 0.686) + (b * 0.168));
+                    data[i + 2] = Math.min(255, (r * 0.272) + (g * 0.534) + (b * 0.131));
+                }
+            }
+            
+            toggleFilter() {
+                this.filterEnabled = !this.filterEnabled;
+                alert(`Filter ${this.filterEnabled ? 'enabled' : 'disabled'}`);
+            }
+            
+            stopCamera() {
+                if (this.stream) {
+                    this.stream.getTracks().forEach(track => track.stop());
+                    this.stream = null;
+                }
+                
+                const display = document.getElementById('cameraDisplay');
+                display.innerHTML = '<div class="loading"><div class="spinner"></div>Camera stopped</div>';
+                
+                this.video = null;
+            }
+        }
+
+        // Audio Demo
+        class AudioDemo {
+            constructor() {
+                this.audioContext = null;
+                this.analyser = null;
+                this.microphone = null;
+                this.dataArray = null;
+                this.canvas = document.getElementById('audioCanvas');
+                this.ctx = this.canvas.getContext('2d');
+                this.isRecording = false;
+                this.visualizationMode = 'bars';
+            }
+            
+            async startRecording() {
+                try {
+                    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                    
+                    this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                    this.analyser = this.audioContext.createAnalyser();
+                    this.microphone = this.audioContext.createMediaStreamSource(stream);
+                    
+                    this.analyser.smoothingTimeConstant = 0.8;
+                    this.analyser.fftSize = 512;
+                    
+                    this.microphone.connect(this.analyser);
+                    
+                    const bufferLength = this.analyser.frequencyBinCount;
+                    this.dataArray = new Uint8Array(bufferLength);
+                    
+                    this.isRecording = true;
+                    this.visualize();
+                    
+                } catch (error) {
+                    alert('Microphone access denied: ' + error.message);
+                }
+            }
+            
+            visualize() {
+                if (!this.isRecording) return;
+                
+                this.analyser.getByteFrequencyData(this.dataArray);
+                
+                this.ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
+                this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+                
+                if (this.visualizationMode === 'bars') {
+                    this.drawBars();
+                } else {
+                    this.drawWaveform();
+                }
+                
+                this.updateVolumeLevel();
+                
+                requestAnimationFrame(() => this.visualize());
+            }
+            
+            drawBars() {
+                const barWidth = this.canvas.width / this.dataArray.length * 2;
+                let x = 0;
+                
+                for (let i = 0; i < this.dataArray.length; i++) {
+                    const barHeight = this.dataArray[i] / 255 * this.canvas.height;
+                    
+                    const r = barHeight + 25 * (i / this.dataArray.length);
+                    const g = 250 * (i / this.dataArray.length);
+                    const b = 50;
+                    
+                    this.ctx.fillStyle = `rgb(${r},${g},${b})`;
+                    this.ctx.fillRect(x, this.canvas.height - barHeight, barWidth, barHeight);
+                    
+                    x += barWidth + 1;
+                }
+            }
+            
+            drawWaveform() {
+                this.ctx.lineWidth = 2;
+                this.ctx.strokeStyle = '#4ecdc4';
+                this.ctx.beginPath();
+                
+                const sliceWidth = this.canvas.width / this.dataArray.length;
+                let x = 0;
+                
+                for (let i = 0; i < this.dataArray.length; i++) {
+                    const v = this.dataArray[i] / 128.0;
+                    const y = v * this.canvas.height / 2;
+                    
+                    if (i === 0) {
+                        this.ctx.moveTo(x, y);
+                    } else {
+                        this.ctx.lineTo(x, y);
+                    }
+                    
+                    x += sliceWidth;
+                }
+                
+                this.ctx.stroke();
+            }
+            
+            updateVolumeLevel() {
+                const sum = this.dataArray.reduce((a, b) => a + b, 0);
+                const average = sum / this.dataArray.length;
+                const volume = Math.round((average / 255) * 100);
+                
+                document.getElementById('volumeLevel').textContent = `${volume}%`;
+                
+                // Find dominant frequency
+                const maxIndex = this.dataArray.indexOf(Math.max(...this.dataArray));
+                const frequency = Math.round(maxIndex * this.audioContext.sampleRate / this.analyser.fftSize);
+                document.getElementById('dominantFreq').textContent = `${frequency} Hz`;
+            }
+            
+            toggleVisualization() {
+                this.visualizationMode = this.visualizationMode === 'bars' ? 'waveform' : 'bars';
+            }
+            
+            stopRecording() {
+                this.isRecording = false;
+                
+                if (this.audioContext) {
+                    this.audioContext.close();
+                }
+                
+                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                document.getElementById('volumeLevel').textContent = '0%';
+                document.getElementById('dominantFreq').textContent = '-- Hz';
+            }
+        }
+
+        // Motion Graphics Demo
+        class MotionDemo {
+            constructor() {
+                this.container = document.getElementById('motionDemo');
+                this.particles = [];
+            }
+            
+            spawnParticles() {
+                for (let i = 0; i < 20; i++) {
+                    setTimeout(() => {
+                        this.createParticle();
+                    }, i * 100);
+                }
+            }
+            
+            createParticle() {
+                const particle = document.createElement('div');
+                particle.className = 'floating-particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 2 + 's';
+                particle.style.animationDuration = (3 + Math.random() * 3) + 's';
+                
+                const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57'];
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.boxShadow = `0 0 10px ${particle.style.background}`;
+                
+                this.container.appendChild(particle);
+                this.particles.push(particle);
+                
+                setTimeout(() => {
+                    if (particle.parentNode) {
+                        particle.parentNode.removeChild(particle);
+                        this.particles = this.particles.filter(p => p !== particle);
+                    }
+                }, 6000);
+            }
+            
+            createWave() {
+                const wave = document.createElement('div');
+                wave.style.cssText = `
+                    position: absolute;
+                    top: 50%;
+                    left: -10%;
+                    width: 120%;
+                    height: 4px;
+                    background: linear-gradient(90deg, transparent, #4ecdc4, transparent);
+                    animation: waveMove 2s ease-out forwards;
+                    box-shadow: 0 0 20px #4ecdc4;
+                `;
+                
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes waveMove {
+                        0% { transform: translateX(-100%) scaleY(1); }
+                        50% { transform: translateX(0%) scaleY(3); }
+                        100% { transform: translateX(100%) scaleY(1); }
+                    }
+                `;
+                document.head.appendChild(style);
+                
+                this.container.appendChild(wave);
+                
+                setTimeout(() => {
+                    if (wave.parentNode) {
+                        wave.parentNode.removeChild(wave);
+                        document.head.removeChild(style);
+                    }
+                }, 2000);
+            }
+            
+            fireworks() {
+                for (let i = 0; i < 5; i++) {
+                    setTimeout(() => {
+                        this.createFirework();
+                    }, i * 300);
+                }
+            }
+            
+            createFirework() {
+                const x = Math.random() * 80 + 10;
+                const y = Math.random() * 60 + 20;
+                
+                for (let i = 0; i < 12; i++) {
+                    const spark = document.createElement('div');
+                    const angle = (i / 12) * Math.PI * 2;
+                    const distance = 50 + Math.random() * 50;
+                    
+                    spark.style.cssText = `
+                        position: absolute;
+                        left: ${x}%;
+                        top: ${y}%;
+                        width: 4px;
+                        height: 4px;
+                        background: hsl(${Math.random() * 360}, 100%, 60%);
+                        border-radius: 50%;
+                        animation: fireworkSpark 1.5s ease-out forwards;
+                        transform-origin: center;
+                        --end-x: ${Math.cos(angle) * distance}px;
+                        --end-y: ${Math.sin(angle) * distance}px;
+                    `;
+                    
+                    const keyframes = document.createElement('style');
+                    keyframes.textContent = `
+                        @keyframes fireworkSpark {
+                            0% { transform: translate(0, 0) scale(1); opacity: 1; }
+                            100% { transform: translate(var(--end-x), var(--end-y)) scale(0); opacity: 0; }
+                        }
+                    `;
+                    document.head.appendChild(keyframes);
+                    
+                    this.container.appendChild(spark);
+                    
+                    setTimeout(() => {
+                        if (spark.parentNode) {
+                            spark.parentNode.removeChild(spark);
+                            document.head.removeChild(keyframes);
+                        }
+                    }, 1500);
+                }
+            }
+            
+            reset() {
+                this.particles.forEach(particle => {
+                    if (particle.parentNode) {
+                        particle.parentNode.removeChild(particle);
+                    }
+                });
+                this.particles = [];
+                
+                // Clear any remaining elements except the animated text
+                Array.from(this.container.children).forEach(child => {
+                    if (!child.classList.contains('animated-text')) {
+                        child.remove();
+                    }
+                });
+            }
+        }
+
+        // Molecule Demo (simplified for 3D molecules)
+        class MoleculeDemo {
+            constructor() {
+                this.scene = new THREE.Scene();
+                this.camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
+                this.renderer = new THREE.WebGLRenderer({ 
+                    canvas: document.getElementById('moleculeViewer'),
+                    antialias: true,
+                    alpha: true
+                });
+                
+                this.molecules = {};
+                this.currentMolecule = 'water';
+                this.rotationSpeed = 1;
+                this.showLabels = true;
+                this.showBonds = true;
+                
+                this.init();
+                this.setupMolecules();
+                this.changeMolecule('water');
+                this.animate();
+                this.setupControls();
+            }
+            
+            init() {
+                const canvas = document.getElementById('moleculeViewer');
+                const container = canvas.parentElement;
+                
+                this.renderer.setSize(container.clientWidth, container.clientHeight);
+                this.renderer.setClearColor(0x222222, 1);
+                
+                this.camera.position.set(0, 0, 10);
+                
+                // Lighting
+                const ambientLight = new THREE.AmbientLight(0x404040, 0.6);
+                this.scene.add(ambientLight);
+                
+                const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
+                directionalLight.position.set(1, 1, 1);
+                this.scene.add(directionalLight);
+            }
+            
+            setupMolecules() {
+                // Define molecules with atom positions and bonds
+                this.molecules = {
+                    water: {
+                        name: 'Water (H₂O)',
+                        formula: '2 Hydrogen + 1 Oxygen',
+                        atoms: [
+                            { element: 'O', position: [0, 0, 0], color: 0xff0000, size: 1.2 },
+                            { element: 'H', position: [-1.5, 1, 0], color: 0xffffff, size: 0.8 },
+                            { element: 'H', position: [1.5, 1, 0], color: 0xffffff, size: 0.8 }
+                        ],
+                        bonds: [[0, 1], [0, 2]]
+                    },
+                    methane: {
+                        name: 'Methane (CH₄)',
+                        formula: '1 Carbon + 4 Hydrogen',
+                        atoms: [
+                            { element: 'C', position: [0, 0, 0], color: 0x000000, size: 1.0 },
+                            { element: 'H', position: [1.5, 1.5, 1.5], color: 0xffffff, size: 0.8 },
+                            { element: 'H', position: [-1.5, -1.5, 1.5], color: 0xffffff, size: 0.8 },
+                            { element: 'H', position: [1.5, -1.5, -1.5], color: 0xffffff, size: 0.8 },
+                            { element: 'H', position: [-1.5, 1.5, -1.5], color: 0xffffff, size: 0.8 }
+                        ],
+                        bonds: [[0, 1], [0, 2], [0, 3], [0, 4]]
+                    },
+                    benzene: {
+                        name: 'Benzene (C₆H₆)',
+                        formula: '6 Carbon + 6 Hydrogen',
+                        atoms: [
+                            { element: 'C', position: [2, 0, 0], color: 0x000000, size: 1.0 },
+                            { element: 'C', position: [1, 1.7, 0], color: 0x000000, size: 1.0 },
+                            { element: 'C', position: [-1, 1.7, 0], color: 0x000000, size: 1.0 },
+                            { element: 'C', position: [-2, 0, 0], color: 0x000000, size: 1.0 },
+                            { element: 'C', position: [-1, -1.7, 0], color: 0x000000, size: 1.0 },
+                            { element: 'C', position: [1, -1.7, 0], color: 0x000000, size: 1.0 },
+                            { element: 'H', position: [3, 0, 0], color: 0xffffff, size: 0.8 },
+                            { element: 'H', position: [1.5, 2.6, 0], color: 0xffffff, size: 0.8 },
+                            { element: 'H', position: [-1.5, 2.6, 0], color: 0xffffff, size: 0.8 },
+                            { element: 'H', position: [-3, 0, 0], color: 0xffffff, size: 0.8 },
+                            { element: 'H', position: [-1.5, -2.6, 0], color: 0xffffff, size: 0.8 },
+                            { element: 'H', position: [1.5, -2.6, 0], color: 0xffffff, size: 0.8 }
+                        ],
+                        bonds: [[0,1], [1,2], [2,3], [3,4], [4,5], [5,0], [0,6], [1,7], [2,8], [3,9], [4,10], [5,11]]
+                    },
+                    caffeine: {
+                        name: 'Caffeine (C₈H₁₀N₄O₂)',
+                        formula: '8 Carbon + 10 Hydrogen + 4 Nitrogen + 2 Oxygen',
+                        atoms: [
+                            // Simplified caffeine structure
+                            { element: 'C', position: [0, 0, 0], color: 0x000000, size: 1.0 },
+                            { element: 'N', position: [2, 1, 0], color: 0x0000ff, size: 1.0 },
+                            { element: 'C', position: [1, 2, 0], color: 0x000000, size: 1.0 },
+                            { element: 'N', position: [-1, 2, 0], color: 0x0000ff, size: 1.0 },
+                            { element: 'C', position: [-2, 1, 0], color: 0x000000, size: 1.0 },
+                            { element: 'O', position: [0, -2, 0], color: 0xff0000, size: 1.2 },
+                            { element: 'O', position: [3, -1, 0], color: 0xff0000, size: 1.2 }
+                        ],
+                        bonds: [[0,1], [1,2], [2,3], [3,4], [4,0], [0,5], [1,6]]
+                    }
+                };
+            }
+            
+            changeMolecule(moleculeType) {
+                // Clear previous molecule
+                this.scene.clear();
+                this.init();
+                
+                const molecule = this.molecules[moleculeType];
+                this.currentMolecule = moleculeType;
+                
+                // Update UI
+                document.getElementById('moleculeName').textContent = molecule.name;
+                document.getElementById('moleculeFormula').textContent = molecule.formula;
+                
+                // Create atoms
+                molecule.atoms.forEach(atom => {
+                    const geometry = new THREE.SphereGeometry(atom.size, 16, 16);
+                    const material = new THREE.MeshLambertMaterial({ color: atom.color });
+                    const sphere = new THREE.Mesh(geometry, material);
+                    
+                    sphere.position.set(...atom.position);
+                    this.scene.add(sphere);
+                });
+                
+                // Create bonds
+                if (this.showBonds) {
+                    molecule.bonds.forEach(bond => {
+                        const [atom1Idx, atom2Idx] = bond;
+                        const atom1 = molecule.atoms[atom1Idx];
+                        const atom2 = molecule.atoms[atom2Idx];
+                        
+                        const start = new THREE.Vector3(...atom1.position);
+                        const end = new THREE.Vector3(...atom2.position);
+                        const direction = end.clone().sub(start);
+                        const length = direction.length();
+                        
+                        const geometry = new THREE.CylinderGeometry(0.1, 0.1, length);
+                        const material = new THREE.MeshLambertMaterial({ color: 0x888888 });
+                        const cylinder = new THREE.Mesh(geometry, material);
+                        
+                        cylinder.position.copy(start.clone().add(end).multiplyScalar(0.5));
+                        cylinder.lookAt(end);
+                        cylinder.rotateX(Math.PI / 2);
+                        
+                        this.scene.add(cylinder);
+                    });
+                }
+            }
+            
+            animate() {
+                this.scene.rotation.y += 0.005 * this.rotationSpeed;
+                this.scene.rotation.x += 0.002 * this.rotationSpeed;
+                
+                this.renderer.render(this.scene, this.camera);
+                requestAnimationFrame(() => this.animate());
+            }
+            
+            setupControls() {
+                const canvas = document.getElementById('moleculeViewer');
+                let isDragging = false;
+                let previousMousePosition = { x: 0, y: 0 };
+                
+                canvas.addEventListener('mousedown', (e) => {
+                    isDragging = true;
+                    previousMousePosition.x = e.clientX;
+                    previousMousePosition.y = e.clientY;
+                });
+                
+                canvas.addEventListener('mousemove', (e) => {
+                    if (isDragging) {
+                        const deltaMove = {
+                            x: e.clientX - previousMousePosition.x,
+                            y: e.clientY - previousMousePosition.y
+                        };
+                        
+                        this.scene.rotation.y += deltaMove.x * 0.01;
+                        this.scene.rotation.x += deltaMove.y * 0.01;
+                        
+                        previousMousePosition = { x: e.clientX, y: e.clientY };
+                    }
+                });
+                
+                canvas.addEventListener('mouseup', () => {
+                    isDragging = false;
+                });
+                
+                canvas.addEventListener('wheel', (e) => {
+                    e.preventDefault();
+                    this.camera.position.z += e.deltaY * 0.01;
+                    this.camera.position.z = Math.max(3, Math.min(20, this.camera.position.z));
+                });
+                
+                // Rotation speed control
+                document.getElementById('rotationSpeed').addEventListener('input', (e) => {
+                    this.rotationSpeed = parseFloat(e.target.value);
+                });
+            }
+            
+            toggleLabels() {
+                this.showLabels = !this.showLabels;
+                // In a full implementation, this would toggle text labels
+                alert(`Labels ${this.showLabels ? 'enabled' : 'disabled'}`);
+            }
+            
+            toggleBonds() {
+                this.showBonds = !this.showBonds;
+                this.changeMolecule(this.currentMolecule);
+            }
+        }
+
+        // Initialize the application
+        const slideSystem = new SlideSystem();
+        const cameraDemo = new CameraDemo();
+        const audioDemo = new AudioDemo();
+        const motionDemo = new MotionDemo();
+        
+        // Initialize first slide content
+        slideSystem.initializeSlideContent();
+        
+        console.log('🚀 Educational 3D Platform loaded!');
+        console.log('🎮 Features: 3D Graphics, Camera, Microphone, Motion Graphics');
+        console.log('📱 Navigation: Arrow keys, touch/swipe, or buttons');
+        console.log('🔧 All in a single HTML file - save and run anywhere!');
+    </script>
+</body>
+</html>

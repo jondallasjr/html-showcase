@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic JavaScript Approaches</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: white;
+        }
+
+        .approach {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .approach h2 {
+            color: #4ecdc4;
+            margin-top: 0;
+        }
+
+        .demo-area {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        button {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            border: none;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin: 0.5rem;
+            transition: transform 0.2s ease;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+        }
+
+        .code-block {
+            background: #1a1a1a;
+            color: #f8f8f2;
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            margin: 1rem 0;
+        }
+
+        .highlight {
+            background: rgba(255, 255, 0, 0.1);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+        }
+
+        .canvas-demo {
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            background: black;
+        }
+
+        .result-area {
+            min-height: 100px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .chat-container {
+            max-height: 200px;
+            overflow-y: auto;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .chat-message {
+            margin: 0.5rem 0;
+            padding: 0.5rem;
+            border-radius: 6px;
+        }
+
+        .user-message {
+            background: rgba(78, 205, 196, 0.2);
+            text-align: right;
+        }
+
+        .bot-message {
+            background: rgba(255, 107, 107, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <h1>🚀 Dynamic JavaScript: No Build Tools Required</h1>
+    <p>Here are several approaches to generate and deploy JavaScript dynamically, just like HTML/CSS:</p>
+
+    <!-- Approach 1: Vanilla JavaScript -->
+    <div class="approach">
+        <h2>1. Pure Vanilla JavaScript</h2>
+        <p>Modern JavaScript is incredibly powerful without any libraries. Perfect for LLM generation:</p>
+        
+        <div class="code-block">
+&lt;script&gt;
+// LLM can generate this directly
+class TodoApp {
+    constructor() {
+        this.todos = [];
+        this.init();
+    }
+    
+    init() {
+        this.render();
+        this.attachEvents();
+    }
+    
+    addTodo(text) {
+        this.todos.push({ id: Date.now(), text, done: false });
+        this.render();
+    }
+    
+    render() {
+        const container = document.getElementById('todo-container');
+        container.innerHTML = `
+            &lt;input type="text" id="todo-input" placeholder="Add todo..."&gt;
+            &lt;button onclick="app.addTodo(document.getElementById('todo-input').value)"&gt;Add&lt;/button&gt;
+            &lt;div&gt;${this.todos.map(todo =&gt; 
+                `&lt;div&gt;${todo.text} &lt;button onclick="app.removeTodo(${todo.id})"&gt;×&lt;/button&gt;&lt;/div&gt;`
+            ).join('')}&lt;/div&gt;
+        `;
+    }
+    
+    removeTodo(id) {
+        this.todos = this.todos.filter(todo =&gt; todo.id !== id);
+        this.render();
+    }
+    
+    attachEvents() {
+        document.addEventListener('keypress', (e) =&gt; {
+            if (e.key === 'Enter' && e.target.id === 'todo-input') {
+                this.addTodo(e.target.value);
+                e.target.value = '';
+            }
+        });
+    }
+}
+
+const app = new TodoApp();
+&lt;/script&gt;
+        </div>
+
+        <div class="demo-area">
+            <h4>Live Demo:</h4>
+            <div id="todo-container"></div>
+        </div>
+    </div>
+
+    <!-- Approach 2: CDN Libraries -->
+    <div class="approach">
+        <h2>2. CDN-Based Libraries (No Build Required)</h2>
+        <p>Include popular libraries directly from CDN. LLM can generate code using any library:</p>
+        
+        <div class="code-block">
+&lt;!-- Include libraries from CDN --&gt;
+&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"&gt;&lt;/script&gt;
+&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"&gt;&lt;/script&gt;
+&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"&gt;&lt;/script&gt;
+
+&lt;script&gt;
+// LLM generates this using the libraries
+function createChart() {
+    const ctx = document.getElementById('myChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Red', 'Blue', 'Yellow', 'Green'],
+            datasets: [{
+                data: [12, 19, 3, 5],
+                backgroundColor: ['#ff6b6b', '#4ecdc4', '#feca57', '#48ca48']
+            }]
+        },
+        options: { responsive: true }
+    });
+}
+&lt;/script&gt;
+        </div>
+
+        <div class="demo-area">
+            <h4>Chart.js Demo:</h4>
+            <canvas id="myChart" width="300" height="150"></canvas>
+            <button onclick="createChart()">Generate Chart</button>
+        </div>
+    </div>
+
+    <!-- Approach 3: ES Modules -->
+    <div class="approach">
+        <h2>3. ES Modules from CDN (Modern Approach)</h2>
+        <p>Use modern ES modules directly from CDNs like Skypack, JSDelivr, or UNPKG:</p>
+        
+        <div class="code-block">
+&lt;script type="module"&gt;
+// Import libraries as ES modules - no build step!
+import { createNoise2D } from 'https://cdn.skypack.dev/simplex-noise@4.0.1';
+import { format } from 'https://cdn.skypack.dev/date-fns@2.29.3';
+
+// LLM can generate modern modular code
+class NoiseVisualizer {
+    constructor(canvas) {
+        this.canvas = canvas;
+        this.ctx = canvas.getContext('2d');
+        this.noise = createNoise2D();
+        this.time = 0;
+        this.animate();
+    }
+    
+    animate() {
+        this.draw();
+        this.time += 0.01;
+        requestAnimationFrame(() =&gt; this.animate());
+    }
+    
+    draw() {
+        const { width, height } = this.canvas;
+        const imageData = this.ctx.createImageData(width, height);
+        
+        for (let x = 0; x &lt; width; x++) {
+            for (let y = 0; y &lt; height; y++) {
+                const value = this.noise(x * 0.01, y * 0.01 + this.time);
+                const color = Math.floor((value + 1) * 127);
+                const index = (y * width + x) * 4;
+                
+                imageData.data[index] = color;     // Red
+                imageData.data[index + 1] = color * 0.5; // Green  
+                imageData.data[index + 2] = color * 1.5; // Blue
+                imageData.data[index + 3] = 255;   // Alpha
+            }
+        }
+        
+        this.ctx.putImageData(imageData, 0, 0);
+        
+        // Show current time using date-fns
+        document.getElementById('noise-time').textContent = 
+            `Generated at: ${format(new Date(), 'HH:mm:ss')}`;
+    }
+}
+&lt;/script&gt;
+        </div>
+
+        <div class="demo-area">
+            <h4>ES Module Demo (Noise Visualization):</h4>
+            <canvas id="noise-canvas" width="300" height="150" class="canvas-demo"></canvas>
+            <div id="noise-time"></div>
+            <button onclick="startNoiseDemo()">Start Noise Demo</button>
+        </div>
+    </div>
+
+    <!-- Approach 4: Web Components -->
+    <div class="approach">
+        <h2>4. Web Components (Native Browser Technology)</h2>
+        <p>Create reusable components with vanilla JavaScript - no framework needed:</p>
+        
+        <div class="code-block">
+&lt;script&gt;
+// LLM can generate custom elements
+class CounterWidget extends HTMLElement {
+    constructor() {
+        super();
+        this.count = 0;
+    }
+    
+    connectedCallback() {
+        this.innerHTML = `
+            &lt;style&gt;
+                :host {
+                    display: block;
+                    padding: 1rem;
+                    background: linear-gradient(45deg, #667eea, #764ba2);
+                    border-radius: 8px;
+                    color: white;
+                    text-align: center;
+                    font-family: system-ui;
+                }
+                button {
+                    background: rgba(255,255,255,0.2);
+                    border: 1px solid rgba(255,255,255,0.3);
+                    color: white;
+                    padding: 0.5rem 1rem;
+                    border-radius: 4px;
+                    cursor: pointer;
+                    margin: 0 0.5rem;
+                }
+                button:hover { background: rgba(255,255,255,0.3); }
+                .count { font-size: 2rem; margin: 1rem 0; }
+            &lt;/style&gt;
+            &lt;div&gt;
+                &lt;div class="count"&gt;${this.count}&lt;/div&gt;
+                &lt;button onclick="this.parentElement.parentElement.increment()"&gt;+&lt;/button&gt;
+                &lt;button onclick="this.parentElement.parentElement.decrement()"&gt;-&lt;/button&gt;
+                &lt;button onclick="this.parentElement.parentElement.reset()"&gt;Reset&lt;/button&gt;
+            &lt;/div&gt;
+        `;
+    }
+    
+    increment() { this.count++; this.render(); }
+    decrement() { this.count--; this.render(); }
+    reset() { this.count = 0; this.render(); }
+    
+    render() {
+        this.querySelector('.count').textContent = this.count;
+    }
+}
+
+customElements.define('counter-widget', CounterWidget);
+&lt;/script&gt;
+        </div>
+
+        <div class="demo-area">
+            <h4>Web Component Demo:</h4>
+            <counter-widget></counter-widget>
+            <p><em>This is a reusable web component created with vanilla JS!</em></p>
+        </div>
+    </div>
+
+    <!-- Approach 5: Modern Browser APIs -->
+    <div class="approach">
+        <h2>5. Modern Browser APIs (No Libraries Needed)</h2>
+        <p>Many features that used to require libraries are now built into browsers:</p>
+        
+        <div class="code-block">
+&lt;script&gt;
+// LLM can use modern browser APIs directly
+class ModernFeatures {
+    static async fetchAndDisplay() {
+        try {
+            // Fetch API (no axios needed)
+            const response = await fetch('https://api.github.com/users/octocat');
+            const data = await response.json();
+            
+            document.getElementById('api-result').innerHTML = `
+                &lt;h4&gt;${data.name}&lt;/h4&gt;
+                &lt;p&gt;Followers: ${data.followers}&lt;/p&gt;
+                &lt;p&gt;Public Repos: ${data.public_repos}&lt;/p&gt;
+            `;
+        } catch (error) {
+            document.getElementById('api-result').innerHTML = 
+                `&lt;p style="color: #ff6b6b"&gt;Error: ${error.message}&lt;/p&gt;`;
+        }
+    }
+    
+    static detectDevice() {
+        // Intersection Observer (no scroll libraries)
+        const observer = new IntersectionObserver((entries) =&gt; {
+            entries.forEach(entry =&gt; {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        });
+        
+        document.querySelectorAll('.fade-in').forEach(el =&gt; observer.observe(el));
+        
+        // Geolocation API
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition((position) =&gt; {
+                document.getElementById('location-result').innerHTML = 
+                    `Lat: ${position.coords.latitude.toFixed(2)}, 
+                     Lng: ${position.coords.longitude.toFixed(2)}`;
+            });
+        }
+        
+        // Web Speech API
+        if ('speechSynthesis' in window) {
+            const utterance = new SpeechSynthesisUtterance('Hello from vanilla JavaScript!');
+            speechSynthesis.speak(utterance);
+        }
+    }
+    
+    static storeData() {
+        // Local Storage (no state management library)
+        const data = { timestamp: Date.now(), message: 'Hello from LLM-generated JS!' };
+        localStorage.setItem('llm-data', JSON.stringify(data));
+        
+        const stored = JSON.parse(localStorage.getItem('llm-data'));
+        document.getElementById('storage-result').innerHTML = 
+            `Stored: ${new Date(stored.timestamp).toLocaleTimeString()} - ${stored.message}`;
+    }
+}
+&lt;/script&gt;
+        </div>
+
+        <div class="demo-area">
+            <h4>Modern API Demos:</h4>
+            <button onclick="ModernFeatures.fetchAndDisplay()">Fetch GitHub Data</button>
+            <button onclick="ModernFeatures.detectDevice()">Use Device APIs</button>
+            <button onclick="ModernFeatures.storeData()">Store Data Locally</button>
+            
+            <div id="api-result" class="result-area"></div>
+            <div id="location-result" class="result-area"></div>
+            <div id="storage-result" class="result-area"></div>
+        </div>
+    </div>
+
+    <!-- Approach 6: Template-Based Apps -->
+    <div class="approach">
+        <h2>6. Template-Based Mini-Apps</h2>
+        <p>Create full applications using HTML templates and vanilla JS:</p>
+        
+        <div class="code-block">
+&lt;template id="chat-template"&gt;
+    &lt;div class="chat-app"&gt;
+        &lt;div class="chat-messages"&gt;&lt;/div&gt;
+        &lt;input type="text" placeholder="Type a message..." class="chat-input"&gt;
+        &lt;button class="chat-send"&gt;Send&lt;/button&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+class SimpleChatApp {
+    constructor(container) {
+        this.container = container;
+        this.messages = [];
+        this.init();
+    }
+    
+    init() {
+        const template = document.getElementById('chat-template');
+        const clone = template.content.cloneNode(true);
+        this.container.appendChild(clone);
+        
+        this.messagesEl = this.container.querySelector('.chat-messages');
+        this.inputEl = this.container.querySelector('.chat-input');
+        this.sendEl = this.container.querySelector('.chat-send');
+        
+        this.sendEl.onclick = () =&gt; this.sendMessage();
+        this.inputEl.onkeypress = (e) =&gt; {
+            if (e.key === 'Enter') this.sendMessage();
+        };
+    }
+    
+    sendMessage() {
+        const text = this.inputEl.value.trim();
+        if (!text) return;
+        
+        this.addMessage('user', text);
+        this.inputEl.value = '';
+        
+        // Simulate bot response
+        setTimeout(() =&gt; {
+            const responses = [
+                'That\'s interesting!', 'Tell me more!', 'I see what you mean.',
+                'Great point!', 'How fascinating!', 'Thanks for sharing!'
+            ];
+            const response = responses[Math.floor(Math.random() * responses.length)];
+            this.addMessage('bot', response);
+        }, 500);
+    }
+    
+    addMessage(sender, text) {
+        this.messages.push({ sender, text, time: new Date() });
+        this.render();
+        this.messagesEl.scrollTop = this.messagesEl.scrollHeight;
+    }
+    
+    render() {
+        this.messagesEl.innerHTML = this.messages.map(msg =&gt; `
+            &lt;div class="${msg.sender}-message chat-message"&gt;
+                &lt;strong&gt;${msg.sender === 'user' ? 'You' : 'Bot'}&lt;/strong&gt;: ${msg.text}
+            &lt;/div&gt;
+        `).join('');
+    }
+}
+&lt;/script&gt;
+        </div>
+
+        <div class="demo-area">
+            <h4>Template-Based Chat App:</h4>
+            <div id="chat-container" class="chat-container"></div>
+            <button onclick="initChat()">Initialize Chat App</button>
+        </div>
+    </div>
+
+    <!-- Hidden template for chat app -->
+    <template id="chat-template">
+        <div class="chat-app" style="border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; padding: 1rem; background: rgba(0,0,0,0.2);">
+            <div class="chat-messages" style="height: 150px; overflow-y: auto; margin-bottom: 1rem; padding: 0.5rem; background: rgba(255,255,255,0.05); border-radius: 4px;"></div>
+            <div style="display: flex; gap: 0.5rem;">
+                <input type="text" placeholder="Type a message..." class="chat-input" style="flex: 1; padding: 0.5rem; border: 1px solid rgba(255,255,255,0.2); border-radius: 4px; background: rgba(255,255,255,0.1); color: white;">
+                <button class="chat-send" style="padding: 0.5rem 1rem; background: linear-gradient(45deg, #ff6b6b, #4ecdc4); border: none; color: white; border-radius: 4px; cursor: pointer;">Send</button>
+            </div>
+        </div>
+    </template>
+
+    <div style="margin-top: 3rem; padding: 2rem; background: rgba(255,255,255,0.1); border-radius: 16px;">
+        <h2 style="color: #4ecdc4;">✨ Key Advantages for LLM-Generated JavaScript:</h2>
+        <ul style="list-style: none; padding: 0;">
+            <li style="margin: 1rem 0; padding-left: 2rem; position: relative;">
+                <span style="position: absolute; left: 0; color: #4ecdc4;">🚀</span>
+                <strong>No Build Process:</strong> Generate code and deploy immediately
+            </li>
+            <li style="margin: 1rem 0; padding-left: 2rem; position: relative;">
+                <span style="position: absolute; left: 0; color: #4ecdc4;">📦</span>
+                <strong>CDN Libraries:</strong> Access to thousands of libraries without npm
+            </li>
+            <li style="margin: 1rem 0; padding-left: 2rem; position: relative;">
+                <span style="position: absolute; left: 0; color: #4ecdc4;">⚡</span>
+                <strong>Modern APIs:</strong> Browser capabilities rival many libraries
+            </li>
+            <li style="margin: 1rem 0; padding-left: 2rem; position: relative;">
+                <span style="position: absolute; left: 0; color: #4ecdc4;">🎯</span>
+                <strong>Single File Deployment:</strong> Everything in one HTML file
+            </li>
+            <li style="margin: 1rem 0; padding-left: 2rem; position: relative;">
+                <span style="position: absolute; left: 0; color: #4ecdc4;">🔄</span>
+                <strong>Live Updates:</strong> Change code and refresh - no compilation
+            </li>
+        </ul>
+    </div>
+
+    <!-- Include Chart.js for the demo -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    
+    <!-- Initialize demos -->
+    <script>
+        // Initialize the todo app
+        class TodoApp {
+            constructor() {
+                this.todos = [];
+                this.init();
+            }
+            
+            init() {
+                this.render();
+                this.attachEvents();
+            }
+            
+            addTodo(text) {
+                if (!text.trim()) return;
+                this.todos.push({ id: Date.now(), text: text.trim(), done: false });
+                this.render();
+            }
+            
+            render() {
+                const container = document.getElementById('todo-container');
+                container.innerHTML = `
+                    <input type="text" id="todo-input" placeholder="Add todo..." style="padding: 0.5rem; border: 1px solid rgba(255,255,255,0.2); border-radius: 4px; background: rgba(255,255,255,0.1); color: white; margin-right: 0.5rem;">
+                    <button onclick="app.addTodo(document.getElementById('todo-input').value)" style="background: linear-gradient(45deg, #ff6b6b, #4ecdc4); border: none; color: white; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer;">Add</button>
+                    <div style="margin-top: 1rem;">
+                        ${this.todos.map(todo => 
+                            `<div style="padding: 0.5rem; margin: 0.25rem 0; background: rgba(255,255,255,0.1); border-radius: 4px; display: flex; justify-content: space-between; align-items: center;">
+                                <span>${todo.text}</span>
+                                <button onclick="app.removeTodo(${todo.id})" style="background: #ff6b6b; border: none; color: white; width: 25px; height: 25px; border-radius: 50%; cursor: pointer;">×</button>
+                            </div>`
+                        ).join('')}
+                    </div>
+                `;
+            }
+            
+            removeTodo(id) {
+                this.todos = this.todos.filter(todo => todo.id !== id);
+                this.render();
+            }
+            
+            attachEvents() {
+                document.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter' && e.target.id === 'todo-input') {
+                        this.addTodo(e.target.value);
+                        e.target.value = '';
+                    }
+                });
+            }
+        }
+
+        const app = new TodoApp();
+
+        // Chart.js demo function
+        function createChart() {
+            const ctx = document.getElementById('myChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Red', 'Blue', 'Yellow', 'Green'],
+                    datasets: [{
+                        data: [12, 19, 3, 5],
+                        backgroundColor: ['#ff6b6b', '#4ecdc4', '#feca57', '#48ca48']
+                    }]
+                },
+                options: { 
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            labels: { color: 'white' }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Noise demo function
+        function startNoiseDemo() {
+            alert('ES Module demo would work with proper CORS setup. This demonstrates the concept!');
+        }
+
+        // Web Components
+        class CounterWidget extends HTMLElement {
+            constructor() {
+                super();
+                this.count = 0;
+            }
+            
+            connectedCallback() {
+                this.innerHTML = `
+                    <style>
+                        :host {
+                            display: block;
+                            padding: 1rem;
+                            background: linear-gradient(45deg, #667eea, #764ba2);
+                            border-radius: 8px;
+                            color: white;
+                            text-align: center;
+                            font-family: system-ui;
+                        }
+                        button {
+                            background: rgba(255,255,255,0.2);
+                            border: 1px solid rgba(255,255,255,0.3);
+                            color: white;
+                            padding: 0.5rem 1rem;
+                            border-radius: 4px;
+                            cursor: pointer;
+                            margin: 0 0.5rem;
+                        }
+                        button:hover { background: rgba(255,255,255,0.3); }
+                        .count { font-size: 2rem; margin: 1rem 0; }
+                    </style>
+                    <div>
+                        <div class="count">${this.count}</div>
+                        <button onclick="this.parentElement.parentElement.increment()">+</button>
+                        <button onclick="this.parentElement.parentElement.decrement()">-</button>
+                        <button onclick="this.parentElement.parentElement.reset()">Reset</button>
+                    </div>
+                `;
+            }
+            
+            increment() { this.count++; this.render(); }
+            decrement() { this.count--; this.render(); }
+            reset() { this.count = 0; this.render(); }
+            
+            render() {
+                this.querySelector('.count').textContent = this.count;
+            }
+        }
+
+        customElements.define('counter-widget', CounterWidget);
+
+        // Modern Features class
+        class ModernFeatures {
+            static async fetchAndDisplay() {
+                try {
+                    const response = await fetch('https://api.github.com/users/octocat');
+                    const data = await response.json();
+                    
+                    document.getElementById('api-result').innerHTML = `
+                        <h4 style="margin: 0 0 0.5rem 0; color: #4ecdc4;">${data.name}</h4>
+                        <p style="margin: 0.25rem 0;">Followers: ${data.followers}</p>
+                        <p style="margin: 0.25rem 0;">Public Repos: ${data.public_repos}</p>
+                    `;
+                } catch (error) {
+                    document.getElementById('api-result').innerHTML = 
+                        `<p style="color: #ff6b6b">Error: ${error.message}</p>`;
+                }
+            }
+            
+            static detectDevice() {
+                document.getElementById('location-result').innerHTML = '<p>Device APIs activated! Check console for details.</p>';
+                console.log('Device detection features would work in production environment');
+                
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition((position) => {
+                        document.getElementById('location-result').innerHTML = 
+                            `Lat: ${position.coords.latitude.toFixed(2)}, Lng: ${position.coords.longitude.toFixed(2)}`;
+                    }, (error) => {
+                        document.getElementById('location-result').innerHTML = 
+                            `<p style="color: #ff6b6b">Geolocation error: ${error.message}</p>`;
+                    });
+                }
+            }
+            
+            static storeData() {
+                const data = { timestamp: Date.now(), message: 'Hello from LLM-generated JS!' };
+                localStorage.setItem('llm-data', JSON.stringify(data));
+                
+                const stored = JSON.parse(localStorage.getItem('llm-data'));
+                document.getElementById('storage-result').innerHTML = 
+                    `<p>Stored: ${new Date(stored.timestamp).toLocaleTimeString()} - "${stored.message}"</p>`;
+            }
+        }
+
+        // Chat app initialization
+        class SimpleChatApp {
+            constructor(container) {
+                this.container = container;
+                this.messages = [];
+                this.init();
+            }
+            
+            init() {
+                const template = document.getElementById('chat-template');
+                const clone = template.content.cloneNode(true);
+                this.container.appendChild(clone);
+                
+                this.messagesEl = this.container.querySelector('.chat-messages');
+                this.inputEl = this.container.querySelector('.chat-input');
+                this.sendEl = this.container.querySelector('.chat-send');
+                
+                this.sendEl.onclick = () => this.sendMessage();
+                this.inputEl.onkeypress = (e) => {
+                    if (e.key === 'Enter') this.sendMessage();
+                };
+            }
+            
+            sendMessage() {
+                const text = this.inputEl.value.trim();
+                if (!text) return;
+                
+                this.addMessage('user', text);
+                this.inputEl.value = '';
+                
+                setTimeout(() => {
+                    const responses = [
+                        'That\'s interesting!', 'Tell me more!', 'I see what you mean.',
+                        'Great point!', 'How fascinating!', 'Thanks for sharing!'
+                    ];
+                    const response = responses[Math.floor(Math.random() * responses.length)];
+                    this.addMessage('bot', response);
+                }, 500);
+            }
+            
+            addMessage(sender, text) {
+                this.messages.push({ sender, text, time: new Date() });
+                this.render();
+                this.messagesEl.scrollTop = this.messagesEl.scrollHeight;
+            }
+            
+            render() {
+                this.messagesEl.innerHTML = this.messages.map(msg => `
+                    <div class="${msg.sender}-message chat-message">
+                        <strong>${msg.sender === 'user' ? 'You' : 'Bot'}</strong>: ${msg.text}
+                    </div>
+                `).join('');
+            }
+        }
+
+        function initChat() {
+            const container = document.getElementById('chat-container');
+            container.innerHTML = ''; // Clear existing content
+            new SimpleChatApp(container);
+        }
+    </script>
+</body>
+</html>

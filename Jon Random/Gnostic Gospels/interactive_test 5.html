@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Gnostic Gospels: Forbidden Knowledge Interactive Explorer</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --parchment: #F4ECD8;
+            --iron-gall: #2C1810;
+            --divine-gold: #FFD700;
+            --red-ochre: #A0522D;
+            --lapis-lazuli: #1E3A8A;
+            --tyrian-purple: #6B46C1;
+            --shadow-charcoal: #374151;
+            --desert-sand: #C19A6B;
+            --manuscript-gradient: linear-gradient(135deg, var(--parchment), #E6DCC6);
+            --divine-glow: 0 0 20px var(--divine-gold);
+        }
+        
+        body {
+            font-family: 'Crimson Text', serif;
+            background: var(--manuscript-gradient);
+            color: var(--iron-gall);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        /* Navigation */
+        .nav-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(244, 236, 216, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            z-index: 1000;
+            border-bottom: 2px solid var(--divine-gold);
+        }
+        
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .brand {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--tyrian-purple);
+            text-decoration: none;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            gap: 1rem;
+            list-style: none;
+        }
+        
+        .nav-tab {
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            border: 2px solid transparent;
+        }
+        
+        .nav-tab:hover,
+        .nav-tab.active {
+            background: var(--divine-gold);
+            color: var(--iron-gall);
+            box-shadow: var(--divine-glow);
+            border-color: var(--red-ochre);
+        }
+        
+        /* Main Content */
+        .main-content {
+            margin-top: 100px;
+            padding: 2rem;
+        }
+        
+        .section {
+            display: none;
+            animation: fadeIn 0.6s ease-in-out;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Discovery Section */
+        .discovery-hero {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .hero-title {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--tyrian-purple), var(--divine-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--shadow-charcoal);
+            font-style: italic;
+            margin-bottom: 2rem;
+        }
+        
+        .discovery-scene {
+            position: relative;
+            height: 500px;
+            background: url('https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-gvxB655kKl/f38a1c968cbce481d9948b143b89c8cbecc234964349d8624ba444cbc6b90f4387d901a2616e3ec1a09d9e1c2f24db47eb1e5bf506c5cc725c90b53b39db6207ee967184fa764b9bb5c71feb2e33ba7691dab9fdeda83d497f3bee17c6541af6b0b42850') center/cover;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            overflow: hidden;
+            cursor: pointer;
+            margin-bottom: 2rem;
+        }
+        
+        .discovery-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(44, 24, 16, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .discovery-scene:hover .discovery-overlay {
+            background: rgba(44, 24, 16, 0.2);
+        }
+        
+        .discovery-text {
+            background: rgba(244, 236, 216, 0.9);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid var(--divine-gold);
+            max-width: 600px;
+        }
+        
+        .discovery-quote {
+            font-size: 1.2rem;
+            font-style: italic;
+            margin-bottom: 1rem;
+            color: var(--tyrian-purple);
+        }
+        
+        .click-hint {
+            font-size: 0.9rem;
+            color: var(--red-ochre);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+        
+        /* Interactive Timeline */
+        .timeline {
+            position: relative;
+            margin: 3rem 0;
+        }
+        
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--desert-sand), var(--divine-gold));
+            transform: translateX(-50%);
+        }
+        
+        .timeline-event {
+            position: relative;
+            margin: 3rem 0;
+            cursor: pointer;
+        }
+        
+        .timeline-event:nth-child(odd) .timeline-content {
+            margin-right: 60%;
+            text-align: right;
+        }
+        
+        .timeline-event:nth-child(even) .timeline-content {
+            margin-left: 60%;
+        }
+        
+        .timeline-marker {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 20px;
+            height: 20px;
+            background: var(--divine-gold);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: var(--divine-glow);
+            z-index: 10;
+            transition: all 0.3s ease;
+        }
+        
+        .timeline-event:hover .timeline-marker {
+            transform: translate(-50%, -50%) scale(1.5);
+        }
+        
+        .timeline-content {
+            background: rgba(244, 236, 216, 0.9);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 2px solid var(--red-ochre);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .timeline-event:hover .timeline-content {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        .timeline-date {
+            font-family: 'Cinzel', serif;
+            font-weight: 600;
+            color: var(--tyrian-purple);
+            margin-bottom: 0.5rem;
+        }
+        
+        .timeline-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--iron-gall);
+        }
+        
+        /* Manuscript Viewer */
+        .manuscript-viewer {
+            background: rgba(244, 236, 216, 0.95);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            border: 3px solid var(--divine-gold);
+            box-shadow: inset 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+        
+        .manuscript-tabs {
+            display: flex;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid var(--red-ochre);
+        }
+        
+        .manuscript-tab {
+            padding: 1rem 2rem;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-family: 'Cinzel', serif;
+            font-weight: 600;
+            color: var(--shadow-charcoal);
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .manuscript-tab:hover,
+        .manuscript-tab.active {
+            color: var(--tyrian-purple);
+            border-bottom-color: var(--divine-gold);
+            background: rgba(255, 215, 0, 0.1);
+        }
+        
+        .manuscript-content {
+            display: none;
+        }
+        
+        .manuscript-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .manuscript-image {
+            width: 100%;
+            max-width: 600px;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .manuscript-image:hover {
+            transform: scale(1.05);
+        }
+        
+        .manuscript-excerpt {
+            background: rgba(107, 70, 193, 0.1);
+            padding: 2rem;
+            border-radius: 10px;
+            border-left: 5px solid var(--tyrian-purple);
+            margin: 2rem 0;
+            position: relative;
+        }
+        
+        .manuscript-excerpt::before {
+            content: '"';
+            font-size: 4rem;
+            color: var(--divine-gold);
+            position: absolute;
+            left: 1rem;
+            top: -0.5rem;
+            font-family: serif;
+        }
+        
+        .excerpt-text {
+            font-size: 1.2rem;
+            font-style: italic;
+            margin-left: 2rem;
+            line-height: 1.8;
+        }
+        
+        .excerpt-attribution {
+            text-align: right;
+            margin-top: 1rem;
+            font-weight: 600;
+            color: var(--red-ochre);
+        }
+        
+        .controversy-alert {
+            background: rgba(255, 107, 53, 0.1);
+            border: 2px solid var(--red-ochre);
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .controversy-alert::before {
+            content: '⚠️';
+            font-size: 1.5rem;
+        }
+        
+        /* Interactive Elements */
+        .interactive-card {
+            background: rgba(244, 236, 216, 0.9);
+            border: 2px solid var(--divine-gold);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .interactive-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+        
+        .interactive-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        
+        .interactive-card:hover::before {
+            transform: translateX(100%);
+        }
+        
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: var(--manuscript-gradient);
+            padding: 3rem;
+            border-radius: 15px;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            border: 3px solid var(--divine-gold);
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--red-ochre);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        
+        /* Quiz Section */
+        .quiz-container {
+            background: rgba(244, 236, 216, 0.9);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 2px solid var(--divine-gold);
+        }
+        
+        .quiz-question {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            color: var(--tyrian-purple);
+        }
+        
+        .quiz-options {
+            display: grid;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .quiz-option {
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.5);
+            border: 2px solid var(--desert-sand);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .quiz-option:hover {
+            border-color: var(--divine-gold);
+            background: rgba(255, 215, 0, 0.2);
+        }
+        
+        .quiz-option.correct {
+            border-color: #22c55e;
+            background: rgba(34, 197, 94, 0.2);
+        }
+        
+        .quiz-option.incorrect {
+            border-color: var(--red-ochre);
+            background: rgba(160, 82, 45, 0.2);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .nav-tabs {
+                flex-wrap: wrap;
+            }
+            
+            .timeline-event:nth-child(odd) .timeline-content,
+            .timeline-event:nth-child(even) .timeline-content {
+                margin: 0 2rem;
+                text-align: left;
+            }
+            
+            .manuscript-tabs {
+                flex-wrap: wrap;
+            }
+            
+            .manuscript-tab {
+                padding: 0.5rem 1rem;
+            }
+            
+            .modal-content {
+                margin: 1rem;
+                padding: 2rem;
+            }
+        }
+        
+        /* Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+        
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+        
+        /* Focus indicators */
+        *:focus {
+            outline: 2px solid var(--divine-gold);
+            outline-offset: 2px;
+        }
+        
+        button:focus,
+        .nav-tab:focus,
+        .interactive-card:focus {
+            outline: 3px solid var(--divine-gold);
+            outline-offset: 3px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav-bar" role="navigation" aria-label="Main navigation">
+        <div class="nav-content">
+            <a href="#" class="brand">Jon Random Thoughts</a>
+            <ul class="nav-tabs" role="tablist">
+                <li class="nav-tab active" role="tab" data-section="discovery" tabindex="0">Discovery</li>
+                <li class="nav-tab" role="tab" data-section="manuscripts" tabindex="0">Manuscripts</li>
+                <li class="nav-tab" role="tab" data-section="history" tabindex="0">History</li>
+                <li class="nav-tab" role="tab" data-section="impact" tabindex="0">Impact</li>
+                <li class="nav-tab" role="tab" data-section="quiz" tabindex="0">Explore</li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-content container">
+        <!-- Discovery Section -->
+        <section id="discovery" class="section active" role="tabpanel">
+            <div class="discovery-hero">
+                <h1 class="hero-title">The Gnostic Gospels</h1>
+                <p class="hero-subtitle">Forbidden Knowledge That Reshapes Christianity</p>
+                
+                <div class="discovery-scene" onclick="showModal('discoveryModal')" role="button" tabindex="0">
+                    <div class="discovery-overlay">
+                        <div class="discovery-text">
+                            <p class="discovery-quote">
+                                "In 1945, an Egyptian farmer looking for fertilizer instead unearthed the most controversial religious documents in history."
+                            </p>
+                            <p class="click-hint">Click to explore the discovery</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-grid">
+                <div class="interactive-card" onclick="showModal('jarModal')" role="button" tabindex="0">
+                    <h3>The Sealed Jar</h3>
+                    <p>Muhammad Ali al-Samman discovered 13 leather-bound codices containing 52 revolutionary texts, carefully preserved in an earthenware jar for 1,700 years.</p>
+                </div>
+                
+                <div class="interactive-card" onclick="showModal('preservationModal')" role="button" tabindex="0">
+                    <h3>Ritualistic Preservation</h3>
+                    <p>The texts were wrapped in white linen and sealed with bitumen—suggesting a deliberate rescue operation by monks who recognized their spiritual value.</p>
+                </div>
+                
+                <div class="interactive-card" onclick="showModal('timingModal')" role="button" tabindex="0">
+                    <h3>Perfect Timing</h3>
+                    <p>The burial coincides with Bishop Athanasius's 367 CE Easter Letter ordering the destruction of "heretical" texts—these manuscripts narrowly escaped annihilation.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Manuscripts Section -->
+        <section id="manuscripts" class="section" role="tabpanel">
+            <h2 style="font-family: 'Cinzel', serif; font-size: 2.5rem; text-align: center; margin-bottom: 2rem; color: var(--tyrian-purple);">Sacred Texts Revealed</h2>
+            
+            <div class="manuscript-viewer">
+                <div class="manuscript-tabs" role="tablist">
+                    <button class="manuscript-tab active" data-manuscript="thomas" role="tab">Gospel of Thomas</button>
+                    <button class="manuscript-tab" data-manuscript="mary" role="tab">Gospel of Mary</button>
+                    <button class="manuscript-tab" data-manuscript="philip" role="tab">Gospel of Philip</button>
+                </div>
+
+                <div id="thomas" class="manuscript-content active" role="tabpanel">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-6viOFmT3Lr/75fc36c3cc85eceb82846e86d580dea0e223a9ab4849c4d93ec0fbedeb0476dc44012dbf8983c05cbb9aeda8d4ad8ba5ce336ad961fa2fb01acc28790629957e47751b30b10ea3c867ef58361ee34c3959c22ae82e6ed90f77fcfd6b58e5692e0ba6f060" alt="Gospel of Thomas manuscript fragment" class="manuscript-image" onclick="showModal('thomasModal')">
+                    
+                    <div class="manuscript-excerpt">
+                        <p class="excerpt-text">
+                            "Split a piece of wood; I am there. Lift up the stone, and you will find me there."
+                        </p>
+                        <p class="excerpt-attribution">— Gospel of Thomas, Saying 77</p>
+                    </div>
+                    
+                    <div class="controversy-alert">
+                        <p><strong>Revolutionary Implication:</strong> This presents a pantheistic Jesus claiming universal presence—radically different from orthodox Christianity's emphasis on historical incarnation.</p>
+                    </div>
+                </div>
+
+                <div id="mary" class="manuscript-content" role="tabpanel">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-78uEfAkWK7/c4af8d6b5ee15e2b79a80e609a2da1b9241cabe99e583964469022a5e6bede6885d32c5b39a988c07302af2c65ea95f785901e392f83d578225357edb29872e26e685f8684dc4f7f57df427b06b7af626837b9462effc5c8bb0c63c1861a467986fc32f3" alt="Mary Magdalene authority portrait" class="manuscript-image" onclick="showModal('maryModal')">
+                    
+                    <div class="manuscript-excerpt">
+                        <p class="excerpt-text">
+                            "We know that the Savior loved you more than the rest of women. Tell us the words of the Savior which you remember—which you know but we do not."
+                        </p>
+                        <p class="excerpt-attribution">— Gospel of Mary, Fragment 17:7-9</p>
+                    </div>
+                    
+                    <div class="controversy-alert">
+                        <p><strong>Revolutionary Implication:</strong> Mary Magdalene appears not as a repentant prostitute but as Jesus's primary spiritual heir, possessing secret teachings unknown to male apostles.</p>
+                    </div>
+                </div>
+
+                <div id="philip" class="manuscript-content" role="tabpanel">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-xd9OLp8Rnb/897444af8e370278674b119f25ca618f6a95abbaa8c87101944b720f522756ed315984158bcd9e5192c5ee15e63ea84ea275b585ede1c1ab32031043d3d0ec88750421197c3ca0ab7768242bebde0719830a8432fec4564b11a87b13b4d55d9372e29d82" alt="Gospel of Philip manuscript fragments" class="manuscript-image" onclick="showModal('philipModal')">
+                    
+                    <div class="manuscript-excerpt">
+                        <p class="excerpt-text">
+                            "The companion of the [Savior] is Mary Magdalene... used to kiss her [often] on her [mouth]."
+                        </p>
+                        <p class="excerpt-attribution">— Gospel of Philip, Saying 59</p>
+                    </div>
+                    
+                    <div class="controversy-alert">
+                        <p><strong>Revolutionary Implication:</strong> This describes an intimate, possibly romantic relationship between Jesus and Mary Magdalene—challenging orthodox narratives about Jesus's celibacy.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- History Section -->
+        <section id="history" class="section" role="tabpanel">
+            <h2 style="font-family: 'Cinzel', serif; font-size: 2.5rem; text-align: center; margin-bottom: 3rem; color: var(--tyrian-purple);">The Great Suppression</h2>
+            
+            <div class="timeline">
+                <div class="timeline-line"></div>
+                
+                <div class="timeline-event" onclick="showModal('earlyModal')">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">50-180 CE</div>
+                        <div class="timeline-title">Gnostic Origins</div>
+                        <p>Early Gnostic gospels composed alongside orthodox texts, representing parallel Christian traditions with sophisticated theological reasoning.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-event" onclick="showModal('nicaeaModal')">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">325 CE</div>
+                        <div class="timeline-title">Council of Nicaea</div>
+                        <p>Emperor Constantine convenes church leaders to establish unified doctrine, partly to counter Gnostic theological diversity that threatened imperial control.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-event" onclick="showModal('athanModal')">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">367 CE</div>
+                        <div class="timeline-title">Athanasius Letter</div>
+                        <p>Bishop Athanasius establishes the canonical New Testament and orders destruction of "heretical" texts—beginning systematic elimination of Gnostic Christianity.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-event" onclick="showModal('burialModal')">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">367-400 CE</div>
+                        <div class="timeline-title">Emergency Preservation</div>
+                        <p>Monks carefully wrap and seal Gnostic texts in earthenware jars, burying them near Nag Hammadi to save them from destruction.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-event" onclick="showModal('rediscoveryModal')">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">1945 CE</div>
+                        <div class="timeline-title">Accidental Discovery</div>
+                        <p>Egyptian farmer Muhammad Ali al-Samman discovers the buried manuscripts while digging for fertilizer, returning suppressed voices to history after 1,578 years.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="interactive-card" onclick="showModal('suppressionModal')" style="margin-top: 3rem;">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-ajheMQ7LJk/eb232fd23c2a4963be0d09c63bf16847747feb768e4ecfc16afcb047ac42be2db812cf65a0794235a8e20b698eb06606350b938ff942bda15875f544788de1282f6b88e5ef5a49b7ae6f0836b3bf41d4492e09fac872c229573541fe83c65ad03c1627b0" alt="Suppression visualization" style="width: 100%; height: 300px; object-fit: cover; border-radius: 10px; margin-bottom: 1rem;">
+                <h3>Why Were They Suppressed?</h3>
+                <p>Gnostic Christianity threatened institutional authority by emphasizing direct divine experience over church mediation, featuring female spiritual leaders, and presenting salvation through knowledge rather than faith.</p>
+            </div>
+        </section>
+
+        <!-- Impact Section -->
+        <section id="impact" class="section" role="tabpanel">
+            <h2 style="font-family: 'Cinzel', serif; font-size: 2.5rem; text-align: center; margin-bottom: 2rem; color: var(--tyrian-purple);">Contemporary Relevance</h2>
+            
+            <div class="card-grid">
+                <div class="interactive-card" onclick="showModal('modernModal')">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-x1Ngf5xhMX/739049c9b03c1d5037de7efeb97c87aeda761e8e38a5aa298528095434ab6d69093ba957855ad49fd9cb419de81d4ba0674b7745f3bcdbb240b267e0e271c762eb1af3edbaf97b44eb846ce93f20a86de5b9981d73" alt="Cultural impact network" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px; margin-bottom: 1rem;">
+                    <h3>Spiritual Renaissance</h3>
+                    <p>Growing interest in non-institutional spirituality mirrors Gnostic individualism, with direct experience preferred over religious authority.</p>
+                </div>
+                
+                <div class="interactive-card" onclick="showModal('psychologyModal')">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-4HsRt2k9Is/0cbd1f1cde1287c2295b8ff6ee942e28d014d595d7f496051153c08152644d9a2fcc1ffaabb21475bf35012ea980384b569fcb60ce05450a15d8b5bb1da7d5070fd42fa88e79dad7afffabe8fd43b7bef826b3a15241588ae5a9b98c31fe582266a1b43c" alt="Psychological bridge ancient-modern" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px; margin-bottom: 1rem;">
+                    <h3>Consciousness Research</h3>
+                    <p>Gnostic concepts of direct divine knowledge parallel modern research into mystical experiences and consciousness states.</p>
+                </div>
+                
+                <div class="interactive-card" onclick="showModal('feminineModal')">
+                    <h3>Divine Feminine</h3>
+                    <p>Gnostic emphasis on female spiritual authority (Mary Magdalene, Sophia) aligns with contemporary movements toward gender equality in religious leadership.</p>
+                </div>
+                
+                <div class="interactive-card" onclick="showModal('environmentModal')">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-i8Z7sceUqu/59af54e2c1e604e16126ef13b4f00d06700710176323cc1576af5db6022dc990ec005b0858875bc19169e773bed967f0735a39f82d1cb896d8e07259fd5b1929a37ac1f708e5c5241bf1ee92e0b4cdb8a61d9e21585226477ad303e693880b70454fe0a4" alt="Cosmological diagram" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px; margin-bottom: 1rem;">
+                    <h3>Environmental Crisis</h3>
+                    <p>Gnostic critique of material world resonates with modern ecological concerns about humanity's relationship with nature.</p>
+                </div>
+            </div>
+            
+            <div class="interactive-card" onclick="showModal('resurrectionModal')" style="margin-top: 2rem;">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-Iey7_S59bS/845feffec99ceeaf6269f9b5433818d4086e63e255099a7bc7fb7c9d5c2c61ce6b6580d640273ec3d99b68c7137c24ba59da5630bf7edb87830465effe77f44f6ba79ffad4c1e682c73866cef57da3fcc4631b58f822d8757dc9cbd25bf9a114ec3bc19f" alt="Resurrection finale hope" style="width: 100%; height: 300px; object-fit: cover; border-radius: 10px; margin-bottom: 1rem;">
+                <h3>The Ultimate Irony</h3>
+                <p>The church fathers' successful suppression may have eliminated precisely the spiritual resources needed to address modern crises of meaning, environmental destruction, and institutional religious decline.</p>
+            </div>
+        </section>
+
+        <!-- Quiz Section -->
+        <section id="quiz" class="section" role="tabpanel">
+            <h2 style="font-family: 'Cinzel', serif; font-size: 2.5rem; text-align: center; margin-bottom: 2rem; color: var(--tyrian-purple);">Test Your Knowledge</h2>
+            
+            <div class="quiz-container">
+                <div class="quiz-question" id="quizQuestion">
+                    What year were the Nag Hammadi codices discovered?
+                </div>
+                <div class="quiz-options" id="quizOptions">
+                    <div class="quiz-option" onclick="checkAnswer(this, false)">1943</div>
+                    <div class="quiz-option" onclick="checkAnswer(this, true)">1945</div>
+                    <div class="quiz-option" onclick="checkAnswer(this, false)">1947</div>
+                    <div class="quiz-option" onclick="checkAnswer(this, false)">1950</div>
+                </div>
+                <div id="quizFeedback" style="margin-top: 1rem; font-weight: 600;"></div>
+                <button onclick="nextQuestion()" id="nextBtn" style="display: none; margin-top: 1rem; padding: 1rem 2rem; background: var(--divine-gold); border: none; border-radius: 5px; cursor: pointer;">Next Question</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modals -->
+    <div class="modal" id="discoveryModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('discoveryModal')">&times;</button>
+            <h2>The Discovery That Changed Everything</h2>
+            <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-KyV14rRDXI/c917e41eb1fd7e1a60c8b831b5cc224b324d473389aead6280c9f87e9590449437ddd2b01372f28cae9e3bee61107df1eedb6c001b4d8ec86a15414bfabb6ad401898c2fd328f3fc3aa2bb560ec07008e5bffb70e847424b0be344fefd14e263136b1b116" alt="Archaeological process documentation" style="width: 100%; max-height: 300px; object-fit: cover; border-radius: 10px; margin: 1rem 0;">
+            <p>In December 1945, Muhammad Ali al-Samman was digging for fertilizer near Nag Hammadi, Egypt, when his shovel struck something hard. Inside a sealed earthenware jar, he discovered 13 leather-bound codices containing 52 texts—the largest cache of early Christian alternative literature ever found.</p>
+            <p>This wasn't just an archaeological discovery; it was a resurrection of voices silenced for nearly 1,700 years. The manuscripts had been carefully preserved, wrapped in white linen and sealed with bitumen, suggesting this was a deliberate rescue operation by monks who recognized their spiritual value.</p>
+        </div>
+    </div>
+
+    <div class="modal" id="suppressionModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('suppressionModal')">&times;</button>
+            <h2>The Systematic Suppression</h2>
+            <p>The suppression of Gnostic Christianity wasn't just theological—it was political. Emperor Constantine needed unified Christian doctrine for imperial control, but Gnostic Christianity's emphasis on individual revelation and diverse interpretations threatened this unity.</p>
+            <p><strong>Key Threats to Orthodox Authority:</strong></p>
+            <ul style="margin: 1rem 0; padding-left: 2rem;">
+                <li>Direct divine experience (gnosis) over institutional mediation</li>
+                <li>Female spiritual authority figures</li>
+                <li>Salvation through knowledge, not faith or church participation</li>
+                <li>Diverse interpretations rather than unified doctrine</li>
+            </ul>
+            <p>The Council of Nicaea (325 CE) established orthodox Christology partly to counter this theological diversity, leading to the systematic persecution of alternative Christian movements.</p>
+        </div>
+    </div>
+
+    <script>
+        // Navigation functionality
+        const navTabs = document.querySelectorAll('.nav-tab');
+        const sections = document.querySelectorAll('.section');
+        
+        navTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const targetSection = tab.dataset.section;
+                
+                // Update nav tabs
+                navTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                // Update sections
+                sections.forEach(s => s.classList.remove('active'));
+                document.getElementById(targetSection).classList.add('active');
+            });
+            
+            // Keyboard navigation
+            tab.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    tab.click();
+                }
+            });
+        });
+        
+        // Manuscript tabs
+        const manuscriptTabs = document.querySelectorAll('.manuscript-tab');
+        const manuscriptContents = document.querySelectorAll('.manuscript-content');
+        
+        manuscriptTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const targetManuscript = tab.dataset.manuscript;
+                
+                manuscriptTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                manuscriptContents.forEach(c => c.classList.remove('active'));
+                document.getElementById(targetManuscript).classList.add('active');
+            });
+        });
+        
+        // Modal functionality
+        function showModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Close modal when clicking outside
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeModal(modal.id);
+                }
+            });
+        });
+        
+        // Keyboard support for modals
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.modal.active').forEach(modal => {
+                    closeModal(modal.id);
+                });
+            }
+        });
+        
+        // Quiz functionality
+        let currentQuestion = 0;
+        const quizData = [
+            {
+                question: "What year were the Nag Hammadi codices discovered?",
+                options: ["1943", "1945", "1947", "1950"],
+                correct: 1,
+                explanation: "The Nag Hammadi codices were discovered in December 1945 by Muhammad Ali al-Samman."
+            },
+            {
+                question: "Which Gospel presents Mary Magdalene as Jesus's primary spiritual heir?",
+                options: ["Gospel of Thomas", "Gospel of Mary", "Gospel of Philip", "Gospel of Truth"],
+                correct: 1,
+                explanation: "The Gospel of Mary presents Mary Magdalene as possessing secret teachings unknown to the male apostles."
+            },
+            {
+                question: "What does the term 'gnosis' mean in Gnostic Christianity?",
+                options: ["Faith", "Direct divine knowledge", "Church authority", "Written scripture"],
+                correct: 1,
+                explanation: "Gnosis refers to direct experiential knowledge of the divine that leads to salvation, central to Gnostic spirituality."
+            },
+            {
+                question: "Who is the Demiurge in Gnostic cosmology?",
+                options: ["The true God", "A false creator god", "An angel", "A human prophet"],
+                correct: 1,
+                explanation: "The Demiurge is the false creator god who traps souls in material reality, distinct from the true divine source."
+            }
+        ];
+        
+        function checkAnswer(option, isCorrect) {
+            const options = document.querySelectorAll('.quiz-option');
+            const feedback = document.getElementById('quizFeedback');
+            const nextBtn = document.getElementById('nextBtn');
+            
+            options.forEach(opt => opt.style.pointerEvents = 'none');
+            
+            if (isCorrect) {
+                option.classList.add('correct');
+                feedback.textContent = '✓ Correct! ' + quizData[currentQuestion].explanation;
+                feedback.style.color = '#22c55e';
+            } else {
+                option.classList.add('incorrect');
+                options[quizData[currentQuestion].correct].classList.add('correct');
+                feedback.textContent = '✗ Incorrect. ' + quizData[currentQuestion].explanation;
+                feedback.style.color = '#dc2626';
+            }
+            
+            nextBtn.style.display = 'inline-block';
+        }
+        
+        function nextQuestion() {
+            currentQuestion++;
+            
+            if (currentQuestion < quizData.length) {
+                loadQuestion(currentQuestion);
+            } else {
+                // Quiz completed
+                document.getElementById('quizQuestion').textContent = "Congratulations! You've completed the Gnostic Gospels quiz.";
+                document.getElementById('quizOptions').innerHTML = '<p style="text-align: center; font-size: 1.2rem; color: var(--tyrian-purple);">🎉 You\'ve explored the forbidden knowledge! 🎉</p>';
+                document.getElementById('quizFeedback').textContent = '';
+                document.getElementById('nextBtn').style.display = 'none';
+            }
+        }
+        
+        function loadQuestion(index) {
+            const question = quizData[index];
+            const questionEl = document.getElementById('quizQuestion');
+            const optionsEl = document.getElementById('quizOptions');
+            const feedbackEl = document.getElementById('quizFeedback');
+            const nextBtn = document.getElementById('nextBtn');
+            
+            questionEl.textContent = question.question;
+            feedbackEl.textContent = '';
+            nextBtn.style.display = 'none';
+            
+            optionsEl.innerHTML = '';
+            question.options.forEach((option, i) => {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'quiz-option';
+                optionDiv.textContent = option;
+                optionDiv.onclick = () => checkAnswer(optionDiv, i === question.correct);
+                optionsEl.appendChild(optionDiv);
+            });
+        }
+        
+        // Initialize additional modals
+        const additionalModals = {
+            jarModal: {
+                title: "The Sealed Earthenware Jar",
+                content: `
+                    <p>The jar that changed history was no ordinary vessel. Archaeological analysis revealed it was specifically chosen for long-term preservation—thick-walled, sealed with bitumen, and buried at the optimal depth to protect against both moisture and temperature fluctuations.</p>
+                    <p>Inside, 13 leather-bound codices were carefully wrapped in white linen, suggesting ritualistic care rather than hasty disposal. This wasn't random hiding—it was a deliberate rescue operation.</p>
+                `
+            },
+            thomasModal: {
+                title: "Gospel of Thomas: The Pantheistic Jesus",
+                content: `
+                    <p>Saying 77 from the Gospel of Thomas presents one of the most radical departures from orthodox Christianity. This isn't the Jesus of the canonical gospels, confined to historical time and place.</p>
+                    <p>Instead, this Jesus claims universal presence—existing in wood, stone, and everywhere matter exists. This pantheistic vision transforms Jesus from historical figure to cosmic principle, challenging fundamental Christian doctrine about the nature of incarnation.</p>
+                `
+            },
+            maryModal: {
+                title: "Mary Magdalene: The Lost Apostle",
+                content: `
+                    <p>The Gospel of Mary revolutionizes our understanding of early Christian leadership. Rather than the repentant prostitute of later church tradition, Mary appears as Jesus's primary spiritual heir—possessing teachings unknown to the male disciples.</p>
+                    <p>This text suggests the suppression of female spiritual authority was a later development, not an original Christian principle.</p>
+                `
+            }
+        };
+        
+        // Create additional modal elements
+        Object.keys(additionalModals).forEach(modalId => {
+            if (!document.getElementById(modalId)) {
+                const modal = document.createElement('div');
+                modal.className = 'modal';
+                modal.id = modalId;
+                modal.innerHTML = `
+                    <div class="modal-content">
+                        <button class="modal-close" onclick="closeModal('${modalId}')">&times;</button>
+                        <h2>${additionalModals[modalId].title}</h2>
+                        ${additionalModals[modalId].content}
+                    </div>
+                `;
+                document.body.appendChild(modal);
+            }
+        });
+        
+        // Accessibility improvements
+        document.addEventListener('DOMContentLoaded', () => {
+            // Add ARIA labels to interactive elements
+            const interactiveCards = document.querySelectorAll('.interactive-card');
+            interactiveCards.forEach((card, index) => {
+                card.setAttribute('role', 'button');
+                card.setAttribute('tabindex', '0');
+                card.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        card.click();
+                    }
+                });
+            });
+            
+            // Discovery scene keyboard support
+            const discoveryScene = document.querySelector('.discovery-scene');
+            discoveryScene.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    showModal('discoveryModal');
+                }
+            });
+        });
+        
+        console.log('🏺 Welcome to the Gnostic Gospels Explorer! 📜');
+        console.log('Navigate through forbidden knowledge that was hidden for 1,700 years...');
+    </script>
+</body>
+</html>
