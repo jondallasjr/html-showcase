@@ -153,6 +153,18 @@
             text-align: center;
             font-weight: bold;
             color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .state-title {
+            font-size: 1.1em;
+            margin-bottom: 8px;
+        }
+        .state-definition {
+            font-size: 0.85em;
+            font-weight: normal;
+            opacity: 0.9;
         }
         .synced { background: #28a745; }
         .unsynced { background: #ffc107; color: #212529; }
@@ -176,17 +188,20 @@
             background: white;
             border-radius: 6px;
             border-left: 4px solid #007bff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        .critical-note {
-            background: #fff5f5;
-            border: 1px solid #fed7d7;
-            color: #c53030;
+        .info-note {
+            background: #e8f4f8;
+            border: 1px solid #bee5eb;
+            color: #0c5460;
             padding: 15px;
             border-radius: 8px;
             margin: 15px 0;
         }
-        .critical-note strong {
-            color: #9b2c2c;
+        .info-note strong {
+            color: #0a4249;
         }
         .summary-box {
             background: #f8f9fa;
@@ -196,7 +211,7 @@
         }
         .req-analysis {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
             gap: 20px;
         }
         .req-box {
@@ -206,7 +221,13 @@
         }
         .built { border-color: #28a745; background: #f8fff9; }
         .easy { border-color: #ffc107; background: #fffdf5; }
-        .complex { border-color: #dc3545; background: #fff5f5; }
+        .needs-section {
+            background: #fff9f0;
+            border: 2px solid #ffb347;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
     </style>
 </head>
 <body>
@@ -221,66 +242,79 @@
             <div class="process-section">
                 <div class="process-title">
                     <div class="process-icon">📋</div>
-                    Overview
+                    System Overview
                 </div>
                 <div class="summary-box">
-                    <p><strong>Architecture:</strong> Bi-directional sync between Coda and NetSuite via Apollo API intermediary. Task Change Requests flow Coda→Apollo→NetSuite with approval workflow. Sync operations use "Last Sync State" JSON for delta detection and conflict resolution.</p>
-                    <p><strong>Current Status:</strong> Core sync functionality (Pull Projects, Sync Tasks, Pull Change Updates) is live. Apollo approval workflow in development. Visual indicators and PM workflow UX not implemented.</p>
-                    <p><strong>Performance:</strong> Single data record architecture avoids duplication across 10,000+ task rows. Bulk operations converted to individual API calls server-side.</p>
+                    <p><strong>Two-Way Data Flow:</strong> 
+                    <br>• <strong>Task Change Requests:</strong> PM changes in Coda → Apollo (approval) → NetSuite (if approved)
+                    <br>• <strong>Sync Operations:</strong> NetSuite/Apollo → Coda (pulling latest data)</p>
+                    
+                    <p><strong>Architecture:</strong> Apollo API serves as intermediary with MongoDB storage for approval workflow. "Last Sync State" JSON enables delta detection between Coda changes and NetSuite reality.</p>
+                    
+                    <p><strong>Current Status:</strong> Core functionality (Pull Projects, Submit Task Change Requests, Pull Status Updates) is live. Apollo approval interface and visual PM indicators are in development.</p>
+                </div>
+
+                <div class="info-note">
+                    <strong>Key Design Decisions:</strong> Single data record per task (no duplication), project-level bulk submissions converted to individual API calls, and performance-optimized JSON parsing for 10,000+ row scalability.
                 </div>
             </div>
 
-            <!-- What RES Wants -->
+            <!-- RES Core Needs -->
             <div class="process-section">
                 <div class="process-title">
                     <div class="process-icon">🎯</div>
-                    RES Requirements Analysis
+                    RES's Core Needs
+                </div>
+                
+                <div class="needs-section">
+                    <strong>Primary Requirement:</strong> PMs must clearly see when their Coda changes differ from NetSuite reality and understand the status of their change requests (pending, approved, rejected).
+                    
+                    <br><br><strong>Specific Gaps to Address:</strong>
+                    <br>• Visual indicator when PM makes changes but hasn't submitted requests
+                    <br>• Clear differentiation between "what's live in NetSuite" vs "what PM changed in Coda"  
+                    <br>• Prominent display of rejection reasons requiring PM corrective action
+                    <br>• PM expectation that opening work items shows current NetSuite data
+                </div>
+            </div>
+
+            <!-- Requirements Analysis -->
+            <div class="process-section">
+                <div class="process-title">
+                    <div class="process-icon">📊</div>
+                    Implementation Assessment
                 </div>
                 
                 <div class="req-analysis">
                     <div class="req-box built">
-                        <div class="step-title">✓ Already Built</div>
+                        <div class="step-title">✓ Already Built & Live</div>
                         <div class="step-description">
                             • Core sync functionality (David's system)<br>
                             • Last Sync State JSON storage<br>
                             • Bulk task change request processing<br>
-                            • Project-level WBS pull from NetSuite
+                            • Project-level WBS pull from NetSuite<br>
+                            • Change request status tracking columns
                         </div>
-                        <div class="trigger-type automatic" style="margin-top: 15px;">Live/Functional</div>
+                        <div class="trigger-type automatic" style="margin-top: 15px;">Functional</div>
                     </div>
                     
                     <div class="req-box easy">
                         <div class="step-title">⚡ Easy to Build</div>
                         <div class="step-description">
-                            • Sync State column (compare Coda vs Last Sync State)<br>
+                            • Work Item Sync States column (compare Coda vs Last Sync State)<br>
                             • Visual indicators for unsynced changes<br>
-                            • "Sync" button on Work Items table<br>
-                            • JSON parsing optimization
+                            • "Sync" button with timestamp on Work Items table<br>
+                            • Optimized JSON parsing (parse on update, not live)<br>
+                            • Dual data view capability (NetSuite vs Coda values)
                         </div>
                         <div class="trigger-type manual" style="margin-top: 15px;">UI/Formula Work</div>
                     </div>
-                    
-                    <div class="req-box complex">
-                        <div class="step-title">⚠ Complex/Challenging</div>
-                        <div class="step-description">
-                            • Real-time sync expectations (performance)<br>
-                            • Dual data views (NetSuite reality vs Coda changes)<br>
-                            • Task-level vs project-level scope change<br>
-                            • Automatic page-load sync triggers
-                        </div>
-                        <div class="trigger-type on-demand" style="margin-top: 15px; background: #f8d7da; color: #721c24;">Scope/Contract Risk</div>
-                    </div>
-                </div>
-
-                <div class="critical-note">
-                    <strong>Amish's Core Need:</strong> PMs must clearly see when their Coda changes differ from NetSuite reality and when requests are pending/rejected. Current system works but lacks PM visibility into sync states.
                 </div>
             </div>
 
             <!-- Process 1: Task Change Requests -->
             <div class="process-section">
                 <div class="process-title">
-                    <div class="process-icon">1</div>
+                    <div class="process-icon">📤</div>
                     Task Change Requests: Coda → Apollo → NetSuite
                 </div>
                 
@@ -296,14 +330,14 @@
                     <div class="workflow-step">
                         <div class="step-number">2</div>
                         <div class="step-title">Visual Indicators</div>
-                        <div class="step-description">Sync State column shows "Unsynced Changes" - PM sees their changes haven't been submitted to Apollo yet</div>
+                        <div class="step-description">Work Item Sync States column shows "Unsynced Changes" - PM sees their changes haven't been submitted to Apollo yet</div>
                         <div class="trigger-type automatic">Automatic</div>
                         <div class="dev-status not-built">❌ NOT BUILT</div>
                     </div>
                     
                     <div class="workflow-step">
                         <div class="step-number">3</div>
-                        <div class="step-title">Submit Request</div>
+                        <div class="step-title">Submit Task Change Requests</div>
                         <div class="step-description">PM clicks "Submit Task Change Request" button (project-level, affects all modified tasks)</div>
                         <div class="trigger-type manual">Manual</div>
                         <div class="dev-status live">✓ LIVE (David's "Sync Tasks")</div>
@@ -320,7 +354,7 @@
                     <div class="workflow-step">
                         <div class="step-number">5</div>
                         <div class="step-title">Apollo Storage</div>
-                        <div class="step-description">Requests stored in Apollo's MongoDB, not directly in NetSuite. Accounting team reviews in Apollo interface</div>
+                        <div class="step-description">Task change requests stored in Apollo's MongoDB, not directly in NetSuite. Accounting team reviews in Apollo interface</div>
                         <div class="trigger-type automatic">Automatic</div>
                         <div class="dev-status live">✓ LIVE</div>
                     </div>
@@ -328,7 +362,7 @@
                     <div class="workflow-step">
                         <div class="step-number">6</div>
                         <div class="step-title">Apollo Approval Interface</div>
-                        <div class="step-description">Accounting team sees requests in Apollo and clicks approve/reject. Status: "Changes Pending Approval"</div>
+                        <div class="step-description">Accounting team sees task change requests in Apollo and clicks approve/reject. Status: "Changes Pending Approval"</div>
                         <div class="trigger-type manual">Manual (by Accounting)</div>
                         <div class="dev-status in-dev">🔄 IN DEVELOPMENT</div>
                     </div>
@@ -336,34 +370,34 @@
                     <div class="workflow-step">
                         <div class="step-number">7</div>
                         <div class="step-title">NetSuite Update</div>
-                        <div class="step-description">If approved, Apollo API automatically pushes changes to NetSuite. Status changes to "Synced"</div>
+                        <div class="step-description">If approved, Apollo API automatically pushes changes to NetSuite. Work Item Sync State changes to "Synced"</div>
                         <div class="trigger-type automatic">Automatic</div>
                         <div class="dev-status in-dev">🔄 IN DEVELOPMENT</div>
                     </div>
                 </div>
 
                 <div class="data-flow">
-                    <h4>Data Sent in Change Requests:</h4>
-                    <div class="flow-item">Task Name (Level 3 tasks only)</div>
-                    <div class="flow-item">Task Status</div>
-                    <div class="flow-item">Billing Type (Billable/Non-billable)</div>
-                    <div class="flow-item">Billing Budget Value (if billable)</div>
-                    <div class="flow-item">Revenue Type (POC, T&M, Recurring, T&M with CAP, etc.)</div>
+                    <h4>Data Sent in Task Change Requests:</h4>
+                    <div class="flow-item">Task Name (Level 3 tasks only) <span class="dev-status live">✓ LIVE</span></div>
+                    <div class="flow-item">Task Status <span class="dev-status live">✓ LIVE</span></div>
+                    <div class="flow-item">Billing Type (Billable/Non-billable) <span class="dev-status live">✓ LIVE</span></div>
+                    <div class="flow-item">Billing Budget Value (if billable) <span class="dev-status live">✓ LIVE</span></div>
+                    <div class="flow-item">Revenue Type (POC, T&M, Recurring, T&M with CAP, etc.) <span class="dev-status live">✓ LIVE</span></div>
                 </div>
             </div>
 
-            <!-- Process 2: Syncing -->
+            <!-- Process 2: Sync Operations -->
             <div class="process-section">
                 <div class="process-title">
-                    <div class="process-icon">2</div>
-                    Syncing: NetSuite/Apollo → Coda
+                    <div class="process-icon">📥</div>
+                    Sync Operations: NetSuite/Apollo → Coda
                 </div>
                 
                 <div class="workflow-grid">
                     <div class="workflow-step">
                         <div class="step-number">1</div>
-                        <div class="step-title">Initial Project Pull</div>
-                        <div class="step-description">When PM creates project, complete WBS pulled from NetSuite including all tasks, statuses, budgets</div>
+                        <div class="step-title">Initial Project Sync</div>
+                        <div class="step-description">When PM creates project, complete WBS synced from NetSuite including all tasks, statuses, budgets</div>
                         <div class="trigger-type manual">Manual (Project Creation)</div>
                         <div class="dev-status live">✓ LIVE (David's "Pull Projects")</div>
                     </div>
@@ -371,7 +405,7 @@
                     <div class="workflow-step">
                         <div class="step-number">2</div>
                         <div class="step-title">Last Sync State Storage</div>
-                        <div class="step-description">Each task stores complete NetSuite data in "Last Sync State" JSON column for future comparison</div>
+                        <div class="step-description">Each task stores complete NetSuite data in "Last Sync State" JSON column as the "source of truth" for comparison</div>
                         <div class="trigger-type automatic">Automatic</div>
                         <div class="dev-status live">✓ LIVE</div>
                     </div>
@@ -386,73 +420,51 @@
                     
                     <div class="workflow-step">
                         <div class="step-number">4</div>
-                        <div class="step-title">Change Request Status Updates</div>
-                        <div class="step-description">System pulls approval/rejection status of submitted change requests from Apollo during hourly sync or on-demand</div>
+                        <div class="step-title">Task Change Request Status Sync</div>
+                        <div class="step-description">System syncs approval/rejection status of submitted task change requests from Apollo during hourly sync or on-demand</div>
                         <div class="trigger-type on-demand">Hourly/On-Demand</div>
                         <div class="dev-status live">✓ LIVE (David's "Pull Change Updates")</div>
                     </div>
                 </div>
 
                 <div class="data-flow">
-                    <h4>Data Pulled from NetSuite/Apollo:</h4>
-                    <div class="flow-item">Task WBS Structure (ID, name, parent relationships)</div>
-                    <div class="flow-item">Task Status, Project Manager assignments</div>
-                    <div class="flow-item">Budget data (Current Cost/Billing Budget, As Sold budgets)</div>
-                    <div class="flow-item">Hours, Billable/Non-billable flags</div>
-                    <div class="flow-item">Change Request Status (Pending/Approved/Rejected)</div>
+                    <h4>Data Synced from NetSuite/Apollo:</h4>
+                    <div class="flow-item">Task WBS Structure (ID, name, parent relationships) <span class="dev-status live">✓ LIVE</span></div>
+                    <div class="flow-item">Task Status, Project Manager assignments <span class="dev-status live">✓ LIVE</span></div>
+                    <div class="flow-item">Budget data (Current Cost/Billing Budget, As Sold budgets) <span class="dev-status live">✓ LIVE</span></div>
+                    <div class="flow-item">Hours, Billable/Non-billable flags <span class="dev-status live">✓ LIVE</span></div>
+                    <div class="flow-item">Task Change Request Status (Pending/Approved/Rejected) <span class="dev-status live">✓ LIVE</span></div>
                 </div>
             </div>
 
-            <!-- Sync State Options -->
+            <!-- Work Item Sync States -->
             <div class="process-section">
                 <div class="process-title">
-                    <div class="process-icon">3</div>
-                    Sync State Column Options
+                    <div class="process-icon">🚦</div>
+                    Work Item Sync States
                 </div>
                 
                 <div class="sync-states">
-                    <div class="sync-state synced">Synced</div>
-                    <div class="sync-state unsynced">Unsynced Changes</div>
-                    <div class="sync-state pending">Changes Pending Approval</div>
-                    <div class="sync-state rejected">Changes Rejected</div>
-                    <div class="sync-state sync-required">Sync Required</div>
-                </div>
-                
-                <div style="margin-top: 20px;">
-                    <p><strong>Calculation:</strong> Compare current Coda values against Last Sync State JSON + Change Request Status columns</p>
-                    <p><strong>Performance:</strong> Parse JSON on update, not live formulas on every row</p>
-                </div>
-            </div>
-
-            <!-- Critical Considerations -->
-            <div class="process-section">
-                <div class="process-title">
-                    <div class="process-icon">⚠</div>
-                    Critical Considerations from September 2 Meeting
-                </div>
-                
-                <div class="critical-note">
-                    <strong>PM Confusion Risk:</strong> PMs might think their changes are "live" in NetSuite when they're actually just pending approval in Apollo. Visual indicators are essential.
-                </div>
-                
-                <div class="critical-note">
-                    <strong>Data Currency:</strong> Anna Stuart Lambert emphasized PMs expect to see current NetSuite data when they open work items. Consider automatic sync on page load vs. hourly background updates.
-                </div>
-                
-                <div class="critical-note">
-                    <strong>Scope Creep Alert:</strong> Jordyn flagged that visual-only changes might stay in scope, but rebuilding the system for task-level vs. project-level requests could require contract renegotiation.
-                </div>
-                
-                <div class="critical-note">
-                    <strong>Performance Constraint:</strong> System maintains single data record to avoid issues with 10,000+ rows. No duplication of NetSuite data in Coda.
-                </div>
-                
-                <div class="critical-note">
-                    <strong>Missing Features:</strong> No visual indicator when PM makes changes but hasn't submitted request. No way to show difference between Coda changes and NetSuite reality. Both identified as "important" by Amish.
-                </div>
-                
-                <div class="critical-note">
-                    <strong>Last Sync State Clarification:</strong> This JSON column stores the complete NetSuite/Apollo task data from the most recent sync operation (when data flowed Apollo→Coda). It represents the "source of truth" from NetSuite that can be compared against current Coda values to detect PM changes.
+                    <div class="sync-state synced">
+                        <div class="state-title">Synced</div>
+                        <div class="state-definition">Coda values match NetSuite exactly</div>
+                    </div>
+                    <div class="sync-state unsynced">
+                        <div class="state-title">Unsynced Changes</div>
+                        <div class="state-definition">PM made changes but hasn't submitted request</div>
+                    </div>
+                    <div class="sync-state pending">
+                        <div class="state-title">Changes Pending Approval</div>
+                        <div class="state-definition">Request submitted, awaiting accounting approval</div>
+                    </div>
+                    <div class="sync-state rejected">
+                        <div class="state-title">Changes Rejected</div>
+                        <div class="state-definition">Accounting rejected request, PM action required</div>
+                    </div>
+                    <div class="sync-state sync-required">
+                        <div class="state-title">Sync Required</div>
+                        <div class="state-definition">NetSuite data changed, sync needed</div>
+                    </div>
                 </div>
             </div>
         </div>
