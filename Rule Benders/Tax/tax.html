@@ -1,0 +1,1600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Offshore Advantage: Why Geography is Your Greatest Tax Asset | Rule Benders Academy</title>
+    <meta name="description" content="Discover how the wealthy leverage geographical arbitrage to slash their tax bills. Learn the 183-day rule and identify your biggest tax optimization opportunities.">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        /* CSS CUSTOM PROPERTIES */
+        :root {
+            --primary-navy: #1B365D;
+            --primary-gold: #B8860B;
+            --primary-teal: #17A2B8;
+            --accent-orange: #FF6B35;
+            --danger-red: #8B0000;
+            --success-green: #228B22;
+            --neutral-platinum: #E8E8E8;
+            --text-light: rgba(255, 255, 255, 0.9);
+            --text-muted: rgba(255, 255, 255, 0.7);
+            --background-overlay: rgba(27, 54, 93, 0.95);
+            --card-background: rgba(255, 255, 255, 0.05);
+            --border-subtle: rgba(184, 134, 11, 0.3);
+            --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.2);
+            --shadow-strong: 0 20px 40px rgba(184, 134, 11, 0.3);
+        }
+
+        /* RESET & BASE STYLES */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, var(--primary-navy) 0%, #0f2749 100%);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* TYPOGRAPHY SYSTEM */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        h1 { font-size: clamp(2.5rem, 5vw, 4rem); color: var(--primary-gold); }
+        h2 { font-size: clamp(2rem, 4vw, 3rem); color: var(--primary-gold); }
+        h3 { font-size: clamp(1.5rem, 3vw, 2rem); color: var(--primary-teal); }
+        h4 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
+        h5 { font-size: clamp(1.125rem, 2vw, 1.25rem); }
+        h6 { font-size: clamp(1rem, 1.5vw, 1.125rem); }
+
+        p { margin-bottom: 1.5rem; font-size: 1.1rem; }
+        
+        .text-large { font-size: 1.25rem; }
+        .text-small { font-size: 0.9rem; }
+        .text-muted { color: var(--text-muted); }
+        .text-gold { color: var(--primary-gold); }
+        .text-teal { color: var(--primary-teal); }
+        .text-danger { color: var(--danger-red); }
+        .text-success { color: var(--success-green); }
+
+        /* LAYOUT SYSTEM */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            padding: 5rem 0;
+            position: relative;
+        }
+
+        .section-sm { padding: 3rem 0; }
+        .section-lg { padding: 8rem 0; }
+
+        .grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .grid-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+        .grid-3 { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+        .grid-4 { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+
+        .flex { display: flex; }
+        .flex-col { flex-direction: column; }
+        .items-center { align-items: center; }
+        .justify-center { justify-content: center; }
+        .justify-between { justify-content: space-between; }
+        .text-center { text-align: center; }
+
+        /* CARD COMPONENTS */
+        .card {
+            background: var(--card-background);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 2px solid var(--border-subtle);
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, transparent, var(--primary-gold), transparent);
+            border-radius: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-strong);
+            border-color: var(--primary-gold);
+        }
+
+        .card:hover::before {
+            opacity: 0.3;
+        }
+
+        .card-premium {
+            background: linear-gradient(45deg, rgba(184, 134, 11, 0.1), rgba(23, 162, 184, 0.1));
+            border: 3px solid var(--primary-gold);
+        }
+
+        .card-danger {
+            background: linear-gradient(45deg, rgba(139, 0, 0, 0.2), rgba(220, 20, 60, 0.1));
+            border-color: var(--danger-red);
+        }
+
+        .card-success {
+            background: linear-gradient(45deg, rgba(34, 139, 34, 0.2), rgba(50, 205, 50, 0.1));
+            border-color: var(--success-green);
+        }
+
+        /* HERO SECTION */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: radial-gradient(circle at 30% 70%, rgba(184, 134, 11, 0.15) 0%, transparent 50%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: var(--primary-gold);
+            color: var(--primary-navy);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .hero-title {
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+
+        .hero-hook {
+            background: linear-gradient(45deg, var(--danger-red), #DC143C);
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            font-size: 1.3rem;
+            font-weight: 600;
+            box-shadow: var(--shadow-soft);
+            animation: fadeInUp 0.8s ease-out 0.6s both;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 3rem;
+            animation: fadeInUp 0.8s ease-out 0.8s both;
+        }
+
+        .hero-stat {
+            text-align: center;
+        }
+
+        .hero-stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--primary-gold);
+            display: block;
+            line-height: 1;
+        }
+
+        .hero-stat-label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+        }
+
+        /* INTERACTIVE CALCULATOR */
+        .calculator {
+            background: var(--card-background);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 3rem;
+            border: 2px solid var(--border-subtle);
+        }
+
+        .calculator-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        .form-input, .form-select {
+            width: 100%;
+            padding: 1rem 1.25rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid var(--border-subtle);
+            border-radius: 10px;
+            color: white;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus, .form-select:focus {
+            outline: none;
+            border-color: var(--primary-gold);
+            box-shadow: 0 0 20px rgba(184, 134, 11, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .form-label {
+            position: absolute;
+            left: 1.25rem;
+            top: 1rem;
+            color: var(--text-muted);
+            transition: all 0.3s ease;
+            pointer-events: none;
+            background: var(--primary-navy);
+            padding: 0 0.5rem;
+        }
+
+        .form-input:focus + .form-label,
+        .form-input:not(:placeholder-shown) + .form-label {
+            top: -0.75rem;
+            left: 1rem;
+            font-size: 0.9rem;
+            color: var(--primary-gold);
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .result-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .result-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        .result-amount {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin: 0.5rem 0;
+            line-height: 1;
+        }
+
+        .result-label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .current-tax .result-amount { color: var(--danger-red); }
+        .optimized-tax .result-amount { color: var(--primary-teal); }
+        .savings .result-amount { color: var(--success-green); }
+
+        /* WORLD MAP VISUALIZATION */
+        .world-map-container {
+            position: relative;
+            height: 500px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 500"><defs><pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(184,134,11,0.1)" stroke-width="1"/></pattern></defs><rect width="1000" height="500" fill="url(%23grid)"/></svg>') center/cover;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 2px solid var(--border-subtle);
+        }
+
+        .tax-zone {
+            position: absolute;
+            padding: 0.75rem 1rem;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            box-shadow: var(--shadow-soft);
+            backdrop-filter: blur(5px);
+        }
+
+        .tax-zone:hover {
+            transform: scale(1.2);
+            z-index: 10;
+            box-shadow: var(--shadow-strong);
+        }
+
+        .tax-high { 
+            background: linear-gradient(45deg, var(--danger-red), #DC143C);
+            top: 25%; left: 12%;
+        }
+        
+        .tax-zero { 
+            background: linear-gradient(45deg, var(--primary-gold), #DAA520);
+            color: var(--primary-navy);
+            top: 45%; left: 75%;
+            animation: goldPulse 2s infinite;
+        }
+        
+        .tax-low { 
+            background: linear-gradient(45deg, var(--success-green), #32CD32);
+            top: 55%; left: 85%;
+        }
+        
+        .tax-medium { 
+            background: linear-gradient(45deg, #FF8C00, #FFD700);
+            color: #333;
+            top: 35%; left: 8%;
+        }
+
+        /* STATISTICS SECTION */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .stat-card {
+            background: var(--card-background);
+            border: 2px solid var(--border-subtle);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-strong);
+            border-color: var(--primary-gold);
+        }
+
+        .stat-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--primary-gold);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--primary-gold);
+            margin: 0.5rem 0;
+            line-height: 1;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        /* CASE STUDIES */
+        .case-study-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .case-card {
+            background: var(--card-background);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 2px solid var(--border-subtle);
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .case-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-gold);
+            box-shadow: var(--shadow-strong);
+        }
+
+        .case-title {
+            font-size: 1.4rem;
+            color: var(--primary-gold);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .case-metrics {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .metric {
+            background: rgba(184, 134, 11, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-gold);
+            line-height: 1;
+        }
+
+        .metric-label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+        }
+
+        /* TIMELINE */
+        .timeline {
+            position: relative;
+            margin: 4rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary-gold), var(--primary-teal));
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin: 3rem 0;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-content {
+            flex: 1;
+            background: var(--card-background);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 0 2rem;
+            border-left: 4px solid var(--primary-gold);
+            backdrop-filter: blur(10px);
+        }
+
+        .timeline-marker {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--primary-navy);
+            z-index: 2;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .timeline-title {
+            color: var(--primary-gold);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        /* BUTTONS */
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary-gold), #DAA520);
+            color: var(--primary-navy);
+        }
+
+        .btn-secondary {
+            background: var(--primary-navy);
+            color: white;
+            border: 2px solid var(--primary-gold);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-strong);
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(45deg, #DAA520, var(--primary-gold));
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-gold);
+            color: var(--primary-navy);
+        }
+
+        /* CTA SECTION */
+        .cta {
+            background: linear-gradient(45deg, var(--primary-gold), #DAA520);
+            border-radius: 20px;
+            padding: 4rem 2rem;
+            text-align: center;
+            color: var(--primary-navy);
+            margin: 4rem 0;
+        }
+
+        .cta h2, .cta h3 {
+            color: var(--primary-navy);
+        }
+
+        .cta-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        /* PROGRESS BAR */
+        .progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-gold), var(--primary-teal));
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        /* FLOATING ACTION BUTTON */
+        .fab {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            background: var(--primary-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--primary-navy);
+            cursor: pointer;
+            box-shadow: var(--shadow-soft);
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .fab:hover {
+            transform: scale(1.1);
+            box-shadow: var(--shadow-strong);
+        }
+
+        /* ANIMATIONS */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes goldPulse {
+            0%, 100% { 
+                box-shadow: 0 0 20px rgba(184, 134, 11, 0.5); 
+                transform: scale(1);
+            }
+            50% { 
+                box-shadow: 0 0 40px rgba(184, 134, 11, 0.8); 
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes countUp {
+            from {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 768px) {
+            .container { padding: 0 1rem; }
+            .section { padding: 3rem 0; }
+            
+            .hero-stats {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            
+            .calculator-form,
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .timeline-item {
+                flex-direction: column !important;
+            }
+            
+            .timeline::before {
+                left: 30px;
+            }
+            
+            .timeline-content {
+                margin: 1rem 0 1rem 4rem;
+            }
+            
+            .timeline-marker {
+                width: 40px;
+                height: 40px;
+                align-self: flex-start;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
+        /* ACCESSIBILITY */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* FOCUS STYLES */
+        .focus-visible:focus {
+            outline: 2px solid var(--primary-gold);
+            outline-offset: 4px;
+        }
+
+        /* ADDITIONAL UTILITY CLASSES */
+        .mb-0 { margin-bottom: 0; }
+        .mb-1 { margin-bottom: 1rem; }
+        .mb-2 { margin-bottom: 2rem; }
+        .mb-3 { margin-bottom: 3rem; }
+
+        .mt-0 { margin-top: 0; }
+        .mt-1 { margin-top: 1rem; }
+        .mt-2 { margin-top: 2rem; }
+        .mt-3 { margin-top: 3rem; }
+
+        .opacity-70 { opacity: 0.7; }
+        .opacity-80 { opacity: 0.8; }
+        .opacity-90 { opacity: 0.9; }
+
+        .font-bold { font-weight: 700; }
+        .font-semibold { font-weight: 600; }
+        .font-medium { font-weight: 500; }
+    </style>
+</head>
+<body>
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <span class="hero-badge">Foundation Mastery Lesson</span>
+                <h1 class="hero-title">The Offshore Advantage</h1>
+                <p class="hero-subtitle">Why Geography is Your Greatest Tax Asset</p>
+                
+                <div class="hero-hook">
+                    <i class="fas fa-quote-left"></i>
+                    "Your postcode is costing you more than your mortgage. While you're paying 45% tax in London, a consultant in Dubai pays 0%. Same skills, same clients, different geography."
+                </div>
+
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <span class="hero-stat-number" id="heroStat1">£150,000</span>
+                        <div class="hero-stat-label">Annual difference for £300K earner</div>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="hero-stat-number" id="heroStat2">126,000</span>
+                        <div class="hero-stat-label">Millionaires relocated in 2023</div>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="hero-stat-number" id="heroStat3">0%</span>
+                        <div class="hero-stat-label">Tax rate in 25+ countries</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Introduction -->
+    <section class="section">
+        <div class="container">
+            <div class="grid grid-2">
+                <div>
+                    <h2>The Geographic Tax Revolution</h2>
+                    <p class="text-large">For decades, the wealthy have quietly leveraged the most powerful tax optimization tool available: <strong class="text-gold">strategic geography</strong>.</p>
+                    <p>While traditional tax advice focuses on complex structures and expensive schemes, smart professionals have discovered a simple truth: <strong>your tax rate is determined more by where you are than what you earn.</strong></p>
+                    
+                    <div class="card card-premium">
+                        <h4><i class="fas fa-lightbulb text-gold"></i> Key Insight</h4>
+                        <p class="mb-0">High-earning professionals can reduce effective tax rates from 45%+ to 0-15% through strategic relocation, often saving £50,000-£500,000 annually.</p>
+                    </div>
+                </div>
+                <div>
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-JuRB4_HJHt/d3b3b95b50d8fb8745ffdedfcd4dd8dfd6fb255417a02815b4738f3132aa1a257439992d0e4cab2d56c45dd70429bdbf0dd12ed3b67193cd98c04adc7ffc0ddd2c8d888c1eee5ccf9e8cf79f68c61d58d9942200795633d3af8192e307d23b7e3034a2ec" alt="Strategic Professional Planning" style="width: 100%; border-radius: 15px; box-shadow: var(--shadow-soft);">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Tax Calculator -->
+    <section class="section" id="calculator">
+        <div class="container">
+            <h2 class="text-center mb-3">Calculate Your Geographic Tax Premium</h2>
+            <p class="text-center text-large mb-3">Discover exactly how much your current location is costing you annually</p>
+            
+            <div class="calculator">
+                <div class="calculator-form">
+                    <div class="form-group">
+                        <input type="number" class="form-input" id="income" placeholder=" " min="50000" step="5000">
+                        <label class="form-label" for="income">Annual Income (£)</label>
+                    </div>
+                    <div class="form-group">
+                        <select class="form-select" id="destination">
+                            <option value="">Select Optimization Destination</option>
+                            <option value="uae">🇦🇪 UAE (0% tax)</option>
+                            <option value="singapore">🇸🇬 Singapore (0% on foreign income)</option>
+                            <option value="portugal">🇵🇹 Portugal NHR (10% flat rate)</option>
+                            <option value="cyprus">🇨🇾 Cyprus Non-Dom (5% on foreign income)</option>
+                            <option value="malta">🇲🇹 Malta (15% effective rate)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="results-grid">
+                    <div class="result-card current-tax">
+                        <h4>Current UK Tax</h4>
+                        <div class="result-amount" id="currentTax">£0</div>
+                        <div class="result-label">45% + National Insurance</div>
+                    </div>
+                    <div class="result-card optimized-tax">
+                        <h4>Optimized Tax</h4>
+                        <div class="result-amount" id="optimizedTax">£0</div>
+                        <div class="result-label" id="optimizedRate">Select destination</div>
+                    </div>
+                    <div class="result-card savings">
+                        <h4>Annual Savings</h4>
+                        <div class="result-amount" id="taxSavings">£0</div>
+                        <div class="result-label" id="savingsPercent">0% reduction</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- World Map Visualization -->
+    <section class="section">
+        <div class="container">
+            <h2 class="text-center mb-3">Global Tax Rate Reality</h2>
+            <p class="text-center text-large mb-3">Click on each region to explore tax optimization opportunities worldwide</p>
+            
+            <div class="world-map-container">
+                <div class="tax-zone tax-high" data-country="UK" data-rate="45%" data-info="One of the highest personal tax rates globally. High earners pay 45% plus 2% National Insurance." role="button" tabindex="0">
+                    UK: 45%
+                </div>
+                <div class="tax-zone tax-zero" data-country="UAE" data-rate="0%" data-info="Zero personal income tax. Residents pay no tax on salary, bonuses, or investment income." role="button" tabindex="0">
+                    UAE: 0%
+                </div>
+                <div class="tax-zone tax-low" data-country="Singapore" data-rate="0%*" data-info="Territorial tax system - 0% tax on foreign-sourced income for residents." role="button" tabindex="0">
+                    Singapore: 0%*
+                </div>
+                <div class="tax-zone tax-medium" data-country="Portugal" data-rate="10%*" data-info="NHR program offers 10% flat rate on foreign income for qualifying professionals." role="button" tabindex="0">
+                    Portugal: 10%*
+                </div>
+            </div>
+
+            <div class="grid grid-2 mt-3">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-d_oCNTAWZQ/1410c329420b743c7bc0f22402d1bec1e933963f642f8f0373e764d4a3e8a4ab78b3203187ae45e3ba7a848a49fc228802fbe957ab8efc94bb1d3dcdf1e5189d5d90954e4355175bcd87f9c2167ba53a9a033cc98eaf0d4bdade2b35426f876e5d7125e1" alt="Tax Rate Reality Map" style="width: 100%; border-radius: 15px;">
+                <div class="card">
+                    <h4><i class="fas fa-exclamation-triangle text-gold"></i> The Tax Haven Myth</h4>
+                    <p><strong>Conventional Wisdom:</strong> You need complex offshore structures and exotic tax havens.</p>
+                    <p><strong class="text-success">Reality:</strong> The biggest opportunities exist in mainstream, developed countries with territorial tax systems.</p>
+                    <ul class="mt-2">
+                        <li>Singapore: 0% on foreign income</li>
+                        <li>Portugal: NHR program (10% rate)</li>
+                        <li>UAE: Complete 0% personal tax</li>
+                        <li>Cyprus: 5% on foreign income</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The 183-Day Rule -->
+    <section class="section">
+        <div class="container">
+            <div class="text-center mb-3">
+                <h2>The 183-Day Rule: Your Strategic Advantage</h2>
+                <p class="text-large">Master the most powerful tool for legal tax optimization</p>
+            </div>
+
+            <div class="grid grid-2">
+                <div>
+                    <div class="card card-premium">
+                        <h3><i class="fas fa-calendar-alt text-gold"></i> How It Works</h3>
+                        <div class="mb-2">
+                            <h5 class="text-danger">Stay UNDER 183 days</h5>
+                            <p class="text-small">in high-tax countries like the UK to avoid becoming tax resident</p>
+                        </div>
+                        <div class="mb-2">
+                            <h5 class="text-success">Spend 183+ days</h5>
+                            <p class="text-small">in low-tax jurisdictions to establish beneficial tax residency</p>
+                        </div>
+                        <div>
+                            <h5 class="text-teal">Strategic Management</h5>
+                            <p class="text-small mb-0">allows you to legally optimize across multiple jurisdictions</p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h4>Optimization Patterns</h4>
+                        <p><strong class="text-gold">High earners typically:</strong></p>
+                        <ul>
+                            <li>Spend 182 days max in high-tax countries</li>
+                            <li>Establish 183+ day presence in territorial tax jurisdictions</li>
+                            <li>Use strategic presence management across 2-3 countries</li>
+                            <li>Maintain business continuity through digital operations</li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-_G524JdAF1/6c8b3309de8555bbf68112c79c632f493558698ba3d6f43fcc4057a365f8f40728129c726e7aa9ceeb2d4051b6bfcec83eeac91b97b81e1ad4614fe1184588a132f0dd7b6c254167d5cde9f185f53a8173e4d5bdb845290a36836b41a0bb9acbe2cddbfc" alt="Wealth Migration Visualization" style="width: 100%; border-radius: 15px;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics -->
+    <section class="section">
+        <div class="container">
+            <h2 class="text-center mb-3">The Wealth Migration Revolution</h2>
+            
+            <div class="stats-grid">
+                <div class="stat-card" tabindex="0" role="button">
+                    <div class="stat-icon">👥</div>
+                    <div class="stat-number" data-target="126000">0</div>
+                    <div class="stat-label">Millionaires relocated in 2023</div>
+                </div>
+                <div class="stat-card" tabindex="0" role="button">
+                    <div class="stat-icon">💰</div>
+                    <div class="stat-number" data-target="184000">0</div>
+                    <div class="stat-label">Average annual tax savings (£)</div>
+                </div>
+                <div class="stat-card" tabindex="0" role="button">
+                    <div class="stat-icon">📈</div>
+                    <div class="stat-number" data-target="58">0</div>
+                    <div class="stat-label">% of knowledge workers can work remotely</div>
+                </div>
+                <div class="stat-card" tabindex="0" role="button">
+                    <div class="stat-icon">🌍</div>
+                    <div class="stat-number" data-target="25">0</div>
+                    <div class="stat-label">Countries with 0% personal tax</div>
+                </div>
+            </div>
+
+            <div class="grid grid-3 mt-3">
+                <div class="card">
+                    <h4><i class="fas fa-trending-up text-success"></i> Trend #1: Policy Lag</h4>
+                    <p><strong>Government Systems:</strong> Designed for 20th-century workers</p>
+                    <p><strong class="text-gold">Opportunity:</strong> Massive arbitrage opportunities during transition period (2020-2030)</p>
+                </div>
+                <div class="card">
+                    <h4><i class="fas fa-globe text-teal"></i> Trend #2: Tax Competition</h4>
+                    <p><strong>Evidence:</strong> Countries introducing attractive programs to compete for mobile talent</p>
+                    <p><strong class="text-gold">Examples:</strong> UAE Golden Visa, Portugal NHR, Estonia e-Residency</p>
+                </div>
+                <div class="card">
+                    <h4><i class="fas fa-rocket text-gold"></i> Trend #3: Acceleration</h4>
+                    <p><strong>Pre-COVID:</strong> 42,000 millionaire relocations</p>
+                    <p><strong>Post-COVID:</strong> 126,000 millionaire relocations</p>
+                    <p><strong class="text-success">Projection 2030:</strong> 200,000+ annually</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Case Studies -->
+    <section class="section">
+        <div class="container">
+            <h2 class="text-center mb-3">Real Success Stories</h2>
+            <p class="text-center text-large mb-3">Learn from professionals who've already made the transition</p>
+            
+            <div class="case-study-grid">
+                <div class="case-card">
+                    <div class="case-title">The London Consultant Escape</div>
+                    <p>Management consultant earning £300K relocated to Dubai while maintaining UK clients through strategic structuring.</p>
+                    
+                    <div class="case-metrics">
+                        <div class="metric">
+                            <div class="metric-value">£135K</div>
+                            <div class="metric-label">Annual Tax Savings</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">12 months</div>
+                            <div class="metric-label">Transition Timeline</div>
+                        </div>
+                    </div>
+                    
+                    <p><strong class="text-success">Result:</strong> 45% → 0% tax rate, enhanced lifestyle, business growth, 100% client retention</p>
+                    
+                    <div class="card-success">
+                        <h5>Key Tactics:</h5>
+                        <ul class="text-small mb-0">
+                            <li>UAE freezone company setup</li>
+                            <li>Strategic client communication</li>
+                            <li>Presence optimization planning</li>
+                            <li>Compliance framework implementation</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="case-card">
+                    <div class="case-title">The Digital Nomad Strategy</div>
+                    <p>Software developer earning £150K optimized between Portugal NHR program and strategic remote work positioning.</p>
+                    
+                    <div class="case-metrics">
+                        <div class="metric">
+                            <div class="metric-value">£48K</div>
+                            <div class="metric-label">Annual Savings</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">8%</div>
+                            <div class="metric-label">Effective Tax Rate</div>
+                        </div>
+                    </div>
+                    
+                    <p><strong class="text-success">Result:</strong> 40% → 8% tax rate, European lifestyle, enhanced work-life balance</p>
+                    
+                    <div class="card-success">
+                        <h5>Key Tactics:</h5>
+                        <ul class="text-small mb-0">
+                            <li>Portugal D7 visa application</li>
+                            <li>NHR program qualification</li>
+                            <li>Remote work infrastructure</li>
+                            <li>EU mobility optimization</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="case-card">
+                    <div class="case-title">The Investment Professional</div>
+                    <p>Private equity partner relocated to Singapore for territorial tax advantages while expanding into Asian markets.</p>
+                    
+                    <div class="case-metrics">
+                        <div class="metric">
+                            <div class="metric-value">£250K+</div>
+                            <div class="metric-label">Annual Savings</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">0%</div>
+                            <div class="metric-label">Tax on Foreign Income</div>
+                        </div>
+                    </div>
+                    
+                    <p><strong class="text-success">Result:</strong> 45% → 0% on investments, Asian market access, career acceleration</p>
+                    
+                    <div class="card-success">
+                        <h5>Key Tactics:</h5>
+                        <ul class="text-small mb-0">
+                            <li>Employment pass strategy</li>
+                            <li>Territorial tax optimization</li>
+                            <li>Investment structure planning</li>
+                            <li>Regional market expansion</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-3">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-p9cAXDbtDm/93b8ef791189b7321224d141922b648c18e4c68ad2ecdea5523dcce4549a855a14f94e6f8668ff67b373284c596df84b48b58aae039508b069c8f2c3dc63eeeb2d1a24f6a36b2aaf8a1da56486a39d0932ad5280e2deb29cba8d58931f7e33ab52955337" alt="Nomadic Professional Lifestyle" style="width: 100%; max-width: 800px; border-radius: 15px; box-shadow: var(--shadow-soft);">
+            </div>
+        </div>
+    </section>
+
+    <!-- Implementation Roadmap -->
+    <section class="section">
+        <div class="container">
+            <h2 class="text-center mb-3">Your 12-Month Implementation Roadmap</h2>
+            <p class="text-center text-large mb-3">A proven framework for implementing geographic tax optimization</p>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker">1</div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">Months 1-3: Assessment & Strategy</h3>
+                        <p>Complete comprehensive tax optimization assessment, research target jurisdictions, engage professional advisors, and develop transition strategy.</p>
+                        
+                        <div class="grid grid-2 mt-2">
+                            <div>
+                                <h5 class="text-gold">Key Activities:</h5>
+                                <ul class="text-small">
+                                    <li>Personal tax audit</li>
+                                    <li>Jurisdiction research</li>
+                                    <li>Professional consultation</li>
+                                    <li>Strategy development</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h5 class="text-teal">Success Metrics:</h5>
+                                <ul class="text-small">
+                                    <li>Tax savings identified</li>
+                                    <li>Target jurisdictions selected</li>
+                                    <li>Professional team assembled</li>
+                                    <li>Timeline established</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker">2</div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">Months 4-6: Legal Structure Setup</h3>
+                        <p>Establish legal entities, apply for residency programs, set up international banking, and create compliance framework.</p>
+                        
+                        <div class="grid grid-2 mt-2">
+                            <div>
+                                <h5 class="text-gold">Key Activities:</h5>
+                                <ul class="text-small">
+                                    <li>Company formation</li>
+                                    <li>Residency applications</li>
+                                    <li>Banking setup</li>
+                                    <li>Compliance systems</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h5 class="text-teal">Success Metrics:</h5>
+                                <ul class="text-small">
+                                    <li>Legal structures active</li>
+                                    <li>Visa approvals received</li>
+                                    <li>Banking relationships established</li>
+                                    <li>Compliance framework operational</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker">3</div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">Months 7-9: Business Transition</h3>
+                        <p>Transition client relationships, implement new operating model, establish physical presence, maintain business continuity.</p>
+                        
+                        <div class="grid grid-2 mt-2">
+                            <div>
+                                <h5 class="text-gold">Key Activities:</h5>
+                                <ul class="text-small">
+                                    <li>Client communication</li>
+                                    <li>Operational transition</li>
+                                    <li>Physical relocation</li>
+                                    <li>System integration</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h5 class="text-teal">Success Metrics:</h5>
+                                <ul class="text-small">
+                                    <li>Client retention >90%</li>
+                                    <li>Business continuity maintained</li>
+                                    <li>Physical presence established</li>
+                                    <li>Operations optimized</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker">4</div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">Months 10-12: Optimization & Growth</h3>
+                        <p>Complete tax residency transition, optimize ongoing compliance, scale business operations, measure results and ROI.</p>
+                        
+                        <div class="grid grid-2 mt-2">
+                            <div>
+                                <h5 class="text-gold">Key Activities:</h5>
+                                <ul class="text-small">
+                                    <li>Tax residency completion</li>
+                                    <li>Compliance optimization</li>
+                                    <li>Business scaling</li>
+                                    <li>ROI measurement</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h5 class="text-teal">Success Metrics:</h5>
+                                <ul class="text-small">
+                                    <li>Tax savings realized</li>
+                                    <li>Compliance streamlined</li>
+                                    <li>Revenue growth achieved</li>
+                                    <li>ROI targets met</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-3">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-4hZsJTgLBu/82cc11f8eefcfd4f4709b1d3268cc9cbfe7929129fba55703cdf0f5bfb5bdffbe57f9987f60dfceb9e62ef6b45cca7f36726ca11d73e398bdf8aa52ad96507e91c2a137943dad8d3ab9ce4378eaa54004961246f935d4e1521b38a82ae243c89aca5d211" alt="Tax Haven Destination" style="width: 100%; max-width: 800px; border-radius: 15px; box-shadow: var(--shadow-soft);">
+            </div>
+        </div>
+    </section>
+
+    <!-- Action Items -->
+    <section class="section">
+        <div class="container">
+            <h2 class="text-center mb-3">Your Immediate Action Plan</h2>
+            
+            <div class="grid grid-3">
+                <div class="card">
+                    <h4><i class="fas fa-clock text-gold"></i> Today (5 minutes)</h4>
+                    <ul>
+                        <li>Complete the tax calculator above</li>
+                        <li>Identify your potential annual savings</li>
+                        <li>Bookmark 3 target jurisdictions</li>
+                        <li>Share this lesson with colleagues</li>
+                    </ul>
+                </div>
+
+                <div class="card card-premium">
+                    <h4><i class="fas fa-calendar-week text-gold"></i> This Week</h4>
+                    <ul>
+                        <li>Research detailed tax rates for target countries</li>
+                        <li>Assess your professional mobility</li>
+                        <li>Connect with international tax advisors</li>
+                        <li>Review current client contract terms</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4><i class="fas fa-calendar-alt text-gold"></i> This Month</h4>
+                    <ul>
+                        <li>Schedule consultation with tax specialist</li>
+                        <li>Begin jurisdiction comparison analysis</li>
+                        <li>Assess business model adaptability</li>
+                        <li>Create preliminary transition timeline</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="text-center mt-3">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-RMr5XeLbAD/4b7d4aa0d63b233c21cd9fe83aa1cb3eea5caa36ef0a2d26dee099e7c98bf57496d1a5f53d3260620f1d1e293edbcc126530759c166d65e3035ceed31cb37bb85314d0d503e75814b16876841ed1311e11eaaf818c51aa9435db3789b1a03a5f1ba17faa" alt="Professional Network Meeting" style="width: 100%; max-width: 800px; border-radius: 15px; box-shadow: var(--shadow-soft);">
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Takeaways -->
+    <section class="section">
+        <div class="container">
+            <div class="card card-premium">
+                <h2 class="text-center mb-3"><i class="fas fa-key text-gold"></i> Key Takeaways</h2>
+                
+                <div class="grid grid-2">
+                    <div>
+                        <h4 class="text-gold">🎯 Core Principles</h4>
+                        <ul>
+                            <li><strong>Geography > Complexity:</strong> Location matters more than elaborate structures</li>
+                            <li><strong>183-Day Rule:</strong> Master strategic presence management</li>
+                            <li><strong>Timing Advantage:</strong> Policy gaps create unprecedented opportunities</li>
+                            <li><strong>Digital Enablement:</strong> Remote work unlocks global optimization</li>
+                        </ul>
+
+                        <h4 class="text-teal mt-3">💡 Counterintuitive Insights</h4>
+                        <ul>
+                            <li>Mainstream countries offer better opportunities than "tax havens"</li>
+                            <li>You don't need to live somewhere 12 months for tax benefits</li>
+                            <li>Digital nomads have 10-15x more optimization opportunities</li>
+                            <li>The biggest barrier is mindset, not complexity</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-success">📊 Success Metrics</h4>
+                        <ul>
+                            <li><strong>Tax Savings:</strong> £75K-£500K+ annually achievable</li>
+                            <li><strong>Implementation Time:</strong> 12 months average</li>
+                            <li><strong>Client Retention:</strong> 90%+ with proper planning</li>
+                            <li><strong>ROI:</strong> 10-20x investment in professional advice</li>
+                        </ul>
+
+                        <h4 class="text-gold mt-3">🚀 Next Level</h4>
+                        <p><strong>Coming in Lesson 2:</strong> "Jurisdiction Selection: Your Tax Haven Shortlist"</p>
+                        <ul>
+                            <li>Detailed country-by-country analysis</li>
+                            <li>Lifestyle vs. tax optimization trade-offs</li>
+                            <li>Residency requirement comparisons</li>
+                            <li>Professional recognition considerations</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta">
+        <div class="container text-center">
+            <h2>Ready to Unlock Your Geographic Advantage?</h2>
+            <p class="text-large mb-2">Join thousands of professionals who have already optimized their tax burden through strategic geographic positioning.</p>
+            
+            <div class="cta-buttons">
+                <a href="#" class="btn btn-secondary" onclick="startAssessment()">
+                    <i class="fas fa-calculator"></i> Get Free Tax Assessment
+                </a>
+                <a href="#" class="btn btn-secondary" onclick="downloadGuide()">
+                    <i class="fas fa-download"></i> Download Complete Guide
+                </a>
+            </div>
+
+            <p class="mt-2 text-small">
+                <strong>Limited Time:</strong> Free 30-minute strategy consultation for qualified professionals earning £75K+
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="section-sm">
+        <div class="container">
+            <div class="text-center">
+                <p class="text-muted text-small">
+                    <strong>Disclaimer:</strong> This lesson is for educational purposes only. Tax optimization strategies vary by individual circumstances. 
+                    Always consult with qualified international tax advisors before implementing any strategies discussed.
+                </p>
+                
+                <div class="mt-2">
+                    <p class="text-small">
+                        <strong>Next Lesson:</strong> 
+                        <a href="#" class="text-gold">Jurisdiction Selection: Your Tax Haven Shortlist</a> | 
+                        <strong>Course:</strong> 
+                        <a href="#" class="text-teal">Off Shore Tax Strategies</a> | 
+                        <strong>Instructor:</strong> 
+                        <a href="#" class="text-gold">Will Richardson</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Action Button -->
+    <div class="fab" onclick="scrollToTop()" title="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Progress Bar
+        function updateProgressBar() {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById("progressBar").style.width = scrolled + "%";
+        }
+
+        // Tax Calculator
+        function initializeTaxCalculator() {
+            const incomeInput = document.getElementById('income');
+            const destinationSelect = document.getElementById('destination');
+            const currentTaxElement = document.getElementById('currentTax');
+            const optimizedTaxElement = document.getElementById('optimizedTax');
+            const savingsElement = document.getElementById('taxSavings');
+            const optimizedRateElement = document.getElementById('optimizedRate');
+            const savingsPercentElement = document.getElementById('savingsPercent');
+
+            const taxRates = {
+                uk: 0.47, // 45% + 2% NI
+                uae: 0,
+                singapore: 0,
+                portugal: 0.10,
+                cyprus: 0.05,
+                malta: 0.15
+            };
+
+            const jurisdictionNames = {
+                uae: '0% UAE Rate',
+                singapore: '0% on Foreign Income',
+                portugal: '10% NHR Rate', 
+                cyprus: '5% Non-Dom Rate',
+                malta: '15% Effective Rate'
+            };
+
+            function calculateTax() {
+                const income = parseFloat(incomeInput.value) || 0;
+                const destination = destinationSelect.value;
+
+                if (income <= 0) {
+                    currentTaxElement.textContent = '£0';
+                    optimizedTaxElement.textContent = '£0';
+                    savingsElement.textContent = '£0';
+                    optimizedRateElement.textContent = 'Select destination';
+                    savingsPercentElement.textContent = '0% reduction';
+                    return;
+                }
+
+                const currentTax = income * taxRates.uk;
+                const optimizedTax = destination ? income * taxRates[destination] : 0;
+                const savings = currentTax - optimizedTax;
+                const savingsPercent = destination ? Math.round((savings / currentTax) * 100) : 0;
+
+                // Animate numbers
+                animateNumber(currentTaxElement, Math.round(currentTax));
+                animateNumber(optimizedTaxElement, Math.round(optimizedTax));
+                animateNumber(savingsElement, Math.round(savings));
+
+                // Update labels
+                optimizedRateElement.textContent = destination ? jurisdictionNames[destination] : 'Select destination';
+                savingsPercentElement.textContent = `${savingsPercent}% reduction`;
+            }
+
+            incomeInput.addEventListener('input', calculateTax);
+            destinationSelect.addEventListener('change', calculateTax);
+        }
+
+        // Animate Numbers
+        function animateNumber(element, target) {
+            const duration = 1000;
+            const start = Date.now();
+            const startValue = 0;
+
+            function update() {
+                const elapsed = Date.now() - start;
+                const progress = Math.min(elapsed / duration, 1);
+                const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+                const current = Math.round(startValue + (target - startValue) * easeOutQuart);
+                
+                element.textContent = '£' + current.toLocaleString();
+
+                if (progress < 1) {
+                    requestAnimationFrame(update);
+                }
+            }
+            update();
+        }
+
+        // Statistics Animation
+        function animateStatistics() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const numbers = entry.target.querySelectorAll('.stat-number');
+                        numbers.forEach(numberElement => {
+                            if (!numberElement.dataset.animated) {
+                                const target = parseInt(numberElement.dataset.target);
+                                animateStatNumber(numberElement, target);
+                                numberElement.dataset.animated = 'true';
+                            }
+                        });
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            const statsSection = document.querySelector('.stats-grid');
+            if (statsSection) observer.observe(statsSection);
+        }
+
+        function animateStatNumber(element, target) {
+            const duration = 2000;
+            const start = Date.now();
+
+            function update() {
+                const elapsed = Date.now() - start;
+                const progress = Math.min(elapsed / duration, 1);
+                const easeOut = 1 - Math.pow(1 - progress, 4);
+                const current = Math.round(target * easeOut);
+                
+                element.textContent = current.toLocaleString();
+
+                if (progress < 1) {
+                    requestAnimationFrame(update);
+                }
+            }
+            update();
+        }
+
+        // World Map Interactions
+        function initializeWorldMap() {
+            const taxZones = document.querySelectorAll('.tax-zone');
+            
+            taxZones.forEach(zone => {
+                zone.addEventListener('click', function() {
+                    // Remove previous selections
+                    taxZones.forEach(z => z.style.transform = '');
+                    
+                    // Highlight selected
+                    this.style.transform = 'scale(1.3)';
+                    
+                    // Show info
+                    const country = this.dataset.country;
+                    const rate = this.dataset.rate;
+                    const info = this.dataset.info;
+                    
+                    // Could show modal or update calculator
+                    console.log(`Selected ${country}: ${rate} - ${info}`);
+                });
+
+                zone.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        this.click();
+                    }
+                });
+            });
+        }
+
+        // Scroll to Top
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // CTA Functions
+        function startAssessment() {
+            alert('🎯 Tax Assessment Started!\n\nThis would normally redirect to a comprehensive assessment. For this demo, imagine a detailed questionnaire covering:\n\n• Current income and tax situation\n• Professional mobility options\n• Target jurisdictions\n• Timeline preferences\n• Risk tolerance\n\nResult: Personalized strategy worth £50K-£500K+ in annual savings.');
+        }
+
+        function downloadGuide() {
+            alert('📋 Complete Guide Downloaded!\n\nIn the real implementation, this would download a comprehensive PDF guide:\n\n• Step-by-step jurisdiction selection\n• Legal compliance checklists\n• Detailed case studies\n• Professional network directory\n• Implementation timelines\n• Risk mitigation strategies\n\nCustomized based on your assessment results.');
+        }
+
+        // Initialize Everything
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add scroll listener
+            window.addEventListener('scroll', updateProgressBar);
+            
+            // Initialize components
+            initializeTaxCalculator();
+            initializeWorldMap();
+            animateStatistics();
+
+            // Add keyboard navigation support
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Tab') {
+                    document.body.classList.add('keyboard-navigation');
+                }
+            });
+
+            document.addEventListener('mousedown', function() {
+                document.body.classList.remove('keyboard-navigation');
+            });
+
+            console.log('🌍 The Offshore Advantage lesson loaded successfully!');
+        });
+
+        // Performance monitoring
+        if ('performance' in window) {
+            window.addEventListener('load', function() {
+                const loadTime = performance.now();
+                console.log(`⚡ Page loaded in ${Math.round(loadTime)}ms`);
+            });
+        }
+    </script>
+</body>
+</html>
