@@ -1,0 +1,1551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tax Treaty Networks: Leveraging International Agreements | Rule Benders Academy</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --void-black: #000000;
+            --treaty-blue: #0057FF;
+            --power-orange: #FF5733;
+            --enforcement-silver: #C0C0C0;
+            --success-gold: #FFD700;
+            --text-white: #FFFFFF;
+            --text-gray: #B0B0B0;
+            --accent-dark: #1a1a1a;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--void-black);
+            color: var(--text-white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Typography */
+        h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--treaty-blue), var(--power-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 600;
+            margin-bottom: 2rem;
+            color: var(--treaty-blue);
+            border-left: 4px solid var(--power-orange);
+            padding-left: 1rem;
+        }
+
+        h3 {
+            font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+            font-weight: 500;
+            margin-bottom: 1rem;
+            color: var(--power-orange);
+        }
+
+        h4 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--enforcement-silver);
+        }
+
+        p {
+            margin-bottom: 1.2rem;
+            color: var(--text-gray);
+            font-size: 1.1rem;
+        }
+
+        strong {
+            color: var(--text-white);
+            font-weight: 600;
+        }
+
+        /* Layout Components */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .lesson-header {
+            background: radial-gradient(circle at center, rgba(0, 87, 255, 0.15) 0%, var(--void-black) 70%);
+            padding: 4rem 0 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .lesson-subtitle {
+            font-size: 1.3rem;
+            color: var(--power-orange);
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .lesson-intro {
+            font-size: 1.2rem;
+            color: var(--text-white);
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            line-height: 1.7;
+        }
+
+        .section {
+            padding: 3rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        /* Interactive Panels */
+        .insight-panel {
+            background: linear-gradient(135deg, rgba(0, 87, 255, 0.1), rgba(0, 87, 255, 0.05));
+            border: 1px solid rgba(0, 87, 255, 0.3);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            position: relative;
+            backdrop-filter: blur(10px);
+        }
+
+        .warning-panel {
+            background: linear-gradient(135deg, rgba(255, 87, 51, 0.1), rgba(255, 87, 51, 0.05));
+            border: 1px solid rgba(255, 87, 51, 0.3);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .success-panel {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 215, 0, 0.05));
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .quote-panel {
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 4px solid var(--treaty-blue);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            font-style: italic;
+            position: relative;
+        }
+
+        .quote-panel::before {
+            content: '"';
+            font-size: 3rem;
+            color: var(--treaty-blue);
+            position: absolute;
+            top: -0.5rem;
+            left: 0.5rem;
+        }
+
+        /* Grid Systems */
+        .grid {
+            display: grid;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .grid-2 {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+
+        .grid-3 {
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+
+        /* Three-Tier Implementation Visualization */
+        .tier-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .tier {
+            background: linear-gradient(135deg, rgba(0, 87, 255, 0.15), rgba(0, 87, 255, 0.05));
+            border: 2px solid var(--treaty-blue);
+            border-radius: 12px;
+            padding: 2rem;
+            position: relative;
+            transition: all 0.3s ease;
+            min-height: 280px;
+        }
+
+        .tier:hover {
+            transform: translateY(-5px);
+            border-color: var(--power-orange);
+            box-shadow: 0 10px 30px rgba(0, 87, 255, 0.2);
+        }
+
+        .tier-number {
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            background: var(--treaty-blue);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+
+        .tier h3 {
+            margin-top: 1rem;
+        }
+
+        .tier ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .tier li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--text-gray);
+        }
+
+        .tier li::before {
+            content: '→';
+            color: var(--power-orange);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-top: 1rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--treaty-blue), var(--power-orange));
+            border-radius: 3px;
+            transition: width 0.8s ease;
+        }
+
+        /* Jurisdiction Cards */
+        .jurisdiction-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .jurisdiction-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            border: 1px solid rgba(192, 192, 192, 0.3);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .jurisdiction-card:hover {
+            border-color: var(--treaty-blue);
+            transform: scale(1.05);
+        }
+
+        .jurisdiction-card.power-hub {
+            border-color: var(--power-orange);
+            background: linear-gradient(135deg, rgba(255, 87, 51, 0.2), rgba(255, 87, 51, 0.05));
+        }
+
+        .jurisdiction-card.emerging {
+            border-color: var(--success-gold);
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 215, 0, 0.05));
+        }
+
+        .jurisdiction-card.declining {
+            opacity: 0.7;
+            border-color: rgba(255, 87, 51, 0.5);
+        }
+
+        .jurisdiction-flag {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .treaty-count {
+            color: var(--treaty-blue);
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin: 0.5rem 0;
+        }
+
+        /* Assessment Tools */
+        .assessment-container {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            color: var(--treaty-blue);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-input, .form-select {
+            width: 100%;
+            padding: 0.75rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .form-input:focus, .form-select:focus {
+            outline: none;
+            border-color: var(--treaty-blue);
+            box-shadow: 0 0 10px rgba(0, 87, 255, 0.3);
+        }
+
+        .checkbox-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: var(--treaty-blue);
+        }
+
+        /* Buttons */
+        .btn-primary {
+            background: linear-gradient(135deg, var(--treaty-blue), #003DCC);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0.5rem;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 87, 255, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--power-orange);
+            padding: 1rem 2rem;
+            border: 2px solid var(--power-orange);
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0.5rem;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-secondary:hover {
+            background: var(--power-orange);
+            color: var(--void-black);
+        }
+
+        /* Risk Meters */
+        .risk-meter {
+            width: 100%;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+
+        .risk-fill {
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+
+        .risk-low { background: linear-gradient(90deg, var(--treaty-blue), #00AAFF); }
+        .risk-medium { background: linear-gradient(90deg, var(--success-gold), #FFE500); }
+        .risk-high { background: linear-gradient(90deg, var(--power-orange), #FF3300); }
+
+        /* Lists */
+        ul {
+            padding-left: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+            color: var(--text-gray);
+        }
+
+        /* Tables */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .comparison-table th {
+            background: var(--treaty-blue);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .comparison-table td {
+            padding: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-gray);
+        }
+
+        .comparison-table tr:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Statistics Display */
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--power-orange);
+            display: block;
+        }
+
+        .stat-label {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .section {
+                padding: 2rem 0;
+            }
+            
+            .grid {
+                gap: 1rem;
+            }
+            
+            .tier-container {
+                gap: 1rem;
+            }
+            
+            .tier {
+                min-height: auto;
+            }
+            
+            .jurisdiction-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 1rem;
+            }
+        }
+
+        /* Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* High Contrast Mode */
+        @media (prefers-contrast: high) {
+            :root {
+                --treaty-blue: #4D9FFF;
+                --power-orange: #FF6B47;
+                --text-gray: #FFFFFF;
+            }
+        }
+
+        /* Focus States */
+        button:focus, 
+        input:focus, 
+        select:focus,
+        .jurisdiction-card:focus {
+            outline: 2px solid var(--treaty-blue);
+            outline-offset: 2px;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        /* Network Visualization */
+        .network-container {
+            position: relative;
+            height: 400px;
+            background: radial-gradient(circle, rgba(0, 87, 255, 0.1) 0%, transparent 70%);
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 2rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .network-node {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--treaty-blue), rgba(0, 87, 255, 0.5));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            font-size: 1.2rem;
+        }
+
+        .network-node:hover {
+            transform: scale(1.2);
+            box-shadow: 0 0 20px rgba(0, 87, 255, 0.5);
+        }
+
+        .network-node.power {
+            background: linear-gradient(135deg, var(--power-orange), rgba(255, 87, 51, 0.5));
+        }
+    </style>
+</head>
+<body>
+    <header class="lesson-header">
+        <div class="container">
+            <h1>Tax Treaty Networks: Leveraging International Agreements</h1>
+            <p class="lesson-subtitle">Master the art of strategic treaty optimization in the modern enforcement landscape</p>
+            <div class="lesson-intro">
+                <p><strong>The landscape has changed.</strong> Traditional "treaty shopping" is dead, but sophisticated treaty optimization is more powerful than ever. Learn how to navigate the new enforcement reality while building bulletproof structures that deliver real results.</p>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Introduction: The Enforcement Revolution -->
+        <section class="section">
+            <h2>The Enforcement Revolution That Changed Everything</h2>
+            
+            <div class="quote-panel">
+                Sarah, a UK management consultant, thought she'd cracked the code. Dutch holding company, Singapore billing entity, UAE residence card. On paper, a 12% effective tax rate. Then the letters started arriving from three different revenue authorities, each questioning her structure...
+            </div>
+
+            <p>If you're still thinking about tax treaties the way most consultants did five years ago, you're already behind. The enforcement landscape underwent a seismic shift between 2018 and 2024, and most practitioners are still operating with outdated playbooks.</p>
+
+            <div class="stat-grid">
+                <div class="stat-card">
+                    <span class="stat-number">340%</span>
+                    <span class="stat-label">Increase in treaty claim audits since 2019</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">73%</span>
+                    <span class="stat-label">Traditional planners caught off-guard</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">95+</span>
+                    <span class="stat-label">Jurisdictions implementing Principal Purpose Test</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">18-24</span>
+                    <span class="stat-label">Months average processing time</span>
+                </div>
+            </div>
+
+            <h3>The Three Seismic Shifts</h3>
+
+            <div class="grid grid-3">
+                <div class="insight-panel">
+                    <h4>1. Manual to Automated Enforcement</h4>
+                    <p>Revenue authorities now use AI-powered systems that can flag treaty claims within 48 hours. The Common Reporting Standard (CRS) provides real-time data matching across 130+ jurisdictions.</p>
+                </div>
+                <div class="warning-panel">
+                    <h4>2. Form to Substance Requirements</h4>
+                    <p>The Principal Purpose Test (PPT) means technical compliance isn't enough. You need genuine economic substance, not just legal structures.</p>
+                </div>
+                <div class="insight-panel">
+                    <h4>3. Reactive to Proactive Response</h4>
+                    <p>Revenue authorities now require advance rulings and comprehensive documentation before you can claim treaty benefits, not after.</p>
+                </div>
+            </div>
+
+            <div class="success-panel">
+                <h4>The Opportunity Hidden in the Chaos</h4>
+                <p>While 73% of traditional planners struggle with the new reality, sophisticated practitioners who understand substance requirements are seeing better results than ever. The key isn't avoiding enforcement—it's mastering it.</p>
+            </div>
+        </section>
+
+        <!-- The Consultant Advantage -->
+        <section class="section">
+            <h2>Why Consultants Have a Hidden Advantage</h2>
+
+            <p>While multinational employees struggle with permanent establishment rules and corporate compliance requirements, independent consultants have three structural advantages that most don't realize they possess.</p>
+
+            <div class="grid grid-2">
+                <div>
+                    <h3>The Three Consultant Advantages</h3>
+                    <ul>
+                        <li><strong>Base Fixed Place Flexibility:</strong> Your home office can qualify as genuine business premises under most treaties</li>
+                        <li><strong>Client Jurisdiction Planning:</strong> You can structure engagement terms to maximize treaty benefits</li>
+                        <li><strong>Personal Services Provisions:</strong> Articles 14-15 offer more flexibility for independent contractors than employment income rules</li>
+                    </ul>
+                </div>
+                <div class="assessment-container">
+                    <h4>Quick Assessment: Your Current Position</h4>
+                    <div class="form-group">
+                        <label class="form-label">Current Structure Type</label>
+                        <select class="form-select" id="currentStructure">
+                            <option value="">Select your current setup</option>
+                            <option value="sole-trader">Sole Trader/Individual</option>
+                            <option value="domestic-company">Domestic Company Only</option>
+                            <option value="simple-offshore">Simple Offshore Structure</option>
+                            <option value="complex-multi">Complex Multi-jurisdictional</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Annual Consulting Income (GBP)</label>
+                        <input type="number" class="form-input" id="annualIncome" placeholder="250000">
+                    </div>
+                    <button class="btn-primary" onclick="calculateOptimization()">Calculate Optimization Potential</button>
+                    <div id="optimizationResult" style="display: none; margin-top: 1rem;">
+                        <div class="success-panel">
+                            <h4>Optimization Analysis</h4>
+                            <p id="optimizationText">Results will appear here</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Three-Tier Implementation Strategy -->
+        <section class="section">
+            <h2>The Three-Tier Implementation Strategy</h2>
+
+            <p>Successful treaty optimization isn't about finding loopholes—it's about building genuine economic substance while maximizing available benefits. Here's the proven framework that transforms consultant practices from compliance risks into optimization success stories.</p>
+
+            <div class="tier-container">
+                <div class="tier">
+                    <div class="tier-number">1</div>
+                    <h3>Foundation (Months 1-3)</h3>
+                    <p><strong>Focus:</strong> Establish bulletproof substance and residence</p>
+                    <ul>
+                        <li>Document 183+ days physical presence with evidence trail</li>
+                        <li>Establish substantial economic ties (bank accounts, professional registrations)</li>
+                        <li>Incorporate professional services entity with genuine business purpose</li>
+                        <li>Create local business presence (office, contracts, relationships)</li>
+                        <li>Avoid dual residence positions requiring tie-breaker applications</li>
+                    </ul>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 33%;"></div>
+                    </div>
+                </div>
+
+                <div class="tier">
+                    <div class="tier-number">2</div>
+                    <h3>Operational Excellence (Months 4-12)</h3>
+                    <p><strong>Focus:</strong> Systematic optimization and risk management</p>
+                    <ul>
+                        <li>Map client locations against your treaty network</li>
+                        <li>Structure engagement terms to maximize treaty benefits</li>
+                        <li>Implement real-time expense and time tracking systems</li>
+                        <li>Monitor PE risk through activity tracking and time allocation</li>
+                        <li>Create contemporaneous evidence of business decisions</li>
+                    </ul>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 66%;"></div>
+                    </div>
+                </div>
+
+                <div class="tier">
+                    <div class="tier-number">3</div>
+                    <h3>Advanced Optimization (Year 2+)</h3>
+                    <p><strong>Focus:</strong> Multi-jurisdictional benefit stacking</p>
+                    <ul>
+                        <li>Evaluate IP holding structures for recurring income</li>
+                        <li>Consider management company arrangements for operational efficiency</li>
+                        <li>Implement group treasury functions for cash flow optimization</li>
+                        <li>Master "treaty network amplification" for compound benefits</li>
+                        <li>Build advisory relationships for complex structuring decisions</li>
+                    </ul>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 100%;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="warning-panel">
+                <h4>Critical Implementation Note</h4>
+                <p>Don't skip Tier 1 to jump to advanced strategies. Revenue authorities now audit substance retroactively. Build your foundation properly, or risk having your entire structure challenged.</p>
+            </div>
+        </section>
+
+        <!-- Jurisdiction Power Mapping -->
+        <section class="section">
+            <h2>Jurisdiction Power Mapping: The New Global Hierarchy</h2>
+
+            <p>Not all treaty networks are created equal. The power dynamics shifted dramatically since 2018, with new centers emerging while traditional hubs face increased scrutiny. Understanding these changes is critical for strategic positioning.</p>
+
+            <h3>The Power Centers vs. The Declining Empires</h3>
+
+            <div class="jurisdiction-grid">
+                <div class="jurisdiction-card power-hub">
+                    <div class="jurisdiction-flag">🇦🇪</div>
+                    <h4>UAE</h4>
+                    <div class="treaty-count">45+ Treaties</div>
+                    <div class="risk-meter">
+                        <div class="risk-fill risk-low" style="width: 85%;"></div>
+                    </div>
+                    <p>Aggressive expansion targeting professional services. 0% tax rate with substance requirements.</p>
+                </div>
+
+                <div class="jurisdiction-card emerging">
+                    <div class="jurisdiction-flag">🇪🇪</div>
+                    <h4>Estonia</h4>
+                    <div class="treaty-count">60+ Treaties</div>
+                    <div class="risk-meter">
+                        <div class="risk-fill risk-low" style="width: 90%;"></div>
+                    </div>
+                    <p>Digital nomad visa integration with substance-light requirements and EU access.</p>
+                </div>
+
+                <div class="jurisdiction-card emerging">
+                    <div class="jurisdiction-flag">🇵🇹</div>
+                    <h4>Portugal</h4>
+                    <div class="treaty-count">70+ Treaties</div>
+                    <div class="risk-meter">
+                        <div class="risk-fill risk-low" style="width: 75%;"></div>
+                    </div>
+                    <p>NHR program specifically targeting UK/US professionals with favorable rates.</p>
+                </div>
+
+                <div class="jurisdiction-card">
+                    <div class="jurisdiction-flag">🇳🇱</div>
+                    <h4>Netherlands</h4>
+                    <div class="treaty-count">67 Treaties</div>
+                    <div class="risk-meter">
+                        <div class="risk-fill risk-medium" style="width: 70%;"></div>
+                    </div>
+                    <p>Quality over quantity. Extensive network but increased substance requirements.</p>
+                </div>
+
+                <div class="jurisdiction-card">
+                    <div class="jurisdiction-flag">🇸🇬</div>
+                    <h4>Singapore</h4>
+                    <div class="treaty-count">94+ Treaties</div>
+                    <div class="risk-meter">
+                        <div class="risk-fill risk-low" style="width: 80%;"></div>
+                    </div>
+                    <p>APAC gateway with territorial tax system and political stability.</p>
+                </div>
+
+                <div class="jurisdiction-card declining">
+                    <div class="jurisdiction-flag">🇨🇭</div>
+                    <h4>Switzerland</h4>
+                    <div class="treaty-count">80+ Treaties</div>
+                    <div class="risk-meter">
+                        <div class="risk-fill risk-medium" style="width: 60%;"></div>
+                    </div>
+                    <p>MLI implementation reduced planning flexibility. Higher barriers to entry.</p>
+                </div>
+            </div>
+
+            <div class="insight-panel">
+                <h4>The Quality vs. Quantity Revelation</h4>
+                <p>Research shows that jurisdictions with fewer, higher-quality treaties often provide better consultant outcomes than those with extensive but lower-quality networks. The Netherlands (67 treaties) consistently outperforms Singapore (94 treaties) for consultant services due to:</p>
+                <ul>
+                    <li>Stronger substance requirements that create genuine business nexus</li>
+                    <li>More predictable ruling processes and timeline certainty</li>
+                    <li>Lower administrative burden for ongoing compliance management</li>
+                </ul>
+            </div>
+
+            <h3>Treaty Selection Decision Framework</h3>
+
+            <div class="assessment-container">
+                <h4>Interactive Jurisdiction Selector</h4>
+                <div class="grid grid-2">
+                    <div class="form-group">
+                        <label class="form-label">Primary Client Geography</label>
+                        <select class="form-select" id="clientGeography">
+                            <option value="">Select primary region</option>
+                            <option value="uk-europe">UK & Europe</option>
+                            <option value="us-americas">US & Americas</option>
+                            <option value="apac">Asia Pacific</option>
+                            <option value="middle-east">Middle East & Africa</option>
+                            <option value="global">Global (no primary region)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Service Delivery Model</label>
+                        <select class="form-select" id="deliveryModel">
+                            <option value="">Select model</option>
+                            <option value="remote-only">Fully remote delivery</option>
+                            <option value="periodic-travel">Periodic client site visits</option>
+                            <option value="project-based">Extended project deployments</option>
+                            <option value="mixed">Mixed delivery model</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="btn-primary" onclick="generateRecommendations()">Get Jurisdiction Recommendations</button>
+                <div id="jurisdictionRecommendations" style="display: none; margin-top: 1rem;"></div>
+            </div>
+        </section>
+
+        <!-- Substance Building -->
+        <section class="section">
+            <h2>Substance Building: The Foundation That Everything Depends On</h2>
+
+            <p>The Principal Purpose Test destroyed traditional treaty shopping, but smart consultants didn't retreat—they evolved. Modern tax optimization isn't about avoiding substance requirements; it's about building them strategically while maximizing treaty benefits.</p>
+
+            <div class="quote-panel">
+                One consultant's substance building was so thorough that when audited simultaneously by three revenue authorities, all three ruled in his favor. His secret? A documentation system that creates evidence automatically as part of normal business operations.
+            </div>
+
+            <h3>The 50% Rule and Why It Matters</h3>
+
+            <p>Revenue authorities now apply economic substance tests that require <strong>at least 50% of key business decisions</strong> to occur in your treaty jurisdiction. This isn't about time spent—it's about where value-creating activities happen.</p>
+
+            <div class="grid grid-2">
+                <div class="insight-panel">
+                    <h4>Critical Business Activities</h4>
+                    <ul>
+                        <li>Client acquisition and relationship management</li>
+                        <li>Service design and methodology development</li>
+                        <li>Key personnel hiring and management decisions</li>
+                        <li>Intellectual property creation and licensing</li>
+                        <li>Risk management and insurance decisions</li>
+                        <li>Banking, treasury, and significant financial decisions</li>
+                    </ul>
+                </div>
+                <div class="warning-panel">
+                    <h4>Common Substance Building Mistakes</h4>
+                    <ul>
+                        <li>Focusing on time spent rather than decisions made</li>
+                        <li>Creating artificial activities without commercial purpose</li>
+                        <li>Inadequate documentation of decision-making processes</li>
+                        <li>Inconsistent residence claims across jurisdictions</li>
+                        <li>Post-hoc justifications for pre-existing structures</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>The Four-Phase Substance Building Process</h3>
+
+            <div class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Phase</th>
+                        <th>Timeline</th>
+                        <th>Key Activities</th>
+                        <th>Evidence Required</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Physical Presence</strong></td>
+                        <td>Month 1-2</td>
+                        <td>Office selection, residence establishment, service provider relationships</td>
+                        <td>Lease agreements, utility bills, professional registrations</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Business Activity</strong></td>
+                        <td>Month 2-4</td>
+                        <td>Key personnel positioning, management decisions, local contracts</td>
+                        <td>Employment agreements, board minutes, contract execution records</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Economic Integration</strong></td>
+                        <td>Month 3-6</td>
+                        <td>Banking relationships, regulatory compliance, business networks</td>
+                        <td>Bank statements, regulatory filings, professional memberships</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Evidence Architecture</strong></td>
+                        <td>Ongoing</td>
+                        <td>Documentation systems, decision tracking, compliance monitoring</td>
+                        <td>Decision logs, communication records, activity tracking</td>
+                    </tr>
+                </tbody>
+            </div>
+
+            <div class="assessment-container">
+                <h4>Substance Building Self-Assessment</h4>
+                <p>Check all activities you have properly documented and can evidence:</p>
+                <div class="checkbox-list">
+                    <label class="checkbox-item">
+                        <input type="checkbox" id="substance1">
+                        <span>183+ days physical presence with evidence trail</span>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" id="substance2">
+                        <span>Local office or dedicated business premises</span>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" id="substance3">
+                        <span>Key business decisions made and documented locally</span>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" id="substance4">
+                        <span>Local bank accounts with significant business activity</span>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" id="substance5">
+                        <span>Local service providers and professional relationships</span>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" id="substance6">
+                        <span>Comprehensive documentation system in place</span>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" id="substance7">
+                        <span>Consistent residence claims across all jurisdictions</span>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" id="substance8">
+                        <span>Independent business justification for structural decisions</span>
+                    </label>
+                </div>
+                <button class="btn-primary" onclick="assessSubstance()">Assess My Risk Level</button>
+                <div id="substanceResult" style="display: none; margin-top: 1rem;"></div>
+            </div>
+        </section>
+
+        <!-- Risk Management and Red Flags -->
+        <section class="section">
+            <h2>Risk Management: Avoiding the Enforcement Magnets</h2>
+
+            <p>Even with solid substance, certain patterns trigger immediate scrutiny from revenue authorities. Understanding these "enforcement magnets" is critical for maintaining a defensible position.</p>
+
+            <h3>High-Risk Patterns That Trigger Audits</h3>
+
+            <div class="grid grid-3">
+                <div class="warning-panel">
+                    <h4>Treaty Shopping Red Flags</h4>
+                    <ul>
+                        <li>Incorporating solely for treaty access</li>
+                        <li>No genuine business activities in treaty jurisdiction</li>
+                        <li>Artificial arrangements lacking commercial substance</li>
+                        <li>Disproportionate benefits relative to actual business activity</li>
+                    </ul>
+                </div>
+                <div class="warning-panel">
+                    <h4>Enforcement Triggers</h4>
+                    <ul>
+                        <li>Inconsistent residency claims across jurisdictions</li>
+                        <li>Historical patterns suggesting tax-driven decisions</li>
+                        <li>Missing contemporaneous documentation</li>
+                        <li>Frequent restructuring without business reasons</li>
+                    </ul>
+                </div>
+                <div class="warning-panel">
+                    <h4>Documentation Gaps</h4>
+                    <ul>
+                        <li>Post-hoc justifications for existing structures</li>
+                        <li>Inconsistent narratives across documentation</li>
+                        <li>Missing evidence of decision-making processes</li>
+                        <li>Inadequate substance documentation</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>The Risk Mitigation Framework</h3>
+
+            <div class="insight-panel">
+                <h4>Three-Layer Defense Strategy</h4>
+                <p><strong>Layer 1: Proactive Compliance</strong> - Use voluntary disclosure programs where available and maintain consistent documentation standards.</p>
+                <p><strong>Layer 2: Independent Business Justification</strong> - Ensure every structural decision has documented commercial reasons beyond tax optimization.</p>
+                <p><strong>Layer 3: Narrative Consistency</strong> - Maintain aligned stories across all jurisdictions and documentation systems.</p>
+            </div>
+
+            <div class="success-panel">
+                <h4>Case Study: The Documentation System That Saved £500K</h4>
+                <p>A UK consultant faced simultaneous audits from HMRC, German authorities, and the UAE FTA. His automated documentation system had recorded every business decision, client interaction, and location-based activity for three years. Total audit defense cost: £15,000. Estimated cost of adverse ruling: £500,000+. Investment in proper systems: £3,000 annually.</p>
+            </div>
+        </section>
+
+        <!-- Advanced Optimization Strategies -->
+        <section class="section">
+            <h2>Advanced Optimization: Stacking Benefits Legally</h2>
+
+            <p>Once you've mastered substance in one jurisdiction, the real optimization begins. Advanced practitioners use "Treaty Network Amplification"—legally stacking benefits across multiple agreements for compound optimization.</p>
+
+            <h3>The Multi-Jurisdictional Structuring Playbook</h3>
+
+            <div class="grid grid-2">
+                <div class="insight-panel">
+                    <h4>IP Holding Optimization</h4>
+                    <p>Strategic positioning of intellectual property can reduce withholding taxes from 30% to 0% across multiple client jurisdictions. The key is understanding how different treaties treat various IP categories:</p>
+                    <ul>
+                        <li>Patent royalties: Often 0-5% under modern treaties</li>
+                        <li>Trademark licensing: Varies significantly by jurisdiction</li>
+                        <li>Copyright and methodologies: Increasingly favorable treatment</li>
+                        <li>Software and digital assets: Rapid treaty evolution in this area</li>
+                    </ul>
+                </div>
+                <div class="insight-panel">
+                    <h4>Management Company Structures</h4>
+                    <p>Professional management companies can optimize both treaty benefits and operational efficiency:</p>
+                    <ul>
+                        <li>Centralized business development and client management</li>
+                        <li>Shared services for multiple operational entities</li>
+                        <li>Strategic fee deduction optimization</li>
+                        <li>Risk management and insurance coordination</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="warning-panel">
+                <h4>Advanced Strategy Warning</h4>
+                <p>Complex structures multiply both opportunities and risks. Every additional jurisdiction increases compliance costs and audit probability. Only proceed with advanced optimization if you have:</p>
+                <ul>
+                    <li>Annual revenues exceeding £500,000</li>
+                    <li>Solid Tier 1 and 2 foundation already established</li>
+                    <li>Professional advisory relationships in place</li>
+                    <li>Comprehensive ongoing compliance systems</li>
+                </ul>
+            </div>
+
+            <h3>Real-World Success Example</h3>
+
+            <div class="success-panel">
+                <h4>The £47,000 Annual Saving That Almost Wasn't</h4>
+                <p>Sarah (from our opening story) restructured her practice using these principles:</p>
+                <ul>
+                    <li><strong>Before:</strong> UK LLP structure, 45% effective tax rate, compliance nightmares</li>
+                    <li><strong>After:</strong> Estonian tax residency, UAE operational base, IP holding in Netherlands</li>
+                    <li><strong>Result:</strong> 8.5% effective tax rate on £550K annual revenue</li>
+                    <li><strong>Annual tax saving:</strong> £47,000 (after compliance costs)</li>
+                    <li><strong>Implementation time:</strong> 14 months following the three-tier approach</li>
+                </ul>
+                <p>Her success wasn't about avoiding compliance—it was about mastering it strategically while building genuine business substance across multiple jurisdictions.</p>
+            </div>
+        </section>
+
+        <!-- Future Scenario Planning -->
+        <section class="section">
+            <h2>Future-Proofing: Preparing for Multiple Scenarios</h2>
+
+            <p>The treaty landscape will continue evolving rapidly. Smart consultants don't just optimize for today—they position for tomorrow. Based on current trends and policy directions, three scenarios are most likely.</p>
+
+            <div class="grid grid-3">
+                <div class="insight-panel">
+                    <h4>The Tightening Noose (70% probability)</h4>
+                    <p><strong>Drivers:</strong> OECD Pillar One implementation, continued CRS expansion, AI-powered compliance detection</p>
+                    <p><strong>Impact:</strong> Higher barriers to entry, premium on early positioning, increased compliance costs</p>
+                    <p><strong>Strategy:</strong> Build substance early, invest in premium compliance systems, focus on quality over complexity</p>
+                    <div class="risk-meter">
+                        <div class="risk-fill risk-high" style="width: 70%;"></div>
+                    </div>
+                </div>
+
+                <div class="insight-panel">
+                    <h4>The Fragmentation (25% probability)</h4>
+                    <p><strong>Drivers:</strong> Political disruption, Brexit-style renegotiations, developing country resistance to BEPS</p>
+                    <p><strong>Impact:</strong> Regional opportunities, increased complexity, planning premiums</p>
+                    <p><strong>Strategy:</strong> Regional specialization, flexible structures, multiple jurisdiction options</p>
+                    <div class="risk-meter">
+                        <div class="risk-fill risk-medium" style="width: 25%;"></div>
+                    </div>
+                </div>
+
+                <div class="insight-panel">
+                    <h4>The Harmonization (5% probability)</h4>
+                    <p><strong>Drivers:</strong> Global minimum tax success, technology enablement, political consensus</p>
+                    <p><strong>Impact:</strong> Reduced opportunities, commodity compliance, operational focus</p>
+                    <p><strong>Strategy:</strong> Operational excellence, technology integration, service differentiation</p>
+                    <div class="risk-meter">
+                        <div class="risk-fill risk-low" style="width: 5%;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="insight-panel">
+                <h4>Scenario-Agnostic Preparation Strategy</h4>
+                <p>Regardless of which scenario unfolds, certain preparations will serve you well:</p>
+                <ul>
+                    <li><strong>Build Quality Substance Now:</strong> All scenarios favor genuine business operations over artificial structures</li>
+                    <li><strong>Invest in Documentation Systems:</strong> Automation and evidence creation will become increasingly valuable</li>
+                    <li><strong>Maintain Flexibility:</strong> Avoid structures that can't adapt to changing requirements</li>
+                    <li><strong>Develop Advisory Relationships:</strong> Quality professional guidance will become more, not less, important</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Conclusion and Implementation -->
+        <section class="section">
+            <h2>Your Implementation Pathway: From Theory to Results</h2>
+
+            <p>You now understand the enforcement revolution, the consultant advantages, and the proven framework for success. The only question remaining is: What's your first move?</p>
+
+            <div class="success-panel">
+                <h4>The Implementation Reality Check</h4>
+                <p>Treaty optimization isn't a weekend project. Done properly, it requires 12-18 months of systematic implementation. But the consultants who invest this time and effort are seeing unprecedented results in the current environment.</p>
+            </div>
+
+            <h3>Immediate Action Framework</h3>
+
+            <div class="tier-container">
+                <div class="tier">
+                    <div class="tier-number">1</div>
+                    <h3>Assessment Phase (Week 1)</h3>
+                    <ul>
+                        <li>Complete current structure evaluation using provided tools</li>
+                        <li>Calculate optimization potential for your revenue level</li>
+                        <li>Identify immediate risk factors requiring attention</li>
+                        <li>Set realistic timeline and budget expectations</li>
+                    </ul>
+                </div>
+
+                <div class="tier">
+                    <div class="tier-number">2</div>
+                    <h3>Planning Phase (Weeks 2-4)</h3>
+                    <ul>
+                        <li>Select optimal jurisdiction based on client geography</li>
+                        <li>Design substance building strategy for your business model</li>
+                        <li>Engage professional advisers in target jurisdictions</li>
+                        <li>Create implementation timeline and milestone tracking</li>
+                    </ul>
+                </div>
+
+                <div class="tier">
+                    <div class="tier-number">3</div>
+                    <h3>Foundation Phase (Months 1-3)</h3>
+                    <ul>
+                        <li>Execute residence establishment and entity structuring</li>
+                        <li>Implement documentation and evidence creation systems</li>
+                        <li>Begin client contract restructuring for treaty optimization</li>
+                        <li>Establish ongoing compliance monitoring processes</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="assessment-container">
+                <h4>Final Assessment: Your Next Steps</h4>
+                <div class="form-group">
+                    <label class="form-label">Which implementation tier are you ready to commit to?</label>
+                    <select class="form-select" id="commitmentLevel">
+                        <option value="">Select your commitment level</option>
+                        <option value="assessment">Assessment only - understand my current position</option>
+                        <option value="planning">Planning phase - design my optimization strategy</option>
+                        <option value="foundation">Full foundation implementation</option>
+                        <option value="advanced">Advanced multi-jurisdictional optimization</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Target implementation timeline</label>
+                    <select class="form-select" id="timeline">
+                        <option value="">Select timeline</option>
+                        <option value="3-months">Next 3 months</option>
+                        <option value="6-months">Next 6 months</option>
+                        <option value="12-months">Next 12 months</option>
+                        <option value="18-months">18+ months (comprehensive approach)</option>
+                    </select>
+                </div>
+                <button class="btn-primary" onclick="generateActionPlan()">Generate My Action Plan</button>
+                <div id="actionPlan" style="display: none; margin-top: 1rem;"></div>
+            </div>
+
+            <div class="quote-panel">
+                The consultants who master treaty networks in 2024-2025 will have a sustainable competitive advantage for the next decade. The window for easy optimization is closing, but the opportunity for sophisticated practitioners has never been greater.
+            </div>
+
+            <div style="text-align: center; margin: 3rem 0;">
+                <button class="btn-primary">Download Complete Implementation Toolkit</button>
+                <button class="btn-secondary">Book Strategy Consultation</button>
+            </div>
+        </section>
+
+        <!-- References and Citations -->
+        <section class="section">
+            <h2>References and Further Reading</h2>
+            
+            <div class="insight-panel">
+                <h4>Key Sources and Citations</h4>
+                <ul>
+                    <li><strong>OECD Model Tax Convention & Commentary (2022 Update)</strong> - Primary source for treaty interpretation and recent changes</li>
+                    <li><strong>BEPS Action 6 Implementation Reports</strong> - Principal Purpose Test implementation across jurisdictions</li>
+                    <li><strong>Common Reporting Standard (CRS) Implementation Guidelines</strong> - Automatic exchange of financial account information</li>
+                    <li><strong>Big Four Tax Firm Technical Bulletins (2023-2024)</strong> - PwC, KPMG, Deloitte, and EY professional guidance</li>
+                    <li><strong>Revenue Authority Technical Interpretations</strong> - HMRC, IRS, ATO, and other authority positions on treaty claims</li>
+                </ul>
+            </div>
+
+            <div class="grid grid-2">
+                <div>
+                    <h4>Recommended Professional Resources</h4>
+                    <ul>
+                        <li>International Tax Review (ITR) - Industry news and analysis</li>
+                        <li>Tax Notes International - Technical commentary and updates</li>
+                        <li>BNA Tax Management Portfolios - Detailed jurisdiction analysis</li>
+                        <li>IBFD Tax Research Platform - Treaty texts and interpretations</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Professional Development</h4>
+                    <ul>
+                        <li>IFA (International Fiscal Association) conferences</li>
+                        <li>STEP (Society of Trust and Estate Practitioners) certifications</li>
+                        <li>Local tax institute memberships and continuing education</li>
+                        <li>Specialist treaty planning courses and workshops</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="warning-panel">
+                <h4>Disclaimer and Professional Advice</h4>
+                <p>This lesson provides educational information about tax treaty networks and should not be construed as specific tax or legal advice. Tax laws are complex and change frequently. Always consult with qualified professional advisers familiar with your specific circumstances and the laws of relevant jurisdictions before implementing any tax planning strategies.</p>
+                <p>The author and Rule Benders Academy make no representations about the accuracy or completeness of this information and disclaim all liability for any actions taken based on this content.</p>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Interactive functionality for the lesson
+
+        // Optimization potential calculator
+        function calculateOptimization() {
+            const structure = document.getElementById('currentStructure').value;
+            const income = parseFloat(document.getElementById('annualIncome').value) || 0;
+            
+            if (!structure || income < 50000) {
+                alert('Please complete all fields. Minimum income £50,000 for meaningful optimization.');
+                return;
+            }
+
+            const taxRates = {
+                'sole-trader': 0.47, // UK higher rate
+                'domestic-company': 0.25, // UK corporation tax
+                'simple-offshore': 0.15, // Basic offshore
+                'complex-multi': 0.12  // Existing optimization
+            };
+
+            const currentRate = taxRates[structure] || 0.40;
+            const optimizedRate = 0.085; // Target rate with proper treaty planning
+            const potentialSaving = income * (currentRate - optimizedRate);
+
+            const resultDiv = document.getElementById('optimizationResult');
+            const textDiv = document.getElementById('optimizationText');
+            
+            textDiv.innerHTML = `
+                <strong>Current effective tax rate:</strong> ${(currentRate * 100).toFixed(1)}%<br>
+                <strong>Potential optimized rate:</strong> 8.5%<br>
+                <strong>Annual optimization potential:</strong> £${potentialSaving.toLocaleString()}<br>
+                <strong>Implementation investment required:</strong> £${Math.min(25000, potentialSaving * 0.1).toLocaleString()}<br>
+                <em>Note: Results assume proper substance building and compliance with all requirements.</em>
+            `;
+            
+            resultDiv.style.display = 'block';
+        }
+
+        // Jurisdiction recommendation generator
+        function generateRecommendations() {
+            const geography = document.getElementById('clientGeography').value;
+            const delivery = document.getElementById('deliveryModel').value;
+            
+            if (!geography || !delivery) {
+                alert('Please select both client geography and delivery model.');
+                return;
+            }
+
+            const recommendations = {
+                'uk-europe': {
+                    'remote-only': 'Estonia or Netherlands - EU access with favorable treaty networks',
+                    'periodic-travel': 'Netherlands or Portugal - Strong UK treaties with travel flexibility',
+                    'project-based': 'UAE or Cyprus - No withholding taxes with project-friendly rules',
+                    'mixed': 'Portugal NHR or Estonian e-Residency - Flexible structures for mixed delivery'
+                },
+                'us-americas': {
+                    'remote-only': 'UAE or Singapore - Strong US treaties with territorial taxation',
+                    'periodic-travel': 'Canada or Netherlands - NAFTA/US treaty benefits',
+                    'project-based': 'UAE or Barbados - US treaty network optimization',
+                    'mixed': 'Portugal or Estonia - EU base with US treaty access'
+                },
+                'apac': {
+                    'remote-only': 'Singapore or Hong Kong - Regional hub advantages',
+                    'periodic-travel': 'Singapore or Malaysia - APAC treaty networks',
+                    'project-based': 'UAE or Thailand - Growing APAC treaty networks',
+                    'mixed': 'Singapore - Optimal for mixed APAC delivery'
+                },
+                'global': {
+                    'remote-only': 'UAE or Estonia - Global treaty coverage with minimal requirements',
+                    'periodic-travel': 'Netherlands or Singapore - Comprehensive global networks',
+                    'project-based': 'UAE or Cyprus - Flexible global structuring options',
+                    'mixed': 'UAE - Ultimate flexibility for global consultants'
+                }
+            };
+
+            const recommendation = recommendations[geography]?.[delivery] || 'Please consult with a specialist for your specific combination.';
+            
+            document.getElementById('jurisdictionRecommendations').innerHTML = `
+                <div class="success-panel">
+                    <h4>Recommended Jurisdiction Strategy</h4>
+                    <p>${recommendation}</p>
+                    <p><em>This is a general recommendation. Detailed analysis of your specific circumstances is required for final decisions.</em></p>
+                </div>
+            `;
+            document.getElementById('jurisdictionRecommendations').style.display = 'block';
+        }
+
+        // Substance assessment calculator
+        function assessSubstance() {
+            const checkboxes = [
+                'substance1', 'substance2', 'substance3', 'substance4',
+                'substance5', 'substance6', 'substance7', 'substance8'
+            ];
+            
+            let checkedCount = 0;
+            checkboxes.forEach(id => {
+                if (document.getElementById(id).checked) {
+                    checkedCount++;
+                }
+            });
+
+            const percentage = (checkedCount / checkboxes.length) * 100;
+            let riskLevel, riskColor, advice;
+            
+            if (percentage >= 75) {
+                riskLevel = 'LOW';
+                riskColor = 'success-panel';
+                advice = 'Strong substance foundation. You\'re well-positioned for treaty optimization with minimal audit risk.';
+            } else if (percentage >= 50) {
+                riskLevel = 'MEDIUM';
+                riskColor = 'insight-panel';
+                advice = 'Moderate substance. Address the unchecked items before proceeding with advanced optimization.';
+            } else {
+                riskLevel = 'HIGH';
+                riskColor = 'warning-panel';
+                advice = 'Significant substance gaps. Focus on building foundation before considering treaty benefits.';
+            }
+
+            document.getElementById('substanceResult').innerHTML = `
+                <div class="${riskColor}">
+                    <h4>Substance Assessment Result</h4>
+                    <p><strong>Compliance Score:</strong> ${checkedCount}/8 (${percentage.toFixed(0)}%)</p>
+                    <p><strong>Risk Level:</strong> ${riskLevel}</p>
+                    <p>${advice}</p>
+                </div>
+            `;
+            document.getElementById('substanceResult').style.display = 'block';
+        }
+
+        // Action plan generator
+        function generateActionPlan() {
+            const commitment = document.getElementById('commitmentLevel').value;
+            const timeline = document.getElementById('timeline').value;
+            
+            if (!commitment || !timeline) {
+                alert('Please select both commitment level and timeline.');
+                return;
+            }
+
+            const plans = {
+                'assessment': {
+                    'title': 'Assessment-Only Action Plan',
+                    'steps': [
+                        'Complete comprehensive current structure analysis',
+                        'Calculate detailed optimization potential',
+                        'Identify critical risk factors and compliance gaps',
+                        'Research jurisdiction options for your client base',
+                        'Estimate implementation costs and timeline'
+                    ]
+                },
+                'planning': {
+                    'title': 'Strategic Planning Action Plan',
+                    'steps': [
+                        'Complete assessment phase deliverables',
+                        'Engage professional advisers in target jurisdictions',
+                        'Design substance building strategy for your business',
+                        'Create detailed implementation timeline and budget',
+                        'Develop client communication and transition strategy'
+                    ]
+                },
+                'foundation': {
+                    'title': 'Foundation Implementation Action Plan',
+                    'steps': [
+                        'Execute residence establishment in chosen jurisdiction',
+                        'Incorporate professional services entity with proper substance',
+                        'Implement documentation and evidence creation systems',
+                        'Begin client contract restructuring for treaty benefits',
+                        'Establish ongoing compliance and monitoring processes'
+                    ]
+                },
+                'advanced': {
+                    'title': 'Advanced Optimization Action Plan',
+                    'steps': [
+                        'Ensure solid foundation implementation is complete',
+                        'Design multi-jurisdictional holding structure',
+                        'Implement IP optimization and management companies',
+                        'Execute advanced treaty benefit stacking strategies',
+                        'Establish comprehensive advisory and compliance support'
+                    ]
+                }
+            };
+
+            const plan = plans[commitment];
+            const timelineText = timeline.replace('-', ' ');
+            
+            document.getElementById('actionPlan').innerHTML = `
+                <div class="success-panel">
+                    <h4>${plan.title}</h4>
+                    <p><strong>Timeline:</strong> ${timelineText}</p>
+                    <p><strong>Next Steps:</strong></p>
+                    <ol>
+                        ${plan.steps.map(step => `<li>${step}</li>`).join('')}
+                    </ol>
+                    <p><em>Download the complete implementation toolkit for detailed guidance on each step.</em></p>
+                </div>
+            `;
+            document.getElementById('actionPlan').style.display = 'block';
+        }
+
+        // Progress bar animations
+        function animateProgressBars() {
+            const progressBars = document.querySelectorAll('.progress-fill');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const width = entry.target.style.width;
+                        entry.target.style.width = '0%';
+                        setTimeout(() => {
+                            entry.target.style.width = width;
+                        }, 100);
+                    }
+                });
+            });
+
+            progressBars.forEach(bar => observer.observe(bar));
+        }
+
+        // Initialize interactive elements
+        document.addEventListener('DOMContentLoaded', () => {
+            animateProgressBars();
+            
+            // Add fade-in animation to sections as they scroll into view
+            const sections = document.querySelectorAll('.section');
+            
+            const sectionObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            sections.forEach(section => sectionObserver.observe(section));
+            
+            // Add keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                // Allow Escape key to close any open modals or reset forms
+                if (e.key === 'Escape') {
+                    const openResults = document.querySelectorAll('[id$="Result"]:not([style*="display: none"])');
+                    openResults.forEach(result => {
+                        result.style.display = 'none';
+                    });
+                }
+            });
+        });
+
+        // Accessibility improvements
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Tab') {
+                document.body.classList.add('using-keyboard');
+            }
+        });
+
+        document.addEventListener('mousedown', function() {
+            document.body.classList.remove('using-keyboard');
+        });
+    </script>
+</body>
+</html>

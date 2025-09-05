@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Physics of Chernobyl: How Nuclear Power Plants Work</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #3498db;
+            --warning-color: #f39c12;
+            --danger-color: #e74c3c;
+            --success-color: #27ae60;
+            --nuclear-blue: #00bfff;
+            --nuclear-gold: #ffd700;
+            --uranium-green: #228b22;
+            --graphite-gray: #36454f;
+            --text-color: #333;
+            --bg-color: #ffffff;
+            --section-spacing: 4rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.7;
+            color: var(--text-color);
+            background: var(--bg-color);
+            font-size: 18px;
+        }
+
+        .lesson-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Typography Hierarchy */
+        h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: clamp(1.5rem, 3vw, 2.2rem);
+            color: var(--primary-color);
+            margin: var(--section-spacing) 0 1.5rem 0;
+            border-left: 4px solid var(--accent-color);
+            padding-left: 1rem;
+        }
+
+        h3 {
+            font-size: 1.4rem;
+            color: var(--primary-color);
+            margin: 2rem 0 1rem 0;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            text-align: justify;
+        }
+
+        .hero-section {
+            text-align: center;
+            margin-bottom: var(--section-spacing);
+        }
+
+        .hero-image {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            margin: 2rem 0;
+        }
+
+        .hook-text {
+            font-size: 1.3rem;
+            font-style: italic;
+            color: var(--danger-color);
+            font-weight: 600;
+            margin: 2rem 0;
+        }
+
+        /* Image Integration */
+        .concept-image, .comparison-image, .technical-image, .sequence-image, .solution-image {
+            width: 100%;
+            max-width: 700px;
+            height: auto;
+            margin: 2rem auto;
+            display: block;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+
+        .comparison-image {
+            max-width: 800px;
+        }
+
+        /* Interactive Elements */
+        .criticality-demo {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .slider-container {
+            margin: 1rem 0;
+        }
+
+        .criticality-slider {
+            width: 100%;
+            max-width: 400px;
+            margin: 1rem 0;
+        }
+
+        .criticality-display {
+            font-size: 1.2rem;
+            font-weight: bold;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .subcritical { background-color: var(--success-color); color: white; }
+        .critical { background-color: var(--warning-color); color: white; }
+        .supercritical { background-color: var(--danger-color); color: white; }
+
+        /* Timeline Animation */
+        .timeline-section {
+            position: relative;
+            padding-left: 2rem;
+            border-left: 3px solid var(--accent-color);
+        }
+
+        .timeline-item {
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            opacity: 0;
+            transform: translateX(-20px);
+            animation: slideIn 0.6s ease forwards;
+        }
+
+        .timeline-item:nth-child(1) { animation-delay: 0.1s; }
+        .timeline-item:nth-child(2) { animation-delay: 0.3s; }
+        .timeline-item:nth-child(3) { animation-delay: 0.5s; }
+
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .timeline-time {
+            font-weight: bold;
+            color: var(--danger-color);
+            font-size: 1.1rem;
+        }
+
+        /* Key Stats Highlighting */
+        .stat-highlight {
+            background: linear-gradient(120deg, var(--nuclear-gold), var(--nuclear-blue));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        /* Callout Boxes */
+        .physics-insight {
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            border-left: 4px solid var(--accent-color);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .danger-warning {
+            background: linear-gradient(135deg, #ffebee, #ffcdd2);
+            border-left: 4px solid var(--danger-color);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .safety-lesson {
+            background: linear-gradient(135deg, #e8f5e8, #c8e6c9);
+            border-left: 4px solid var(--success-color);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        /* Memorial Section Styling */
+        .memorial-section {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: linear-gradient(135deg, #f5f5f5, #e8e8e8);
+            border-radius: 12px;
+            margin: 3rem 0;
+        }
+
+        .memorial-image {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            margin: 2rem auto;
+            display: block;
+            border-radius: 8px;
+            filter: sepia(10%);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .lesson-container {
+                padding: 1rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+                margin: 2rem 0 1rem 0;
+            }
+            
+            .timeline-section {
+                padding-left: 1rem;
+            }
+        }
+
+        /* Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            .timeline-item {
+                animation: none;
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        /* Progress Indicator */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--nuclear-gold), var(--nuclear-blue));
+            z-index: 1000;
+            transition: width 0.3s ease;
+        }
+
+        /* Hover Effects for Images */
+        .concept-image:hover, .comparison-image:hover, .technical-image:hover {
+            transform: scale(1.02);
+            transition: transform 0.3s ease;
+        }
+
+        .footnote {
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+    
+    <div class="lesson-container">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <h1>The Physics of Chernobyl</h1>
+            <p class="hook-text">"Soviet engineers said it couldn't happen. Physics proved them catastrophically wrong."</p>
+            <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-t0gEQiAYY9/1ddfbee6ff57dc6bda41690582839f09f819741338baba3d83f99f236b668ef3f47b5b9faf94d40ccc31e7b6e1a2ca69cded47eb1e77debffc0cbcbd41c6557f0532e715ffa058ea7dfdb8bcbdf69ead425793ba4d0371004658ff3862ffaed9f7d525fe" alt="Split Reactor Comparison - The Impossible Explosion" class="hero-image">
+            
+            <p><strong>4 seconds.</strong> That's how long it took for 100 years of nuclear confidence to shatter. On April 26, 1986, at 01:23:43, the fundamental laws of physics overwhelmed human engineering in the most catastrophic way possible.</p>
+            
+            <p>This lesson explores the physics behind nuclear power—how it works, why Soviet engineers believed their RBMK reactors were safe, and the fatal flaws that made the Chernobyl disaster inevitable.</p>
+        </section>
+
+        <!-- Nuclear Fundamentals -->
+        <section>
+            <h2>Nuclear Fundamentals: The Power of the Atom</h2>
+            
+            <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-KlgLUmwgDH/334ff033c1d8ef88a9cb883d7cab1e00be04ec17c5193b281e30149e717023df8884849e4fdeb3003a3c8d44e129794271c1314bbf293e6c2b3499120574a3b0ce085ca7972d209dca16d1b4e3c5cc201205d8e2f78b79f4089395666c3687494d56f549" alt="Nuclear Chain Reaction Fundamentals" class="concept-image">
+            
+            <p>Nuclear reactors harness one of the most powerful forces in the universe: nuclear fission. When a uranium-235 atom absorbs a thermal neutron, it becomes unstable and splits, releasing approximately <span class="stat-highlight">200 million electron volts</span> of energy—millions of times more than chemical reactions.</p>
+            
+            <p>The key to nuclear power lies in controlling the chain reaction through a parameter called <strong>k-effective (keff)</strong>:</p>
+            
+            <ul style="margin: 1rem 0; padding-left: 2rem;">
+                <li><strong>keff = 1.0:</strong> Critical (steady state power)</li>
+                <li><strong>keff > 1.0:</strong> Supercritical (power increasing)</li>
+                <li><strong>keff < 1.0:</strong> Subcritical (power decreasing)</li>
+            </ul>
+            
+            <!-- Interactive Criticality Demo -->
+            <div class="criticality-demo">
+                <h3>Interactive: Reactor Criticality Control</h3>
+                <p>Adjust the control rods to see how k-effective changes:</p>
+                <input type="range" min="0.8" max="1.3" step="0.01" value="1.0" class="criticality-slider" id="criticalitySlider">
+                <div id="criticalityDisplay" class="criticality-display critical">k-effective = 1.00 (Critical)</div>
+                <p class="footnote">In real reactors, operators must maintain k-effective extremely close to 1.0 for safe operation.</p>
+            </div>
+            
+            <div class="physics-insight">
+                <strong>Physics Insight:</strong> Nuclear power is fundamentally about neutron management. Fast neutrons from fission must be slowed down by a "moderator" (like water or graphite) to thermal energies where they're most likely to cause additional fission in uranium-235.
+            </div>
+        </section>
+
+        <!-- Soviet vs Western Design Philosophy -->
+        <section>
+            <h2>The Great Divide: Soviet vs Western Nuclear Philosophy</h2>
+            
+            <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-K6wmX9Bs5H/7d884017ae359f3cdbbe225d1e984da94664ba5dfabcafd24c3db73337a4fb2558427f82bbdf43bafafc9d81e2eff3a9571bacf40e49195d560c60e73893fb8dbb13bb819a85868df4663d089f5ec3e8dc612b861eff5abbebd6a25be366dd194ab8621f" alt="RBMK vs PWR Reactor Design Philosophy" class="comparison-image">
+            
+            <p>The philosophical differences between Soviet RBMK and Western PWR reactors reveal two fundamentally different approaches to nuclear safety—one that would prove catastrophic, and another that prioritized containment above all else.</p>
+            
+            <h3>Western Philosophy: Fail-Safe Design</h3>
+            <p>Western Pressurized Water Reactors (PWRs) embodied a "defense in depth" philosophy:</p>
+            
+            <ul style="margin: 1rem 0; padding-left: 2rem;">
+                <li><strong>Negative Temperature Coefficient:</strong> As temperature rises, reactivity automatically decreases</li>
+                <li><strong>Negative Void Coefficient:</strong> Steam formation reduces reactivity (<span class="stat-highlight">-20 β</span>)</li>
+                <li><strong>Robust Containment:</strong> Multiple steel and concrete barriers</li>
+                <li><strong>Fail-Safe Mentality:</strong> Systems designed to shut down safely under any failure condition</li>
+            </ul>
+            
+            <h3>Soviet Philosophy: Production Optimization</h3>
+            <p>The RBMK design prioritized different goals:</p>
+            
+            <ul style="margin: 1rem 0; padding-left: 2rem;">
+                <li><strong>Dual-Use Capability:</strong> Electricity generation + plutonium production for weapons</li>
+                <li><strong>Cost Optimization:</strong> <span class="stat-highlight">30% cheaper</span> than Western designs</li>
+                <li><strong>No Containment Structure:</strong> Fatal cost-saving decision</li>
+                <li><strong>Positive Void Coefficient:</strong> Steam formation <em>increases</em> reactivity (<span class="stat-highlight">+3.0 β</span>)</li>
+            </ul>
+            
+            <div class="danger-warning">
+                <strong>Fatal Flaw:</strong> The positive void coefficient meant that RBMK reactors became <em>more</em> reactive as coolant turned to steam—the exact opposite of what safety required.
+            </div>
+        </section>
+
+        <!-- The Hidden Danger -->
+        <section>
+            <h2>The Hidden Danger: Positive Void Coefficient</h2>
+            
+            <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-7QgKhlrHEE/74264d304b3ef6584465a2838fdb56c5485176b578f55a686d393dce0a3aabc9fcb97b290941ef3baf1f2801b4ae56d1d7b4375aac4c5030afd7ffec3abe4369d775b72e3d718ec52c7bed5f9ad6e03ffea50ca58e86cb00825e5db9b50e6179b2d6ab58" alt="Positive Void Coefficient - The Hidden Danger" class="concept-image">
+            
+            <p>The most insidious aspect of RBMK design was a phenomenon that Soviet engineers either misunderstood or chose to ignore: the positive void coefficient. This physics principle would become the driving force behind the Chernobyl explosion.</p>
+            
+            <h3>The Physics of the Void Coefficient</h3>
+            <p>In normal operation, water in the RBMK reactor serves two critical functions:</p>
+            
+            <ul style="margin: 1rem 0; padding-left: 2rem;">
+                <li><strong>Coolant:</strong> Removes heat from the reactor core</li>
+                <li><strong>Neutron Absorber:</strong> Captures some neutrons, preventing them from causing fission</li>
+            </ul>
+            
+            <p>When water turns to steam (forming "voids"), it absorbs fewer neutrons. In Western reactors, this would shut down the reaction because water also serves as a neutron moderator. But RBMK reactors used <strong>graphite</strong> as the primary moderator.</p>
+            
+            <p>The result: when steam bubbles formed, neutron absorption decreased while moderation remained constant, leading to <span class="stat-highlight">increased reactivity</span>. This created a dangerous positive feedback loop—more steam led to more power, which created more steam.</p>
+            
+            <div class="physics-insight">
+                <strong>Mathematical Reality:</strong> The void coefficient in RBMK reactors was +3.0 β (positive), while Western PWRs had -20 β (negative). This 23 β difference represented the margin between stability and catastrophe.
+            </div>
+        </section>
+
+        <!-- Control Rod Catastrophe -->
+        <section>
+            <h2>The Control Rod Catastrophe</h2>
+            
+            <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-ig8tcE4wlW/696fbfb3d0ff893f9b7dc9650470b865c1e157d502203a02d8a971ce91d429aef95e200c6c157145ce5499acb1d3ab9d7cac50b83532336fa03da02edec1e01fcd1dbe003b760eec8e5f57c97f1539925bd05cd1a01d75cbf73af40f9982b7eb82243fb8" alt="Control Rod Fatal Flaw - Graphite Tips" class="technical-image">
+            
+            <p>Perhaps the most cruel irony of Chernobyl lay in the design of the very systems meant to provide safety. The RBMK control rods, intended to shut down the reactor in emergencies, were engineered in a way that would initially <em>accelerate</em> the disaster.</p>
+            
+            <h3>The Fatal Design Flaw</h3>
+            <p>RBMK control rods consisted of two distinct sections:</p>
+            
+            <ul style="margin: 1rem 0; padding-left: 2rem;">
+                <li><strong>Neutron Absorber (Top):</strong> Boron carbide that captures neutrons and reduces reactivity</li>
+                <li><strong>Graphite Tips (Bottom):</strong> <span class="stat-highlight">5-meter graphite sections</span> that moderate neutrons</li>
+            </ul>
+            
+            <p>When control rods were fully withdrawn for normal operation, the channels filled with water. During an emergency SCRAM (rapid shutdown), the rods would begin insertion from the top.</p>
+            
+            <p><strong>The problem:</strong> The graphite tips entered the core first, displacing water and initially <em>increasing</em> reactivity by approximately <span class="stat-highlight">+1.0 β per rod</span>. With multiple rods inserting simultaneously, this created a massive reactivity spike just when operators desperately needed the opposite effect.</p>
+            
+            <div class="danger-warning">
+                <strong>Design Nightmare:</strong> The emergency shutdown system was designed to briefly make the emergency worse before making it better. In a rapidly escalating situation, those crucial seconds of increased reactivity would prove catastrophic.
+            </div>
+        </section>
+
+        <!-- The Fatal Night -->
+        <section>
+            <h2>The Fatal Night: Physics in Freefall</h2>
+            
+            <div class="timeline-section">
+                <p>On April 26, 1986, Reactor 4 at Chernobyl was scheduled for a safety test that would ironically become the catalyst for disaster. The reactor was in its most dangerous possible state: low power operation with most control rods withdrawn.</p>
+                
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-7b5e3CS8c8/12bc73088775ea9e1db38ea511d782bcc7408cb14852708ab0bff22a742116498ac13212ae1325f3b1848d4aed099528e8cc2dbb2ee813dba8bd16d90fc5933cf4d9aca3837b4c90da1595e93fab96f2b6813b93986be6ecf5771c2c3aa658286e82ba53" alt="The 4-Second Cascade Timeline" class="sequence-image">
+                
+                <div class="timeline-item">
+                    <div class="timeline-time">01:23:04 - The Test Begins</div>
+                    <p>Turbine generators are disconnected from the electrical grid. Coolant pumps begin slowing down as they switch to generator power. Steam production increases in the core.</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-time">01:23:40 - Physics Takes Control</div>
+                    <p>Reduced coolant flow creates more steam voids. The positive void coefficient begins driving an exponential power increase. Reactor power jumps from <span class="stat-highlight">200 MW to 300 MW</span> in seconds.</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-time">01:23:42 - Human Intervention Fails</div>
+                    <p>Operators recognize the danger and press the AZ-5 emergency SCRAM button. All 205 control rods begin their fatally flawed descent. The graphite tips enter the core, initially <em>increasing</em> reactivity by <span class="stat-highlight">over 200 β</span>.</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-time">01:23:43 - Point of No Return</div>
+                    <p>Reactor power explodes from <span class="stat-highlight">200 MW to over 300,000 MW</span> in less than four seconds—a 1,500-fold increase. The fuel literally vaporizes. Steam pressure jams the control rods, preventing them from fully inserting. Two explosions destroy the reactor core.</p>
+                </div>
+            </div>
+            
+            <div class="physics-insight">
+                <strong>Energy Scale:</strong> The energy released in those four seconds was equivalent to approximately 1,000 tons of TNT—about 1/15th the power of the Hiroshima bomb, but sustained over several seconds rather than microseconds.
+            </div>
+        </section>
+
+        <!-- Radiation Unleashed -->
+        <section>
+            <h2>The Invisible Enemy: Radiation Unleashed</h2>
+            
+            <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-beWONnQbo-/4dc04be6c79e6ce083ea60d77f1f76b7f5de8dccd7b1f6614d305e1c8914ecc00cf53b97c0019e4a1c0cf679e95a644064295cb77832752e2b8d0c6a4acd63b54f7d563b263c6847e66284076e5778764c7815b213274dcaec486fbb302bf33ddb6adcd6" alt="Graphite Fire and Radioactive Release" class="concept-image">
+            
+            <p>The explosions at Chernobyl were only the beginning. What followed was a radiological disaster of unprecedented scale, made possible by the complete absence of containment structures that defined Western reactor design.</p>
+            
+            <h3>The Graphite Fire</h3>
+            <p>The <span class="stat-highlight">1,700 tons</span> of graphite moderator, superheated by the explosion, began burning in the open air. Unlike normal fires, this graphite burned at temperatures exceeding <span class="stat-highlight">400°C</span>, creating a thermal column that lifted radioactive particles <span class="stat-highlight">1.5 kilometers</span> into the atmosphere.</p>
+            
+            <p>The fire burned for approximately <strong>10 days</strong>, continuously releasing radioactive material across Europe. This extended release was possible because RBMK reactors, unlike Western designs, had no containment structure to limit the spread of contamination.</p>
+            
+            <h3>Radioactive Release by the Numbers</h3>
+            <p>The major isotopes released included:</p>
+            
+            <ul style="margin: 1rem 0; padding-left: 2rem;">
+                <li><strong>Iodine-131:</strong> <span class="stat-highlight">1.76 × 10¹⁸ Bq</span> (50% of reactor inventory)</li>
+                <li><strong>Cesium-137:</strong> <span class="stat-highlight">8.5 × 10¹⁶ Bq</span> (20% of reactor inventory)</li>
+                <li><strong>Strontium-90:</strong> <span class="stat-highlight">1.0 × 10¹⁶ Bq</span> (4% of reactor inventory)</li>
+            </ul>
+            
+            <p>The <span class="stat-highlight">30-kilometer exclusion zone</span> established around the plant encompasses <span class="stat-highlight">2,600 square kilometers</span>—an area larger than Luxembourg, abandoned for generations due to radioactive contamination.</p>
+            
+            <div class="danger-warning">
+                <strong>Containment Contrast:</strong> A Western PWR with similar core damage would have retained over 99% of radioactive material within multiple containment barriers. The absence of containment at Chernobyl turned a reactor accident into an international disaster.
+            </div>
+        </section>
+
+        <!-- Modern Safety -->
+        <section>
+            <h2>Modern Lessons: Physics-Based Safety</h2>
+            
+            <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-s0_gLAW62s/62a0b78acc2acd583118e3ea8b3de986da4c58465a37db3ab4134cdee841548de3e3a6307606ba7da7f778bd77b6866d2a8b69cb69a935072e9f8f0c170c5fbc7f260b877d0aa259e3517b643330797239885f3dfb04464379c67d3a7005649eb64ae0af" alt="Modern Passive Safety Systems" class="solution-image">
+            
+            <p>The nuclear industry's response to Chernobyl has been comprehensive, fundamentally changing how reactors are designed, operated, and regulated worldwide. Modern reactors incorporate multiple layers of physics-based safety that make a Chernobyl-type accident virtually impossible.</p>
+            
+            <h3>Passive Safety Revolution</h3>
+            <p>Modern Generation III+ reactors feature passive safety systems that require no human intervention, electrical power, or mechanical components to function:</p>
+            
+            <ul style="margin: 1rem 0; padding-left: 2rem;">
+                <li><strong>Negative Coefficients:</strong> All modern designs have strongly negative temperature and void coefficients</li>
+                <li><strong>Gravity-Fed Cooling:</strong> Emergency cooling systems operate by gravity alone</li>
+                <li><strong>Natural Circulation:</strong> Heat removal through natural convection, no pumps required</li>
+                <li><strong>72-Hour Autonomy:</strong> Can safely shut down without any external support for three days</li>
+            </ul>
+            
+            <h3>Defense in Depth</h3>
+            <p>Contemporary nuclear plants employ five independent safety barriers:</p>
+            
+            <ol style="margin: 1rem 0; padding-left: 2rem;">
+                <li><strong>Fuel Cladding:</strong> Zirconium alloy tubes containing radioactive fuel</li>
+                <li><strong>Reactor Pressure Vessel:</strong> Thick steel vessel containing the core</li>
+                <li><strong>Primary Containment:</strong> Steel-lined concrete structure surrounding the reactor</li>
+                <li><strong>Secondary Containment:</strong> Outer building providing additional protection</li>
+                <li><strong>Emergency Systems:</strong> Multiple independent cooling and power systems</li>
+            </ol>
+            
+            <div class="safety-lesson">
+                <strong>Physics Lesson Applied:</strong> Modern reactor design recognizes that human operators and mechanical systems can fail. True safety comes from physics itself—negative feedback coefficients and passive systems that automatically respond to prevent accidents.
+            </div>
+        </section>
+
+        <!-- Memorial Section -->
+        <section class="memorial-section">
+            <h2>The Eternal Lesson: Physics Cannot Be Overruled</h2>
+            
+            <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-GvX-p7wQvB/6041108152294da6c508c3d0dbb53a2dbd2036c8801f8ca19e002f2ff9736dc4ba0dfe30573b06079fd3e44513d4ab4b6aece3a240c999d77786c7a369950fd061b3aaa1ab431e8eff69e7e962d1ef98c7b77c0904170f8b18e6a078d03d696290dea5a8" alt="Memorial - Physics Cannot Be Overruled" class="memorial-image">
+            
+            <p>Chernobyl stands as a permanent monument to a fundamental truth: the laws of physics cannot be overruled by human confidence, political ideology, or economic considerations. The positive void coefficient was not a suggestion—it was an immutable physical reality that demanded respect.</p>
+            
+            <h3>The Competence Paradox</h3>
+            <p>Ironically, the deep expertise of Soviet nuclear engineers contributed to the disaster. Their successful operation of other RBMK reactors bred overconfidence, masking fundamental design flaws that made catastrophe inevitable under the wrong conditions.</p>
+            
+            <h3>Lessons for Today</h3>
+            <p>The physics lessons of Chernobyl extend far beyond nuclear power:</p>
+            
+            <ul style="margin: 1rem 0; padding-left: 2rem;">
+                <li><strong>Respect Natural Laws:</strong> Engineering hubris cannot overcome fundamental physics</li>
+                <li><strong>Design for Failure:</strong> Systems must be safe even when everything goes wrong</li>
+                <li><strong>Transparency Saves Lives:</strong> Information suppression prevents learning from mistakes</li>
+                <li><strong>Global Cooperation:</strong> Nuclear safety requires shared knowledge across all borders</li>
+            </ul>
+            
+            <p><em>The 31 people who died immediately at Chernobyl, the hundreds of thousands of liquidators who risked their lives in cleanup efforts, and the communities forever displaced by contamination deserve to be remembered not just as victims, but as teachers. Their sacrifice illuminated the unforgiving nature of nuclear physics and paved the way for safer reactor designs worldwide.</em></p>
+            
+            <div class="physics-insight">
+                <strong>Final Truth:</strong> Chernobyl's legacy isn't just about nuclear power—it's about the dangerous intersection of human ambition and natural forces. The physics was always there, waiting to be revealed. The question for every generation of engineers is whether we will listen to what physics is trying to teach us, or whether we will force it to teach us the hard way.
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Progress Bar
+        window.addEventListener('scroll', () => {
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
+            const clientHeight = document.documentElement.clientHeight || document.body.clientHeight;
+            const scrolled = (scrollTop / (scrollHeight - clientHeight)) * 100;
+            document.getElementById('progressBar').style.width = scrolled + '%';
+        });
+
+        // Criticality Slider
+        const slider = document.getElementById('criticalitySlider');
+        const display = document.getElementById('criticalityDisplay');
+        
+        slider.addEventListener('input', (e) => {
+            const value = parseFloat(e.target.value);
+            let status, className;
+            
+            if (value < 0.95) {
+                status = 'Subcritical (Shutting Down)';
+                className = 'subcritical';
+            } else if (value > 1.05) {
+                status = 'Supercritical (Power Rising!)';
+                className = 'supercritical';
+            } else {
+                status = 'Critical (Steady State)';
+                className = 'critical';
+            }
+            
+            display.textContent = `k-effective = ${value.toFixed(2)} (${status})`;
+            display.className = `criticality-display ${className}`;
+        });
+
+        // Intersection Observer for animations (accessibility-friendly)
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                    }
+                });
+            });
+
+            document.querySelectorAll('.timeline-item').forEach(item => {
+                observer.observe(item);
+            });
+        }
+
+        // Image hover effects
+        document.querySelectorAll('.concept-image, .comparison-image, .technical-image').forEach(img => {
+            img.addEventListener('mouseenter', () => {
+                if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                    img.style.transform = 'scale(1.02)';
+                }
+            });
+            
+            img.addEventListener('mouseleave', () => {
+                img.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
