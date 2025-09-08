@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task Change Request & Sync Workflow</title>
+    <title>Task Change Request & Data Flow Workflow</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -140,6 +140,7 @@
         .in-dev { color: #ffc107; }
         .not-built { color: #dc3545; }
         .planned { color: #6f42c1; }
+        .needs-clarification { color: #6c757d; }
         
         .sync-states {
             display: grid;
@@ -233,7 +234,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>Task Change Request & Sync Workflow</h1>
+            <h1>Task Change Request & Data Flow Workflow</h1>
             <div class="subtitle">RES Project Management System: Coda ↔ Apollo ↔ NetSuite</div>
         </div>
         
@@ -245,17 +246,14 @@
                     System Overview
                 </div>
                 <div class="summary-box">
-                    <p><strong>Two-Way Data Flow:</strong> 
+                    <p><strong>Data Flow Architecture:</strong> 
                     <br>• <strong>Task Change Requests:</strong> PM changes in Coda → Apollo (approval) → NetSuite (if approved)
-                    <br>• <strong>Sync Operations:</strong> NetSuite/Apollo → Coda (pulling latest data)</p>
+                    <br>• <strong>Pulling Data IN:</strong> NetSuite/Apollo → Coda (manual triggers)
+                    <br>• <strong>Status Updates:</strong> Apollo → Coda (change request approval/rejection status)</p>
                     
-                    <p><strong>Architecture:</strong> Apollo API serves as intermediary with MongoDB storage for approval workflow. "Last Sync State" JSON enables delta detection between Coda changes and NetSuite reality.</p>
+                    <p><strong>Current Implementation:</strong> David built project-level bulk Task Change Requests with Last Sync State JSON storage for comparing Coda changes against NetSuite source data.</p>
                     
-                    <p><strong>Current Status:</strong> Core functionality (Pull Projects, Submit Task Change Requests, Pull Status Updates) is live. Apollo approval interface and visual PM indicators are in development.</p>
-                </div>
-
-                <div class="info-note">
-                    <strong>Key Design Decisions:</strong> Single data record per task (no duplication), project-level bulk submissions converted to individual API calls, and performance-optimized JSON parsing for 10,000+ row scalability.
+                    <p><strong>Key Terminology:</strong> "Pulling" = NetSuite→Coda, "Task Change Requests" = Coda→Apollo</p>
                 </div>
             </div>
 
@@ -269,42 +267,41 @@
                 <div class="needs-section">
                     <strong>Primary Requirement:</strong> PMs must clearly see when their Coda changes differ from NetSuite reality and understand the status of their change requests (pending, approved, rejected).
                     
-                    <br><br><strong>Specific Gaps to Address:</strong>
+                    <br><br><strong>Specific Requirements:</strong>
                     <br>• Visual indicator when PM makes changes but hasn't submitted requests
                     <br>• Clear differentiation between "what's live in NetSuite" vs "what PM changed in Coda"  
-                    <br>• Prominent display of rejection reasons requiring PM corrective action
-                    <br>• PM expectation that opening work items shows current NetSuite data
+                    <br>• Display of rejection reasons and required corrective actions
+                    <br>• Understanding that changes aren't "live" until approved
                 </div>
             </div>
 
-            <!-- Requirements Analysis -->
+            <!-- Implementation Status -->
             <div class="process-section">
                 <div class="process-title">
                     <div class="process-icon">📊</div>
-                    Implementation Assessment
+                    Current Implementation Status
                 </div>
                 
                 <div class="req-analysis">
                     <div class="req-box built">
-                        <div class="step-title">✓ Already Built & Live</div>
+                        <div class="step-title">✅ Built & Live</div>
                         <div class="step-description">
-                            • Core sync functionality (David's system)<br>
+                            • Task Change Requests (project-level bulk)<br>
+                            • Pull Projects (manual, entire WBS)<br>
+                            • Pull Change Request status updates<br>
                             • Last Sync State JSON storage<br>
-                            • Bulk task change request processing<br>
-                            • Project-level WBS pull from NetSuite<br>
-                            • Change request status tracking columns
+                            • Apollo approval interface
                         </div>
                         <div class="trigger-type automatic" style="margin-top: 15px;">Functional</div>
                     </div>
                     
                     <div class="req-box easy">
-                        <div class="step-title">⚡ Easy to Build</div>
+                        <div class="step-title">⚡ Ready to Build</div>
                         <div class="step-description">
-                            • Work Item Sync States column (compare Coda vs Last Sync State)<br>
+                            • Work Item Sync States column<br>
                             • Visual indicators for unsynced changes<br>
-                            • "Sync" button with timestamp on Work Items table<br>
-                            • Optimized JSON parsing (parse on update, not live)<br>
-                            • Dual data view capability (NetSuite vs Coda values)
+                            • JSON parsing optimization<br>
+                            • Task-level individual buttons (if needed)
                         </div>
                         <div class="trigger-type manual" style="margin-top: 15px;">UI/Formula Work</div>
                     </div>
@@ -322,15 +319,15 @@
                     <div class="workflow-step">
                         <div class="step-number">1</div>
                         <div class="step-title">PM Makes Changes</div>
-                        <div class="step-description">PM updates task status, name (Level 3 only), billing type (billable/non-billable), or billing budget value in Coda</div>
+                        <div class="step-description">PM updates task status, name (Level 3 only), billing type, revenue type in Coda</div>
                         <div class="trigger-type manual">Manual</div>
-                        <div class="dev-status live">✓ LIVE</div>
+                        <div class="dev-status live">✅ LIVE</div>
                     </div>
                     
                     <div class="workflow-step">
                         <div class="step-number">2</div>
                         <div class="step-title">Visual Indicators</div>
-                        <div class="step-description">Work Item Sync States column shows "Unsynced Changes" - PM sees their changes haven't been submitted to Apollo yet</div>
+                        <div class="step-description">Work Item Sync States column shows "Unsynced Changes" - PM sees changes haven't been submitted</div>
                         <div class="trigger-type automatic">Automatic</div>
                         <div class="dev-status not-built">❌ NOT BUILT</div>
                     </div>
@@ -338,102 +335,96 @@
                     <div class="workflow-step">
                         <div class="step-number">3</div>
                         <div class="step-title">Submit Task Change Requests</div>
-                        <div class="step-description">PM clicks "Submit Task Change Request" button (project-level, affects all modified tasks)</div>
+                        <div class="step-description">PM clicks "Submit Task Change Request" button (currently project-level bulk)</div>
                         <div class="trigger-type manual">Manual</div>
-                        <div class="dev-status live">✓ LIVE (David's "Sync Tasks")</div>
+                        <div class="dev-status live">✅ LIVE (Project-Level)</div>
                     </div>
                     
                     <div class="workflow-step">
                         <div class="step-number">4</div>
-                        <div class="step-title">Bulk Processing</div>
-                        <div class="step-description">David's system converts bulk request to individual Apollo API calls (Apollo only supports single task requests)</div>
+                        <div class="step-title">Apollo Processing</div>
+                        <div class="step-description">David's system sends bulk requests to Apollo for accounting review</div>
                         <div class="trigger-type automatic">Automatic</div>
-                        <div class="dev-status live">✓ LIVE</div>
+                        <div class="dev-status live">✅ LIVE</div>
                     </div>
                     
                     <div class="workflow-step">
                         <div class="step-number">5</div>
-                        <div class="step-title">Apollo Storage</div>
-                        <div class="step-description">Task change requests stored in Apollo's MongoDB, not directly in NetSuite. Accounting team reviews in Apollo interface</div>
-                        <div class="trigger-type automatic">Automatic</div>
-                        <div class="dev-status live">✓ LIVE</div>
+                        <div class="step-title">Accounting Review</div>
+                        <div class="step-description">Accounting team reviews requests in Apollo and approves/rejects</div>
+                        <div class="trigger-type manual">Manual (by Accounting)</div>
+                        <div class="dev-status live">✅ LIVE</div>
                     </div>
                     
                     <div class="workflow-step">
                         <div class="step-number">6</div>
-                        <div class="step-title">Apollo Approval Interface</div>
-                        <div class="step-description">Accounting team sees task change requests in Apollo and clicks approve/reject. Status: "Changes Pending Approval"</div>
-                        <div class="trigger-type manual">Manual (by Accounting)</div>
-                        <div class="dev-status in-dev">🔄 IN DEVELOPMENT</div>
-                    </div>
-                    
-                    <div class="workflow-step">
-                        <div class="step-number">7</div>
                         <div class="step-title">NetSuite Update</div>
-                        <div class="step-description">If approved, Apollo API automatically pushes changes to NetSuite. Work Item Sync State changes to "Synced"</div>
+                        <div class="step-description">If approved, Apollo API automatically pushes changes to NetSuite</div>
                         <div class="trigger-type automatic">Automatic</div>
-                        <div class="dev-status in-dev">🔄 IN DEVELOPMENT</div>
+                        <div class="dev-status live">✅ LIVE</div>
                     </div>
                 </div>
 
                 <div class="data-flow">
                     <h4>Data Sent in Task Change Requests:</h4>
-                    <div class="flow-item">Task Name (Level 3 tasks only) <span class="dev-status live">✓ LIVE</span></div>
-                    <div class="flow-item">Task Status <span class="dev-status live">✓ LIVE</span></div>
-                    <div class="flow-item">Billing Type (Billable/Non-billable) <span class="dev-status live">✓ LIVE</span></div>
-                    <div class="flow-item">Billing Budget Value (if billable) <span class="dev-status live">✓ LIVE</span></div>
-                    <div class="flow-item">Revenue Type (POC, T&M, Recurring, T&M with CAP, etc.) <span class="dev-status live">✓ LIVE</span></div>
+                    <div class="flow-item">Task Name (Level 3 only) <span class="dev-status live">✅ LIVE</span></div>
+                    <div class="flow-item">Task Status <span class="dev-status live">✅ LIVE</span></div>
+                    <div class="flow-item">Billing Type (Billable/Non-billable) <span class="dev-status live">✅ LIVE</span></div>
+                    <div class="flow-item">Revenue Type <span class="dev-status live">✅ LIVE</span></div>
+                    <div class="flow-item">PM Notes <span class="dev-status live">✅ LIVE</span></div>
+                    <div class="flow-item">NetSuite IDs (task, parent, project, PM) <span class="dev-status live">✅ LIVE</span></div>
+                    <div class="flow-item">Cost Plan Integration <span class="dev-status needs-clarification">❓ NEEDS CLARIFICATION</span></div>
                 </div>
             </div>
 
-            <!-- Process 2: Sync Operations -->
+            <!-- Process 2: Pulling Data IN -->
             <div class="process-section">
                 <div class="process-title">
                     <div class="process-icon">📥</div>
-                    Sync Operations: NetSuite/Apollo → Coda
+                    Pulling Data IN: NetSuite/Apollo → Coda
                 </div>
                 
                 <div class="workflow-grid">
                     <div class="workflow-step">
                         <div class="step-number">1</div>
-                        <div class="step-title">Initial Project Sync</div>
-                        <div class="step-description">When PM creates project, complete WBS synced from NetSuite including all tasks, statuses, budgets</div>
+                        <div class="step-title">Initial Project Pull</div>
+                        <div class="step-description">When PM creates project, complete WBS pulled from NetSuite (manual trigger)</div>
                         <div class="trigger-type manual">Manual (Project Creation)</div>
-                        <div class="dev-status live">✓ LIVE (David's "Pull Projects")</div>
+                        <div class="dev-status live">✅ LIVE</div>
                     </div>
                     
                     <div class="workflow-step">
                         <div class="step-number">2</div>
                         <div class="step-title">Last Sync State Storage</div>
-                        <div class="step-description">Each task stores complete NetSuite data in "Last Sync State" JSON column as the "source of truth" for comparison</div>
+                        <div class="step-description">Each task stores complete NetSuite data in "Last Sync State" JSON as source of truth</div>
                         <div class="trigger-type automatic">Automatic</div>
-                        <div class="dev-status live">✓ LIVE</div>
+                        <div class="dev-status live">✅ LIVE</div>
                     </div>
                     
                     <div class="workflow-step">
                         <div class="step-number">3</div>
-                        <div class="step-title">On-Demand Sync</div>
-                        <div class="step-description">PM clicks "Sync" button on Work Items table to pull latest NetSuite changes (updates Last Sync State JSON)</div>
-                        <div class="trigger-type on-demand">On-Demand</div>
-                        <div class="dev-status planned">🔄 PLANNED (hourly exists)</div>
+                        <div class="step-title">Manual Re-Pull</div>
+                        <div class="step-description">PM manually triggers re-pull of entire project WBS when needed</div>
+                        <div class="trigger-type manual">Manual Only</div>
+                        <div class="dev-status live">✅ LIVE</div>
                     </div>
                     
                     <div class="workflow-step">
                         <div class="step-number">4</div>
-                        <div class="step-title">Task Change Request Status Sync</div>
-                        <div class="step-description">System syncs approval/rejection status of submitted task change requests from Apollo during hourly sync or on-demand</div>
-                        <div class="trigger-type on-demand">Hourly/On-Demand</div>
-                        <div class="dev-status live">✓ LIVE (David's "Pull Change Updates")</div>
+                        <div class="step-title">Change Request Status Updates</div>
+                        <div class="step-description">System pulls approval/rejection status from Apollo</div>
+                        <div class="trigger-type on-demand">Manual/Planned Automatic</div>
+                        <div class="dev-status live">✅ LIVE</div>
                     </div>
                 </div>
 
                 <div class="data-flow">
-                    <h4>Data Synced from NetSuite/Apollo:</h4>
-                    <div class="flow-item">Task WBS Structure (ID, name, parent relationships) <span class="dev-status live">✓ LIVE</span></div>
-                    <div class="flow-item">Task Status, Project Manager assignments <span class="dev-status live">✓ LIVE</span></div>
-                    <div class="flow-item">Budget data (Current Cost/Billing Budget, As Sold budgets) <span class="dev-status live">✓ LIVE</span></div>
-                    <div class="flow-item">Hours, Billable/Non-billable flags <span class="dev-status live">✓ LIVE</span></div>
-                    <div class="flow-item">Task Change Request Status (Pending/Approved/Rejected) <span class="dev-status live">✓ LIVE</span></div>
+                    <h4>Data Pulled IN from NetSuite/Apollo:</h4>
+                    <div class="flow-item">Complete WBS Structure (names, hierarchy, IDs) <span class="dev-status live">✅ LIVE</span></div>
+                    <div class="flow-item">Task Status, Project Manager assignments <span class="dev-status live">✅ LIVE</span></div>
+                    <div class="flow-item">Budget data (Current/As Sold Cost & Billing Budget) <span class="dev-status live">✅ LIVE</span></div>
+                    <div class="flow-item">Hours, Revenue Type, Billable flags <span class="dev-status live">✅ LIVE</span></div>
+                    <div class="flow-item">Change Request Status (Pending/Approved/Rejected) <span class="dev-status live">✅ LIVE</span></div>
                 </div>
             </div>
 
@@ -447,7 +438,7 @@
                 <div class="sync-states">
                     <div class="sync-state synced">
                         <div class="state-title">Synced</div>
-                        <div class="state-definition">Coda values match NetSuite exactly</div>
+                        <div class="state-definition">Coda values match Last Sync State exactly</div>
                     </div>
                     <div class="sync-state unsynced">
                         <div class="state-title">Unsynced Changes</div>
@@ -462,9 +453,41 @@
                         <div class="state-definition">Accounting rejected request, PM action required</div>
                     </div>
                     <div class="sync-state sync-required">
-                        <div class="state-title">Sync Required</div>
-                        <div class="state-definition">NetSuite data changed, sync needed</div>
+                        <div class="state-title">Pull Required</div>
+                        <div class="state-definition">NetSuite data may have changed, manual pull needed</div>
                     </div>
+                </div>
+            </div>
+
+            <!-- Clarification Questions -->
+            <div class="process-section">
+                <div class="process-title">
+                    <div class="process-icon">❓</div>
+                    Clarification Questions for RES
+                </div>
+                
+                <div class="info-note">
+                    <strong>1. Automatic Data Pulling:</strong> Should there be automatic/scheduled pulling of task data from NetSuite to Coda? Currently only manual pulling exists.
+                </div>
+                
+                <div class="info-note">
+                    <strong>2. Cost Plan Integration:</strong> Should Cost Plan data be sent with Task Change Requests, or kept as a separate Cost Budget Change Request process?
+                </div>
+                
+                <div class="info-note">
+                    <strong>3. Rejection Handling:</strong> If accounting rejects a change request, what should happen? Should Coda automatically revert to NetSuite values or require manual PM action?
+                </div>
+                
+                <div class="info-note">
+                    <strong>4. Button Placement:</strong> Should Task Change Request buttons be at the project-level (bulk) or task-level (individual) or both?
+                </div>
+                
+                <div class="info-note">
+                    <strong>5. Cost Budget Change Requests:</strong> How should the separate Cost Budget Change Request process work in relation to Task Change Requests? Are these two different workflows or integrated?
+                </div>
+                
+                <div class="info-note">
+                    <strong>6. Data Freshness:</strong> How often should PMs expect Coda to reflect the latest NetSuite data? Should this be on-demand only or include automatic updates?
                 </div>
             </div>
         </div>

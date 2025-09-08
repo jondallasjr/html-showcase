@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zoom Test - Text Scaling Relative to Fixed Background</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f0f0f0;
+            padding: 32px;
+            line-height: 1.4;
+        }
+
+        .slide-container {
+            display: flex;
+            align-items: flex-start;
+            gap: 32px;
+            margin: 0 auto;
+            width: fit-content;
+        }
+
+        .slide-number {
+            background: #0057FF;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 24px;
+            font-weight: 600;
+            font-size: 16px;
+            white-space: nowrap;
+            margin-top: 32px;
+        }
+
+        .slide-content-wrapper {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* FIXED SIZE SLIDE - stays 1080x1080 regardless of zoom */
+        .slide {
+            width: 1080px;
+            height: 1080px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            background-image: url('https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-orA2DWFudI/9a42b3916bbbf60144796c0b39506dff77f7d448f25b4d948d4d73f89ace0cfc3249ba3160cdb4a86d8bc0d3d8abc07b41fadcc4f8a0039cb31c7aa639de59c7e6842a3cb5253ea3cb3e52233cd5f69391765e1f584d6710c8211dc582435bf9a3db69bb');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* FIXED SIZE OVERLAY */
+        .slide-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(26,26,26,0.8);
+            z-index: 1;
+        }
+
+        /* FIXED SIZE PADDING */
+        .slide-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 80px 64px;
+            color: white;
+            width: 100%;
+        }
+
+        /* SCALING TEXT - uses rem units to scale with browser zoom */
+        .slide h1 {
+            font-size: 4.5rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, #0057FF 0%, #FF5733 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.1;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+        }
+
+        .slide .subtitle {
+            font-size: 2rem;
+            font-weight: 300;
+            margin-bottom: 2.5rem;
+            color: #FFFFFF;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+        }
+
+        /* FIXED SIZE CONTAINER with SCALING TEXT */
+        .slide .stat-reveal {
+            background: rgba(0,87,255,0.15);
+            border: 2px solid rgba(0,87,255,0.6);
+            border-radius: 20px;
+            padding: 40px;
+            margin-top: 40px;
+            backdrop-filter: blur(8px);
+        }
+
+        .slide .stat-number {
+            font-size: 7.5rem;
+            font-weight: 800;
+            color: #FF5733;
+            line-height: 1;
+            text-shadow: 0 4px 8px rgba(0,0,0,0.6);
+        }
+
+        .slide .stat-text {
+            font-size: 1.5rem;
+            color: #FFFFFF;
+            margin-top: 16px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+        }
+
+        /* FIXED SIZE CAPTION */
+        .caption-section {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            margin-top: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            width: 1080px;
+        }
+
+        .caption-section h3 {
+            color: #1A1A1A;
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #0057FF;
+            padding-bottom: 10px;
+        }
+
+        .caption-text {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .zoom-instructions {
+            background: #e8f4fd;
+            border: 2px solid #0057FF;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .zoom-instructions h4 {
+            color: #0057FF;
+            margin-bottom: 10px;
+        }
+
+        .zoom-instructions p {
+            color: #333;
+            font-size: 14px;
+        }
+
+        /* Responsive breakpoints for smaller screens */
+        @media (max-width: 1200px) {
+            .slide-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .slide-number {
+                margin-top: 0;
+                margin-bottom: 16px;
+            }
+            
+            .slide {
+                width: 540px;
+                height: 540px;
+            }
+            
+            .caption-section {
+                width: 540px;
+            }
+            
+            .slide-content {
+                padding: 40px 32px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 16px;
+            }
+            
+            .slide {
+                width: 400px;
+                height: 400px;
+            }
+            
+            .caption-section {
+                width: 400px;
+            }
+            
+            .slide-content {
+                padding: 32px 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="zoom-instructions">
+        <h4>Test the Zoom Feature</h4>
+        <p>Use Ctrl/Cmd + or - to zoom your browser. The slide container stays 1080x1080px while only the text scales!</p>
+    </div>
+
+    <div class="slide-container">
+        
+        <div class="slide-number">1/7</div>
+        
+        <div class="slide-content-wrapper">
+            <div class="slide">
+                <div class="slide-overlay"></div>
+                <div class="slide-content">
+                    <h1>The £500/Day<br>Rate Trap</h1>
+                    <p class="subtitle">Why 23% of £1000+ consultants have LESS experience than you</p>
+                    <div class="stat-reveal">
+                        <div class="stat-number">67%</div>
+                        <div class="stat-text">of 20+ year veterans are stuck below £600/day</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="caption-section">
+                <h3>Social Media Caption</h3>
+                <div class="caption-text">
+                    The £500/day rate ceiling isn't real—it's psychological.<br><br>
+                    
+                    67% of consultants with 20+ years experience are STUCK below £600/day, while 23% of £1000+ earners have less than 10 years experience.<br><br>
+                    
+                    Your rate isn't about your experience. It's about your POSITIONING.<br><br>
+                    
+                    Most consultants operate in the Commodity Market (£300-500/day) when they should be targeting the Strategic Market (£1000+/day).<br><br>
+                    
+                    The difference? Premium consultants understand the 4 Pillars of positioning:<br>
+                    → Sponsor Development (relationships with budget controllers)<br>
+                    → Outcome Focus (results over time)<br>
+                    → Scarcity Creation (limited, valuable expertise)<br>
+                    → Risk Absorption (accountability for outcomes)<br><br>
+                    
+                    Ready to break through your rate ceiling?<br><br>
+                    
+                    #Consulting #RateBreakthrough #BusinessStrategy #ProfessionalGrowth #HighPaidConsultant #ConsultingLife #FreelanceLife #RuleBenders
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</body>
+</html>
