@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Handle Price Objections Like a Pro | Rule Benders Academy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #2B5CE6;
+            --primary-orange: #E85D00;
+            --dark-bg: #0A0A0A;
+            --card-bg: #1A1A1A;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0B0;
+            --border-color: #333333;
+            --success-green: #10B981;
+            --warning-red: #EF4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.7;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .lesson-header {
+            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--card-bg) 100%);
+            padding: 60px 0;
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .lesson-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-sYa-LF4AN-/fd57faaf616b48b6b47d7e790c2aa488e1566ba565bce8ebeb62e852fdf9b6b0b01c756a54915bca1d581e293533b386caf6ccc8da5f505f336d1fa91b8138b75fb0dcf0576af7adedda928ef6e2c0f36ce5cb3a7933106e2a3ad2a272bb976d56341738') center/cover;
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .lesson-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-orange) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto 40px;
+        }
+
+        .instructor-badge {
+            display: inline-flex;
+            align-items: center;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 50px;
+            padding: 12px 24px;
+            font-weight: 600;
+            color: var(--primary-blue);
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--card-bg);
+            z-index: 1000;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-blue) 0%, var(--primary-orange) 100%);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        /* Main Content */
+        .lesson-content {
+            padding: 80px 0;
+        }
+
+        .content-section {
+            margin-bottom: 80px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .content-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .section-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-orange) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.5rem;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.3;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        .content-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-primary);
+        }
+
+        .content-text p {
+            margin-bottom: 24px;
+        }
+
+        .content-text h3 {
+            color: var(--primary-orange);
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin: 40px 0 20px 0;
+        }
+
+        .content-image {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+        }
+
+        .content-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+        }
+
+        /* Framework Boxes */
+        .framework-box {
+            background: var(--card-bg);
+            border: 2px solid var(--primary-blue);
+            border-radius: 16px;
+            padding: 30px;
+            margin: 40px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .framework-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-blue) 0%, var(--primary-orange) 100%);
+        }
+
+        .framework-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+        }
+
+        .framework-steps {
+            list-style: none;
+        }
+
+        .framework-steps li {
+            background: rgba(43, 92, 230, 0.1);
+            border-left: 4px solid var(--primary-orange);
+            padding: 15px 20px;
+            margin-bottom: 15px;
+            border-radius: 0 8px 8px 0;
+            font-weight: 500;
+        }
+
+        /* Quote Blocks */
+        .quote-block {
+            background: linear-gradient(135deg, rgba(43, 92, 230, 0.1) 0%, rgba(232, 93, 0, 0.1) 100%);
+            border-left: 4px solid var(--primary-orange);
+            padding: 30px;
+            margin: 40px 0;
+            border-radius: 0 16px 16px 0;
+            font-style: italic;
+            font-size: 1.2rem;
+            position: relative;
+        }
+
+        .quote-block::before {
+            content: '"';
+            font-size: 4rem;
+            color: var(--primary-orange);
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            font-weight: 800;
+        }
+
+        /* Check-in Components */
+        .check-in {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 30px;
+            margin: 60px 0;
+        }
+
+        .check-in-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .check-in-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary-orange);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+        }
+
+        .check-in-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary-orange);
+        }
+
+        .question {
+            margin-bottom: 30px;
+        }
+
+        .question-text {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 15px;
+            color: var(--text-primary);
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid transparent;
+            border-radius: 8px;
+            padding: 15px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .option:hover {
+            background: rgba(43, 92, 230, 0.1);
+            border-color: var(--primary-blue);
+        }
+
+        .option.selected {
+            background: rgba(43, 92, 230, 0.2);
+            border-color: var(--primary-blue);
+            color: var(--primary-blue);
+        }
+
+        .option.correct {
+            background: rgba(16, 185, 129, 0.2);
+            border-color: var(--success-green);
+            color: var(--success-green);
+        }
+
+        .option.incorrect {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: var(--warning-red);
+            color: var(--warning-red);
+        }
+
+        .feedback {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 8px;
+            font-weight: 500;
+            display: none;
+        }
+
+        .feedback.correct {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid var(--success-green);
+            color: var(--success-green);
+        }
+
+        .feedback.incorrect {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid var(--warning-red);
+            color: var(--warning-red);
+        }
+
+        .check-answer-btn {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-orange) 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            margin-top: 15px;
+        }
+
+        .check-answer-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Reflection Box */
+        .reflection-box {
+            background: linear-gradient(135deg, rgba(232, 93, 0, 0.1) 0%, rgba(43, 92, 230, 0.1) 100%);
+            border: 1px solid var(--primary-orange);
+            border-radius: 16px;
+            padding: 30px;
+            margin: 40px 0;
+        }
+
+        .reflection-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary-orange);
+            margin-bottom: 20px;
+        }
+
+        .reflection-textarea {
+            width: 100%;
+            min-height: 120px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 15px;
+            color: var(--text-primary);
+            font-family: inherit;
+            resize: vertical;
+        }
+
+        /* Scripts Section */
+        .scripts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .script-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 25px;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .script-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-blue);
+        }
+
+        .script-objection {
+            font-weight: 700;
+            color: var(--primary-orange);
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .script-response {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Final Assessment */
+        .final-assessment {
+            background: linear-gradient(135deg, var(--card-bg) 0%, rgba(43, 92, 230, 0.1) 100%);
+            border: 2px solid var(--primary-blue);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 80px 0;
+            text-align: center;
+        }
+
+        .assessment-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+        }
+
+        .mastery-tracker {
+            background: var(--dark-bg);
+            border-radius: 50px;
+            height: 20px;
+            margin: 30px 0;
+            overflow: hidden;
+        }
+
+        .mastery-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-blue) 0%, var(--primary-orange) 100%);
+            border-radius: 50px;
+            transition: width 0.5s ease;
+            width: 0%;
+        }
+
+        .mastery-text {
+            margin-top: 10px;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .lesson-title {
+                font-size: 2.5rem;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+
+            .scripts-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animation keyframes */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- Header -->
+    <section class="lesson-header">
+        <div class="container">
+            <div class="header-content">
+                <h1 class="lesson-title">Handle Price Objections Like a Pro</h1>
+                <p class="lesson-subtitle">Master the tactical responses that turn 'too expensive' into signed contracts. Learn the reframe techniques, value reinforcement strategies, and negotiation tactics that keep premium rates intact while addressing client concerns without dropping your fees.</p>
+                <div class="instructor-badge">
+                    Will Richardson • £2,000/day Government Consultant
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="lesson-content">
+        <div class="container">
+            <!-- Section 1: Introduction -->
+            <section class="content-section">
+                <div class="section-header">
+                    <div class="section-number">1</div>
+                    <h2 class="section-title">The Real Psychology Behind "Too Expensive"</h2>
+                </div>
+                
+                <div class="content-grid">
+                    <div class="content-text">
+                        <p>After 17 years of commanding £2,000 daily rates in government consulting, I've learned something that will transform how you think about price objections: they're almost never about the money. Here's what I mean by that, and more importantly, how to use this insight to maintain your premium rates while addressing client concerns.</p>
+                        
+                        <p>When a client says "your price is too high," your natural instinct is probably to defend your rates or offer a discount. Don't. That reaction reveals you've misunderstood what's actually happening in that moment.</p>
+                        
+                        <p>Research shows that 84% of sales professionals believe price is the biggest objection, but only 26% of customers say price is their primary obstacle. This massive disconnect creates an opportunity for consultants who understand what's really going on. In my experience billing £2,000 daily to the Treasury and Cabinet Office, I discovered that "too expensive" usually translates to one of three things: they don't see the value, they lack authority to approve the budget, or they're using price as a smokescreen for other concerns.</p>
+                        
+                        <div class="quote-block">
+                            The clients who ultimately paid my premium rates weren't necessarily those with the biggest budgets—they were those who understood the relationship between investment and outcome.
+                        </div>
+                    </div>
+                    
+                    <div class="content-image">
+                        <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-mpabptSSxw/bbf889d48aa45112ba49b4fa1bc73a541099cd9850ee44b785c5a7255178a0b936fba0c2dc109bb534db2fff5940d01b66c65eb887cb5635588ab96aa148d870130af641b12107d078935f027d738ee2899ed6da9c37670b1ad44d9a7aeb1ac171446566" alt="The Strategic Pause Moment" />
+                    </div>
+                </div>
+            </section>
+
+            <!-- Check-in 1 -->
+            <div class="check-in">
+                <div class="check-in-header">
+                    <div class="check-in-icon">?</div>
+                    <div class="check-in-title">Quick Check-in: Understanding Price Objections</div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">According to research, what percentage of customers actually cite price as their primary concern?</div>
+                    <div class="options">
+                        <div class="option" data-value="84%">84%</div>
+                        <div class="option" data-value="26%" data-correct="true">26%</div>
+                        <div class="option" data-value="50%">50%</div>
+                        <div class="option" data-value="15%">15%</div>
+                    </div>
+                    <button class="check-answer-btn">Check Answer</button>
+                    <div class="feedback correct">
+                        <strong>Correct!</strong> Only 26% of customers cite price as their primary obstacle, while 84% of sales professionals believe it's the biggest objection. This disconnect is your opportunity.
+                    </div>
+                    <div class="feedback incorrect">
+                        <strong>Not quite.</strong> Only 26% of customers actually cite price as their primary concern, despite 84% of sales professionals thinking it's the biggest objection.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: Four-Step Framework -->
+            <section class="content-section">
+                <div class="section-header">
+                    <div class="section-number">2</div>
+                    <h2 class="section-title">The Four-Step Tactical Response Framework</h2>
+                </div>
+                
+                <div class="content-grid">
+                    <div class="content-text">
+                        <p>When you hear "too expensive," here's the exact process I've used to maintain rate integrity across hundreds of negotiations:</p>
+                        
+                        <div class="framework-box">
+                            <div class="framework-title">The Four-Step Process</div>
+                            <ol class="framework-steps">
+                                <li><strong>The Strategic Pause:</strong> Pause for 3-5 seconds after hearing the objection</li>
+                                <li><strong>Explore with Precision:</strong> Ask up to three targeted questions to understand what "too expensive" actually means</li>
+                                <li><strong>Summarize Their Position:</strong> Repeat back what you've heard to confirm understanding</li>
+                                <li><strong>Circle Back to Value:</strong> Reinforce the value proposition with specific, measurable outcomes</li>
+                            </ol>
+                        </div>
+                        
+                        <h3>Step 1: The Strategic Pause</h3>
+                        <p>Pause for 3-5 seconds after hearing the objection. This serves two purposes: it prevents you from sounding defensive, and it often prompts the client to elaborate without you asking. Elite sellers maintain 176 words per minute during objections versus 188 words per minute for average performers who speed up when flustered. Your calm response signals confidence in your pricing.</p>
+                    </div>
+                    
+                    <div class="content-image">
+                        <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-eVZ_D700kV/bd4e78f49d5ba2f782f4d1261f7b1c64d5f39fe41c678616c77780ceb89e7a3fd2e5a548ba1b94131fd3ab6e9c350b737b28e77eb2a80ce7562866e078d9c5a8026f8d398e3d88d3d6d788841d80c5bdef0bb9209a4a1d639b3f4a94b04403a6858c2dd8" alt="Four-Step Framework Process" />
+                    </div>
+                </div>
+            </section>
+
+            <!-- Check-in 2 -->
+            <div class="check-in">
+                <div class="check-in-header">
+                    <div class="check-in-icon">✓</div>
+                    <div class="check-in-title">Practice: The Strategic Pause</div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">A client says "That's way too expensive for our budget." What's your FIRST response?</div>
+                    <div class="options">
+                        <div class="option" data-value="explain">Immediately explain why your rates are justified</div>
+                        <div class="option" data-value="discount">Offer a 10% discount to show flexibility</div>
+                        <div class="option" data-value="pause" data-correct="true">Pause for 3-5 seconds and wait</div>
+                        <div class="option" data-value="question">Ask "What's your budget?"</div>
+                    </div>
+                    <button class="check-answer-btn">Check Answer</button>
+                    <div class="feedback correct">
+                        <strong>Perfect!</strong> The strategic pause prevents defensive responses and often prompts clients to elaborate, giving you valuable information.
+                    </div>
+                    <div class="feedback incorrect">
+                        <strong>Try again.</strong> The strategic pause is crucial - it prevents defensive reactions and often leads to the client providing more context naturally.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3: Value-Based Reframing -->
+            <section class="content-section">
+                <div class="section-header">
+                    <div class="section-number">3</div>
+                    <h2 class="section-title">Value-Based Reframing Techniques That Work</h2>
+                </div>
+                
+                <div class="content-grid">
+                    <div class="content-text">
+                        <p>The most powerful objection handling tool isn't a clever response—it's how you frame the investment from the beginning. Converting "£78,000 per year" to "£6,500 per month" or "£1,500 per week" makes pricing more psychologically digestible. But more importantly, connecting that investment to specific business outcomes transforms the conversation entirely.</p>
+                        
+                        <p>When I was working with the Ministry of Defence on a £2 million efficiency program, the initial reaction was sticker shock. Instead of defending the fee, I reframed it: "This £2 million investment over 18 months will eliminate £8 million in annual waste. That's a 400% ROI in year one, and £8 million in savings every year after that." The conversation shifted from cost to consequence of inaction.</p>
+                        
+                        <div class="quote-block">
+                            The question isn't whether £75,000 is expensive—it's whether solving this problem is worth £75,000 to your business.
+                        </div>
+                    </div>
+                    
+                    <div class="content-image">
+                        <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-bKJijf-1fa/fb515dd02cff4c3e73a749b4c58268a5fe86bfd5f15e875526d730f72f5110d2088906e6e1064bf5888eb0e45c45f644a39302a6328d1e874ec7bc99376ef703896c21bce5bb5ecfc2503e2e2af245042b30bd43c32a3bb6b281940c591c3169146f6e97" alt="Value Transformation Visualization" />
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 4: Trade Don't Cave -->
+            <section class="content-section">
+                <div class="section-header">
+                    <div class="section-number">4</div>
+                    <h2 class="section-title">The Trade Don't Cave Principle</h2>
+                </div>
+                
+                <div class="content-grid">
+                    <div class="content-text">
+                        <p>Here's what separates premium consultants from commodity providers: never give concessions for free. If a client needs a lower price, you modify the scope, timeline, or deliverables accordingly. This principle has protected my rate integrity across every negotiation I've handled.</p>
+                        
+                        <p>When the Cabinet Office requested a budget adjustment on a transformation project, my response wasn't to cut my daily rate. Instead, I presented three options: maintain the current scope at the current investment, reduce deliverables to fit their budget, or extend the timeline to spread costs across multiple budget periods. They chose to maintain the scope because they understood the value equation.</p>
+                        
+                        <p>The "Trade Don't Cave" principle works because it reinforces your position as a value creator, not a cost center. Clients respect consultants who protect their rates because it signals confidence in their worth.</p>
+                    </div>
+                    
+                    <div class="content-image">
+                        <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-J8YIWengkK/c807574a6882895014366343af53320a23e977ade93edff5df0f46a5c75637ce7627b9e64e33b206b925068ef27b01bc86ddd0917999d6218a19ed78fa2a1db77b97eaaf106ffe9540bd4850f7144c4ea2dc9d4bdbca025e933633e5e4e53da6640c64e2" alt="Trade Don't Cave Principle" />
+                    </div>
+                </div>
+            </section>
+
+            <!-- Reflection Box -->
+            <div class="reflection-box">
+                <div class="reflection-title">💭 Reflect: Your Rate Integrity</div>
+                <p>Think about the last time you faced a price objection. Did you immediately offer a discount, or did you explore the real concern? How might you apply the "Trade Don't Cave" principle to protect your rates while still addressing client needs?</p>
+                <textarea class="reflection-textarea" placeholder="Share your thoughts and experiences with price objections..."></textarea>
+            </div>
+
+            <!-- Section 5: Real-World Scripts -->
+            <section class="content-section">
+                <div class="section-header">
+                    <div class="section-number">5</div>
+                    <h2 class="section-title">Real-World Implementation Scripts</h2>
+                </div>
+                
+                <div class="content-text">
+                    <p>Here are the exact responses I use for the most common price objections, refined through hundreds of negotiations:</p>
+                </div>
+                
+                <div class="scripts-grid">
+                    <div class="script-card">
+                        <div class="script-objection">"Your price is too high compared to other consultants"</div>
+                        <div class="script-response">"I understand you're evaluating options. The difference in investment reflects the difference in approach and outcomes. Other consultants might focus on delivering a report, while my methodology ensures implementation and measurable results. Which outcome is more valuable for your situation?"</div>
+                    </div>
+                    
+                    <div class="script-card">
+                        <div class="script-objection">"We don't have that kind of budget"</div>
+                        <div class="script-response">"I appreciate you being direct about budget constraints. Let's look at three options: we can adjust the scope to fit your current budget, extend the timeline to spread the investment across multiple periods, or explore a phased approach where we start with the highest-impact components. Which approach interests you most?"</div>
+                    </div>
+                    
+                    <div class="script-card">
+                        <div class="script-objection">"We need to think about it"</div>
+                        <div class="script-response">"That makes sense—this is an important decision. What specific aspects would be most helpful to discuss further? Is it the investment level, the timeline, or questions about the methodology? Would it be useful if I prepared a brief overview showing the ROI calculation based on your specific metrics?"</div>
+                    </div>
+                    
+                    <div class="script-card">
+                        <div class="script-objection">"Can't you just reduce your rate?"</div>
+                        <div class="script-response">"I maintain consistent rates across all clients because it ensures I can deliver the quality and attention your project deserves. However, I'm happy to adjust the scope or timeline to work within your budget. What's most important—completing everything in three months, or spreading it over six months to fit your budget cycle?"</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Check-in 3 -->
+            <div class="check-in">
+                <div class="check-in-header">
+                    <div class="check-in-icon">💬</div>
+                    <div class="check-in-title">Script Practice: "We don't have that budget"</div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">A client says "We love the proposal but don't have £50,000 in our budget." Which response best follows the Trade Don't Cave principle?</div>
+                    <div class="options">
+                        <div class="option" data-value="discount">"I can do it for £40,000 to fit your budget"</div>
+                        <div class="option" data-value="options" data-correct="true">"Let's explore three options: reduce scope, extend timeline, or phase the project"</div>
+                        <div class="option" data-value="firm">"My rates are non-negotiable, take it or leave it"</div>
+                        <div class="option" data-value="payment">"What if we set up a payment plan?"</div>
+                    </div>
+                    <button class="check-answer-btn">Check Answer</button>
+                    <div class="feedback correct">
+                        <strong>Excellent!</strong> This response maintains your rate integrity while offering collaborative solutions that address their budget constraint.
+                    </div>
+                    <div class="feedback incorrect">
+                        <strong>Think again.</strong> The Trade Don't Cave principle means offering alternatives that modify scope/timeline rather than discounting your rates.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 6: Premium Positioning -->
+            <section class="content-section">
+                <div class="section-header">
+                    <div class="section-number">6</div>
+                    <h2 class="section-title">Maintaining Premium Positioning Throughout</h2>
+                </div>
+                
+                <div class="content-grid">
+                    <div class="content-text">
+                        <p>Successfully handling price objections while maintaining £1,000+ daily rates comes down to consistent positioning throughout every interaction. This starts before you ever quote a rate and continues through contract signing and project delivery.</p>
+                        
+                        <p>Your positioning begins with how you describe your services. Never present yourself as someone who "provides consulting services." Instead, position yourself as someone who "delivers specific outcomes for clients facing [specific challenge]." This outcome-focused positioning justifies premium rates because clients understand they're investing in results, not hours.</p>
+                        
+                        <p>During initial conversations, establish the cost of inaction before discussing your investment. When I worked with the Ministry of Defence, I spent the first meeting understanding what would happen if they didn't address their efficiency challenges. The £2 million annual waste I identified made my fee seem like a bargain by comparison.</p>
+                        
+                        <div class="quote-block">
+                            The consultants who consistently command £1,000+ daily rates aren't necessarily the most experienced or credentialed—they're the ones who understand that premium pricing requires premium positioning.
+                        </div>
+                    </div>
+                    
+                    <div class="content-image">
+                        <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-el6LKH1-TG/45bc895f494557407ee3269786682f24fca6175c5c4da9fde9e6959d6e0c4e4342c258b16dc8e606bec4028cb75612c77373e4d3f7e17bf046bcab7850ef80c8593efb218bde8ff6ba4fca383159cf6a469c444a6512d8a61d1bdb84f8c9cf0c306c0a60" alt="Executive Negotiation Authority" />
+                    </div>
+                </div>
+            </section>
+
+            <!-- Final Assessment -->
+            <div class="final-assessment">
+                <h3 class="assessment-title">Lesson Mastery Check</h3>
+                <p>You've covered the key principles of handling price objections like a pro. Let's assess your understanding:</p>
+                
+                <div class="mastery-tracker">
+                    <div class="mastery-progress" id="masteryProgress"></div>
+                </div>
+                <div class="mastery-text" id="masteryText">Complete the questions above to track your progress</div>
+            </div>
+
+            <!-- Check-in 4 - Final Comprehensive -->
+            <div class="check-in">
+                <div class="check-in-header">
+                    <div class="check-in-icon">🎯</div>
+                    <div class="check-in-title">Final Assessment: Objection Handling Mastery</div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">What's the most important principle when facing a price objection?</div>
+                    <div class="options">
+                        <div class="option" data-value="defend">Immediately defend your pricing with credentials</div>
+                        <div class="option" data-value="understand" data-correct="true">Understand the real concern behind "too expensive"</div>
+                        <div class="option" data-value="lower">Lower your price to show flexibility</div>
+                        <div class="option" data-value="competitors">Compare yourself to cheaper competitors</div>
+                    </div>
+                    <button class="check-answer-btn">Check Answer</button>
+                    <div class="feedback correct">
+                        <strong>Perfect!</strong> Price objections are rarely about money - they're about value perception, authority, or other concerns. Understanding the real issue is key to maintaining premium rates.
+                    </div>
+                    <div class="feedback incorrect">
+                        <strong>Not quite.</strong> The key is understanding that "too expensive" usually masks other concerns - value perception, budget authority, or timing issues.
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">According to the Trade Don't Cave principle, if a client needs a lower price, you should:</div>
+                    <div class="options">
+                        <div class="option" data-value="discount">Offer a percentage discount</div>
+                        <div class="option" data-value="modify" data-correct="true">Modify scope, timeline, or deliverables</div>
+                        <div class="option" data-value="refuse">Refuse to negotiate entirely</div>
+                        <div class="option" data-value="match">Match competitor pricing</div>
+                    </div>
+                    <button class="check-answer-btn">Check Answer</button>
+                    <div class="feedback correct">
+                        <strong>Excellent!</strong> Trade Don't Cave means never giving free concessions - always trade scope/timeline adjustments for price considerations while maintaining rate integrity.
+                    </div>
+                    <div class="feedback incorrect">
+                        <strong>Try again.</strong> Trade Don't Cave means offering alternatives that modify the project parameters rather than discounting your rates.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Progress tracking
+        let totalQuestions = 0;
+        let correctAnswers = 0;
+        
+        // Scroll progress bar
+        function updateProgressBar() {
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            document.getElementById('progressBar').style.width = scrollPercent + '%';
+        }
+
+        // Animate sections on scroll
+        function animateOnScroll() {
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (sectionTop < windowHeight * 0.8) {
+                    section.classList.add('visible');
+                }
+            });
+        }
+
+        // Handle quiz interactions
+        function initializeQuizzes() {
+            const checkIns = document.querySelectorAll('.check-in');
+            
+            checkIns.forEach(checkIn => {
+                const options = checkIn.querySelectorAll('.option');
+                const button = checkIn.querySelector('.check-answer-btn');
+                const feedbacks = checkIn.querySelectorAll('.feedback');
+                let selectedOption = null;
+                
+                totalQuestions += checkIn.querySelectorAll('.question').length;
+                
+                options.forEach(option => {
+                    option.addEventListener('click', function() {
+                        options.forEach(opt => opt.classList.remove('selected'));
+                        this.classList.add('selected');
+                        selectedOption = this;
+                        button.style.display = 'inline-block';
+                    });
+                });
+                
+                button.addEventListener('click', function() {
+                    if (!selectedOption) return;
+                    
+                    const isCorrect = selectedOption.hasAttribute('data-correct');
+                    
+                    options.forEach(option => {
+                        if (option.hasAttribute('data-correct')) {
+                            option.classList.add('correct');
+                        } else if (option.classList.contains('selected')) {
+                            option.classList.add(isCorrect ? 'correct' : 'incorrect');
+                        }
+                        option.style.pointerEvents = 'none';
+                    });
+                    
+                    feedbacks.forEach(feedback => {
+                        if ((isCorrect && feedback.classList.contains('correct')) ||
+                            (!isCorrect && feedback.classList.contains('incorrect'))) {
+                            feedback.style.display = 'block';
+                        }
+                    });
+                    
+                    if (isCorrect) {
+                        correctAnswers++;
+                    }
+                    
+                    updateMasteryProgress();
+                    button.style.display = 'none';
+                });
+            });
+        }
+
+        function updateMasteryProgress() {
+            const progressElement = document.getElementById('masteryProgress');
+            const textElement = document.getElementById('masteryText');
+            
+            if (totalQuestions > 0) {
+                const percentage = (correctAnswers / totalQuestions) * 100;
+                progressElement.style.width = percentage + '%';
+                textElement.textContent = `Mastery: ${Math.round(percentage)}% (${correctAnswers}/${totalQuestions} correct)`;
+                
+                if (percentage >= 80) {
+                    textElement.textContent += ' - Excellent! You can proceed to the next lesson.';
+                    textElement.style.color = 'var(--success-green)';
+                }
+            }
+        }
+
+        // Event listeners
+        window.addEventListener('scroll', function() {
+            updateProgressBar();
+            animateOnScroll();
+        });
+
+        window.addEventListener('load', function() {
+            animateOnScroll();
+            initializeQuizzes();
+        });
+
+        // Copy reflection notes functionality
+        const reflectionTextarea = document.querySelector('.reflection-textarea');
+        if (reflectionTextarea) {
+            reflectionTextarea.addEventListener('keyup', function() {
+                localStorage.setItem('objection-handling-reflection', this.value);
+            });
+            
+            // Load saved reflection
+            const savedReflection = localStorage.getItem('objection-handling-reflection');
+            if (savedReflection) {
+                reflectionTextarea.value = savedReflection;
+            }
+        }
+    </script>
+</body>
+</html>

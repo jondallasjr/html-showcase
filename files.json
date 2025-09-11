@@ -1,0 +1,419 @@
+{
+  "files": [
+    "DTV/Guide/DTVGuide.html",
+    "Jon Random/Amsterdam/Amsterdam.html",
+    "Jon Random/Buddha in Bangkok/Buddha In Bangkok 7 (mobile friendly).html",
+    "Jon Random/Buddha in Bangkok/Buddha in Bangkok 5.html",
+    "Jon Random/Buddha in Bangkok/Buddha in Bangkok 6.html",
+    "Jon Random/Buddha in Bangkok/Buddha in Bangkok 8 (slides).html",
+    "Jon Random/CatGPT/CatGPT 2.html",
+    "Jon Random/CatGPT/CatGPT.html",
+    "Jon Random/Chernobyl/chernobyl.html",
+    "Jon Random/Chernobyl/chernobyl2 (all imgs).html",
+    "Jon Random/Coffee and Dharma/Coffee and Dharma 1.html",
+    "Jon Random/Coffee and Dharma/Coffee and Dharma 2.html",
+    "Jon Random/Coffee and Dharma/Coffee and Dharma 3 GPT.html",
+    "Jon Random/George/George Mifflin Dallas.html",
+    "Jon Random/Gnostic Gospels/Animated Graphics.html",
+    "Jon Random/Gnostic Gospels/gnostic_gospels 1.html",
+    "Jon Random/Gnostic Gospels/gnostic_gospels 2 (with JS).html",
+    "Jon Random/Gnostic Gospels/gnostic_gospels 3.html",
+    "Jon Random/Gnostic Gospels/gnostic_gospels 5.html",
+    "Jon Random/Gnostic Gospels/gnostic_gospels 6.html",
+    "Jon Random/Gnostic Gospels/gnostic_gospels 7.html",
+    "Jon Random/Gnostic Gospels/gnostic_gospels 8.html",
+    "Jon Random/Gnostic Gospels/interactive_test 5.html",
+    "Jon Random/Gnostic Gospels/interactive_test.html",
+    "Jon Random/Gnostic Gospels/interactive_test2.html",
+    "Jon Random/Hans/Hans Engelmann.html",
+    "Jon Random/Impossible But True/Impossible But True 2.html",
+    "Jon Random/Momma in Chiang Mai/Guide.html",
+    "Jon Random/Oil Rigger Mermaid Love Story/Oil Rigger Mermaid Love Story 2 (Claude).html",
+    "Jon Random/Weird Al with My Dad/weird al with my dad 1.html",
+    "Jon Random/Weird Al with My Dad/weird al with my dad 2.html",
+    "Jon Random/advancedHTML/AdvancedHtmlCss.html",
+    "Jon Random/advancedHTML/advancedHtml.html",
+    "Jon Random/advancedHTML/interactiveCodeLab.html",
+    "Jon Random/advancedHTML/interactiveLearning.html",
+    "Jon Random/advancedHTML/singleFileJsApps.html",
+    "Jon Random/advancedHTML/singleFileJsApps2.html",
+    "Jon Random/advancedHTML/vanillaJS.html",
+    "Personal/Iron Foods.html",
+    "Personal/blog.html",
+    "Rule Benders/Business Owner/Book Lesson/Business Owner Mindset - Book Lesson 4.html",
+    "Rule Benders/Business Owner/ROI Based Fees/Web Lesson/one.html",
+    "Rule Benders/Business Owner/Web Lesson/BusinessOwnerMindset2.html",
+    "Rule Benders/Business Owner/Web Lesson/BusinessOwnerMindset4.html",
+    "Rule Benders/Business Owner/Web Lesson/BusinessOwnerMindset5.html",
+    "Rule Benders/Business Owner/Web Lesson/BusinessOwnerMindset6.html",
+    "Rule Benders/Business Owner/Web Lesson/BusinessOwnerMindset7.html",
+    "Rule Benders/Business Owner/Web Lesson/BusinessOwnerMindset8.html",
+    "Rule Benders/Business Owner/Web Lesson/businessOwnerMindset3.html",
+    "Rule Benders/Government Money Map/Government Money 2.html",
+    "Rule Benders/Government Money Map/Government Money.html",
+    "Rule Benders/HTML Content Editor.html",
+    "Rule Benders/Handle Price Objections Like a Pro/Web Lesson/webLesson1.html",
+    "Rule Benders/High Stakes Body Language/Web Lesson/webLesson1.html",
+    "Rule Benders/MISC/trap.html",
+    "Rule Benders/Off Shore Advantage/off shore 1.html",
+    "Rule Benders/Tax/tax.html",
+    "Rule Benders/Tax/taxTreatyNetworks.html",
+    "Rule Benders/The Research Trap/Comic/The Research Trap 1.html",
+    "Rule Benders/The Research Trap/Comic/The Research Trap 2.html",
+    "Rule Benders/The Research Trap/Infographic?/Infographic 1.html",
+    "Rule Benders/The Research Trap/Infographic?/Infographic2.html",
+    "Rule Benders/The Research Trap/Lesson/The Research Trap.html",
+    "Rule Benders/The Research Trap/LinkedIn Posts/LinkedIn1.html",
+    "SimplaDocs/RES/RES-Netsuite Integration.html",
+    "SimplaDocs/RES/Task Change Request and Sync Workflow.html",
+    "propertybook.co.zw.html/cluster homes.html",
+    "propertybook.co.zw.html/stands legal guide.html",
+    "propertybook.co.zw.html/title deed.html"
+  ],
+  "structure": {
+    "DTV/Guide": [
+      "DTV/Guide/DTVGuide.html"
+    ],
+    "Jon Random/Amsterdam": [
+      "Jon Random/Amsterdam/Amsterdam.html"
+    ],
+    "Jon Random/Buddha in Bangkok": [
+      "Jon Random/Buddha in Bangkok/Buddha In Bangkok 7 (mobile friendly).html",
+      "Jon Random/Buddha in Bangkok/Buddha in Bangkok 5.html",
+      "Jon Random/Buddha in Bangkok/Buddha in Bangkok 6.html",
+      "Jon Random/Buddha in Bangkok/Buddha in Bangkok 8 (slides).html"
+    ],
+    "Jon Random/CatGPT": [
+      "Jon Random/CatGPT/CatGPT 2.html",
+      "Jon Random/CatGPT/CatGPT.html"
+    ],
+    "Jon Random/Chernobyl": [
+      "Jon Random/Chernobyl/chernobyl.html",
+      "Jon Random/Chernobyl/chernobyl2 (all imgs).html"
+    ],
+    "Jon Random/Coffee and Dharma": [
+      "Jon Random/Coffee and Dharma/Coffee and Dharma 1.html",
+      "Jon Random/Coffee and Dharma/Coffee and Dharma 2.html",
+      "Jon Random/Coffee and Dharma/Coffee and Dharma 3 GPT.html"
+    ],
+    "Jon Random/George": [
+      "Jon Random/George/George Mifflin Dallas.html"
+    ],
+    "Jon Random/Gnostic Gospels": [
+      "Jon Random/Gnostic Gospels/Animated Graphics.html",
+      "Jon Random/Gnostic Gospels/gnostic_gospels 1.html",
+      "Jon Random/Gnostic Gospels/gnostic_gospels 2 (with JS).html",
+      "Jon Random/Gnostic Gospels/gnostic_gospels 3.html",
+      "Jon Random/Gnostic Gospels/gnostic_gospels 5.html",
+      "Jon Random/Gnostic Gospels/gnostic_gospels 6.html",
+      "Jon Random/Gnostic Gospels/gnostic_gospels 7.html",
+      "Jon Random/Gnostic Gospels/gnostic_gospels 8.html",
+      "Jon Random/Gnostic Gospels/interactive_test 5.html",
+      "Jon Random/Gnostic Gospels/interactive_test.html",
+      "Jon Random/Gnostic Gospels/interactive_test2.html"
+    ],
+    "Jon Random/Hans": [
+      "Jon Random/Hans/Hans Engelmann.html"
+    ],
+    "Jon Random/Impossible But True": [
+      "Jon Random/Impossible But True/Impossible But True 2.html"
+    ],
+    "Jon Random/Momma in Chiang Mai": [
+      "Jon Random/Momma in Chiang Mai/Guide.html"
+    ],
+    "Jon Random/Oil Rigger Mermaid Love Story": [
+      "Jon Random/Oil Rigger Mermaid Love Story/Oil Rigger Mermaid Love Story 2 (Claude).html"
+    ],
+    "Jon Random/Weird Al with My Dad": [
+      "Jon Random/Weird Al with My Dad/weird al with my dad 1.html",
+      "Jon Random/Weird Al with My Dad/weird al with my dad 2.html"
+    ],
+    "Jon Random/advancedHTML": [
+      "Jon Random/advancedHTML/AdvancedHtmlCss.html",
+      "Jon Random/advancedHTML/advancedHtml.html",
+      "Jon Random/advancedHTML/interactiveCodeLab.html",
+      "Jon Random/advancedHTML/interactiveLearning.html",
+      "Jon Random/advancedHTML/singleFileJsApps.html",
+      "Jon Random/advancedHTML/singleFileJsApps2.html",
+      "Jon Random/advancedHTML/vanillaJS.html"
+    ],
+    "Personal": [
+      "Personal/Iron Foods.html",
+      "Personal/blog.html"
+    ],
+    "Rule Benders/Business Owner/Book Lesson": [
+      "Rule Benders/Business Owner/Book Lesson/Business Owner Mindset - Book Lesson 4.html"
+    ],
+    "Rule Benders/Business Owner/ROI Based Fees/Web Lesson": [
+      "Rule Benders/Business Owner/ROI Based Fees/Web Lesson/one.html"
+    ],
+    "Rule Benders/Business Owner/Web Lesson": [
+      "Rule Benders/Business Owner/Web Lesson/BusinessOwnerMindset2.html",
+      "Rule Benders/Business Owner/Web Lesson/BusinessOwnerMindset4.html",
+      "Rule Benders/Business Owner/Web Lesson/BusinessOwnerMindset5.html",
+      "Rule Benders/Business Owner/Web Lesson/BusinessOwnerMindset6.html",
+      "Rule Benders/Business Owner/Web Lesson/BusinessOwnerMindset7.html",
+      "Rule Benders/Business Owner/Web Lesson/BusinessOwnerMindset8.html",
+      "Rule Benders/Business Owner/Web Lesson/businessOwnerMindset3.html"
+    ],
+    "Rule Benders/Government Money Map": [
+      "Rule Benders/Government Money Map/Government Money 2.html",
+      "Rule Benders/Government Money Map/Government Money.html"
+    ],
+    "Rule Benders": [
+      "Rule Benders/HTML Content Editor.html"
+    ],
+    "Rule Benders/Handle Price Objections Like a Pro/Web Lesson": [
+      "Rule Benders/Handle Price Objections Like a Pro/Web Lesson/webLesson1.html"
+    ],
+    "Rule Benders/High Stakes Body Language/Web Lesson": [
+      "Rule Benders/High Stakes Body Language/Web Lesson/webLesson1.html"
+    ],
+    "Rule Benders/MISC": [
+      "Rule Benders/MISC/trap.html"
+    ],
+    "Rule Benders/Off Shore Advantage": [
+      "Rule Benders/Off Shore Advantage/off shore 1.html"
+    ],
+    "Rule Benders/Tax": [
+      "Rule Benders/Tax/tax.html",
+      "Rule Benders/Tax/taxTreatyNetworks.html"
+    ],
+    "Rule Benders/The Research Trap/Comic": [
+      "Rule Benders/The Research Trap/Comic/The Research Trap 1.html",
+      "Rule Benders/The Research Trap/Comic/The Research Trap 2.html"
+    ],
+    "Rule Benders/The Research Trap/Infographic?": [
+      "Rule Benders/The Research Trap/Infographic?/Infographic 1.html",
+      "Rule Benders/The Research Trap/Infographic?/Infographic2.html"
+    ],
+    "Rule Benders/The Research Trap/Lesson": [
+      "Rule Benders/The Research Trap/Lesson/The Research Trap.html"
+    ],
+    "Rule Benders/The Research Trap/LinkedIn Posts": [
+      "Rule Benders/The Research Trap/LinkedIn Posts/LinkedIn1.html"
+    ],
+    "SimplaDocs/RES": [
+      "SimplaDocs/RES/RES-Netsuite Integration.html",
+      "SimplaDocs/RES/Task Change Request and Sync Workflow.html"
+    ],
+    "propertybook.co.zw.html": [
+      "propertybook.co.zw.html/cluster homes.html",
+      "propertybook.co.zw.html/stands legal guide.html",
+      "propertybook.co.zw.html/title deed.html"
+    ]
+  },
+  "nestedStructure": {
+    "DTV": {
+      "Guide": {
+        "_files": [
+          "DTV/Guide/DTVGuide.html"
+        ]
+      }
+    },
+    "Jon Random": {
+      "Amsterdam": {
+        "_files": [
+          "Jon Random/Amsterdam/Amsterdam.html"
+        ]
+      },
+      "Buddha in Bangkok": {
+        "_files": [
+          "Jon Random/Buddha in Bangkok/Buddha In Bangkok 7 (mobile friendly).html",
+          "Jon Random/Buddha in Bangkok/Buddha in Bangkok 5.html",
+          "Jon Random/Buddha in Bangkok/Buddha in Bangkok 6.html",
+          "Jon Random/Buddha in Bangkok/Buddha in Bangkok 8 (slides).html"
+        ]
+      },
+      "CatGPT": {
+        "_files": [
+          "Jon Random/CatGPT/CatGPT 2.html",
+          "Jon Random/CatGPT/CatGPT.html"
+        ]
+      },
+      "Chernobyl": {
+        "_files": [
+          "Jon Random/Chernobyl/chernobyl.html",
+          "Jon Random/Chernobyl/chernobyl2 (all imgs).html"
+        ]
+      },
+      "Coffee and Dharma": {
+        "_files": [
+          "Jon Random/Coffee and Dharma/Coffee and Dharma 1.html",
+          "Jon Random/Coffee and Dharma/Coffee and Dharma 2.html",
+          "Jon Random/Coffee and Dharma/Coffee and Dharma 3 GPT.html"
+        ]
+      },
+      "George": {
+        "_files": [
+          "Jon Random/George/George Mifflin Dallas.html"
+        ]
+      },
+      "Gnostic Gospels": {
+        "_files": [
+          "Jon Random/Gnostic Gospels/Animated Graphics.html",
+          "Jon Random/Gnostic Gospels/gnostic_gospels 1.html",
+          "Jon Random/Gnostic Gospels/gnostic_gospels 2 (with JS).html",
+          "Jon Random/Gnostic Gospels/gnostic_gospels 3.html",
+          "Jon Random/Gnostic Gospels/gnostic_gospels 5.html",
+          "Jon Random/Gnostic Gospels/gnostic_gospels 6.html",
+          "Jon Random/Gnostic Gospels/gnostic_gospels 7.html",
+          "Jon Random/Gnostic Gospels/gnostic_gospels 8.html",
+          "Jon Random/Gnostic Gospels/interactive_test 5.html",
+          "Jon Random/Gnostic Gospels/interactive_test.html",
+          "Jon Random/Gnostic Gospels/interactive_test2.html"
+        ]
+      },
+      "Hans": {
+        "_files": [
+          "Jon Random/Hans/Hans Engelmann.html"
+        ]
+      },
+      "Impossible But True": {
+        "_files": [
+          "Jon Random/Impossible But True/Impossible But True 2.html"
+        ]
+      },
+      "Momma in Chiang Mai": {
+        "_files": [
+          "Jon Random/Momma in Chiang Mai/Guide.html"
+        ]
+      },
+      "Oil Rigger Mermaid Love Story": {
+        "_files": [
+          "Jon Random/Oil Rigger Mermaid Love Story/Oil Rigger Mermaid Love Story 2 (Claude).html"
+        ]
+      },
+      "Weird Al with My Dad": {
+        "_files": [
+          "Jon Random/Weird Al with My Dad/weird al with my dad 1.html",
+          "Jon Random/Weird Al with My Dad/weird al with my dad 2.html"
+        ]
+      },
+      "advancedHTML": {
+        "_files": [
+          "Jon Random/advancedHTML/AdvancedHtmlCss.html",
+          "Jon Random/advancedHTML/advancedHtml.html",
+          "Jon Random/advancedHTML/interactiveCodeLab.html",
+          "Jon Random/advancedHTML/interactiveLearning.html",
+          "Jon Random/advancedHTML/singleFileJsApps.html",
+          "Jon Random/advancedHTML/singleFileJsApps2.html",
+          "Jon Random/advancedHTML/vanillaJS.html"
+        ]
+      }
+    },
+    "Personal": {
+      "_files": [
+        "Personal/Iron Foods.html",
+        "Personal/blog.html"
+      ]
+    },
+    "Rule Benders": {
+      "Business Owner": {
+        "Book Lesson": {
+          "_files": [
+            "Rule Benders/Business Owner/Book Lesson/Business Owner Mindset - Book Lesson 4.html"
+          ]
+        },
+        "ROI Based Fees": {
+          "Web Lesson": {
+            "_files": [
+              "Rule Benders/Business Owner/ROI Based Fees/Web Lesson/one.html"
+            ]
+          }
+        },
+        "Web Lesson": {
+          "_files": [
+            "Rule Benders/Business Owner/Web Lesson/BusinessOwnerMindset2.html",
+            "Rule Benders/Business Owner/Web Lesson/BusinessOwnerMindset4.html",
+            "Rule Benders/Business Owner/Web Lesson/BusinessOwnerMindset5.html",
+            "Rule Benders/Business Owner/Web Lesson/BusinessOwnerMindset6.html",
+            "Rule Benders/Business Owner/Web Lesson/BusinessOwnerMindset7.html",
+            "Rule Benders/Business Owner/Web Lesson/BusinessOwnerMindset8.html",
+            "Rule Benders/Business Owner/Web Lesson/businessOwnerMindset3.html"
+          ]
+        }
+      },
+      "Government Money Map": {
+        "_files": [
+          "Rule Benders/Government Money Map/Government Money 2.html",
+          "Rule Benders/Government Money Map/Government Money.html"
+        ]
+      },
+      "_files": [
+        "Rule Benders/HTML Content Editor.html"
+      ],
+      "Handle Price Objections Like a Pro": {
+        "Web Lesson": {
+          "_files": [
+            "Rule Benders/Handle Price Objections Like a Pro/Web Lesson/webLesson1.html"
+          ]
+        }
+      },
+      "High Stakes Body Language": {
+        "Web Lesson": {
+          "_files": [
+            "Rule Benders/High Stakes Body Language/Web Lesson/webLesson1.html"
+          ]
+        }
+      },
+      "MISC": {
+        "_files": [
+          "Rule Benders/MISC/trap.html"
+        ]
+      },
+      "Off Shore Advantage": {
+        "_files": [
+          "Rule Benders/Off Shore Advantage/off shore 1.html"
+        ]
+      },
+      "Tax": {
+        "_files": [
+          "Rule Benders/Tax/tax.html",
+          "Rule Benders/Tax/taxTreatyNetworks.html"
+        ]
+      },
+      "The Research Trap": {
+        "Comic": {
+          "_files": [
+            "Rule Benders/The Research Trap/Comic/The Research Trap 1.html",
+            "Rule Benders/The Research Trap/Comic/The Research Trap 2.html"
+          ]
+        },
+        "Infographic?": {
+          "_files": [
+            "Rule Benders/The Research Trap/Infographic?/Infographic 1.html",
+            "Rule Benders/The Research Trap/Infographic?/Infographic2.html"
+          ]
+        },
+        "Lesson": {
+          "_files": [
+            "Rule Benders/The Research Trap/Lesson/The Research Trap.html"
+          ]
+        },
+        "LinkedIn Posts": {
+          "_files": [
+            "Rule Benders/The Research Trap/LinkedIn Posts/LinkedIn1.html"
+          ]
+        }
+      }
+    },
+    "SimplaDocs": {
+      "RES": {
+        "_files": [
+          "SimplaDocs/RES/RES-Netsuite Integration.html",
+          "SimplaDocs/RES/Task Change Request and Sync Workflow.html"
+        ]
+      }
+    },
+    "propertybook.co.zw.html": {
+      "_files": [
+        "propertybook.co.zw.html/cluster homes.html",
+        "propertybook.co.zw.html/stands legal guide.html",
+        "propertybook.co.zw.html/title deed.html"
+      ]
+    }
+  },
+  "generatedAt": "2025-09-11T22:28:33.621Z",
+  "count": 69
+}

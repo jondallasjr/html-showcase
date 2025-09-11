@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discover Client Value Drivers - Rule Benders Academy</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --rb-black: #000000;
+            --rb-blue: #2B5CE6;
+            --rb-orange: #E85D00;
+            --rb-white: #FFFFFF;
+            --rb-grey: #333333;
+            --rb-light-grey: #666666;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, var(--rb-black) 0%, var(--rb-grey) 100%);
+            color: var(--rb-white);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .lesson-header {
+            background: var(--rb-black);
+            border-bottom: 3px solid var(--rb-blue);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .lesson-title {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--rb-white);
+        }
+
+        .lesson-subtitle {
+            color: var(--rb-blue);
+            font-size: 1rem;
+            margin-top: 5px;
+        }
+
+        .progress-indicator {
+            background: var(--rb-grey);
+            height: 8px;
+            border-radius: 4px;
+            width: 200px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            background: linear-gradient(90deg, var(--rb-blue), var(--rb-orange));
+            height: 100%;
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 4px;
+        }
+
+        /* Main Content */
+        .lesson-content {
+            padding: 40px 0;
+        }
+
+        .section {
+            background: rgba(51, 51, 51, 0.9);
+            margin: 30px 0;
+            border-radius: 10px;
+            overflow: hidden;
+            border-left: 4px solid var(--rb-blue);
+        }
+
+        .section-header {
+            background: var(--rb-black);
+            padding: 20px 30px;
+            border-bottom: 1px solid var(--rb-blue);
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .section-icon {
+            width: 40px;
+            height: 40px;
+            margin-right: 15px;
+            border-radius: 50%;
+            background: var(--rb-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .section-content {
+            padding: 30px;
+        }
+
+        .hero-section {
+            text-align: center;
+            padding: 60px 0;
+            background: linear-gradient(135deg, rgba(43, 92, 230, 0.1), rgba(232, 93, 0, 0.1));
+            border-radius: 15px;
+            margin-bottom: 40px;
+        }
+
+        .hero-image {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 30px;
+            border-radius: 50%;
+            background: var(--rb-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-image img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+        }
+
+        .objectives-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .objective-card {
+            background: var(--rb-black);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid var(--rb-orange);
+        }
+
+        .framework-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .framework-card {
+            background: var(--rb-black);
+            padding: 25px;
+            border-radius: 10px;
+            border: 2px solid var(--rb-blue);
+            transition: transform 0.3s ease;
+        }
+
+        .framework-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--rb-orange);
+        }
+
+        .framework-icon {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 15px;
+            border-radius: 50%;
+            background: var(--rb-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .framework-icon img {
+            width: 35px;
+            height: 35px;
+        }
+
+        /* Interactive Elements */
+        .comprehension-check {
+            background: linear-gradient(135deg, var(--rb-blue), var(--rb-orange));
+            padding: 25px;
+            border-radius: 10px;
+            margin: 30px 0;
+        }
+
+        .quiz-question {
+            background: var(--rb-white);
+            color: var(--rb-black);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .quiz-options {
+            display: grid;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .quiz-option {
+            background: var(--rb-grey);
+            color: var(--rb-white);
+            padding: 12px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            border: none;
+            text-align: left;
+        }
+
+        .quiz-option:hover {
+            background: var(--rb-blue);
+        }
+
+        .quiz-option.correct {
+            background: #28a745;
+        }
+
+        .quiz-option.incorrect {
+            background: #dc3545;
+        }
+
+        .feedback {
+            background: var(--rb-black);
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .expandable-content {
+            border: 1px solid var(--rb-blue);
+            border-radius: 8px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .expand-trigger {
+            background: var(--rb-black);
+            padding: 15px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .expand-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .expand-content {
+            padding: 20px;
+            display: none;
+            background: var(--rb-grey);
+        }
+
+        .roi-calculator {
+            background: var(--rb-black);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 30px 0;
+            border: 2px solid var(--rb-orange);
+        }
+
+        .calculator-inputs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .input-group label {
+            margin-bottom: 5px;
+            color: var(--rb-blue);
+        }
+
+        .input-group input {
+            padding: 10px;
+            border: 1px solid var(--rb-blue);
+            border-radius: 5px;
+            background: var(--rb-grey);
+            color: var(--rb-white);
+        }
+
+        .calculate-btn {
+            background: var(--rb-orange);
+            color: var(--rb-white);
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+
+        .calculate-btn:hover {
+            background: #cc5200;
+        }
+
+        .calculator-result {
+            background: var(--rb-blue);
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 15px;
+            display: none;
+        }
+
+        .toolkit-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .toolkit-card {
+            background: var(--rb-black);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--rb-blue);
+        }
+
+        .copy-btn {
+            background: var(--rb-blue);
+            color: var(--rb-white);
+            padding: 8px 15px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        .copy-btn:hover {
+            background: var(--rb-orange);
+        }
+
+        .action-section {
+            background: linear-gradient(135deg, var(--rb-orange), #cc5200);
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .cta-button {
+            background: var(--rb-black);
+            color: var(--rb-white);
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .lesson-title {
+                font-size: 1.5rem;
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .framework-container,
+            .objectives-grid,
+            .toolkit-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-content {
+                padding: 20px;
+            }
+        }
+
+        /* Citations */
+        .citation {
+            color: var(--rb-blue);
+            cursor: pointer;
+            text-decoration: none;
+            position: relative;
+        }
+
+        .citation:hover::after {
+            content: attr(data-citation);
+            position: absolute;
+            bottom: 100%;
+            left: 0;
+            background: var(--rb-black);
+            color: var(--rb-white);
+            padding: 10px;
+            border-radius: 5px;
+            white-space: nowrap;
+            z-index: 1000;
+            font-size: 0.9rem;
+            border: 1px solid var(--rb-blue);
+        }
+
+        /* Animations */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section {
+            animation: slideIn 0.6s ease;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, transparent, var(--rb-orange), transparent);
+            background-size: 200% 100%;
+            animation: highlight 2s ease;
+        }
+
+        @keyframes highlight {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+    </style>
+</head>
+<body>
+    <header class="lesson-header">
+        <div class="container">
+            <div class="header-content">
+                <div>
+                    <h1 class="lesson-title">Discover Client Value Drivers</h1>
+                    <p class="lesson-subtitle">The Strategic Questioning Framework That Justifies £1000+ Daily Rates</p>
+                </div>
+                <div>
+                    <div class="progress-indicator">
+                        <div class="progress-bar" id="progressBar"></div>
+                    </div>
+                    <small style="color: var(--rb-light-grey);">Progress: <span id="progressText">0%</span></small>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="lesson-content">
+        <div class="container">
+            <div class="hero-section">
+                <div class="hero-image">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-d0kfyL1rdX/f0753fd3677fa23789bf1dbfbfa0d88fe98bf5ce44ec0aff2b0261d212cc2f67803856f876ccb740338d5fea93442b38c0764da2572b37cbc79a3ca9640f1bb7c327c6794eafc33bcada5fed061aacb86d6b3011bdc23bc5e1a9df17b3003065bb47e612" alt="Strategic Discovery">
+                </div>
+                <h2 style="font-size: 2.5rem; margin-bottom: 20px;">Transform From Cost Center to Profit Driver</h2>
+                <p style="font-size: 1.2rem; color: var(--rb-light-grey);">Master the discovery process that justifies premium consulting rates through strategic value identification</p>
+            </div>
+
+            <section class="section">
+                <div class="section-header">
+                    <div class="section-icon">🎯</div>
+                    <h2 class="section-title">What You'll Be Able to Do</h2>
+                </div>
+                <div class="section-content">
+                    <div class="objectives-grid">
+                        <div class="objective-card">
+                            <h3 style="color: var(--rb-orange); margin-bottom: 10px;">Master Strategic Questioning</h3>
+                            <p>Deploy the SPIN methodology to uncover hidden value drivers and quantify client pain points worth £10K+ per day to solve.</p>
+                        </div>
+                        <div class="objective-card">
+                            <h3 style="color: var(--rb-orange); margin-bottom: 10px;">Position Premium Value</h3>
+                            <p>Present your services as profit drivers using the 5-6X ROI framework that justifies £1000+ daily rates.</p>
+                        </div>
+                        <div class="objective-card">
+                            <h3 style="color: var(--rb-orange); margin-bottom: 10px;">Handle Price Objections</h3>
+                            <p>Transform "that's expensive" into "where else can I get 4X ROI in 90 days?" using proven reframe techniques.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="comprehension-check">
+                <h3 style="margin-bottom: 15px;">🔍 Self-Limitation Check</h3>
+                <div class="quiz-question">
+                    <p><strong>Before we start:</strong> Are you more comfortable talking about your hourly rate than discussing the £500K revenue increase you could deliver?</p>
+                    <div class="quiz-options">
+                        <button class="quiz-option" onclick="handleLimitationCheck(this, false)">A) Yes - I focus on time-based pricing</button>
+                        <button class="quiz-option" onclick="handleLimitationCheck(this, true)">B) No - I lead with value and outcomes</button>
+                        <button class="quiz-option" onclick="handleLimitationCheck(this, false)">C) I avoid discussing money entirely</button>
+                    </div>
+                    <div class="feedback" id="limitationFeedback">
+                        <p><strong>Reality Check:</strong> If you answered A or C, that mindset is costing you thousands every month. This lesson will fix that.</p>
+                    </div>
+                </div>
+            </div>
+
+            <section class="section">
+                <div class="section-header">
+                    <div class="section-icon">💡</div>
+                    <h2 class="section-title">The Value Discovery Reality Check</h2>
+                </div>
+                <div class="section-content">
+                    <div style="background: var(--rb-black); padding: 25px; border-radius: 10px; border-left: 4px solid var(--rb-orange);">
+                        <h3 style="color: var(--rb-orange); margin-bottom: 15px;">The Uncomfortable Truth</h3>
+                        <p style="font-size: 1.1rem;">After 17 years of consulting across government and private sector—billing up to £2,000/day at HM Treasury—most consultants are leaving 300-400% of their potential fees on the table.</p>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 30px 0; text-align: center;">
+                        <div style="background: var(--rb-black); padding: 20px; border-radius: 8px;">
+                            <h4 style="color: var(--rb-blue); font-size: 2rem;">£550</h4>
+                            <p>Median UK consultant daily rate<a href="#" class="citation" data-citation="IT Jobs Watch - UK Consultant Rates">[1]</a></p>
+                        </div>
+                        <div style="background: var(--rb-black); padding: 20px; border-radius: 8px;">
+                            <h4 style="color: var(--rb-blue); font-size: 2rem;">€1,000+</h4>
+                            <p>European IT consultants exceeded this for first time in 2024<a href="#" class="citation" data-citation="Metrics.biz - IT Consultants 2024">[2]</a></p>
+                        </div>
+                        <div style="background: var(--rb-black); padding: 20px; border-radius: 8px;">
+                            <h4 style="color: var(--rb-orange); font-size: 2rem;">17.3%</h4>
+                            <p>Only this percentage use value-based pricing<a href="#" class="citation" data-citation="Atarim - Value-Based Pricing Study">[3]</a></p>
+                        </div>
+                        <div style="background: var(--rb-black); padding: 20px; border-radius: 8px;">
+                            <h4 style="color: var(--rb-orange); font-size: 2rem;">350%</h4>
+                            <p>My project fee increase: £65K to £300K<a href="#" class="citation" data-citation="Consulting Success - Value-Based Pricing Guide">[4]</a></p>
+                        </div>
+                    </div>
+
+                    <p>Same expertise, same time investment. The difference? I learned to discover and articulate value in language clients actually cared about.</p>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="section-header" onclick="toggleSection('spinSection')">
+                    <div class="section-icon">🎲</div>
+                    <h2 class="section-title">The SPIN Framework for Value Discovery</h2>
+                    <span class="expand-icon" style="margin-left: auto;">▼</span>
+                </div>
+                <div class="section-content" id="spinSection">
+                    <div style="text-align: center; margin-bottom: 30px;">
+                        <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-xQks398PPm/ed90d0943d6739378e385f9e057eda1e6c61a4348517fcc6c45e2c961b0c54b26a07be943689d56fae989850a62d46872c211652517d7305549a9efa3ffc2652b638db66f66ed4db760a436dc48a4d0151f31bc6d8b6eee6ccef6874d76f18b3e00c0854" style="width: 120px; height: 120px;" alt="SPIN Methodology">
+                    </div>
+
+                    <p>The SPIN methodology isn't just sales training—it's the foundation for uncovering value drivers that justify premium rates. Here's how I've adapted it for consulting engagements.</p>
+
+                    <div class="framework-container">
+                        <div class="framework-card">
+                            <div class="framework-icon">
+                                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-dhJK1Bki_e/795f0648a2bf2eada5584a1c1076c1a8991e2e12a3f5e04d778188672103ef15c00557bddba33d1bafd1f00594ef3dcd9110987f04f8f4c81f56d4c50cd95575de4bfa99cf21f812da0e8dc38de9e5be1ad5ea96a65a942e69138b6303a4de6f7da5edc1" alt="Situation">
+                            </div>
+                            <h3 style="color: var(--rb-blue);">Situation Questions</h3>
+                            <p><strong>Mapping the Current State</strong></p>
+                            <p>These establish context without being obvious. You're mapping specific operational realities.</p>
+                            <div class="expandable-content">
+                                <div class="expand-trigger" onclick="toggleContent('situationExample')">
+                                    <span>My go-to situation questions</span>
+                                    <span class="expand-icon">+</span>
+                                </div>
+                                <div class="expand-content" id="situationExample">
+                                    <ul>
+                                        <li>"Walk me through your current process for [specific challenge area]"</li>
+                                        <li>"How long has this system been in place?"</li>
+                                        <li>"Who's currently responsible for [relevant function]?"</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="framework-card">
+                            <div class="framework-icon">
+                                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-bHRocIIvlQ/9ac117832fa4c965e0396b148ed29076f92feaa3b06236053b9c51e98cd666379e7c43899730ac0b2543cf2ce33581052d18a3234b8927f21730190f2d0d5c92e236c8bd06b9281c159d57800aa12be567ba5255cbf287f84b828185ad3b6f64d6d10ef2" alt="Problem">
+                            </div>
+                            <h3 style="color: var(--rb-blue);">Problem Questions</h3>
+                            <p><strong>Uncovering Pain Points</strong></p>
+                            <p>This is where most consultants go wrong. You need to dig into operational, financial, and strategic problems.</p>
+                            <div class="expandable-content">
+                                <div class="expand-trigger" onclick="toggleContent('problemExample')">
+                                    <span>Proven problem questions</span>
+                                    <span class="expand-icon">+</span>
+                                </div>
+                                <div class="expand-content" id="problemExample">
+                                    <ul>
+                                        <li>"What's the biggest bottleneck in your current approach?"</li>
+                                        <li>"Where do you see the most waste or inefficiency?"</li>
+                                        <li>"What keeps you awake at night about this situation?"</li>
+                                    </ul>
+                                    <p><strong>Advanced technique:</strong> Ask about duration and escalation. "How long has this been a problem?" If they say two years, follow with: "What's changed in the last six months that makes this urgent now?"</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="framework-card">
+                            <div class="framework-icon">
+                                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-ea4fENuevy/da7a707cca3386d5072e9ad15a51fbeb1b53d1c3c505d65a04cbb7a1340a7a0f246958bb8a295674eeb7e7a90bbc352a6ec521f2b61aee30bee7494eabfe9da95e02980b1c12d4623d431141c4cb4df3324e7427d3b1cd94dba4093cda78365b3f08dac9" alt="Implication">
+                            </div>
+                            <h3 style="color: var(--rb-orange);">Implication Questions</h3>
+                            <p><strong>Quantifying Cost of Inaction</strong></p>
+                            <p>This is where value discovery gets real. Help clients understand the true cost—not just obvious costs, but hidden opportunity costs.</p>
+                            <div class="expandable-content">
+                                <div class="expand-trigger" onclick="toggleContent('implicationExample')">
+                                    <span>My framework for implication questions</span>
+                                    <span class="expand-icon">+</span>
+                                </div>
+                                <div class="expand-content" id="implicationExample">
+                                    <ul>
+                                        <li>"If this problem persists for another year, what's the financial impact?"</li>
+                                        <li>"How is this affecting your team's productivity?"</li>
+                                        <li>"What opportunities are you missing because of this issue?"</li>
+                                    </ul>
+                                    <p><strong>Real scenario:</strong> A client mentioned their team was "a bit inefficient" with project reporting. My implication questions revealed this "bit inefficient" meant 40 hours per month across 12 team members—£24,000 annual cost for a problem they'd never quantified.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="framework-card">
+                            <div class="framework-icon">
+                                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-4cOSVEcWGy/c26e8722998f2ec48cb07db2d5e5abd125c5e7945426bb187c4ba526eb7b36ada10424fb2229f3437c9ead59530d2c805dd490efd69d642003141d5f3053da13ebafbe1bb052e016fb56410c7df144c37504ad3ecf51396dba934656ef4a00fe48168a44" alt="Need-Payoff">
+                            </div>
+                            <h3 style="color: var(--rb-orange);">Need-Payoff Questions</h3>
+                            <p><strong>Positioning Your Value</strong></p>
+                            <p>These questions help clients articulate the value of solving their problems. You're getting them to paint the picture of success.</p>
+                            <div class="expandable-content">
+                                <div class="expand-trigger" onclick="toggleContent('needPayoffExample')">
+                                    <span>Value-focused need-payoff questions</span>
+                                    <span class="expand-icon">+</span>
+                                </div>
+                                <div class="expand-content" id="needPayoffExample">
+                                    <ul>
+                                        <li>"If we could solve this, what would that mean for your quarterly targets?"</li>
+                                        <li>"How would fixing this change your competitive position?"</li>
+                                        <li>"What's the ROI on getting this right?"</li>
+                                    </ul>
+                                    <p><strong>The magic happens</strong> when clients start quantifying their own success metrics. They're selling themselves on the value you'll deliver.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="comprehension-check">
+                <h3 style="margin-bottom: 15px;">🎯 SPIN Framework Check</h3>
+                <div class="quiz-question">
+                    <p><strong>Which SPIN question type helps quantify the financial cost of client problems?</strong></p>
+                    <div class="quiz-options">
+                        <button class="quiz-option" onclick="handleQuiz(this, false, 'spinQuiz')">A) Situation Questions - they map current processes</button>
+                        <button class="quiz-option" onclick="handleQuiz(this, false, 'spinQuiz')">B) Problem Questions - they identify pain points</button>
+                        <button class="quiz-option" onclick="handleQuiz(this, true, 'spinQuiz')">C) Implication Questions - they quantify cost of inaction</button>
+                        <button class="quiz-option" onclick="handleQuiz(this, false, 'spinQuiz')">D) Need-Payoff Questions - they position value</button>
+                    </div>
+                    <div class="feedback" id="spinQuiz">
+                        <p><strong>Correct!</strong> Implication questions are where value discovery gets real. They help clients understand not just obvious costs, but hidden opportunity costs that justify premium fees.</p>
+                    </div>
+                </div>
+            </div>
+
+            <section class="section">
+                <div class="section-header">
+                    <div class="section-icon">💰</div>
+                    <h2 class="section-title">The ROI Positioning Framework</h2>
+                </div>
+                <div class="section-content">
+                    <div style="text-align: center; margin-bottom: 30px;">
+                        <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-xDpolcwN8l/117464845cbe43c73b811138b7b984bdbc5f69794362bb2b49895da4f70d20d568b35a9c164340bae744821df75219a28a7521e2f478e2c2e9fb539311c2e2d0343e1199cfee8a4b9fb0f6134dbb34f868596b7d934a3090b4fc225c573b901b0fab5d43" style="width: 120px; height: 120px;" alt="ROI Calculator">
+                    </div>
+
+                    <p>Here's where most consultants crash and burn. They discover problems but can't position solutions in financial terms. After optimizing programs worth over £10 billion, here's my systematic approach to ROI positioning.</p>
+
+                    <div style="background: linear-gradient(135deg, var(--rb-blue), var(--rb-orange)); padding: 30px; border-radius: 15px; text-align: center; margin: 30px 0;">
+                        <h3 style="font-size: 2rem; margin-bottom: 15px;">The 5-6X ROI Sweet Spot</h3>
+                        <p style="font-size: 1.2rem;">Research shows value-based pricing should target 5-6X ROI for optimal positioning. This isn't arbitrary—it's the zone where clients see significant value while you capture fair compensation.</p>
+                    </div>
+
+                    <div class="roi-calculator">
+                        <h4 style="color: var(--rb-orange); margin-bottom: 20px; text-align: center;">🧮 Interactive ROI Calculator</h4>
+                        <div class="calculator-inputs">
+                            <div class="input-group">
+                                <label for="problemCost">Annual Problem Cost (£)</label>
+                                <input type="number" id="problemCost" placeholder="100000">
+                            </div>
+                            <div class="input-group">
+                                <label for="solutionBenefit">Annual Solution Benefit (£)</label>
+                                <input type="number" id="solutionBenefit" placeholder="100000">
+                            </div>
+                            <div class="input-group">
+                                <label for="consultingFee">Your Consulting Fee (£)</label>
+                                <input type="number" id="consultingFee" placeholder="20000">
+                            </div>
+                        </div>
+                        <button class="calculate-btn" onclick="calculateROI()">Calculate Client ROI</button>
+                        <div class="calculator-result" id="roiResult">
+                            <h4>Client ROI Analysis:</h4>
+                            <p id="roiValue"></p>
+                            <p id="roiAdvice"></p>
+                        </div>
+                    </div>
+
+                    <div style="background: var(--rb-black); padding: 25px; border-radius: 10px; margin: 30px 0;">
+                        <h4 style="color: var(--rb-blue); margin-bottom: 15px;">The Value Quantification Process</h4>
+                        <div style="display: grid; gap: 20px;">
+                            <div style="display: flex; align-items: center; gap: 15px;">
+                                <div style="background: var(--rb-blue); color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">1</div>
+                                <div>
+                                    <strong>Identify Tangible Impact</strong>
+                                    <p>Revenue increase, cost reduction, time savings—anything with a clear monetary value.</p>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 15px;">
+                                <div style="background: var(--rb-blue); color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">2</div>
+                                <div>
+                                    <strong>Calculate Opportunity Cost</strong>
+                                    <p>What's the client missing by not solving this? Lost market share, competitive disadvantage, team productivity drain.</p>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 15px;">
+                                <div style="background: var(--rb-orange); color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">3</div>
+                                <div>
+                                    <strong>Apply the Risk Multiplier</strong>
+                                    <p>Problems don't stay static—they compound. A £50K annual problem today could be £200K in two years if left unsolved.</p>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 15px;">
+                                <div style="background: var(--rb-orange); color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">4</div>
+                                <div>
+                                    <strong>Present the Business Case</strong>
+                                    <p>"This problem is costing you £150K annually. If we don't address it, historical patterns suggest it'll hit £300K within 18 months. My fee is £30K for a solution that delivers £120K net benefit—a 4X ROI."</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="section-header">
+                    <div class="section-icon">🛡️</div>
+                    <h2 class="section-title">Handling Price Objections Like a Pro</h2>
+                </div>
+                <div class="section-content">
+                    <p>When clients say "that's expensive," they're not rejecting your price—they're saying they don't see the value. Here's how I handle this after 17 years of premium pricing.</p>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin: 30px 0;">
+                        <div style="background: var(--rb-black); padding: 20px; border-radius: 10px; border-left: 4px solid var(--rb-blue);">
+                            <h4 style="color: var(--rb-blue); margin-bottom: 10px;">The Value Reframe Technique</h4>
+                            <div style="background: var(--rb-grey); padding: 15px; border-radius: 5px; margin: 10px 0;">
+                                <strong>Client:</strong> "£50K seems steep for a three-month project."
+                            </div>
+                            <div style="background: var(--rb-blue); color: white; padding: 15px; border-radius: 5px;">
+                                <strong>You:</strong> "It sounds like the value isn't clear. Let me ask—where else in your business are you getting a 4X ROI in 90 days?"
+                            </div>
+                            <p style="margin-top: 10px; color: var(--rb-light-grey);">Nine times out of ten, the answer is nowhere. This reframes the conversation from cost to opportunity.</p>
+                        </div>
+
+                        <div style="background: var(--rb-black); padding: 20px; border-radius: 10px; border-left: 4px solid var(--rb-orange);">
+                            <h4 style="color: var(--rb-orange); margin-bottom: 10px;">The Inaction Cost Reality Check</h4>
+                            <div style="background: var(--rb-orange); color: white; padding: 15px; border-radius: 5px;">
+                                <strong>You:</strong> "I understand £50K feels significant. Help me understand—what's it costing you to not solve this problem? Based on our discovery, you're losing £15K monthly to inefficiency. So the question isn't whether you can afford to invest £50K—it's whether you can afford to keep losing £15K every month."
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="comprehension-check">
+                <h3 style="margin-bottom: 15px;">💡 Price Objection Mastery Check</h3>
+                <div class="quiz-question">
+                    <p><strong>A client says "Your £40K fee seems expensive." What's the best response?</strong></p>
+                    <div class="quiz-options">
+                        <button class="quiz-option" onclick="handleQuiz(this, false, 'objectionQuiz')">A) "I understand, but this is my standard rate"</button>
+                        <button class="quiz-option" onclick="handleQuiz(this, true, 'objectionQuiz')">B) "It sounds like the value isn't clear. Where else are you getting 5X ROI in 90 days?"</button>
+                        <button class="quiz-option" onclick="handleQuiz(this, false, 'objectionQuiz')">C) "I can offer a 10% discount"</button>
+                        <button class="quiz-option" onclick="handleQuiz(this, false, 'objectionQuiz')">D) "Let me break down my hourly rates"</button>
+                    </div>
+                    <div class="feedback" id="objectionQuiz">
+                        <p><strong>Exactly!</strong> The value reframe technique shifts the conversation from cost to opportunity. When clients say "expensive," they mean they don't see the value—so make the value crystal clear through ROI comparison.</p>
+                    </div>
+                </div>
+            </div>
+
+            <section class="section">
+                <div class="section-header">
+                    <div class="section-icon">🏆</div>
+                    <h2 class="section-title">Real-World Application: Discovery in Action</h2>
+                </div>
+                <div class="section-content">
+                    <div style="text-align: center; margin-bottom: 30px;">
+                        <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-Xc4bVv9rb6/9441818c9a0402e982742d1203cb8faabd5a6faaf27d447ca35a6f67de705515a3bd8edaac99f1d13f8a1e2f559984900f0719582897785714e3f662484ac048b76d58ce66e0c2fdee2700f0b8089edce039ae51cadccfbe73aec026912e28acae94fea8" style="width: 100%; max-width: 400px; height: 200px; object-fit: cover; border-radius: 10px;" alt="Client Meeting">
+                    </div>
+
+                    <div style="background: linear-gradient(135deg, var(--rb-black), var(--rb-grey)); padding: 30px; border-radius: 15px; border: 2px solid var(--rb-blue);">
+                        <h3 style="color: var(--rb-blue); text-align: center; margin-bottom: 20px;">Case Study: Mid-Sized Tech Company</h3>
+                        
+                        <div style="display: grid; gap: 20px;">
+                            <div style="background: var(--rb-black); padding: 20px; border-radius: 8px; border-left: 4px solid var(--rb-blue);">
+                                <h4 style="color: var(--rb-blue);">The Setup</h4>
+                                <p>Mid-sized tech company, struggling with project delivery delays.</p>
+                            </div>
+
+                            <div style="background: var(--rb-black); padding: 20px; border-radius: 8px; border-left: 4px solid var(--rb-blue);">
+                                <h4 style="color: var(--rb-blue);">Situation Questions Revealed</h4>
+                                <p>They were managing 25 concurrent projects with no standardized methodology. Projects typically ran 40% over budget and 3 months behind schedule.</p>
+                            </div>
+
+                            <div style="background: var(--rb-black); padding: 20px; border-radius: 8px; border-left: 4px solid var(--rb-orange);">
+                                <h4 style="color: var(--rb-orange);">Problem Questions Uncovered</h4>
+                                <p>The real issue wasn't project management—it was stakeholder alignment. Key decisions were delayed because executives weren't aligned on priorities.</p>
+                            </div>
+
+                            <div style="background: var(--rb-black); padding: 20px; border-radius: 8px; border-left: 4px solid var(--rb-orange);">
+                                <h4 style="color: var(--rb-orange);">Implication Questions Quantified</h4>
+                                <p>3-month delays on £2M projects meant £500K quarterly in delayed revenue. Over a year, we're talking £2M+ in lost market opportunity.</p>
+                            </div>
+
+                            <div style="background: var(--rb-orange); color: var(--rb-black); padding: 20px; border-radius: 8px; font-weight: bold;">
+                                <h4>The Result</h4>
+                                <p>£180K consulting engagement for a solution that delivered £1.8M in improved project performance. The client got 10X ROI—I got my premium rate.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="section-header">
+                    <div class="section-icon">🛠️</div>
+                    <h2 class="section-title">Your Implementation Toolkit</h2>
+                </div>
+                <div class="section-content">
+                    <div class="toolkit-grid">
+                        <div class="toolkit-card">
+                            <h4 style="color: var(--rb-blue); margin-bottom: 15px;">🎯 Value Discovery Question Bank</h4>
+                            <p style="margin-bottom: 15px;">Copy these word-for-word into your next discovery calls:</p>
+                            <div style="background: var(--rb-grey); padding: 15px; border-radius: 5px; font-size: 0.9rem;">
+                                <p>"Help me understand the financial impact of this problem."</p>
+                                <p>"What's this costing you in terms of team productivity?"</p>
+                                <p>"How is this affecting your competitive position?"</p>
+                                <p>"What opportunities are you missing because of this situation?"</p>
+                                <p>"If we solve this completely, what does success look like in financial terms?"</p>
+                            </div>
+                            <button class="copy-btn" onclick="copyToClipboard('questions')">Copy Questions</button>
+                        </div>
+
+                        <div class="toolkit-card">
+                            <h4 style="color: var(--rb-orange); margin-bottom: 15px;">🧮 ROI Calculation Template</h4>
+                            <div style="background: var(--rb-grey); padding: 15px; border-radius: 5px; font-size: 0.9rem;">
+                                <p>• Current Problem Cost: £_______/month</p>
+                                <p>• Opportunity Cost: £_______/month</p>
+                                <p>• Total Monthly Impact: £_______</p>
+                                <p>• Annual Impact: £_______ × 12</p>
+                                <p>• Your Fee: £_______ (targeting 5-6X client ROI)</p>
+                                <p>• Client Net Benefit: Annual Impact - Your Fee</p>
+                                <p>• Client ROI: Net Benefit ÷ Your Fee × 100</p>
+                            </div>
+                            <button class="copy-btn" onclick="copyToClipboard('template')">Copy Template</button>
+                        </div>
+
+                        <div class="toolkit-card">
+                            <h4 style="color: var(--rb-blue); margin-bottom: 15px;">🛡️ Objection Response Scripts</h4>
+                            <div style="background: var(--rb-grey); padding: 15px; border-radius: 5px; font-size: 0.9rem;">
+                                <p><strong>When they say "expensive":</strong></p>
+                                <p>"It sounds like the value isn't clear. Where else in your business are you getting 4X ROI in 90 days?"</p>
+                                <br>
+                                <p><strong>Inaction cost reframe:</strong></p>
+                                <p>"What's it costing you to not solve this problem? The question isn't whether you can afford to invest £X—it's whether you can afford to keep losing £Y every month."</p>
+                            </div>
+                            <button class="copy-btn" onclick="copyToClipboard('scripts')">Copy Scripts</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="comprehension-check">
+                <h3 style="margin-bottom: 15px;">🔍 Mental Blocker Self-Check</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                    <div style="background: var(--rb-black); padding: 20px; border-radius: 8px; border: 1px solid var(--rb-blue);">
+                        <h4 style="color: var(--rb-blue); margin-bottom: 10px;">Blocker 1</h4>
+                        <p><strong>"I don't want to seem pushy asking about money."</strong></p>
+                        <div style="background: var(--rb-grey); padding: 10px; margin-top: 10px; border-radius: 5px;">
+                            <strong>Reality Check:</strong> Clients respect consultants who understand business impact. Not asking about financial implications makes you look amateur.
+                        </div>
+                    </div>
+
+                    <div style="background: var(--rb-black); padding: 20px; border-radius: 8px; border: 1px solid var(--rb-orange);">
+                        <h4 style="color: var(--rb-orange); margin-bottom: 10px;">Blocker 2</h4>
+                        <p><strong>"I'm not sure they'll share financial details."</strong></p>
+                        <div style="background: var(--rb-grey); padding: 10px; margin-top: 10px; border-radius: 5px;">
+                            <strong>Reality Check:</strong> If they won't discuss the financial impact of problems, they're not serious about solutions. Move on.
+                        </div>
+                    </div>
+
+                    <div style="background: var(--rb-black); padding: 20px; border-radius: 8px; border: 1px solid var(--rb-blue);">
+                        <h4 style="color: var(--rb-blue); margin-bottom: 10px;">Blocker 3</h4>
+                        <p><strong>"What if my solution isn't worth what they're paying?"</strong></p>
+                        <div style="background: var(--rb-grey); padding: 10px; margin-top: 10px; border-radius: 5px;">
+                            <strong>Reality Check:</strong> If you're targeting 5-6X ROI, you're delivering massive value. Price confidence comes from value confidence.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <section class="action-section">
+                <h2 style="margin-bottom: 20px; font-size: 2.5rem;">Your Next Action</h2>
+                <p style="font-size: 1.2rem; margin-bottom: 30px;">The consultants commanding £1000+ daily rates aren't smarter than you—they're just better at discovering and articulating value. Master this framework, and you'll never worry about justifying your rates again.</p>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 30px 0; text-align: left;">
+                    <div style="background: var(--rb-black); padding: 20px; border-radius: 10px;">
+                        <h4 style="color: var(--rb-orange); margin-bottom: 10px;">This Week</h4>
+                        <p>Review your current client conversations. Where are you missing value discovery opportunities? Where are you accepting surface-level problem statements?</p>
+                    </div>
+                    <div style="background: var(--rb-black); padding: 20px; border-radius: 10px;">
+                        <h4 style="color: var(--rb-orange); margin-bottom: 10px;">Next Discovery Call</h4>
+                        <p>Use the SPIN framework verbatim. Ask the five value discovery questions from the toolkit. Calculate the ROI using the template.</p>
+                    </div>
+                    <div style="background: var(--rb-black); padding: 20px; border-radius: 10px;">
+                        <h4 style="color: var(--rb-orange); margin-bottom: 10px;">This Month</h4>
+                        <p>Identify one existing client where you could quantify additional value. Schedule a "strategic review" to uncover new value drivers.</p>
+                    </div>
+                </div>
+
+                <button class="cta-button" onclick="completeLesson()">Mark Lesson Complete & Continue</button>
+            </section>
+
+            <div class="comprehension-check" style="margin-top: 40px;">
+                <h3 style="margin-bottom: 20px;">🏆 Final Assessment: Value Discovery Mastery</h3>
+                <div id="finalAssessment">
+                    <div class="quiz-question">
+                        <p><strong>Question 1 of 5:</strong> What percentage of consultants currently use value-based pricing?</p>
+                        <div class="quiz-options">
+                            <button class="quiz-option" onclick="handleFinalQuiz(this, false, 1)">A) 35.7%</button>
+                            <button class="quiz-option" onclick="handleFinalQuiz(this, true, 1)">B) 17.3%</button>
+                            <button class="quiz-option" onclick="handleFinalQuiz(this, false, 1)">C) 42.1%</button>
+                            <button class="quiz-option" onclick="handleFinalQuiz(this, false, 1)">D) 28.9%</button>
+                        </div>
+                        <div class="feedback" id="finalQ1"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Progress tracking
+        let currentProgress = 0;
+        const totalSections = 8;
+
+        function updateProgress() {
+            currentProgress = Math.min(currentProgress + 12.5, 100);
+            document.getElementById('progressBar').style.width = currentProgress + '%';
+            document.getElementById('progressText').textContent = Math.round(currentProgress) + '%';
+        }
+
+        // Section toggling
+        function toggleSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            const icon = section.previousElementSibling.querySelector('.expand-icon');
+            
+            if (section.style.display === 'none') {
+                section.style.display = 'block';
+                icon.textContent = '▲';
+            } else {
+                section.style.display = 'none';
+                icon.textContent = '▼';
+            }
+        }
+
+        // Content expansion
+        function toggleContent(contentId) {
+            const content = document.getElementById(contentId);
+            const trigger = content.previousElementSibling;
+            const icon = trigger.querySelector('.expand-icon');
+            
+            if (content.style.display === 'none' || content.style.display === '') {
+                content.style.display = 'block';
+                icon.textContent = '−';
+                updateProgress();
+            } else {
+                content.style.display = 'none';
+                icon.textContent = '+';
+            }
+        }
+
+        // Quiz handling
+        function handleLimitationCheck(button, isCorrect) {
+            const options = button.parentElement.querySelectorAll('.quiz-option');
+            const feedback = document.getElementById('limitationFeedback');
+            
+            options.forEach(opt => opt.disabled = true);
+            
+            if (isCorrect) {
+                button.classList.add('correct');
+            } else {
+                button.classList.add('incorrect');
+                options.forEach(opt => {
+                    if (opt.onclick.toString().includes('true')) {
+                        opt.classList.add('correct');
+                    }
+                });
+            }
+            
+            feedback.style.display = 'block';
+            updateProgress();
+        }
+
+        function handleQuiz(button, isCorrect, feedbackId) {
+            const options = button.parentElement.querySelectorAll('.quiz-option');
+            const feedback = document.getElementById(feedbackId);
+            
+            options.forEach(opt => opt.disabled = true);
+            
+            if (isCorrect) {
+                button.classList.add('correct');
+            } else {
+                button.classList.add('incorrect');
+                options.forEach(opt => {
+                    if (opt.onclick.toString().includes('true')) {
+                        opt.classList.add('correct');
+                    }
+                });
+            }
+            
+            feedback.style.display = 'block';
+            updateProgress();
+        }
+
+        // ROI Calculator
+        function calculateROI() {
+            const problemCost = parseFloat(document.getElementById('problemCost').value) || 0;
+            const solutionBenefit = parseFloat(document.getElementById('solutionBenefit').value) || 0;
+            const consultingFee = parseFloat(document.getElementById('consultingFee').value) || 0;
+            
+            if (problemCost === 0 || consultingFee === 0) {
+                alert('Please enter problem cost and consulting fee values');
+                return;
+            }
+            
+            const netBenefit = solutionBenefit - consultingFee;
+            const roi = ((netBenefit / consultingFee) * 100).toFixed(1);
+            
+            let advice = '';
+            if (roi >= 400 && roi <= 600) {
+                advice = '✅ Perfect! This is the 4-6X ROI sweet spot that clients find compelling.';
+            } else if (roi > 600) {
+                advice = '⚠️ ROI might be too high - client may question credibility. Consider increasing your fee.';
+            } else if (roi >= 300) {
+                advice = '👍 Good ROI, but you could potentially charge more for optimal positioning.';
+            } else {
+                advice = '❌ ROI too low. Either increase the value proposition or reduce your fee.';
+            }
+            
+            document.getElementById('roiValue').innerHTML = `<strong>Client ROI: ${roi}%</strong><br>Net Benefit: £${netBenefit.toLocaleString()}`;
+            document.getElementById('roiAdvice').innerHTML = advice;
+            document.getElementById('roiResult').style.display = 'block';
+            
+            updateProgress();
+        }
+
+        // Copy to clipboard
+        function copyToClipboard(type) {
+            let text = '';
+            
+            switch(type) {
+                case 'questions':
+                    text = `Value Discovery Questions:
+1. "Help me understand the financial impact of this problem."
+2. "What's this costing you in terms of team productivity?"
+3. "How is this affecting your competitive position?"
+4. "What opportunities are you missing because of this situation?"
+5. "If we solve this completely, what does success look like in financial terms?"`;
+                    break;
+                case 'template':
+                    text = `ROI Calculation Template:
+• Current Problem Cost: £_______/month
+• Opportunity Cost: £_______/month  
+• Total Monthly Impact: £_______
+• Annual Impact: £_______ × 12
+• Your Fee: £_______ (targeting 5-6X client ROI)
+• Client Net Benefit: Annual Impact - Your Fee
+• Client ROI: Net Benefit ÷ Your Fee × 100`;
+                    break;
+                case 'scripts':
+                    text = `Objection Response Scripts:
+
+When they say "expensive":
+"It sounds like the value isn't clear. Where else in your business are you getting 4X ROI in 90 days?"
+
+Inaction cost reframe:
+"What's it costing you to not solve this problem? The question isn't whether you can afford to invest £X—it's whether you can afford to keep losing £Y every month."`;
+                    break;
+            }
+            
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Copied to clipboard!');
+            });
+            
+            updateProgress();
+        }
+
+        // Final assessment
+        let finalQuizScore = 0;
+        let currentFinalQuestion = 1;
+        const finalQuestions = [
+            {
+                question: "What percentage of consultants currently use value-based pricing?",
+                options: ["35.7%", "17.3%", "42.1%", "28.9%"],
+                correct: 1,
+                feedback: "Correct! Only 17.3% of consultants leverage value-based pricing, creating massive opportunity."
+            },
+            {
+                question: "What's the optimal ROI positioning for value-based pricing?",
+                options: ["2-3X ROI", "5-6X ROI", "8-10X ROI", "15X+ ROI"],
+                correct: 1,
+                feedback: "Exactly! 5-6X ROI is the sweet spot where clients see significant value while you capture fair compensation."
+            },
+            {
+                question: "Which SPIN question type quantifies the cost of inaction?",
+                options: ["Situation", "Problem", "Implication", "Need-Payoff"],
+                correct: 2,
+                feedback: "Perfect! Implication questions help clients understand the true cost of their problems."
+            },
+            {
+                question: "When a client says 'that's expensive,' what's the best response?",
+                options: ["Offer a discount", "Explain your hourly rate", "Ask about ROI comparison", "Lower your price"],
+                correct: 2,
+                feedback: "Right! The value reframe technique shifts focus from cost to opportunity and ROI comparison."
+            },
+            {
+                question: "What was the project fee increase example mentioned in the lesson?",
+                options: ["£45K to £180K", "£65K to £300K", "£80K to £320K", "£50K to £250K"],
+                correct: 1,
+                feedback: "Correct! The example showed a 350% increase from £65K to £300K through proper value discovery."
+            }
+        ];
+
+        function handleFinalQuiz(button, isCorrect, questionNum) {
+            const options = button.parentElement.querySelectorAll('.quiz-option');
+            const feedback = document.getElementById(`finalQ${questionNum}`);
+            
+            options.forEach(opt => opt.disabled = true);
+            
+            if (isCorrect) {
+                button.classList.add('correct');
+                finalQuizScore++;
+            } else {
+                button.classList.add('incorrect');
+                options.forEach((opt, index) => {
+                    if (index === finalQuestions[questionNum - 1].correct) {
+                        opt.classList.add('correct');
+                    }
+                });
+            }
+            
+            feedback.innerHTML = `<p><strong>${isCorrect ? 'Correct!' : 'Incorrect.'}</strong> ${finalQuestions[questionNum - 1].feedback}</p>`;
+            feedback.style.display = 'block';
+            
+            setTimeout(() => {
+                if (questionNum < finalQuestions.length) {
+                    showNextFinalQuestion(questionNum + 1);
+                } else {
+                    showFinalResults();
+                }
+            }, 2000);
+            
+            updateProgress();
+        }
+
+        function showNextFinalQuestion(questionNum) {
+            if (questionNum > finalQuestions.length) {
+                showFinalResults();
+                return;
+            }
+            
+            const q = finalQuestions[questionNum - 1];
+            const assessmentDiv = document.getElementById('finalAssessment');
+            
+            assessmentDiv.innerHTML = `
+                <div class="quiz-question">
+                    <p><strong>Question ${questionNum} of ${finalQuestions.length}:</strong> ${q.question}</p>
+                    <div class="quiz-options">
+                        ${q.options.map((option, index) => 
+                            `<button class="quiz-option" onclick="handleFinalQuiz(this, ${index === q.correct}, ${questionNum})">
+                                ${String.fromCharCode(65 + index)}) ${option}
+                            </button>`
+                        ).join('')}
+                    </div>
+                    <div class="feedback" id="finalQ${questionNum}"></div>
+                </div>
+            `;
+        }
+
+        function showFinalResults() {
+            const percentage = (finalQuizScore / finalQuestions.length) * 100;
+            let resultMessage = '';
+            let resultColor = '';
+            
+            if (percentage >= 80) {
+                resultMessage = '🏆 Excellent! You\'ve mastered the value discovery framework. You\'re ready to command premium rates.';
+                resultColor = 'var(--rb-orange)';
+            } else if (percentage >= 60) {
+                resultMessage = '👍 Good understanding! Review the key frameworks and you\'ll be ready to implement.';
+                resultColor = 'var(--rb-blue)';
+            } else {
+                resultMessage = '📚 Consider reviewing the lesson content again to strengthen your understanding of value discovery.';
+                resultColor = 'var(--rb-grey)';
+            }
+            
+            document.getElementById('finalAssessment').innerHTML = `
+                <div style="text-align: center; background: var(--rb-black); padding: 30px; border-radius: 10px; border: 2px solid ${resultColor};">
+                    <h3 style="color: ${resultColor}; margin-bottom: 15px;">Assessment Complete!</h3>
+                    <p style="font-size: 1.5rem; margin-bottom: 15px;">Score: ${finalQuizScore}/${finalQuestions.length} (${percentage}%)</p>
+                    <p style="font-size: 1.1rem;">${resultMessage}</p>
+                </div>
+            `;
+            
+            updateProgress();
+        }
+
+        function completeLesson() {
+            currentProgress = 100;
+            updateProgress();
+            alert('🎉 Congratulations! You\'ve completed "Discover Client Value Drivers". You now have the framework to justify premium consulting rates through strategic value discovery.');
+        }
+
+        // Auto-start first final question
+        window.addEventListener('load', function() {
+            // Animate sections on scroll
+            const sections = document.querySelectorAll('.section');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            });
+            
+            sections.forEach(section => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(30px)';
+                section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>

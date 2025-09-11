@@ -44,13 +44,61 @@ function organizeFilesByFolder(files) {
     return structure;
 }
 
+function createNestedStructure(files, maxDepth = 5) {
+    const nested = {};
+    
+    files.forEach(file => {
+        const parts = file.split('/');
+        const fileName = parts.pop();
+        
+        // Limit depth to prevent infinite nesting
+        const limitedParts = parts.slice(0, maxDepth);
+        
+        let current = nested;
+        
+        // Navigate/create the folder structure
+        limitedParts.forEach(folder => {
+            if (!current[folder]) {
+                current[folder] = {};
+            }
+            current = current[folder];
+        });
+        
+        // Add the file to the deepest level
+        if (!current['_files']) {
+            current['_files'] = [];
+        }
+        current['_files'].push(file);
+    });
+    
+    return nested;
+}
+
+function printNestedStructure(structure, indent = '') {
+    Object.keys(structure).sort().forEach(key => {
+        if (key === '_files') {
+            // Print files
+            structure[key].forEach(file => {
+                const fileName = file.split('/').pop().replace('.html', '');
+                console.log(`${indent}📄 ${fileName}`);
+            });
+        } else {
+            // Print folder and recurse
+            console.log(`${indent}📁 ${key}/`);
+            printNestedStructure(structure[key], indent + '  ');
+        }
+    });
+}
+
 function generateFilesList() {
     const htmlFiles = findHtmlFiles();
-    const structure = organizeFilesByFolder(htmlFiles);
+    const flatStructure = organizeFilesByFolder(htmlFiles);
+    const nestedStructure = createNestedStructure(htmlFiles);
     
     const filesList = {
         files: htmlFiles,
-        structure: structure,
+        structure: flatStructure, // Keep for backward compatibility
+        nestedStructure: nestedStructure, // New nested structure
         generatedAt: new Date().toISOString(),
         count: htmlFiles.length
     };
@@ -58,15 +106,18 @@ function generateFilesList() {
     fs.writeFileSync('./files.json', JSON.stringify(filesList, null, 2));
     
     console.log(`✅ Found ${htmlFiles.length} HTML files:`);
+    console.log('\n📊 Nested Structure:');
+    printNestedStructure(nestedStructure);
     
+    console.log('\n📊 Flat Structure (legacy):');
     // Display organized structure
-    Object.keys(structure).forEach(folder => {
+    Object.keys(flatStructure).forEach(folder => {
         if (folder === '_root') {
             console.log(`📁 Root folder:`);
         } else {
             console.log(`📁 ${folder}/:`);
         }
-        structure[folder].forEach(file => {
+        flatStructure[folder].forEach(file => {
             const fileName = file.split('/').pop();
             console.log(`   - ${fileName}`);
         });

@@ -230,6 +230,113 @@
             padding: 0;
         }
 
+        /* Nested folder tree styles */
+        .folder-tree {
+            margin-left: 0;
+        }
+
+        .folder-item {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem 0.75rem;
+            margin: 0.125rem 0;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            user-select: none;
+            position: relative;
+        }
+
+        .folder-item:hover {
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .folder-item.expanded {
+            background: rgba(102, 126, 234, 0.05);
+        }
+
+        .folder-item-content {
+            display: flex;
+            align-items: center;
+            flex: 1;
+        }
+
+        .tree-icon {
+            width: 16px;
+            height: 16px;
+            margin-right: 0.5rem;
+            transition: transform 0.2s ease;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tree-icon.expanded {
+            transform: rotate(90deg);
+        }
+
+        .item-icon {
+            width: 16px;
+            height: 16px;
+            margin-right: 0.75rem;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .item-name {
+            font-size: 0.9rem;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .file-item-name {
+            color: #666;
+            font-weight: 400;
+        }
+
+        .file-count {
+            display: none;
+        }
+
+        .folder-children {
+            margin-left: 1.5rem;
+            border-left: 1px solid rgba(102, 126, 234, 0.15);
+            padding-left: 0.75rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, opacity 0.2s ease;
+            opacity: 0;
+        }
+
+        .folder-children.expanded {
+            max-height: 2000px;
+            opacity: 1;
+            margin-top: 0.25rem;
+            margin-bottom: 0.25rem;
+        }
+
+        /* Depth-based indentation and styling */
+        .folder-children[data-depth="1"] { border-left-color: rgba(102, 126, 234, 0.2); }
+        .folder-children[data-depth="2"] { border-left-color: rgba(118, 75, 162, 0.2); }
+        .folder-children[data-depth="3"] { border-left-color: rgba(102, 126, 234, 0.15); }
+        .folder-children[data-depth="4"] { border-left-color: rgba(118, 75, 162, 0.15); }
+        .folder-children[data-depth="5"] { border-left-color: rgba(102, 126, 234, 0.1); }
+
+        /* File preview section */
+        .file-preview-section {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .selected-file {
+            background: rgba(102, 126, 234, 0.1);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+        }
+
         @media (max-width: 768px) {
             .container {
                 padding: 1rem;
@@ -255,6 +362,11 @@
 
             .folder-name {
                 font-size: 1.1rem;
+            }
+
+            .folder-children {
+                margin-left: 1rem;
+                padding-left: 0.5rem;
             }
         }
     </style>
@@ -342,6 +454,161 @@ landing-page.html</code></pre>
             return fileCard;
         }
 
+        function createNestedStructure(structure, depth = 0) {
+            if (depth > 5) return null; // Max depth limit
+            
+            const container = document.createElement('div');
+            container.className = 'folder-tree';
+            
+            Object.keys(structure).sort().forEach(key => {
+                const item = structure[key];
+                
+                if (Array.isArray(item)) {
+                    // It's a files array
+                    item.forEach(file => {
+                        const fileItem = createFileItem(file, depth);
+                        container.appendChild(fileItem);
+                    });
+                } else if (typeof item === 'object') {
+                    // It's a nested folder
+                    const folderItem = createFolderItem(key, item, depth);
+                    container.appendChild(folderItem);
+                }
+            });
+            
+            return container;
+        }
+
+        function createFolderItem(name, contents, depth) {
+            const folderDiv = document.createElement('div');
+            folderDiv.className = 'folder-item';
+            
+            const hasSubfolders = Object.keys(contents).some(key => !Array.isArray(contents[key]));
+            const fileCount = countTotalFiles(contents);
+            
+            folderDiv.innerHTML = `
+                <div class="folder-item-content">
+                    <span class="tree-icon">${hasSubfolders || fileCount > 0 ? '▶' : ''}</span>
+                    <span class="item-icon">📁</span>
+                    <span class="item-name">${name}</span>
+                </div>
+            `;
+            
+            if (hasSubfolders || fileCount > 0) {
+                const childrenContainer = document.createElement('div');
+                childrenContainer.className = 'folder-children';
+                childrenContainer.setAttribute('data-depth', depth + 1);
+                
+                const nestedStructure = createNestedStructure(contents, depth + 1);
+                if (nestedStructure) {
+                    childrenContainer.appendChild(nestedStructure);
+                }
+                
+                folderDiv.appendChild(childrenContainer);
+                
+                // Add click handler for expansion
+                const folderContent = folderDiv.querySelector('.folder-item-content');
+                folderContent.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    toggleNestedFolder(folderDiv);
+                });
+            }
+            
+            return folderDiv;
+        }
+
+        function createFileItem(filePath, depth) {
+            const fileDiv = document.createElement('div');
+            fileDiv.className = 'folder-item file-item';
+            
+            const fileName = filePath.split('/').pop().replace(/\.html$/, '').replace(/[-_]/g, ' ');
+            
+            fileDiv.innerHTML = `
+                <div class="folder-item-content">
+                    <span class="tree-icon"></span>
+                    <span class="item-icon">📄</span>
+                    <span class="item-name file-item-name">${fileName}</span>
+                </div>
+            `;
+            
+            // Add click handler to show file details
+            fileDiv.addEventListener('click', (e) => {
+                e.stopPropagation();
+                showFilePreview(filePath, fileName);
+                
+                // Update selection
+                document.querySelectorAll('.folder-item.selected').forEach(el => {
+                    el.classList.remove('selected');
+                });
+                fileDiv.classList.add('selected');
+            });
+            
+            return fileDiv;
+        }
+
+        function countTotalFiles(structure) {
+            let count = 0;
+            
+            Object.keys(structure).forEach(key => {
+                const item = structure[key];
+                if (Array.isArray(item)) {
+                    count += item.length;
+                } else if (typeof item === 'object') {
+                    count += countTotalFiles(item);
+                }
+            });
+            
+            return count;
+        }
+
+        function toggleNestedFolder(folderDiv) {
+            const childrenContainer = folderDiv.querySelector('.folder-children');
+            const treeIcon = folderDiv.querySelector('.tree-icon');
+            
+            if (!childrenContainer) return;
+            
+            const isExpanded = childrenContainer.classList.contains('expanded');
+            
+            if (isExpanded) {
+                childrenContainer.classList.remove('expanded');
+                folderDiv.classList.remove('expanded');
+                if (treeIcon) treeIcon.classList.remove('expanded');
+            } else {
+                childrenContainer.classList.add('expanded');
+                folderDiv.classList.add('expanded');
+                if (treeIcon) treeIcon.classList.add('expanded');
+            }
+        }
+
+        function showFilePreview(filePath, fileName) {
+            // Remove existing preview
+            const existingPreview = document.querySelector('.file-preview-section');
+            if (existingPreview) {
+                existingPreview.remove();
+            }
+            
+            // Create new preview section
+            const previewSection = document.createElement('div');
+            previewSection.className = 'file-preview-section';
+            
+            previewSection.innerHTML = `
+                <div class="file-card">
+                    <div class="file-name">${fileName}</div>
+                    <div class="file-path">/${filePath}</div>
+                    <div class="file-actions">
+                        <a href="/${filePath}" class="btn btn-primary" target="_blank">
+                            👁️ Preview
+                        </a>
+                        <a href="/${filePath}" class="btn btn-secondary">
+                            🔗 Direct Link
+                        </a>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('files-container').appendChild(previewSection);
+        }
+
         function createFolderSection(folderPath, files) {
             const folderSection = document.createElement('div');
             folderSection.className = 'folder-section';
@@ -387,7 +654,7 @@ landing-page.html</code></pre>
 
             try {
                 const data = await discoverFiles();
-                const structure = data.structure || {};
+                let structure = data.nestedStructure || data.structure || {};
                 const totalFiles = data.files ? data.files.length : 0;
                 
                 setTimeout(() => {
@@ -400,26 +667,36 @@ landing-page.html</code></pre>
 
                     container.style.display = 'block';
                     
-                    // Sort folders: root first, then alphabetically
-                    const sortedFolders = Object.keys(structure).sort((a, b) => {
-                        if (a === '_root') return -1;
-                        if (b === '_root') return 1;
-                        return a.localeCompare(b);
-                    });
-                    
-                    sortedFolders.forEach(folderPath => {
-                        const files = structure[folderPath];
-                        if (files && files.length > 0) {
-                            const folderSection = createFolderSection(folderPath, files);
-                            container.appendChild(folderSection);
-                            
-                            // Auto-expand if only one folder or if it's root with few files
-                            if (sortedFolders.length === 1 || (folderPath === '_root' && files.length <= 3)) {
-                                const header = folderSection.querySelector('.folder-header');
-                                toggleFolder(header);
-                            }
+                    // Check if we have nested structure or flat structure
+                    if (data.nestedStructure) {
+                        // Use new nested tree view
+                        const treeContainer = createNestedStructure(structure);
+                        if (treeContainer) {
+                            container.appendChild(treeContainer);
                         }
-                    });
+                    } else {
+                        // Fallback to original flat folder view
+                        // Sort folders: root first, then alphabetically
+                        const sortedFolders = Object.keys(structure).sort((a, b) => {
+                            if (a === '_root') return -1;
+                            if (b === '_root') return 1;
+                            return a.localeCompare(b);
+                        });
+                        
+                        sortedFolders.forEach(folderPath => {
+                            const files = structure[folderPath];
+                            if (files && files.length > 0) {
+                                const folderSection = createFolderSection(folderPath, files);
+                                container.appendChild(folderSection);
+                                
+                                // Auto-expand if only one folder or if it's root with few files
+                                if (sortedFolders.length === 1 || (folderPath === '_root' && files.length <= 3)) {
+                                    const header = folderSection.querySelector('.folder-header');
+                                    toggleFolder(header);
+                                }
+                            }
+                        });
+                    }
                 }, 800);
                 
             } catch (error) {

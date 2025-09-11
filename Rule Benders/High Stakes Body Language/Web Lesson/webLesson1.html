@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Master High-Stakes Body Language | Rule Benders Academy</title>
+    <style>
+        :root {
+            --rb-black: #000000;
+            --rb-blue: #2B5CE6;
+            --rb-orange: #E85D00;
+            --rb-white: #FFFFFF;
+            --rb-gray: #333333;
+            --rb-light-gray: #666666;
+            --rb-bg: #0A0A0A;
+            --section-padding: clamp(2rem, 5vw, 4rem);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--rb-bg);
+            color: var(--rb-white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--rb-gray);
+            z-index: 1000;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--rb-blue), var(--rb-orange));
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .hero-section {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--rb-black) 0%, var(--rb-gray) 100%);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-image {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 50%;
+            height: 100%;
+            background: url('https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-zxM6Mwkmur/8b2bae3bcbeabbcd902ecc755e0e9064d12faa2df98778d999fbd37cfa9635df051592306fefe0675fe1be47ac3824c942cf33ac7fa185882db273784c22c780fd58fd249253f79584aa0c77157d66ee1c5a8b815383cc77a629aa7c81c1fb4f9f68abde') center/cover no-repeat;
+            opacity: 0.7;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--section-padding);
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--rb-white), var(--rb-blue));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+            color: var(--rb-orange);
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        .lesson-meta {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--rb-light-gray);
+        }
+
+        .content-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--section-padding);
+        }
+
+        .section {
+            margin-bottom: 4rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 2.5rem);
+            margin-bottom: 2rem;
+            position: relative;
+            color: var(--rb-white);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--rb-blue), var(--rb-orange));
+        }
+
+        .text-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            color: #E0E0E0;
+        }
+
+        .text-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .text-content strong {
+            color: var(--rb-orange);
+            font-weight: 600;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, var(--rb-blue)15, var(--rb-orange)15);
+            border-left: 4px solid var(--rb-orange);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .framework-box {
+            background: var(--rb-gray);
+            border: 2px solid var(--rb-blue);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .framework-title {
+            color: var(--rb-blue);
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .image-container {
+            margin: 3rem 0;
+            text-align: center;
+        }
+
+        .lesson-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            margin: 3rem 0;
+        }
+
+        .check-in {
+            background: var(--rb-gray);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 3rem 0;
+            border: 1px solid var(--rb-blue);
+        }
+
+        .check-in-title {
+            color: var(--rb-blue);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .question {
+            margin-bottom: 1.5rem;
+        }
+
+        .question p {
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem;
+            background: var(--rb-black);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .option:hover {
+            background: var(--rb-blue)20;
+        }
+
+        .option input[type="radio"] {
+            margin-right: 0.5rem;
+        }
+
+        .feedback {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 6px;
+            display: none;
+        }
+
+        .feedback.correct {
+            background: #1a472a;
+            border: 1px solid #22c55e;
+            color: #86efac;
+        }
+
+        .feedback.incorrect {
+            background: #7f1d1d;
+            border: 1px solid #ef4444;
+            color: #fca5a5;
+        }
+
+        .accordion {
+            margin: 2rem 0;
+        }
+
+        .accordion-header {
+            background: var(--rb-gray);
+            padding: 1rem;
+            cursor: pointer;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .accordion-header:hover {
+            background: var(--rb-blue)20;
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: var(--rb-black);
+            border-radius: 8px;
+        }
+
+        .accordion-content.active {
+            max-height: 1000px;
+            padding: 1rem;
+        }
+
+        .implementation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .implementation-card {
+            background: var(--rb-gray);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--rb-blue);
+            text-center;
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1rem;
+            background: var(--rb-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .card-title {
+            color: var(--rb-blue);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .tl-dr-toggle {
+            background: var(--rb-orange);
+            color: var(--rb-white);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            margin: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .tl-dr-toggle:hover {
+            background: var(--rb-blue);
+            transform: translateY(-2px);
+        }
+
+        .tl-dr-content {
+            display: none;
+            background: var(--rb-orange)20;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--rb-orange);
+            margin-top: 1rem;
+        }
+
+        .final-assessment {
+            background: linear-gradient(135deg, var(--rb-gray), var(--rb-black));
+            border: 2px solid var(--rb-blue);
+            border-radius: 16px;
+            padding: 3rem;
+            margin: 4rem 0;
+            text-align: center;
+        }
+
+        .assessment-title {
+            color: var(--rb-blue);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .confidence-slider {
+            margin: 2rem 0;
+        }
+
+        .slider {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: var(--rb-gray);
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--rb-orange);
+            cursor: pointer;
+        }
+
+        .navigation-footer {
+            text-align: center;
+            padding: 3rem;
+            background: var(--rb-black);
+        }
+
+        .next-lesson-btn {
+            background: linear-gradient(135deg, var(--rb-blue), var(--rb-orange));
+            color: var(--rb-white);
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .next-lesson-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(43, 92, 230, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .two-column {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .hero-image {
+                width: 100%;
+                opacity: 0.3;
+            }
+
+            .lesson-meta {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .implementation-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media print {
+            .accordion-content {
+                max-height: none !important;
+                padding: 1rem !important;
+            }
+            
+            .tl-dr-content {
+                display: block !important;
+            }
+            
+            body {
+                font-size: 11pt;
+                line-height: 1.4;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+    </div>
+
+    <section class="hero-section">
+        <div class="hero-image"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">Master High-Stakes Body Language</h1>
+            <p class="hero-subtitle">Decode the non-verbal signals that separate premium consultants from cheap contractors</p>
+            <div class="lesson-meta">
+                <div class="meta-item">
+                    <span>⏱️</span>
+                    <span>20-25 minutes</span>
+                </div>
+                <div class="meta-item">
+                    <span>🎯</span>
+                    <span>Premium Authority</span>
+                </div>
+                <div class="meta-item">
+                    <span>💰</span>
+                    <span>£1,000+/day rates</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main class="content-container">
+        <section class="section">
+            <div class="text-content">
+                <p>When I walked into that Treasury boardroom in 2018 to present a £50 million restructuring proposal, I knew the next 30 minutes would determine whether I'd walk out with a contract extension or a polite "we'll be in touch." What I didn't expect was that my fee rate would jump from £1,200 to £2,000 per day based entirely on how I carried myself in that room—before I'd even opened my mouth.</p>
+
+                <p>The Permanent Secretary later told me, "We knew within the first minute you understood the gravity of what we were dealing with. Your presence commanded the room." That moment crystallized something I'd been learning across 17 years of high-stakes consulting: your body language doesn't just support your message—it IS your message.</p>
+
+                <p>Here's what most consultants get catastrophically wrong about executive presence: they think it's about looking confident. It's not. It's about projecting competence, authority, and value before you speak. And there's a specific formula for it.</p>
+            </div>
+
+            <button class="tl-dr-toggle" onclick="toggleTLDR('intro')">TL;DR - Key Takeaway</button>
+            <div class="tl-dr-content" id="intro-tldr">
+                <strong>Bottom Line:</strong> Your body language determines your rate before you speak. Premium consultants project competence and authority through specific, learnable positioning techniques—not generic confidence.
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">The Authority Triangle: Your Non-Negotiable Framework</h2>
+            
+            <div class="two-column">
+                <div class="text-content">
+                    <p>After analyzing hundreds of premium consulting interactions, I've identified what I call the Authority Triangle—three positioning elements that separate £1,000+ per day consultants from the £300 contractors fighting for scraps.</p>
+                </div>
+                <div class="image-container">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-wbSOCOEohp/4fa776548f590c46c8ef12865d21a3146f570adf1d9cf05bfc63d5cdf674e51b7478fccfa083ad8db057fc86bc09bdb59fb57dc96f006c3446e2503ed7f01b272f663e1af41fd6c9484b8f8ea4603e854eb6cdaa2b07c7ad4371f03a22485825725fc6cf" alt="Spatial Dominance Demonstration" class="lesson-image">
+                </div>
+            </div>
+
+            <div class="check-in">
+                <div class="check-in-title">
+                    <span>🎯</span> Quick Check: Current State Assessment
+                </div>
+                <div class="question">
+                    <p>Before we dive deeper, how do you typically enter a client meeting room?</p>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="entry" value="a">
+                            <span>Take the nearest available seat to avoid disruption</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="entry" value="b">
+                            <span>Survey the room briefly then choose a strategic position</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="entry" value="c">
+                            <span>Wait to be directed where to sit</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="entry" value="d">
+                            <span>I've never really thought about it consciously</span>
+                        </label>
+                    </div>
+                    <div class="feedback" id="entry-feedback"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h3 class="section-title">Element 1: Spatial Dominance</h3>
+            
+            <div class="text-content">
+                <p>The research is clear: the bigger the space you occupy, the more authority you're perceived to have. But this isn't about being a space hog—it's about strategic territorial claiming.</p>
+
+                <p>When I enter a client boardroom, I don't shuffle to the nearest empty chair like a supplicant. I survey the room, identify the power positions, and claim territory deliberately. Here's the tactical breakdown:</p>
+            </div>
+
+            <div class="framework-box">
+                <div class="framework-title">The Power Position Selection Process:</div>
+                <ul style="color: #E0E0E0; line-height: 1.8;">
+                    <li>Corner seats facing the door (see who enters, control visual dynamics)</li>
+                    <li>Chairs that allow full table visibility (never sit with your back to key decision-makers)</li>
+                    <li>Positions where you can gesture without hitting walls or people (spatial freedom = authority projection)</li>
+                </ul>
+            </div>
+
+            <div class="image-container">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-Hsku7GdWJS/754e9842b4e31548755bd3b728fd77f06e54edce7ed6fd7307a12c9aa4ff0cbb306d492703892f1d6e93755f28503df34174509a526f54031f8afe7fc3084117a6c6ebfcc194aad3ee1bb00e7177a9543375fb75ff5c54f9ab40d2642af2a0cf31feff74" alt="Boardroom Power Positioning Map" class="lesson-image">
+            </div>
+
+            <div class="text-content">
+                <p><strong>The Territorial Claiming Sequence:</strong></p>
+                <p>Place your materials deliberately across more space than strictly necessary. Not obnoxiously, but with intention. Your notebook, your laptop, your phone—they create a presence footprint that signals "this person operates at scale."</p>
+
+                <p>I learned this watching a McKinsey partner charge £3,000 per day. She'd arrive early, select her position, and arrange her materials like she was setting up a command center. By the time others arrived, the power dynamics were already established.</p>
+            </div>
+
+            <div class="check-in">
+                <div class="check-in-title">
+                    <span>💡</span> Spatial Intelligence Check
+                </div>
+                <div class="question">
+                    <p>Which seating position offers maximum authority in a 12-person boardroom?</p>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="seating" value="a">
+                            <span>Head of table (maximum visibility but potentially presumptuous)</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="seating" value="b">
+                            <span>Corner position with back to wall and door visibility</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="seating" value="c">
+                            <span>Center of one side for maximum collaboration</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="seating" value="d">
+                            <span>Next to the most senior person present</span>
+                        </label>
+                    </div>
+                    <div class="feedback" id="seating-feedback"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h3 class="section-title">Element 2: The Micro-Expression Advantage</h3>
+            
+            <div class="two-column">
+                <div class="text-content">
+                    <p>Most consultants focus on projecting confidence. Premium consultants focus on reading the room. The data shows that with training, you can achieve 68-73% accuracy in reading micro-expressions—and in high-stakes consulting, that intelligence gap is worth thousands per day.</p>
+                </div>
+                <div class="image-container">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-WF71QXzmoL/c7b03dd808dfa2c6121896267587f29cf2a6a737bacadbe0db462c92b1333e84a4b581c2341d0b2a8477885fc2e3e980b80ffd57365ef6aa8f4997c6987ab5b3414a5cb75e7a0af5c673e69cd35696bbb25dee59ee0a41c31434578adad6a044c459536e" alt="Micro-Expression Reading Workshop" class="lesson-image">
+                </div>
+            </div>
+
+            <div class="framework-box">
+                <div class="framework-title">The FACE Framework for Real-Time Reading:</div>
+                <div class="accordion">
+                    <div class="accordion-header" onclick="toggleAccordion('face-f')">
+                        <strong>F - Flash Expressions</strong>
+                        <span>▼</span>
+                    </div>
+                    <div class="accordion-content" id="face-f">
+                        <p>Watch for expressions lasting less than half a second. When a client's face flashes concern during your recommendation, that's your cue to address objections immediately, not barrel ahead.</p>
+                    </div>
+
+                    <div class="accordion-header" onclick="toggleAccordion('face-a')">
+                        <strong>A - Asymmetry Alerts</strong>
+                        <span>▼</span>
+                    </div>
+                    <div class="accordion-content" id="face-a">
+                        <p>True emotions create symmetrical expressions. When someone's smile is stronger on one side, you're seeing polite disagreement, not genuine enthusiasm.</p>
+                    </div>
+
+                    <div class="accordion-header" onclick="toggleAccordion('face-c')">
+                        <strong>C - Context Contradictions</strong>
+                        <span>▼</span>
+                    </div>
+                    <div class="accordion-content" id="face-c">
+                        <p>When body language contradicts words, believe the body. A client saying "interesting proposal" while their eyebrows flash upward in surprise is telling you they're not convinced.</p>
+                    </div>
+
+                    <div class="accordion-header" onclick="toggleAccordion('face-e')">
+                        <strong>E - Energy Shifts</strong>
+                        <span>▼</span>
+                    </div>
+                    <div class="accordion-content" id="face-e">
+                        <p>Watch for sudden changes in facial tension. Micro-frowns, brief lip compressions, fleeting eye movements—these reveal the real decision-making process happening beneath the surface.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <p><strong>Real-World Application:</strong> During a £2M digital transformation pitch, I caught the Finance Director's micro-expression of skepticism when I mentioned the timeline. Instead of continuing my rehearsed presentation, I stopped and said, "I can see you have concerns about delivery speed. Let's address that directly." We secured the contract because I read the room instead of just talking to it.</p>
+            </div>
+
+            <div class="check-in">
+                <div class="check-in-title">
+                    <span>👁️</span> Micro-Expression Mastery Check
+                </div>
+                <div class="question">
+                    <p>A client says "That sounds feasible" but you notice a brief lip compression and slight eyebrow raise. What does this likely indicate?</p>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="micro" value="a">
+                            <span>Genuine agreement and enthusiasm</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="micro" value="b">
+                            <span>Polite skepticism - they have unspoken concerns</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="micro" value="c">
+                            <span>They're thinking deeply about implementation</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="micro" value="d">
+                            <span>Normal conversational processing</span>
+                        </label>
+                    </div>
+                    <div class="feedback" id="micro-feedback"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h3 class="section-title">Element 3: Vocal Authority Integration</h3>
+            
+            <div class="text-content">
+                <p>Here's where most "presence training" falls apart—they treat voice and posture as separate elements. The neuroscience research shows that when body language, voice, and facial expressions align, your impact multiplies by 3x.</p>
+            </div>
+
+            <div class="image-container">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-JT_I1Ym_jY/87b8ebf6866c20ef98f542e9f2945dbe54d6e52b0d62171e74113a43eff98e2cdd642eb6cc6ce6f909587a91e9193ca886257a2cf813d099a48bfb76205087a245b0ef4314b81aece4a314d54f34c128b0fceff67f5cea7d23f8f4ad0e8b393561853826" alt="Authority Voice Posture Connection" class="lesson-image">
+            </div>
+
+            <div class="framework-box">
+                <div class="framework-title">The Authority Voice Formula:</div>
+                <p>Lower your pitch by 20% and you increase perceived influence by 14%. But here's the tactical application: you achieve this through posture, not vocal gymnastics.</p>
+            </div>
+
+            <div class="framework-box">
+                <div class="framework-title">Posture-to-Voice Integration:</div>
+                <ul style="color: #E0E0E0; line-height: 1.8;">
+                    <li>Expand your chest and your voice naturally drops into your chest resonance</li>
+                    <li>Keep feet firmly planted and your voice gains stability and authority</li>
+                    <li>Maintain straight spine alignment and your voice carries further with less effort</li>
+                </ul>
+            </div>
+
+            <div class="text-content">
+                <p>When presenting budget recommendations to permanent secretaries, I discovered that standing (when appropriate) and using chest-voice resonance made my financial projections sound more credible. Same data, same analysis—but delivered with integrated authority positioning, it commanded different respect.</p>
+            </div>
+
+            <button class="tl-dr-toggle" onclick="toggleTLDR('authority')">TL;DR - Authority Triangle</button>
+            <div class="tl-dr-content" id="authority-tldr">
+                <strong>The Authority Triangle Summary:</strong>
+                <br>1. <strong>Spatial Dominance:</strong> Strategic positioning + territorial claiming
+                <br>2. <strong>Micro-Expression Reading:</strong> Real-time intelligence gathering via FACE framework
+                <br>3. <strong>Voice-Posture Integration:</strong> Aligned physical and vocal authority signals
+                <br><br><strong>Result:</strong> 3x impact multiplier when all elements work together
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Room Dynamics Control: Advanced Techniques</h2>
+            
+            <div class="image-container">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-akHMmV-F1O/22fba8eaa6a99271c5c2d976e8934a0f6d7d640e648215b1935cb2b4e0487d0aa7f1428572dd06baf8b368783de2246814a068438f8241a9c4da525e2465b66ff7806ea94e2dbb463fd25e7867a4c0dfb4dffa933216bc6b5e1871e3d0908398de120c98" alt="Room Dynamics Control Overview" class="lesson-image">
+            </div>
+
+            <div class="text-content">
+                <p>Once you've mastered the Authority Triangle, you can start manipulating entire room dynamics. This is where premium consultants separate themselves from competent contractors.</p>
+            </div>
+
+            <div class="framework-box">
+                <div class="framework-title">The Strategic Eye Contact Allocation System</div>
+                <p>Research shows we should maintain eye contact 60-70% of the time, but most professionals only achieve 30-60%. Premium consultants use strategic allocation:</p>
+            </div>
+
+            <div class="two-column">
+                <div class="text-content">
+                    <h4><strong>Power Mapping Through Eye Contact:</strong></h4>
+                    <ul>
+                        <li>Identify the real decision-maker (not always the titled authority)</li>
+                        <li>Allocate 40% of your eye contact to them</li>
+                        <li>Distribute remaining 60% based on influence hierarchy</li>
+                        <li>Use eye contact withdrawal strategically to create tension and draw people in</li>
+                    </ul>
+                </div>
+                <div class="image-container">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-Cv9STJiS76/ea876d7646e8c4e564f125bcd8490edc46ed19f5c26bf813e6d6f04eb1b7b26ed510d9e8425ccdddf7f86d38884be188761d2729cb43d1ed2ca7c9d93eaad1d4abb6d29e65c5b00ce564623db3610e112fe5cebbb3adc3ec73bfb2fb9b7a7cc206321f3b" alt="Strategic Eye Contact Allocation" class="lesson-image">
+                </div>
+            </div>
+
+            <div class="check-in">
+                <div class="check-in-title">
+                    <span>🎯</span> Eye Contact Strategy Assessment
+                </div>
+                <div class="question">
+                    <p>You're presenting to a 5-person committee where the CEO is present but the CFO is the actual decision-maker for your project. How do you allocate eye contact?</p>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="eyecontact" value="a">
+                            <span>60% CEO, 40% distributed among others</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="eyecontact" value="b">
+                            <span>40% CFO, 60% distributed including CEO respect</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="eyecontact" value="c">
+                            <span>Equal 20% to each person</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="eyecontact" value="d">
+                            <span>Focus primarily on whoever asks questions</span>
+                        </label>
+                    </div>
+                    <div class="feedback" id="eyecontact-feedback"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h3 class="section-title">Reading Stakeholder Micro-Expressions for Pricing Intelligence</h3>
+            
+            <div class="text-content">
+                <p>This is where body language becomes directly profitable. During fee negotiations, I watch for specific micro-expression tells that reveal budget flexibility:</p>
+            </div>
+
+            <div class="two-column">
+                <div class="framework-box">
+                    <div class="framework-title">The Budget Flexibility Indicators:</div>
+                    <ul style="color: #E0E0E0; line-height: 1.8;">
+                        <li>Eyebrow flash when you state your rate (surprise, not shock—there's budget headroom)</li>
+                        <li>Lip compression followed by slight nod (internal calculation happening, they're finding ways to justify)</li>
+                        <li>Brief eye contact break then return (processing, not rejecting)</li>
+                    </ul>
+                </div>
+                <div class="framework-box">
+                    <div class="framework-title">The Deal-Killer Signals:</div>
+                    <ul style="color: #E0E0E0; line-height: 1.8;">
+                        <li>Micro-frown with head tilt (genuine confusion about value proposition)</li>
+                        <li>Eye roll or eye contact withdrawal (disengagement, you've lost them)</li>
+                        <li>Lip pursing with crossed arms (defensive posturing, price is too high for perceived value)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="image-container">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-1xT9UreDry/47b38ff6d1c9f33a17f36a83cea2c1dd827522eb6f220322cd1577824a43786653b3e03d1f879418a7789265ed9ef8fadb1128fb4e12484283dcf85ec75c07e60dcb5cfb1069ad735d433f93c5fcc4926f2f8235c05e9ccd3cb65f376d9e039c106653f5" alt="Client Reading Intelligence" class="lesson-image">
+            </div>
+
+            <div class="check-in">
+                <div class="check-in-title">
+                    <span>💰</span> Pricing Intelligence Check
+                </div>
+                <div class="question">
+                    <p>You quote £1,500/day and see an eyebrow flash followed by lip compression and a slight nod. What's your next move?</p>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="pricing" value="a">
+                            <span>Immediately lower your rate to ensure the deal</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="pricing" value="b">
+                            <span>Hold your rate and wait for their response</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="pricing" value="c">
+                            <span>Justify the value without changing the price</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="pricing" value="d">
+                            <span>Ask what their budget range looks like</span>
+                        </label>
+                    </div>
+                    <div class="feedback" id="pricing-feedback"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Implementation: Your 48-Hour Authority Upgrade</h2>
+            
+            <div class="text-content">
+                <p>Here's your tactical implementation sequence. I've used this with consultants who've jumped from £400 to £1,200 per day within six months.</p>
+            </div>
+
+            <div class="implementation-grid">
+                <div class="implementation-card">
+                    <div class="card-icon">
+                        <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-b9hcvdRpSL/2b7ac454448527fef52bf97f9b265821a7f47ed25bc48f6b1abbf6e231e7e9e8171e37e7467f1eb3798462022d623b5eb3d343a7e707c55f99209ec192d99b1faa422f6f78b5a1d1bb1bf8cf7696a2c7ba66c1f4f4a2db889fb1ed3400af488efb7a0581" alt="Authority Shield" style="width: 40px; height: 40px;">
+                    </div>
+                    <div class="card-title">Week 1: Master Spatial Presence</div>
+                    <p>Practice the Authority Triangle in every meeting for seven days. Video record yourself presenting. Identify your three power positions.</p>
+                </div>
+
+                <div class="implementation-card">
+                    <div class="card-icon">
+                        <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-6R2P3PeQGO/6ca8c99121014e7c8e98438ef4fec0d1f389f39743f4a3a64f7972a05670a7009bb4a111f6d00a600282222b6517b0522c47557855e254c6af5232450248679a1da9f45efad4b4f6303b8298f5c32c0d25f069c81caa9d459d2fcc33a8be8b1864534ddb" alt="Micro-Expression Radar" style="width: 40px; height: 40px;">
+                    </div>
+                    <div class="card-title">Week 2: Develop Micro-Expression Intelligence</div>
+                    <p>Study the seven universal expressions for 15 minutes daily. Practice real-time reading in low-stakes conversations.</p>
+                </div>
+
+                <div class="implementation-card">
+                    <div class="card-icon">
+                        <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-OhkDWPjKNo/1918847e6b3dce1bd531d23cbf67ce294244eb791957421898c41bc516d19f06f3fc2e829472b11e74558b9beb2032bf9ff8f80e6a325a317f4e1657820cf0baa897438dc0993fc54864894618edcec1d768110d9a865023207cc11d435921c53810612f" alt="Voice-Posture Connection" style="width: 40px; height: 40px;">
+                    </div>
+                    <div class="card-title">Week 3: Integrate Voice-Posture Authority</div>
+                    <p>Practice chest-voice resonance through posture adjustment. Record yourself delivering key consulting messages.</p>
+                </div>
+
+                <div class="implementation-card">
+                    <div class="card-icon">
+                        <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-npqYQ_911r/88367d7d983c397b9b706dd80e8cdd980714ee2b1b9d6fbc1fe1723ec99d6cf436f594c2213e897467d88f4cf7d02e935072bf0c58b0076d9be15156fdbd94c7dccbe7095e9adfd603b73dafe94620b6e8c5808b642a9c764c9466d598ef8eee0a6b51e6" alt="Room Control Center" style="width: 40px; height: 40px;">
+                    </div>
+                    <div class="card-title">Week 4: Advanced Room Control</div>
+                    <p>Implement strategic eye contact allocation. Practice positioning chess game in different environments.</p>
+                </div>
+            </div>
+
+            <div class="image-container">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-S5pXhYIw7h/ef9359544db112b83e8a0c4f2bb5440ff33b38a84a02d58b0da5008a362f9225af392102b17220a6e1b2b4bbf18bc2b4f22f012ac57e370168a6f6822d46c6684d510f3738f30ab6783faffa71b699147b544e0e1ebf2b0269bedd6e04853c3ef00890ee" alt="Authority Upgrade Implementation" class="lesson-image">
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">The Premium Rate Connection</h2>
+            
+            <div class="text-content">
+                <p>Every technique I've shared connects directly to your ability to command premium rates. When clients see you read rooms accurately, control meeting dynamics, and project natural authority, they mentally categorize you differently. You become the consultant who "gets it"—the one who operates at their level.</p>
+
+                <p>The £300-per-day contractors focus on delivering good work. The £1,000+ consultants focus on projecting the authority that makes good work seem inevitable. Body language mastery isn't about manipulation—it's about demonstrating the executive presence that justifies premium investment.</p>
+            </div>
+
+            <div class="image-container">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-_0biOBvvaZ/428ef16961ff093d17693db7a31abae0193f041484ca246db9dbbf414f0762eb2bbea610fcea638935edc4fd0a5c4aeb2c8333a4a663b7a43800fd890c8a28f6a1d7f631f28a4f2229afd1605b529557bab14138c89f017d922060808e8fcf29a1007a93" alt="Premium Rate Body Language" class="lesson-image">
+            </div>
+
+            <div class="highlight-box">
+                <p><strong>Reality Check:</strong> After implementing these techniques across hundreds of high-stakes interactions, I've seen consultants transform not just how they're perceived, but how they see themselves. When you master the Authority Triangle, develop micro-expression intelligence, and control room dynamics, you don't just look like a premium consultant—you become one.</p>
+            </div>
+
+            <div class="text-content">
+                <p>Your next client meeting is your laboratory. Choose one element of the Authority Triangle, implement it deliberately, and watch how the room dynamics shift. Then build from there.</p>
+
+                <p>The difference between consultants struggling at £400 per day and those commanding £2,000+ isn't experience, qualifications, or even results. It's the ability to project the authority that makes premium rates feel inevitable rather than ambitious.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="final-assessment">
+                <h2 class="assessment-title">🎯 Master Your Authority: Final Assessment</h2>
+                <p>Rate your confidence in applying each core technique:</p>
+                
+                <div class="confidence-slider">
+                    <label for="spatial">Spatial Dominance & Territorial Claiming</label>
+                    <input type="range" id="spatial" class="slider" min="1" max="10" value="5">
+                    <div style="display: flex; justify-content: space-between; color: #666; font-size: 0.9rem;">
+                        <span>Need Practice</span>
+                        <span>Ready to Implement</span>
+                    </div>
+                </div>
+
+                <div class="confidence-slider">
+                    <label for="microread">Micro-Expression Reading (FACE Framework)</label>
+                    <input type="range" id="microread" class="slider" min="1" max="10" value="5">
+                    <div style="display: flex; justify-content: space-between; color: #666; font-size: 0.9rem;">
+                        <span>Need Practice</span>
+                        <span>Ready to Implement</span>
+                    </div>
+                </div>
+
+                <div class="confidence-slider">
+                    <label for="vocal">Voice-Posture Integration</label>
+                    <input type="range" id="vocal" class="slider" min="1" max="10" value="5">
+                    <div style="display: flex; justify-content: space-between; color: #666; font-size: 0.9rem;">
+                        <span>Need Practice</span>
+                        <span>Ready to Implement</span>
+                    </div>
+                </div>
+
+                <div class="confidence-slider">
+                    <label for="roomcontrol">Strategic Room Control</label>
+                    <input type="range" id="roomcontrol" class="slider" min="1" max="10" value="5">
+                    <div style="display: flex; justify-content: space-between; color: #666; font-size: 0.9rem;">
+                        <span>Need Practice</span>
+                        <span>Ready to Implement</span>
+                    </div>
+                </div>
+
+                <button class="tl-dr-toggle" style="margin: 2rem 0;" onclick="showMasteryLevel()">Calculate My Authority Mastery Level</button>
+                <div id="mastery-result" style="display: none; background: var(--rb-blue)20; padding: 1.5rem; border-radius: 8px; margin-top: 1rem;"></div>
+            </div>
+        </section>
+
+        <div class="check-in">
+            <div class="check-in-title">
+                <span>🚀</span> Commitment to Implementation
+            </div>
+            <div class="question">
+                <p>Which Authority Triangle element will you implement in your very next client meeting?</p>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="commitment" value="a">
+                        <span>Spatial dominance - strategic positioning and territorial claiming</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="commitment" value="b">
+                        <span>Micro-expression reading - using FACE framework for intelligence</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="commitment" value="c">
+                        <span>Voice-posture integration - chest resonance through positioning</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="commitment" value="d">
+                        <span>Strategic eye contact allocation - power mapping through attention</span>
+                    </label>
+                </div>
+                <div class="feedback" id="commitment-feedback"></div>
+            </div>
+        </div>
+    </main>
+
+    <nav class="navigation-footer">
+        <p style="margin-bottom: 1rem; color: #666;">Lesson Complete: Master High-Stakes Body Language</p>
+        <button class="next-lesson-btn">Continue to Next Lesson →</button>
+    </nav>
+
+    <script>
+        // Progress tracking
+        function updateProgress() {
+            const sections = document.querySelectorAll('.section');
+            const scrolled = window.scrollY;
+            const total = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = (scrolled / total) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+        }
+
+        // Scroll animations
+        function checkVisibility() {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                if (rect.top < window.innerHeight * 0.8 && rect.bottom > 0) {
+                    section.classList.add('visible');
+                }
+            });
+        }
+
+        // TL;DR toggles
+        function toggleTLDR(id) {
+            const content = document.getElementById(id + '-tldr');
+            const isVisible = content.style.display === 'block';
+            content.style.display = isVisible ? 'none' : 'block';
+        }
+
+        // Accordion functionality
+        function toggleAccordion(id) {
+            const content = document.getElementById(id);
+            const isActive = content.classList.contains('active');
+            
+            // Close all other accordions
+            document.querySelectorAll('.accordion-content').forEach(acc => {
+                acc.classList.remove('active');
+            });
+            
+            if (!isActive) {
+                content.classList.add('active');
+            }
+        }
+
+        // Quiz functionality
+        function setupQuizzes() {
+            const questions = {
+                'entry': {
+                    correct: 'b',
+                    feedback: {
+                        'a': "❌ This is contractor-level behavior. Premium consultants survey first, then claim strategic positions.",
+                        'b': "✅ Exactly right! Strategic room assessment followed by deliberate positioning signals authority and competence.",
+                        'c': "❌ This passive approach signals low status. Premium consultants take control of their positioning.",
+                        'd': "❌ Time to start! Room positioning is your first opportunity to project authority before you speak."
+                    }
+                },
+                'seating': {
+                    correct: 'b',
+                    feedback: {
+                        'a': "❌ Can be too presumptuous if you're not the senior person. Corner position is often more strategic.",
+                        'b': "✅ Perfect! Maximum visibility, security, and control with appropriate respect for hierarchy.",
+                        'c': "❌ Good for collaboration but weak for authority projection. Centers lack territorial control.",
+                        'd': "❌ Shows deference but doesn't establish your own authority presence in the room."
+                    }
+                },
+                'micro': {
+                    correct: 'b',
+                    feedback: {
+                        'a': "❌ Genuine agreement creates consistent, symmetrical expressions. The lip compression suggests restraint.",
+                        'b': "✅ Exactly! The contradiction between words and micro-expressions reveals hidden skepticism you must address.",
+                        'c': "❌ Deep thinking shows different patterns. This combination suggests polite disagreement, not consideration.",
+                        'd': "❌ Normal processing doesn't typically include compression and eyebrow raises together."
+                    }
+                },
+                'eyecontact': {
+                    correct: 'b',
+                    feedback: {
+                        'a': "❌ This respects hierarchy but ignores who actually makes the decision. You'll lose the real power broker.",
+                        'b': "✅ Smart strategy! Focus on the decision-maker while showing appropriate respect to all hierarchy levels.",
+                        'c': "❌ Equal distribution wastes your influence. Strategic allocation based on power mapping is more effective.",
+                        'd': "❌ Reactive approach. Premium consultants proactively control attention allocation, not just respond."
+                    }
+                },
+                'pricing': {
+                    correct: 'c',
+                    feedback: {
+                        'a': "❌ Never lower rates immediately! Those micro-expressions suggest they're processing value, not rejecting price.",
+                        'b': "❌ While confidence is good, the signals suggest they need help justifying the value to themselves or others.",
+                        'c': "✅ Perfect read! They're internally calculating value. Help them justify the premium investment.",
+                        'd': "❌ Don't negotiate against yourself. Their micro-expressions suggest budget exists; focus on value justification."
+                    }
+                },
+                'commitment': {
+                    correct: 'any',
+                    feedback: {
+                        'a': "🚀 Excellent choice! Spatial dominance creates immediate authority shifts. Position strategically and claim your territory.",
+                        'b': "🚀 Smart focus! Reading the room gives you intelligence advantages worth thousands in negotiations and presentations.",
+                        'c': "🚀 Great selection! Voice-posture integration multiplies your authority impact. Stand tall, resonate from your chest.",
+                        'd': "🚀 Strategic thinking! Eye contact allocation lets you control room dynamics and influence patterns from day one."
+                    }
+                }
+            };
+
+            Object.entries(questions).forEach(([questionName, questionData]) => {
+                const options = document.querySelectorAll(`input[name="${questionName}"]`);
+                const feedback = document.getElementById(`${questionName}-feedback`);
+
+                options.forEach(option => {
+                    option.addEventListener('change', () => {
+                        const selected = option.value;
+                        const isCorrect = selected === questionData.correct || questionData.correct === 'any';
+                        
+                        feedback.innerHTML = questionData.feedback[selected];
+                        feedback.className = `feedback ${isCorrect ? 'correct' : 'incorrect'}`;
+                        feedback.style.display = 'block';
+                    });
+                });
+            });
+        }
+
+        // Mastery level calculator
+        function showMasteryLevel() {
+            const spatial = document.getElementById('spatial').value;
+            const microread = document.getElementById('microread').value;
+            const vocal = document.getElementById('vocal').value;
+            const roomcontrol = document.getElementById('roomcontrol').value;
+            
+            const average = (parseInt(spatial) + parseInt(microread) + parseInt(vocal) + parseInt(roomcontrol)) / 4;
+            const resultDiv = document.getElementById('mastery-result');
+            
+            let level, advice;
+            if (average >= 8) {
+                level = "🏆 Authority Master";
+                advice = "You're ready to command premium rates! Your confidence levels suggest you can implement these techniques immediately. Focus on consistent application across all client interactions.";
+            } else if (average >= 6) {
+                level = "⚡ Authority Developer";
+                advice = "Strong foundation! Pick your weakest area and focus intensive practice there for 2 weeks. You're close to premium consultant positioning.";
+            } else if (average >= 4) {
+                level = "🎯 Authority Learner";
+                advice = "Good awareness! Start with spatial dominance (easiest to control) and build from there. Practice one technique per week systematically.";
+            } else {
+                level = "🚀 Authority Beginner";
+                advice = "Perfect starting point! Focus on the Authority Triangle basics. Master spatial positioning first - it provides immediate confidence boost and visible results.";
+            }
+            
+            resultDiv.innerHTML = `
+                <h3>${level}</h3>
+                <p><strong>Average Score:</strong> ${average.toFixed(1)}/10</p>
+                <p>${advice}</p>
+                <p><strong>Next Step:</strong> Choose ONE technique and practice it in your next three client meetings. Master one element before adding others.</p>
+            `;
+            resultDiv.style.display = 'block';
+        }
+
+        // Event listeners
+        window.addEventListener('scroll', () => {
+            updateProgress();
+            checkVisibility();
+        });
+
+        window.addEventListener('load', () => {
+            checkVisibility();
+            setupQuizzes();
+        });
+
+        // Accessibility improvements
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && e.target.classList.contains('accordion-header')) {
+                e.target.click();
+            }
+        });
+
+        // Print optimization
+        window.addEventListener('beforeprint', () => {
+            document.querySelectorAll('.accordion-content').forEach(content => {
+                content.classList.add('active');
+            });
+            document.querySelectorAll('.tl-dr-content').forEach(content => {
+                content.style.display = 'block';
+            });
+        });
+    </script>
+</body>
+</html>

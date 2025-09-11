@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculate ROI-Based Fees - Rule Benders Academy</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #ffffff;
+            background: #000000;
+            overflow-x: hidden;
+        }
+
+        .hero-section {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            overflow: hidden;
+        }
+
+        .hero-visual {
+            position: absolute;
+            right: 10%;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0.3;
+            z-index: 1;
+        }
+
+        .hero-visual img {
+            width: 400px;
+            height: 400px;
+            object-fit: contain;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 2rem;
+            text-align: left;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, #2B5CE6, #E85D00);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(43, 92, 230, 0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.4rem;
+            color: #cccccc;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        .instructor-cred {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: rgba(43, 92, 230, 0.1);
+            border-left: 4px solid #2B5CE6;
+            border-radius: 8px;
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: rgba(43, 92, 230, 0.2);
+            z-index: 1000;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #2B5CE6, #E85D00);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .lesson-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .section-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            background: linear-gradient(45deg, #2B5CE6, #E85D00);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .section-icon img {
+            width: 32px;
+            height: 32px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #2B5CE6;
+        }
+
+        .content-block {
+            background: rgba(26, 26, 26, 0.8);
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(43, 92, 230, 0.2);
+            position: relative;
+        }
+
+        .content-block::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #2B5CE6, #E85D00);
+            border-radius: 16px 16px 0 0;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(43, 92, 230, 0.15), rgba(232, 93, 0, 0.15));
+            border-left: 4px solid #E85D00;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+        }
+
+        .formula-box {
+            background: rgba(43, 92, 230, 0.1);
+            border: 2px solid #2B5CE6;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 12px;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+            font-size: 1.2rem;
+            position: relative;
+        }
+
+        .case-study {
+            background: rgba(232, 93, 0, 0.1);
+            border: 1px solid #E85D00;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 12px;
+        }
+
+        .case-study-title {
+            color: #E85D00;
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .interactive-element {
+            background: rgba(43, 92, 230, 0.05);
+            border: 1px solid rgba(43, 92, 230, 0.3);
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .interactive-element:hover {
+            background: rgba(43, 92, 230, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .check-in {
+            background: linear-gradient(135deg, rgba(43, 92, 230, 0.2), rgba(232, 93, 0, 0.2));
+            padding: 2rem;
+            margin: 3rem 0;
+            border-radius: 16px;
+            border: 2px solid rgba(43, 92, 230, 0.5);
+        }
+
+        .check-in-title {
+            color: #2B5CE6;
+            font-weight: 700;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .question {
+            margin-bottom: 1.5rem;
+        }
+
+        .question-text {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        .options {
+            display: grid;
+            gap: 0.8rem;
+        }
+
+        .option {
+            background: rgba(26, 26, 26, 0.8);
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .option:hover {
+            border-color: #2B5CE6;
+            background: rgba(43, 92, 230, 0.1);
+        }
+
+        .option.selected {
+            border-color: #2B5CE6;
+            background: rgba(43, 92, 230, 0.2);
+        }
+
+        .option.correct {
+            border-color: #00ff88;
+            background: rgba(0, 255, 136, 0.1);
+        }
+
+        .option.incorrect {
+            border-color: #ff4444;
+            background: rgba(255, 68, 68, 0.1);
+        }
+
+        .feedback {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback.correct {
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid #00ff88;
+            color: #00ff88;
+        }
+
+        .feedback.incorrect {
+            background: rgba(255, 68, 68, 0.1);
+            border: 1px solid #ff4444;
+            color: #ff4444;
+        }
+
+        .expandable {
+            border: 1px solid rgba(43, 92, 230, 0.3);
+            border-radius: 12px;
+            margin: 2rem 0;
+            overflow: hidden;
+        }
+
+        .expandable-header {
+            background: rgba(43, 92, 230, 0.1);
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s ease;
+        }
+
+        .expandable-header:hover {
+            background: rgba(43, 92, 230, 0.2);
+        }
+
+        .expandable-content {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.5s ease;
+        }
+
+        .expandable-content.expanded {
+            padding: 1.5rem;
+            max-height: 1000px;
+        }
+
+        .toggle-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .toggle-icon.rotated {
+            transform: rotate(180deg);
+        }
+
+        .image-float {
+            float: right;
+            margin: 0 0 2rem 2rem;
+            max-width: 300px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(43, 92, 230, 0.3);
+        }
+
+        .image-float img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .tool-card {
+            background: rgba(26, 26, 26, 0.8);
+            border: 1px solid rgba(232, 93, 0, 0.3);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(232, 93, 0, 0.2);
+        }
+
+        .tool-title {
+            color: #E85D00;
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .confidence-slider {
+            margin: 2rem 0;
+        }
+
+        .slider {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: rgba(43, 92, 230, 0.3);
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #2B5CE6, #E85D00);
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(43, 92, 230, 0.3);
+        }
+
+        .final-assessment {
+            background: linear-gradient(135deg, rgba(43, 92, 230, 0.2), rgba(232, 93, 0, 0.2));
+            padding: 3rem;
+            margin: 4rem 0;
+            border-radius: 20px;
+            border: 2px solid rgba(43, 92, 230, 0.5);
+            text-align: center;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #2B5CE6, #E85D00);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(43, 92, 230, 0.3);
+        }
+
+        .completion-badge {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background: linear-gradient(45deg, #2B5CE6, #E85D00);
+            padding: 3rem;
+            border-radius: 20px;
+            text-align: center;
+            z-index: 2000;
+            transition: transform 0.5s ease;
+        }
+
+        .completion-badge.show {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-visual {
+                opacity: 0.1;
+            }
+            
+            .image-float {
+                float: none;
+                margin: 2rem 0;
+                max-width: 100%;
+            }
+            
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .lesson-container {
+                padding: 1rem;
+            }
+        }
+
+        .toc {
+            position: fixed;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(26, 26, 26, 0.9);
+            border: 1px solid rgba(43, 92, 230, 0.3);
+            border-radius: 12px;
+            padding: 1rem;
+            z-index: 100;
+            max-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .toc.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .toc-item {
+            display: block;
+            color: #cccccc;
+            text-decoration: none;
+            padding: 0.5rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .toc-item:hover, .toc-item.active {
+            background: rgba(43, 92, 230, 0.2);
+            color: #2B5CE6;
+        }
+
+        @media (max-width: 1024px) {
+            .toc {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+    </div>
+
+    <div class="toc" id="toc">
+        <a href="#reality" class="toc-item">The Reality</a>
+        <a href="#framework" class="toc-item">Core Framework</a>
+        <a href="#conversation" class="toc-item">Value Conversation</a>
+        <a href="#benefits" class="toc-item">Soft Benefits</a>
+        <a href="#presentation" class="toc-item">Client Presentation</a>
+        <a href="#tools" class="toc-item">Practical Tools</a>
+    </div>
+
+    <section class="hero-section">
+        <div class="hero-visual">
+            <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-9LmodgOFLJ/44500855b36038cf446cffd2300b61d4c9935ee90c06e65a54f9ecba642d36e8c792d9d2cde3e5722e41e5ba9711718daf40d575526b0a802ecd1e4d694785a9580f3542de2d3d5f66cb8787bb947de07d98052935c84a370f28c612420d0323bc5352a5" alt="ROI Calculator">
+        </div>
+        <div class="hero-content">
+            <h1 class="hero-title">Calculate ROI-Based Fees</h1>
+            <p class="hero-subtitle">Master the mathematical frameworks top consultants use to justify premium rates by calculating tangible business impact.</p>
+            
+            <div class="instructor-cred">
+                <div>
+                    <strong>Will Richardson</strong><br>
+                    <small>17 years billing £1,000-£2,000 daily | £500M+ taxpayer savings</small>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="lesson-container">
+        <section id="intro" class="section">
+            <div class="content-block">
+                <p>After 17 years of consulting—from billing £2,000/day at HM Treasury to closing £300K projects—I've learned that most consultants dramatically undercharge because they don't understand one fundamental truth: your fee should be based on the value you create, not the time you spend.</p>
+
+                <div class="highlight-box">
+                    <p>Here's what I've discovered: only 17.3% of consultants use value-based pricing, yet those who master it consistently command premium rates while their competitors fight over hourly billing. The mathematics are simple, but the psychology is everything.</p>
+                </div>
+            </div>
+
+            <div class="check-in">
+                <div class="check-in-title">
+                    🎯 Quick Reality Check
+                </div>
+                <div class="question">
+                    <p class="question-text">What's the biggest factor keeping most consultants from charging premium rates?</p>
+                    <div class="options">
+                        <div class="option" data-correct="false">Lack of experience or qualifications</div>
+                        <div class="option" data-correct="false">Market competition and pricing pressure</div>
+                        <div class="option" data-correct="true">Not understanding how to calculate and present ROI-based value</div>
+                        <div class="option" data-correct="false">Client budget constraints</div>
+                    </div>
+                    <div class="feedback">
+                        <p><strong>Correct!</strong> The difference isn't experience or credentials—it's mathematical precision in calculating and presenting return on investment. McKinsey charges $1,193/hour not because they're smarter, but because they've mastered ROI communication.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="reality" class="section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-XnzIr_veOp/83896f6ee290742fc89228a7eeb4dbadf609a5484f4b08d4f3d072b9920ef0821954469a2982b84d3ca5f355a0260124d842fa0399df456b4869c267b2ff0e4a7ff099b8570ac5b09be805f31f014d2c681bfd4cae519808b11cc8217e390aa4426d37a7" alt="Value Shield">
+                </div>
+                <h2 class="section-title">The Reality: Why Consultants Leave Money on the Table</h2>
+            </div>
+
+            <div class="content-block">
+                <div class="image-float">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-Q3iRVgVbei/62a2b58cc844c5da7df7e01be9c03f38eb136e665caddc33e097bcb0fa1a556e744fc9e81aa3a8a03383072f7cd1899e130608e728352d2f59e40424e72b391a933296c346c94bdcace2f227d631c782ac20b09e0943c6cbadea2cbbe0fac7a6cdd63e88" alt="Value Pyramid">
+                </div>
+
+                <p>Most consultants think like employees, not business owners. They calculate their desired salary, add some overhead, and divide by billable hours. This is backwards thinking that keeps you trapped in the £300-500/day range while McKinsey senior partners charge $1,193.57 per hour—roughly £950 per hour.</p>
+
+                <p>The difference isn't experience or credentials. It's mathematical precision in calculating and presenting return on investment.</p>
+
+                <div class="case-study">
+                    <div class="case-study-title">Cabinet Office Transformation</div>
+                    <p>When I was working with the Cabinet Office on a major transformation program, I didn't quote based on the months it would take. I calculated that the new processes would save the government £2.3 million annually. My £180K fee suddenly looked like the bargain it was—a 12X return in year one alone.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="framework" class="section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-u12HtPnAOT/e6b564c019c3281eb24d3a328243ef8f08dc31131c81c44b7f7c87be0c7002aca0d61cec91570fc019d0e855490e242103b815a1c4da4e0e17e7b24302288441db333b540cc5740bed55d6ccd95bcf0fe8428298f2fc4ae607e1b333607b309638a2319e" alt="ROI Percentage">
+                </div>
+                <h2 class="section-title">The Core ROI Calculation Framework</h2>
+            </div>
+
+            <div class="content-block">
+                <p>Here's the formula I use for every premium project:</p>
+
+                <div class="formula-box">
+                    <strong>ROI = (Tangible Benefits + Quantified Soft Benefits - Total Investment) ÷ Total Investment × 100</strong>
+                </div>
+
+                <p>But that's just the starting point. The real skill is in the value conversation that precedes any number crunching.</p>
+
+                <div class="expandable">
+                    <div class="expandable-header">
+                        <h3>Step 1: The Value Conversation</h3>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="expandable-content">
+                        <p>Before discussing fees, I ask clients to calculate their own ROI. Not me telling them—them working it out through my questioning. Here's my standard approach:</p>
+                        
+                        <ul>
+                            <li>"What's the current cost of not solving this problem?"</li>
+                            <li>"If we implement this solution, what's the annual benefit?"</li>
+                            <li>"What happens if you do nothing for another year?"</li>
+                        </ul>
+
+                        <div class="case-study">
+                            <div class="case-study-title">Manufacturing Client Example</div>
+                            <p>I had a manufacturing client who initially balked at my £150K project fee. Through this conversation, he calculated that production inefficiencies were costing £50K per month. Suddenly, a three-month payback period made my fee look essential, not expensive.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="expandable">
+                    <div class="expandable-header">
+                        <h3>Step 2: The Three Value Driver Model</h3>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="expandable-content">
+                        <div class="image-float">
+                            <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-6Sq1V5bjUJ/9d6fe85e6432258b2d9d70a3728a2d42884b6bbb514332c6daf7bfd18c8ac1b33d186db15cb421edad200e04c63ed17b9e4ac771f7ba1a956228ead548e8a055910865cfdb3d9a28cc12fb8115a17a4ef9cfcd9af57bd835b814b043bf7a1972520b30fa" alt="Value Stack">
+                        </div>
+
+                        <p>Never base ROI on a single benefit—clients will question your assumptions. Always identify at least three value drivers, even when one alone justifies your fee. Here's how I structure it:</p>
+
+                        <div class="highlight-box">
+                            <strong>Primary Driver (50% of value):</strong> Direct, measurable impact
+                            <ul>
+                                <li>Revenue increase</li>
+                                <li>Cost reduction</li>
+                                <li>Time savings</li>
+                            </ul>
+                        </div>
+
+                        <div class="highlight-box">
+                            <strong>Secondary Driver (30% of value):</strong> Quantified operational benefits
+                            <ul>
+                                <li>Process efficiency gains</li>
+                                <li>Risk mitigation value</li>
+                                <li>Quality improvements</li>
+                            </ul>
+                        </div>
+
+                        <div class="highlight-box">
+                            <strong>Tertiary Driver (20% of value):</strong> Strategic advantages
+                            <ul>
+                                <li>Competitive positioning</li>
+                                <li>Market opportunities</li>
+                                <li>Future capability building</li>
+                            </ul>
+                        </div>
+
+                        <div class="case-study">
+                            <div class="case-study-title">Digital Transformation Project</div>
+                            <p>For a recent digital transformation project, my value drivers were:</p>
+                            <ol>
+                                <li><strong>£400K annual savings</strong> from process automation (Primary)</li>
+                                <li><strong>£240K value</strong> from reduced errors and rework (Secondary)</li>
+                                <li><strong>£160K strategic value</strong> from faster market response capability (Tertiary)</li>
+                            </ol>
+                            <p><strong>Total annual value: £800K. My £160K fee represented a 5X ROI—exactly where you want to position premium consulting services.</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="check-in">
+                <div class="check-in-title">
+                    📊 Value Driver Assessment
+                </div>
+                <div class="question">
+                    <p class="question-text">Why should you always use at least three value drivers in your ROI calculation?</p>
+                    <div class="options">
+                        <div class="option" data-correct="false">To make the proposal longer and more impressive</div>
+                        <div class="option" data-correct="true">To prevent clients from questioning single-point assumptions</div>
+                        <div class="option" data-correct="false">To justify higher fees through complexity</div>
+                        <div class="option" data-correct="false">To show comprehensive analysis skills</div>
+                    </div>
+                    <div class="feedback">
+                        <p><strong>Exactly right!</strong> When you base ROI on a single benefit, clients will always question that one assumption. With three drivers, even if they discount one completely, you still have solid justification. It's mathematical insurance for your pricing.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="benefits" class="section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-SqTamqU1ka/2623b0891d481c8eb1f27f1a9230768fa0fad479c8ebd0c3421c0d51c99d31773cb3e768db802f2c34e900703fc8b5362fb17005d266e81c92ee49a82f264103aeb7ef5624943e8e02de1bd5e835a780aab58d26e19a13e95df120bec87b9efbf5034269" alt="Cost Reduction">
+                </div>
+                <h2 class="section-title">Quantifying Soft Benefits: The Secret Weapon</h2>
+            </div>
+
+            <div class="content-block">
+                <p>Most consultants struggle with "soft" benefits like improved morale, better decision-making, or enhanced reputation. Here's my method for converting these into hard numbers:</p>
+
+                <div class="interactive-element" onclick="toggleContent('conservativeCalc')">
+                    <h3>The Conservative Calculation Approach</h3>
+                    <p>Click to explore the methodology...</p>
+                    <div id="conservativeCalc" style="display: none; margin-top: 1rem;">
+                        <p>For each soft benefit, I ask: "What's the minimum financial impact if this improves by X%?"</p>
+
+                        <div class="highlight-box">
+                            <strong>Employee retention example:</strong> If consultant work improves job satisfaction and reduces turnover by 2%, calculate the replacement cost savings. For a 100-person company with £50K average salaries and 20% annual turnover, a 2% reduction saves £20K annually (2 fewer replacements at £10K cost each).
+                        </div>
+
+                        <div class="highlight-box">
+                            <strong>Decision-making improvements:</strong> If better processes help executives make decisions 20% faster, calculate the opportunity cost of delayed decisions. For a £10M company, faster strategic decisions might generate just 1% additional revenue—still £100K annual value.
+                        </div>
+                    </div>
+                </div>
+
+                <p>I bundle these quantified soft benefits into three impact categories:</p>
+                <ul>
+                    <li><strong>High Impact:</strong> Equal to tangible savings already identified</li>
+                    <li><strong>Medium Impact:</strong> 50% of tangible savings</li>
+                    <li><strong>Low Impact:</strong> 25% of tangible savings</li>
+                </ul>
+
+                <p><strong>This approach doubled my project valuations while maintaining credibility with finance-conscious clients.</strong></p>
+            </div>
+
+            <div class="check-in">
+                <div class="check-in-title">
+                    💡 Soft Benefits Challenge
+                </div>
+                <div class="question">
+                    <p class="question-text">A client says "improved team morale" isn't quantifiable. How do you respond?</p>
+                    <div class="options">
+                        <div class="option" data-correct="false">Agree and focus only on hard metrics</div>
+                        <div class="option" data-correct="true">Ask what's the minimum cost of low morale (turnover, sick days, productivity)</div>
+                        <div class="option" data-correct="false">Provide industry statistics on morale's impact</div>
+                        <div class="option" data-correct="false">Suggest removing it from the ROI calculation</div>
+                    </div>
+                    <div class="feedback">
+                        <p><strong>Perfect approach!</strong> By asking them to quantify the cost of the problem, you're getting them to calculate the value of solving it. If high turnover costs £50K annually, improving retention by just 10% is worth £5K—suddenly "soft" becomes very hard numbers.</p>
+                    </div>
+                </div>
+
+                <div class="confidence-slider">
+                    <label for="confidenceLevel">How confident are you in quantifying soft benefits? (1-10)</label>
+                    <input type="range" id="confidenceLevel" class="slider" min="1" max="10" value="5">
+                    <p id="confidenceText">Confidence Level: 5/10</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="presentation" class="section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-yxxHmGTs85/b7d8bc1d1f4630803565fa3457ed01e2ed56fdd1deb875fe43560818e1f2f56724e51de376cd13ea281ef6a87add26a306cf1492dc3f6de9b49feef9db59c3efc745ccc1f8bb9b6377986d2687c4ad4cc42110f159413a9ee121ddff71be553e068e6b85" alt="Business Handshake">
+                </div>
+                <h2 class="section-title">The Client Presentation: Making Premium Rates Look Like Bargains</h2>
+            </div>
+
+            <div class="content-block">
+                <div class="image-float">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-2-Wc6Y7o_o/32d99360fb930b5bbca875059a1ec2c1004c2ea264fd8dd83ead78f143155ff0ca5db31d41ef58935f34187ac2a7b25c8eedfb58140cb49909daa4f359fae9b4f5608adbd1c71a53f46fa106e5a5f8ac3aa6857025acd8b517bd01c5a225c6fdd7ea5a9d" alt="Premium Presentation">
+                </div>
+
+                <p>When presenting ROI-based fees, I use this exact sequence:</p>
+
+                <div class="expandable">
+                    <div class="expandable-header">
+                        <h3>1. Opening with Reality</h3>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="expandable-content">
+                        <p><em>"Based on our analysis, the current situation is costing you £X annually. That's £Y per month you're losing while we discuss this project."</em></p>
+                    </div>
+                </div>
+
+                <div class="expandable">
+                    <div class="expandable-header">
+                        <h3>2. Establishing Value</h3>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="expandable-content">
+                        <p><em>"Our solution will deliver £Z in measurable benefits within 12 months. Here's how we calculated that..."</em> [Show the three value drivers]</p>
+                    </div>
+                </div>
+
+                <div class="expandable">
+                    <div class="expandable-header">
+                        <h3>3. Positioning the Investment</h3>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="expandable-content">
+                        <p><em>"The total investment is £A, which represents a B.C X return in year one. Where else in your business are you getting a 5X ROI?"</em></p>
+                        <p><strong>The answer is usually "nowhere," which is exactly the point.</strong></p>
+                    </div>
+                </div>
+
+                <div class="expandable">
+                    <div class="expandable-header">
+                        <h3>4. Handling Price Objections</h3>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="expandable-content">
+                        <p>When someone says fees are "too high," it's never a pricing problem—it's a value communication problem. I respond with:</p>
+                        <div class="highlight-box">
+                            <em>"Help me understand—are you questioning the value calculation, or is there a budget constraint we should discuss?"</em>
+                        </div>
+                        <p>This separates real objections from reflexive price resistance. Most clients haven't thought through their ROI calculations, so this conversation alone often closes the deal.</p>
+                    </div>
+                </div>
+
+                <div class="case-study">
+                    <div class="case-study-title">Treasury Efficiency Program - £280K Project</div>
+                    <p><strong>Current Cost Analysis:</strong></p>
+                    <ul>
+                        <li>Manual processes: 2,000 hours monthly at £35/hour = £840K annually</li>
+                        <li>Error corrections: £180K annually</li>
+                        <li>Opportunity cost of delays: £220K annually</li>
+                        <li><strong>Total annual cost: £1.24M</strong></li>
+                    </ul>
+
+                    <p><strong>Solution Value Calculation:</strong></p>
+                    <ul>
+                        <li>Process automation saves 60% manual effort = £504K annually</li>
+                        <li>Error reduction (80% improvement) = £144K annually</li>
+                        <li>Faster delivery enables £200K additional revenue = £200K annually</li>
+                        <li><strong>Total annual benefit: £848K</strong></li>
+                    </ul>
+
+                    <p><strong>ROI Presentation:</strong></p>
+                    <div class="highlight-box">
+                        <p><em>"This inefficiency is costing Treasury £1.24 million per year. Our solution delivers £848K in annual savings—that's £71K per month starting month four. The £280K investment pays for itself in 4.5 months and delivers a 3X ROI in year one."</em></p>
+                        <p><strong>The project was approved within two weeks.</strong></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="check-in">
+                <div class="check-in-title">
+                    🎭 Objection Handling Scenario
+                </div>
+                <div class="question">
+                    <p class="question-text">Client says: "Your fees are too expensive compared to other consultants." Your best response?</p>
+                    <div class="options">
+                        <div class="option" data-correct="false">"I can reduce my rate to match the competition"</div>
+                        <div class="option" data-correct="true">"Expensive compared to what? The cost of not solving this problem?"</div>
+                        <div class="option" data-correct="false">"Let me show you my credentials and experience"</div>
+                        <div class="option" data-correct="false">"Other consultants can't deliver the same results"</div>
+                    </div>
+                    <div class="feedback">
+                        <p><strong>Brilliant!</strong> You're redirecting from cost to value. When they realize the problem costs £100K annually, your £30K fee isn't expensive—it's essential. You're not selling consulting hours, you're selling problem-solving that pays for itself.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tools" class="section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-EXj2etI8ww/9f574815f5095f56f046817d13d17e21fae8dc71e96487a1403457072dfa135b28cc41fb38530d15f2c3625d0137794ef2522638bf4b1b41e22a3cd574a1f7396fa6b7f325840189ebd3e371c83f59f7d78b61b63680974d17b9963772ddfd101f1f8fc2" alt="Consulting Briefcase">
+                </div>
+                <h2 class="section-title">Practical Tools for Immediate Implementation</h2>
+            </div>
+
+            <div class="content-block">
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <div class="tool-title">The ROI Calculation Template</div>
+                        <p>Create a simple spreadsheet with these sections:</p>
+                        <ol>
+                            <li><strong>Current State Costs</strong> (quantify the problem)</li>
+                            <li><strong>Future State Benefits</strong> (quantify the solution)</li>
+                            <li><strong>Implementation Costs</strong> (your fee plus client resources)</li>
+                            <li><strong>ROI Timeline</strong> (monthly payback calculation)</li>
+                            <li><strong>Risk Factors</strong> (conservative adjustments)</li>
+                        </ol>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-title">The Value Driver Worksheet</div>
+                        <p>For each project, document:</p>
+                        <ul>
+                            <li><strong>Primary Driver:</strong> Biggest measurable impact</li>
+                            <li><strong>Supporting Evidence:</strong> How you calculated the numbers</li>
+                            <li><strong>Conservative Estimate:</strong> Reduce projections by 20-30%</li>
+                            <li><strong>Client Validation:</strong> Get them to agree on assumptions</li>
+                        </ul>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-title">The Objection Response Framework</div>
+                        <div class="highlight-box">
+                            <p><strong>"Too expensive":</strong> "Expensive compared to what? The cost of not solving this problem?"</p>
+                            <p><strong>"Budget constraints":</strong> "What's the budget for solving this problem? Because ignoring it costs £X per month."</p>
+                            <p><strong>"Need to think about it":</strong> "What specifically would help you make this decision? The ROI is clear—is there something else we should address?"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="interactive-element" onclick="toggleContent('mentalShift')">
+                <h3>The Mental Shift: From Cost to Investment</h3>
+                <p>Click to explore the psychology behind premium pricing...</p>
+                <div id="mentalShift" style="display: none; margin-top: 1rem;">
+                    <div class="image-float">
+                        <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-ycxkSJ307Q/3a5da9fb37f0cf2893765bf6d1c65b8311e361e6b161813555c0fa4ff1ca196b66ae01944650ac1c8b82e3983f072da294181a09c9f15226e1b8cfe3c9dbf1d80c86f55f3eaff98b02fd03c233560b87d5b21436ba78a5b19c9730eef7f8afae34a43953" alt="Strategic Decision Diamond">
+                    </div>
+                    
+                    <p>The biggest barrier to premium pricing isn't mathematical—it's psychological. You must genuinely believe your services are investments, not costs. When I quote £1,500/day, I'm not selling time. I'm selling outcomes worth 10X that amount.</p>
+
+                    <p>This shift transforms client relationships. Instead of questioning your rates, they start calculating how quickly they'll see returns. Instead of negotiating fees, they're asking when you can start.</p>
+
+                    <div class="highlight-box">
+                        <p><strong>Here's the final reality:</strong> if you can't calculate and articulate clear ROI for your services, you're not ready for premium rates. But if you can master these frameworks—if you can make £100K fees look like bargains through mathematical precision—there's no ceiling on what you can charge.</p>
+                        <p><strong>The numbers don't lie. The question is: are you ready to use them?</strong></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="final-assessment">
+            <h2>Master the ROI Framework</h2>
+            <p>Test your understanding with this comprehensive assessment</p>
+
+            <div class="check-in">
+                <div class="check-in-title">
+                    🏆 Final Challenge: The £200K Project
+                </div>
+                <p><strong>Scenario:</strong> A manufacturing client has manual inventory processes costing £80K annually in labor, plus £30K in errors, plus £40K in lost sales from stockouts. Your solution eliminates 70% of manual work, reduces errors by 85%, and prevents 60% of stockouts. How do you present the ROI for your £200K fee?</p>
+                
+                <div class="question">
+                    <p class="question-text">What's the total annual value you can demonstrate?</p>
+                    <div class="options">
+                        <div class="option" data-correct="false">£105K (70% of £80K + 85% of £30K + 60% of £40K)</div>
+                        <div class="option" data-correct="true">£105.5K (£56K + £25.5K + £24K)</div>
+                        <div class="option" data-correct="false">£150K (full cost elimination)</div>
+                        <div class="option" data-correct="false">£95K (conservative 50% estimate)</div>
+                    </div>
+                    <div class="feedback">
+                        <p><strong>Exactly right!</strong> £56K labor savings + £25.5K error reduction + £24K revenue protection = £105.5K annual value. Your £200K investment delivers 53% ROI in year one, then pure profit afterward. This is how you justify premium fees.</p>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <p class="question-text">How do you position this ROI to the client?</p>
+                    <div class="options">
+                        <div class="option" data-correct="false">"My fee is £200K for this 8-month project"</div>
+                        <div class="option" data-correct="true">"This problem costs £150K annually. Our solution delivers £105K in year-one savings alone, making the £200K investment profitable in 23 months"</div>
+                        <div class="option" data-correct="false">"Based on industry standards, this type of project typically costs £200K"</div>
+                        <div class="option" data-correct="false">"I'll need £200K to deliver the comprehensive solution you need"</div>
+                    </div>
+                    <div class="feedback">
+                        <p><strong>Perfect positioning!</strong> You've led with the problem cost, demonstrated solution value, and positioned your fee as an investment with clear payback. The client isn't buying consulting time—they're buying a profitable business improvement.</p>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn" onclick="completeLesson()">Complete Lesson</button>
+        </div>
+    </div>
+
+    <div class="completion-badge" id="completionBadge">
+        <h2>🎉 Lesson Complete!</h2>
+        <p>You've mastered ROI-based fee calculation</p>
+        <p>Ready to justify premium rates with mathematical precision</p>
+    </div>
+
+    <script>
+        // Progress tracking
+        let completedChecks = 0;
+        let totalChecks = 6;
+
+        function updateProgress() {
+            const progress = Math.min((completedChecks / totalChecks) * 100, 100);
+            document.getElementById('progressFill').style.width = progress + '%';
+        }
+
+        // Scroll progress
+        window.addEventListener('scroll', () => {
+            const winHeight = window.innerHeight;
+            const docHeight = document.documentElement.scrollHeight - winHeight;
+            const scrolled = window.pageYOffset;
+            const scrollProgress = (scrolled / docHeight) * 100;
+            
+            document.getElementById('progressFill').style.width = Math.max(scrollProgress, (completedChecks / totalChecks) * 100) + '%';
+
+            // Show TOC after scrolling past hero
+            const toc = document.getElementById('toc');
+            if (scrolled > winHeight * 0.8) {
+                toc.classList.add('visible');
+            } else {
+                toc.classList.remove('visible');
+            }
+
+            // Animate sections on scroll
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+                if (scrolled + winHeight > sectionTop + sectionHeight * 0.3) {
+                    section.classList.add('visible');
+                }
+            });
+
+            // Update TOC active item
+            updateTOCActive();
+        });
+
+        // TOC functionality
+        function updateTOCActive() {
+            const sections = ['reality', 'framework', 'conversation', 'benefits', 'presentation', 'tools'];
+            const tocItems = document.querySelectorAll('.toc-item');
+            
+            sections.forEach((section, index) => {
+                const element = document.getElementById(section);
+                if (element) {
+                    const rect = element.getBoundingClientRect();
+                    if (rect.top <= window.innerHeight * 0.3 && rect.bottom >= 0) {
+                        tocItems.forEach(item => item.classList.remove('active'));
+                        tocItems[index]?.classList.add('active');
+                    }
+                }
+            });
+        }
+
+        // Check-in functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const checkIns = document.querySelectorAll('.check-in');
+            checkIns.forEach((checkIn, checkInIndex) => {
+                const questions = checkIn.querySelectorAll('.question');
+                questions.forEach((question, questionIndex) => {
+                    const options = question.querySelectorAll('.option');
+                    const feedback = question.querySelector('.feedback');
+                    let answered = false;
+
+                    options.forEach(option => {
+                        option.addEventListener('click', function() {
+                            if (answered) return;
+                            
+                            options.forEach(opt => {
+                                opt.classList.remove('selected');
+                                if (opt.dataset.correct === 'true') {
+                                    opt.classList.add('correct');
+                                } else {
+                                    opt.classList.add('incorrect');
+                                }
+                            });
+
+                            this.classList.add('selected');
+                            feedback.classList.add('show');
+                            
+                            if (this.dataset.correct === 'true') {
+                                feedback.classList.add('correct');
+                                if (!answered) {
+                                    completedChecks++;
+                                    updateProgress();
+                                }
+                            } else {
+                                feedback.classList.add('incorrect');
+                            }
+                            
+                            answered = true;
+                        });
+                    });
+                });
+            });
+
+            // Confidence slider
+            const slider = document.getElementById('confidenceLevel');
+            const text = document.getElementById('confidenceText');
+            if (slider && text) {
+                slider.addEventListener('input', function() {
+                    text.textContent = `Confidence Level: ${this.value}/10`;
+                });
+            }
+
+            // Expandable sections
+            const expandables = document.querySelectorAll('.expandable-header');
+            expandables.forEach(header => {
+                header.addEventListener('click', function() {
+                    const content = this.nextElementSibling;
+                    const icon = this.querySelector('.toggle-icon');
+                    
+                    content.classList.toggle('expanded');
+                    icon.classList.toggle('rotated');
+                });
+            });
+
+            // Initial section visibility
+            const sections = document.querySelectorAll('.section');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+
+        // Toggle content function
+        function toggleContent(id) {
+            const element = document.getElementById(id);
+            if (element.style.display === 'none') {
+                element.style.display = 'block';
+            } else {
+                element.style.display = 'none';
+            }
+        }
+
+        // Complete lesson function
+        function completeLesson() {
+            const badge = document.getElementById('completionBadge');
+            badge.classList.add('show');
+            
+            setTimeout(() => {
+                badge.classList.remove('show');
+            }, 3000);
+        }
+
+        // Smooth scrolling for TOC links
+        document.querySelectorAll('.toc-item').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const target = document.getElementById(targetId);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
