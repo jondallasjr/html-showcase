@@ -531,9 +531,13 @@ landing-page.html</code></pre>
                 </div>
             `;
             
+            // Store the full file path as a data attribute for debugging
+            fileDiv.setAttribute('data-file-path', filePath);
+            
             // Add click handler to show file details
             fileDiv.addEventListener('click', (e) => {
                 e.stopPropagation();
+                console.log('File clicked:', filePath); // Debug log
                 showFilePreview(filePath, fileName);
                 
                 // Update selection
@@ -581,6 +585,8 @@ landing-page.html</code></pre>
         }
 
         function showFilePreview(filePath, fileName) {
+            console.log('showFilePreview called with:', { filePath, fileName }); // Debug log
+            
             // Remove existing preview
             const existingPreview = document.querySelector('.file-preview-section');
             if (existingPreview) {
@@ -591,15 +597,18 @@ landing-page.html</code></pre>
             const previewSection = document.createElement('div');
             previewSection.className = 'file-preview-section';
             
+            // Ensure filePath has proper encoding for URLs
+            const encodedPath = encodeURI(filePath);
+            
             previewSection.innerHTML = `
                 <div class="file-card">
                     <div class="file-name">${fileName}</div>
                     <div class="file-path">/${filePath}</div>
                     <div class="file-actions">
-                        <a href="/${filePath}" class="btn btn-primary" target="_blank">
+                        <a href="/${encodedPath}" class="btn btn-primary" target="_blank">
                             👁️ Preview
                         </a>
-                        <a href="/${filePath}" class="btn btn-secondary">
+                        <a href="/${encodedPath}" class="btn btn-secondary">
                             🔗 Direct Link
                         </a>
                     </div>
@@ -607,6 +616,9 @@ landing-page.html</code></pre>
             `;
             
             document.getElementById('files-container').appendChild(previewSection);
+            
+            // Scroll to the preview section
+            previewSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
 
         function createFolderSection(folderPath, files) {
