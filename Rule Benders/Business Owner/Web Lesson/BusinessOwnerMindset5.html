@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rapid Risk Assessment Techniques - Rule Benders Academy</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --rule-benders-black: #000000;
+            --strategic-blue: #2B5CE6;
+            --action-orange: #E85D00;
+            --text-white: #FFFFFF;
+            --text-gray: #B0B0B0;
+            --surface-dark: #1a1a1a;
+            --surface-darker: #0f0f0f;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, var(--rule-benders-black) 0%, var(--surface-darker) 100%);
+            color: var(--text-white);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+
+        .lesson-header {
+            background: linear-gradient(135deg, var(--strategic-blue) 0%, var(--action-orange) 100%);
+            padding: 3rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .lesson-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-t9kpTtGXW9/4ffddd13a91c33dc0bc9355ff9106b519b4020972e2e9c3b1cfea0b59c97633cd66c11967fc7dc26fb86583e584e069811d5846c236db14f6c50506e98b848a067037ca245228680738ca4283b6488af40b9600b9aa64c7701ab72a8590d8bcc91e43b8c') center/cover;
+            opacity: 0.3;
+        }
+
+        .lesson-header h1 {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .lesson-header p {
+            font-size: 1.4rem;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            opacity: 0.9;
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--strategic-blue), var(--action-orange));
+            z-index: 1000;
+            transition: width 0.3s ease;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .lesson-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            padding: 4rem 0;
+        }
+
+        .content-section {
+            background: var(--surface-dark);
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid #333;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .content-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .content-section:hover {
+            border-color: var(--strategic-blue);
+            box-shadow: 0 8px 32px rgba(43, 92, 230, 0.2);
+        }
+
+        .section-image {
+            width: 100%;
+            max-width: 400px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin: 1rem 0;
+            border: 2px solid var(--strategic-blue);
+        }
+
+        .icon-inline {
+            width: 40px;
+            height: 40px;
+            display: inline-block;
+            margin: 0 10px;
+            vertical-align: middle;
+        }
+
+        h2 {
+            color: var(--strategic-blue);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--action-orange);
+        }
+
+        h3 {
+            color: var(--action-orange);
+            font-size: 1.5rem;
+            margin: 2rem 0 1rem 0;
+        }
+
+        .check-in {
+            background: linear-gradient(135deg, var(--surface-darker) 0%, var(--surface-dark) 100%);
+            border: 2px solid var(--strategic-blue);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .check-in h4 {
+            color: var(--strategic-blue);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .question {
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .options {
+            display: grid;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .option {
+            background: var(--surface-dark);
+            border: 1px solid #444;
+            border-radius: 6px;
+            padding: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .option:hover {
+            border-color: var(--strategic-blue);
+            background: rgba(43, 92, 230, 0.1);
+        }
+
+        .option.selected {
+            border-color: var(--action-orange);
+            background: rgba(232, 93, 0, 0.1);
+        }
+
+        .option.correct {
+            border-color: #28a745;
+            background: rgba(40, 167, 69, 0.1);
+        }
+
+        .option.incorrect {
+            border-color: #dc3545;
+            background: rgba(220, 53, 69, 0.1);
+        }
+
+        .feedback {
+            background: var(--surface-darker);
+            border-left: 4px solid var(--action-orange);
+            padding: 1rem;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .confidence-slider {
+            margin: 1rem 0;
+        }
+
+        .confidence-slider input {
+            width: 100%;
+            margin: 0.5rem 0;
+        }
+
+        .progress-section {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--surface-dark);
+            border: 1px solid var(--strategic-blue);
+            border-radius: 8px;
+            padding: 1rem;
+            min-width: 200px;
+            z-index: 999;
+        }
+
+        .progress-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: conic-gradient(var(--strategic-blue) 0deg, var(--surface-darker) 0deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            position: relative;
+        }
+
+        .progress-circle::before {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: var(--surface-dark);
+            border-radius: 50%;
+        }
+
+        .progress-text {
+            position: relative;
+            z-index: 1;
+            font-weight: bold;
+            color: var(--strategic-blue);
+        }
+
+        .btn {
+            background: linear-gradient(135deg, var(--strategic-blue), var(--action-orange));
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin: 0.5rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(43, 92, 230, 0.3);
+        }
+
+        .final-assessment {
+            background: linear-gradient(135deg, var(--surface-darker) 0%, var(--rule-benders-black) 100%);
+            border: 2px solid var(--action-orange);
+            border-radius: 12px;
+            padding: 3rem;
+            margin: 3rem 0;
+            text-align: center;
+        }
+
+        .mastery-gate {
+            background: var(--surface-darker);
+            border: 2px solid var(--strategic-blue);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .mastery-score {
+            font-size: 2rem;
+            color: var(--action-orange);
+            font-weight: bold;
+            margin: 1rem 0;
+        }
+
+        .footnote {
+            border-top: 1px solid #333;
+            padding-top: 2rem;
+            margin-top: 3rem;
+            font-size: 0.9rem;
+            color: var(--text-gray);
+        }
+
+        @media (max-width: 768px) {
+            .lesson-header h1 {
+                font-size: 2rem;
+            }
+            
+            .lesson-header p {
+                font-size: 1.1rem;
+            }
+            
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .progress-section {
+                position: relative;
+                top: auto;
+                right: auto;
+                margin: 2rem 0;
+            }
+            
+            .content-section {
+                padding: 1.5rem;
+            }
+        }
+
+        .tooltip {
+            position: relative;
+            cursor: pointer;
+            color: var(--strategic-blue);
+            text-decoration: underline;
+        }
+
+        .tooltip:hover::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--surface-darker);
+            color: white;
+            padding: 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            z-index: 1000;
+            border: 1px solid var(--strategic-blue);
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+    
+    <header class="lesson-header">
+        <div class="container">
+            <h1>Rapid Risk Assessment Techniques</h1>
+            <p>Your 30-Minute Advantage to £1,000+ Daily Rates</p>
+        </div>
+    </header>
+
+    <div class="progress-section">
+        <div class="progress-circle" id="progressCircle">
+            <span class="progress-text" id="progressText">0%</span>
+        </div>
+        <div style="text-align: center;">
+            <div>Section Progress</div>
+            <div style="font-size: 0.8rem; color: var(--text-gray);">Mastery: <span id="masteryScore">0%</span></div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="lesson-content">
+            
+            <!-- Introduction Section -->
+            <section class="content-section" id="section-1">
+                <h2>The Business Reality Behind Premium Consulting</h2>
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-HE7XY8kgwP/613cfebe8c828801f06676dee5a3b4f9a3ffc493cd0dce7f5a49da533d1fd88d80c4b9797ac9dbd68852df1bd916c68661a12a561812fd337fa151f832cb4283704116906f28bbee18e23730b4e2c300fa2f38e3cd8cb91a81f285f901b563b81b41a2a8" alt="Consultant Premium Positioning Moment" class="section-image">
+                
+                <p>After 17 years billing £1,000-£2,000 daily to clients like HM Treasury and the Cabinet Office, I've learned something most consultants never figure out: <strong>risk assessment isn't about avoiding disasters—it's about positioning yourself as the consultant who sees problems before they happen.</strong></p>
+
+                <p>Here's the brutal truth that separates premium consultants from everyone else: high-performing organizations successfully complete 89% of their projects, while low performers only complete 36%. The difference isn't experience, qualifications, or even technical skills. It's the ability to rapidly identify and communicate risks that could derail everything.</p>
+
+                <div class="check-in">
+                    <h4><img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-sSjlTYrZtl/57b97fe4ec340f220efaf696b6cb9d99fc5fe3a907133c7dcf78a1e45bd8a0d0f75523a22961d8ef7f64c46582dcd9a9bd5867422184c2e53b0779e9b9607b5b3ac77d170e49937240c3a5bf6a6a8e66bbf3e13d2b3204fe9f40b5b1cf94710a82f54336" class="icon-inline"> Quick Check: Premium Positioning</h4>
+                    <div class="question">What's the primary difference between premium consultants (£1,000+/day) and average consultants?</div>
+                    <div class="options">
+                        <div class="option" data-correct="false">More years of experience and qualifications</div>
+                        <div class="option" data-correct="false">Better technical skills and certifications</div>
+                        <div class="option" data-correct="true">Ability to identify and communicate risks before they occur</div>
+                        <div class="option" data-correct="false">Stronger personal networks and connections</div>
+                    </div>
+                    <div class="feedback">
+                        <strong>Correct!</strong> Premium consultants distinguish themselves by providing strategic foresight - identifying problems before they happen rather than just reacting to them. This proactive risk identification is what justifies premium rates.
+                    </div>
+                </div>
+
+                <p>Most consultants reactive to problems. Premium consultants prevent them. That's why I can walk into a £10 billion government program and immediately command attention—not because I've seen it all, but because I can spot what's coming next.</p>
+            </section>
+
+            <!-- Market Reality Section -->
+            <section class="content-section" id="section-2">
+                <h2>Why Rapid Risk Assessment Creates Premium Positioning</h2>
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-i68eiDeyNN/155d2a10d02eee6549f2e275a63cab633154d0541e674fcd51896a63422f6b21b9998f765115b45c4c58d530fce2d2bbc0675d67de9c1981f2ee2759fbde05d18d90154ab3d69009125f4b060e3486d6700149f9b1daf7ebedf34fd6c243bed043017ba5" alt="Government Program Risk Environment" class="section-image">
+                
+                <p>Let me share what happened when I was brought into the Ministry of Defence for a £2 billion procurement program. Within the first 30 minutes of stakeholder interviews, I identified three critical risks that the internal team had missed after six months of planning. One risk alone could have cost taxpayers £50 million.</p>
+
+                <p>That's the power of rapid risk assessment. It's not about creating comprehensive risk registers that nobody reads. It's about delivering immediate strategic value that justifies premium rates.</p>
+
+                <p>The statistics are staggering: around 50% of projects experience scope creep, and large projects are twice as likely to be late, over budget, and missing critical features. When you can identify these risks in 30-60 minutes and present clear mitigation strategies, you're not just another consultant—you're providing the strategic foresight that separates disasters from successes.</p>
+
+                <div class="check-in">
+                    <h4><img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-xl-XCFMElp/f0b2440aae1ed4a9bcb0471e9f982da36ea0c37408a3008024a8d2721c4d0fe9c363a33eeed4fb1d82d5660ce82f96d42317f6456c17f60f08951686df3de571eb5dcc03e889a847ce0653ef267e50dd7136aad980d8268735d97987b9369b9676e04414" class="icon-inline"> True or False Challenge</h4>
+                    <div class="question">True or False: The main purpose of rapid risk assessment is to create comprehensive documentation that covers every possible risk scenario.</div>
+                    <div class="options">
+                        <div class="option" data-correct="false">True - comprehensive documentation is essential</div>
+                        <div class="option" data-correct="true">False - it's about delivering immediate strategic value</div>
+                    </div>
+                    <div class="feedback">
+                        <strong>False is correct!</strong> Rapid risk assessment focuses on delivering immediate strategic value and positioning advantages, not creating comprehensive documentation that nobody reads. The goal is actionable insights that justify premium rates.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Mozilla Framework Section -->
+            <section class="content-section" id="section-3">
+                <h2>The Mozilla RRA Framework: Your 30-Minute Competitive Advantage</h2>
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-9_NvPQTyPw/951f41332c12912623a5ab31e09d0e86ab03eee1663ab5cb6a28afbd83c66f33524f758d96e1b4b0e18ef48fad721ea59cc4c91f44db00411c72a5753c74810b086ba29d85107dd85cbcc2147f6f8f7cb32ef6dd6bf391aa17e8ee29eb043de81874debb" alt="Risk Probability Calculator Tool" class="section-image">
+                
+                <p>The Rapid Risk Assessment (RRA) methodology I use comes from Mozilla's security team, but I've adapted it for management consulting across government and private sector projects. The beauty of this framework is its speed and reproducibility—characteristics that make it perfect for high-stakes consulting environments.</p>
+
+                <p>The core methodology focuses on three critical questions that cut through complexity:</p>
+
+                <h3><img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-9O02X31Qtw/ff6232467582271bdd2bd6d3c130316b2ee15df3b1db4d0f5c7bda4a2fb8ea3be9660df42e3b5f94dc6d272af20ba99c3606e25190fcc652e3efbc1d5c63ed4d66e83ce1e8234f6af20cbb180df1543ba66d693ac279268b4a5ceb2443acd1a4e3d677bd" class="icon-inline"> Question 1: What happens if all the data/information is disclosed?</h3>
+                
+                <p>In government consulting, this often means classified information, competitive intelligence, or sensitive commercial data. But the principle applies everywhere. When I'm assessing a client's digital transformation project, I'm asking: what happens if competitors see our strategy, if customers discover our problems, if regulators access our internal processes?</p>
+
+                <h3>Question 2: What happens if the data/process is incorrect or misleading?</h3>
+                
+                <p>This is where most consultants miss the mark. They focus on preventing bad outcomes instead of identifying what creates them. Incorrect stakeholder analysis, misleading financial projections, defaced public communications—these aren't just operational risks, they're reputation destroyers that can end consulting relationships permanently.</p>
+
+                <h3>Question 3: What happens if the data/service is missing or unreachable?</h3>
+                
+                <p>In my Treasury work, this question revealed critical dependencies that could halt billion-pound programs. Missing key stakeholder buy-in, unreachable subject matter experts, deleted critical documentation—these gaps compound rapidly in complex projects.</p>
+
+                <div class="check-in">
+                    <h4><img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-z86J4dVm-s/9829b2467ea835f93bd4d282e8470a2c95135a862fc6c9b5af96c8556b573c4c12391f4f149400ecadd8babd85574a4874df0b0f4bed2fa55a8be8b4ed75156e88cf30908244ce6e4f0fd70235e4ef98d7295c5e796b875a462d665facd330dc478345fd" class="icon-inline"> Scenario Application</h4>
+                    <div class="question">You're assessing a client's customer database migration project. Using the Mozilla RRA framework, which risk would you prioritize first?</div>
+                    <div class="options">
+                        <div class="option" data-correct="true">Customer data being accidentally exposed to competitors during migration</div>
+                        <div class="option" data-correct="false">Migration taking 2 weeks longer than planned</div>
+                        <div class="option" data-correct="false">New database requiring additional user training</div>
+                        <div class="option" data-correct="false">Migration costs exceeding budget by 15%</div>
+                    </div>
+                    <div class="feedback">
+                        <strong>Excellent choice!</strong> Data disclosure risks (Question 1) typically have the highest strategic impact. Customer data exposure could destroy trust, trigger regulatory action, and end the consulting relationship - exactly the type of reputation-destroying risk that premium consultants identify first.
+                    </div>
+                    
+                    <div class="confidence-slider">
+                        <label>How confident are you in applying the Mozilla RRA framework?</label>
+                        <input type="range" min="1" max="10" value="5" class="confidence-input">
+                        <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-gray);">
+                            <span>Not confident</span>
+                            <span>Very confident</span>
+                        </div>
+                    </div>
+                </div>
+
+                <p>The framework's power lies in its characteristics: quick (30-60 minutes maximum), high-level focus, and concise output that senior stakeholders can actually use. It's designed to be created and updated as needed, with or without formal meetings.</p>
+            </section>
+
+            <!-- Probability-Impact Matrix Section -->
+            <section class="content-section" id="section-4">
+                <h2>The Probability-Impact Matrix: Your 5-Minute Risk Prioritizer</h2>
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-dFqh6BoA_x/b7eeaa8dbcd6e3e8fcf063219b4d4cb2193da75c9e8ee243be03b26a55df09e24998198a1ee2efbb425f017d43c6e66910d563ba98977f6ad551f7a2a69395b4119c92c4b7f4e1bda1cd7200a75beb9b76ad2a8d4150cdb6ff88b884f689faeea443e0ed" alt="Risk Assessment Matrix Grid" class="section-image">
+                
+                <p>While academic risk management courses spend weeks on complex probability calculations, I've learned to use a simple 5x5 matrix that delivers immediate clarity for decision-makers. This tool has saved me countless hours and positioned me as the consultant who cuts through analysis paralysis.</p>
+
+                <h3><img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-GgQahPdmd1/9d61c9650b1efe06c075d4c16bfe7f929782b8d10692df517c2aaf2cc63691207ee3b655d077204e152f53c47e515cbeaa88fdbaab853c886eef24be3fea269af7d8e0dfe546604bc5dbf8cf201959ea53afb16c2bce1460478136267e1e128e0ff42738" class="icon-inline"> Probability Scoring (1-5 Scale):</h3>
+                
+                <ul style="margin: 1rem 0; padding-left: 2rem;">
+                    <li><strong>1 (Very unlikely):</strong> Less than 10% chance - might never happen in project timeframe</li>
+                    <li><strong>2 (Not likely):</strong> 10-30% chance - possible but not probable</li>
+                    <li><strong>3 (Possible):</strong> 30-50% chance - could go either way</li>
+                    <li><strong>4 (Probable):</strong> 50-80% chance - likely to occur without intervention</li>
+                    <li><strong>5 (Very likely):</strong> 80%+ chance - assume it will happen</li>
+                </ul>
+
+                <h3><img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-jgVS4xTgx3/2224d166a96b80b9f9645f498b0e4a3b711022602d1947d48c7c239e6ac8a30360acbc622031938acb697d4a37ceda529609f4c080136da2b502626fe62e0b2c2d7ee62230f7ecd78cb31b6f9a0ba7bf8a2de50572186292e4d01e4394924dcf4d1000ac" class="icon-inline"> Impact Scoring (1-5 Scale):</h3>
+                
+                <ul style="margin: 1rem 0; padding-left: 2rem;">
+                    <li><strong>1 (Negligible):</strong> Minor inconvenience, easily absorbed</li>
+                    <li><strong>2 (Low):</strong> Manageable consequences, standard contingency handling</li>
+                    <li><strong>3 (Moderate):</strong> Significant effort required, timeline impact possible</li>
+                    <li><strong>4 (Significant):</strong> Major consequences, substantial recovery time</li>
+                    <li><strong>5 (Severe):</strong> Project-threatening, relationship-damaging outcomes</li>
+                </ul>
+
+                <p>The magic happens when you multiply these scores. Anything scoring 13-25 demands immediate attention. Scores of 7-12 need monitoring and contingency planning. Scores of 1-6 can be documented but don't require active management.</p>
+
+                <div class="check-in">
+                    <h4><img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-1axrFdTims/828a9aa2bf6812a141305129f35d8b47e2faf102904867d01b7e47ed8b39d5f289b5bda0e5757f15d8406de6c2d6970ff4ef344ae661a7d6afcc1b3a47d65ebcd5bd715fada070e4e2c74240ca306554aec795d387a655aeedf6c73f6fee2ccfe0bbecff" class="icon-inline"> Risk Calculation Exercise</h4>
+                    <div class="question">A key stakeholder who controls budget approval is likely to leave the organization during your project (Probability: 4). If they leave, the project will be delayed by 3 months and require finding a new sponsor (Impact: 4). What's the risk score and priority level?</div>
+                    <div class="options">
+                        <div class="option" data-correct="false">Score: 8 (Medium priority - monitor and plan)</div>
+                        <div class="option" data-correct="true">Score: 16 (High priority - immediate attention required)</div>
+                        <div class="option" data-correct="false">Score: 12 (Medium priority - monitor and plan)</div>
+                        <div class="option" data-correct="false">Score: 20 (High priority - immediate attention required)</div>
+                    </div>
+                    <div class="feedback">
+                        <strong>Perfect calculation!</strong> Probability 4 × Impact 4 = 16, which falls in the 13-25 range requiring immediate attention. This is exactly the type of stakeholder risk that can derail projects and makes rapid identification so valuable.
+                    </div>
+                </div>
+
+                <p>Here's what makes this powerful for premium consultants: you can complete this analysis in real-time during stakeholder meetings. While others are taking notes, you're providing immediate strategic insights that demonstrate your value.</p>
+            </section>
+
+            <!-- Risk Registers Section -->
+            <section class="content-section" id="section-5">
+                <h2>Building Risk Registers That Senior Stakeholders Actually Read</h2>
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-sdEyuGSwqQ/85b42e2e6a9fd7a3c1dee62679759a62f9785cf654cc4fcb0ef3d0fbcd60c73a7ab316765cb9bf55c27363076705703ad23f30aa15ef43d805c3af574fa1ee0ad665f63eab3601fd8b8d74addfe1014ecd81f36a6198970f98b0aa656b25a39d1fc27f00" alt="Risk Register Document System" class="section-image">
+                
+                <p>After watching countless consultants create 50-page risk registers that gather digital dust, I developed a streamlined approach that gets attention and drives action. The key is understanding that senior stakeholders don't want comprehensive documentation—they want decision-supporting intelligence.</p>
+
+                <h3>The Essential Components:</h3>
+                
+                <p>Every risk needs a unique identifier (I use three digits minimum for easy sorting), a clear description in business language, probability and impact scores, current status, owner assignment, and specific mitigation actions with deadlines.</p>
+
+                <p>But here's the insider secret: the most important element is the "strategic implication" field. This is where you connect each risk to business outcomes that matter to your client. Instead of "system downtime possible," write "customer acquisition could halt for 48 hours, impacting Q4 revenue targets."</p>
+
+                <div class="check-in">
+                    <h4><img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-_uhw0DG8C9/3370310d4863cff1e33a026b9d6ef5e8365ac5d49ff14be65cf0a41b03483daafb59501e4c148137aaeb9438951ffdb313e8f7a41ab88dba05cd8263382812ae3a2c14199823c07f4edb3618605e349dcdba58477121dc794af8465dcdfdeedf5b21beed" class="icon-inline"> Risk Description Improvement</h4>
+                    <div class="question">Which risk description would be more effective in a senior stakeholder presentation?</div>
+                    <div class="options">
+                        <div class="option" data-correct="false">"Database migration might experience technical difficulties during implementation"</div>
+                        <div class="option" data-correct="true">"Database migration delays could halt customer onboarding for 2 weeks, risking £150K monthly revenue and Q4 targets"</div>
+                        <div class="option" data-correct="false">"Migration process has potential for unexpected issues"</div>
+                        <div class="option" data-correct="false">"Technical challenges may arise during database transition"</div>
+                    </div>
+                    <div class="feedback">
+                        <strong>Excellent choice!</strong> The strategic implication approach connects risks directly to business outcomes that matter to stakeholders. This positioning differentiates you as a strategic advisor rather than just a technical documenter.
+                    </div>
+                </div>
+
+                <h3><img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-_uhw0DG8C9/3370310d4863cff1e33a026b9d6ef5e8365ac5d49ff14be65cf0a41b03483daafb59501e4c148137aaeb9438951ffdb313e8f7a41ab88dba05cd8263382812ae3a2c14199823c07f4edb3618605e349dcdba58477121dc794af8465dcdfdeedf5b21beed" class="icon-inline"> Template Structure That Works:</h3>
+                
+                <p>I use Excel spreadsheets because they're accessible, sortable, and familiar to every stakeholder. Cloud-based tools look impressive but create adoption barriers. Remember: the best risk register is the one that gets used.</p>
+
+                <p>Your template should include: Risk ID, Risk Description (one sentence maximum), Category (operational, technical, financial, stakeholder), Probability (1-5), Impact (1-5), Risk Score (calculated), Current Status, Owner, Mitigation Actions, Target Date, and Strategic Implication.</p>
+
+                <p>The strategic implication field is your positioning differentiator. While other consultants document risks, you're connecting them to business outcomes and positioning yourself as a strategic advisor.</p>
+            </section>
+
+            <!-- Quantitative Techniques Section -->
+            <section class="content-section" id="section-6">
+                <h2>Advanced Quantitative Techniques for High-Stakes Projects</h2>
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-1IpYLkxmyN/14c4224206a67eb81606902c135583af48421cb351769c9638333502582bc4328b9247b68a937144f012ca57640fe1d015c1935ceb96f32fa644ec50e33f5334e967f4e0ab6413149615621d6f517f9ac6136051ab32f691ac5cbcabe70acaa2ef886c0d" alt="High-Stakes Project Environment Scene" class="section-image">
+                
+                <p>When I'm working on £billion+ government programs, stakeholders need more than qualitative assessments. They need quantitative risk analysis that can inform budget decisions and timeline planning. Here's the framework I use for high-value engagements.</p>
+
+                <h3>Three-Point Estimation for Time and Cost Risks:</h3>
+                
+                <p>For each major risk, I estimate optimistic, most likely, and pessimistic outcomes. Using a weighted formula (Optimistic + 4×Most Likely + Pessimistic) ÷ 6, this provides realistic planning scenarios that account for uncertainty.</p>
+
+                <p>For example, when assessing stakeholder engagement risks on a digital transformation project, I might estimate: optimistic scenario (2-week delay, £10k additional cost), most likely scenario (6-week delay, £50k additional cost), pessimistic scenario (16-week delay, £200k additional cost). The weighted calculation provides a realistic planning baseline.</p>
+
+                <div class="check-in">
+                    <h4><img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-dovp_h7hW2/881e216c40b7a5ed3fddf023ff13fb2b63eb355a841258e95fb8206bfc0274fe1836436484962528fddb00b09b60a3e96ee752ba54d055e2cd812ac0899feb6ecca20cb6b0a5cbb0bbc78792ef6be43c74cd2e8c98e1b038881545df51f888ac2a19bd84" class="icon-inline"> Three-Point Calculation</h4>
+                    <div class="question">Using the three-point estimation formula, if a risk has Optimistic: 1 week delay, Most Likely: 4 weeks delay, Pessimistic: 10 weeks delay, what's the weighted estimate?</div>
+                    <div class="options">
+                        <div class="option" data-correct="false">5 weeks (simple average)</div>
+                        <div class="option" data-correct="true">4.5 weeks (weighted calculation)</div>
+                        <div class="option" data-correct="false">4 weeks (most likely scenario)</div>
+                        <div class="option" data-correct="false">6 weeks (midpoint estimate)</div>
+                    </div>
+                    <div class="feedback">
+                        <strong>Correct!</strong> Using the formula (1 + 4×4 + 10) ÷ 6 = 27 ÷ 6 = 4.5 weeks. This weighted approach accounts for uncertainty while avoiding the bias of simple averaging.
+                    </div>
+                </div>
+
+                <h3>Risk Classification for Portfolio Management:</h3>
+                
+                <p>High-stakes clients need risk categorization that supports resource allocation decisions. I classify risks as high (-15% to +25% impact), medium (-10% to +15% impact), and low (-5% to +5% impact) against baseline assumptions.</p>
+
+                <p>This approach transforms risk assessment from compliance exercise into strategic planning tool, positioning you as the consultant who provides decision-supporting intelligence rather than just documentation.</p>
+            </section>
+
+            <!-- Implementation Framework Section -->
+            <section class="content-section" id="section-7">
+                <h2>The Consultant's Implementation Framework</h2>
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-YmfkT4rWkP/577d4739a30ea3cccb7da58e6e471aa406cd8f4fe4219e0b11bba527ec7d8fcc4de5d5c475a77a438e986ff172373756c0216b19aee9e39fd6f3134bd6d9a4e22468d20f87fb660302034bfa4af76ec9f52ab6274a6c595b2fee0d3030e5bf8bf4db28d9" alt="Rapid Assessment Workflow Process" class="section-image">
+                
+                <p>The difference between good consultants and great ones isn't technical skill—it's the ability to translate analysis into actionable value. Here's the four-step process I use to deliver rapid risk assessments that justify premium rates.</p>
+
+                <h3><img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-OoQEbwfaA1/a2c5a1bfa2836017f68a5f5ee5e551438e3fbef992649bd152df512134ed1055bfd4bd20d4f32f3edb92c9e78a1ce48192c2cde4dce7f38c3902c52aad932b6b80cd8433aae0c7c43553e9b0c0d168311cb4a313950f6443d1267b0fec8915f2b883ee3c" class="icon-inline"> Step 1: Stakeholder Risk Identification (10 minutes)</h3>
+                
+                <p>I start every assessment with structured brainstorming focused on four categories: operational risks (what could disrupt delivery), strategic risks (what could undermine objectives), stakeholder risks (who could withdraw support), and external risks (what's outside our control).</p>
+
+                <p>The key is asking the right questions: "What keeps you awake at night about this project?" "Where have similar initiatives failed before?" "Which stakeholders have veto power over success?" "What external changes could make this irrelevant?"</p>
+
+                <div class="check-in">
+                    <h4><img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-lOf3kx2Vw2/708c24f7d57338bcf9635f82e38f4d40abe707b0e55b063bf92bad7d1e82dfe41d57888e42f6f9af5100e4ffaf68d8f3a4e555c1cfb8c27c0f18bfde414f0678c1b0553e824342139ed9648c3743095d06a37365b752434ed268837040708dfff866be52" class="icon-inline"> Risk Category Matching</h4>
+                    <div class="question">Match each risk to its category:</div>
+                    <p><strong>Risk:</strong> Key technical expert planning to leave company mid-project</p>
+                    <div class="options">
+                        <div class="option" data-correct="false">Operational Risk</div>
+                        <div class="option" data-correct="true">Stakeholder Risk</div>
+                        <div class="option" data-correct="false">Strategic Risk</div>
+                        <div class="option" data-correct="false">External Risk</div>
+                    </div>
+                    <div class="feedback">
+                        <strong>Correct!</strong> This is a stakeholder risk because it involves a specific person whose withdrawal of support (through leaving) could impact project success. Understanding risk categories helps ensure comprehensive assessment coverage.
+                    </div>
+                </div>
+
+                <h3>Step 2: Rapid Scoring and Prioritization (10 minutes)</h3>
+                
+                <p>Using the 5x5 matrix, I score each identified risk with stakeholder input. This isn't about perfect accuracy—it's about creating shared understanding and priority focus. The goal is identifying the 3-5 risks that demand immediate attention.</p>
+
+                <h3>Step 3: Mitigation Strategy Development (10 minutes)</h3>
+                
+                <p>For high-priority risks, I apply the standard response framework: avoid (change plans to eliminate the risk), mitigate (reduce likelihood or impact), transfer (shift to third parties), or accept (monitor without immediate action).</p>
+
+                <p>The consultant's advantage comes from connecting mitigation strategies to business value. Instead of "implement backup systems," I recommend "establish redundant processes to protect £2M monthly revenue stream."</p>
+
+                <div class="check-in">
+                    <h4><img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-pKSuh6hed8/ce62f3b6c52400c7d8fa7c23a293ba0ba414cc8995dd3e2f87d53de158880b3718a663759fd53af1a8810fe86f7b8354ed87810740d24482c08eb9c717035f842b53f08a109d7da6c52309659fa725e2709ad1eb3814136f3be2cfe1c03b4cef5155f58f" class="icon-inline"> Mitigation Strategy Selection</h4>
+                    <div class="question">Your client's critical data server has a 70% chance of failing within 6 months, which would halt operations for a week. Which mitigation approach offers the best business value positioning?</div>
+                    <div class="options">
+                        <div class="option" data-correct="false">Accept - document the risk and monitor monthly</div>
+                        <div class="option" data-correct="false">Avoid - move all operations to cloud immediately</div>
+                        <div class="option" data-correct="true">Mitigate - implement redundant backup systems to protect £500K weekly revenue</div>
+                        <div class="option" data-correct="false">Transfer - purchase comprehensive insurance coverage</div>
+                    </div>
+                    <div class="feedback">
+                        <strong>Perfect business positioning!</strong> The mitigation approach connects the technical solution to business value protection, demonstrating the strategic thinking that justifies premium consulting rates.
+                    </div>
+                </div>
+
+                <h3>Step 4: Communication and Positioning (5 minutes)</h3>
+                
+                <p>The final step is presenting findings in a format that demonstrates your strategic value. I use a one-page summary with traffic-light risk indicators, clear mitigation priorities, and specific recommendations for next steps.</p>
+
+                <p>This isn't just risk documentation—it's positioning material that shows stakeholders why they need your continued involvement to ensure project success.</p>
+            </section>
+
+            <!-- Mastery Gate -->
+            <div class="mastery-gate" id="masteryGate">
+                <h3>Section Mastery Check</h3>
+                <div class="mastery-score" id="sectionMastery">0%</div>
+                <p>Complete the interactive assessments above to demonstrate mastery of rapid risk assessment techniques.</p>
+                <p><em>Achieve 80% mastery to proceed to the final assessment</em></p>
+                <button class="btn" onclick="proceedToFinal()" id="proceedBtn" disabled>Continue to Final Assessment</button>
+            </div>
+
+            <!-- Final Assessment -->
+            <section class="final-assessment" id="finalAssessment" style="display: none;">
+                <h2>🎯 Final Mastery Assessment</h2>
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-CZwN5jCyff/bae412b78bbaa51ae838d8085f950b82a57f0939070ee10b9e72b9ebe8b7d674bfbb331c77070b3b406d8dff365819f97918f5809eda3a027295424c4d875100caa783445923a947f71655d2b5f8986f2a27e69b99ae0780be256bbedb541af3db621f07" alt="Executive Decision Making Crisis Moment" class="section-image">
+                
+                <p>Demonstrate your mastery of rapid risk assessment techniques with this comprehensive scenario-based assessment.</p>
+
+                <div class="check-in">
+                    <h4>🏛️ Government Consulting Scenario</h4>
+                    <div class="question">You're the lead consultant on a £50M government digital transformation program. During your first week, you identify these potential risks. Using rapid assessment techniques, rank them by priority (1 = highest priority, 4 = lowest priority):</div>
+                    
+                    <div style="margin: 1rem 0;">
+                        <p><strong>Risk A:</strong> The current IT director who championed this project might be reassigned to another department (Probability: 4, Impact: 5)</p>
+                        <p><strong>Risk B:</strong> Legacy system integration could take 2 weeks longer than planned (Probability: 3, Impact: 2)</p>
+                        <p><strong>Risk C:</strong> A competing technology vendor is lobbying MPs to cancel the project (Probability: 2, Impact: 5)</p>
+                        <p><strong>Risk D:</strong> User acceptance testing might reveal minor usability issues (Probability: 4, Impact: 1)</p>
+                    </div>
+
+                    <div class="options">
+                        <div class="option" data-correct="true">Priority order: A(20), C(10), B(6), D(4)</div>
+                        <div class="option" data-correct="false">Priority order: C(10), A(20), B(6), D(4)</div>
+                        <div class="option" data-correct="false">Priority order: A(20), B(6), C(10), D(4)</div>
+                        <div class="option" data-correct="false">Priority order: B(6), C(10), A(20), D(4)</div>
+                    </div>
+                    <div class="feedback">
+                        <strong>Excellent strategic thinking!</strong> Risk A (score 20) is your highest priority - losing the internal champion on a government program is project-threatening. Risk C (score 10) is second due to high impact despite lower probability. This prioritization demonstrates the strategic foresight that commands premium rates.
+                    </div>
+                </div>
+
+                <div class="check-in">
+                    <h4>💼 Client Value Proposition</h4>
+                    <div class="question">Based on this lesson, complete this value proposition for your rapid risk assessment service: "In 30 minutes, I can identify and prioritize the 3-5 risks that could _______, while positioning mitigation strategies that _______."</div>
+                    
+                    <div class="options">
+                        <div class="option" data-correct="false">exceed your budget, save money on future projects</div>
+                        <div class="option" data-correct="true">derail your £50M program, protect stakeholder relationships and project outcomes</div>
+                        <div class="option" data-correct="false">cause minor delays, improve team efficiency</div>
+                        <div class="option" data-correct="false">create documentation issues, enhance reporting processes</div>
+                    </div>
+                    <div class="feedback">
+                        <strong>Perfect positioning!</strong> You're connecting rapid assessment to high-stakes business outcomes and strategic relationship protection - exactly the value proposition that justifies £1,000+ daily rates and positions you as indispensable.
+                    </div>
+                </div>
+
+                <div class="check-in">
+                    <h4>⚡ Implementation Commitment</h4>
+                    <div class="question">What's your immediate next action to implement rapid risk assessment techniques?</div>
+                    
+                    <div class="options">
+                        <div class="option" data-correct="false">Study academic risk management frameworks for 6 months</div>
+                        <div class="option" data-correct="false">Create a comprehensive 50-page risk management process</div>
+                        <div class="option" data-correct="true">Apply the 30-minute Mozilla RRA framework in my next stakeholder meeting</div>
+                        <div class="option" data-correct="false">Wait until I have more experience before trying these techniques</div>
+                    </div>
+                    <div class="feedback">
+                        <strong>Rule Benders mindset!</strong> Skip the theoretical preparation and start applying these frameworks immediately. The 30-minute rapid assessment is your competitive advantage - use it to demonstrate value and build your reputation as the consultant who sees problems before they happen.
+                    </div>
+                </div>
+
+                <div id="finalResults" style="display: none;">
+                    <h3>🎉 Assessment Complete!</h3>
+                    <div class="mastery-score" id="finalScore">0%</div>
+                    <div id="finalFeedback"></div>
+                    <button class="btn" onclick="exportResults()">Export Learning Report</button>
+                    <button class="btn" onclick="restartLesson()">Review Lesson</button>
+                </div>
+            </section>
+
+            <!-- Action Plan Section -->
+            <section class="content-section" id="section-8">
+                <h2>Your Rapid Assessment Action Plan</h2>
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-7kGNJobukw/13fc75cf7666e5cd6373df1cd3d47d8ec132f37021824cb43cdced907abdc163dae74b2446e2ff6d3f96804cf3afb29551e92b6cc7095e96f56bed0456980e20fa1c62e7e5d0dc8417aa2b431277ab7144792ef0fa83f69d9410584f9dc15760e79559a4" alt="Rapid Assessment Speed Visualization" class="section-image">
+                
+                <p>Mastering rapid risk assessment isn't just about avoiding problems—it's about positioning yourself as the consultant who delivers predictable outcomes in unpredictable environments. When you can identify and quantify risks in 30-60 minutes, you're providing strategic foresight that justifies premium rates.</p>
+
+                <p>The frameworks I've shared represent 17 years of refining these techniques across £10+ billion worth of government and private sector projects. They work because they focus on speed, clarity, and business impact—exactly what senior stakeholders need from premium consultants.</p>
+
+                <p>Your next step is simple: take the Mozilla RRA framework and 5x5 probability-impact matrix into your next stakeholder meeting. Spend 30 minutes identifying risks, 10 minutes prioritizing them, and 5 minutes developing mitigation strategies. Then watch how stakeholders respond when you're the consultant who sees problems before they happen.</p>
+
+                <div class="check-in">
+                    <h4><img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-3AeW6uOC6O/666d6244a9bb5e861a19478319f8365b1cfec79ee6adb0c32bf05a050faf8595736b8c825391c11fc3aef55c62d226224b6b08736d053d9c821798092cd5d7b269e78ea439571aa6378a49e7cb8fa851c331c61ba35ebcb612fed54e2c39b96166cdfc22" class="icon-inline"> Implementation Commitment</h4>
+                    <div class="question">Which commitment will you make to implement these techniques within the next 7 days?</div>
+                    <div class="options">
+                        <div class="option" data-correct="false">Read more academic literature on risk management theory</div>
+                        <div class="option" data-correct="true">Conduct a 30-minute rapid risk assessment in my next project meeting</div>
+                        <div class="option" data-correct="false">Create a comprehensive risk management certification plan</div>
+                        <div class="option" data-correct="false">Wait until I have more experience before applying these techniques</div>
+                    </div>
+                    <div class="feedback">
+                        <strong>Perfect Rule Benders approach!</strong> Immediate implementation beats theoretical preparation every time. Your 30-minute rapid assessment will demonstrate strategic value and position you as the consultant who delivers actionable insights, not just documentation.
+                    </div>
+                </div>
+
+                <p>Remember: risk management isn't just about avoiding disasters—it's about ensuring success. Your ability to rapidly assess and communicate risk will determine whether clients see you as another pair of hands or as the indispensable strategic asset who commands £1,000+ daily rates.</p>
+            </section>
+
+            <!-- Footnotes -->
+            <div class="footnote">
+                <h3>References & Further Reading</h3>
+                <p>¹ <a href="https://teamstage.io/project-management-statistics/" target="_blank" rel="noopener">Project Management Statistics 2024: New Trends | TeamStage</a></p>
+                <p>² <a href="https://www.projectmanagementworks.co.uk/project-failure-statistics/" target="_blank" rel="noopener">Project Failure Statistics: The Shocking Truth - Project Management Works</a></p>
+                <p>³ <a href="https://infosec.mozilla.org/guidelines/risk/rapid_risk_assessment.html" target="_blank" rel="noopener">Rapid Risk Assessment (RRA) | Mozilla</a></p>
+                <p>⁴ <a href="https://bigpicture.one/blog/project-risk-assessment-examples/" target="_blank" rel="noopener">Project risk assessment: an example with a risk matrix template</a></p>
+                <p>⁵ <a href="https://www.pmi.org/learning/library/quantitative-risk-assessment-methods-9929" target="_blank" rel="noopener">Quantifying risk | PMI</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Progress tracking and interactive functionality
+        let currentProgress = 0;
+        let masteryScores = [];
+        let questionResponses = {};
+        
+        // Initialize lesson
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeLesson();
+            setupScrollProgress();
+            setupInteractiveElements();
+        });
+
+        function initializeLesson() {
+            // Animate sections on scroll
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        updateProgress();
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.content-section').forEach(section => {
+                observer.observe(section);
+            });
+        }
+
+        function setupScrollProgress() {
+            window.addEventListener('scroll', () => {
+                const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+                document.getElementById('progressBar').style.width = scrolled + '%';
+            });
+        }
+
+        function setupInteractiveElements() {
+            // Setup check-in interactions
+            document.querySelectorAll('.check-in').forEach((checkIn, index) => {
+                const options = checkIn.querySelectorAll('.option');
+                const feedback = checkIn.querySelector('.feedback');
+                let answered = false;
+
+                options.forEach(option => {
+                    option.addEventListener('click', () => {
+                        if (answered) return;
+                        
+                        options.forEach(opt => opt.classList.remove('selected'));
+                        option.classList.add('selected');
+                        
+                        setTimeout(() => {
+                            const isCorrect = option.getAttribute('data-correct') === 'true';
+                            option.classList.add(isCorrect ? 'correct' : 'incorrect');
+                            
+                            // Show correct answer if wrong selection
+                            if (!isCorrect) {
+                                const correctOption = checkIn.querySelector('[data-correct="true"]');
+                                if (correctOption) correctOption.classList.add('correct');
+                            }
+                            
+                            feedback.style.display = 'block';
+                            answered = true;
+                            
+                            // Record response
+                            questionResponses[index] = isCorrect;
+                            masteryScores.push(isCorrect ? 100 : 0);
+                            updateMasteryScore();
+                        }, 500);
+                    });
+                });
+            });
+        }
+
+        function updateProgress() {
+            const sections = document.querySelectorAll('.content-section.visible');
+            const totalSections = document.querySelectorAll('.content-section').length;
+            currentProgress = Math.round((sections.length / totalSections) * 100);
+            
+            document.getElementById('progressText').textContent = currentProgress + '%';
+            
+            // Update progress circle
+            const circle = document.getElementById('progressCircle');
+            circle.style.background = `conic-gradient(var(--strategic-blue) ${currentProgress * 3.6}deg, var(--surface-darker) 0deg)`;
+        }
+
+        function updateMasteryScore() {
+            const averageScore = masteryScores.length > 0 
+                ? Math.round(masteryScores.reduce((a, b) => a + b, 0) / masteryScores.length)
+                : 0;
+            
+            document.getElementById('masteryScore').textContent = averageScore + '%';
+            document.getElementById('sectionMastery').textContent = averageScore + '%';
+            
+            // Enable final assessment if mastery >= 80%
+            if (averageScore >= 80) {
+                document.getElementById('proceedBtn').disabled = false;
+                document.getElementById('proceedBtn').textContent = 'Continue to Final Assessment ✓';
+            }
+        }
+
+        function proceedToFinal() {
+            const masteryScore = parseInt(document.getElementById('masteryScore').textContent);
+            if (masteryScore >= 80) {
+                document.getElementById('finalAssessment').style.display = 'block';
+                document.getElementById('finalAssessment').scrollIntoView({ behavior: 'smooth' });
+            } else {
+                alert('Please complete more assessments to achieve 80% mastery before proceeding.');
+            }
+        }
+
+        // Final assessment handling
+        let finalAssessmentScores = [];
+
+        // Add event listeners for final assessment when DOM is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                const finalCheckIns = document.querySelectorAll('#finalAssessment .check-in');
+                finalCheckIns.forEach((checkIn, index) => {
+                    const options = checkIn.querySelectorAll('.option');
+                    const feedback = checkIn.querySelector('.feedback');
+                    let answered = false;
+
+                    options.forEach(option => {
+                        option.addEventListener('click', () => {
+                            if (answered) return;
+                            
+                            options.forEach(opt => opt.classList.remove('selected'));
+                            option.classList.add('selected');
+                            
+                            setTimeout(() => {
+                                const isCorrect = option.getAttribute('data-correct') === 'true';
+                                option.classList.add(isCorrect ? 'correct' : 'incorrect');
+                                
+                                if (!isCorrect) {
+                                    const correctOption = checkIn.querySelector('[data-correct="true"]');
+                                    if (correctOption) correctOption.classList.add('correct');
+                                }
+                                
+                                feedback.style.display = 'block';
+                                answered = true;
+                                
+                                finalAssessmentScores[index] = isCorrect ? 100 : 0;
+                                checkFinalCompletion();
+                            }, 500);
+                        });
+                    });
+                });
+            }, 1000);
+        });
+
+        function checkFinalCompletion() {
+            const totalFinalQuestions = 3;
+            if (finalAssessmentScores.length >= totalFinalQuestions) {
+                const finalScore = Math.round(finalAssessmentScores.reduce((a, b) => a + b, 0) / finalAssessmentScores.length);
+                
+                document.getElementById('finalResults').style.display = 'block';
+                document.getElementById('finalScore').textContent = finalScore + '%';
+                
+                let feedback = '';
+                if (finalScore >= 90) {
+                    feedback = '🎉 Outstanding mastery! You\'re ready to command premium rates with rapid risk assessment expertise.';
+                } else if (finalScore >= 80) {
+                    feedback = '✅ Strong performance! You have solid foundations for implementing rapid risk assessment techniques.';
+                } else if (finalScore >= 70) {
+                    feedback = '📚 Good progress! Review the lesson materials and practice the frameworks to strengthen your mastery.';
+                } else {
+                    feedback = '🔄 Consider reviewing the lesson content and retaking the assessment to improve your understanding.';
+                }
+                
+                document.getElementById('finalFeedback').textContent = feedback;
+            }
+        }
+
+        function exportResults() {
+            const results = {
+                lesson: 'Rapid Risk Assessment Techniques',
+                overallMastery: document.getElementById('masteryScore').textContent,
+                finalScore: document.getElementById('finalScore').textContent,
+                completedQuestions: masteryScores.length + finalAssessmentScores.length,
+                timestamp: new Date().toLocaleString()
+            };
+            
+            const dataStr = JSON.stringify(results, null, 2);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+            
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(dataBlob);
+            link.download = 'risk-assessment-lesson-results.json';
+            link.click();
+        }
+
+        function restartLesson() {
+            window.scrollTo(0, 0);
+            masteryScores = [];
+            finalAssessmentScores = [];
+            questionResponses = {};
+            
+            // Reset all interactive elements
+            document.querySelectorAll('.option').forEach(opt => {
+                opt.classList.remove('selected', 'correct', 'incorrect');
+            });
+            
+            document.querySelectorAll('.feedback').forEach(feedback => {
+                feedback.style.display = 'none';
+            });
+            
+            document.getElementById('finalAssessment').style.display = 'none';
+            document.getElementById('finalResults').style.display = 'none';
+            document.getElementById('proceedBtn').disabled = true;
+            document.getElementById('proceedBtn').textContent = 'Continue to Final Assessment';
+            
+            updateMasteryScore();
+        }
+
+        // Enhanced tooltips for key terms
+        document.addEventListener('DOMContentLoaded', function() {
+            const keyTerms = {
+                'Mozilla RRA': 'Rapid Risk Assessment methodology from Mozilla - 30-minute framework for identifying critical risks',
+                'probability-impact matrix': '5x5 grid scoring system: Probability (1-5) × Impact (1-5) = Risk Priority Score',
+                'strategic implication': 'Business outcome connection - links risks to revenue, reputation, and relationship impacts',
+                'three-point estimation': 'Weighted calculation: (Optimistic + 4×Most Likely + Pessimistic) ÷ 6'
+            };
+
+            Object.entries(keyTerms).forEach(([term, definition]) => {
+                const regex = new RegExp(`\\b${term}\\b`, 'gi');
+                document.body.innerHTML = document.body.innerHTML.replace(regex, 
+                    `<span class="tooltip" data-tooltip="${definition}">${term}</span>`
+                );
+            });
+        });
+    </script>
+</body>
+</html>

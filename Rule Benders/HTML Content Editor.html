@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Content Editor</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            color: #2B5CE6;
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .section {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .section h2 {
+            color: #333;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #E85D00;
+            font-size: 1.5rem;
+        }
+
+        .textarea-container {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 200px;
+            padding: 15px;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 14px;
+            resize: vertical;
+            transition: border-color 0.3s ease;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #2B5CE6;
+        }
+
+        .btn {
+            background: #2B5CE6;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+
+        .btn:hover {
+            background: #1e47c7;
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: #E85D00;
+        }
+
+        .btn-secondary:hover {
+            background: #c44e00;
+        }
+
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .edit-grid {
+            display: none;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .edit-grid.active {
+            display: grid;
+        }
+
+        .edit-panel {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 8px;
+            border: 1px solid #e1e5e9;
+        }
+
+        .edit-panel h3 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .edit-group {
+            margin-bottom: 20px;
+        }
+
+        .edit-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .edit-group input,
+        .edit-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .edit-group textarea {
+            min-height: 80px;
+            font-family: inherit;
+        }
+
+        .edit-group input:focus,
+        .edit-group textarea:focus {
+            outline: none;
+            border-color: #2B5CE6;
+        }
+
+        .preview-panel {
+            border: 1px solid #e1e5e9;
+            border-radius: 8px;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        .preview-panel iframe {
+            width: 100%;
+            min-height: 600px;
+            border: none;
+        }
+
+        .status {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            display: block;
+        }
+
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            display: block;
+        }
+
+        .workflow {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .workflow-step {
+            text-align: center;
+            flex: 1;
+            position: relative;
+        }
+
+        .workflow-step::after {
+            content: '→';
+            position: absolute;
+            right: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #2B5CE6;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .workflow-step:last-child::after {
+            display: none;
+        }
+
+        .workflow-step.active {
+            color: #2B5CE6;
+            font-weight: 600;
+        }
+
+        .workflow-number {
+            background: #2B5CE6;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .edit-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .workflow {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .workflow-step::after {
+                content: '↓';
+                right: auto;
+                top: auto;
+                bottom: -15px;
+            }
+            
+            .workflow-step:last-child::after {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>HTML Content Editor</h1>
+            <p>Edit your HTML content without touching the code</p>
+        </div>
+
+        <div class="workflow">
+            <div class="workflow-step active" id="step1">
+                <div class="workflow-number">1</div>
+                <div>Paste HTML</div>
+            </div>
+            <div class="workflow-step" id="step2">
+                <div class="workflow-number">2</div>
+                <div>Edit Content</div>
+            </div>
+            <div class="workflow-step" id="step3">
+                <div class="workflow-number">3</div>
+                <div>Copy Result</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Step 1: Paste Your HTML</h2>
+            <div class="textarea-container">
+                <textarea id="htmlInput" placeholder="Paste your complete HTML lesson content here..."></textarea>
+            </div>
+            <button class="btn" onclick="parseHTML()">Parse Content for Editing</button>
+            <div id="parseStatus" class="status"></div>
+        </div>
+
+        <div class="edit-grid" id="editInterface">
+            <div class="edit-panel">
+                <h3>Edit Content</h3>
+                <div id="editFields"></div>
+                <button class="btn btn-secondary" onclick="updatePreview()">Update Preview</button>
+                <button class="btn" onclick="generateFinalHTML()">Generate Final HTML</button>
+            </div>
+            <div class="edit-panel">
+                <h3>Live Preview</h3>
+                <div class="preview-panel">
+                    <iframe id="preview"></iframe>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" id="outputSection" style="display: none;">
+            <h2>Step 3: Your Updated HTML</h2>
+            <div class="textarea-container">
+                <textarea id="htmlOutput" readonly placeholder="Your edited HTML will appear here..."></textarea>
+            </div>
+            <button class="btn btn-secondary" onclick="copyToClipboard()">Copy to Clipboard</button>
+            <div id="copyStatus" class="status"></div>
+        </div>
+    </div>
+
+    <script>
+        let parsedContent = [];
+        let originalDoc = null;
+
+        function showStatus(elementId, message, type) {
+            const status = document.getElementById(elementId);
+            status.textContent = message;
+            status.className = `status ${type}`;
+            status.style.display = 'block';
+            
+            if (type === 'success') {
+                setTimeout(() => {
+                    status.style.display = 'none';
+                }, 3000);
+            }
+        }
+
+        function updateWorkflowStep(step) {
+            document.querySelectorAll('.workflow-step').forEach(el => el.classList.remove('active'));
+            document.getElementById(`step${step}`).classList.add('active');
+        }
+
+        function parseHTML() {
+            const htmlInput = document.getElementById('htmlInput').value.trim();
+            
+            if (!htmlInput) {
+                showStatus('parseStatus', 'Please paste some HTML content first.', 'error');
+                return;
+            }
+
+            try {
+                // Create a temporary DOM to parse the HTML safely
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(htmlInput, 'text/html');
+                originalDoc = doc.cloneNode(true);
+                
+                // Extract editable content
+                parsedContent = [];
+                let counter = 0;
+
+                // Find headings
+                doc.querySelectorAll('h1, h2, h3, h4, h5, h6').forEach(el => {
+                    if (el.textContent.trim()) {
+                        parsedContent.push({
+                            id: `content_${counter++}`,
+                            type: 'heading',
+                            tag: el.tagName.toLowerCase(),
+                            label: `${el.tagName} - ${el.textContent.substring(0, 50)}...`,
+                            value: el.textContent.trim(),
+                            selector: `${el.tagName.toLowerCase()}`,
+                            element: el
+                        });
+                    }
+                });
+
+                // Find paragraphs and text content
+                doc.querySelectorAll('p, div.content, .text-content').forEach(el => {
+                    if (el.textContent.trim() && !el.querySelector('img, button, input')) {
+                        parsedContent.push({
+                            id: `content_${counter++}`,
+                            type: 'text',
+                            tag: el.tagName.toLowerCase(),
+                            label: `Text - ${el.textContent.substring(0, 50)}...`,
+                            value: el.textContent.trim(),
+                            selector: el.tagName.toLowerCase(),
+                            element: el
+                        });
+                    }
+                });
+
+                // Find images
+                doc.querySelectorAll('img').forEach(el => {
+                    parsedContent.push({
+                        id: `content_${counter++}`,
+                        type: 'image',
+                        tag: 'img',
+                        label: `Image - ${el.alt || el.src.substring(0, 50)}...`,
+                        value: el.src,
+                        alt: el.alt || '',
+                        selector: 'img',
+                        element: el
+                    });
+                });
+
+                if (parsedContent.length === 0) {
+                    showStatus('parseStatus', 'No editable content found in the HTML.', 'error');
+                    return;
+                }
+
+                createEditInterface();
+                showStatus('parseStatus', `Found ${parsedContent.length} editable elements!`, 'success');
+                updateWorkflowStep(2);
+
+            } catch (error) {
+                showStatus('parseStatus', 'Error parsing HTML. Please check your HTML is valid.', 'error');
+                console.error('Parse error:', error);
+            }
+        }
+
+        function createEditInterface() {
+            const editFields = document.getElementById('editFields');
+            editFields.innerHTML = '';
+
+            parsedContent.forEach(item => {
+                const group = document.createElement('div');
+                group.className = 'edit-group';
+
+                const label = document.createElement('label');
+                label.textContent = item.label;
+                
+                let input;
+                if (item.type === 'text' && item.value.length > 100) {
+                    input = document.createElement('textarea');
+                    input.rows = 3;
+                } else {
+                    input = document.createElement('input');
+                    input.type = 'text';
+                }
+                
+                input.value = item.value;
+                input.id = item.id;
+                
+                if (item.type === 'image') {
+                    // Add alt text field for images
+                    const altInput = document.createElement('input');
+                    altInput.type = 'text';
+                    altInput.value = item.alt;
+                    altInput.id = item.id + '_alt';
+                    altInput.placeholder = 'Alt text (optional)';
+                    
+                    const altLabel = document.createElement('label');
+                    altLabel.textContent = 'Alt text:';
+                    
+                    group.appendChild(label);
+                    group.appendChild(input);
+                    group.appendChild(altLabel);
+                    group.appendChild(altInput);
+                } else {
+                    group.appendChild(label);
+                    group.appendChild(input);
+                }
+
+                editFields.appendChild(group);
+            });
+
+            document.getElementById('editInterface').classList.add('active');
+            updatePreview();
+        }
+
+        function updatePreview() {
+            if (!originalDoc) return;
+
+            const updatedDoc = originalDoc.cloneNode(true);
+            
+            // Create a map of original content to new content
+            const contentMap = new Map();
+            parsedContent.forEach(item => {
+                const newValue = document.getElementById(item.id)?.value || '';
+                contentMap.set(item, newValue);
+                
+                if (item.type === 'image') {
+                    const newAlt = document.getElementById(item.id + '_alt')?.value || '';
+                    contentMap.set(item.id + '_alt', newAlt);
+                }
+            });
+            
+            // Update content in the document
+            parsedContent.forEach(item => {
+                const newValue = contentMap.get(item);
+                
+                if (item.type === 'image') {
+                    const newAlt = contentMap.get(item.id + '_alt');
+                    const imgs = updatedDoc.querySelectorAll('img');
+                    const targetImg = Array.from(imgs).find(img => img.src === item.value);
+                    if (targetImg) {
+                        targetImg.src = newValue;
+                        targetImg.alt = newAlt;
+                    }
+                } else {
+                    // Find the corresponding element and update its text
+                    const elements = updatedDoc.querySelectorAll(item.tag);
+                    const targetElement = Array.from(elements).find(el => 
+                        el.textContent.trim() === item.value
+                    );
+                    if (targetElement) {
+                        targetElement.textContent = newValue;
+                    }
+                }
+            });
+
+            // Remove deleted elements from the document
+            const currentElements = Array.from(updatedDoc.querySelectorAll('h1, h2, h3, h4, h5, h6, p, div.content, .text-content, img'));
+            currentElements.forEach(el => {
+                if (el.tagName.toLowerCase() === 'img') {
+                    const stillExists = parsedContent.some(item => 
+                        item.type === 'image' && item.value === el.src
+                    );
+                    if (!stillExists) {
+                        el.remove();
+                    }
+                } else {
+                    const stillExists = parsedContent.some(item => 
+                        item.type !== 'image' && 
+                        item.tag === el.tagName.toLowerCase() && 
+                        item.value === el.textContent.trim()
+                    );
+                    if (!stillExists) {
+                        el.remove();
+                    }
+                }
+            });
+
+            const preview = document.getElementById('preview');
+            const htmlString = updatedDoc.documentElement.outerHTML;
+            preview.srcdoc = htmlString;
+        }
+
+        function generateFinalHTML() {
+            updatePreview();
+            
+            if (!originalDoc) {
+                showStatus('copyStatus', 'No content to generate. Please parse HTML first.', 'error');
+                return;
+            }
+
+            const updatedDoc = originalDoc.cloneNode(true);
+            
+            // Create a map of original content to new content
+            const contentMap = new Map();
+            parsedContent.forEach(item => {
+                const newValue = document.getElementById(item.id)?.value || '';
+                contentMap.set(item, newValue);
+                
+                if (item.type === 'image') {
+                    const newAlt = document.getElementById(item.id + '_alt')?.value || '';
+                    contentMap.set(item.id + '_alt', newAlt);
+                }
+            });
+            
+            // Update existing content
+            parsedContent.forEach(item => {
+                const newValue = contentMap.get(item);
+                
+                if (item.type === 'image') {
+                    const newAlt = contentMap.get(item.id + '_alt');
+                    const imgs = updatedDoc.querySelectorAll('img');
+                    const targetImg = Array.from(imgs).find(img => img.src === item.value);
+                    if (targetImg) {
+                        targetImg.src = newValue;
+                        targetImg.alt = newAlt;
+                    }
+                } else {
+                    const elements = updatedDoc.querySelectorAll(item.tag);
+                    const targetElement = Array.from(elements).find(el => 
+                        el.textContent.trim() === item.value
+                    );
+                    if (targetElement) {
+                        targetElement.textContent = newValue;
+                    }
+                }
+            });
+
+            // Remove deleted elements
+            const currentElements = Array.from(updatedDoc.querySelectorAll('h1, h2, h3, h4, h5, h6, p, div.content, .text-content, img'));
+            currentElements.forEach(el => {
+                if (el.tagName.toLowerCase() === 'img') {
+                    const stillExists = parsedContent.some(item => 
+                        item.type === 'image' && item.value === el.src
+                    );
+                    if (!stillExists) {
+                        el.remove();
+                    }
+                } else {
+                    const stillExists = parsedContent.some(item => 
+                        item.type !== 'image' && 
+                        item.tag === el.tagName.toLowerCase() && 
+                        item.value === el.textContent.trim()
+                    );
+                    if (!stillExists) {
+                        el.remove();
+                    }
+                }
+            });
+
+            const finalHTML = '<!DOCTYPE html>\n' + updatedDoc.documentElement.outerHTML;
+            document.getElementById('htmlOutput').value = finalHTML;
+            document.getElementById('outputSection').style.display = 'block';
+            
+            updateWorkflowStep(3);
+            showStatus('copyStatus', 'HTML generated successfully! You can now copy it.', 'success');
+        }
+
+        async function copyToClipboard() {
+            const htmlOutput = document.getElementById('htmlOutput');
+            
+            if (!htmlOutput.value) {
+                showStatus('copyStatus', 'No HTML to copy. Please generate HTML first.', 'error');
+                return;
+            }
+
+            try {
+                await navigator.clipboard.writeText(htmlOutput.value);
+                showStatus('copyStatus', 'HTML copied to clipboard successfully!', 'success');
+            } catch (err) {
+                // Fallback for older browsers
+                htmlOutput.select();
+                document.execCommand('copy');
+                showStatus('copyStatus', 'HTML copied to clipboard!', 'success');
+            }
+        }
+
+        // Auto-resize textareas
+        document.addEventListener('input', function(e) {
+            if (e.target.tagName.toLowerCase() === 'textarea') {
+                e.target.style.height = 'auto';
+                e.target.style.height = e.target.scrollHeight + 'px';
+            }
+        });
+    </script>
+</body>
+</html>

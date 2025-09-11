@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Position Yourself as the Business Owner | Rule Benders Academy</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --rb-black: #000000;
+            --rb-blue: #2B5CE6;
+            --rb-orange: #E85D00;
+            --rb-white: #FFFFFF;
+            --rb-gray: #f8f9fa;
+            --rb-dark-gray: #2c3e50;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--rb-white);
+            background: linear-gradient(135deg, var(--rb-black) 0%, var(--rb-dark-gray) 100%);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-1KnSvEzBvx/8bb31f79a77269c2bf6f66d2e641d24628eb18f5ac167e747c11ce6b154a16b6ce89da70ec170f8dcda14185411811dec9d4f2cf96248d5f98937a5eb56941d1dd70f3f479504da9b2647169b4869755a35d878697c0fc398c741d1ba2f6dcaf2277b68d');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--rb-blue), var(--rb-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 30px;
+            background: linear-gradient(45deg, var(--rb-blue), var(--rb-orange));
+            color: var(--rb-white);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+        }
+
+        .lesson-content {
+            padding: 80px 0;
+        }
+
+        .section {
+            margin-bottom: 80px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
+            color: var(--rb-blue);
+            position: relative;
+        }
+
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(45deg, var(--rb-blue), var(--rb-orange));
+        }
+
+        .section h3 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin: 2rem 0 1rem;
+            color: var(--rb-orange);
+        }
+
+        .section p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .image-container {
+            margin: 3rem 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .image-container img:hover {
+            transform: scale(1.05);
+        }
+
+        .split-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin: 4rem 0;
+        }
+
+        .contractor-language, .business-language {
+            background: rgba(255,255,255,0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            border-left: 4px solid;
+        }
+
+        .contractor-language {
+            border-left-color: #dc3545;
+        }
+
+        .business-language {
+            border-left-color: var(--rb-orange);
+        }
+
+        .contractor-language h4 {
+            color: #dc3545;
+            margin-bottom: 1rem;
+        }
+
+        .business-language h4 {
+            color: var(--rb-orange);
+            margin-bottom: 1rem;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, var(--rb-blue), var(--rb-orange));
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            color: var(--rb-white);
+        }
+
+        .implementation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .implementation-card {
+            background: rgba(255,255,255,0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .implementation-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255,255,255,0.1);
+        }
+
+        .implementation-card h4 {
+            color: var(--rb-blue);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(45deg, var(--rb-blue), var(--rb-orange));
+            z-index: 1000;
+            transition: width 0.3s ease;
+        }
+
+        .floating-nav {
+            position: fixed;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 100;
+        }
+
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            margin: 10px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-dot.active {
+            background: var(--rb-orange);
+            transform: scale(1.5);
+        }
+
+        .quote-callout {
+            font-style: italic;
+            font-size: 1.3rem;
+            text-align: center;
+            margin: 3rem 0;
+            padding: 2rem;
+            border-left: 4px solid var(--rb-orange);
+            background: rgba(255,255,255,0.05);
+        }
+
+        @media (max-width: 768px) {
+            .split-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .floating-nav {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section h2 {
+                font-size: 2rem;
+            }
+        }
+
+        ul, ol {
+            margin-left: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        strong {
+            color: var(--rb-orange);
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+    
+    <div class="floating-nav" id="floatingNav">
+        <div class="nav-dot active" onclick="scrollToSection(0)"></div>
+        <div class="nav-dot" onclick="scrollToSection(1)"></div>
+        <div class="nav-dot" onclick="scrollToSection(2)"></div>
+        <div class="nav-dot" onclick="scrollToSection(3)"></div>
+        <div class="nav-dot" onclick="scrollToSection(4)"></div>
+        <div class="nav-dot" onclick="scrollToSection(5)"></div>
+        <div class="nav-dot" onclick="scrollToSection(6)"></div>
+    </div>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Position Yourself as the Business Owner</h1>
+                <p class="hero-subtitle">Transform how you present yourself from contractor to business owner. Master the language patterns, behavioral cues, and positioning strategies that make clients see you as an equal rather than hired help.</p>
+                <a href="#lesson-start" class="cta-button">Start Your Transformation</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="lesson-content" id="lesson-start">
+        <div class="container">
+            <section class="section" id="section-0">
+                <p>Here's what most consultants get catastrophically wrong: they position themselves as expensive employees rather than business owners. I see it every day - skilled professionals charging £400-600/day when they should be billing £1,500+ because they're thinking like hired help instead of strategic partners.</p>
+
+                <p>After 17 years of billing premium rates to organizations like HM Treasury and building three consulting businesses, I can tell you this positioning shift is the difference between being a commodity service provider and becoming a trusted transformation partner. The psychology behind this change runs deeper than most people realize.</p>
+
+                <div class="image-container">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-1KnSvEzBvx/8bb31f79a77269c2bf6f66d2e641d24628eb18f5ac167e747c11ce6b154a16b6ce89da70ec170f8dcda14185411811dec9d4f2cf96248d5f98937a5eb56941d1dd70f3f479504da9b2647169b4869755a35d878697c0fc398c741d1ba2f6dcaf2277b68d" alt="Contractor vs Business Owner Mindset Split" />
+                </div>
+            </section>
+
+            <section class="section" id="section-1">
+                <h2>The Business Owner Mindset Psychology</h2>
+                
+                <p>Most consultants carry employee psychology into their independent work. They price based on their former salary, speak in terms of "deliverables" rather than outcomes, and position themselves as extra hands rather than strategic minds. This is psychological sabotage.</p>
+
+                <p>When I shifted from contractor thinking to business owner mentality, my rates doubled within six months. Not because I suddenly became more skilled, but because I fundamentally changed how I perceived my role and communicated my value.</p>
+
+                <div class="highlight-box">
+                    <h3>The Core Psychological Difference:</h3>
+                    <div class="split-content">
+                        <div class="contractor-language">
+                            <h4>Contractors think:</h4>
+                            <p>"What do they want me to do?"</p>
+                        </div>
+                        <div class="business-language">
+                            <h4>Business owners think:</h4>
+                            <p>"What transformation do they need to achieve?"</p>
+                        </div>
+                    </div>
+                </div>
+
+                <p>This shift from task orientation to outcome focus changes everything. Recent research shows that psychological ownership - feeling like you own the business outcome rather than just completing tasks - directly correlates with entrepreneurial thinking and premium positioning capability.</p>
+
+                <div class="image-container">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-CFrYW1qymC/9efe9744f0c77ce6e32ffadb5e693bea0e992581e34f0cb3a9245dce75abcfc5388c1c2a2026a12ae457fef9f7d94893b064ba257bb00d6bf3ac40fc1fa38fada29bfb8441183c4c53451f3d282bcf297068dc01677ac7e036a368081263fced89c6fb12" alt="Authority Positioning Transformation" />
+                </div>
+
+                <h3>Authority Bias in Your Favor:</h3>
+                
+                <p>Here's what the research reveals: 90% of service buyers actively research consultants, and they're looking for authority signals. The authority bias means clients are significantly more influenced by opinions from people they perceive as credible business leaders rather than skilled technicians.</p>
+
+                <p>When you position yourself as a business owner, you trigger this bias. Clients don't just buy your time - they buy your business judgment, strategic thinking, and transformation expertise.</p>
+            </section>
+
+            <section class="section" id="section-2">
+                <h2>Language Patterns That Establish Ownership</h2>
+                
+                <p>The way you communicate either reinforces contractor status or establishes business owner authority. After billing £2,000+ per day across government departments, I've identified specific language patterns that position you as an equal rather than hired help.</p>
+
+                <div class="split-content">
+                    <div class="contractor-language">
+                        <h4>Contractor Language:</h4>
+                        <ul>
+                            <li>"I can help you with..."</li>
+                            <li>"My deliverables will include..."</li>
+                            <li>"What do you need me to focus on?"</li>
+                            <li>"I'll do whatever you think is best"</li>
+                        </ul>
+                    </div>
+                    <div class="business-language">
+                        <h4>Business Owner Language:</h4>
+                        <ul>
+                            <li>"The transformation we'll achieve is..."</li>
+                            <li>"Here's what I typically see in organizations like yours..."</li>
+                            <li>"Based on my experience with similar challenges..."</li>
+                            <li>"I recommend we focus on these three strategic priorities..."</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <p>Notice the difference? Business owners speak with authority about outcomes, reference comparable situations, and make recommendations based on expertise rather than asking for direction.</p>
+
+                <div class="image-container">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-4OKTILtOUs/65460c14e624c4517905175bed803ac78c57515bfd6eae6741fa90fb8902a06487cf7b5ee59f5754ac2646535c25f91e690246aa1eb2ae8ce471d659d13b852fd2fdd7812bb68854ad797735436a4c65f424c96fb0e853b9b64ebcd68c2c14be0987ec0b" alt="Peer Level Business Meeting" />
+                </div>
+
+                <h3>The Peer Conversation Framework:</h3>
+                
+                <p>When I'm billing £1,500/day to Treasury officials, the conversation happens between equals discussing a business challenge. I'm not reporting to them - I'm advising them. This peer dynamic is established through language patterns:</p>
+
+                <ul>
+                    <li>Use "we" to indicate partnership: "We need to address this transformation"</li>
+                    <li>Reference your expertise: "In my experience working with similar organizations..."</li>
+                    <li>Make strategic recommendations: "I recommend we approach this differently"</li>
+                    <li>Discuss outcomes, not tasks: "The result you'll achieve is..."</li>
+                </ul>
+            </section>
+
+            <section class="section" id="section-3">
+                <h2>Behavioral Positioning Strategies</h2>
+                
+                <p>Your behavior either reinforces authority or undermines it. After working with organizations managing £10+ billion programs, I've learned that executive presence is about control, confidence, and strategic focus.</p>
+
+                <div class="image-container">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-L5XL44DMnW/d0c8313639f81b296b9c0b310dfbf433c3487efae35c8479e9695e8f228d033f94aaaf2a87ab7a07aa701cfe6cbf860b49be42e65738f3b82cdc32e7812ef611fdebf09274e2406dbd5b2363ebc3e872998af9b573b9d9efff3b5621bae5f7de0daf4563" alt="Confident Business Owner Presence" />
+                </div>
+
+                <h3>Meeting Dynamics:</h3>
+                <p>Business owners enter meetings as consultants solving problems, not employees receiving instructions. I walk into Treasury meetings prepared to challenge assumptions, recommend alternatives, and guide strategic thinking. That's what they're paying for.</p>
+
+                <h3>Communication Rhythm:</h3>
+                <p>I don't respond immediately to every email like an eager employee. Business owners manage communication professionally - responding within 24 hours with thoughtful input rather than instant availability.</p>
+
+                <h3>Project Ownership:</h3>
+                <p>When clients try to micro-manage, business owners redirect: "Let me handle the methodology while you focus on stakeholder alignment." You own your expertise domain while respecting their business domain.</p>
+
+                <h3>Pricing Conversations:</h3>
+                <p>Contractors apologize for their rates. Business owners explain value: "The investment is £X because the transformation we're targeting typically generates 5-10x return through efficiency improvements and strategic positioning."</p>
+            </section>
+
+            <section class="section" id="section-4">
+                <h2>Client Relationship Dynamics</h2>
+                
+                <p>The relationship dynamic determines whether you're seen as expensive help or valuable partnership. Here's how I structure relationships that justify premium rates:</p>
+
+                <div class="image-container">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-HlEfY5nspT/d7ad4c78e6be8ee0f7a9b58983df6cca7c1bf2c5a4bc58ddb8426c9e8b253305972ecd2adcce50a3e5a1779ce1e0a184980e751e54304cff44ebc79ac0c6459c9432bb621f084dc8afbcc4617868f89ed632b1eec498e43df560146a8a74a1f0912da6b6" alt="Strategic Advisor Consultation" />
+                </div>
+
+                <h3>Strategic Advisor Role:</h3>
+                <p>Position yourself as the person who helps them think through complex challenges, not the person who executes their ideas. When a Cabinet Office director calls me, they're not looking for task completion - they're seeking strategic guidance on transformation challenges.</p>
+
+                <h3>Peer-Level Engagement:</h3>
+                <p>I engage with clients as business equals. If I'm advising on a £500 million program transformation, I speak with the authority of someone who has guided similar transformations, not someone grateful for the opportunity.</p>
+
+                <h3>Value Demonstration:</h3>
+                <p>Business owners constantly connect activities to business outcomes. "This analysis will help you avoid the £50 million overrun we prevented at the last organization" rather than "Here's the analysis you requested."</p>
+
+                <h3>Strategic Push-Back:</h3>
+                <p>When clients make requests that won't serve their transformation goals, business owners provide alternative recommendations: "Instead of that approach, I recommend we focus on X because it addresses the root cause rather than symptoms."</p>
+
+                <div class="image-container">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-Ajcce9a433/842bd3cacf9eff6fef429b6dedbfbc112d96effac1925adf1d80082c3cd7b2ca17709bd5a08ea920b898e0b21ba13bdea09ad3267600670c5e9a6166893efe2da3961f04e2e7c568dfdd706a2c35379f0612bd60322e904ab20ffc45e509657f85fa93a4" alt="Executive Handshake Peer Engagement" />
+                </div>
+            </section>
+
+            <section class="section" id="section-5">
+                <h2>The Authority Communication Framework</h2>
+                
+                <p>Authority in consulting comes from demonstrated expertise, strategic thinking, and confident communication. Here's the framework I use that justified £2,000+ daily rates:</p>
+
+                <div class="image-container">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-4pX-pJVdG8/39b8741754d5ab77d7875afee052736a0fd54b6196f3853a97906138767fd8aacc40a3b57f0a097aaf810f3548c84b3248d94812468d8b78c073ac8eb031a23c97db1b1ac6fafef7dd8fd5d66562a837c2d4ea0c197d9af8fbeafbd56383982e2d671bbe" alt="Strategic Thinking Visualization" />
+                </div>
+
+                <h3>Opening Authority:</h3>
+                <p>Start conversations with strategic context: "Based on my work with similar organizations, the typical challenge you're facing is..." This immediately establishes expertise relevance.</p>
+
+                <h3>Strategic Questions:</h3>
+                <p>Ask questions that demonstrate strategic thinking: "What's the business impact if we don't address this transformation?" rather than "What tasks do you want me to complete?"</p>
+
+                <h3>Recommendation Framework:</h3>
+                <p>Present options with clear recommendations: "I see three strategic approaches. Based on your organizational context, I recommend approach B because..."</p>
+
+                <h3>Outcome Focus:</h3>
+                <p>Connect every activity to business results: "This will position your organization to achieve X transformation, which typically generates Y value."</p>
+            </section>
+
+            <section class="section" id="section-6">
+                <h2>Practical Implementation Strategy</h2>
+                
+                <p>Here's how to make this transformation immediately:</p>
+
+                <div class="implementation-grid">
+                    <div class="implementation-card">
+                        <h4>Week 1: Language Audit</h4>
+                        <p>Record yourself in client conversations. Identify contractor language patterns and replace them with business owner alternatives. The shift from "I can help with" to "The transformation we'll achieve" changes client perception instantly.</p>
+                    </div>
+                    <div class="implementation-card">
+                        <h4>Week 2: Positioning Adjustment</h4>
+                        <p>Rewrite your proposals using business owner language. Focus on transformations achieved rather than services provided. Replace task lists with outcome descriptions.</p>
+                    </div>
+                    <div class="implementation-card">
+                        <h4>Week 3: Communication Patterns</h4>
+                        <p>Implement the peer conversation framework. Start making strategic recommendations rather than asking for direction. Reference your expertise in comparable situations.</p>
+                    </div>
+                    <div class="implementation-card">
+                        <h4>Week 4: Relationship Dynamics</h4>
+                        <p>Begin positioning yourself as strategic advisor rather than task executor. Challenge approaches that won't serve transformation goals. Connect activities to business outcomes.</p>
+                    </div>
+                </div>
+
+                <div class="image-container">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-33P_3_q8pU/c585b01d98a9b17849a2ee39a03d7b9e722507a55b42705c1e0870ec22e835428775494cdbba1e6d26724800c20e6f7084232ba2412c920786b34c71ab6c037127f254d6615e6d83e3e83bf9cfc9f437ed1de53a17aa5180b95db99b2eb725708cb59dfc" alt="Transformation Journey Evolution" />
+                </div>
+
+                <h2>The Premium Positioning Psychology</h2>
+                
+                <p>Premium positioning isn't about charging more - it's about being perceived differently. McKinsey partners command £1,193 per hour because clients see them as strategic transformation partners, not expensive consultants.</p>
+
+                <div class="image-container">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-Dx9iAoTSzl/230c804bb1499259bc357dd6095dfbb3acd999a21f4611f825d4e722f041ae41c7c2ac2b242499a3d780cbab31e2fe28a0fa79dced17161e5ebf812eebda2d894070b254f7678d55942a4ea1fd0ec1dc0acc2589a49876cef48130a32d2b2477e8f897ae" alt="Premium Positioning Metaphor" />
+                </div>
+
+                <h3>Psychological Ownership Development:</h3>
+                <p>Take ownership of client outcomes rather than task completion. When you feel ownership for business transformation rather than deliverable production, clients perceive that authority.</p>
+
+                <h3>Strategic Value Communication:</h3>
+                <p>Business owners communicate in terms of strategic value rather than hourly service. "This transformation typically generates 30% efficiency improvement" rather than "I'll spend 40 hours on analysis."</p>
+
+                <h3>Authority Positioning:</h3>
+                <p>Position yourself as the expert who guides transformation rather than the person who implements client ideas. Authority comes from demonstrated expertise in achieving specific business outcomes.</p>
+
+                <div class="quote-callout">
+                    "The transformation from contractor to business owner positioning isn't just about language and behavior - it's about fundamental psychology. When you genuinely see yourself as a business owner partnering with clients to achieve transformation rather than an expensive employee completing tasks, everything changes."
+                </div>
+
+                <p>Your rates increase because you're providing strategic value rather than skilled labor. Your client relationships improve because you're engaging as an equal rather than a subordinate. Your professional satisfaction increases because you're solving business problems rather than completing assignments.</p>
+
+                <p>This positioning shift enabled me to build businesses worth millions rather than just billing premium daily rates. The psychology of business ownership creates the foundation for premium positioning, authority-based relationships, and transformation-focused consulting that justifies £1,000+ daily rates.</p>
+
+                <div class="image-container">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-hjCDOFvCpz/e1139ff74d0d4aa4f8c2115548dcf10d1442e0b4e185cedd2da80a292a66d5c3db6c665356b367d17822003d969b885eb28a1ceede8e846615d8963d20d18b9614c6abda949fa01845372812e1c855a7b59579ca76f7c68f73339939a68d7fe9e6ad87b1" alt="Premium Consultation Environment" />
+                </div>
+
+                <p><strong>Start implementing these frameworks immediately.</strong> The market is desperately seeking consultants who think like business owners rather than expensive employees. Position yourself correctly, and premium rates become the natural result of perceived strategic value.</p>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        // Progress bar functionality
+        function updateProgressBar() {
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.body.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            document.getElementById('progressBar').style.width = scrollPercent + '%';
+        }
+
+        // Section visibility on scroll
+        function checkSectionVisibility() {
+            const sections = document.querySelectorAll('.section');
+            const navDots = document.querySelectorAll('.nav-dot');
+            
+            sections.forEach((section, index) => {
+                const rect = section.getBoundingClientRect();
+                const isVisible = rect.top < window.innerHeight * 0.75;
+                
+                if (isVisible) {
+                    section.classList.add('visible');
+                }
+                
+                // Update navigation dots
+                if (rect.top < window.innerHeight * 0.5 && rect.bottom > window.innerHeight * 0.5) {
+                    navDots.forEach(dot => dot.classList.remove('active'));
+                    if (navDots[index]) {
+                        navDots[index].classList.add('active');
+                    }
+                }
+            });
+        }
+
+        // Smooth scroll to section
+        function scrollToSection(index) {
+            const sections = document.querySelectorAll('.section');
+            if (sections[index]) {
+                sections[index].scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Event listeners
+        window.addEventListener('scroll', () => {
+            updateProgressBar();
+            checkSectionVisibility();
+        });
+
+        window.addEventListener('load', () => {
+            checkSectionVisibility();
+        });
+
+        // Smooth scrolling for CTA button
+        document.querySelector('.cta-button').addEventListener('click', (e) => {
+            e.preventDefault();
+            document.getElementById('lesson-start').scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>

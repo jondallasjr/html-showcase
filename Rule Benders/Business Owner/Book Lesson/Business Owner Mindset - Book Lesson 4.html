@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rapid Risk Assessment Techniques - Rule Benders Academy</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Print-specific styles */
+        @media print {
+            @page {
+                size: A4;
+                margin: 0.75in;
+            }
+            
+            body {
+                font-size: 12pt;
+                line-height: 1.4;
+                color: #000;
+                background: #fff;
+            }
+            
+            .page-break-before { page-break-before: always; }
+            .page-break-after { page-break-after: always; }
+            .no-break { page-break-inside: avoid; }
+            
+            .lesson-image {
+                max-width: 100%;
+                max-height: 4in;
+                break-inside: avoid;
+                margin: 12pt 0;
+            }
+            
+            .sidebar {
+                background: #f5f5f5 !important;
+                border: 1pt solid #ddd !important;
+            }
+            
+            a {
+                color: #000;
+                text-decoration: underline;
+            }
+            
+            .screen-only { display: none; }
+        }
+
+        /* Screen styles */
+        @media screen {
+            body {
+                background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+                color: #ffffff;
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+                line-height: 1.6;
+                font-size: 16px;
+                min-height: 100vh;
+            }
+            
+            .print-only { display: none; }
+        }
+
+        /* Common styles */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        .lesson-container {
+            max-width: 8.5in;
+            margin: 0 auto;
+            padding: 1in;
+            background: white;
+            color: #333;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            min-height: 11in;
+        }
+
+        @media screen {
+            .lesson-container {
+                background: rgba(255,255,255,0.95);
+                margin: 2rem auto;
+                border-radius: 8px;
+            }
+        }
+
+        /* Typography hierarchy */
+        h1 {
+            font-size: 28pt;
+            font-weight: 800;
+            color: #2B5CE6;
+            margin-bottom: 24pt;
+            line-height: 1.2;
+            border-bottom: 3pt solid #E85D00;
+            padding-bottom: 12pt;
+        }
+
+        h2 {
+            font-size: 18pt;
+            font-weight: 700;
+            color: #2B5CE6;
+            margin-top: 24pt;
+            margin-bottom: 12pt;
+            line-height: 1.3;
+        }
+
+        h3 {
+            font-size: 14pt;
+            font-weight: 600;
+            color: #E85D00;
+            margin-top: 18pt;
+            margin-bottom: 8pt;
+        }
+
+        p {
+            margin-bottom: 12pt;
+            font-size: 12pt;
+            line-height: 1.5;
+            text-align: justify;
+        }
+
+        .lesson-header {
+            text-align: center;
+            margin-bottom: 36pt;
+            border-bottom: 2pt solid #E85D00;
+            padding-bottom: 18pt;
+        }
+
+        .instructor-credit {
+            font-size: 11pt;
+            color: #666;
+            font-style: italic;
+            margin-bottom: 8pt;
+        }
+
+        .course-path {
+            font-size: 10pt;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1pt;
+        }
+
+        /* Content blocks */
+        .key-insight {
+            background: linear-gradient(135deg, #f8f9ff 0%, #fff8f5 100%);
+            border-left: 4pt solid #2B5CE6;
+            padding: 16pt;
+            margin: 18pt 0;
+            border-radius: 4pt;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #fff8f5 0%, #ffede5 100%);
+            border: 2pt solid #E85D00;
+            padding: 16pt;
+            margin: 18pt 0;
+            border-radius: 4pt;
+        }
+
+        .framework-box {
+            background: #f8f9ff;
+            border: 1pt solid #2B5CE6;
+            padding: 18pt;
+            margin: 18pt 0;
+            border-radius: 6pt;
+        }
+
+        /* Lists */
+        ul, ol {
+            margin: 12pt 0 12pt 24pt;
+        }
+
+        li {
+            margin-bottom: 6pt;
+            line-height: 1.4;
+        }
+
+        /* Tables */
+        .risk-matrix {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 18pt 0;
+            font-size: 11pt;
+        }
+
+        .risk-matrix th,
+        .risk-matrix td {
+            border: 1pt solid #ddd;
+            padding: 8pt;
+            text-align: center;
+        }
+
+        .risk-matrix th {
+            background: #2B5CE6;
+            color: white;
+            font-weight: 600;
+        }
+
+        .high-risk { background: #ffebee; }
+        .medium-risk { background: #fff8e1; }
+        .low-risk { background: #e8f5e8; }
+
+        /* Images */
+        .lesson-image {
+            width: 100%;
+            height: auto;
+            margin: 18pt 0;
+            border-radius: 6pt;
+            border: 1pt solid #eee;
+        }
+
+        .image-caption {
+            font-size: 10pt;
+            color: #666;
+            text-align: center;
+            margin-top: 6pt;
+            font-style: italic;
+        }
+
+        /* Action items */
+        .action-plan {
+            background: linear-gradient(135deg, #e8f5e8 0%, #f0fff0 100%);
+            border: 2pt solid #4CAF50;
+            padding: 18pt;
+            margin: 24pt 0;
+            border-radius: 6pt;
+        }
+
+        .action-plan h3 {
+            color: #2E7D32;
+            margin-top: 0;
+        }
+
+        /* Footer */
+        .lesson-footer {
+            margin-top: 36pt;
+            padding-top: 18pt;
+            border-top: 1pt solid #ddd;
+            font-size: 10pt;
+            color: #666;
+        }
+
+        /* Responsive adjustments */
+        @media screen and (max-width: 768px) {
+            .lesson-container {
+                margin: 1rem;
+                padding: 1rem;
+            }
+            
+            h1 { font-size: 24pt; }
+            h2 { font-size: 16pt; }
+            body { font-size: 14px; }
+        }
+
+        /* Print controls */
+        .print-controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(43, 92, 230, 0.9);
+            padding: 12px;
+            border-radius: 6px;
+            z-index: 1000;
+        }
+
+        .print-controls button {
+            background: #E85D00;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            margin: 4px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .print-controls button:hover {
+            background: #d54900;
+        }
+
+        /* Progress indicator */
+        .progress-bar {
+            height: 4px;
+            background: linear-gradient(90deg, #2B5CE6 0%, #E85D00 100%);
+            margin-bottom: 24pt;
+            border-radius: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="print-controls screen-only">
+        <button onclick="window.print()">Print Lesson</button>
+        <button onclick="adjustTextSize(-1)">A-</button>
+        <button onclick="adjustTextSize(1)">A+</button>
+    </div>
+
+    <div class="lesson-container">
+        <div class="progress-bar"></div>
+        
+        <header class="lesson-header no-break">
+            <div class="course-path">The High Paid Consultant → Master the Core Four Skills</div>
+            <h1>Rapid Risk Assessment Techniques</h1>
+            <div class="instructor-credit">Will Richardson • Rule Benders Academy</div>
+            <p class="course-path">Your 30-Minute Advantage to £1,000+ Daily Rates</p>
+        </header>
+
+        <div class="key-insight no-break">
+            <p><strong>The Premium Consultant Reality:</strong> After 17 years billing £1,000-£2,000 daily to clients like HM Treasury and the Cabinet Office, I've learned that risk assessment isn't about avoiding disasters—it's about positioning yourself as the consultant who sees problems before they happen.</p>
+        </div>
+
+        <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-EgMlOa5dY-/78d5f971a7f29e24d271cc19c699f144b55315d0e5d18412cba0031a5f9c7fa4efa8bb25f40337898243139c7f1707f0255a0dfe08be72ab3b5912d61e57fd4c55979fa835474282dad13f34536d76d3427d9cfb4a8f5032dfd7927adade21fbe7dce5cb" alt="Strategic Consultant Authority" class="lesson-image">
+
+        <h2>The Business Reality: Why Rapid Risk Assessment Creates Premium Positioning</h2>
+
+        <p>Here's the brutal truth that separates premium consultants from everyone else: high-performing organizations successfully complete 89% of their projects, while low performers only complete 36%. The difference isn't experience, qualifications, or even technical skills. It's the ability to rapidly identify and communicate risks that could derail everything.</p>
+
+        <p>Most consultants reactive to problems. Premium consultants prevent them. That's why I can walk into a £10 billion government program and immediately command attention—not because I've seen it all, but because I can spot what's coming next.</p>
+
+        <div class="warning-box no-break">
+            <h3>The Ministry of Defence Case Study</h3>
+            <p>When I was brought into the Ministry of Defence for a £2 billion procurement program, I identified three critical risks within the first 30 minutes of stakeholder interviews that the internal team had missed after six months of planning. One risk alone could have cost taxpayers £50 million.</p>
+            <p><strong>That's the power of rapid risk assessment.</strong> It's not about creating comprehensive risk registers that nobody reads. It's about delivering immediate strategic value that justifies premium rates.</p>
+        </div>
+
+        <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-cCfzfPKuBR/ad656c32c757ed0f9752e1e606a350cacdb193f9c83d9fd8eaeccddf9aa89aead8c4e18ca225cecc5c800e31ffcaa590226f9d53884bf4beec3e77a6fd79e58f1ca411be74791a651694b2cc9103a785cea5b7745f02486d4deb6c73236596c1b7449c1a" alt="Risk Assessment Matrix Visualization" class="lesson-image">
+
+        <p>The statistics are staggering: around 50% of projects experience scope creep, and large projects are twice as likely to be late, over budget, and missing critical features. When you can identify these risks in 30-60 minutes and present clear mitigation strategies, you're not just another consultant—you're providing the strategic foresight that separates disasters from successes.</p>
+
+        <div class="page-break-before"></div>
+
+        <h2>The Mozilla RRA Framework: Your 30-Minute Competitive Advantage</h2>
+
+        <p>The Rapid Risk Assessment (RRA) methodology I use comes from Mozilla's security team, but I've adapted it for management consulting across government and private sector projects. The beauty of this framework is its speed and reproducibility—characteristics that make it perfect for high-stakes consulting environments.</p>
+
+        <div class="framework-box no-break">
+            <h3>The Three Critical Questions</h3>
+            <p>The core methodology focuses on three critical questions that cut through complexity:</p>
+            <ol>
+                <li><strong>What happens if all the data/information is disclosed?</strong><br>
+                In government consulting, this often means classified information, competitive intelligence, or sensitive commercial data. When assessing a client's digital transformation project, ask: what happens if competitors see our strategy, if customers discover our problems, if regulators access our internal processes?</li>
+                
+                <li><strong>What happens if the data/process is incorrect or misleading?</strong><br>
+                This is where most consultants miss the mark. They focus on preventing bad outcomes instead of identifying what creates them. Incorrect stakeholder analysis, misleading financial projections, defaced public communications—these aren't just operational risks, they're reputation destroyers.</li>
+                
+                <li><strong>What happens if the data/service is missing or unreachable?</strong><br>
+                In my Treasury work, this question revealed critical dependencies that could halt billion-pound programs. Missing key stakeholder buy-in, unreachable subject matter experts, deleted critical documentation—these gaps compound rapidly.</li>
+            </ol>
+        </div>
+
+        <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-Mh0y3XdFtH/80fe2292663385948bfcecbcabc180e7bc4b5c38a89317db0b512cc65ef83bb44d9a481c346ec6e68caff45b06f35924c53c312632c3f2ece942ae91d9342b60d14cc397c462738baabb86890724341fafd31a0c09570fb951d5738c427f367356e1566f" alt="30-Minute Rapid Assessment Dashboard" class="lesson-image">
+
+        <p>The framework's power lies in its characteristics: quick (30-60 minutes maximum), high-level focus, and concise output that senior stakeholders can actually use. It's designed to be created and updated as needed, with or without formal meetings.</p>
+
+        <h2>The Probability-Impact Matrix: Your 5-Minute Risk Prioritizer</h2>
+
+        <p>While academic risk management courses spend weeks on complex probability calculations, I've learned to use a simple 5x5 matrix that delivers immediate clarity for decision-makers. This tool has saved me countless hours and positioned me as the consultant who cuts through analysis paralysis.</p>
+
+        <table class="risk-matrix no-break">
+            <thead>
+                <tr>
+                    <th>Probability Scale</th>
+                    <th>Description</th>
+                    <th>Percentage Range</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>5 - Very Likely</td>
+                    <td>Assume it will happen</td>
+                    <td class="high-risk">80%+</td>
+                </tr>
+                <tr>
+                    <td>4 - Probable</td>
+                    <td>Likely without intervention</td>
+                    <td class="medium-risk">50-80%</td>
+                </tr>
+                <tr>
+                    <td>3 - Possible</td>
+                    <td>Could go either way</td>
+                    <td class="medium-risk">30-50%</td>
+                </tr>
+                <tr>
+                    <td>2 - Not Likely</td>
+                    <td>Possible but not probable</td>
+                    <td class="low-risk">10-30%</td>
+                </tr>
+                <tr>
+                    <td>1 - Very Unlikely</td>
+                    <td>Might never happen in timeframe</td>
+                    <td class="low-risk">Less than 10%</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="risk-matrix no-break">
+            <thead>
+                <tr>
+                    <th>Impact Scale</th>
+                    <th>Description</th>
+                    <th>Business Consequence</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>5 - Severe</td>
+                    <td>Project-threatening outcomes</td>
+                    <td class="high-risk">Relationship-damaging</td>
+                </tr>
+                <tr>
+                    <td>4 - Significant</td>
+                    <td>Major consequences</td>
+                    <td class="medium-risk">Substantial recovery time</td>
+                </tr>
+                <tr>
+                    <td>3 - Moderate</td>
+                    <td>Significant effort required</td>
+                    <td class="medium-risk">Timeline impact possible</td>
+                </tr>
+                <tr>
+                    <td>2 - Low</td>
+                    <td>Manageable consequences</td>
+                    <td class="low-risk">Standard contingency</td>
+                </tr>
+                <tr>
+                    <td>1 - Negligible</td>
+                    <td>Minor inconvenience</td>
+                    <td class="low-risk">Easily absorbed</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-X663Cbd5uy/892407d8896cb5b617b1eb12daa5c58666d48bb846241f385284181d3bc32ef329230bb1c1251caa10355f08d29978ea0ee6d47825a75012d394db8ccb0605c7b59ad7439b7c66859d32b875eab3c60155349f26f73f46b9d6873310b2e46614a65b91f3" alt="Risk Probability Scales Visualization" class="lesson-image">
+
+        <p>The magic happens when you multiply these scores. Anything scoring 13-25 demands immediate attention. Scores of 7-12 need monitoring and contingency planning. Scores of 1-6 can be documented but don't require active management.</p>
+
+        <p><strong>Here's what makes this powerful for premium consultants:</strong> you can complete this analysis in real-time during stakeholder meetings. While others are taking notes, you're providing immediate strategic insights that demonstrate your value.</p>
+
+        <div class="page-break-before"></div>
+
+        <h2>Building Risk Registers That Senior Stakeholders Actually Read</h2>
+
+        <p>After watching countless consultants create 50-page risk registers that gather digital dust, I developed a streamlined approach that gets attention and drives action. The key is understanding that senior stakeholders don't want comprehensive documentation—they want decision-supporting intelligence.</p>
+
+        <div class="framework-box no-break">
+            <h3>The Essential Components</h3>
+            <p>Every risk needs:</p>
+            <ul>
+                <li>Unique identifier (three digits minimum for easy sorting)</li>
+                <li>Clear description in business language</li>
+                <li>Probability and impact scores</li>
+                <li>Current status</li>
+                <li>Owner assignment</li>
+                <li>Specific mitigation actions with deadlines</li>
+                <li><strong>Strategic implication field</strong> (your positioning differentiator)</li>
+            </ul>
+        </div>
+
+        <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-b8im2pcHFX/2eb73668c0f6a6a3edb41f659cf5232da67f52d51be34362b9ab469f76b5757613f24246be32b8ab77764737987d6abee089fcbc1efca35ae9396b09181d3b0381a90df29cec937da8ebb3283281635812b0c47c53e5c32ea20ac808f6652a626ee27786" alt="Stakeholder Risk Identification Scene" class="lesson-image">
+
+        <p>Here's the insider secret: the most important element is the "strategic implication" field. This is where you connect each risk to business outcomes that matter to your client. Instead of "system downtime possible," write "customer acquisition could halt for 48 hours, impacting Q4 revenue targets."</p>
+
+        <p><strong>Template Structure That Works:</strong> I use Excel spreadsheets because they're accessible, sortable, and familiar to every stakeholder. Cloud-based tools look impressive but create adoption barriers. Remember: the best risk register is the one that gets used.</p>
+
+        <h2>Advanced Quantitative Techniques for High-Stakes Projects</h2>
+
+        <p>When I'm working on £billion+ government programs, stakeholders need more than qualitative assessments. They need quantitative risk analysis that can inform budget decisions and timeline planning. Here's the framework I use for high-value engagements.</p>
+
+        <div class="framework-box no-break">
+            <h3>Three-Point Estimation for Time and Cost Risks</h3>
+            <p>For each major risk, estimate optimistic, most likely, and pessimistic outcomes. Using the weighted formula: <strong>(Optimistic + 4×Most Likely + Pessimistic) ÷ 6</strong></p>
+            
+            <p><strong>Example - Stakeholder Engagement Risk on Digital Transformation:</strong></p>
+            <ul>
+                <li>Optimistic scenario: 2-week delay, £10k additional cost</li>
+                <li>Most likely scenario: 6-week delay, £50k additional cost</li>
+                <li>Pessimistic scenario: 16-week delay, £200k additional cost</li>
+                <li><strong>Weighted calculation provides realistic planning baseline</strong></li>
+            </ul>
+        </div>
+
+        <p>This approach transforms risk assessment from compliance exercise into strategic planning tool, positioning you as the consultant who provides decision-supporting intelligence rather than just documentation.</p>
+
+        <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-pIl9TqvTOQ/a591ed0a62417b656f4452c36f1a72401c202f91d6f68d3d2017318cf5e489d6d4643063735e113bd0f94addcc032542038b733bbcd6fc7966756afbd7d5fd27a5c2b5cfa7d419a5d34c53b0adc7fb061be8a657428ef58a227a9a1151864afde11efa0d" alt="Risk Mitigation Strategy Network" class="lesson-image">
+
+        <div class="page-break-before"></div>
+
+        <h2>The Consultant's Implementation Framework</h2>
+
+        <p>The difference between good consultants and great ones isn't technical skill—it's the ability to translate analysis into actionable value. Here's the four-step process I use to deliver rapid risk assessments that justify premium rates.</p>
+
+        <div class="framework-box no-break">
+            <h3>Step 1: Stakeholder Risk Identification (10 minutes)</h3>
+            <p>Start every assessment with structured brainstorming focused on four categories:</p>
+            <ul>
+                <li><strong>Operational risks:</strong> What could disrupt delivery?</li>
+                <li><strong>Strategic risks:</strong> What could undermine objectives?</li>
+                <li><strong>Stakeholder risks:</strong> Who could withdraw support?</li>
+                <li><strong>External risks:</strong> What's outside our control?</li>
+            </ul>
+            
+            <p><strong>Key Questions:</strong> "What keeps you awake at night about this project?" "Where have similar initiatives failed before?" "Which stakeholders have veto power over success?"</p>
+        </div>
+
+        <div class="framework-box no-break">
+            <h3>Step 2: Rapid Scoring and Prioritization (10 minutes)</h3>
+            <p>Using the 5x5 matrix, score each identified risk with stakeholder input. This isn't about perfect accuracy—it's about creating shared understanding and priority focus. The goal is identifying the 3-5 risks that demand immediate attention.</p>
+        </div>
+
+        <div class="framework-box no-break">
+            <h3>Step 3: Mitigation Strategy Development (10 minutes)</h3>
+            <p>For high-priority risks, apply the standard response framework:</p>
+            <ul>
+                <li><strong>Avoid:</strong> Change plans to eliminate the risk</li>
+                <li><strong>Mitigate:</strong> Reduce likelihood or impact</li>
+                <li><strong>Transfer:</strong> Shift to third parties</li>
+                <li><strong>Accept:</strong> Monitor without immediate action</li>
+            </ul>
+            
+            <p>The consultant's advantage comes from connecting mitigation strategies to business value. Instead of "implement backup systems," recommend "establish redundant processes to protect £2M monthly revenue stream."</p>
+        </div>
+
+        <div class="framework-box no-break">
+            <h3>Step 4: Communication and Positioning (5 minutes)</h3>
+            <p>Present findings in a format that demonstrates your strategic value. Use a one-page summary with traffic-light risk indicators, clear mitigation priorities, and specific recommendations for next steps.</p>
+            
+            <p><strong>This isn't just risk documentation—it's positioning material that shows stakeholders why they need your continued involvement to ensure project success.</strong></p>
+        </div>
+
+        <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-TBMhy01DKE/4f622995448baa450e9ac0279adfdc2e336139da9c4919b89faa2e73bbbecb8541f92ce4a0faf52b4b5bf7c0965d448f715df4f299aa39c8ce08280d9fc42aa55402254ec4fd1dbbeefc9d41988fb7231177b7a1e5cba0f11c7e997d4e756e09e0d903d2" alt="Executive Decision Making Moment" class="lesson-image">
+
+        <div class="action-plan no-break">
+            <h3>Your Rapid Assessment Action Plan</h3>
+            <p>Mastering rapid risk assessment isn't just about avoiding problems—it's about positioning yourself as the consultant who delivers predictable outcomes in unpredictable environments. When you can identify and quantify risks in 30-60 minutes, you're providing strategic foresight that justifies premium rates.</p>
+            
+            <p><strong>Your next step is simple:</strong> Take the Mozilla RRA framework and 5x5 probability-impact matrix into your next stakeholder meeting. Spend 30 minutes identifying risks, 10 minutes prioritizing them, and 5 minutes developing mitigation strategies. Then watch how stakeholders respond when you're the consultant who sees problems before they happen.</p>
+            
+            <p><strong>Remember:</strong> Risk management isn't just about avoiding disasters—it's about ensuring success. Your ability to rapidly assess and communicate risk will determine whether clients see you as another pair of hands or as the indispensable strategic asset who commands £1,000+ daily rates.</p>
+        </div>
+
+        <div class="lesson-footer">
+            <p><strong>Will Richardson</strong> is the founder of Rule Benders Academy and has 17+ years of experience billing £1,000-£2,000 daily to clients including HM Treasury, the Cabinet Office, and the Ministry of Defence. His risk assessment frameworks have saved UK taxpayers over £500 million across major government programs.</p>
+            
+            <p><strong>Course:</strong> The High Paid Consultant • <strong>Section:</strong> Master the Core Four Skills<br>
+            <strong>Lesson Duration:</strong> 15-30 minutes • <strong>Implementation Time:</strong> Same day</p>
+            
+            <p class="print-only"><strong>Printed:</strong> <span id="print-date"></span></p>
+        </div>
+    </div>
+
+    <script>
+        // Text size adjustment
+        function adjustTextSize(delta) {
+            const container = document.querySelector('.lesson-container');
+            const currentSize = parseFloat(window.getComputedStyle(container).fontSize);
+            const newSize = currentSize + delta;
+            if (newSize >= 12 && newSize <= 20) {
+                container.style.fontSize = newSize + 'px';
+            }
+        }
+
+        // Set print date
+        document.getElementById('print-date')?.addEventListener('DOMContentLoaded', function() {
+            if (document.getElementById('print-date')) {
+                document.getElementById('print-date').textContent = new Date().toLocaleDateString();
+            }
+        });
+
+        // Print date for immediate display
+        window.addEventListener('load', function() {
+            if (document.getElementById('print-date')) {
+                document.getElementById('print-date').textContent = new Date().toLocaleDateString();
+            }
+        });
+
+        // Print event listener
+        window.addEventListener('beforeprint', function() {
+            if (document.getElementById('print-date')) {
+                document.getElementById('print-date').textContent = new Date().toLocaleDateString();
+            }
+        });
+    </script>
+</body>
+</html>
