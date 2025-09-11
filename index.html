@@ -463,13 +463,13 @@ landing-page.html</code></pre>
             Object.keys(structure).sort().forEach(key => {
                 const item = structure[key];
                 
-                if (Array.isArray(item)) {
+                if (key === '_files' && Array.isArray(item)) {
                     // It's a files array
                     item.forEach(file => {
                         const fileItem = createFileItem(file, depth);
                         container.appendChild(fileItem);
                     });
-                } else if (typeof item === 'object') {
+                } else if (typeof item === 'object' && key !== '_files') {
                     // It's a nested folder
                     const folderItem = createFolderItem(key, item, depth);
                     container.appendChild(folderItem);
@@ -483,7 +483,7 @@ landing-page.html</code></pre>
             const folderDiv = document.createElement('div');
             folderDiv.className = 'folder-item';
             
-            const hasSubfolders = Object.keys(contents).some(key => !Array.isArray(contents[key]));
+            const hasSubfolders = Object.keys(contents).some(key => key !== '_files' && typeof contents[key] === 'object');
             const fileCount = countTotalFiles(contents);
             
             folderDiv.innerHTML = `
@@ -551,9 +551,9 @@ landing-page.html</code></pre>
             
             Object.keys(structure).forEach(key => {
                 const item = structure[key];
-                if (Array.isArray(item)) {
+                if (key === '_files' && Array.isArray(item)) {
                     count += item.length;
-                } else if (typeof item === 'object') {
+                } else if (typeof item === 'object' && key !== '_files') {
                     count += countTotalFiles(item);
                 }
             });

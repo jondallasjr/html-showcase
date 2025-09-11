@@ -49,6 +49,7 @@
     "Rule Benders/Business Owner/Web Lesson/BusinessOwnerMindset7.html",
     "Rule Benders/Business Owner/Web Lesson/BusinessOwnerMindset8.html",
     "Rule Benders/Business Owner/Web Lesson/businessOwnerMindset3.html",
+    "Rule Benders/Client Value Drivers/Web Lesson/webLesson1.html",
     "Rule Benders/Government Money Map/Government Money 2.html",
     "Rule Benders/Government Money Map/Government Money.html",
     "Rule Benders/HTML Content Editor.html",
@@ -56,6 +57,7 @@
     "Rule Benders/High Stakes Body Language/Web Lesson/webLesson1.html",
     "Rule Benders/MISC/trap.html",
     "Rule Benders/Off Shore Advantage/off shore 1.html",
+    "Rule Benders/Price Objections/Web Lesson/webLesson1.html",
     "Rule Benders/Tax/tax.html",
     "Rule Benders/Tax/taxTreatyNetworks.html",
     "Rule Benders/The Research Trap/Comic/The Research Trap 1.html",
@@ -156,6 +158,9 @@
       "Rule Benders/Business Owner/Web Lesson/BusinessOwnerMindset8.html",
       "Rule Benders/Business Owner/Web Lesson/businessOwnerMindset3.html"
     ],
+    "Rule Benders/Client Value Drivers/Web Lesson": [
+      "Rule Benders/Client Value Drivers/Web Lesson/webLesson1.html"
+    ],
     "Rule Benders/Government Money Map": [
       "Rule Benders/Government Money Map/Government Money 2.html",
       "Rule Benders/Government Money Map/Government Money.html"
@@ -174,6 +179,9 @@
     ],
     "Rule Benders/Off Shore Advantage": [
       "Rule Benders/Off Shore Advantage/off shore 1.html"
+    ],
+    "Rule Benders/Price Objections/Web Lesson": [
+      "Rule Benders/Price Objections/Web Lesson/webLesson1.html"
     ],
     "Rule Benders/Tax": [
       "Rule Benders/Tax/tax.html",
@@ -334,6 +342,13 @@
           ]
         }
       },
+      "Client Value Drivers": {
+        "Web Lesson": {
+          "_files": [
+            "Rule Benders/Client Value Drivers/Web Lesson/webLesson1.html"
+          ]
+        }
+      },
       "Government Money Map": {
         "_files": [
           "Rule Benders/Government Money Map/Government Money 2.html",
@@ -366,6 +381,13 @@
         "_files": [
           "Rule Benders/Off Shore Advantage/off shore 1.html"
         ]
+      },
+      "Price Objections": {
+        "Web Lesson": {
+          "_files": [
+            "Rule Benders/Price Objections/Web Lesson/webLesson1.html"
+          ]
+        }
       },
       "Tax": {
         "_files": [
@@ -414,6 +436,6 @@
       ]
     }
   },
-  "generatedAt": "2025-09-11T22:28:33.621Z",
-  "count": 69
+  "generatedAt": "2025-09-11T22:57:33.502Z",
+  "count": 71
 }
