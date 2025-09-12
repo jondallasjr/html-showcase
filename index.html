@@ -207,9 +207,31 @@
             <h3>No HTML files found</h3>
             <p>Add your HTML files to the project directory and redeploy to see them here.</p>
         </div>
+
+        <div class="instructions">
+            <h3>How to organize and add files:</h3>
+            <ol>
+                <li>Add <code>.html</code> files to the root directory or organize in folders</li>
+                <li>Create folders like <code>client-a/</code>, <code>prototypes/</code>, <code>mobile/</code></li>
+                <li>Commit and push to GitHub</li>
+                <li>Vercel will automatically redeploy and discover all files</li>
+                <li>Folders will be shown as expandable sections!</li>
+            </ol>
+            <p><strong>Example structure:</strong></p>
+            <pre><code>client-a/
+  ├── landing.html
+  └── checkout.html
+prototypes/
+  ├── mobile-v1.html
+  └── desktop.html
+landing-page.html</code></pre>
+        </div>
     </div>
 
     <script>
+        let globalData = null;
+        let currentPath = [];
+
         async function discoverFiles() {
             // Check if we're running locally (file:// protocol)
             const isLocal = window.location.protocol === 'file:';
@@ -233,7 +255,7 @@
             return { files: [], nestedStructure: {} };
         }
 
-        function createTreeItem(name, isFolder, filePath = null, level = 0) {
+        function createTreeItem(name, isFolder, filePath = null, level = 0, folderPath = []) {
             const item = document.createElement('div');
             item.className = 'tree-item';
             item.setAttribute('data-level', level);
@@ -253,13 +275,19 @@
                 childrenContainer.className = 'tree-children';
                 item.appendChild(childrenContainer);
                 
-                // Add click handler for folder expansion
                 const expandIcon = item.querySelector('.expand-icon');
-                const itemContent = item.querySelector('.tree-item-content');
+                const folderName = item.querySelector('.item-name');
                 
-                itemContent.addEventListener('click', (e) => {
+                // Separate handlers for expand arrow and folder name
+                expandIcon.addEventListener('click', (e) => {
                     e.stopPropagation();
                     toggleFolder(item);
+                });
+                
+                folderName.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const newPath = [...folderPath, name];
+                    navigateToFolder(newPath);
                 });
             } else {
                 // Add click handler for files
@@ -295,7 +323,7 @@
             }
         }
 
-        function buildTree(structure, container, level = 0) {
+        function buildTree(structure, container, level = 0, folderPath = []) {
             if (level > 5) return; // Max 5 levels as requested
             
             const sortedKeys = Object.keys(structure).sort((a, b) => {
@@ -311,27 +339,106 @@
                     // Add files
                     item.sort().forEach(filePath => {
                         const fileName = filePath.split('/').pop().replace(/\.html$/, '');
-                        const fileItem = createTreeItem(fileName, false, filePath, level);
+                        const fileItem = createTreeItem(fileName, false, filePath, level, folderPath);
                         container.appendChild(fileItem);
                     });
                 } else if (typeof item === 'object' && key !== '_files') {
                     // Add folders
-                    const folderItem = createTreeItem(key, true, null, level);
+                    const folderItem = createTreeItem(key, true, null, level, folderPath);
                     container.appendChild(folderItem);
                     
                     const childrenContainer = folderItem.querySelector('.tree-children');
-                    buildTree(item, childrenContainer, level + 1);
+                    buildTree(item, childrenContainer, level + 1, [...folderPath, key]);
                 }
             });
         }
 
+        function getCurrentStructure(path) {
+            let current = globalData.nestedStructure;
+            for (const segment of path) {
+                if (current[segment]) {
+                    current = current[segment];
+                } else {
+                    return null;
+                }
+            }
+            return current;
+        }
+
+        function updateBreadcrumb(path) {
+            const breadcrumb = document.getElementById('breadcrumb');
+            const parts = ['Home'];
+            
+            if (path.length > 0) {
+                parts.push(...path);
+            }
+            
+            const breadcrumbHtml = parts.map((part, index) => {
+                if (index === parts.length - 1) {
+                    // Current page - not a link
+                    return part;
+                } else if (index === 0) {
+                    // Home link
+                    return `<a href="#" onclick="navigateToFolder([])">${part}</a>`;
+                } else {
+                    // Folder links
+                    const folderPath = path.slice(0, index);
+                    return `<a href="#${folderPath.join('/')}" onclick="navigateToFolder(${JSON.stringify(folderPath)})">${part}</a>`;
+                }
+            }).join('<span class="separator">›</span>');
+            
+            breadcrumb.innerHTML = breadcrumbHtml;
+        }
+
+        function navigateToFolder(path) {
+            currentPath = path;
+            
+            // Update URL hash
+            if (path.length > 0) {
+                window.location.hash = path.join('/');
+            } else {
+                window.location.hash = '';
+            }
+            
+            updateBreadcrumb(path);
+            
+            const treeContainer = document.getElementById('tree-container');
+            treeContainer.innerHTML = '';
+            
+            const currentStructure = getCurrentStructure(path);
+            if (currentStructure) {
+                buildTree(currentStructure, treeContainer, 0, path);
+                
+                // Auto-expand first level if there are only a few items
+                setTimeout(() => {
+                    const topLevelFolders = treeContainer.querySelectorAll('[data-level="0"].tree-item');
+                    if (topLevelFolders.length <= 3) {
+                        topLevelFolders.forEach(folder => {
+                            if (folder.querySelector('.tree-children')) {
+                                toggleFolder(folder);
+                            }
+                        });
+                    }
+                }, 100);
+            }
+        }
+
+        function parseHashPath() {
+            const hash = window.location.hash.substring(1);
+            if (hash) {
+                return hash.split('/').filter(segment => segment.length > 0);
+            }
+            return [];
+        }
+
         async function loadFiles() {
             const loading = document.getElementById('loading');
-            const treeContainer = document.getElementById('tree-container');
+            const mainView = document.getElementById('main-view');
             const noFiles = document.getElementById('no-files');
 
             try {
                 const data = await discoverFiles();
+                globalData = data;
                 const totalFiles = data.files ? data.files.length : 0;
                 
                 setTimeout(() => {
@@ -342,20 +449,12 @@
                         return;
                     }
 
-                    treeContainer.style.display = 'block';
+                    mainView.style.display = 'block';
                     
                     if (data.nestedStructure && Object.keys(data.nestedStructure).length > 0) {
-                        buildTree(data.nestedStructure, treeContainer);
-                        
-                        // Auto-expand first level if there are only a few top-level items
-                        const topLevelFolders = treeContainer.querySelectorAll('[data-level="0"].tree-item');
-                        if (topLevelFolders.length <= 3) {
-                            topLevelFolders.forEach(folder => {
-                                if (folder.querySelector('.tree-children')) {
-                                    toggleFolder(folder);
-                                }
-                            });
-                        }
+                        // Check if there's a hash path to navigate to
+                        const hashPath = parseHashPath();
+                        navigateToFolder(hashPath);
                     }
                 }, 800);
                 
@@ -364,6 +463,14 @@
                 loading.innerHTML = '<div style="color: #ff6b6b;">Error loading files</div>';
             }
         }
+
+        // Handle browser back/forward
+        window.addEventListener('hashchange', () => {
+            if (globalData) {
+                const hashPath = parseHashPath();
+                navigateToFolder(hashPath);
+            }
+        });
 
         // Load files when page loads
         document.addEventListener('DOMContentLoaded', loadFiles);
