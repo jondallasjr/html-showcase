@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Command Attention Without Speaking - Rule Benders Academy</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --rule-benders-black: #000000;
+            --strategic-blue: #2B5CE6;
+            --action-orange: #E85D00;
+            --premium-white: #FFFFFF;
+            --charcoal: #1A1A1A;
+            --professional-gray: #666666;
+            --light-gray: #E5E5E5;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--rule-benders-black) 0%, var(--charcoal) 100%);
+            color: var(--premium-white);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .infographic-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--strategic-blue), var(--action-orange));
+            border-radius: 2px;
+        }
+
+        .main-headline {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            color: var(--premium-white);
+            margin: 30px 0 20px;
+            letter-spacing: -0.02em;
+        }
+
+        .headline-accent {
+            color: var(--strategic-blue);
+        }
+
+        .hero-subtitle {
+            font-size: 1.4rem;
+            color: var(--professional-gray);
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, var(--charcoal), var(--rule-benders-black));
+            border: 2px solid var(--strategic-blue);
+            border-radius: 16px;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--strategic-blue), var(--action-orange));
+        }
+
+        .stat-number {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--strategic-blue);
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: var(--premium-white);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Framework Section */
+        .framework-section {
+            margin: 80px 0;
+        }
+
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--premium-white);
+        }
+
+        .framework-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .framework-card {
+            background: var(--charcoal);
+            border-radius: 20px;
+            padding: 40px;
+            position: relative;
+            border-left: 6px solid var(--action-orange);
+        }
+
+        .framework-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--strategic-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+            font-size: 2rem;
+            color: var(--premium-white);
+        }
+
+        .framework-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--premium-white);
+            margin-bottom: 20px;
+        }
+
+        .framework-description {
+            color: var(--light-gray);
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        /* Key Insights */
+        .insights-section {
+            background: linear-gradient(135deg, var(--strategic-blue), #1a4bc7);
+            border-radius: 24px;
+            padding: 60px 40px;
+            margin: 80px 0;
+            text-align: center;
+        }
+
+        .insights-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 40px;
+        }
+
+        .insights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .insight-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 30px 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .insight-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--action-orange);
+        }
+
+        .insight-text {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        /* Implementation Steps */
+        .steps-section {
+            margin: 80px 0;
+        }
+
+        .steps-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .step-card {
+            background: var(--charcoal);
+            border-radius: 16px;
+            padding: 40px 30px;
+            position: relative;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .step-card:hover {
+            border-color: var(--strategic-blue);
+            transform: translateY(-5px);
+        }
+
+        .step-number {
+            position: absolute;
+            top: -15px;
+            left: 30px;
+            background: var(--action-orange);
+            color: var(--premium-white);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .step-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin: 20px 0 15px;
+            color: var(--premium-white);
+        }
+
+        .step-description {
+            color: var(--light-gray);
+            line-height: 1.6;
+        }
+
+        /* Call to Action */
+        .cta-section {
+            background: linear-gradient(135deg, var(--action-orange), #d14a00);
+            border-radius: 24px;
+            padding: 60px 40px;
+            text-align: center;
+            margin: 80px 0 40px;
+        }
+
+        .cta-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--premium-white);
+        }
+
+        .cta-text {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .rate-highlight {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--premium-white);
+            display: block;
+            margin: 20px 0;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid var(--professional-gray);
+            color: var(--professional-gray);
+        }
+
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--strategic-blue);
+            margin-bottom: 15px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .infographic-container {
+                padding: 20px 15px;
+            }
+
+            .main-headline {
+                font-size: 2.5rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .framework-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .insights-section,
+            .cta-section {
+                padding: 40px 20px;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        @media print {
+            body {
+                background: white;
+                color: black;
+            }
+            
+            .stat-card,
+            .framework-card,
+            .step-card {
+                border: 2px solid #333;
+                background: white;
+                color: black;
+                break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="infographic-container">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <h1 class="main-headline">
+                Command <span class="headline-accent">Attention</span><br>
+                Without Speaking
+            </h1>
+            <p class="hero-subtitle">
+                The silent authority system that transforms £500/day consultants into £2,000/day strategic advisors
+            </p>
+        </section>
+
+        <!-- Key Statistics -->
+        <section class="stats-grid">
+            <div class="stat-card">
+                <span class="stat-number">93%</span>
+                <span class="stat-label">Authority Without Words</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">26%</span>
+                <span class="stat-label">Promotions from Presence</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">0.1s</span>
+                <span class="stat-label">First Impression Window</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">£2000+</span>
+                <span class="stat-label">Premium Day Rates</span>
+            </div>
+        </section>
+
+        <!-- Framework Section -->
+        <section class="framework-section">
+            <h2 class="section-title">The Silent Authority Framework</h2>
+            <div class="framework-grid">
+                <div class="framework-card">
+                    <div class="framework-icon">
+                        <i class="fas fa-chess-king"></i>
+                    </div>
+                    <h3 class="framework-title">Physical Command Positioning</h3>
+                    <p class="framework-description">
+                        Master the authority triangle: strategic spatial ownership, confident posture, and deliberate movement that signals £1,000+ day rate status before you speak a word.
+                    </p>
+                </div>
+                <div class="framework-card">
+                    <div class="framework-icon">
+                        <i class="fas fa-pause"></i>
+                    </div>
+                    <h3 class="framework-title">Strategic Silence Toolkit</h3>
+                    <p class="framework-description">
+                        Deploy the executive pause, synthesis silence, and question absorption techniques that position you as the authority worth waiting for.
+                    </p>
+                </div>
+                <div class="framework-card">
+                    <div class="framework-icon">
+                        <i class="fas fa-gem"></i>
+                    </div>
+                    <h3 class="framework-title">Gravitas Through Minimalism</h3>
+                    <p class="framework-description">
+                        Speak 30% less but mean 300% more. Transform from reactive commentator to strategic synthesizer through value-dense communication.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Insights -->
+        <section class="insights-section">
+            <h2 class="insights-title">The Silent Authority Advantage</h2>
+            <div class="insights-grid">
+                <div class="insight-item">
+                    <div class="insight-icon">
+                        <i class="fas fa-magnet"></i>
+                    </div>
+                    <p class="insight-text">Silence creates scarcity, scarcity drives value</p>
+                </div>
+                <div class="insight-item">
+                    <div class="insight-icon">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                    <p class="insight-text">67% of leaders rank gravitas as top executive skill</p>
+                </div>
+                <div class="insight-item">
+                    <div class="insight-icon">
+                        <i class="fas fa-target"></i>
+                    </div>
+                    <p class="insight-text">Strategic positioning over technical perfection</p>
+                </div>
+                <div class="insight-item">
+                    <div class="insight-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <p class="insight-text">Premium presence justifies premium rates</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Implementation Steps -->
+        <section class="steps-section">
+            <h2 class="section-title">48-Hour Implementation Plan</h2>
+            <div class="steps-container">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Master Your Physical Presence</h3>
+                    <p class="step-description">
+                        Practice the authority triangle positioning. Enter meetings with deliberate pace, claim your space confidently, and maintain steady eye contact.
+                    </p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Deploy Strategic Silence</h3>
+                    <p class="step-description">
+                        Use the 2-3 second executive pause before responding. Count your words - speak 30% less but with 300% more impact.
+                    </p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Measure Your Authority Impact</h3>
+                    <p class="step-description">
+                        Track if people look to you for direction, pause after you speak, and seek your input more frequently. This indicates developing silent authority.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section class="cta-section">
+            <h2 class="cta-title">Ready to Command Premium Rates?</h2>
+            <p class="cta-text">
+                Stop competing for attention with everyone else. Start commanding it through strategic silence and executive presence.
+            </p>
+            <span class="rate-highlight">£1,000+ Day Rates Await</span>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="logo">RULE BENDERS ACADEMY</div>
+            <p>Teaching what we've lived, not what we've read</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Command Attention Without Speaking - Social Media Carousel</title>
+    <style>
+        :root {
+            --scale: 1;
+            --slide-width: 1080px;
+            --slide-height: 1080px;
+            --aspect-ratio: 1/1;
+            
+            /* Brand Colors */
+            --rule-benders-black: #000000;
+            --strategic-blue: #2B5CE6;
+            --action-orange: #E85D00;
+            --premium-white: #FFFFFF;
+            --charcoal: #1A1A1A;
+            --professional-gray: #666666;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--rule-benders-black);
+            color: var(--premium-white);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .controls {
+            background: var(--charcoal);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .dimension-controls {
+            margin-bottom: 20px;
+        }
+
+        .dimension-controls h3 {
+            margin-bottom: 10px;
+            color: var(--strategic-blue);
+            font-size: 18px;
+        }
+
+        .dimension-btn {
+            background: var(--strategic-blue);
+            color: var(--premium-white);
+            border: none;
+            padding: 8px 16px;
+            margin: 0 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .dimension-btn:hover, .dimension-btn.active {
+            background: var(--action-orange);
+            transform: translateY(-2px);
+        }
+
+        .scale-controls h3 {
+            color: var(--strategic-blue);
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .scale-slider {
+            width: 300px;
+            margin: 0 auto 10px;
+            accent-color: var(--strategic-blue);
+        }
+
+        .scale-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .scale-btn {
+            background: var(--professional-gray);
+            color: var(--premium-white);
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 11px;
+            transition: all 0.3s ease;
+        }
+
+        .scale-btn:hover {
+            background: var(--strategic-blue);
+        }
+
+        .carousel-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .slide-wrapper {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 50px;
+            gap: 30px;
+        }
+
+        .slide-number {
+            background: var(--strategic-blue);
+            color: var(--premium-white);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+            flex-shrink: 0;
+            margin-top: 20px;
+        }
+
+        .slide-content {
+            flex: 1;
+        }
+
+        .slide {
+            width: var(--slide-width);
+            height: var(--slide-height);
+            aspect-ratio: var(--aspect-ratio);
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            max-width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .slide-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .slide-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, 
+                rgba(0,0,0,0.8) 0%, 
+                rgba(43,92,230,0.3) 50%, 
+                rgba(0,0,0,0.7) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: calc(40px * var(--scale));
+        }
+
+        .slide h1 {
+            font-size: calc(72px * var(--scale));
+            font-weight: 900;
+            margin-bottom: calc(20px * var(--scale));
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            line-height: 1.1;
+            color: var(--premium-white);
+        }
+
+        .slide h2 {
+            font-size: calc(48px * var(--scale));
+            font-weight: 800;
+            margin-bottom: calc(15px * var(--scale));
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            line-height: 1.2;
+            color: var(--premium-white);
+        }
+
+        .slide h3 {
+            font-size: calc(32px * var(--scale));
+            font-weight: 700;
+            margin-bottom: calc(15px * var(--scale));
+            color: var(--action-orange);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+        }
+
+        .slide p {
+            font-size: calc(24px * var(--scale));
+            font-weight: 600;
+            line-height: 1.4;
+            margin-bottom: calc(15px * var(--scale));
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+            color: var(--premium-white);
+        }
+
+        .slide .highlight {
+            color: var(--action-orange);
+            font-weight: 800;
+        }
+
+        .slide .metric {
+            color: var(--strategic-blue);
+            font-weight: 800;
+            font-size: calc(28px * var(--scale));
+        }
+
+        .caption {
+            background: var(--charcoal);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid var(--strategic-blue);
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .caption .hashtags {
+            color: var(--strategic-blue);
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .slide-wrapper {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 15px;
+            }
+            
+            .slide-number {
+                order: -1;
+                margin-top: 0;
+            }
+            
+            .controls {
+                padding: 15px;
+            }
+            
+            .scale-slider {
+                width: 250px;
+            }
+            
+            .dimension-btn {
+                padding: 6px 12px;
+                font-size: 11px;
+                margin: 2px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="controls">
+        <div class="dimension-controls">
+            <h3>Platform Dimensions</h3>
+            <button class="dimension-btn active" data-width="1080" data-height="1080" data-aspect="1/1">Square (1080x1080)</button>
+            <button class="dimension-btn" data-width="1080" data-height="1350" data-aspect="4/5">Portrait (1080x1350)</button>
+            <button class="dimension-btn" data-width="1200" data-height="675" data-aspect="16/9">Landscape (1200x675)</button>
+            <button class="dimension-btn" data-width="1080" data-height="1920" data-aspect="9/16">Stories (1080x1920)</button>
+        </div>
+        
+        <div class="scale-controls">
+            <h3>Text Scaling Control</h3>
+            <input type="range" class="scale-slider" min="0.5" max="2" step="0.1" value="1">
+            <div class="scale-buttons">
+                <button class="scale-btn" data-scale="0.5">50%</button>
+                <button class="scale-btn" data-scale="0.7">70%</button>
+                <button class="scale-btn" data-scale="1">100%</button>
+                <button class="scale-btn" data-scale="1.3">130%</button>
+                <button class="scale-btn" data-scale="1.6">160%</button>
+                <button class="scale-btn" data-scale="2">200%</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="carousel-container">
+        <!-- Slide 1: Hero Introduction -->
+        <div class="slide-wrapper">
+            <div class="slide-number">1/7</div>
+            <div class="slide-content">
+                <div class="slide">
+                    <div class="slide-background" style="background-image: url('https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-EDVviW_Uug/0f78b8aa09e969e1750edf22da3f62ad7e1f9cb707dbc18c5acf92406c39a9fa85113543c6fea6c0e9c3719b23b5bec70ce71d001d8431ed696e676c8857da2440f0bd8a05ff34edec1d40829cfefc07caabc65aa32e6f0d8322bad7eb25ab93bba61975');"></div>
+                    <div class="slide-overlay">
+                        <h1>The <span class="highlight">£2,000/Day</span> Secret</h1>
+                        <p>Most powerful consultants are the <span class="highlight">quietest ones</span> in the room</p>
+                        <p class="metric">93% of authority happens without speaking</p>
+                    </div>
+                </div>
+                <div class="caption">
+                    After 17 years in Treasury boardrooms, I learned the counterintuitive truth: The highest-paid consultants don't win through volume. They win through presence. Research proves only 7% of communication impact comes from words—93% comes from body language and vocal tone. Silent authority isn't about being quiet. It's about commanding attention without competing for airtime. 
+                    <div class="hashtags">#ExecutivePresence #SilentAuthority #PremiumConsulting #HighPaidConsultant #RuleBenders</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Physical Command Positioning -->
+        <div class="slide-wrapper">
+            <div class="slide-number">2/7</div>
+            <div class="slide-content">
+                <div class="slide">
+                    <div class="slide-background" style="background-image: url('https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-dQDKiI_J67/df8a0ae1ce843ef5788c76c8d261087d5194257f62e8fdcdc14a9008ec74abd530f495d9a50be3ea596add1b506f4218373c2905682fd9cfa8e3943ecfaf5aa4e1383cb94a472ae8fd32274350e0aaba2277b386e7cad2507e6ce02e2bfb760bdffd70b6');"></div>
+                    <div class="slide-overlay">
+                        <h2>The <span class="highlight">Authority Triangle</span></h2>
+                        <p>Feet planted • Shoulders back • Eyes steady</p>
+                        <p>Your body speaks before you do</p>
+                        <h3>Physical = Premium Positioning</h3>
+                    </div>
+                </div>
+                <div class="caption">
+                    Your body language determines whether clients see you as a £500/day implementer or £2,000/day strategist. The Authority Triangle: feet shoulder-width apart, shoulders back, spine centered. Move with deliberate pace, claim your space, make steady eye contact. This isn't fake confidence—it's strategic positioning that signals premium value before you speak.
+                    <div class="hashtags">#BodyLanguage #AuthorityTriangle #PhysicalPresence #PremiumPositioning #ConsultingSkills</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Strategic Silence Toolkit -->
+        <div class="slide-wrapper">
+            <div class="slide-number">3/7</div>
+            <div class="slide-content">
+                <div class="slide">
+                    <div class="slide-background" style="background-image: url('https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-fByAFphLYK/a2c42367c4a944169ff6448c7e7f19a46d2cd06ce38717886e805c3bccbf7d90161b5b54a8803696cc17ad0613d0c5a550c7c53f65430ec86d2968eab239b27efde6b68bad70ff7b7296f7a3856be867cd62a47d057c9a1e9350d87dd836d09bbf91d6de');"></div>
+                    <div class="slide-overlay">
+                        <h2>Strategic <span class="highlight">Silence Toolkit</span></h2>
+                        <h3>The Executive Pause: 2-3 seconds</h3>
+                        <p>Creates anticipation • Builds authority</p>
+                        <p>Makes your words worth <span class="metric">waiting for</span></p>
+                    </div>
+                </div>
+                <div class="caption">
+                    Silence isn't empty space—it's a precision tool. The Executive Pause: Take 2-3 seconds before responding to show thoughtful consideration. The Synthesis Silence: Count to three after others speak, then provide measured authority. Strategic silence creates scarcity, and scarcity drives value. When everyone fights for airtime, restraint makes you magnetic.
+                    <div class="hashtags">#StrategicSilence #ExecutivePause #CommunicationSkills #AuthorityBuilding #ConsultingTips</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Gravitas Through Minimalism -->
+        <div class="slide-wrapper">
+            <div class="slide-number">4/7</div>
+            <div class="slide-content">
+                <div class="slide">
+                    <div class="slide-background" style="background-image: url('https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-VW129FxyJl/f47c8e3aaefc6cb5ce8a78080d411dd1c3f755ab358d86365798380e5b84103331a2b3272f92957f731b50ca46d7883ee70eb11e7ee5f7bd102ba1329c7ccb3fa8731abd28d0f8ed7bf2afccacb5b45a178ef085103dbcebdd0d52fe3743121316459255');"></div>
+                    <div class="slide-overlay">
+                        <h2><span class="highlight">Less Words</span></h2>
+                        <h2><span class="metric">More Impact</span></h2>
+                        <h3>Speak 30% less • Mean 300% more</h3>
+                        <p>Premium consultants say less but carry more weight</p>
+                    </div>
+                </div>
+                <div class="caption">
+                    The Rule of Strategic Scarcity: Speak 30% less than you think you should. Most expensive consultants say less but mean more. Eliminate filler words, qualifiers, unnecessary preambles. Start with conclusions, then provide rationale. Position yourself as the intellectual center of gravity who synthesizes, clarifies, and moves conversations forward.
+                    <div class="hashtags">#StrategicScarcity #ValueDenseCommunication #Gravitas #MinimalistCommunication #ExecutiveSkills</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Executive Presence Economics -->
+        <div class="slide-wrapper">
+            <div class="slide-number">5/7</div>
+            <div class="slide-content">
+                <div class="slide">
+                    <div class="slide-background" style="background-image: url('https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-ANSRrhWDy0/da0d3d6986e765b70d5b7a80c7c4e08ca606edae1797ae6416361e6d5759cac6dc75a16edaf757f25d92588bd47186c1e52507ce5fc0d45b693c64f3cddc80bf969bd7460c300be13091710c4fdb0e9ac6773eadcf41c90ce8e43d87c171d0edc8ae2bc7');"></div>
+                    <div class="slide-overlay">
+                        <h2>The <span class="highlight">Economics</span> of Presence</h2>
+                        <p class="metric">26% of promotions</p>
+                        <p>determined by executive presence</p>
+                        <h3>First impressions: 0.1 seconds</h3>
+                        <p>Last for <span class="highlight">months</span></p>
+                    </div>
+                </div>
+                <div class="caption">
+                    Executive presence isn't soft skills—it's hard economics. Research shows 26% of all promotion decisions are based on physical gravitas and silent command. First impressions form in 0.1 seconds and influence interactions for months. Your silent authority determines whether clients see you as £500/day task executor or £2,000/day strategic advisor within ten seconds.
+                    <div class="hashtags">#ExecutivePresence #FirstImpressions #CareerAdvancement #ProfessionalGrowth #ConsultingBusiness</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Authority Positioning -->
+        <div class="slide-wrapper">
+            <div class="slide-number">6/7</div>
+            <div class="slide-content">
+                <div class="slide">
+                    <div class="slide-background" style="background-image: url('https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-5EncQ_z7fg/ae92ed5b80016ca432793c67a182e5e5e539ba2e822426ff8c25e405ee52b5f36254d0545d94e734b6e1411521745c0945c8057333081c198f237cb58b99cb4230c28489583f17faf4d6421bbdadf5c9da998b091d27436c7f7bfa14446e44c3f6483bdb');"></div>
+                    <div class="slide-overlay">
+                        <h2><span class="metric">£1,000+</span> Day Rates</h2>
+                        <h2>Through <span class="highlight">Silent Authority</span></h2>
+                        <p>Senior advisor • Not junior implementer</p>
+                        <p>Strategy • Not execution</p>
+                    </div>
+                </div>
+                <div class="caption">
+                    Silent authority changes the conversation from "Can you do this work?" to "How do we structure the engagement around your strategic guidance?" Consultants who master presence command premium rates because they position themselves as senior advisors. They earn referrals based on judgment and gravitas, not just technical skills.
+                    <div class="hashtags">#PremiumRates #StrategicAdviser #HighPaidConsultant #AuthorityPositioning #ConsultingSuccess</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Implementation Challenge -->
+        <div class="slide-wrapper">
+            <div class="slide-number">7/7</div>
+            <div class="slide-content">
+                <div class="slide">
+                    <div class="slide-background" style="background-image: url('https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-ZLx3ToMiJh/cce936a35c7067d0df8c030b4cd294a992f054aecb99dca56267706a4a2017487710ba527d41dd7aa5f7a63fc98b51dc9618a239e95efac49c3cb7331881cf5ca304a1e18289a6475df0f27842ce71eab144316ef859b0d86ce7c569e18ff000');"></div>
+                    <div class="slide-overlay">
+                        <h2>Your <span class="highlight">48-Hour</span> Test</h2>
+                        <p>Authority Triangle positioning</p>
+                        <p>Executive pause before speaking</p>
+                        <p>Strategic silence implementation</p>
+                        <h3>Stop competing • Start <span class="metric">commanding</span></h3>
+                    </div>
+                </div>
+                <div class="caption">
+                    Implementation starts now. Next client meeting: Enter with deliberate pace, claim your space confidently, use the authority triangle. Count your words—speak 30% less, make every sentence count. Use the executive pause. Track results: Are people listening more carefully? Seeking your input? Silent authority isn't about being quiet—it's about being so confident in your value you don't oversell it.
+                    <div class="hashtags">#TakeAction #SilentAuthorityChallenge #ExecutivePresence #PremiumConsulting #RuleBenders #CommandAttention</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Dimension Controls
+        const dimensionButtons = document.querySelectorAll('.dimension-btn');
+        const root = document.documentElement;
+
+        dimensionButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                dimensionButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const width = btn.dataset.width;
+                const height = btn.dataset.height;
+                const aspect = btn.dataset.aspect;
+                
+                root.style.setProperty('--slide-width', width + 'px');
+                root.style.setProperty('--slide-height', height + 'px');
+                root.style.setProperty('--aspect-ratio', aspect);
+            });
+        });
+
+        // Text Scaling Controls
+        const scaleSlider = document.querySelector('.scale-slider');
+        const scaleButtons = document.querySelectorAll('.scale-btn');
+
+        function updateScale(value) {
+            root.style.setProperty('--scale', value);
+            scaleSlider.value = value;
+        }
+
+        scaleSlider.addEventListener('input', (e) => {
+            updateScale(e.target.value);
+        });
+
+        scaleButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                updateScale(btn.dataset.scale);
+            });
+        });
+
+        // Keyboard shortcuts for quick scaling
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey || e.metaKey) {
+                switch(e.key) {
+                    case '1':
+                        e.preventDefault();
+                        updateScale('0.5');
+                        break;
+                    case '2':
+                        e.preventDefault();
+                        updateScale('1');
+                        break;
+                    case '3':
+                        e.preventDefault();
+                        updateScale('1.5');
+                        break;
+                    case '4':
+                        e.preventDefault();
+                        updateScale('2');
+                        break;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

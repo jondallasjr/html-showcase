@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Command Attention Without Speaking - Workbook Activities</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --rule-benders-black: #000000;
+            --strategic-blue: #2B5CE6;
+            --action-orange: #E85D00;
+            --premium-white: #FFFFFF;
+            --charcoal: #1A1A1A;
+            --professional-gray: #666666;
+            --light-gray: #F8F9FA;
+            --border-gray: #E0E0E0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--rule-benders-black);
+            background: var(--premium-white);
+        }
+
+        .workbook-container {
+            max-width: 8.5in;
+            margin: 0 auto;
+            padding: 0.75in;
+            background: var(--premium-white);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid var(--strategic-blue);
+        }
+
+        .course-path {
+            font-size: 0.85rem;
+            color: var(--professional-gray);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .lesson-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--rule-benders-black);
+            margin-bottom: 0.5rem;
+        }
+
+        .workbook-subtitle {
+            font-size: 1rem;
+            color: var(--strategic-blue);
+            font-weight: 500;
+        }
+
+        .activity-section {
+            margin-bottom: 2.5rem;
+            page-break-inside: avoid;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--light-gray);
+        }
+
+        .section-number {
+            width: 2rem;
+            height: 2rem;
+            background: var(--strategic-blue);
+            color: var(--premium-white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-right: 1rem;
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--rule-benders-black);
+        }
+
+        .activity-instructions {
+            background: var(--light-gray);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--action-orange);
+        }
+
+        .instructions-text {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: var(--charcoal);
+        }
+
+        .form-field {
+            margin-bottom: 1.5rem;
+        }
+
+        .field-label {
+            font-weight: 600;
+            color: var(--rule-benders-black);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .text-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--border-gray);
+            border-radius: 4px;
+            font-size: 0.95rem;
+            background: var(--premium-white);
+            min-height: 3rem;
+        }
+
+        .text-input:focus {
+            border-color: var(--strategic-blue);
+            outline: none;
+        }
+
+        .textarea-field {
+            min-height: 6rem;
+            resize: vertical;
+        }
+
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.75rem;
+            margin-top: 0.5rem;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 0.75rem;
+            background: var(--premium-white);
+            border: 2px solid var(--border-gray);
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .checkbox-item:hover {
+            border-color: var(--strategic-blue);
+            background: rgba(43, 92, 230, 0.02);
+        }
+
+        .checkbox {
+            width: 1.25rem;
+            height: 1.25rem;
+            border: 2px solid var(--border-gray);
+            border-radius: 3px;
+            margin-right: 0.75rem;
+            flex-shrink: 0;
+            margin-top: 0.1rem;
+        }
+
+        .checkbox-text {
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        .rating-scale {
+            display: grid;
+            grid-template-columns: 2fr repeat(10, 1fr);
+            gap: 0.5rem;
+            align-items: center;
+            padding: 0.75rem;
+            background: var(--premium-white);
+            border: 2px solid var(--border-gray);
+            border-radius: 4px;
+            margin-bottom: 0.75rem;
+        }
+
+        .rating-label {
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-align: left;
+        }
+
+        .rating-number {
+            font-size: 0.8rem;
+            text-align: center;
+            color: var(--professional-gray);
+            font-weight: 500;
+        }
+
+        .rating-circle {
+            width: 1.5rem;
+            height: 1.5rem;
+            border: 2px solid var(--border-gray);
+            border-radius: 50%;
+            margin: 0 auto;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .rating-circle:hover {
+            border-color: var(--strategic-blue);
+            background: rgba(43, 92, 230, 0.1);
+        }
+
+        .framework-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .framework-card {
+            border: 2px solid var(--border-gray);
+            border-radius: 8px;
+            padding: 1rem;
+            background: var(--premium-white);
+        }
+
+        .card-header {
+            font-weight: 600;
+            color: var(--strategic-blue);
+            margin-bottom: 0.75rem;
+            text-align: center;
+        }
+
+        .card-content {
+            min-height: 4rem;
+            border: 1px dashed var(--border-gray);
+            border-radius: 4px;
+            background: var(--light-gray);
+        }
+
+        .implementation-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .implementation-table th,
+        .implementation-table td {
+            border: 2px solid var(--border-gray);
+            padding: 0.75rem;
+            text-align: left;
+        }
+
+        .implementation-table th {
+            background: var(--strategic-blue);
+            color: var(--premium-white);
+            font-weight: 600;
+        }
+
+        .table-cell-input {
+            width: 100%;
+            border: none;
+            background: transparent;
+            font-size: 0.9rem;
+            min-height: 2rem;
+        }
+
+        .progress-tracker {
+            background: linear-gradient(135deg, var(--light-gray), var(--premium-white));
+            border: 2px solid var(--border-gray);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .progress-header {
+            text-align: center;
+            font-weight: 600;
+            color: var(--strategic-blue);
+            margin-bottom: 1rem;
+        }
+
+        .milestone-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+            padding: 0.5rem;
+        }
+
+        .milestone-checkbox {
+            width: 1.25rem;
+            height: 1.25rem;
+            border: 2px solid var(--action-orange);
+            border-radius: 3px;
+            margin-right: 1rem;
+        }
+
+        .milestone-text {
+            font-size: 0.95rem;
+        }
+
+        .reflection-prompt {
+            background: linear-gradient(135deg, rgba(43, 92, 230, 0.05), rgba(232, 93, 0, 0.05));
+            border: 2px solid var(--strategic-blue);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .prompt-icon {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .prompt-text {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--charcoal);
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .signature-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-gray);
+        }
+
+        .signature-field {
+            text-align: center;
+        }
+
+        .signature-line {
+            border-bottom: 2px solid var(--rule-benders-black);
+            height: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .signature-label {
+            font-size: 0.9rem;
+            color: var(--professional-gray);
+        }
+
+        .page-break {
+            page-break-before: always;
+        }
+
+        @media print {
+            body {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            
+            .workbook-container {
+                margin: 0;
+                padding: 0.5in;
+            }
+            
+            .activity-section {
+                page-break-inside: avoid;
+            }
+            
+            .text-input,
+            .rating-circle,
+            .checkbox,
+            .milestone-checkbox {
+                border: 2px solid var(--rule-benders-black) !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="workbook-container">
+        <!-- Header Section -->
+        <header class="header">
+            <div class="course-path">Rule Benders Academy → The High Paid Consultant → Command Premium Authority</div>
+            <h1 class="lesson-title">Command Attention Without Speaking</h1>
+            <p class="workbook-subtitle">Silent Authority Workbook Activities</p>
+        </header>
+
+        <!-- Activity 1: Silent Authority Self-Assessment -->
+        <section class="activity-section">
+            <div class="section-header">
+                <div class="section-number">1</div>
+                <h2 class="section-title">Silent Authority Self-Assessment</h2>
+            </div>
+            
+            <div class="activity-instructions">
+                <p class="instructions-text">
+                    <strong>Purpose:</strong> Establish your baseline silent authority positioning. Rate yourself honestly on each element using the 1-10 scale (1 = Needs Significant Improvement, 10 = Premium Consultant Level).
+                </p>
+            </div>
+
+            <div class="form-field">
+                <label class="field-label">Physical Command Presence Elements</label>
+                
+                <div class="rating-scale">
+                    <div class="rating-label">Authority Triangle Positioning</div>
+                    <div class="rating-number">1</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">2</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">3</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">4</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">5</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">6</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">7</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">8</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">9</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">10</div>
+                    <div class="rating-circle"></div>
+                </div>
+
+                <div class="rating-scale">
+                    <div class="rating-label">Strategic Eye Contact Mastery</div>
+                    <div class="rating-number">1</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">2</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">3</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">4</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">5</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">6</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">7</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">8</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">9</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">10</div>
+                    <div class="rating-circle"></div>
+                </div>
+
+                <div class="rating-scale">
+                    <div class="rating-label">Spatial Ownership Confidence</div>
+                    <div class="rating-number">1</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">2</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">3</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">4</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">5</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">6</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">7</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">8</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">9</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">10</div>
+                    <div class="rating-circle"></div>
+                </div>
+            </div>
+
+            <div class="form-field">
+                <label class="field-label">Strategic Silence Toolkit</label>
+                
+                <div class="rating-scale">
+                    <div class="rating-label">Executive Pause Implementation</div>
+                    <div class="rating-number">1</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">2</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">3</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">4</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">5</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">6</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">7</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">8</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">9</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">10</div>
+                    <div class="rating-circle"></div>
+                </div>
+
+                <div class="rating-scale">
+                    <div class="rating-label">Strategic Scarcity Application</div>
+                    <div class="rating-number">1</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">2</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">3</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">4</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">5</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">6</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">7</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">8</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">9</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">10</div>
+                    <div class="rating-circle"></div>
+                </div>
+
+                <div class="rating-scale">
+                    <div class="rating-label">Value-Dense Communication</div>
+                    <div class="rating-number">1</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">2</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">3</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">4</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">5</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">6</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">7</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">8</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">9</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">10</div>
+                    <div class="rating-circle"></div>
+                </div>
+            </div>
+
+            <div class="form-field">
+                <label class="field-label">Your Current Silent Authority Score (Total / 60):</label>
+                <input type="text" class="text-input" placeholder="Calculate your total score here...">
+            </div>
+        </section>
+
+        <!-- Activity 2: Authority Blocker Identification -->
+        <section class="activity-section">
+            <div class="section-header">
+                <div class="section-number">2</div>
+                <h2 class="section-title">Authority Blocker Identification</h2>
+            </div>
+            
+            <div class="activity-instructions">
+                <p class="instructions-text">
+                    <strong>Purpose:</strong> Identify personal barriers preventing premium silent authority positioning. Check all blockers that apply to your current professional interactions.
+                </p>
+            </div>
+
+            <div class="form-field">
+                <label class="field-label">Physical Presence Blockers</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <div class="checkbox"></div>
+                        <div class="checkbox-text">I rush into meetings/rooms instead of entering with deliberate pace</div>
+                    </div>
+                    <div class="checkbox-item">
+                        <div class="checkbox"></div>
+                        <div class="checkbox-text">I shrink into corners or take the least prominent seating position</div>
+                    </div>
+                    <div class="checkbox-item">
+                        <div class="checkbox"></div>
+                        <div class="checkbox-text">I break eye contact first when engaging with senior stakeholders</div>
+                    </div>
+                    <div class="checkbox-item">
+                        <div class="checkbox"></div>
+                        <div class="checkbox-text">I fidget or display nervous energy instead of confident stillness</div>
+                    </div>
+                    <div class="checkbox-item">
+                        <div class="checkbox"></div>
+                        <div class="checkbox-text">I apologize for my presence or minimize my physical space</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-field">
+                <label class="field-label">Communication Pattern Blockers</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <div class="checkbox"></div>
+                        <div class="checkbox-text">I immediately respond to questions without strategic pauses</div>
+                    </div>
+                    <div class="checkbox-item">
+                        <div class="checkbox"></div>
+                        <div class="checkbox-text">I fill silence with unnecessary words or filler phrases</div>
+                    </div>
+                    <div class="checkbox-item">
+                        <div class="checkbox"></div>
+                        <div class="checkbox-text">I compete for airtime instead of letting others finish completely</div>
+                    </div>
+                    <div class="checkbox-item">
+                        <div class="checkbox"></div>
+                        <div class="checkbox-text">I over-explain concepts instead of providing value-dense communication</div>
+                    </div>
+                    <div class="checkbox-item">
+                        <div class="checkbox"></div>
+                        <div class="checkbox-text">I use qualifiers and preambles that weaken my statements</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-field">
+                <label class="field-label">Mindset Blockers</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <div class="checkbox"></div>
+                        <div class="checkbox-text">I believe I need to be the loudest voice to demonstrate expertise</div>
+                    </div>
+                    <div class="checkbox-item">
+                        <div class="checkbox"></div>
+                        <div class="checkbox-text">I fear that silence will be perceived as lack of knowledge</div>
+                    </div>
+                    <div class="checkbox-item">
+                        <div class="checkbox"></div>
+                        <div class="checkbox-text">I feel uncomfortable with sustained attention focused on me</div>
+                    </div>
+                    <div class="checkbox-item">
+                        <div class="checkbox"></div>
+                        <div class="checkbox-text">I position myself as an implementer rather than strategic advisor</div>
+                    </div>
+                    <div class="checkbox-item">
+                        <div class="checkbox"></div>
+                        <div class="checkbox-text">I doubt my right to command premium rates and positioning</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="reflection-prompt">
+                <div class="prompt-icon">🎯</div>
+                <div class="prompt-text">Priority Blocker for Immediate Action</div>
+                <div class="form-field">
+                    <label class="field-label">Which blocker, if eliminated, would create the most immediate impact on your authority positioning?</label>
+                    <textarea class="text-input textarea-field" placeholder="Identify your #1 priority blocker and explain why addressing this specific limitation will unlock premium consultant positioning..."></textarea>
+                </div>
+            </div>
+        </section>
+
+        <!-- Activity 3: Silent Authority Framework Implementation Plan -->
+        <section class="activity-section page-break">
+            <div class="section-header">
+                <div class="section-number">3</div>
+                <h2 class="section-title">48-Hour Implementation Strategy</h2>
+            </div>
+            
+            <div class="activity-instructions">
+                <p class="instructions-text">
+                    <strong>Purpose:</strong> Create specific implementation plan for your next client interaction. Design your silent authority test using the three-element framework.
+                </p>
+            </div>
+
+            <div class="framework-grid">
+                <div class="framework-card">
+                    <div class="card-header">Element 1: Physical Command</div>
+                    <div class="card-content"></div>
+                </div>
+                <div class="framework-card">
+                    <div class="card-header">Element 2: Strategic Silence</div>
+                    <div class="card-content"></div>
+                </div>
+                <div class="framework-card">
+                    <div class="card-header">Element 3: Strategic Minimalism</div>
+                    <div class="card-content"></div>
+                </div>
+            </div>
+
+            <table class="implementation-table">
+                <thead>
+                    <tr>
+                        <th>Next Client Interaction</th>
+                        <th>Specific Technique</th>
+                        <th>Success Measurement</th>
+                        <th>Backup Plan</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="text" class="table-cell-input" placeholder="Meeting/call details..."></td>
+                        <td><input type="text" class="table-cell-input" placeholder="Authority triangle + executive pause..."></td>
+                        <td><input type="text" class="table-cell-input" placeholder="People look to me for direction..."></td>
+                        <td><input type="text" class="table-cell-input" placeholder="If technique fails, I will..."></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" class="table-cell-input" placeholder="Second opportunity..."></td>
+                        <td><input type="text" class="table-cell-input" placeholder="Strategic silence + spatial command..."></td>
+                        <td><input type="text" class="table-cell-input" placeholder="Others pause after I speak..."></td>
+                        <td><input type="text" class="table-cell-input" placeholder="Alternative approach..."></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" class="table-cell-input" placeholder="Third practice scenario..."></td>
+                        <td><input type="text" class="table-cell-input" placeholder="Value-dense communication..."></td>
+                        <td><input type="text" class="table-cell-input" placeholder="Increased attention/respect..."></td>
+                        <td><input type="text" class="table-cell-input" placeholder="Recovery strategy..."></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="reflection-prompt">
+                <div class="prompt-icon">💡</div>
+                <div class="prompt-text">Pre-Implementation Visualization</div>
+                <div class="form-field">
+                    <label class="field-label">Walk through your next meeting in your mind. How will you enter the room? Where will you position yourself? What will your first moment of strategic silence look like?</label>
+                    <textarea class="text-input textarea-field" placeholder="Describe your detailed visualization of commanding attention without speaking in your specific upcoming client situation..."></textarea>
+                </div>
+            </div>
+        </section>
+
+        <!-- Activity 4: Executive Presence Economics Tracker -->
+        <section class="activity-section">
+            <div class="section-header">
+                <div class="section-number">4</div>
+                <h2 class="section-title">Day Rate Positioning Progress</h2>
+            </div>
+            
+            <div class="activity-instructions">
+                <p class="instructions-text">
+                    <strong>Purpose:</strong> Track how silent authority development directly impacts your positioning for premium day rates. Connect behavior changes to economic outcomes.
+                </p>
+            </div>
+
+            <div class="form-field">
+                <label class="field-label">Current Positioning Assessment</label>
+                <div class="rating-scale">
+                    <div class="rating-label">Clients see me as strategic advisor (not task executor)</div>
+                    <div class="rating-number">1</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">2</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">3</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">4</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">5</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">6</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">7</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">8</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">9</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">10</div>
+                    <div class="rating-circle"></div>
+                </div>
+
+                <div class="rating-scale">
+                    <div class="rating-label">My presence feels valuable before I speak</div>
+                    <div class="rating-number">1</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">2</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">3</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">4</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">5</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">6</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">7</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">8</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">9</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">10</div>
+                    <div class="rating-circle"></div>
+                </div>
+
+                <div class="rating-scale">
+                    <div class="rating-label">I command respect through composure and gravitas</div>
+                    <div class="rating-number">1</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">2</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">3</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">4</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">5</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">6</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">7</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">8</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">9</div>
+                    <div class="rating-circle"></div>
+                    <div class="rating-number">10</div>
+                    <div class="rating-circle"></div>
+                </div>
+            </div>
+
+            <div class="form-field">
+                <label class="field-label">Target Day Rate Positioning (£)</label>
+                <input type="text" class="text-input" placeholder="£1,000 - £2,000+ based on silent authority mastery">
+            </div>
+
+            <div class="form-field">
+                <label class="field-label">Current Rate vs. Target Gap Analysis</label>
+                <textarea class="text-input textarea-field" placeholder="What specific silent authority improvements need to happen to justify your target rate? Be honest about the gap between your current positioning and premium consultant standards..."></textarea>
+            </div>
+
+            <div class="progress-tracker">
+                <div class="progress-header">Silent Authority Milestones</div>
+                <div class="milestone-item">
+                    <div class="milestone-checkbox"></div>
+                    <div class="milestone-text">Implemented authority triangle in client meeting</div>
+                </div>
+                <div class="milestone-item">
+                    <div class="milestone-checkbox"></div>
+                    <div class="milestone-text">Used executive pause successfully 3+ times</div>
+                </div>
+                <div class="milestone-item">
+                    <div class="milestone-checkbox"></div>
+                    <div class="milestone-text">People looked to me for direction without prompting</div>
+                </div>
+                <div class="milestone-item">
+                    <div class="milestone-checkbox"></div>
+                    <div class="milestone-text">Reduced speaking volume by 30%, increased impact</div>
+                </div>
+                <div class="milestone-item">
+                    <div class="milestone-checkbox"></div>
+                    <div class="milestone-text">Client referenced my "gravitas" or "executive presence"</div>
+                </div>
+                <div class="milestone-item">
+                    <div class="milestone-checkbox"></div>
+                    <div class="milestone-text">Positioned for strategic advisor role, not implementer</div>
+                </div>
+                <div class="milestone-item">
+                    <div class="milestone-checkbox"></div>
+                    <div class="milestone-text">Comfortable with sustained attention and silence</div>
+                </div>
+                <div class="milestone-item">
+                    <div class="milestone-checkbox"></div>
+                    <div class="milestone-text">Ready to request premium day rate increase</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Activity 5: Weekly Implementation Challenge -->
+        <section class="activity-section">
+            <div class="section-header">
+                <div class="section-number">5</div>
+                <h2 class="section-title">7-Day Silent Authority Challenge</h2>
+            </div>
+            
+            <div class="activity-instructions">
+                <p class="instructions-text">
+                    <strong>Purpose:</strong> Daily practice log for building silent authority habits. Track specific techniques and measure behavioral change over one week of focused implementation.
+                </p>
+            </div>
+
+            <table class="implementation-table">
+                <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th>Technique Practiced</th>
+                        <th>Situation/Context</th>
+                        <th>Response Observed</th>
+                        <th>Improvement Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Day 1</strong></td>
+                        <td><input type="text" class="table-cell-input" placeholder="Authority triangle focus..."></td>
+                        <td><input type="text" class="table-cell-input" placeholder="Team meeting, client call..."></td>
+                        <td><input type="text" class="table-cell-input" placeholder="People listened more carefully..."></td>
+                        <td><input type="text" class="table-cell-input" placeholder="Next time, hold position longer..."></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Day 2</strong></td>
+                        <td><input type="text" class="table-cell-input" placeholder="Executive pause implementation..."></td>
+                        <td><input type="text" class="table-cell-input" placeholder="Specific interaction..."></td>
+                        <td><input type="text" class="table-cell-input" placeholder="Clients waited for my response..."></td>
+                        <td><input type="text" class="table-cell-input" placeholder="Extend pause to 3 seconds..."></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Day 3</strong></td>
+                        <td><input type="text" class="table-cell-input" placeholder="Strategic silence + eye contact..."></td>
+                        <td><input type="text" class="table-cell-input" placeholder="Presentation or discussion..."></td>
+                        <td><input type="text" class="table-cell-input" placeholder="Authority positioning improved..."></td>
+                        <td><input type="text" class="table-cell-input" placeholder="Combine with spatial ownership..."></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Day 4</strong></td>
+                        <td><input type="text" class="table-cell-input" placeholder="Value-dense communication..."></td>
+                        <td><input type="text" class="table-cell-input" placeholder="Client advisory session..."></td>
+                        <td><input type="text" class="table-cell-input" placeholder="Words carried more weight..."></td>
+                        <td><input type="text" class="table-cell-input" placeholder="Eliminate remaining fillers..."></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Day 5</strong></td>
+                        <td><input type="text" class="table-cell-input" placeholder="Spatial command mastery..."></td>
+                        <td><input type="text" class="table-cell-input" placeholder="High-stakes meeting..."></td>
+                        <td><input type="text" class="table-cell-input" placeholder="Commanded room attention..."></td>
+                        <td><input type="text" class="table-cell-input" placeholder="Maintain throughout entire meeting..."></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Day 6</strong></td>
+                        <td><input type="text" class="table-cell-input" placeholder="Integrated framework approach..."></td>
+                        <td><input type="text" class="table-cell-input" placeholder="Complex client situation..."></td>
+                        <td><input type="text" class="table-cell-input" placeholder="Premium positioning recognized..."></td>
+                        <td><input type="text" class="table-cell-input" placeholder="Ready for rate discussion..."></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Day 7</strong></td>
+                        <td><input type="text" class="table-cell-input" placeholder="Silent authority mastery test..."></td>
+                        <td><input type="text" class="table-cell-input" placeholder="Most important client interaction..."></td>
+                        <td><input type="text" class="table-cell-input" placeholder="Natural authority command..."></td>
+                        <td><input type="text" class="table-cell-input" placeholder="Sustain at this level..."></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="reflection-prompt">
+                <div class="prompt-icon">🚀</div>
+                <div class="prompt-text">Week 1 Transformation Summary</div>
+                <div class="form-field">
+                    <label class="field-label">How has your professional presence changed? What specific evidence shows you're positioned for premium day rates?</label>
+                    <textarea class="text-input textarea-field" placeholder="Document your transformation from competing for attention to naturally commanding it. Include specific client feedback, behavioral changes, and positioning improvements that justify £1,000+ day rate discussions..."></textarea>
+                </div>
+            </div>
+
+            <div class="signature-section">
+                <div class="signature-field">
+                    <div class="signature-line"></div>
+                    <div class="signature-label">Your Signature</div>
+                </div>
+                <div class="signature-field">
+                    <div class="signature-line"></div>
+                    <div class="signature-label">Date Completed</div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Interactive elements for enhanced user experience
+        document.addEventListener('DOMContentLoaded', function() {
+            // Rating circle interactions
+            const ratingCircles = document.querySelectorAll('.rating-circle');
+            ratingCircles.forEach(circle => {
+                circle.addEventListener('click', function() {
+                    // Remove selection from siblings
+                    const siblings = Array.from(this.parentNode.querySelectorAll('.rating-circle'));
+                    siblings.forEach(sibling => {
+                        sibling.style.background = '';
+                        sibling.style.borderColor = 'var(--border-gray)';
+                    });
+                    
+                    // Select this circle and all previous ones
+                    const index = siblings.indexOf(this);
+                    for (let i = 0; i <= index; i++) {
+                        siblings[i].style.background = 'var(--strategic-blue)';
+                        siblings[i].style.borderColor = 'var(--strategic-blue)';
+                    }
+                });
+            });
+
+            // Checkbox interactions
+            const checkboxes = document.querySelectorAll('.checkbox, .milestone-checkbox');
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('click', function() {
+                    if (this.style.background === 'var(--strategic-blue)' || this.style.background === 'rgb(43, 92, 230)') {
+                        this.style.background = '';
+                        this.style.borderColor = this.classList.contains('milestone-checkbox') ? 'var(--action-orange)' : 'var(--border-gray)';
+                        this.innerHTML = '';
+                    } else {
+                        this.style.background = 'var(--strategic-blue)';
+                        this.style.borderColor = 'var(--strategic-blue)';
+                        this.innerHTML = '✓';
+                        this.style.color = 'white';
+                        this.style.display = 'flex';
+                        this.style.alignItems = 'center';
+                        this.style.justifyContent = 'center';
+                        this.style.fontWeight = 'bold';
+                    }
+                });
+            });
+
+            // Auto-save functionality for inputs
+            const inputs = document.querySelectorAll('input, textarea');
+            inputs.forEach(input => {
+                input.addEventListener('change', function() {
+                    // Simple localStorage save (optional)
+                    if (this.id || this.name) {
+                        localStorage.setItem(this.id || this.name, this.value);
+                    }
+                });
+            });
+
+            // Progress tracking
+            const milestoneCheckboxes = document.querySelectorAll('.milestone-checkbox');
+            function updateProgress() {
+                const checked = Array.from(milestoneCheckboxes).filter(cb => 
+                    cb.style.background === 'var(--strategic-blue)' || cb.style.background === 'rgb(43, 92, 230)'
+                ).length;
+                const total = milestoneCheckboxes.length;
+                const progressPercent = Math.round((checked / total) * 100);
+                
+                // Update progress header
+                const progressHeader = document.querySelector('.progress-header');
+                if (progressHeader) {
+                    progressHeader.textContent = `Silent Authority Milestones (${progressPercent}% Complete)`;
+                }
+            }
+
+            milestoneCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('click', updateProgress);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Command Attention Without Speaking - Rule Benders Academy</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --rb-black: #000000;
+            --rb-blue: #2B5CE6;
+            --rb-orange: #E85D00;
+            --rb-white: #FFFFFF;
+            --rb-charcoal: #1A1A1A;
+            --rb-gray: #666666;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--rb-black);
+            color: var(--rb-white);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        .lesson-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Progress */
+        .lesson-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--rb-black);
+            border-bottom: 1px solid var(--rb-charcoal);
+            z-index: 100;
+            padding: 10px 0;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: var(--rb-charcoal);
+            border-radius: 2px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--rb-blue), var(--rb-orange));
+            border-radius: 2px;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .lesson-title {
+            text-align: center;
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            margin-top: 80px;
+            padding: 60px 0;
+            text-align: center;
+            background: linear-gradient(135deg, var(--rb-charcoal) 0%, var(--rb-black) 100%);
+        }
+
+        .hero-image {
+            max-width: 500px;
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            margin: 0 auto 30px;
+            box-shadow: 0 20px 40px rgba(43, 92, 230, 0.2);
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--rb-white), var(--rb-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.4rem;
+            color: var(--rb-gray);
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Content Sections */
+        .content-section {
+            padding: 60px 0;
+            border-bottom: 1px solid var(--rb-charcoal);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--rb-blue);
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--rb-gray);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 40px;
+            align-items: start;
+            margin: 40px 0;
+        }
+
+        .content-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .content-text p {
+            margin-bottom: 24px;
+        }
+
+        .content-text h3 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--rb-orange);
+            margin: 30px 0 15px;
+        }
+
+        .content-text h4 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--rb-blue);
+            margin: 25px 0 12px;
+        }
+
+        .content-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 15px 30px rgba(43, 92, 230, 0.15);
+        }
+
+        /* Interactive Elements */
+        .interactive-box {
+            background: var(--rb-charcoal);
+            border: 2px solid var(--rb-blue);
+            border-radius: 12px;
+            padding: 30px;
+            margin: 40px 0;
+        }
+
+        .interactive-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--rb-orange);
+            margin-bottom: 15px;
+        }
+
+        .quiz-question {
+            background: var(--rb-charcoal);
+            border-radius: 12px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+
+        .question-text {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--rb-white);
+        }
+
+        .answer-option {
+            background: var(--rb-black);
+            border: 2px solid var(--rb-gray);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .answer-option:hover {
+            border-color: var(--rb-blue);
+            background: var(--rb-charcoal);
+        }
+
+        .answer-option.correct {
+            border-color: #22c55e;
+            background: rgba(34, 197, 94, 0.1);
+        }
+
+        .answer-option.incorrect {
+            border-color: #ef4444;
+            background: rgba(239, 68, 68, 0.1);
+        }
+
+        .feedback {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .feedback.correct {
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid #22c55e;
+            color: #22c55e;
+        }
+
+        .feedback.incorrect {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid #ef4444;
+            color: #ef4444;
+        }
+
+        /* Reflection Box */
+        .reflection-box {
+            background: linear-gradient(135deg, var(--rb-charcoal), var(--rb-black));
+            border: 2px solid var(--rb-orange);
+            border-radius: 12px;
+            padding: 30px;
+            margin: 40px 0;
+        }
+
+        .reflection-textarea {
+            width: 100%;
+            min-height: 120px;
+            background: var(--rb-black);
+            border: 2px solid var(--rb-gray);
+            border-radius: 8px;
+            padding: 15px;
+            color: var(--rb-white);
+            font-size: 1rem;
+            font-family: inherit;
+            resize: vertical;
+        }
+
+        .reflection-textarea:focus {
+            outline: none;
+            border-color: var(--rb-blue);
+        }
+
+        /* Framework Boxes */
+        .framework-box {
+            background: linear-gradient(135deg, var(--rb-charcoal), var(--rb-black));
+            border-left: 4px solid var(--rb-orange);
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 0 12px 12px 0;
+        }
+
+        .framework-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--rb-orange);
+            margin-bottom: 15px;
+        }
+
+        /* Buttons */
+        .btn {
+            background: linear-gradient(135deg, var(--rb-blue), var(--rb-orange));
+            color: var(--rb-white);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Icons */
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .icon-item {
+            text-align: center;
+            padding: 20px;
+            background: var(--rb-charcoal);
+            border-radius: 12px;
+            transition: transform 0.2s ease;
+        }
+
+        .icon-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .icon-image {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 10px;
+            border-radius: 8px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .lesson-container {
+                padding: 0 15px;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Citation tooltips */
+        .citation {
+            color: var(--rb-blue);
+            text-decoration: none;
+            position: relative;
+            font-size: 0.9em;
+            vertical-align: super;
+        }
+
+        .citation:hover::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--rb-charcoal);
+            color: var(--rb-white);
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            z-index: 1000;
+            border: 1px solid var(--rb-blue);
+        }
+    </style>
+</head>
+<body>
+    <!-- Fixed Header -->
+    <div class="lesson-header">
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="lesson-title">Command Attention Without Speaking</div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="lesson-container">
+            <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-EDVviW_Uug/0f78b8aa09e969e1750edf22da3f62ad7e1f9cb707dbc18c5acf92406c39a9fa85113543c6fea6c0e9c3719b23b5bec70ce71d001d8431ed696e676c8857da2440f0bd8a05ff34edec1d40829cfefc07caabc65aa32e6f0d8322bad7eb25ab93bba61975" alt="Silent Authority Boardroom" class="hero-image">
+            <h1 class="hero-title">Command Attention Without Speaking</h1>
+            <p class="hero-subtitle">Develop the silent authority that makes rooms fall quiet when you enter. Master the premium consultant's secret of commanding respect through strategic presence.</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="lesson-container">
+        
+        <!-- Introduction Section -->
+        <section class="content-section fade-in">
+            <div class="section-header">
+                <h2 class="section-title">The £2,000/Day Secret They Don't Teach in Business School</h2>
+            </div>
+
+            <div class="content-grid">
+                <div class="content-text">
+                    <p>After seventeen years of walking into Treasury boardrooms, Cabinet Office strategy sessions, and private sector C-suites, I learned something that changed everything about how I command premium day rates: <strong>the most powerful consultants in the room are often the quietest ones.</strong></p>
+
+                    <p>Here's what conventional wisdom gets completely wrong. Most aspiring consultants believe they need to be the loudest voice, the most talkative expert, the one dominating every conversation. That's amateur hour thinking that caps you at £500/day rates forever.</p>
+
+                    <p>The reality? Research from Albert Mehrabian proves that only 7% of communication impact comes from your actual words. A massive 55% comes from body language, and 38% from vocal tone<a href="#" class="citation" data-tooltip="Mehrabian's foundational communication research">[1]</a>. This means <strong>93% of your authority happens without speaking</strong>.</p>
+                </div>
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-dQDKiI_J67/df8a0ae1ce843ef5788c76c8d261087d5194257f62e8fdcdc14a9008ec74abd530f495d9a50be3ea596add1b506f4218373c2905682fd9cfa8e3943ecfaf5aa4e1383cb94a472ae8fd32274350e0aaba2277b386e7cad2507e6ce02e2bfb760bdffd70b6" alt="Physical Command Triangle" class="content-image">
+            </div>
+
+            <div class="quiz-question">
+                <div class="question-text">Quick Check: According to Mehrabian's research, what percentage of communication impact comes from body language?</div>
+                <div class="answer-option" onclick="selectAnswer(this, false)">A) 38%</div>
+                <div class="answer-option" onclick="selectAnswer(this, true)">B) 55%</div>
+                <div class="answer-option" onclick="selectAnswer(this, false)">C) 7%</div>
+                <div class="answer-option" onclick="selectAnswer(this, false)">D) 25%</div>
+                <div class="feedback correct">Correct! 55% of communication impact comes from body language, making your physical presence crucial for authority.</div>
+                <div class="feedback incorrect">Not quite. 55% comes from body language - that's why your physical presence matters more than your words.</div>
+            </div>
+        </section>
+
+        <!-- Economics Section -->
+        <section class="content-section fade-in">
+            <div class="section-header">
+                <h2 class="section-title">Why Silent Authority Commands Premium Rates</h2>
+            </div>
+
+            <div class="content-grid">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-5EncQ_z7fg/ae92ed5b80016ca432793c67a182e5e5e539ba2e822426ff8c25e405ee52b5f36254d0545d94e734b6e1411521745c0945c8057333081c198f237cb58b99cb4230c28489583f17faf4d6421bbdadf5c9da998b091d27436c7f7bfa14446e44c3f6483bdb" alt="Premium Consultant Positioning" class="content-image">
+                <div class="content-text">
+                    <p>Let me be blunt: <strong>executive presence accounts for 26% of all promotion decisions</strong><a href="#" class="citation" data-tooltip="Harvard Business Review research on executive presence">[2]</a>. Not technical skills. Not years of experience. Not even results. Physical gravitas and silent command determine a quarter of all career advancement decisions.</p>
+
+                    <p>This isn't soft skills fluff. This is hard economics. When you master silent authority, you position yourself in the top tier where day rates start at £1,000 and climb to £5,000. You become the consultant clients remember, reference, and rehire—not because you talked the most, but because your mere presence felt valuable.</p>
+
+                    <p>Here's the counterintuitive truth I learned billing £2,000/day at the Cabinet Office: <strong>silence creates scarcity, and scarcity drives value</strong>. When everyone else is fighting for airtime, the person who speaks strategically—and owns the silence between words—becomes magnetic.</p>
+                </div>
+            </div>
+
+            <div class="interactive-box">
+                <div class="interactive-title">💡 Authority Economics</div>
+                <p>Research shows that gravitas is the most critical component of executive presence, with 67% of senior leaders ranking it above communication skills and appearance. This directly translates to premium positioning and higher day rates.</p>
+            </div>
+        </section>
+
+        <!-- Framework Section -->
+        <section class="content-section fade-in">
+            <div class="section-header">
+                <h2 class="section-title">The Silent Authority Framework</h2>
+                <p class="section-subtitle">Your £1,000+ Day Rate Positioning System</p>
+            </div>
+
+            <div class="content-text">
+                <p>After testing this across dozens of high-stakes client situations—from Ministry of Defence strategy reviews to private equity due diligence—I've distilled silent authority into a practical system any consultant can implement immediately.</p>
+
+                <p><strong>The framework has three core elements:</strong></p>
+            </div>
+
+            <!-- Element 1 -->
+            <div class="framework-box">
+                <div class="framework-title">Element 1: Physical Command Positioning</div>
+                <div class="content-grid">
+                    <div class="content-text">
+                        <p>Your body language speaks before you do, and it determines whether clients see you as a £500/day implementer or a £2,000/day strategist. This isn't about fake confidence or power posing pseudoscience. This is about deliberate physical positioning that signals premium value.</p>
+
+                        <h4>Strategic Spatial Ownership:</h4>
+                        <p>Walk into every client meeting like you belong in the most expensive chair in the room. Take up appropriate space without apology. Plant your feet shoulder-width apart. Keep your shoulders back and spine straight—not military rigid, but confidently centered.</p>
+
+                        <h4>The Authority Triangle:</h4>
+                        <p>Position your body to create what I call the authority triangle—feet planted, hands visible and relaxed, eyes making steady contact. This triangle becomes your base of power. Every movement should be intentional, not fidgety or reactive.</p>
+                    </div>
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-bWAhchlJub/49278f9f13f0ab2bda562a6a693dd178fab4a30bc2d893f4968fe0022bd26f8cf180152df5beba63b97dd82d360c5c864a11c3c2deb4ffe30dbbe8c4383cb7d9d90e114e156dee0aa25b84be1a01a71008c4a5174550e3b51c816bcb944de1ab90577359" alt="Authority Spatial Command" class="content-image">
+                </div>
+            </div>
+
+            <div class="quiz-question">
+                <div class="question-text">What does "Strategic Spatial Ownership" mean in the context of executive presence?</div>
+                <div class="answer-option" onclick="selectAnswer(this, false)">A) Taking up as much physical space as possible</div>
+                <div class="answer-option" onclick="selectAnswer(this, true)">B) Claiming appropriate space with confident positioning without apology</div>
+                <div class="answer-option" onclick="selectAnswer(this, false)">C) Standing in the center of every room</div>
+                <div class="answer-option" onclick="selectAnswer(this, false)">D) Moving around constantly to maintain attention</div>
+                <div class="feedback correct">Exactly right! It's about confidently claiming appropriate space, not dominating or apologizing for your presence.</div>
+                <div class="feedback incorrect">Strategic Spatial Ownership is about confidently claiming appropriate space with purposeful positioning, not dominating the room.</div>
+            </div>
+
+            <!-- Element 2 -->
+            <div class="framework-box">
+                <div class="framework-title">Element 2: The Strategic Silence Toolkit</div>
+                <div class="content-grid">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-fByAFphLYK/a2c42367c4a944169ff6448c7e7f19a46d2cd06ce38717886e805c3bccbf7d90161b5b54a8803696cc17ad0613d0c5a550c7c53f65430ec86d2968eab239b27efde6b68bad70ff7b7296f7a3856be867cd62a47d057c9a1e9350d87dd836d09bbf91d6de" alt="Strategic Silence Visualization" class="content-image">
+                    <div class="content-text">
+                        <p>Silence isn't empty space—it's a precision tool for controlling conversation flow, creating anticipation, and positioning yourself as the authority worth waiting for.</p>
+
+                        <h4>The Executive Pause:</h4>
+                        <p>Before responding to any client question, take a deliberate 2-3 second pause. This does three things: it shows you're considering their question seriously, it builds anticipation for your response, and it demonstrates confidence that you don't need to rush or fill every moment with noise.</p>
+
+                        <h4>The Synthesis Silence:</h4>
+                        <p>After someone finishes speaking, count to three before responding. Use this space to synthesize what they've said, then speak with considered authority. This positions you as the thoughtful strategist, not the reactive commentator.</p>
+
+                        <h4>Strategic Question Absorption:</h4>
+                        <p>When asked a challenging question, don't immediately deflect or defend. Absorb it visibly. Nod slightly. Pause. Then provide a measured, authoritative response. This approach turns difficult moments into demonstrations of composure and competence.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Element 3 -->
+            <div class="framework-box">
+                <div class="framework-title">Element 3: Gravitas Through Strategic Minimalism</div>
+                <div class="content-grid">
+                    <div class="content-text">
+                        <p>The most expensive consultants say less but mean more. Every word carries weight. Every gesture serves a purpose. Every moment of silence creates value.</p>
+
+                        <h4>The Rule of Strategic Scarcity:</h4>
+                        <p>Speak 30% less than you think you should. When others are competing for airtime, your restraint makes your eventual contributions more impactful. Clients start anticipating your input instead of tuning it out.</p>
+
+                        <h4>Value-Dense Communication:</h4>
+                        <p>When you do speak, make every sentence count. Eliminate filler words, qualifiers, and unnecessary preambles. Start with your conclusion, then provide supporting rationale. This reverse structure positions you as someone who thinks strategically and communicates efficiently.</p>
+
+                        <h4>The Authority Anchor:</h4>
+                        <p>In group discussions, position yourself as the person who synthesizes, clarifies, and moves conversations forward. Listen actively, then provide the perspective that helps others understand what they've actually been discussing. This makes you the intellectual center of gravity.</p>
+                    </div>
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-VW129FxyJl/f47c8e3aaefc6cb5ce8a78080d411dd1c3f755ab358d86365798380e5b84103331a2b3272f92957f731b50ca46d7883ee70eb11e7ee5f7bd102ba1329c7ccb3fa8731abd28d0f8ed7bf2afccacb5b45a178ef085103dbcebdd0d52fe3743121316459255" alt="Gravitas Through Minimalism" class="content-image">
+                </div>
+            </div>
+        </section>
+
+        <!-- Implementation Section -->
+        <section class="content-section fade-in">
+            <div class="section-header">
+                <h2 class="section-title">Your 48-Hour Silent Authority Test</h2>
+            </div>
+
+            <div class="content-text">
+                <p>Theory means nothing without practice. Here's how to implement silent authority in your next client interaction:</p>
+            </div>
+
+            <div class="icon-grid">
+                <div class="icon-item">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-jOWEhuPque/32f77969c2654e6ff6f60b75d7f8cc3e10bfcb88319009149cf1fd16cb2314dc592850e0ce5fc6a283ab1aaf195ff509c75698e78b997ecce2eee6c4e94503b769e8a13cafabe61cd33b2bd73f8d6233040188fa7f8369832f38bcf5804dc63d9ff19654" alt="Authority Triangle" class="icon-image">
+                    <div>Authority Triangle</div>
+                </div>
+                <div class="icon-item">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-TH4l0h_glW/6f6b0b45064aca8058c8a709a1439dc5ccd1225fa9fb9ce5aacbfbfc4a3c5b1c6484046b4699282710ee586de4990aaa1fb6ebaf135fb8dc54f0ccc6a424ca32907aee6a4d1c04ee27bf535ca38f0401a9a97e55a0f25c6684260c7527eeed4761feb861" alt="Strategic Pause" class="icon-image">
+                    <div>Executive Pause</div>
+                </div>
+                <div class="icon-item">
+                    <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-Nbt4J-kjqG/48f8f12036c38a94457e4b583568d23f06cb5718c66681d91bde62f36b881d2c05c2713942cd36b2ab53a5c2a49c9bff39f1b4db3a35073077fe27a041646e04981b2760adf9cc2fffbce93e7e80505dee8edac43a72d78e213e2185bba6ea4920a30ffe" alt="Strategic Scarcity" class="icon-image">
+                    <div>Strategic Scarcity</div>
+                </div>
+            </div>
+
+            <div class="framework-box">
+                <div class="framework-title">Implementation Steps:</div>
+                <p><strong>Pre-Meeting Preparation:</strong> Before your next client meeting, practice the authority triangle positioning. Stand in front of a mirror and adjust your posture until you look like someone worth £1,000/day. Your physical presence should say "premium consultant" before you speak.</p>
+
+                <p><strong>The First Five Minutes:</strong> Enter the meeting with deliberate pace. Claim your space confidently. Make solid eye contact with every person as you're introduced. Use the executive pause before your first contribution. Your opening moments set the tone for everything that follows.</p>
+
+                <p><strong>Strategic Silence Implementation:</strong> Count your words. For every statement someone else makes, let them finish completely, pause for 2-3 seconds, then respond with half the words you normally would use. Watch how this changes the dynamic—people will start listening more carefully to your reduced but more impactful contributions.</p>
+            </div>
+
+            <div class="reflection-box">
+                <div class="interactive-title">🎯 Personal Authority Assessment</div>
+                <p>Reflect on your current presence in professional settings:</p>
+                <textarea class="reflection-textarea" placeholder="Write about a recent meeting where you felt you commanded attention (or wished you had). What would you do differently using the Silent Authority Framework?"></textarea>
+                <button class="btn" onclick="saveReflection()">Save Reflection</button>
+            </div>
+        </section>
+
+        <!-- Economics Section -->
+        <section class="content-section fade-in">
+            <div class="section-header">
+                <h2 class="section-title">The Economics of Executive Presence</h2>
+            </div>
+
+            <div class="content-grid">
+                <div class="content-text">
+                    <p>Let me connect this directly to your day rate positioning, because that's what actually matters. <strong>Executive presence isn't about feeling good—it's about earning more</strong>.</p>
+
+                    <p>Consultants who master silent authority command premium rates because they position themselves as senior advisors, not junior implementers. They become the consultants clients call for strategy, not execution. They earn referrals based on presence and judgment, not just technical skills.</p>
+
+                    <p>The research is clear: <strong>first impressions form within 0.1 seconds and influence interactions for months</strong><a href="#" class="citation" data-tooltip="Princeton psychological research on first impressions">[4]</a>. Your silent authority—or lack of it—determines whether potential clients see you as a £500/day task executor or a £2,000/day strategic advisor within the first ten seconds of meeting you.</p>
+                </div>
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-ANSRrhWDy0/da0d3d6986e765b70d5b7a80c7c4e08ca606edae1797ae6416361e6d5759cac6dc75a16edaf757f25d92588bd47186c1e52507ce5fc0d45b693c64f3cddc80bf969bd7460c300be13091710c4fdb0e9ac6773eadcf41c90ce8e43d87c171d0edc8ae2bc7" alt="First Impression Authority" class="content-image">
+            </div>
+
+            <div class="quiz-question">
+                <div class="question-text">How quickly do first impressions form according to research?</div>
+                <div class="answer-option" onclick="selectAnswer(this, false)">A) Within 7 seconds</div>
+                <div class="answer-option" onclick="selectAnswer(this, true)">B) Within 0.1 seconds</div>
+                <div class="answer-option" onclick="selectAnswer(this, false)">C) Within 30 seconds</div>
+                <div class="answer-option" onclick="selectAnswer(this, false)">D) Within 3 seconds</div>
+                <div class="feedback correct">Correct! First impressions form incredibly quickly - within just 0.1 seconds - making your immediate presence crucial.</div>
+                <div class="feedback incorrect">First impressions form even faster than that - within just 0.1 seconds according to Princeton research.</div>
+            </div>
+
+            <div class="interactive-box">
+                <div class="interactive-title">🎯 The Silent Authority Challenge</div>
+                <p>For the next week, implement one element of this framework in every professional interaction. Start with the authority triangle—physical positioning that signals premium consultant status. Notice how people respond differently when you occupy space with confidence instead of apologizing for your presence.</p>
+                <p>Then add strategic silence. Use the executive pause. Let conversations breathe. Stop filling every moment with words and start creating space for your authority to manifest.</p>
+            </div>
+        </section>
+
+        <!-- Final Assessment -->
+        <section class="content-section fade-in">
+            <div class="section-header">
+                <h2 class="section-title">Master the Positioning Game</h2>
+            </div>
+
+            <div class="content-grid">
+                <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-ZLx3ToMiJh/cce936a35c7067d0df8c030b4cd294a992f054aecb99dca56267706a4a2017487710ba527d41dd7aa5f7a63fc98b51dc9618a239e95efac49c3cb7331881cf5ca304a1e18289a6475df0f27842ce71eab144316ef859b0d86ce7c569e18ff000" alt="Silent Authority Mastery" class="content-image">
+                <div class="content-text">
+                    <p><strong>This is the difference between consultants who struggle for recognition and those who command attention without speaking</strong>. Master silent authority, and you master the positioning game that determines whether you earn £500/day or £2,000/day.</p>
+
+                    <p>The choice is yours. Stay in the noise with everyone else fighting for attention, or step into the sophisticated silence where premium consultants operate.</p>
+
+                    <p>Silent authority isn't about being quiet—it's about being so confident in your value that you don't need to oversell it. That confidence, that presence, that strategic restraint? <strong>That's what £1,000+ day rate consultants understand, and what everyone else is still trying to figure out</strong>.</p>
+                </div>
+            </div>
+
+            <div class="quiz-question">
+                <div class="question-text">Complete this statement: "Silent authority isn't about being quiet—it's about..."</div>
+                <div class="answer-option" onclick="selectAnswer(this, false)">A) Being mysterious and aloof</div>
+                <div class="answer-option" onclick="selectAnswer(this, true)">B) Being so confident in your value that you don't need to oversell it</div>
+                <div class="answer-option" onclick="selectAnswer(this, false)">C) Avoiding difficult conversations</div>
+                <div class="answer-option" onclick="selectAnswer(this, false)">D) Letting others do all the talking</div>
+                <div class="feedback correct">Perfect! Silent authority is about confidence in your value, not being mysterious or avoiding communication.</div>
+                <div class="feedback incorrect">Silent authority is about being so confident in your value that you don't need to oversell it - not about being mysterious or avoiding communication.</div>
+            </div>
+        </section>
+
+        <!-- Action Plan -->
+        <section class="content-section fade-in">
+            <div class="interactive-box">
+                <div class="interactive-title">🚀 Your Silent Authority Action Plan</div>
+                <p>Based on this lesson, create your personal implementation strategy:</p>
+                
+                <div style="margin: 20px 0;">
+                    <h4 style="color: var(--rb-orange);">This Week:</h4>
+                    <textarea class="reflection-textarea" placeholder="What specific silent authority techniques will you practice this week?"></textarea>
+                </div>
+                
+                <div style="margin: 20px 0;">
+                    <h4 style="color: var(--rb-orange);">Next Client Meeting:</h4>
+                    <textarea class="reflection-textarea" placeholder="How will you apply the Authority Triangle and Executive Pause in your next client interaction?"></textarea>
+                </div>
+                
+                <div style="margin: 20px 0;">
+                    <h4 style="color: var(--rb-orange);">Success Metrics:</h4>
+                    <textarea class="reflection-textarea" placeholder="How will you measure whether you're developing silent authority? What changes do you expect to see?"></textarea>
+                </div>
+                
+                <button class="btn" onclick="completeLesson()">Complete Lesson</button>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Progress tracking
+        function updateProgress() {
+            const sections = document.querySelectorAll('.content-section');
+            const totalSections = sections.length;
+            let visibleSections = 0;
+
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                if (rect.top < window.innerHeight * 0.8) {
+                    visibleSections++;
+                }
+            });
+
+            const progress = Math.min((visibleSections / totalSections) * 100, 100);
+            document.getElementById('progressFill').style.width = progress + '%';
+        }
+
+        // Scroll animations
+        function handleScrollAnimations() {
+            const elements = document.querySelectorAll('.fade-in');
+            elements.forEach(element => {
+                const rect = element.getBoundingClientRect();
+                if (rect.top < window.innerHeight * 0.8) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+
+        // Quiz functionality
+        function selectAnswer(element, isCorrect) {
+            const question = element.parentNode;
+            const options = question.querySelectorAll('.answer-option');
+            const correctFeedback = question.querySelector('.feedback.correct');
+            const incorrectFeedback = question.querySelector('.feedback.incorrect');
+
+            // Clear previous selections
+            options.forEach(option => {
+                option.classList.remove('correct', 'incorrect');
+            });
+
+            // Hide previous feedback
+            correctFeedback.style.display = 'none';
+            incorrectFeedback.style.display = 'none';
+
+            // Mark correct answer and show feedback
+            if (isCorrect) {
+                element.classList.add('correct');
+                correctFeedback.style.display = 'block';
+            } else {
+                element.classList.add('incorrect');
+                // Also show correct answer
+                options.forEach(option => {
+                    if (option !== element && option.onclick.toString().includes('true')) {
+                        option.classList.add('correct');
+                    }
+                });
+                incorrectFeedback.style.display = 'block';
+            }
+        }
+
+        // Save reflection
+        function saveReflection() {
+            alert('Reflection saved! Continue applying these insights in your professional interactions.');
+        }
+
+        // Complete lesson
+        function completeLesson() {
+            alert('Congratulations! You\'ve completed "Command Attention Without Speaking". Your silent authority journey begins now.');
+        }
+
+        // Event listeners
+        window.addEventListener('scroll', () => {
+            updateProgress();
+            handleScrollAnimations();
+        });
+
+        // Initial setup
+        document.addEventListener('DOMContentLoaded', () => {
+            updateProgress();
+            handleScrollAnimations();
+        });
+    </script>
+</body>
+</html>

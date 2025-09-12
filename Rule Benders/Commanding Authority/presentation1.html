@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Command Attention Without Speaking | Rule Benders Academy</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #000000;
+            color: #FFFFFF;
+            overflow: hidden;
+        }
+        
+        .presentation {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+        
+        .slide {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px;
+            text-align: center;
+            position: absolute;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .slide.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .slide.prev {
+            transform: translateX(-100%);
+        }
+        
+        h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, #2B5CE6, #E85D00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+        }
+        
+        h2 {
+            font-size: 3rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #2B5CE6;
+        }
+        
+        h3 {
+            font-size: 2rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            color: #E85D00;
+        }
+        
+        .stat-large {
+            font-size: 8rem;
+            font-weight: 900;
+            color: #E85D00;
+            line-height: 0.8;
+        }
+        
+        .stat-context {
+            font-size: 1.5rem;
+            color: #2B5CE6;
+            margin-top: 1rem;
+        }
+        
+        .framework-item {
+            background: rgba(43, 92, 230, 0.1);
+            border: 2px solid #2B5CE6;
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 1rem;
+            min-width: 300px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .framework-item:hover {
+            background: rgba(43, 92, 230, 0.2);
+            transform: scale(1.05);
+        }
+        
+        .framework-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            width: 100%;
+            max-width: 1200px;
+        }
+        
+        .hero-image {
+            width: 400px;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 20px;
+            margin: 2rem 0;
+            border: 3px solid #2B5CE6;
+        }
+        
+        .technique-visual {
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin: 1rem 0;
+            border: 2px solid #E85D00;
+        }
+        
+        .navigation {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            width: 60px;
+            height: 60px;
+            background: #2B5CE6;
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-btn:hover {
+            background: #E85D00;
+            transform: scale(1.1);
+        }
+        
+        .slide-counter {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: rgba(43, 92, 230, 0.2);
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+        }
+        
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        
+        .reveal.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .bullet-point {
+            font-size: 1.5rem;
+            margin: 1rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .bullet-point::before {
+            content: "▶";
+            color: #E85D00;
+            margin-right: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .slide { padding: 30px 20px; }
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 2rem; }
+            .stat-large { font-size: 4rem; }
+            .hero-image { width: 250px; height: 250px; }
+            .technique-visual { width: 200px; height: 200px; }
+            .framework-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation">
+        <div class="slide-counter">
+            <span id="current-slide">1</span> / <span id="total-slides">8</span>
+        </div>
+
+        <!-- Slide 1: Title -->
+        <div class="slide active">
+            <h1>Command Attention<br>Without Speaking</h1>
+            <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-EDVviW_Uug/0f78b8aa09e969e1750edf22da3f62ad7e1f9cb707dbc18c5acf92406c39a9fa85113543c6fea6c0e9c3719b23b5bec70ce71d001d8431ed696e676c8857da2440f0bd8a05ff34edec1d40829cfefc07caabc65aa32e6f0d8322bad7eb25ab93bba61975" alt="Silent Authority Boardroom" class="hero-image">
+            <h3>The Silent Authority System</h3>
+            <p class="stat-context">Will Richardson | Rule Benders Academy</p>
+        </div>
+
+        <!-- Slide 2: The Reality -->
+        <div class="slide">
+            <div class="stat-large">93%</div>
+            <h2>of authority happens<br>without speaking</h2>
+            <div class="reveal">
+                <div class="bullet-point">7% Words</div>
+                <div class="bullet-point">38% Vocal Tone</div>
+                <div class="bullet-point">55% Body Language</div>
+            </div>
+            <p class="stat-context">Mehrabian's Communication Research</p>
+        </div>
+
+        <!-- Slide 3: Executive Presence Stats -->
+        <div class="slide">
+            <div class="stat-large">26%</div>
+            <h2>of promotion decisions</h2>
+            <p class="stat-context">determined by executive presence</p>
+            <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-VW129FxyJl/f47c8e3aaefc6cb5ce8a78080d411dd1c3f755ab358d86365798380e5b84103331a2b3272f92957f731b50ca46d7883ee70eb11e7ee5f7bd102ba1329c7ccb3fa8731abd28d0f8ed7bf2afccacb5b45a178ef085103dbcebdd0d52fe3743121316459255" alt="Gravitas Through Minimalism" class="technique-visual">
+        </div>
+
+        <!-- Slide 4: Framework Overview -->
+        <div class="slide">
+            <h2>Silent Authority Framework</h2>
+            <div class="framework-grid">
+                <div class="framework-item reveal">
+                    <h3>Physical Command</h3>
+                    <p>Authority Triangle Positioning</p>
+                </div>
+                <div class="framework-item reveal">
+                    <h3>Strategic Silence</h3>
+                    <p>Executive Pause Mastery</p>
+                </div>
+                <div class="framework-item reveal">
+                    <h3>Gravitas Minimalism</h3>
+                    <p>Value-Dense Communication</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Physical Command -->
+        <div class="slide">
+            <h2>Physical Command</h2>
+            <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-dQDKiI_J67/df8a0ae1ce843ef5788c76c8d261087d5194257f62e8fdcdc14a9008ec74abd530f495d9a50be3ea596add1b506f4218373c2905682fd9cfa8e3943ecfaf5aa4e1383cb94a472ae8fd32274350e0aaba2277b386e7cad2507e6ce02e2bfb760bdffd70b6" alt="Authority Triangle" class="technique-visual">
+            <div class="reveal">
+                <div class="bullet-point">Shoulders Back</div>
+                <div class="bullet-point">Feet Planted</div>
+                <div class="bullet-point">Strategic Eye Contact</div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Strategic Silence -->
+        <div class="slide">
+            <h2>Strategic Silence</h2>
+            <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-oW8Ei_RS_K/3ae1459d991eeb8549281e7e0e554adbeb039fe55e5a79a385fcabfbb60396c238df70d3df5300c03403a5257bd7bac2f151ee5d730219d9c41c3bd3c98a7c1c72bc85fe2c6301b874463391beffa9fdd758a911932b9ee402221a67cf7a4c593d85974e" alt="Executive Pause" class="technique-visual">
+            <div class="reveal">
+                <div class="bullet-point">2-3 Second Pause</div>
+                <div class="bullet-point">Synthesis Silence</div>
+                <div class="bullet-point">Question Absorption</div>
+            </div>
+        </div>
+
+        <!-- Slide 7: The Economics -->
+        <div class="slide">
+            <div class="stat-large">£1000+</div>
+            <h2>day rate positioning</h2>
+            <div class="reveal">
+                <p class="stat-context">Silent authority positions you as senior advisor</p>
+                <p class="stat-context">Not junior implementer</p>
+            </div>
+            <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-5EncQ_z7fg/ae92ed5b80016ca432793c67a182e5e5e539ba2e822426ff8c25e405ee52b5f36254d0545d94e734b6e1411521745c0945c8057333081c198f237cb58b99cb4230c28489583f17faf4d6421bbdadf5c9da998b091d27436c7f7bfa14446e44c3f6483bdb" alt="Premium Positioning" class="technique-visual">
+        </div>
+
+        <!-- Slide 8: Implementation -->
+        <div class="slide">
+            <h2>48-Hour Challenge</h2>
+            <div class="reveal">
+                <div class="bullet-point">Practice Authority Triangle</div>
+                <div class="bullet-point">Use Executive Pause</div>
+                <div class="bullet-point">Speak 30% Less</div>
+                <div class="bullet-point">Track Client Response</div>
+            </div>
+            <img src="https://codahosted.io/docs/LS8jtbvEXB/blobs/bl-ZLx3ToMiJh/cce936a35c7067d0df8b32ef0d8c030b4cd294a992f054aecb99dca56267706a4a2017487710ba527d41dd7aa5f7a63fc98b51dc9618a239e95efac49c3cb7331881cf5ca304a1e18289a6475df0f27842ce71eab144316ef859b0d86ce7c569e18ff000" alt="Silent Authority Mastery" class="technique-visual">
+        </div>
+
+        <div class="navigation">
+            <button class="nav-btn" id="prev-btn">‹</button>
+            <button class="nav-btn" id="next-btn">›</button>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        
+        document.getElementById('total-slides').textContent = totalSlides;
+        
+        function updateSlideCounter() {
+            document.getElementById('current-slide').textContent = currentSlide + 1;
+        }
+        
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.remove('active', 'prev');
+                if (i === index) {
+                    slide.classList.add('active');
+                } else if (i < index) {
+                    slide.classList.add('prev');
+                }
+            });
+            
+            // Trigger reveal animations
+            setTimeout(() => {
+                const reveals = slides[index].querySelectorAll('.reveal');
+                reveals.forEach((reveal, i) => {
+                    setTimeout(() => {
+                        reveal.classList.add('show');
+                    }, i * 300);
+                });
+            }, 300);
+            
+            updateSlideCounter();
+        }
+        
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+                showSlide(currentSlide);
+            }
+        }
+        
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                showSlide(currentSlide);
+            }
+        }
+        
+        // Event listeners
+        document.getElementById('next-btn').addEventListener('click', nextSlide);
+        document.getElementById('prev-btn').addEventListener('click', prevSlide);
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                prevSlide();
+            }
+        });
+        
+        // Initialize first slide
+        showSlide(0);
+    </script>
+</body>
+</html>
