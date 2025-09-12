@@ -13,336 +13,181 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #2d2d2d;
+            color: #e0e0e0;
             min-height: 100vh;
-            padding: 2rem;
+            padding: 20px;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 600px;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            background: #1e1e1e;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         }
 
         h1 {
             text-align: center;
-            color: #333;
-            margin-bottom: 0.5rem;
-            font-size: 2.5rem;
-            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 10px;
+            font-size: 24px;
+            font-weight: 600;
         }
 
         .subtitle {
             text-align: center;
-            color: #666;
-            margin-bottom: 3rem;
-            font-size: 1.1rem;
+            color: #aaa;
+            margin-bottom: 30px;
+            font-size: 14px;
         }
 
-        .files-container {
-            margin-top: 2rem;
+        .tree-container {
+            font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+            font-size: 14px;
+            line-height: 1.6;
         }
 
-        .folder-section {
-            margin-bottom: 3rem;
+        .tree-item {
+            display: block;
+            padding: 4px 0;
+            cursor: pointer;
+            user-select: none;
+            position: relative;
+            transition: background-color 0.15s ease;
         }
 
-        .folder-header {
+        .tree-item:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 3px;
+        }
+
+        .tree-item-content {
             display: flex;
             align-items: center;
-            margin-bottom: 1.5rem;
-            padding: 1rem 1.5rem;
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-            border-radius: 12px;
-            border-left: 4px solid #667eea;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            padding-left: var(--indent, 0px);
         }
 
-        .folder-header:hover {
-            background: linear-gradient(135deg, #e9ecef, #dee2e6);
-            transform: translateX(5px);
+        .expand-icon {
+            width: 16px;
+            height: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 6px;
+            transition: transform 0.2s ease;
+            color: #888;
+            font-size: 12px;
         }
 
-        .folder-icon {
-            font-size: 1.5rem;
-            margin-right: 1rem;
-            transition: transform 0.3s ease;
-        }
-
-        .folder-header.expanded .folder-icon {
+        .expand-icon.expanded {
             transform: rotate(90deg);
         }
 
-        .folder-name {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: #333;
-            flex: 1;
+        .expand-icon.no-children {
+            visibility: hidden;
         }
 
-        .folder-count {
-            background: #667eea;
-            color: white;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
+        .item-icon {
+            margin-right: 8px;
+            font-size: 14px;
         }
 
-        .files-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin-left: 2rem;
-            margin-top: 1rem;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease;
+        .item-name {
+            color: #e0e0e0;
+            font-weight: 400;
         }
 
-        .files-grid.expanded {
-            max-height: 2000px;
-        }
-
-        .file-card {
-            background: white;
-            border-radius: 12px;
-            padding: 1.5rem;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
-            border: 1px solid #e0e0e0;
-        }
-
-        .file-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-        }
-
-        .file-name {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 0.5rem;
-        }
-
-        .file-path {
-            font-size: 0.9rem;
-            color: #888;
-            font-family: 'Monaco', 'Menlo', monospace;
-            margin-bottom: 1rem;
-            background: #f8f9fa;
-            padding: 0.5rem;
-            border-radius: 6px;
-        }
-
-        .file-actions {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .btn {
-            padding: 0.75rem 1.5rem;
-            border: none;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            text-align: center;
-            transition: all 0.3s ease;
+        .item-name.file {
+            color: #b8b8b8;
             cursor: pointer;
-            font-size: 0.9rem;
         }
 
-        .btn-primary {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            flex: 1;
+        .item-name.file:hover {
+            color: #ffffff;
+            text-decoration: underline;
         }
 
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        .tree-children {
+            display: none;
         }
 
-        .btn-secondary {
-            background: #f8f9fa;
-            color: #333;
-            border: 1px solid #dee2e6;
-        }
-
-        .btn-secondary:hover {
-            background: #e9ecef;
+        .tree-children.expanded {
+            display: block;
         }
 
         .loading {
             text-align: center;
-            padding: 3rem;
-            color: #666;
-            font-size: 1.1rem;
+            padding: 40px 20px;
+            color: #888;
+            font-size: 14px;
         }
 
         .no-files {
             text-align: center;
-            padding: 3rem;
-            color: #666;
+            padding: 40px 20px;
+            color: #888;
         }
 
-        .no-files h3 {
-            margin-bottom: 1rem;
-            color: #333;
+        .instructions {
+            margin-top: 30px;
+            padding: 20px;
+            background: #262626;
+            border-radius: 6px;
+            border-left: 3px solid #4a90e2;
         }
 
-        .upload-instruction {
-            background: #f8f9fa;
-            padding: 1.5rem;
-            border-radius: 12px;
-            margin-top: 2rem;
-            border-left: 4px solid #667eea;
+        .instructions h3 {
+            color: #ffffff;
+            margin-bottom: 12px;
+            font-size: 16px;
         }
 
-        .upload-instruction h3 {
-            color: #333;
-            margin-bottom: 1rem;
+        .instructions p, .instructions li {
+            color: #ccc;
+            font-size: 13px;
+            line-height: 1.5;
         }
 
-        .upload-instruction code {
-            background: #e9ecef;
-            padding: 0.2rem 0.5rem;
+        .instructions code {
+            background: #1a1a1a;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+            color: #4a90e2;
+        }
+
+        .instructions pre {
+            background: #1a1a1a;
+            padding: 12px;
             border-radius: 4px;
-            font-family: 'Monaco', 'Menlo', monospace;
-        }
-
-        .upload-instruction pre {
-            background: #f8f9fa;
-            padding: 1rem;
-            border-radius: 8px;
-            border-left: 3px solid #667eea;
-            margin-top: 1rem;
+            margin-top: 10px;
             overflow-x: auto;
-        }
-
-        .upload-instruction pre code {
-            background: none;
-            padding: 0;
-        }
-
-        /* Nested folder tree styles */
-        .folder-tree {
-            display: block;
-            width: 100%;
-        }
-
-        .folder-item {
-            display: flex;
-            align-items: center;
-            padding: 0.4rem 0.5rem;
-            margin: 0.1rem 0;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.2s ease;
-            user-select: none;
-            width: 100%;
-        }
-
-        .folder-item:hover {
-            background: rgba(102, 126, 234, 0.1);
-        }
-
-        .folder-item-content {
-            display: flex;
-            align-items: center;
-            width: 100%;
-        }
-
-        .tree-icon {
-            width: 14px;
-            height: 14px;
-            margin-right: 0.3rem;
-            transition: transform 0.2s ease;
             font-size: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
+            color: #e0e0e0;
         }
 
-        .tree-icon.expanded {
-            transform: rotate(90deg);
+        .instructions ol {
+            padding-left: 20px;
         }
 
-        .item-icon {
-            width: 16px;
-            height: 16px;
-            margin-right: 0.5rem;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .item-name {
-            font-size: 0.9rem;
-            color: #333;
-            font-weight: 500;
-            flex: 1;
-        }
-
-        .file-item-name {
-            color: #666;
-            font-weight: 400;
-        }
-
-        .folder-children {
-            margin-left: 1.2rem;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-        }
-
-        .folder-children.expanded {
-            max-height: 2000px;
-        }
-
-        .folder-item.file-item:hover {
-            background: rgba(102, 126, 234, 0.15);
-            cursor: pointer;
+        .instructions li {
+            margin: 6px 0;
         }
 
         @media (max-width: 768px) {
             .container {
-                padding: 1rem;
-                margin: 1rem;
+                padding: 15px;
+                margin: 10px;
+            }
+            
+            .tree-container {
+                font-size: 13px;
             }
             
             h1 {
-                font-size: 2rem;
-            }
-            
-            .files-grid {
-                grid-template-columns: 1fr;
-                margin-left: 1rem;
-            }
-            
-            .file-actions {
-                flex-direction: column;
-            }
-
-            .folder-header {
-                padding: 0.75rem 1rem;
-            }
-
-            .folder-name {
-                font-size: 1.1rem;
-            }
-
-            .folder-children {
-                margin-left: 1rem;
-                padding-left: 0.5rem;
+                font-size: 20px;
             }
         }
     </style>
@@ -353,46 +198,18 @@
         <p class="subtitle">Client Review Portal</p>
 
         <div id="loading" class="loading">
-            <div>🔍 Discovering HTML files...</div>
+            🔍 Discovering HTML files...
         </div>
 
-        <div id="files-container" class="files-container" style="display: none;"></div>
+        <div id="tree-container" class="tree-container" style="display: none;"></div>
 
         <div id="no-files" class="no-files" style="display: none;">
             <h3>No HTML files found</h3>
             <p>Add your HTML files to the project directory and redeploy to see them here.</p>
         </div>
-
-        <div class="upload-instruction">
-            <h3>How to organize and add files:</h3>
-            <ol>
-                <li>Add <code>.html</code> files to the root directory or organize in folders</li>
-                <li>Create folders like <code>client-a/</code>, <code>prototypes/</code>, <code>mobile/</code></li>
-                <li>Commit and push to GitHub</li>
-                <li>Vercel will automatically redeploy and discover all files</li>
-                <li>Folders will be shown as expandable sections!</li>
-            </ol>
-            <p><strong>Example structure:</strong></p>
-            <pre><code>client-a/
-  ├── landing.html
-  └── checkout.html
-prototypes/
-  ├── mobile-v1.html
-  └── desktop.html
-landing-page.html</code></pre>
-        </div>
     </div>
 
     <script>
-        // List of HTML files to discover (you'll populate this manually or via build script)
-        // For a fully automated solution, you'd need a build step or API endpoint
-        const htmlFiles = [
-            // Add your HTML files here, or use the build script approach below
-            // 'demo1.html',
-            // 'prototype-landing.html',
-            // 'mobile-design.html'
-        ];
-
         async function discoverFiles() {
             // Check if we're running locally (file:// protocol)
             const isLocal = window.location.protocol === 'file:';
@@ -402,208 +219,66 @@ landing-page.html</code></pre>
                     const response = await fetch('/files.json');
                     if (response.ok) {
                         const data = await response.json();
-                        // Force use of nested structure even with existing files.json
                         if (data.nestedStructure) {
                             return data;
                         }
                     }
                 } catch (e) {
-                    console.log('files.json not found, using manual list');
+                    console.log('files.json not found, no files to display');
+                    return { files: [], nestedStructure: {} };
                 }
             }
             
-            // Fallback for local development - manually list some example files
-            const exampleFiles = [
-                'Rule Benders/Business Owner/Web Lesson/BusinessOwnerMindset2.html',
-                'Rule Benders/Business Owner/Web Lesson/BusinessOwnerMindset4.html',
-                'Rule Benders/Business Owner/Web Lesson/BusinessOwnerMindset5.html',
-                'Rule Benders/Business Owner/Web Lesson/BusinessOwnerMindset6.html',
-                'Rule Benders/Business Owner/Web Lesson/BusinessOwnerMindset7.html',
-                'Rule Benders/Business Owner/Web Lesson/BusinessOwnerMindset8.html',
-                'Rule Benders/Business Owner/ROI Based Fees/Web Lesson/one.html',
-                'Jon Random/Amsterdam/Amsterdam.html',
-                'Personal/blog.html'
-            ];
-            
-            // Create nested structure for demo
-            const nestedStructure = {
-                "Rule Benders": {
-                    "Business Owner": {
-                        "Web Lesson": {
-                            "_files": [
-                                'Rule Benders/Business Owner/Web Lesson/BusinessOwnerMindset2.html',
-                                'Rule Benders/Business Owner/Web Lesson/BusinessOwnerMindset4.html',
-                                'Rule Benders/Business Owner/Web Lesson/BusinessOwnerMindset5.html',
-                                'Rule Benders/Business Owner/Web Lesson/BusinessOwnerMindset6.html',
-                                'Rule Benders/Business Owner/Web Lesson/BusinessOwnerMindset7.html',
-                                'Rule Benders/Business Owner/Web Lesson/BusinessOwnerMindset8.html'
-                            ]
-                        },
-                        "ROI Based Fees": {
-                            "Web Lesson": {
-                                "_files": ['Rule Benders/Business Owner/ROI Based Fees/Web Lesson/one.html']
-                            }
-                        }
-                    }
-                },
-                "Jon Random": {
-                    "Amsterdam": {
-                        "_files": ['Jon Random/Amsterdam/Amsterdam.html']
-                    }
-                },
-                "Personal": {
-                    "_files": ['Personal/blog.html']
-                }
-            };
-            
-            return { 
-                files: exampleFiles, 
-                structure: { '_root': [] }, // Legacy structure
-                nestedStructure: nestedStructure
-            };
+            // For local development, return empty structure
+            return { files: [], nestedStructure: {} };
         }
 
-        function createFileCard(file) {
-            const fileName = file.split('/').pop().replace(/\.html$/, '').replace(/[-_]/g, ' ');
-            const fileCard = document.createElement('div');
-            fileCard.className = 'file-card';
+        function createTreeItem(name, isFolder, filePath = null, level = 0) {
+            const item = document.createElement('div');
+            item.className = 'tree-item';
+            item.setAttribute('data-level', level);
             
-            fileCard.innerHTML = `
-                <div class="file-name">${fileName}</div>
-                <div class="file-path">/${file}</div>
-                <div class="file-actions">
-                    <a href="/${file}" class="btn btn-primary" target="_blank">
-                        👁️ Preview
-                    </a>
-                    <a href="/${file}" class="btn btn-secondary">
-                        🔗 Direct Link
-                    </a>
+            const indent = level * 20;
+            
+            item.innerHTML = `
+                <div class="tree-item-content" style="--indent: ${indent}px">
+                    <span class="expand-icon ${isFolder ? '' : 'no-children'}">▶</span>
+                    <span class="item-icon">${isFolder ? '📁' : '📄'}</span>
+                    <span class="item-name ${isFolder ? 'folder' : 'file'}">${name}</span>
                 </div>
             `;
             
-            return fileCard;
-        }
-
-        function createNestedStructure(structure, depth = 0) {
-            if (depth > 5) return null; // Max depth limit
-            
-            const container = document.createElement('div');
-            container.className = 'folder-tree';
-            
-            Object.keys(structure).sort().forEach(key => {
-                const item = structure[key];
-                
-                if (key === '_files' && Array.isArray(item)) {
-                    // It's a files array
-                    item.forEach(file => {
-                        const fileItem = createFileItem(file, depth);
-                        container.appendChild(fileItem);
-                    });
-                } else if (typeof item === 'object' && key !== '_files') {
-                    // It's a nested folder
-                    const folderItem = createFolderItem(key, item, depth);
-                    container.appendChild(folderItem);
-                }
-            });
-            
-            return container;
-        }
-
-        function createFolderItem(name, contents, depth) {
-            const folderDiv = document.createElement('div');
-            folderDiv.className = 'folder-item';
-            
-            const hasSubfolders = Object.keys(contents).some(key => key !== '_files' && typeof contents[key] === 'object');
-            const fileCount = countTotalFiles(contents);
-            
-            folderDiv.innerHTML = `
-                <div class="folder-item-content">
-                    <span class="tree-icon">${hasSubfolders || fileCount > 0 ? '▶' : ''}</span>
-                    <span class="item-icon">📁</span>
-                    <span class="item-name">${name}</span>
-                </div>
-            `;
-            
-            if (hasSubfolders || fileCount > 0) {
+            if (isFolder) {
                 const childrenContainer = document.createElement('div');
-                childrenContainer.className = 'folder-children';
-                childrenContainer.setAttribute('data-depth', depth + 1);
+                childrenContainer.className = 'tree-children';
+                item.appendChild(childrenContainer);
                 
-                // Directly add children without wrapping in another folder-tree div
-                Object.keys(contents).sort().forEach(key => {
-                    const item = contents[key];
-                    
-                    if (key === '_files' && Array.isArray(item)) {
-                        // Add files directly
-                        item.forEach(file => {
-                            const fileItem = createFileItem(file, depth + 1);
-                            childrenContainer.appendChild(fileItem);
-                        });
-                    } else if (typeof item === 'object' && key !== '_files') {
-                        // Add folders directly
-                        const folderItem = createFolderItem(key, item, depth + 1);
-                        childrenContainer.appendChild(folderItem);
-                    }
-                });
+                // Add click handler for folder expansion
+                const expandIcon = item.querySelector('.expand-icon');
+                const itemContent = item.querySelector('.tree-item-content');
                 
-                folderDiv.appendChild(childrenContainer);
-                
-                // Add click handler for expansion
-                const folderContent = folderDiv.querySelector('.folder-item-content');
-                folderContent.addEventListener('click', (e) => {
+                itemContent.addEventListener('click', (e) => {
                     e.stopPropagation();
-                    toggleNestedFolder(folderDiv);
+                    toggleFolder(item);
+                });
+            } else {
+                // Add click handler for files
+                const fileName = item.querySelector('.item-name');
+                fileName.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    if (filePath) {
+                        const encodedPath = encodeURI(filePath);
+                        window.open(`/${encodedPath}`, '_blank');
+                    }
                 });
             }
             
-            return folderDiv;
+            return item;
         }
 
-        function createFileItem(filePath, depth) {
-            const fileDiv = document.createElement('div');
-            fileDiv.className = 'folder-item file-item';
-            
-            const fileName = filePath.split('/').pop().replace(/\.html$/, '').replace(/[-_]/g, ' ');
-            
-            fileDiv.innerHTML = `
-                <div class="folder-item-content">
-                    <span class="tree-icon"></span>
-                    <span class="item-icon">📄</span>
-                    <span class="item-name file-item-name">${fileName}</span>
-                </div>
-            `;
-            
-            // Store the full file path as a data attribute for debugging
-            fileDiv.setAttribute('data-file-path', filePath);
-            
-            // Add click handler to open file directly
-            fileDiv.addEventListener('click', (e) => {
-                e.stopPropagation();
-                const encodedPath = encodeURI(filePath);
-                window.open(`/${encodedPath}`, '_blank');
-            });
-            
-            return fileDiv;
-        }
-
-        function countTotalFiles(structure) {
-            let count = 0;
-            
-            Object.keys(structure).forEach(key => {
-                const item = structure[key];
-                if (key === '_files' && Array.isArray(item)) {
-                    count += item.length;
-                } else if (typeof item === 'object' && key !== '_files') {
-                    count += countTotalFiles(item);
-                }
-            });
-            
-            return count;
-        }
-
-        function toggleNestedFolder(folderDiv) {
-            const childrenContainer = folderDiv.querySelector('.folder-children');
-            const treeIcon = folderDiv.querySelector('.tree-icon');
+        function toggleFolder(folderItem) {
+            const expandIcon = folderItem.querySelector('.expand-icon');
+            const childrenContainer = folderItem.querySelector('.tree-children');
             
             if (!childrenContainer) return;
             
@@ -611,62 +286,52 @@ landing-page.html</code></pre>
             
             if (isExpanded) {
                 childrenContainer.classList.remove('expanded');
-                folderDiv.classList.remove('expanded');
-                if (treeIcon) treeIcon.classList.remove('expanded');
+                expandIcon.classList.remove('expanded');
+                expandIcon.textContent = '▶';
             } else {
                 childrenContainer.classList.add('expanded');
-                folderDiv.classList.add('expanded');
-                if (treeIcon) treeIcon.classList.add('expanded');
+                expandIcon.classList.add('expanded');
+                expandIcon.textContent = '▼';
             }
         }
 
-
-        function createFolderSection(folderPath, files) {
-            const folderSection = document.createElement('div');
-            folderSection.className = 'folder-section';
+        function buildTree(structure, container, level = 0) {
+            if (level > 5) return; // Max 5 levels as requested
             
-            const displayName = folderPath === '_root' ? '📄 Root Files' : `📁 ${folderPath}`;
-            const folderIcon = folderPath === '_root' ? '📄' : '📁';
-            
-            folderSection.innerHTML = `
-                <div class="folder-header" onclick="toggleFolder(this)">
-                    <span class="folder-icon">${folderIcon}</span>
-                    <span class="folder-name">${folderPath === '_root' ? 'Root Files' : folderPath}</span>
-                    <span class="folder-count">${files.length} file${files.length !== 1 ? 's' : ''}</span>
-                </div>
-                <div class="files-grid">
-                </div>
-            `;
-            
-            const filesGrid = folderSection.querySelector('.files-grid');
-            files.forEach(file => {
-                filesGrid.appendChild(createFileCard(file));
+            const sortedKeys = Object.keys(structure).sort((a, b) => {
+                if (a === '_files') return 1;
+                if (b === '_files') return -1;
+                return a.localeCompare(b);
             });
             
-            return folderSection;
-        }
-
-        function toggleFolder(header) {
-            const filesGrid = header.nextElementSibling;
-            const isExpanded = filesGrid.classList.contains('expanded');
-            
-            if (isExpanded) {
-                filesGrid.classList.remove('expanded');
-                header.classList.remove('expanded');
-            } else {
-                filesGrid.classList.add('expanded');
-                header.classList.add('expanded');
-            }
+            sortedKeys.forEach(key => {
+                const item = structure[key];
+                
+                if (key === '_files' && Array.isArray(item)) {
+                    // Add files
+                    item.sort().forEach(filePath => {
+                        const fileName = filePath.split('/').pop().replace(/\.html$/, '');
+                        const fileItem = createTreeItem(fileName, false, filePath, level);
+                        container.appendChild(fileItem);
+                    });
+                } else if (typeof item === 'object' && key !== '_files') {
+                    // Add folders
+                    const folderItem = createTreeItem(key, true, null, level);
+                    container.appendChild(folderItem);
+                    
+                    const childrenContainer = folderItem.querySelector('.tree-children');
+                    buildTree(item, childrenContainer, level + 1);
+                }
+            });
         }
 
         async function loadFiles() {
             const loading = document.getElementById('loading');
-            const container = document.getElementById('files-container');
+            const treeContainer = document.getElementById('tree-container');
             const noFiles = document.getElementById('no-files');
 
             try {
                 const data = await discoverFiles();
-                let structure = data.nestedStructure || data.structure || {};
                 const totalFiles = data.files ? data.files.length : 0;
                 
                 setTimeout(() => {
@@ -677,51 +342,28 @@ landing-page.html</code></pre>
                         return;
                     }
 
-                    container.style.display = 'block';
+                    treeContainer.style.display = 'block';
                     
-                    console.log('Data structure:', data); // Debug log
-                    
-                    // Always try to use nested structure first
                     if (data.nestedStructure && Object.keys(data.nestedStructure).length > 0) {
-                        console.log('Using nested structure'); // Debug log
-                        // Use new nested tree view
-                        const treeContainer = createNestedStructure(structure);
-                        if (treeContainer) {
-                            container.appendChild(treeContainer);
-                        }
-                    } else {
-                        console.log('Using flat structure fallback'); // Debug log
-                        // Fallback to original flat folder view
-                        // Sort folders: root first, then alphabetically
-                        const sortedFolders = Object.keys(structure).sort((a, b) => {
-                            if (a === '_root') return -1;
-                            if (b === '_root') return 1;
-                            return a.localeCompare(b);
-                        });
+                        buildTree(data.nestedStructure, treeContainer);
                         
-                        sortedFolders.forEach(folderPath => {
-                            const files = structure[folderPath];
-                            if (files && files.length > 0) {
-                                const folderSection = createFolderSection(folderPath, files);
-                                container.appendChild(folderSection);
-                                
-                                // Auto-expand if only one folder or if it's root with few files
-                                if (sortedFolders.length === 1 || (folderPath === '_root' && files.length <= 3)) {
-                                    const header = folderSection.querySelector('.folder-header');
-                                    toggleFolder(header);
+                        // Auto-expand first level if there are only a few top-level items
+                        const topLevelFolders = treeContainer.querySelectorAll('[data-level="0"].tree-item');
+                        if (topLevelFolders.length <= 3) {
+                            topLevelFolders.forEach(folder => {
+                                if (folder.querySelector('.tree-children')) {
+                                    toggleFolder(folder);
                                 }
-                            }
-                        });
+                            });
+                        }
                     }
                 }, 800);
                 
             } catch (error) {
-                loading.innerHTML = '<div style="color: #e74c3c;">Error loading files</div>';
+                console.error('Error loading files:', error);
+                loading.innerHTML = '<div style="color: #ff6b6b;">Error loading files</div>';
             }
         }
-
-        // Make toggleFolder available globally
-        window.toggleFolder = toggleFolder;
 
         // Load files when page loads
         document.addEventListener('DOMContentLoaded', loadFiles);

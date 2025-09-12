@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commanding Authority - Section Roundup | Rule Benders Academy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --rule-benders-black: #000000;
+            --strategic-blue: #2B5CE6;
+            --action-orange: #E85D00;
+            --premium-white: #FFFFFF;
+            --charcoal: #1A1A1A;
+            --professional-gray: #666666;
+            --light-gray: #F8F9FA;
+            --border-gray: #E0E0E0;
+            --success-green: #00d084;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--rule-benders-black);
+            background: var(--premium-white);
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--rule-benders-black) 0%, var(--charcoal) 100%);
+            color: var(--premium-white);
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--strategic-blue), var(--action-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header .subtitle {
+            font-size: 1.2rem;
+            color: var(--professional-gray);
+            margin-bottom: 1rem;
+        }
+
+        .header .internal-note {
+            display: inline-block;
+            background: var(--action-orange);
+            color: var(--premium-white);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .content {
+            padding: 4rem 0;
+        }
+
+        .overview {
+            background: var(--light-gray);
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 3rem;
+            border-left: 4px solid var(--strategic-blue);
+        }
+
+        .overview h2 {
+            color: var(--strategic-blue);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .assets-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .asset-card {
+            background: var(--premium-white);
+            border: 1px solid var(--border-gray);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .asset-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--strategic-blue), var(--action-orange));
+        }
+
+        .asset-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+            border-color: var(--strategic-blue);
+        }
+
+        .asset-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .asset-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            font-size: 1.5rem;
+            color: var(--premium-white);
+            font-weight: 600;
+        }
+
+        .asset-icon.web { background: var(--strategic-blue); }
+        .asset-icon.book { background: var(--action-orange); }
+        .asset-icon.presentation { background: var(--success-green); }
+        .asset-icon.infographic { background: #9b59b6; }
+        .asset-icon.workbook { background: #e74c3c; }
+        .asset-icon.social { background: #f39c12; }
+
+        .asset-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--rule-benders-black);
+        }
+
+        .asset-type {
+            font-size: 0.8rem;
+            color: var(--professional-gray);
+            text-transform: uppercase;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .asset-description {
+            color: var(--professional-gray);
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .asset-meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            color: var(--professional-gray);
+        }
+
+        .meta-icon {
+            font-size: 0.8rem;
+        }
+
+        .asset-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--strategic-blue);
+            color: var(--premium-white);
+        }
+
+        .btn-primary:hover {
+            background: #1e4bd4;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--professional-gray);
+            border: 1px solid var(--border-gray);
+        }
+
+        .btn-secondary:hover {
+            background: var(--light-gray);
+            color: var(--rule-benders-black);
+        }
+
+        .usage-notes {
+            background: var(--charcoal);
+            color: var(--premium-white);
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+            border-radius: 12px;
+        }
+
+        .usage-notes h2 {
+            color: var(--strategic-blue);
+            margin-bottom: 1.5rem;
+        }
+
+        .usage-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .usage-item {
+            background: rgba(43, 92, 230, 0.1);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 3px solid var(--strategic-blue);
+        }
+
+        .usage-item h3 {
+            color: var(--strategic-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .assets-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <h1>Commanding Authority</h1>
+            <p class="subtitle">Complete Asset Library & Implementation Guide</p>
+            <div class="internal-note">🔒 Internal Use Only</div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="content">
+            <div class="overview">
+                <h2>Section Overview</h2>
+                <p><strong>Core Concept:</strong> Command attention and respect without saying a word through strategic body language, presence, and non-verbal communication.</p>
+                <p><strong>Target Audience:</strong> Business professionals, leaders, consultants, and entrepreneurs who need to establish authority in high-stakes situations.</p>
+                <p><strong>Key Learning Outcomes:</strong> Master the subtle art of commanding presence, understand power dynamics through posture, and leverage non-verbal cues for immediate credibility.</p>
+            </div>
+
+            <div class="assets-grid">
+                <div class="asset-card">
+                    <div class="asset-header">
+                        <div class="asset-icon web">WL</div>
+                        <div>
+                            <div class="asset-type">Interactive Web Lesson</div>
+                            <div class="asset-title">Core Training Module</div>
+                        </div>
+                    </div>
+                    <div class="asset-description">
+                        Interactive lesson with progressive disclosure, real-time exercises, and immediate application techniques. Features scroll-triggered animations and engagement tracking.
+                    </div>
+                    <div class="asset-meta">
+                        <div class="meta-item">
+                            <span class="meta-icon">⏱️</span>
+                            <span>15-20 min</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-icon">📱</span>
+                            <span>Mobile Optimized</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-icon">🎯</span>
+                            <span>High Engagement</span>
+                        </div>
+                    </div>
+                    <div class="asset-actions">
+                        <a href="webLesson1.html" class="btn btn-primary" target="_blank">
+                            👁️ View Lesson
+                        </a>
+                        <a href="#" class="btn btn-secondary">
+                            📋 Usage Notes
+                        </a>
+                    </div>
+                </div>
+
+                <div class="asset-card">
+                    <div class="asset-header">
+                        <div class="asset-icon book">BL</div>
+                        <div>
+                            <div class="asset-type">Printable Book Lesson</div>
+                            <div class="asset-title">Study Guide Format</div>
+                        </div>
+                    </div>
+                    <div class="asset-description">
+                        Print-optimized lesson formatted for physical workbooks or PDF distribution. Clean typography and structured layout for focused learning.
+                    </div>
+                    <div class="asset-meta">
+                        <div class="meta-item">
+                            <span class="meta-icon">📄</span>
+                            <span>Print Ready</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-icon">🖨️</span>
+                            <span>8.5x11 Format</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-icon">📚</span>
+                            <span>Course Material</span>
+                        </div>
+                    </div>
+                    <div class="asset-actions">
+                        <a href="bookLesson.html" class="btn btn-primary" target="_blank">
+                            👁️ View Lesson
+                        </a>
+                        <a href="#" class="btn btn-secondary">
+                            📄 Print Guide
+                        </a>
+                    </div>
+                </div>
+
+                <div class="asset-card">
+                    <div class="asset-header">
+                        <div class="asset-icon presentation">PR</div>
+                        <div>
+                            <div class="asset-type">Interactive Presentation</div>
+                            <div class="asset-title">Workshop Slides</div>
+                        </div>
+                    </div>
+                    <div class="asset-description">
+                        Full-screen presentation with click-through slides. Perfect for workshops, seminars, or team training sessions. Includes speaker notes and timing guidance.
+                    </div>
+                    <div class="asset-meta">
+                        <div class="meta-item">
+                            <span class="meta-icon">🖼️</span>
+                            <span>Full Screen</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-icon">🎤</span>
+                            <span>Speaker Ready</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-icon">👥</span>
+                            <span>Group Training</span>
+                        </div>
+                    </div>
+                    <div class="asset-actions">
+                        <a href="presentation1.html" class="btn btn-primary" target="_blank">
+                            👁️ View Slides
+                        </a>
+                        <a href="#" class="btn btn-secondary">
+                            🎤 Speaker Notes
+                        </a>
+                    </div>
+                </div>
+
+                <div class="asset-card">
+                    <div class="asset-header">
+                        <div class="asset-icon infographic">IG</div>
+                        <div>
+                            <div class="asset-type">Visual Cheat Sheet</div>
+                            <div class="asset-title">Quick Reference Guide</div>
+                        </div>
+                    </div>
+                    <div class="asset-description">
+                        Visual infographic with key techniques, body language tips, and power positioning strategies. Designed for quick reference and sharing.
+                    </div>
+                    <div class="asset-meta">
+                        <div class="meta-item">
+                            <span class="meta-icon">🎨</span>
+                            <span>Visual Design</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-icon">⚡</span>
+                            <span>Quick Reference</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-icon">📤</span>
+                            <span>Shareable</span>
+                        </div>
+                    </div>
+                    <div class="asset-actions">
+                        <a href="infographicCheatSheet1.html" class="btn btn-primary" target="_blank">
+                            👁️ View Guide
+                        </a>
+                        <a href="#" class="btn btn-secondary">
+                            💾 Download
+                        </a>
+                    </div>
+                </div>
+
+                <div class="asset-card">
+                    <div class="asset-header">
+                        <div class="asset-icon workbook">WB</div>
+                        <div>
+                            <div class="asset-type">Interactive Workbook</div>
+                            <div class="asset-title">Practice Activities</div>
+                        </div>
+                    </div>
+                    <div class="asset-description">
+                        Hands-on activities and exercises for practicing commanding authority techniques. Includes self-assessment tools and progress tracking.
+                    </div>
+                    <div class="asset-meta">
+                        <div class="meta-item">
+                            <span class="meta-icon">✍️</span>
+                            <span>Interactive</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-icon">📊</span>
+                            <span>Self-Assessment</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-icon">🎯</span>
+                            <span>Practice Focus</span>
+                        </div>
+                    </div>
+                    <div class="asset-actions">
+                        <a href="workbookActivity1.html" class="btn btn-primary" target="_blank">
+                            👁️ View Workbook
+                        </a>
+                        <a href="#" class="btn btn-secondary">
+                            📝 Activities Guide
+                        </a>
+                    </div>
+                </div>
+
+                <div class="asset-card">
+                    <div class="asset-header">
+                        <div class="asset-icon social">SM</div>
+                        <div>
+                            <div class="asset-type">Social Media Carousel</div>
+                            <div class="asset-title">Marketing Content</div>
+                        </div>
+                    </div>
+                    <div class="asset-description">
+                        Instagram/LinkedIn carousel format with key insights and visual tips. Optimized for social sharing and lead generation.
+                    </div>
+                    <div class="asset-meta">
+                        <div class="meta-item">
+                            <span class="meta-icon">📱</span>
+                            <span>1080x1080</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-icon">📈</span>
+                            <span>Lead Gen</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-icon">🔄</span>
+                            <span>Shareable</span>
+                        </div>
+                    </div>
+                    <div class="asset-actions">
+                        <a href="social1.html" class="btn btn-primary" target="_blank">
+                            👁️ View Carousel
+                        </a>
+                        <a href="#" class="btn btn-secondary">
+                            📤 Export Tips
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="usage-notes">
+                <h2>Implementation Guidelines</h2>
+                <div class="usage-grid">
+                    <div class="usage-item">
+                        <h3>Content Sequence</h3>
+                        <p>Start with Web Lesson for core concepts, reinforce with Book Lesson, then use Presentation for group delivery.</p>
+                    </div>
+                    <div class="usage-item">
+                        <h3>Audience Targeting</h3>
+                        <p>Web Lesson: Individual learners<br>
+                        Presentation: Workshop attendees<br>
+                        Social: Lead generation prospects</p>
+                    </div>
+                    <div class="usage-item">
+                        <h3>Engagement Strategy</h3>
+                        <p>Use Workbook activities after core lesson delivery to reinforce learning and create practical application opportunities.</p>
+                    </div>
+                    <div class="usage-item">
+                        <h3>Distribution Channels</h3>
+                        <p>LMS: Web Lesson + Workbook<br>
+                        Workshops: Presentation + Book Lesson<br>
+                        Social: Carousel + Infographic</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
