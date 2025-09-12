@@ -232,44 +232,42 @@
 
         /* Nested folder tree styles */
         .folder-tree {
-            margin-left: 0;
+            display: block;
+            width: 100%;
         }
 
         .folder-item {
             display: flex;
             align-items: center;
-            padding: 0.5rem 0.75rem;
-            margin: 0.125rem 0;
-            border-radius: 6px;
+            padding: 0.4rem 0.5rem;
+            margin: 0.1rem 0;
+            border-radius: 4px;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: background-color 0.2s ease;
             user-select: none;
-            position: relative;
+            width: 100%;
         }
 
         .folder-item:hover {
             background: rgba(102, 126, 234, 0.1);
         }
 
-        .folder-item.expanded {
-            background: rgba(102, 126, 234, 0.05);
-        }
-
         .folder-item-content {
             display: flex;
             align-items: center;
-            flex: 1;
+            width: 100%;
         }
 
         .tree-icon {
-            width: 16px;
-            height: 16px;
-            margin-right: 0.5rem;
+            width: 14px;
+            height: 14px;
+            margin-right: 0.3rem;
             transition: transform 0.2s ease;
-            font-size: 14px;
+            font-size: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-shrink: 0;
         }
 
         .tree-icon.expanded {
@@ -279,17 +277,19 @@
         .item-icon {
             width: 16px;
             height: 16px;
-            margin-right: 0.75rem;
+            margin-right: 0.5rem;
             font-size: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-shrink: 0;
         }
 
         .item-name {
             font-size: 0.9rem;
             color: #333;
             font-weight: 500;
+            flex: 1;
         }
 
         .file-item-name {
@@ -297,44 +297,20 @@
             font-weight: 400;
         }
 
-        .file-count {
-            display: none;
-        }
-
         .folder-children {
-            margin-left: 1.5rem;
-            border-left: 1px solid rgba(102, 126, 234, 0.15);
-            padding-left: 0.75rem;
+            margin-left: 1.2rem;
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.3s ease, opacity 0.2s ease;
-            opacity: 0;
+            transition: max-height 0.3s ease;
         }
 
         .folder-children.expanded {
             max-height: 2000px;
-            opacity: 1;
-            margin-top: 0.25rem;
-            margin-bottom: 0.25rem;
         }
 
-        /* Depth-based indentation and styling */
-        .folder-children[data-depth="1"] { border-left-color: rgba(102, 126, 234, 0.2); }
-        .folder-children[data-depth="2"] { border-left-color: rgba(118, 75, 162, 0.2); }
-        .folder-children[data-depth="3"] { border-left-color: rgba(102, 126, 234, 0.15); }
-        .folder-children[data-depth="4"] { border-left-color: rgba(118, 75, 162, 0.15); }
-        .folder-children[data-depth="5"] { border-left-color: rgba(102, 126, 234, 0.1); }
-
-        /* File preview section */
-        .file-preview-section {
-            margin-top: 2rem;
-            padding-top: 2rem;
-            border-top: 1px solid #e0e0e0;
-        }
-
-        .selected-file {
-            background: rgba(102, 126, 234, 0.1);
-            border: 1px solid rgba(102, 126, 234, 0.3);
+        .folder-item.file-item:hover {
+            background: rgba(102, 126, 234, 0.15);
+            cursor: pointer;
         }
 
         @media (max-width: 768px) {
@@ -418,19 +394,73 @@ landing-page.html</code></pre>
         ];
 
         async function discoverFiles() {
-            try {
-                const response = await fetch('/files.json');
-                if (response.ok) {
-                    const data = await response.json();
-                    return data;
+            // Check if we're running locally (file:// protocol)
+            const isLocal = window.location.protocol === 'file:';
+            
+            if (!isLocal) {
+                try {
+                    const response = await fetch('/files.json');
+                    if (response.ok) {
+                        const data = await response.json();
+                        // Force use of nested structure even with existing files.json
+                        if (data.nestedStructure) {
+                            return data;
+                        }
+                    }
+                } catch (e) {
+                    console.log('files.json not found, using manual list');
                 }
-            } catch (e) {
-                console.log('files.json not found, using manual list');
             }
             
-            // Fallback to manual list - organize into structure
-            const structure = { '_root': htmlFiles };
-            return { files: htmlFiles, structure: structure };
+            // Fallback for local development - manually list some example files
+            const exampleFiles = [
+                'Rule Benders/Business Owner/Web Lesson/BusinessOwnerMindset2.html',
+                'Rule Benders/Business Owner/Web Lesson/BusinessOwnerMindset4.html',
+                'Rule Benders/Business Owner/Web Lesson/BusinessOwnerMindset5.html',
+                'Rule Benders/Business Owner/Web Lesson/BusinessOwnerMindset6.html',
+                'Rule Benders/Business Owner/Web Lesson/BusinessOwnerMindset7.html',
+                'Rule Benders/Business Owner/Web Lesson/BusinessOwnerMindset8.html',
+                'Rule Benders/Business Owner/ROI Based Fees/Web Lesson/one.html',
+                'Jon Random/Amsterdam/Amsterdam.html',
+                'Personal/blog.html'
+            ];
+            
+            // Create nested structure for demo
+            const nestedStructure = {
+                "Rule Benders": {
+                    "Business Owner": {
+                        "Web Lesson": {
+                            "_files": [
+                                'Rule Benders/Business Owner/Web Lesson/BusinessOwnerMindset2.html',
+                                'Rule Benders/Business Owner/Web Lesson/BusinessOwnerMindset4.html',
+                                'Rule Benders/Business Owner/Web Lesson/BusinessOwnerMindset5.html',
+                                'Rule Benders/Business Owner/Web Lesson/BusinessOwnerMindset6.html',
+                                'Rule Benders/Business Owner/Web Lesson/BusinessOwnerMindset7.html',
+                                'Rule Benders/Business Owner/Web Lesson/BusinessOwnerMindset8.html'
+                            ]
+                        },
+                        "ROI Based Fees": {
+                            "Web Lesson": {
+                                "_files": ['Rule Benders/Business Owner/ROI Based Fees/Web Lesson/one.html']
+                            }
+                        }
+                    }
+                },
+                "Jon Random": {
+                    "Amsterdam": {
+                        "_files": ['Jon Random/Amsterdam/Amsterdam.html']
+                    }
+                },
+                "Personal": {
+                    "_files": ['Personal/blog.html']
+                }
+            };
+            
+            return { 
+                files: exampleFiles, 
+                structure: { '_root': [] }, // Legacy structure
+                nestedStructure: nestedStructure
+            };
         }
 
         function createFileCard(file) {
@@ -499,10 +529,22 @@ landing-page.html</code></pre>
                 childrenContainer.className = 'folder-children';
                 childrenContainer.setAttribute('data-depth', depth + 1);
                 
-                const nestedStructure = createNestedStructure(contents, depth + 1);
-                if (nestedStructure) {
-                    childrenContainer.appendChild(nestedStructure);
-                }
+                // Directly add children without wrapping in another folder-tree div
+                Object.keys(contents).sort().forEach(key => {
+                    const item = contents[key];
+                    
+                    if (key === '_files' && Array.isArray(item)) {
+                        // Add files directly
+                        item.forEach(file => {
+                            const fileItem = createFileItem(file, depth + 1);
+                            childrenContainer.appendChild(fileItem);
+                        });
+                    } else if (typeof item === 'object' && key !== '_files') {
+                        // Add folders directly
+                        const folderItem = createFolderItem(key, item, depth + 1);
+                        childrenContainer.appendChild(folderItem);
+                    }
+                });
                 
                 folderDiv.appendChild(childrenContainer);
                 
@@ -534,17 +576,11 @@ landing-page.html</code></pre>
             // Store the full file path as a data attribute for debugging
             fileDiv.setAttribute('data-file-path', filePath);
             
-            // Add click handler to show file details
+            // Add click handler to open file directly
             fileDiv.addEventListener('click', (e) => {
                 e.stopPropagation();
-                console.log('File clicked:', filePath); // Debug log
-                showFilePreview(filePath, fileName);
-                
-                // Update selection
-                document.querySelectorAll('.folder-item.selected').forEach(el => {
-                    el.classList.remove('selected');
-                });
-                fileDiv.classList.add('selected');
+                const encodedPath = encodeURI(filePath);
+                window.open(`/${encodedPath}`, '_blank');
             });
             
             return fileDiv;
@@ -584,42 +620,6 @@ landing-page.html</code></pre>
             }
         }
 
-        function showFilePreview(filePath, fileName) {
-            console.log('showFilePreview called with:', { filePath, fileName }); // Debug log
-            
-            // Remove existing preview
-            const existingPreview = document.querySelector('.file-preview-section');
-            if (existingPreview) {
-                existingPreview.remove();
-            }
-            
-            // Create new preview section
-            const previewSection = document.createElement('div');
-            previewSection.className = 'file-preview-section';
-            
-            // Ensure filePath has proper encoding for URLs
-            const encodedPath = encodeURI(filePath);
-            
-            previewSection.innerHTML = `
-                <div class="file-card">
-                    <div class="file-name">${fileName}</div>
-                    <div class="file-path">/${filePath}</div>
-                    <div class="file-actions">
-                        <a href="/${encodedPath}" class="btn btn-primary" target="_blank">
-                            👁️ Preview
-                        </a>
-                        <a href="/${encodedPath}" class="btn btn-secondary">
-                            🔗 Direct Link
-                        </a>
-                    </div>
-                </div>
-            `;
-            
-            document.getElementById('files-container').appendChild(previewSection);
-            
-            // Scroll to the preview section
-            previewSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }
 
         function createFolderSection(folderPath, files) {
             const folderSection = document.createElement('div');
@@ -679,14 +679,18 @@ landing-page.html</code></pre>
 
                     container.style.display = 'block';
                     
-                    // Check if we have nested structure or flat structure
-                    if (data.nestedStructure) {
+                    console.log('Data structure:', data); // Debug log
+                    
+                    // Always try to use nested structure first
+                    if (data.nestedStructure && Object.keys(data.nestedStructure).length > 0) {
+                        console.log('Using nested structure'); // Debug log
                         // Use new nested tree view
                         const treeContainer = createNestedStructure(structure);
                         if (treeContainer) {
                             container.appendChild(treeContainer);
                         }
                     } else {
+                        console.log('Using flat structure fallback'); // Debug log
                         // Fallback to original flat folder view
                         // Sort folders: root first, then alphabetically
                         const sortedFolders = Object.keys(structure).sort((a, b) => {
