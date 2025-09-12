@@ -98,6 +98,16 @@
             color: #e0e0e0;
             font-weight: 400;
         }
+        
+        .item-name.folder {
+            cursor: pointer;
+            color: #4a90e2;
+        }
+        
+        .item-name.folder:hover {
+            color: #6ba3e8;
+            text-decoration: underline;
+        }
 
         .item-name.file {
             color: #b8b8b8;
@@ -176,6 +186,26 @@
             margin: 6px 0;
         }
 
+        #breadcrumb {
+            padding: 8px 0;
+            border-bottom: 1px solid #333;
+            margin-bottom: 15px !important;
+        }
+
+        #breadcrumb a {
+            color: #4a90e2;
+            text-decoration: none;
+        }
+
+        #breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        #breadcrumb .separator {
+            margin: 0 8px;
+            color: #666;
+        }
+
         @media (max-width: 768px) {
             .container {
                 padding: 15px;
@@ -201,30 +231,14 @@
             🔍 Discovering HTML files...
         </div>
 
-        <div id="tree-container" class="tree-container" style="display: none;"></div>
+        <div id="main-view" style="display: none;">
+            <div id="breadcrumb" style="margin-bottom: 20px; color: #888; font-size: 12px;"></div>
+            <div id="tree-container" class="tree-container"></div>
+        </div>
 
         <div id="no-files" class="no-files" style="display: none;">
             <h3>No HTML files found</h3>
             <p>Add your HTML files to the project directory and redeploy to see them here.</p>
-        </div>
-
-        <div class="instructions">
-            <h3>How to organize and add files:</h3>
-            <ol>
-                <li>Add <code>.html</code> files to the root directory or organize in folders</li>
-                <li>Create folders like <code>client-a/</code>, <code>prototypes/</code>, <code>mobile/</code></li>
-                <li>Commit and push to GitHub</li>
-                <li>Vercel will automatically redeploy and discover all files</li>
-                <li>Folders will be shown as expandable sections!</li>
-            </ol>
-            <p><strong>Example structure:</strong></p>
-            <pre><code>client-a/
-  ├── landing.html
-  └── checkout.html
-prototypes/
-  ├── mobile-v1.html
-  └── desktop.html
-landing-page.html</code></pre>
         </div>
     </div>
 
@@ -383,7 +397,7 @@ landing-page.html</code></pre>
                 } else {
                     // Folder links
                     const folderPath = path.slice(0, index);
-                    return `<a href="#${folderPath.join('/')}" onclick="navigateToFolder(${JSON.stringify(folderPath)})">${part}</a>`;
+                    return `<a href="#${folderPath.join('/')}" onclick="navigateToFolder(${JSON.stringify(folderPath).replace(/"/g, '&quot;')})">${part}</a>`;
                 }
             }).join('<span class="separator">›</span>');
             
@@ -395,7 +409,7 @@ landing-page.html</code></pre>
             
             // Update URL hash
             if (path.length > 0) {
-                window.location.hash = path.join('/');
+                window.location.hash = path.map(segment => encodeURIComponent(segment)).join('/');
             } else {
                 window.location.hash = '';
             }
@@ -426,7 +440,7 @@ landing-page.html</code></pre>
         function parseHashPath() {
             const hash = window.location.hash.substring(1);
             if (hash) {
-                return hash.split('/').filter(segment => segment.length > 0);
+                return hash.split('/').filter(segment => segment.length > 0).map(segment => decodeURIComponent(segment));
             }
             return [];
         }

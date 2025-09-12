@@ -50,6 +50,13 @@
     "Rule Benders/Business Owner/Web Lesson/BusinessOwnerMindset8.html",
     "Rule Benders/Business Owner/Web Lesson/businessOwnerMindset3.html",
     "Rule Benders/Client Value Drivers/Web Lesson/webLesson1.html",
+    "Rule Benders/Commanding Authority/bookLesson.html",
+    "Rule Benders/Commanding Authority/infographicCheatSheet1.html",
+    "Rule Benders/Commanding Authority/presentation1.html",
+    "Rule Benders/Commanding Authority/section-roundup.html",
+    "Rule Benders/Commanding Authority/social1.html",
+    "Rule Benders/Commanding Authority/webLesson1.html",
+    "Rule Benders/Commanding Authority/workbookActivity1.html",
     "Rule Benders/Government Money Map/Government Money 2.html",
     "Rule Benders/Government Money Map/Government Money.html",
     "Rule Benders/HTML Content Editor.html",
@@ -160,6 +167,15 @@
     ],
     "Rule Benders/Client Value Drivers/Web Lesson": [
       "Rule Benders/Client Value Drivers/Web Lesson/webLesson1.html"
+    ],
+    "Rule Benders/Commanding Authority": [
+      "Rule Benders/Commanding Authority/bookLesson.html",
+      "Rule Benders/Commanding Authority/infographicCheatSheet1.html",
+      "Rule Benders/Commanding Authority/presentation1.html",
+      "Rule Benders/Commanding Authority/section-roundup.html",
+      "Rule Benders/Commanding Authority/social1.html",
+      "Rule Benders/Commanding Authority/webLesson1.html",
+      "Rule Benders/Commanding Authority/workbookActivity1.html"
     ],
     "Rule Benders/Government Money Map": [
       "Rule Benders/Government Money Map/Government Money 2.html",
@@ -349,6 +365,17 @@
           ]
         }
       },
+      "Commanding Authority": {
+        "_files": [
+          "Rule Benders/Commanding Authority/bookLesson.html",
+          "Rule Benders/Commanding Authority/infographicCheatSheet1.html",
+          "Rule Benders/Commanding Authority/presentation1.html",
+          "Rule Benders/Commanding Authority/section-roundup.html",
+          "Rule Benders/Commanding Authority/social1.html",
+          "Rule Benders/Commanding Authority/webLesson1.html",
+          "Rule Benders/Commanding Authority/workbookActivity1.html"
+        ]
+      },
       "Government Money Map": {
         "_files": [
           "Rule Benders/Government Money Map/Government Money 2.html",
@@ -436,6 +463,6 @@
       ]
     }
   },
-  "generatedAt": "2025-09-12T02:31:21.218Z",
-  "count": 71
+  "generatedAt": "2025-09-12T07:14:53.685Z",
+  "count": 78
 }
