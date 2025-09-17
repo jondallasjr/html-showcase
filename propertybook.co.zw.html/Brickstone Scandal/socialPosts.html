@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brickstone Scandal: How 45 Harare Families Lost Everything | PropertyBook.co.zw</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Dimension Control System */
+            --slide-width: 1080px;
+            --slide-height: 1080px;
+            --aspect-ratio: 1/1;
+            
+            /* Text Scaling System */
+            --scale: 1;
+            
+            /* Brand Colors */
+            --crisis-red: #D32F2F;
+            --trust-blue: #1976D2;
+            --hope-green: #388E3C;
+            --neutral-charcoal: #424242;
+            --warning-orange: #F57C00;
+            --amber-highlight: #FFA726;
+            
+            /* Text Sizes (Mobile-First Base) */
+            --headline-base: 72px;
+            --subhead-base: 32px;
+            --body-base: 24px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+        
+        .carousel-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Control Panel */
+        .controls {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .control-section {
+            margin-bottom: 20px;
+        }
+        
+        .control-section:last-child {
+            margin-bottom: 0;
+        }
+        
+        .control-section h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--neutral-charcoal);
+            margin-bottom: 12px;
+        }
+        
+        .dimension-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .dimension-btn, .scale-btn {
+            padding: 8px 16px;
+            border: 2px solid var(--trust-blue);
+            background: white;
+            color: var(--trust-blue);
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        
+        .dimension-btn.active, .scale-btn.active {
+            background: var(--trust-blue);
+            color: white;
+        }
+        
+        .scale-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .scale-display {
+            font-weight: 600;
+            color: var(--neutral-charcoal);
+            min-width: 60px;
+        }
+        
+        /* Carousel Layout */
+        .carousel {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .slide-number {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--trust-blue);
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            padding: 20px 10px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            min-height: calc(var(--slide-height) * 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .slide {
+            width: var(--slide-width);
+            height: var(--slide-height);
+            background-size: cover;
+            background-position: center;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: calc(40px * var(--scale));
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        }
+        
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, 
+                rgba(0,0,0,0.7) 0%, 
+                rgba(0,0,0,0.4) 50%, 
+                rgba(0,0,0,0.6) 100%);
+            z-index: 1;
+        }
+        
+        .slide-content {
+            position: relative;
+            z-index: 2;
+            color: white;
+            text-align: left;
+        }
+        
+        .slide h1 {
+            font-size: calc(var(--headline-base) * var(--scale));
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: calc(20px * var(--scale));
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+        
+        .slide h2 {
+            font-size: calc(var(--subhead-base) * var(--scale));
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: calc(15px * var(--scale));
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+        
+        .slide p {
+            font-size: calc(var(--body-base) * var(--scale));
+            font-weight: 400;
+            line-height: 1.4;
+            margin-bottom: calc(15px * var(--scale));
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+        }
+        
+        .slide .highlight {
+            color: var(--amber-highlight);
+            font-weight: 600;
+        }
+        
+        .slide .warning {
+            color: var(--warning-orange);
+            font-weight: 600;
+        }
+        
+        .slide .crisis {
+            color: #ff6b6b;
+            font-weight: 700;
+        }
+        
+        .slide .success {
+            color: #4ecdc4;
+            font-weight: 600;
+        }
+        
+        /* Navigation */
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 0;
+        }
+        
+        .nav-btn {
+            padding: 12px 24px;
+            background: var(--trust-blue);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+        
+        .nav-btn:hover {
+            background: #1565C0;
+        }
+        
+        .nav-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        
+        /* Caption */
+        .caption {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
+        
+        .caption h3 {
+            color: var(--trust-blue);
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .caption p {
+            color: var(--neutral-charcoal);
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+        
+        .caption .hashtags {
+            color: var(--trust-blue);
+            font-weight: 500;
+            margin-top: 15px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            :root {
+                --slide-width: 800px;
+                --slide-height: 800px;
+            }
+        }
+        
+        @media (max-width: 900px) {
+            :root {
+                --slide-width: 600px;
+                --slide-height: 600px;
+            }
+            
+            .carousel {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .slide-number {
+                writing-mode: horizontal-tb;
+                text-orientation: unset;
+                min-height: auto;
+                padding: 10px 20px;
+            }
+        }
+        
+        @media (max-width: 650px) {
+            :root {
+                --slide-width: 90vw;
+                --slide-height: 90vw;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="carousel-container">
+        <!-- Control Panel -->
+        <div class="controls">
+            <div class="control-section">
+                <h3>Platform Dimensions</h3>
+                <div class="dimension-buttons">
+                    <button class="dimension-btn active" data-dimensions="square">Square (1080×1080)</button>
+                    <button class="dimension-btn" data-dimensions="portrait">Portrait (1080×1350)</button>
+                    <button class="dimension-btn" data-dimensions="landscape">Landscape (1200×675)</button>
+                    <button class="dimension-btn" data-dimensions="stories">Stories (1080×1920)</button>
+                </div>
+            </div>
+            
+            <div class="control-section">
+                <h3>Text Scaling Control</h3>
+                <div class="scale-controls">
+                    <button class="scale-btn" data-scale="0.5">50%</button>
+                    <button class="scale-btn" data-scale="0.7">70%</button>
+                    <button class="scale-btn active" data-scale="1">100%</button>
+                    <button class="scale-btn" data-scale="1.3">130%</button>
+                    <button class="scale-btn" data-scale="1.5">150%</button>
+                    <button class="scale-btn" data-scale="2">200%</button>
+                    <span class="scale-display">100%</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Carousel -->
+        <div class="carousel">
+            <div class="slide-number">1/7</div>
+            <div class="slide" id="slide-1" style="background-image: url('https://codahosted.io/docs/9bejBCT96g/blobs/bl-3OczB2Jms4/7615b8371e733128399d7257d953831d327784654d3616b245d17b1e1ca0e01f8a94ed3f85f08f6a9b1d9af86f7090c1bea1a7e170171ff69bcbab575d37f11f67eb77f7f62eb2033eff8481a3b596735188766865faa105f67e3a2446348f771330e6d5')">
+                <div class="slide-content">
+                    <h1>How Brickstone Scandal Left <span class="crisis">45 Harare Families</span> Homeless</h1>
+                    <p>Justice Regis Dembure's verdict ended a <span class="warning">US$1.5 million fraud</span> that demolished dreams and destroyed lives through forged government documents.</p>
+                    <p class="highlight">The complete protection guide every Zimbabwean property buyer must know</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="carousel" style="display: none;">
+            <div class="slide-number">2/7</div>
+            <div class="slide" id="slide-2" style="background-image: url('https://codahosted.io/docs/9bejBCT96g/blobs/bl-tdgwRXu8rf/3c427b56b9648980e946ce14c6b207e47b85b146cd05a6fea8079837d3667ff0ff778042cb7afb9630700cd8117f6297bd154cb92c86fadfddc586e0c995176d4b7f5c5c209dcce3f5442a0c3c2656ceb0b60d27ed4e1b13ec247506a96e8209ae8665aa')">
+                <div class="slide-content">
+                    <h1>The <span class="crisis">Fake Documents</span> That Fooled Everyone</h1>
+                    <p>Brickstone used <span class="warning">forged Ministry letters</span> to sell 52 residential stands worth US$25,000-40,000 each to unsuspecting families.</p>
+                    <p>When Ministry officials confirmed they <span class="crisis">never signed these documents</span>, 45 families had already lost everything.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="carousel" style="display: none;">
+            <div class="slide-number">3/7</div>
+            <div class="slide" id="slide-3" style="background-image: url('https://codahosted.io/docs/9bejBCT96g/blobs/bl-m7gRfCDbv7/363482f4150fb3c17df6b28ed4c208d45cf5f17980dbf0cf6e82c64d00798543c4e4d1fb4dc43722c5a8ae0c4a63f9bd2238317ab56ea5a8886ccf5dd0d9c59ac870196213b2a0647812707670db45f81e92bd9140f425e82cdcfe7e84b64a78cf6b63d6')">
+                <div class="slide-content">
+                    <h1><span class="crisis">US$1.5 Million</span> in Life Savings Lost</h1>
+                    <p>Families paid <span class="warning">US$25,000-40,000 per stand</span>, believing they were making legitimate property investments.</p>
+                    <p>When bulldozers demolished <span class="crisis">30 nearly-complete homes</span>, dreams turned to rubble and families faced homelessness.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="carousel" style="display: none;">
+            <div class="slide-number">4/7</div>
+            <div class="slide" id="slide-4" style="background-image: url('https://codahosted.io/docs/9bejBCT96g/blobs/bl-WWrx9MJM6P/92983137dbce373c1cbe9f4607aefe9cdcb53f565cf6a7e1ccc226f7297f8ee7b252ba8458754f5a7629ae0dc5d8f7cd8c496a035cd3df73037ab8bf43e13e0768f2fd74f04b89377362f0a6adcc327762d1ab9dc57262bfbb02fadd9ec84a9a36f5d9bd')">
+                <div class="slide-content">
+                    <h1>Justice <span class="success">Finally Served</span></h1>
+                    <p>High Court Justice Regis Dembure ordered Brickstone off the land within <span class="highlight">7 days</span> in June 2025.</p>
+                    <p>Directors Lillian Chitanga and Spencer Mabheka face <span class="warning">fraud charges</span> with US$400 bail each - but victims still await compensation.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="carousel" style="display: none;">
+            <div class="slide-number">5/7</div>
+            <div class="slide" id="slide-5" style="background-image: url('https://codahosted.io/docs/9bejBCT96g/blobs/bl-TI9zguax_6/d1aa9a7d67e53d4e1c5a0329a7c3e317f501587ce15f80af810f2a7ca3e49be203ea80fc7d315d59acd9acaf7e1da9f6eff852f705177a8a5841789c44de701f484faecc8f7f373b358324da9b0277d67302ddb7b1147c1cf0a1ea730d498929a0b21c66')">
+                <div class="slide-content">
+                    <h1>How to <span class="success">Protect Yourself</span> From Property Fraud</h1>
+                    <p><span class="highlight">ALWAYS verify documents directly</span> with City of Harare and Ministry officials - never trust copies from sellers.</p>
+                    <p><span class="warning">Red flag:</span> Premium areas at US$5/sqm "special prices" - genuine stands cost US$30-50/sqm in Harare suburbs.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="carousel" style="display: none;">
+            <div class="slide-number">6/7</div>
+            <div class="slide" id="slide-6" style="background-image: url('https://codahosted.io/docs/9bejBCT96g/blobs/bl-N4Ff3jAe42/2b0742e4f5c71be1f81ee54d273b990f574786b5c61f812da35e0921cd8986513557f73f5e263d38a5dc63e683daddc650f189a4e45519db6db735b12e6b34624f6f3589a2f3b66183467dbecc01899a217fe8d9fe2d6553cbc25dac5dac31e69d760497')">
+                <div class="slide-content">
+                    <h1><span class="success">PropertyBook</span> Protection Network</h1>
+                    <p>Zimbabwe's leading platform with <span class="highlight">18+ years experience, 8,000+ verified listings, 2,000+ registered agents</span> across 350 neighborhoods.</p>
+                    <p>Our <span class="success">"No fraudulent listings guarantee"</span> and verification systems prevent Brickstone-style disasters.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="carousel" style="display: none;">
+            <div class="slide-number">7/7</div>
+            <div class="slide" id="slide-7" style="background-image: url('https://codahosted.io/docs/9bejBCT96g/blobs/bl-iNguWmoTJr/b558f150d499ce78425e8f15bb6d41c2b00bda42b738dc535ea0d46c12403b025fce2456d87731f16b2c52b6d430b854f1142bf630a7e40ee284ea650f595d34e655c5b3f844c07b67facf070736bc2861c002519268a7534592c44aedc426ca2e830b08')">
+                <div class="slide-content">
+                    <h1>Your Family's Future <span class="success">Deserves Protection</span></h1>
+                    <p>Don't let your dreams become another Brickstone tragedy. <span class="highlight">Work only with verified PropertyBook agents</span> who protect your investment.</p>
+                    <p class="success">Visit PropertyBook.co.zw today - where 18 years of expertise meets Zimbabwe's largest verified property network.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="nav-buttons">
+            <button class="nav-btn" id="prev-btn" disabled>← Previous</button>
+            <button class="nav-btn" id="next-btn">Next →</button>
+        </div>
+
+        <!-- Caption -->
+        <div class="caption">
+            <h3>The Brickstone Scandal: A Hard-Earned Lesson for All Zimbabwean Property Buyers</h3>
+            <p>The devastating loss of US$1.5 million and 45 family homes through forged documents should serve as a wake-up call. This wasn't just fraud—it was systematic exploitation of families' dreams of homeownership.</p>
+            
+            <p>Justice Regis Dembure's ruling provides accountability, but prevention is always better than cure. Every property transaction in Zimbabwe requires verification through official channels, never relying solely on seller-provided documentation.</p>
+            
+            <p>PropertyBook.co.zw's 18+ years of market leadership and "No fraudulent listings guarantee" offers the professional protection that could have prevented this tragedy. With 8,000+ verified listings and 2,000+ registered agents, we provide the security framework every Zimbabwean family deserves.</p>
+            
+            <p>Don't let shortcuts destroy your family's future. Choose verified professionals who understand that your dreams are worth protecting.</p>
+            
+            <div class="hashtags">#PropertyFraud #Zimbabwe #HarareProperty #PropertyBook #RealEstate #BrickstoneLessons #PropertyProtection #VerifiedAgents #ZimbabweanHomes #PropertySecurity</div>
+        </div>
+    </div>
+
+    <script>
+        // Carousel State Management
+        let currentSlide = 1;
+        const totalSlides = 7;
+        
+        // Dimension Control System
+        const dimensionButtons = document.querySelectorAll('.dimension-btn');
+        const scaleButtons = document.querySelectorAll('.scale-btn');
+        const scaleDisplay = document.querySelector('.scale-display');
+        
+        // Navigation Elements
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const carousels = document.querySelectorAll('.carousel');
+        
+        // Dimension Settings
+        const dimensions = {
+            square: { width: '1080px', height: '1080px', ratio: '1/1' },
+            portrait: { width: '1080px', height: '1350px', ratio: '4/5' },
+            landscape: { width: '1200px', height: '675px', ratio: '16/9' },
+            stories: { width: '1080px', height: '1920px', ratio: '9/16' }
+        };
+        
+        // Initialize Dimension Controls
+        dimensionButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                dimensionButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const format = btn.dataset.dimensions;
+                const settings = dimensions[format];
+                
+                document.documentElement.style.setProperty('--slide-width', settings.width);
+                document.documentElement.style.setProperty('--slide-height', settings.height);
+                document.documentElement.style.setProperty('--aspect-ratio', settings.ratio);
+            });
+        });
+        
+        // Initialize Scale Controls
+        scaleButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                scaleButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const scale = btn.dataset.scale;
+                document.documentElement.style.setProperty('--scale', scale);
+                scaleDisplay.textContent = Math.round(scale * 100) + '%';
+            });
+        });
+        
+        // Navigation Functions
+        function showSlide(slideNumber) {
+            carousels.forEach(carousel => {
+                carousel.style.display = 'none';
+            });
+            
+            carousels[slideNumber - 1].style.display = 'flex';
+            
+            // Update navigation buttons
+            prevBtn.disabled = slideNumber === 1;
+            nextBtn.disabled = slideNumber === totalSlides;
+            
+            currentSlide = slideNumber;
+        }
+        
+        // Navigation Event Listeners
+        prevBtn.addEventListener('click', () => {
+            if (currentSlide > 1) {
+                showSlide(currentSlide - 1);
+            }
+        });
+        
+        nextBtn.addEventListener('click', () => {
+            if (currentSlide < totalSlides) {
+                showSlide(currentSlide + 1);
+            }
+        });
+        
+        // Keyboard Navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft' && currentSlide > 1) {
+                showSlide(currentSlide - 1);
+            } else if (e.key === 'ArrowRight' && currentSlide < totalSlides) {
+                showSlide(currentSlide + 1);
+            }
+        });
+        
+        // Touch/Swipe Support for Mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
+        document.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+        
+        document.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+        
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
+            
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0 && currentSlide < totalSlides) {
+                    // Swiped left - next slide
+                    showSlide(currentSlide + 1);
+                } else if (diff < 0 && currentSlide > 1) {
+                    // Swiped right - previous slide
+                    showSlide(currentSlide - 1);
+                }
+            }
+        }
+        
+        // Initialize carousel
+        showSlide(1);
+    </script>
+</body>
+</html>

@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brickstone Scandal: How 45 Families Lost Everything</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #424242;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+        }
+
+        .infographic {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #D32F2F 0%, #B71C1C 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M0 0h100v100H0z" fill="none"/><path d="M20 20h60v60H20z" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero .subtitle {
+            font-size: 1.4rem;
+            font-weight: 600;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 0;
+            background: #1976D2;
+        }
+
+        .stat-box {
+            padding: 40px 30px;
+            text-align: center;
+            color: white;
+            border-right: 1px solid rgba(255,255,255,0.2);
+            position: relative;
+            background: linear-gradient(45deg, transparent 0%, rgba(255,255,255,0.05) 100%);
+        }
+
+        .stat-box:last-child {
+            border-right: none;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            opacity: 0.9;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .section {
+            padding: 60px 40px;
+        }
+
+        .section-title {
+            font-size: 2.4rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: #424242;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .section-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 6px;
+            height: 60px;
+            background: #D32F2F;
+            border-radius: 3px;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #D32F2F;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+            padding: 25px 30px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            border-left: 4px solid #D32F2F;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -42px;
+            top: 30px;
+            width: 12px;
+            height: 12px;
+            background: #D32F2F;
+            border-radius: 50%;
+            border: 3px solid white;
+        }
+
+        .timeline-date {
+            font-weight: 700;
+            color: #D32F2F;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+
+        .timeline-content {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .protection-steps {
+            display: grid;
+            gap: 25px;
+        }
+
+        .step {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            padding: 30px;
+            background: linear-gradient(135deg, #388E3C 0%, #2E7D32 100%);
+            color: white;
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .step::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 0%, rgba(255,255,255,0.1) 100%);
+            pointer-events: none;
+        }
+
+        .step-number {
+            flex-shrink: 0;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .step-content h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .step-content p {
+            font-weight: 500;
+            opacity: 0.95;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #F57C00 0%, #E65100 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            margin: 40px 0;
+            border-radius: 12px;
+            position: relative;
+        }
+
+        .warning-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .warning-text {
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .cta {
+            background: linear-gradient(135deg, #1976D2 0%, #1565C0 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .cta p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #388E3C;
+            color: white;
+            padding: 18px 40px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background: #2E7D32;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 40px 20px;
+            }
+            
+            .hero h1 {
+                font-size: 2.4rem;
+            }
+            
+            .section {
+                padding: 40px 20px;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .step {
+                padding: 20px;
+            }
+        }
+
+        @media print {
+            .infographic {
+                box-shadow: none;
+                max-width: none;
+            }
+            
+            .cta {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="infographic">
+        <header class="hero">
+            <h1>Fake Papers Cost 45 Families Their Homes</h1>
+            <p class="subtitle">The Brickstone Scandal That Exposed Property Fraud in Zimbabwe</p>
+        </header>
+
+        <div class="stats-grid">
+            <div class="stat-box">
+                <span class="stat-number">45</span>
+                <span class="stat-label">Families Affected</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-number">$1.5M</span>
+                <span class="stat-label">Total Fraud Loss</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-number">52</span>
+                <span class="stat-label">Demolished Homes</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-number">2</span>
+                <span class="stat-label">Directors Arrested</span>
+            </div>
+        </div>
+
+        <section class="section">
+            <h2 class="section-title">How It Happened</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">2023</div>
+                    <div class="timeline-content">Brickstone sells 52 illegal stands using forged government letters</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">July 2023</div>
+                    <div class="timeline-content">City Council discovers fraud, demolishes 52 structures worth millions</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">Sept 2024</div>
+                    <div class="timeline-content">Directors arrested on fraud charges, granted $400 bail each</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">June 2025</div>
+                    <div class="timeline-content">High Court orders Brickstone eviction within 7 days</div>
+                </div>
+            </div>
+        </section>
+
+        <div class="warning-box">
+            <i class="fas fa-exclamation-triangle warning-icon"></i>
+            <p class="warning-text">140 fraud cases reported in Harare, Chitungwiza & Ruwa in 2025 alone</p>
+        </div>
+
+        <section class="section">
+            <h2 class="section-title">Protect Yourself</h2>
+            <div class="protection-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Verify Documents</h3>
+                        <p>Call City of Harare directly to confirm all permits and approvals. Never trust copies alone.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Use Registered Agents</h3>
+                        <p>Work only with EACZ-registered professionals who verify title deeds and ownership.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Check Market Prices</h3>
+                        <p>Genuine serviced stands cost $30-50/sqm. Avoid "special prices" of $5/sqm in premium areas.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Get Legal Advice</h3>
+                        <p>Have a lawyer review all documents before signing. Small cost upfront prevents huge losses.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="cta">
+            <h2>Find Verified Property Professionals</h2>
+            <p>PropertyBook connects you with 2,000+ registered agents from 100+ agencies across Zimbabwe</p>
+            <a href="https://www.propertybook.co.zw" class="cta-button">
+                <i class="fas fa-shield-alt"></i> Find Verified Agents
+            </a>
+        </footer>
+    </div>
+</body>
+</html>

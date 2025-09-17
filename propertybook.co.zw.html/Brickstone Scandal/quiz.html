@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Fraud Protection Quiz - Brickstone Case Study</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+            color: #424242;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .quiz-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .quiz-header {
+            background: linear-gradient(135deg, #1976D2 0%, #1565C0 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .quiz-header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .quiz-header p {
+            opacity: 0.9;
+            font-size: 1rem;
+        }
+        
+        .progress-bar {
+            height: 6px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 3px;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: #388E3C;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        .question-container {
+            padding: 40px;
+            min-height: 400px;
+        }
+        
+        .question {
+            display: none;
+        }
+        
+        .question.active {
+            display: block;
+        }
+        
+        .question-number {
+            color: #1976D2;
+            font-weight: bold;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+        
+        .question-text {
+            font-size: 1.3rem;
+            color: #424242;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+        
+        .scenario {
+            background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+            border-left: 4px solid #F57C00;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 6px;
+        }
+        
+        .scenario h4 {
+            color: #E65100;
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+        
+        .answer-options {
+            display: grid;
+            gap: 12px;
+        }
+        
+        .answer-option {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 18px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .answer-option:hover {
+            border-color: #1976D2;
+            background: #f0f8ff;
+        }
+        
+        .answer-option.selected {
+            border-color: #1976D2;
+            background: #e3f2fd;
+        }
+        
+        .answer-option.correct {
+            border-color: #388E3C;
+            background: #e8f5e8;
+        }
+        
+        .answer-option.incorrect {
+            border-color: #D32F2F;
+            background: #ffebee;
+        }
+        
+        .feedback {
+            display: none;
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid;
+        }
+        
+        .feedback.correct {
+            background: #e8f5e8;
+            border-color: #388E3C;
+            color: #2e7d32;
+        }
+        
+        .feedback.incorrect {
+            background: #ffebee;
+            border-color: #D32F2F;
+            color: #c62828;
+        }
+        
+        .feedback-title {
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        
+        .quiz-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background: #1976D2;
+            color: white;
+        }
+        
+        .btn-primary:hover:not(:disabled) {
+            background: #1565C0;
+        }
+        
+        .btn-primary:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .quiz-score {
+            text-align: center;
+            font-weight: bold;
+            color: #424242;
+        }
+        
+        .results-container {
+            display: none;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .results-score {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .results-score.excellent {
+            color: #388E3C;
+        }
+        
+        .results-score.good {
+            color: #1976D2;
+        }
+        
+        .results-score.needs-improvement {
+            color: #F57C00;
+        }
+        
+        .results-score.poor {
+            color: #D32F2F;
+        }
+        
+        .results-message {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: #424242;
+        }
+        
+        .cta-box {
+            background: linear-gradient(135deg, #1976D2 0%, #1565C0 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 8px;
+            margin-top: 25px;
+        }
+        
+        .cta-link {
+            color: #FFE0B2;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .cta-link:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 640px) {
+            body {
+                padding: 10px;
+            }
+            
+            .quiz-header {
+                padding: 20px;
+            }
+            
+            .quiz-header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .question-container {
+                padding: 25px;
+            }
+            
+            .question-text {
+                font-size: 1.1rem;
+            }
+            
+            .quiz-controls {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <div class="quiz-header">
+            <h1>Property Fraud Protection Quiz</h1>
+            <p>Test your knowledge of how to avoid Brickstone-style property scams in Zimbabwe</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+        </div>
+        
+        <div class="question-container" id="questionContainer">
+            <div class="question active" data-question="1">
+                <div class="question-number">Question 1 of 6</div>
+                <div class="question-text">You've found a "perfect" residential stand in Harare's Belvedere area for US$5 per square meter. The seller shows you an official-looking Ministry letter. What's your first action?</div>
+                <div class="scenario">
+                    <h4>Scenario Alert:</h4>
+                    <p>This mirrors the Brickstone case where families paid US$25,000-40,000 for stands based on fake Ministry documents.</p>
+                </div>
+                <div class="answer-options">
+                    <div class="answer-option" data-answer="a">
+                        <strong>A)</strong> Pay immediately to secure this amazing deal before someone else takes it
+                    </div>
+                    <div class="answer-option" data-answer="b">
+                        <strong>B)</strong> Call the Ministry directly to verify the document's authenticity
+                    </div>
+                    <div class="answer-option" data-answer="c">
+                        <strong>C)</strong> Ask the seller for more time to consider
+                    </div>
+                    <div class="answer-option" data-answer="d">
+                        <strong>D)</strong> Check online reviews of the seller
+                    </div>
+                </div>
+                <div class="feedback" id="feedback1">
+                    <div class="feedback-title"></div>
+                    <div class="feedback-text"></div>
+                </div>
+            </div>
+            
+            <div class="question" data-question="2">
+                <div class="question-number">Question 2 of 6</div>
+                <div class="question-text">A property developer claims they have proper council approval but refuses to let you see the original documents. They say "copies are sufficient for now." How do you respond?</div>
+                <div class="scenario">
+                    <h4>Red Flag Alert:</h4>
+                    <p>Brickstone operated without ANY valid council approval, yet convinced 45 families they were legitimate.</p>
+                </div>
+                <div class="answer-options">
+                    <div class="answer-option" data-answer="a">
+                        <strong>A)</strong> Trust them and proceed with the purchase
+                    </div>
+                    <div class="answer-option" data-answer="b">
+                        <strong>B)</strong> Insist on seeing original documents and independently verifying with Harare City Council
+                    </div>
+                    <div class="answer-option" data-answer="c">
+                        <strong>C)</strong> Ask for a discount due to the inconvenience
+                    </div>
+                    <div class="answer-option" data-answer="d">
+                        <strong>D)</strong> Accept the copies but ask for a guarantee
+                    </div>
+                </div>
+                <div class="feedback" id="feedback2">
+                    <div class="feedback-title"></div>
+                    <div class="feedback-text"></div>
+                </div>
+            </div>
+            
+            <div class="question" data-question="3">
+                <div class="question-text">You're a diaspora buyer shopping for property via WhatsApp. An agent sends photos of beautiful houses and asks for immediate payment to "reserve" your stand. What's your safest approach?</div>
+                <div class="scenario">
+                    <h4>Diaspora Vulnerability:</h4>
+                    <p>40% of property scam reports come from diaspora buyers targeted through social media platforms.</p>
+                </div>
+                <div class="answer-options">
+                    <div class="answer-option" data-answer="a">
+                        <strong>A)</strong> Send the money quickly to secure the property
+                    </div>
+                    <div class="answer-option" data-answer="b">
+                        <strong>B)</strong> Hire a verified legal representative in Zimbabwe to conduct in-person verification
+                    </div>
+                    <div class="answer-option" data-answer="c">
+                        <strong>C)</strong> Ask for more photos as verification
+                    </div>
+                    <div class="answer-option" data-answer="d">
+                        <strong>D)</strong> Video call with the agent to build trust
+                    </div>
+                </div>
+                <div class="feedback" id="feedback3">
+                    <div class="feedback-title"></div>
+                    <div class="feedback-text"></div>
+                </div>
+            </div>
+            
+            <div class="question" data-question="4">
+                <div class="question-number">Question 4 of 6</div>
+                <div class="question-text">Which professional verification offers the strongest protection against property fraud in Zimbabwe?</div>
+                <div class="scenario">
+                    <h4>Professional Protection:</h4>
+                    <p>PropertyBook.co.zw maintains 2,000+ registered agents who undergo verification, while 60% of scams involve unlicensed operators.</p>
+                </div>
+                <div class="answer-options">
+                    <div class="answer-option" data-answer="a">
+                        <strong>A)</strong> Any agent who advertises on Facebook
+                    </div>
+                    <div class="answer-option" data-answer="b">
+                        <strong>B)</strong> EACZ-registered agents with verified PropertyBook.co.zw listings
+                    </div>
+                    <div class="answer-option" data-answer="c">
+                        <strong>C)</strong> Agents recommended by friends
+                    </div>
+                    <div class="answer-option" data-answer="d">
+                        <strong>D)</strong> The cheapest agent available
+                    </div>
+                </div>
+                <div class="feedback" id="feedback4">
+                    <div class="feedback-title"></div>
+                    <div class="feedback-text"></div>
+                </div>
+            </div>
+            
+            <div class="question" data-question="5">
+                <div class="question-number">Question 5 of 6</div>
+                <div class="question-text">What pricing immediately signals potential fraud for serviced residential stands in Harare suburbs?</div>
+                <div class="scenario">
+                    <h4>Market Reality Check:</h4>
+                    <p>Genuine serviced stands range US$30-50/sqm in Harare suburbs. Brickstone's "special pricing" should have been an immediate red flag.</p>
+                </div>
+                <div class="answer-options">
+                    <div class="answer-option" data-answer="a">
+                        <strong>A)</strong> US$45/sqm in established suburbs
+                    </div>
+                    <div class="answer-option" data-answer="b">
+                        <strong>B)</strong> US$5/sqm in premium areas
+                    </div>
+                    <div class="answer-option" data-answer="c">
+                        <strong>C)</strong> US$35/sqm with proper documentation
+                    </div>
+                    <div class="answer-option" data-answer="d">
+                        <strong>D)</strong> US$50/sqm for prime locations
+                    </div>
+                </div>
+                <div class="feedback" id="feedback5">
+                    <div class="feedback-title"></div>
+                    <div class="feedback-text"></div>
+                </div>
+            </div>
+            
+            <div class="question" data-question="6">
+                <div class="question-number">Question 6 of 6</div>
+                <div class="question-text">Zimbabwe's new digital title deed system (Statutory Instrument 76 of 2025) provides which key fraud protection?</div>
+                <div class="scenario">
+                    <h4>Technology Solution:</h4>
+                    <p>Digital verification systems can reduce property fraud by 30% through tamper-proof electronic databases.</p>
+                </div>
+                <div class="answer-options">
+                    <div class="answer-option" data-answer="a">
+                        <strong>A)</strong> Faster processing times only
+                    </div>
+                    <div class="answer-option" data-answer="b">
+                        <strong>B)</strong> Cheaper registration fees
+                    </div>
+                    <div class="answer-option" data-answer="c">
+                        <strong>C)</strong> Tamper-proof electronic databases that make document forgery much more difficult
+                    </div>
+                    <div class="answer-option" data-answer="d">
+                        <strong>D)</strong> Online payment options
+                    </div>
+                </div>
+                <div class="feedback" id="feedback6">
+                    <div class="feedback-title"></div>
+                    <div class="feedback-text"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="quiz-controls">
+            <div class="quiz-score">
+                Score: <span id="currentScore">0</span>/<span id="totalQuestions">6</span>
+            </div>
+            <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()" disabled>
+                Next Question
+            </button>
+        </div>
+        
+        <div class="results-container" id="resultsContainer">
+            <div class="results-score" id="finalScore"></div>
+            <div class="results-message" id="resultsMessage"></div>
+            <div class="cta-box">
+                <h3>Protect Your Property Investment</h3>
+                <p>Work with verified professionals on <a href="https://www.propertybook.co.zw" class="cta-link">PropertyBook.co.zw</a> to avoid Brickstone-style fraud. Our network of 2,000+ registered agents ensures your property transactions are legitimate and secure.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const quizData = {
+            1: { correct: 'b', explanation: 'Correct! Always verify government documents directly with the issuing authority. The Brickstone victims could have avoided US$1.5 million in losses by calling the Ministry to verify the fake letters.' },
+            2: { correct: 'b', explanation: 'Exactly right! Original documents and independent council verification are essential. Brickstone had NO valid council approval despite selling 52 stands.' },
+            3: { correct: 'b', explanation: 'Perfect! Diaspora buyers need in-person legal verification. Remote verification through digital communication alone is insufficient against sophisticated fraud schemes.' },
+            4: { correct: 'b', explanation: 'Absolutely correct! EACZ-registered agents with PropertyBook verification offer systematic protection through established procedures, professional insurance, and regulatory oversight.' },
+            5: { correct: 'b', explanation: 'Red flag identified! US$5/sqm in premium areas is impossibly low. Legitimate serviced stands range US$30-50/sqm in Harare suburbs.' },
+            6: { correct: 'c', explanation: 'Spot on! Digital title deeds provide tamper-proof electronic databases that make document forgery significantly more difficult, addressing the fundamental vulnerability that enabled Brickstone\'s fraud.' }
+        };
+
+        let currentQuestion = 1;
+        let score = 0;
+        let answered = false;
+
+        function selectAnswer(element, answer) {
+            if (answered) return;
+            
+            // Remove previous selections
+            document.querySelectorAll('.answer-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            
+            // Add selection
+            element.classList.add('selected');
+            
+            // Show feedback
+            showFeedback(answer);
+            answered = true;
+            
+            // Enable next button
+            document.getElementById('nextBtn').disabled = false;
+        }
+
+        function showFeedback(selectedAnswer) {
+            const correct = quizData[currentQuestion].correct;
+            const feedback = document.getElementById(`feedback${currentQuestion}`);
+            const title = feedback.querySelector('.feedback-title');
+            const text = feedback.querySelector('.feedback-text');
+            
+            if (selectedAnswer === correct) {
+                feedback.classList.add('correct');
+                title.textContent = '✓ Correct!';
+                score++;
+                updateScore();
+                // Mark correct answer
+                document.querySelector(`[data-answer="${correct}"]`).classList.add('correct');
+            } else {
+                feedback.classList.add('incorrect');
+                title.textContent = '✗ Incorrect';
+                // Mark incorrect answer
+                document.querySelector(`[data-answer="${selectedAnswer}"]`).classList.add('incorrect');
+                // Show correct answer
+                document.querySelector(`[data-answer="${correct}"]`).classList.add('correct');
+            }
+            
+            text.textContent = quizData[currentQuestion].explanation;
+            feedback.style.display = 'block';
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < 6) {
+                // Hide current question
+                document.querySelector('.question.active').classList.remove('active');
+                
+                // Show next question
+                currentQuestion++;
+                const nextQ = document.querySelector(`[data-question="${currentQuestion}"]`);
+                if (nextQ) {
+                    nextQ.classList.add('active');
+                }
+                
+                // Update progress
+                updateProgress();
+                
+                // Reset state
+                answered = false;
+                document.getElementById('nextBtn').disabled = true;
+                
+                // Update button text for last question
+                if (currentQuestion === 6) {
+                    document.getElementById('nextBtn').textContent = 'View Results';
+                }
+            } else {
+                showResults();
+            }
+        }
+
+        function updateProgress() {
+            const progress = (currentQuestion - 1) / 6 * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+        }
+
+        function updateScore() {
+            document.getElementById('currentScore').textContent = score;
+        }
+
+        function showResults() {
+            document.getElementById('questionContainer').style.display = 'none';
+            document.querySelector('.quiz-controls').style.display = 'none';
+            document.getElementById('resultsContainer').style.display = 'block';
+            
+            const percentage = Math.round((score / 6) * 100);
+            const scoreElement = document.getElementById('finalScore');
+            const messageElement = document.getElementById('resultsMessage');
+            
+            scoreElement.textContent = percentage + '%';
+            
+            if (percentage >= 90) {
+                scoreElement.classList.add('excellent');
+                messageElement.textContent = 'Excellent! You have strong property fraud protection knowledge. You\'re well-equipped to avoid Brickstone-style scams.';
+            } else if (percentage >= 70) {
+                scoreElement.classList.add('good');
+                messageElement.textContent = 'Good work! You understand most fraud protection principles. Review the areas you missed to strengthen your defenses.';
+            } else if (percentage >= 50) {
+                scoreElement.classList.add('needs-improvement');
+                messageElement.textContent = 'You\'re on the right track but need more preparation. Study the Brickstone case lessons to better protect yourself.';
+            } else {
+                scoreElement.classList.add('poor');
+                messageElement.textContent = 'Important: You need significant fraud protection education. The lessons from the Brickstone case are crucial for your property safety.';
+            }
+            
+            // Update progress to 100%
+            document.getElementById('progressFill').style.width = '100%';
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add click handlers to answer options
+            document.querySelectorAll('.answer-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    selectAnswer(this, this.dataset.answer);
+                });
+            });
+            
+            // Initialize score display
+            updateScore();
+        });
+
+        // Keyboard accessibility
+        document.addEventListener('keydown', function(e) {
+            if (e.key >= '1' && e.key <= '4' && !answered) {
+                const answers = ['a', 'b', 'c', 'd'];
+                const answerIndex = parseInt(e.key) - 1;
+                const element = document.querySelector(`[data-answer="${answers[answerIndex]}"]`);
+                if (element) {
+                    selectAnswer(element, answers[answerIndex]);
+                }
+            } else if (e.key === 'Enter' && !document.getElementById('nextBtn').disabled) {
+                nextQuestion();
+            }
+        });
+    </script>
+</body>
+</html>

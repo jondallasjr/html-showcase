@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brickstone Scandal - PropertyBook Lesson</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: #1a1a1a;
+            color: #ffffff;
+            overflow: hidden;
+        }
+        
+        .slide-container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            display: flex;
+        }
+        
+        .slide {
+            min-width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 4rem;
+            text-align: center;
+            transition: transform 0.6s ease-in-out;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(26, 26, 26, 0.7);
+            z-index: 1;
+        }
+        
+        .slide-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1000px;
+        }
+        
+        h1 { font-size: 4rem; margin-bottom: 2rem; color: #D32F2F; font-weight: 800; }
+        h2 { font-size: 3rem; margin-bottom: 1.5rem; color: #1976D2; font-weight: 700; }
+        h3 { font-size: 2rem; margin-bottom: 1rem; color: #388E3C; }
+        
+        .subtitle { font-size: 1.5rem; color: #FFA726; margin-bottom: 3rem; }
+        
+        ul {
+            list-style: none;
+            font-size: 1.4rem;
+            line-height: 2;
+            text-align: left;
+        }
+        
+        li {
+            margin: 1rem 0;
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: all 0.5s ease;
+            padding: 0.5rem 1rem;
+            border-left: 3px solid #1976D2;
+            background: rgba(25, 118, 210, 0.1);
+        }
+        
+        li.show { opacity: 1; transform: translateX(0); }
+        
+        .stat-box {
+            background: rgba(211, 47, 47, 0.2);
+            border: 2px solid #D32F2F;
+            padding: 2rem;
+            margin: 1rem 0;
+            border-radius: 10px;
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        
+        .controls {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            display: flex;
+            gap: 10px;
+        }
+        
+        button {
+            padding: 10px 20px;
+            background: #1976D2;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        button:hover { background: #1565C0; }
+        button:disabled { background: #555; cursor: not-allowed; }
+        
+        .notes-icon {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: #388E3C;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+        
+        .notes-panel {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 400px;
+            height: 100vh;
+            background: rgba(0,0,0,0.95);
+            padding: 2rem;
+            transition: right 0.3s ease;
+            overflow-y: auto;
+            z-index: 200;
+        }
+        
+        .notes-panel.show { right: 0; }
+        
+        .slide-number {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            font-size: 1.2rem;
+            color: #FFA726;
+            z-index: 100;
+        }
+        
+        @media (max-width: 768px) {
+            .slide { padding: 2rem; }
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 2rem; }
+            ul { font-size: 1.2rem; }
+            .stat-box { font-size: 1.4rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container" id="slideContainer">
+        
+        <!-- Slide 1: Title -->
+        <div class="slide" style="background-image: url('https://codahosted.io/docs/9bejBCT96g/blobs/bl-3OczB2Jms4/7615b8371e733128399d7257d953831d327784654d3616b245d17b1e1ca0e01f8a94ed3f85f08f6a9b1d9af86f7090c1bea1a7e170171ff69bcbab575d37f11f67eb77f7f62eb2033eff8481a3b596735188766865faa105f67e3a2446348f771330e6d5')">
+            <div class="slide-content">
+                <h1>BRICKSTONE SCANDAL</h1>
+                <div class="subtitle">45 Harare families lost everything</div>
+                <div class="stat-box">US$1.5M FRAUD • DEMOLISHED DREAMS</div>
+            </div>
+        </div>
+
+        <!-- Slide 2: The Scale -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>THE DEVASTATION</h2>
+                <ul>
+                    <li>45 families homeless</li>
+                    <li>52 illegal stands sold</li>
+                    <li>30 homes demolished</li>
+                    <li>US$25,000-$40,000 per family lost</li>
+                    <li>2-year nightmare ended June 2025</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 3: Fake Documents -->
+        <div class="slide" style="background-image: url('https://codahosted.io/docs/9bejBCT96g/blobs/bl-tdgwRXu8rf/3c427b56b9648980e946ce14c6b207e47b85b146cd05a6fea8079837d3667ff0ff778042cb7afb9630700cd8117f6297bd154cb92c86fadfddc586e0c995176d4b7f5c5c209dcce3f5442a0c3c2656ceb0b60d27ed4e1b13ec247506a96e8209ae8665aa')">
+            <div class="slide-content">
+                <h2>FORGED GOVERNMENT PAPERS</h2>
+                <ul>
+                    <li>Fake Ministry of Local Government letters</li>
+                    <li>Counterfeit council approvals</li>
+                    <li>Officials never signed documents</li>
+                    <li>Sophisticated document forgery</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 4: Financial Impact -->
+        <div class="slide" style="background-image: url('https://codahosted.io/docs/9bejBCT96g/blobs/bl-m7gRfCDbv7/363482f4150fb3c17df6b28ed4c208d45cf5f17980dbf0cf6e82c64d00798543c4e4d1fb4dc43722c5a8ae0c4a63f9bd2238317ab56ea5a8886ccf5dd0d9c59ac870196213b2a0647812707670db45f81e92bd9140f425e82cdcfe7e84b64a78cf6b63d6')">
+            <div class="slide-content">
+                <h2>FINANCIAL DESTRUCTION</h2>
+                <div class="stat-box">Total Loss: US$1.5 MILLION</div>
+                <ul>
+                    <li>Life savings vanished</li>
+                    <li>Sold existing homes to buy</li>
+                    <li>Construction costs lost</li>
+                    <li>No insurance coverage</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 5: Legal Justice -->
+        <div class="slide" style="background-image: url('https://codahosted.io/docs/9bejBCT96g/blobs/bl-WWrx9MJM6P/92983137dbce373c1cbe9f4607aefe9cdcb53f565cf6a7e1ccc226f7297f8ee7b252ba8458754f5a7629ae0dc5d8f7cd8c496a035cd3df73037ab8bf43e13e0768f2fd74f04b89377362f0a6adcc327762d1ab9dc57262bfbb02fadd9ec84a9a36f5d9bd')">
+            <div class="slide-content">
+                <h2>JUSTICE DEMBURE RULING</h2>
+                <ul>
+                    <li>High Court eviction order</li>
+                    <li>Directors arrested September 2024</li>
+                    <li>US$400 bail each</li>
+                    <li>Victory came too late</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 6: Warning Signs -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>RED FLAGS IGNORED</h2>
+                <ul>
+                    <li>No valid council approval</li>
+                    <li>Fake ministerial documents</li>
+                    <li>No EACZ registration</li>
+                    <li>Too-good-to-be-true pricing</li>
+                    <li>Pressure to buy quickly</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 7: Protection Strategy -->
+        <div class="slide" style="background-image: url('https://codahosted.io/docs/9bejBCT96g/blobs/bl-TI9zguax_6/d1aa9a7d67e53d4e1c5a0329a7c3e317f501587ce15f80af810f2a7ca3e49be203ea80fc7d315d59acd9acaf7e1da9f6eff852f705177a8a5841789c44de701f484faecc8f7f373b358324da9b0277d67302ddb7b1147c1cf0a1ea730d498929a0b21c66')">
+            <div class="slide-content">
+                <h2>VERIFICATION PROTOCOL</h2>
+                <ul>
+                    <li>Call ministry directly</li>
+                    <li>Visit council offices</li>
+                    <li>Check EACZ registration</li>
+                    <li>Verify all documents independently</li>
+                    <li>Use qualified legal representation</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 8: PropertyBook Solution -->
+        <div class="slide" style="background-image: url('https://codahosted.io/docs/9bejBCT96g/blobs/bl-N4Ff3jAe42/2b0742e4f5c71be1f81ee54d273b990f574786b5c61f812da35e0921cd8986513557f73f5e263d38a5dc63e683daddc650f189a4e45519db6db735b12e6b34624f6f3589a2f3b66183467dbecc01899a217fe8d9fe2d6553cbc25dac5dac31e69d760497')">
+            <div class="slide-content">
+                <h2>PROPERTYBOOK PROTECTION</h2>
+                <ul>
+                    <li>2,000+ registered agents verified</li>
+                    <li>100+ agencies vetted</li>
+                    <li>No fraudulent listings guarantee</li>
+                    <li>18 years market experience</li>
+                </ul>
+                <div class="stat-box">www.propertybook.co.zw</div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Key Takeaways -->
+        <div class="slide" style="background-image: url('https://codahosted.io/docs/9bejBCT96g/blobs/bl-iNguWmoTJr/b558f150d499ce78425e8f15bb6d41c2b00bda42b738dc535ea0d46c12403b025fce2456d87731f16b2c52b6d430b854f1142bf630a7e40ee284ea650f595d34e655c5b3f844c07b67facf070736bc2861c002519268a7534592c44aedc426ca2e830b08')">
+            <div class="slide-content">
+                <h2>NEVER AGAIN</h2>
+                <ul>
+                    <li>Verify before you buy</li>
+                    <li>Use registered professionals</li>
+                    <li>Trust but verify documents</li>
+                    <li>Protect your family's future</li>
+                </ul>
+                <div class="subtitle">45 families paid the price<br>Learn from their tragedy</div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="controls">
+        <button onclick="previousSlide()" id="prevBtn">Previous</button>
+        <button onclick="nextSlide()" id="nextBtn">Next</button>
+        <button onclick="toggleNotes()">Notes</button>
+    </div>
+
+    <div class="notes-icon" onclick="toggleNotes()">📝</div>
+    <div class="slide-number"><span id="currentSlide">1</span> / <span id="totalSlides">9</span></div>
+
+    <div class="notes-panel" id="notesPanel">
+        <h3>Presenter Notes</h3>
+        <div id="notesContent">
+            <p><strong>Slide 1:</strong> Open with the shocking reality - 45 families lost everything. Emphasize this is a true story, not fiction.</p>
+            <p><strong>Slide 2:</strong> Break down the scale of devastation. Each number represents real families with children and dreams.</p>
+            <p><strong>Slide 3:</strong> Explain how sophisticated the fraud was - official-looking documents fooled many people.</p>
+            <p><strong>Slide 4:</strong> Connect to audience - these were normal families saving for their future, just like your audience.</p>
+            <p><strong>Slide 5:</strong> Justice came, but too late to restore lost homes and savings.</p>
+            <p><strong>Slide 6:</strong> These warning signs could have prevented the tragedy if recognized.</p>
+            <p><strong>Slide 7:</strong> Give practical steps audience can take to protect themselves.</p>
+            <p><strong>Slide 8:</strong> Position PropertyBook as the solution that prevents these tragedies.</p>
+            <p><strong>Slide 9:</strong> End with call to action - learn from this tragedy to protect others.</p>
+        </div>
+    </div>
+
+    <script>
+        let currentSlideIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        document.getElementById('totalSlides').textContent = totalSlides;
+
+        function updateSlidePosition() {
+            const container = document.getElementById('slideContainer');
+            container.style.transform = `translateX(-${currentSlideIndex * 100}vw)`;
+            
+            document.getElementById('currentSlide').textContent = currentSlideIndex + 1;
+            document.getElementById('prevBtn').disabled = currentSlideIndex === 0;
+            document.getElementById('nextBtn').disabled = currentSlideIndex === totalSlides - 1;
+
+            // Animate bullet points for current slide
+            setTimeout(() => {
+                const currentSlide = slides[currentSlideIndex];
+                const bullets = currentSlide.querySelectorAll('li');
+                bullets.forEach((bullet, index) => {
+                    setTimeout(() => {
+                        bullet.classList.add('show');
+                    }, index * 200);
+                });
+            }, 300);
+        }
+
+        function nextSlide() {
+            if (currentSlideIndex < totalSlides - 1) {
+                // Reset current slide animations
+                const currentSlide = slides[currentSlideIndex];
+                const bullets = currentSlide.querySelectorAll('li');
+                bullets.forEach(bullet => bullet.classList.remove('show'));
+                
+                currentSlideIndex++;
+                updateSlidePosition();
+            }
+        }
+
+        function previousSlide() {
+            if (currentSlideIndex > 0) {
+                // Reset current slide animations
+                const currentSlide = slides[currentSlideIndex];
+                const bullets = currentSlide.querySelectorAll('li');
+                bullets.forEach(bullet => bullet.classList.remove('show'));
+                
+                currentSlideIndex--;
+                updateSlidePosition();
+            }
+        }
+
+        function toggleNotes() {
+            const panel = document.getElementById('notesPanel');
+            panel.classList.toggle('show');
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') previousSlide();
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'Escape') document.getElementById('notesPanel').classList.remove('show');
+        });
+
+        // Initialize first slide
+        updateSlidePosition();
+
+        // Click to reveal functionality
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.controls') && !e.target.closest('.notes-panel') && !e.target.closest('.notes-icon')) {
+                const currentSlide = slides[currentSlideIndex];
+                const bullets = currentSlide.querySelectorAll('li:not(.show)');
+                if (bullets.length > 0) {
+                    bullets[0].classList.add('show');
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>

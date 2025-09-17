@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Fraud Prevention Workbook: The Brickstone Case Study</title>
+    <style>
+        /* Print-First CSS Design */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Times New Roman', serif;
+            font-size: 12pt;
+            line-height: 1.6;
+            color: #333;
+            background: white;
+            max-width: 8.5in;
+            margin: 0 auto;
+            padding: 0.75in;
+        }
+
+        /* Print Optimization */
+        @media print {
+            body {
+                font-size: 11pt;
+                line-height: 1.5;
+                margin: 0;
+                padding: 0.5in;
+            }
+            
+            .page-break {
+                page-break-before: always;
+            }
+            
+            .no-break {
+                page-break-inside: avoid;
+            }
+            
+            input, textarea {
+                border: none !important;
+                border-bottom: 1px solid #333 !important;
+                background: transparent !important;
+                -webkit-print-color-adjust: exact;
+            }
+        }
+
+        /* Typography Hierarchy */
+        h1 {
+            font-size: 18pt;
+            font-weight: bold;
+            color: #1976D2;
+            margin-bottom: 12pt;
+            text-align: center;
+            border-bottom: 2pt solid #1976D2;
+            padding-bottom: 8pt;
+        }
+
+        h2 {
+            font-size: 14pt;
+            font-weight: bold;
+            color: #333;
+            margin: 18pt 0 8pt 0;
+            background: #f5f5f5;
+            padding: 6pt 8pt;
+            border-left: 4pt solid #1976D2;
+        }
+
+        h3 {
+            font-size: 12pt;
+            font-weight: bold;
+            color: #666;
+            margin: 12pt 0 6pt 0;
+        }
+
+        /* Form Elements */
+        .form-field {
+            border: none;
+            border-bottom: 1px solid #333;
+            background: transparent;
+            width: 100%;
+            padding: 2pt 0;
+            margin: 2pt 0 8pt 0;
+            font-family: inherit;
+            font-size: 11pt;
+            color: #333;
+        }
+
+        .form-field:focus {
+            outline: none;
+            border-bottom: 2px solid #1976D2;
+        }
+
+        .checkbox-field {
+            width: 12pt;
+            height: 12pt;
+            border: 1px solid #333;
+            margin: 0 6pt 0 0;
+            vertical-align: middle;
+        }
+
+        .text-area {
+            min-height: 60pt;
+            border: 1px solid #ccc;
+            padding: 6pt;
+            resize: none;
+            width: 100%;
+            font-family: inherit;
+            font-size: 10pt;
+            line-height: 1.4;
+        }
+
+        /* Layout Components */
+        .activity-section {
+            margin: 18pt 0;
+            padding: 12pt;
+            border: 1px solid #ddd;
+            background: #fafafa;
+        }
+
+        .instruction-box {
+            background: #e3f2fd;
+            border-left: 4pt solid #1976D2;
+            padding: 8pt 12pt;
+            margin: 8pt 0;
+            font-style: italic;
+        }
+
+        .warning-box {
+            background: #ffebee;
+            border-left: 4pt solid #d32f2f;
+            padding: 8pt 12pt;
+            margin: 8pt 0;
+            color: #d32f2f;
+            font-weight: bold;
+        }
+
+        .success-box {
+            background: #e8f5e8;
+            border-left: 4pt solid #388e3c;
+            padding: 8pt 12pt;
+            margin: 8pt 0;
+        }
+
+        /* Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12pt 0;
+            font-size: 10pt;
+        }
+
+        th, td {
+            border: 1px solid #333;
+            padding: 6pt;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background: #f0f0f0;
+            font-weight: bold;
+        }
+
+        /* Progress Indicators */
+        .progress-bar {
+            width: 100%;
+            height: 8pt;
+            background: #e0e0e0;
+            border-radius: 4pt;
+            margin: 6pt 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #1976D2;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        /* Checklist Styling */
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            margin: 6pt 0;
+            padding: 4pt 0;
+        }
+
+        .checklist-item input[type="checkbox"] {
+            margin: 2pt 8pt 0 0;
+            flex-shrink: 0;
+        }
+
+        /* Scoring Rubric */
+        .rubric-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+            gap: 1pt;
+            margin: 12pt 0;
+            font-size: 9pt;
+        }
+
+        .rubric-header {
+            background: #333;
+            color: white;
+            padding: 4pt;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .rubric-cell {
+            border: 1px solid #333;
+            padding: 4pt;
+            background: #fafafa;
+        }
+
+        .rubric-score {
+            text-align: center;
+            font-weight: bold;
+            background: #e3f2fd;
+        }
+
+        /* Utility Classes */
+        .flex-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12pt;
+        }
+
+        .text-center { text-align: center; }
+        .text-bold { font-weight: bold; }
+        .text-small { font-size: 9pt; }
+        .text-large { font-size: 13pt; }
+
+        .margin-top { margin-top: 18pt; }
+        .margin-bottom { margin-bottom: 18pt; }
+        .padding-all { padding: 12pt; }
+
+        /* PropertyBook Branding */
+        .pb-logo {
+            width: 120pt;
+            height: auto;
+            margin: 0 auto 12pt auto;
+            display: block;
+        }
+
+        .pb-blue { color: #1976D2; }
+        .pb-green { color: #388e3c; }
+        .pb-red { color: #d32f2f; }
+        .pb-orange { color: #f57c00; }
+
+        /* Footer */
+        .footer {
+            margin-top: 24pt;
+            padding-top: 12pt;
+            border-top: 1pt solid #ccc;
+            text-align: center;
+            font-size: 9pt;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="text-center margin-bottom">
+        <h1>Property Fraud Prevention Workbook</h1>
+        <div class="text-large text-bold pb-blue">The Brickstone Case Study: Learning from Loss</div>
+        <div class="text-small">PropertyBook.co.zw Professional Development Series</div>
+    </header>
+
+    <!-- Activity 1: Case Analysis -->
+    <section class="activity-section no-break">
+        <h2>Activity 1: Critical Case Analysis</h2>
+        
+        <div class="instruction-box">
+            <strong>Instructions:</strong> Analyze the Brickstone scandal by identifying key failure points and prevention strategies. This exercise builds your ability to recognize fraud patterns in real property transactions.
+        </div>
+
+        <h3>A. Timeline Reconstruction</h3>
+        <p>Fill in the missing details from the Brickstone case timeline:</p>
+        
+        <table>
+            <tr>
+                <th>Date/Period</th>
+                <th>Event</th>
+                <th>Impact on Families</th>
+                <th>Prevention Point</th>
+            </tr>
+            <tr>
+                <td class="text-small">2021-2023</td>
+                <td><input type="text" class="form-field" placeholder="Document creation phase..."></td>
+                <td><input type="text" class="form-field" placeholder="Initial trust building..."></td>
+                <td><input type="text" class="form-field" placeholder="Verification opportunity..."></td>
+            </tr>
+            <tr>
+                <td class="text-small">2023</td>
+                <td><input type="text" class="form-field" placeholder="Sales and construction..."></td>
+                <td><input type="text" class="form-field" placeholder="Financial commitment..."></td>
+                <td><input type="text" class="form-field" placeholder="Red flags appeared..."></td>
+            </tr>
+            <tr>
+                <td class="text-small">July 2023</td>
+                <td><input type="text" class="form-field" placeholder="Demolition action..."></td>
+                <td><input type="text" class="form-field" placeholder="Complete devastation..."></td>
+                <td><input type="text" class="form-field" placeholder="Too late for prevention..."></td>
+            </tr>
+        </table>
+
+        <h3>B. Financial Impact Assessment</h3>
+        <div class="flex-row">
+            <div style="flex: 1;">
+                <label class="text-bold">Total confirmed losses:</label>
+                <input type="text" class="form-field" placeholder="US$ _____">
+            </div>
+            <div style="flex: 1;">
+                <label class="text-bold">Average loss per family:</label>
+                <input type="text" class="form-field" placeholder="US$ _____">
+            </div>
+            <div style="flex: 1;">
+                <label class="text-bold">Number of demolished homes:</label>
+                <input type="text" class="form-field" placeholder="_____ structures">
+            </div>
+        </div>
+    </section>
+
+    <!-- Activity 2: Red Flag Identification -->
+    <section class="activity-section page-break">
+        <h2>Activity 2: Red Flag Recognition System</h2>
+        
+        <div class="warning-box">
+            <strong>Critical Learning:</strong> The ability to spot warning signs early can save your family from financial ruin. Practice identifying these patterns now.
+        </div>
+
+        <h3>A. Document Authentication Checklist</h3>
+        <p>Rate each document characteristic from 1 (major red flag) to 5 (completely legitimate):</p>
+
+        <div class="checklist-item">
+            <input type="checkbox" class="checkbox-field">
+            <span>Government letterhead appears professional but you haven't verified it independently</span>
+            <div style="margin-left: auto;">
+                Rating: <input type="text" class="form-field" style="width: 30pt;" placeholder="1-5">
+            </div>
+        </div>
+
+        <div class="checklist-item">
+            <input type="checkbox" class="checkbox-field">
+            <span>Seller provides photocopies of official documents but won't show originals</span>
+            <div style="margin-left: auto;">
+                Rating: <input type="text" class="form-field" style="width: 30pt;" placeholder="1-5">
+            </div>
+        </div>
+
+        <div class="checklist-item">
+            <input type="checkbox" class="checkbox-field">
+            <span>Pricing is significantly below market rates (US$5/sqm vs US$30-50/sqm)</span>
+            <div style="margin-left: auto;">
+                Rating: <input type="text" class="form-field" style="width: 30pt;" placeholder="1-5">
+            </div>
+        </div>
+
+        <div class="checklist-item">
+            <input type="checkbox" class="checkbox-field">
+            <span>Agent cannot be found in EACZ registry when you check independently</span>
+            <div style="margin-left: auto;">
+                Rating: <input type="text" class="form-field" style="width: 30pt;" placeholder="1-5">
+            </div>
+        </div>
+
+        <div class="checklist-item">
+            <input type="checkbox" class="checkbox-field">
+            <span>Seller pressures you to complete transaction quickly "before prices rise"</span>
+            <div style="margin-left: auto;">
+                Rating: <input type="text" class="form-field" style="width: 30pt;" placeholder="1-5">
+            </div>
+        </div>
+
+        <h3>B. Your Red Flag Analysis</h3>
+        <textarea class="text-area" placeholder="Based on the Brickstone case, what three red flags should have alerted families to potential fraud? Explain how each warning sign could have been addressed through proper verification..."></textarea>
+    </section>
+
+    <!-- Activity 3: Verification Protocol Development -->
+    <section class="activity-section">
+        <h2>Activity 3: Personal Verification Protocol</h2>
+        
+        <div class="success-box">
+            <strong>Action Focus:</strong> Create your own step-by-step verification system that you can use for any property transaction in Zimbabwe.
+        </div>
+
+        <h3>A. Essential Verification Steps</h3>
+        <p>Number these steps in the order you would complete them (1-10):</p>
+
+        <div class="checklist-item">
+            <input type="text" class="form-field" style="width: 20pt;" placeholder="#">
+            <span>Contact City of Harare directly to confirm development permits</span>
+        </div>
+
+        <div class="checklist-item">
+            <input type="text" class="form-field" style="width: 20pt;" placeholder="#">
+            <span>Verify agent's EACZ registration through official channels</span>
+        </div>
+
+        <div class="checklist-item">
+            <input type="text" class="form-field" style="width: 20pt;" placeholder="#">
+            <span>Research comparable property prices in the area</span>
+        </div>
+
+        <div class="checklist-item">
+            <input type="text" class="form-field" style="width: 20pt;" placeholder="#">
+            <span>Examine original title deeds and ownership documents</span>
+        </div>
+
+        <div class="checklist-item">
+            <input type="text" class="form-field" style="width: 20pt;" placeholder="#">
+            <span>Visit property location and surrounding area personally</span>
+        </div>
+
+        <div class="checklist-item">
+            <input type="text" class="form-field" style="width: 20pt;" placeholder="#">
+            <span>Consult with legal advisor before signing any agreements</span>
+        </div>
+
+        <div class="checklist-item">
+            <input type="text" class="form-field" style="width: 20pt;" placeholder="#">
+            <span>Check with Ministry officials if government documents are involved</span>
+        </div>
+
+        <div class="checklist-item">
+            <input type="text" class="form-field" style="width: 20pt;" placeholder="#">
+            <span>Verify seller's identity and company registration status</span>
+        </div>
+
+        <div class="checklist-item">
+            <input type="text" class="form-field" style="width: 20pt;" placeholder="#">
+            <span>Review all contracts with independent legal counsel</span>
+        </div>
+
+        <div class="checklist-item">
+            <input type="text" class="form-field" style="width: 20pt;" placeholder="#">
+            <span>Confirm payment methods and receipt procedures are standard</span>
+        </div>
+
+        <h3>B. Your Personal Action Plan</h3>
+        <p>Complete this commitment statement:</p>
+        
+        <div style="border: 1px solid #ccc; padding: 12pt; margin: 12pt 0; background: #f9f9f9;">
+            <p><strong>When I next consider buying property in Zimbabwe, I commit to:</strong></p>
+            
+            <p>1. Never proceeding without verifying: 
+            <input type="text" class="form-field" placeholder="Specific documents and authorities..."></p>
+            
+            <p>2. Always contacting these official sources:
+            <input type="text" class="form-field" placeholder="Government offices and agencies..."></p>
+            
+            <p>3. Working only with agents who meet these criteria:
+            <input type="text" class="form-field" placeholder="Registration and verification requirements..."></p>
+            
+            <p>4. If something seems too good to be true, I will:
+            <input type="text" class="form-field" placeholder="Specific actions to take..."></p>
+        </div>
+    </section>
+
+    <!-- Activity 4: Professional Network Building -->
+    <section class="activity-section page-break">
+        <h2>Activity 4: Building Your Protection Network</h2>
+        
+        <div class="instruction-box">
+            <strong>Network Strategy:</strong> Create connections with legitimate professionals who can protect you from fraud schemes like Brickstone's operation.
+        </div>
+
+        <h3>A. Professional Contact Directory</h3>
+        <table>
+            <tr>
+                <th>Professional Type</th>
+                <th>Contact Information</th>
+                <th>Verification Method</th>
+                <th>Services Provided</th>
+            </tr>
+            <tr>
+                <td class="text-bold pb-blue">PropertyBook Agent</td>
+                <td><input type="text" class="form-field" placeholder="Name, phone, email..."></td>
+                <td><input type="text" class="form-field" placeholder="EACZ registration #..."></td>
+                <td><input type="text" class="form-field" placeholder="Property verification, market analysis..."></td>
+            </tr>
+            <tr>
+                <td class="text-bold">Legal Advisor</td>
+                <td><input type="text" class="form-field" placeholder="Law firm contact..."></td>
+                <td><input type="text" class="form-field" placeholder="Bar association status..."></td>
+                <td><input type="text" class="form-field" placeholder="Contract review, title verification..."></td>
+            </tr>
+            <tr>
+                <td class="text-bold">Municipal Contact</td>
+                <td><input type="text" class="form-field" placeholder="City of Harare office..."></td>
+                <td><input type="text" class="form-field" placeholder="Official department..."></td>
+                <td><input type="text" class="form-field" placeholder="Permit verification, development approvals..."></td>
+            </tr>
+            <tr>
+                <td class="text-bold">Banking Advisor</td>
+                <td><input type="text" class="form-field" placeholder="Bank representative..."></td>
+                <td><input type="text" class="form-field" placeholder="Institution credentials..."></td>
+                <td><input type="text" class="form-field" placeholder="Secure payment processing..."></td>
+            </tr>
+        </table>
+
+        <h3>B. Emergency Support Protocol</h3>
+        <p><strong>If I suspect fraud during a property transaction, I will immediately:</strong></p>
+
+        <div class="checklist-item">
+            <input type="checkbox" class="checkbox-field">
+            <span>Stop all payments and document everything</span>
+        </div>
+
+        <div class="checklist-item">
+            <input type="checkbox" class="checkbox-field">
+            <span>Contact these authorities: <input type="text" class="form-field" placeholder="ZACC, Police, EACZ..."></span>
+        </div>
+
+        <div class="checklist-item">
+            <input type="checkbox" class="checkbox-field">
+            <span>Preserve all documentation and communications</span>
+        </div>
+
+        <div class="checklist-item">
+            <input type="checkbox" class="checkbox-field">
+            <span>Seek immediate legal counsel</span>
+        </div>
+
+        <div class="checklist-item">
+            <input type="checkbox" class="checkbox-field">
+            <span>Alert other potential victims if possible</span>
+        </div>
+    </section>
+
+    <!-- Activity 5: Self-Assessment and Reflection -->
+    <section class="activity-section">
+        <h2>Activity 5: Knowledge Assessment & Future Planning</h2>
+
+        <h3>A. Self-Evaluation Rubric</h3>
+        <div class="rubric-grid">
+            <div class="rubric-header">Knowledge Area</div>
+            <div class="rubric-header">Beginning (1)</div>
+            <div class="rubric-header">Developing (2)</div>
+            <div class="rubric-header">Proficient (3)</div>
+            <div class="rubric-header">Your Score</div>
+
+            <div class="rubric-cell text-bold">Document Verification</div>
+            <div class="rubric-cell">Cannot identify fake documents</div>
+            <div class="rubric-cell">Recognizes some warning signs</div>
+            <div class="rubric-cell">Systematically verifies all papers</div>
+            <div class="rubric-score"><input type="text" class="form-field" placeholder="1-3"></div>
+
+            <div class="rubric-cell text-bold">Red Flag Recognition</div>
+            <div class="rubric-cell">Misses obvious fraud signals</div>
+            <div class="rubric-cell">Identifies major red flags</div>
+            <div class="rubric-cell">Spots subtle fraud patterns</div>
+            <div class="rubric-score"><input type="text" class="form-field" placeholder="1-3"></div>
+
+            <div class="rubric-cell text-bold">Professional Network</div>
+            <div class="rubric-cell">No verified contacts</div>
+            <div class="rubric-cell">Some legitimate contacts</div>
+            <div class="rubric-cell">Comprehensive protection network</div>
+            <div class="rubric-score"><input type="text" class="form-field" placeholder="1-3"></div>
+
+            <div class="rubric-cell text-bold">Legal Understanding</div>
+            <div class="rubric-cell">Unclear about property law</div>
+            <div class="rubric-cell">Basic legal requirements</div>
+            <div class="rubric-cell">Strong legal foundation</div>
+            <div class="rubric-score"><input type="text" class="form-field" placeholder="1-3"></div>
+        </div>
+
+        <div class="flex-row margin-top">
+            <span class="text-bold">Total Score:</span>
+            <input type="text" class="form-field" style="width: 60pt;" placeholder="___ /12">
+            <span class="text-bold">Target Score:</span>
+            <span class="pb-blue text-bold">9-12 for Property Protection</span>
+        </div>
+
+        <h3>B. Personal Reflection Questions</h3>
+        <div style="margin: 12pt 0;">
+            <label class="text-bold">1. What aspect of the Brickstone case surprised you most?</label>
+            <textarea class="text-area" placeholder="Consider the sophistication of the fraud, the number of victims, or the regulatory failures..."></textarea>
+        </div>
+
+        <div style="margin: 12pt 0;">
+            <label class="text-bold">2. How will this case study change your approach to property transactions?</label>
+            <textarea class="text-area" placeholder="Describe specific behaviors you will change or verify differently..."></textarea>
+        </div>
+
+        <div style="margin: 12pt 0;">
+            <label class="text-bold">3. What support would help you implement better verification practices?</label>
+            <textarea class="text-area" placeholder="Consider technology tools, professional services, or educational resources..."></textarea>
+        </div>
+
+        <h3>C. Action Commitment</h3>
+        <div style="border: 2px solid #1976D2; padding: 12pt; background: #e3f2fd;">
+            <p class="text-bold pb-blue">My Property Protection Commitment:</p>
+            <p>Based on the Brickstone case study, I understand that property fraud can devastate families and destroy dreams. I commit to protecting myself and others by:</p>
+            
+            <div class="margin-top">
+                <input type="text" class="form-field" placeholder="Specific verification step I will always complete...">
+            </div>
+            
+            <div class="margin-top">
+                <input type="text" class="form-field" placeholder="Professional relationship I will establish...">
+            </div>
+            
+            <div class="margin-top">
+                <input type="text" class="form-field" placeholder="Warning I will share with family/friends...">
+            </div>
+            
+            <div class="flex-row margin-top">
+                <span>Signature:</span>
+                <input type="text" class="form-field" placeholder="Your signature here">
+                <span>Date:</span>
+                <input type="text" class="form-field" style="width: 80pt;" placeholder="___/___/2025">
+            </div>
+        </div>
+    </section>
+
+    <!-- Progress Tracking -->
+    <section class="activity-section margin-top">
+        <h2>Progress Tracking & Next Steps</h2>
+        
+        <h3>Completion Checklist</h3>
+        <div class="checklist-item">
+            <input type="checkbox" class="checkbox-field">
+            <span><strong>Activity 1:</strong> Case Analysis completed with timeline and financial assessment</span>
+        </div>
+        
+        <div class="checklist-item">
+            <input type="checkbox" class="checkbox-field">
+            <span><strong>Activity 2:</strong> Red Flag Recognition system developed and tested</span>
+        </div>
+        
+        <div class="checklist-item">
+            <input type="checkbox" class="checkbox-field">
+            <span><strong>Activity 3:</strong> Personal Verification Protocol established</span>
+        </div>
+        
+        <div class="checklist-item">
+            <input type="checkbox" class="checkbox-field">
+            <span><strong>Activity 4:</strong> Professional Protection Network identified</span>
+        </div>
+        
+        <div class="checklist-item">
+            <input type="checkbox" class="checkbox-field">
+            <span><strong>Activity 5:</strong> Self-Assessment completed with action commitment signed</span>
+        </div>
+
+        <div class="success-box margin-top">
+            <strong>Recommended Next Steps:</strong>
+            <ul style="margin: 6pt 0 0 18pt;">
+                <li>Visit www.propertybook.co.zw to connect with verified estate agents</li>
+                <li>Subscribe to PropertyBook's fraud prevention updates</li>
+                <li>Share this knowledge with family members considering property purchases</li>
+                <li>Review and update your verification protocol every 6 months</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p class="text-bold">PropertyBook.co.zw Professional Development Series</p>
+        <p>Zimbabwe's Leading Real Estate Platform | 18+ Years of Market Experience</p>
+        <p>8,000+ Verified Listings | 2,000+ Registered Agents | 350 Neighborhoods</p>
+        <p class="text-small">This workbook activity supports PropertyBook's mission to protect Zimbabwean families from property fraud through education and professional verification systems.</p>
+        
+        <div style="margin-top: 12pt; padding-top: 8pt; border-top: 1px solid #ccc;">
+            <p class="text-small pb-blue"><strong>Your Protection Network:</strong> www.propertybook.co.zw | Email: info@propertybook.co.zw</p>
+        </div>
+    </footer>
+
+</body>
+</html>
