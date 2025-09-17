@@ -368,53 +368,67 @@
                 const doc = parser.parseFromString(htmlInput, 'text/html');
                 originalDoc = doc.cloneNode(true);
                 
-                // Extract editable content
+                // Extract editable content in document order
                 parsedContent = [];
                 let counter = 0;
 
-                // Find headings
-                doc.querySelectorAll('h1, h2, h3, h4, h5, h6').forEach(el => {
-                    if (el.textContent.trim()) {
+                // Walk through all elements in document order
+                const walker = document.createTreeWalker(
+                    doc.body || doc,
+                    NodeFilter.SHOW_ELEMENT,
+                    {
+                        acceptNode: function(node) {
+                            // Accept headings, paragraphs, content divs, and images
+                            if (node.matches('h1, h2, h3, h4, h5, h6, p, div.content, .text-content, img')) {
+                                return NodeFilter.FILTER_ACCEPT;
+                            }
+                            return NodeFilter.FILTER_SKIP;
+                        }
+                    }
+                );
+
+                let element;
+                while (element = walker.nextNode()) {
+                    if (element.tagName.toLowerCase() === 'img') {
+                        // Handle images
                         parsedContent.push({
                             id: `content_${counter++}`,
-                            type: 'heading',
-                            tag: el.tagName.toLowerCase(),
-                            label: `${el.tagName} - ${el.textContent.substring(0, 50)}...`,
-                            value: el.textContent.trim(),
-                            selector: `${el.tagName.toLowerCase()}`,
-                            element: el
+                            type: 'image',
+                            tag: 'img',
+                            label: `Image - ${element.alt || element.src.substring(0, 50)}...`,
+                            value: element.src,
+                            alt: element.alt || '',
+                            selector: 'img',
+                            element: element
                         });
+                    } else if (element.matches('h1, h2, h3, h4, h5, h6')) {
+                        // Handle headings
+                        if (element.textContent.trim()) {
+                            parsedContent.push({
+                                id: `content_${counter++}`,
+                                type: 'heading',
+                                tag: element.tagName.toLowerCase(),
+                                label: `${element.tagName} - ${element.textContent.substring(0, 50)}...`,
+                                value: element.textContent.trim(),
+                                selector: `${element.tagName.toLowerCase()}`,
+                                element: element
+                            });
+                        }
+                    } else if (element.matches('p, div.content, .text-content')) {
+                        // Handle text content
+                        if (element.textContent.trim() && !element.querySelector('img, button, input')) {
+                            parsedContent.push({
+                                id: `content_${counter++}`,
+                                type: 'text',
+                                tag: element.tagName.toLowerCase(),
+                                label: `Text - ${element.textContent.substring(0, 50)}...`,
+                                value: element.textContent.trim(),
+                                selector: element.tagName.toLowerCase(),
+                                element: element
+                            });
+                        }
                     }
-                });
-
-                // Find paragraphs and text content
-                doc.querySelectorAll('p, div.content, .text-content').forEach(el => {
-                    if (el.textContent.trim() && !el.querySelector('img, button, input')) {
-                        parsedContent.push({
-                            id: `content_${counter++}`,
-                            type: 'text',
-                            tag: el.tagName.toLowerCase(),
-                            label: `Text - ${el.textContent.substring(0, 50)}...`,
-                            value: el.textContent.trim(),
-                            selector: el.tagName.toLowerCase(),
-                            element: el
-                        });
-                    }
-                });
-
-                // Find images
-                doc.querySelectorAll('img').forEach(el => {
-                    parsedContent.push({
-                        id: `content_${counter++}`,
-                        type: 'image',
-                        tag: 'img',
-                        label: `Image - ${el.alt || el.src.substring(0, 50)}...`,
-                        value: el.src,
-                        alt: el.alt || '',
-                        selector: 'img',
-                        element: el
-                    });
-                });
+                }
 
                 if (parsedContent.length === 0) {
                     showStatus('parseStatus', 'No editable content found in the HTML.', 'error');

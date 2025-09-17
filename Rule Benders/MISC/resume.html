@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jon Dallas Jr - Resume</title>
+    <style>
+        /* Font size and padding control */
+        :root {
+            --font-scale: 1;
+            --page-padding: 0.5in;
+            --top-padding: 0.25in;
+        }
+
+        body {
+            font-size: calc(12px * var(--font-scale));
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.3;
+            color: #333;
+            max-width: 8.5in;
+            margin: 0 auto;
+            padding: var(--top-padding) var(--page-padding) var(--page-padding) var(--page-padding);
+            background: white;
+        }
+
+        /* Print styles */
+        @media print {
+            body {
+                padding: var(--top-padding) var(--page-padding) var(--page-padding) var(--page-padding);
+                font-size: calc(10px * var(--font-scale));
+            }
+            .no-print {
+                display: none !important;
+            }
+            .page-break {
+                page-break-before: always;
+            }
+            h1, h2, h3, h4 {
+                page-break-after: avoid;
+            }
+            .experience-item {
+                page-break-inside: avoid;
+                margin-bottom: 12px;
+            }
+            ul, ol {
+                page-break-inside: avoid;
+            }
+        }
+
+        /* Font size controls */
+        .font-controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .font-controls button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            margin: 0 2px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .font-controls button:hover {
+            background: #0056b3;
+        }
+
+        .font-size-display {
+            margin: 0 10px;
+            font-weight: bold;
+        }
+
+        /* Resume styles */
+        .resume-container {
+            background: white;
+            max-width: 8.5in;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: calc(28px * var(--font-scale));
+            text-align: center;
+            margin: 0 0 calc(8px * var(--font-scale)) 0;
+            color: #2563eb;
+            font-weight: bold;
+        }
+
+        h2 {
+            font-size: calc(18px * var(--font-scale));
+            margin: calc(20px * var(--font-scale)) 0 calc(8px * var(--font-scale)) 0;
+            color: #333;
+            border-bottom: 2px solid #2563eb;
+            padding-bottom: calc(3px * var(--font-scale));
+            font-weight: bold;
+        }
+
+        h2:first-of-type {
+            margin-top: calc(15px * var(--font-scale));
+        }
+
+        h3 {
+            font-size: calc(16px * var(--font-scale));
+            margin-bottom: calc(6px * var(--font-scale));
+            color: #333;
+            font-weight: bold;
+        }
+
+        h4 {
+            font-size: calc(14px * var(--font-scale));
+            margin-bottom: calc(5px * var(--font-scale));
+            color: #333;
+            font-weight: bold;
+        }
+
+        .contact-info {
+            text-align: center;
+            margin-bottom: calc(15px * var(--font-scale));
+            line-height: 1.4;
+        }
+
+        .contact-info a {
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+
+        .summary {
+            text-align: center;
+            margin-bottom: calc(15px * var(--font-scale));
+            font-style: italic;
+            font-size: calc(14px * var(--font-scale));
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: calc(12px * var(--font-scale));
+            margin-bottom: calc(20px * var(--font-scale));
+        }
+
+        .skill-item {
+            padding: calc(10px * var(--font-scale));
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #2563eb;
+        }
+
+        .skill-title {
+            font-weight: bold;
+            margin-bottom: calc(4px * var(--font-scale));
+            color: #333;
+        }
+
+        .skill-description {
+            font-size: calc(12px * var(--font-scale));
+            color: #666;
+            line-height: 1.3;
+        }
+
+        .experience-item {
+            margin-bottom: calc(18px * var(--font-scale));
+            padding-left: calc(15px * var(--font-scale));
+            border-left: 4px solid #2563eb;
+        }
+
+        .job-title {
+            font-weight: bold;
+            font-size: calc(14px * var(--font-scale));
+            color: #333;
+        }
+
+        .company-date {
+            margin-bottom: calc(6px * var(--font-scale));
+            font-size: calc(13px * var(--font-scale));
+        }
+
+        .company {
+            color: #2563eb;
+            font-weight: bold;
+        }
+
+        .company a {
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        .company a:hover {
+            text-decoration: underline;
+        }
+
+        .date {
+            color: #666;
+        }
+
+        .job-description {
+            margin-bottom: calc(8px * var(--font-scale));
+            font-size: calc(12px * var(--font-scale));
+            color: #666;
+        }
+
+        .project-title {
+            font-weight: bold;
+            font-size: calc(11px * var(--font-scale));
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: calc(4px * var(--font-scale));
+            margin-top: calc(8px * var(--font-scale));
+        }
+
+        .project-title:first-of-type {
+            margin-top: 0;
+        }
+
+        .project-title a {
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        .project-title a:hover {
+            text-decoration: underline;
+        }
+
+        ul {
+            margin: calc(6px * var(--font-scale)) 0;
+            padding-left: calc(18px * var(--font-scale));
+        }
+
+        li {
+            margin-bottom: calc(3px * var(--font-scale));
+            line-height: 1.3;
+            font-size: calc(12px * var(--font-scale));
+        }
+
+        .education-other {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: calc(25px * var(--font-scale));
+            margin-bottom: calc(20px * var(--font-scale));
+        }
+
+        @media (max-width: 600px) {
+            .education-other {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .education-item, .other-item {
+            margin-bottom: calc(12px * var(--font-scale));
+        }
+
+        .degree {
+            font-weight: bold;
+            color: #2563eb;
+        }
+
+        .school {
+            font-weight: normal;
+            color: #333;
+        }
+
+        .testimonial {
+            background: #f8f9fa;
+            padding: calc(15px * var(--font-scale));
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+            margin-top: calc(20px * var(--font-scale));
+        }
+
+        .testimonial blockquote {
+            font-style: italic;
+            margin-bottom: calc(8px * var(--font-scale));
+            font-size: calc(13px * var(--font-scale));
+            line-height: 1.4;
+        }
+
+        .testimonial-author {
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="font-controls no-print">
+        <div style="margin-bottom: 5px;">
+            <button onclick="decreaseFontSize()">A−</button>
+            <span class="font-size-display" id="fontSizeDisplay">100%</span>
+            <button onclick="increaseFontSize()">A+</button>
+        </div>
+        <div style="margin-bottom: 5px;">
+            <button onclick="decreasePadding()">Margin−</button>
+            <span class="font-size-display" id="paddingDisplay">0.5"</span>
+            <button onclick="increasePadding()">Margin+</button>
+        </div>
+        <div style="margin-bottom: 5px;">
+            <button onclick="decreaseTopPadding()">Top−</button>
+            <span class="font-size-display" id="topPaddingDisplay">0.25"</span>
+            <button onclick="increaseTopPadding()">Top+</button>
+        </div>
+        <button onclick="printPage()" style="width: 100%;">Print</button>
+    </div>
+
+    <div class="resume-container">
+        <h1>JON DALLAS JR</h1>
+        
+        <div class="contact-info">
+            <div>
+                <a href="mailto:jondallasjr@gmail.com">jondallasjr@gmail.com</a> | 
+                (443) 470-5740 |
+                <a href="https://jondallasai.com">jondallasai.com</a> |
+                <a href="https://linkedin.com/in/jonadallasjr">linkedin.com/in/jondallasjr</a> |
+                <a href="https://github.com/jondallasjr">github.com/jondallasjr</a>
+            </div>
+        </div>
+
+        <div class="summary">
+            I build custom AI tools for SMBs that deliver rapid ROI through strategic use of LLMs, RAG, low-code MVPs, and full-stack development. I've designed and hosted 250+ workshops for 8,000+ guests across 12 cities on AI, blockchain, and more.
+        </div>
+
+        <h2>SKILLS & EXPERTISE</h2>
+        <div class="skills-grid">
+            <div class="skill-item">
+                <div class="skill-title">AI Engineering</div>
+                <div class="skill-description">Custom AI App Dev, Agents, Vision, RAG, Advanced Prompt Engineering and Chaining</div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-title">Full-Stack Development</div>
+                <div class="skill-description">React, Node.js, Python, Chrome Extensions, API Integration, Data Pipeline Design</div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-title">Rapid Prototyping</div>
+                <div class="skill-description">Low-Code Development (Coda.io Expert), MVP Design, API Integration.</div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-title">Workshop Design & Facilitation</div>
+                <div class="skill-description">250+ Workshops, 8,000+ Attendees across 9 Countries</div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-title">Measurable ROI</div>
+                <div class="skill-description">87% Cost Reduction, 80% Time Savings, 22% Traffic Growth, Workflow Streamlining</div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-title">Project Management</div>
+                <div class="skill-description">12 International Teams, 160+ Freelancers, Agile, Cross-Cultural Communication</div>
+            </div>
+        </div>
+
+        <h2>PROFESSIONAL EXPERIENCE</h2>
+
+        <div class="experience-item">
+            <div class="job-title">Independent AI Consultant & Developer</div>
+            <div class="company-date">
+                <span class="company"><a href="https://www.jondallasai.com">Jon Dallas AI, LLC</a></span>
+                <span class="date"> | 2023-Present</span>
+            </div>
+            <div class="job-description">
+                Independent consultancy delivering custom AI solutions and workshops for SMBs across various sectors
+            </div>
+
+            <div class="project-title"><a href="https://www.propertybook.co.zw">Propertybook</a></div>
+            <ul>
+                <li>Designed an end-to-end AI agent for automated SEO/EEAT-optimized content plan, research, generation, and QA</li>
+                <li>Built with APIs, web scraping, prompt chains, intelligent prompt templating, and RAG to process keyword research, competitive analysis, and internal database (7,000+ listings)</li>
+                <li>Implemented selective writing guidelines to ensure brand consistency</li>
+            </ul>
+
+            <div class="project-title"><a href="https://www.pamgoldingzimbabwe.co.zw">Pam Golding Properties</a></div>
+            <ul>
+                <li>Developed a custom, AI-powered Chrome extension for automatic property listing generation</li>
+                <li>Integrated image analysis (Vision) to determine property condition, style, materials, features, and more</li>
+                <li>Reduced property listing time by 80% (from 60+ to <10 minutes per listing)</li>
+                <li>Applied intelligent Writing Guideline filters to ensure brand-consistency</li>
+                <li>Facilitated workshops, training 100+ agents on system use</li>
+            </ul>
+
+            <div class="project-title">Resume Worded</div>
+            <ul>
+                <li>Designed 58-table agentic AI system for automated resume optimization</li>
+                <li>Automated resume parsing, LinkedIn & job scraping, ATS keyword analysis, generation, QA, and export to Google Docs</li>
+                <li>Achieved 15% conversion rate from free resume critiques to paid rewrites</li>
+                <li>Integrated intelligent prompt chains and selective writing guidelines based on industry, role, and experience level</li>
+                <li>Reduced operational costs by 87% (from $240 to $30 per resume)</li>
+            </ul>
+        </div>
+
+        <div class="experience-item">
+            <div class="job-title">Founder & Lead Facilitator</div>
+            <div class="company-date">
+                <span class="company"><a href="https://www.realtalkphilosophy.org">Real Talk Philosophy</a></span>
+                <span class="date"> | 2017-Present</span>
+            </div>
+            <ul>
+                <li>Designed and facilitated 250+ workshops on AI, blockchain, surveillance capitalism, social media, and more</li>
+                <li>Scaled organization from 0 to 12 chapters across the US, Vietnam, Thailand, Singapore, Zimbabwe, & South Africa</li>
+                <li>Remotely onboarded and managed an international team of 12 franchisees and 160+ freelancers</li>
+                <li>Developed custom AI tools for training, research, content production, and event management</li>
+            </ul>
+        </div>
+
+        <div class="experience-item">
+            <div class="job-title">Workshop & Events Manager</div>
+            <div class="company-date">
+                <span class="company"><a href="https://www.ecovillage.org">Global Ecovillage Network</a></span>
+                <span class="date"> | 2021-2022</span>
+            </div>
+            <ul>
+                <li>Led 6-day virtual Community Sustainability Summit featuring expert panels, interactive workshops, and more</li>
+                <li>Managed 15-person creative team across video production, marketing, and design disciplines</li>
+                <li>Designed comprehensive virtual event structure integrating live discussions, Q&As, and breakout sessions</li>
+            </ul>
+        </div>
+
+        <div class="education-other">
+            <div>
+                <h2>EDUCATION</h2>
+                <div class="education-item">
+                    <div class="degree">Bachelor of Science</div>
+                    <div class="school">Towson University</div>
+                    <div>Theatre & Philosophy</div>
+                </div>
+            </div>
+            
+            <div>
+                <h2>OTHER</h2>
+                <div class="other-item">
+                    <div class="degree"><a href="https://www.youtube.com/watch?v=nFapT0I8ujs">TEDx Speaker</a></div>
+                    <div>"Why We Play Games" | TEDx Ba Dinh, Hanoi</div>
+                </div>
+                <div class="other-item">
+                    <div class="degree"><a href="https://coda.io/@jon-dallas">Coda.io Expert</a></div>
+                    <div>Developed 20+ enterprise systems, 5 custom packs with 15K+ API invocations a month</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="testimonial">
+            <h2>FEATURED TESTIMONIAL</h2>
+            <blockquote>
+                "Jon does an excellent job of making people feel welcomed, connected, and at ease... His communication skills are concise and follow a logical pattern that is easy to understand."
+            </blockquote>
+            <div class="testimonial-author">-Haley Purvis, Workshop Attendee</div>
+        </div>
+    </div>
+
+    <script>
+        let fontScale = 1;
+        let pagePadding = 0.5; // in inches
+        let topPadding = 0.25; // in inches
+
+        function updateFontSize() {
+            document.documentElement.style.setProperty('--font-scale', fontScale);
+            document.getElementById('fontSizeDisplay').textContent = Math.round(fontScale * 100) + '%';
+        }
+
+        function updatePadding() {
+            document.documentElement.style.setProperty('--page-padding', pagePadding + 'in');
+            document.getElementById('paddingDisplay').textContent = pagePadding.toFixed(1) + '"';
+        }
+
+        function updateTopPadding() {
+            document.documentElement.style.setProperty('--top-padding', topPadding + 'in');
+            document.getElementById('topPaddingDisplay').textContent = topPadding.toFixed(2) + '"';
+        }
+
+        function increaseFontSize() {
+            if (fontScale < 1.5) {
+                fontScale += 0.1;
+                updateFontSize();
+            }
+        }
+
+        function decreaseFontSize() {
+            if (fontScale > 0.7) {
+                fontScale -= 0.1;
+                updateFontSize();
+            }
+        }
+
+        function increasePadding() {
+            if (pagePadding < 1.0) {
+                pagePadding += 0.1;
+                updatePadding();
+            }
+        }
+
+        function decreasePadding() {
+            if (pagePadding > 0) {
+                pagePadding = Math.max(0, pagePadding - 0.1);
+                updatePadding();
+            }
+        }
+
+        function increaseTopPadding() {
+            if (topPadding < 1.0) {
+                topPadding += 0.05;
+                updateTopPadding();
+            }
+        }
+
+        function decreaseTopPadding() {
+            if (topPadding > 0) {
+                topPadding = Math.max(0, topPadding - 0.05);
+                updateTopPadding();
+            }
+        }
+
+        function printPage() {
+            window.print();
+        }
+
+        // Initialize
+        updateFontSize();
+        updatePadding();
+        updateTopPadding();
+    </script>
+</body>
+</html>
