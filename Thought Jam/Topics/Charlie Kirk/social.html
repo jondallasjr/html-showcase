@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Charlie Kirk: Understanding Campus Culture and Free Speech | Thought Jam</title>
+    <style>
+        :root {
+            --slide-width: 1080px;
+            --slide-height: 1080px;
+            --aspect-ratio: 1;
+            --scale: 1;
+            --conversation-orange: #E85A2B;
+            --contemplation-purple: #6B46C1;
+            --warm-cream: #FEF7ED;
+            --charcoal-grey: #374151;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, var(--warm-cream) 0%, #f8f4f0 100%);
+            color: var(--charcoal-grey);
+            line-height: 1.4;
+        }
+
+        .carousel-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .controls {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .dimension-selector {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .dimension-btn, .scale-btn {
+            padding: 8px 16px;
+            border: 2px solid var(--conversation-orange);
+            background: white;
+            color: var(--conversation-orange);
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .dimension-btn.active, .scale-btn.active {
+            background: var(--conversation-orange);
+            color: white;
+        }
+
+        .text-scaling {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .scale-range {
+            width: 150px;
+        }
+
+        .slide {
+            width: var(--slide-width);
+            height: var(--slide-height);
+            aspect-ratio: var(--aspect-ratio);
+            margin: 40px auto;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                135deg,
+                rgba(107, 70, 193, 0.85) 0%,
+                rgba(232, 90, 43, 0.75) 50%,
+                rgba(55, 65, 81, 0.85) 100%
+            );
+            z-index: 1;
+        }
+
+        .slide-content {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            padding: calc(60px * var(--scale));
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        .slide h1 {
+            font-size: calc(72px * var(--scale));
+            font-weight: 900;
+            margin-bottom: calc(30px * var(--scale));
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.7);
+            line-height: 1.1;
+        }
+
+        .slide h2 {
+            font-size: calc(32px * var(--scale));
+            font-weight: 700;
+            margin-bottom: calc(20px * var(--scale));
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+            color: var(--warm-cream);
+        }
+
+        .slide p {
+            font-size: calc(24px * var(--scale));
+            font-weight: 600;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+            max-width: 800px;
+            margin: 0 auto calc(20px * var(--scale)) auto;
+        }
+
+        .slide-number {
+            position: absolute;
+            right: -80px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--contemplation-purple);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 18px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .caption {
+            max-width: var(--slide-width);
+            margin: 20px auto 0;
+            padding: 25px 30px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border-left: 5px solid var(--conversation-orange);
+        }
+
+        .caption p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--charcoal-grey);
+            margin-bottom: 15px;
+        }
+
+        .caption .hashtags {
+            color: var(--contemplation-purple);
+            font-weight: 600;
+        }
+
+        .slide1 { background-image: url('https://codahosted.io/docs/9bejBCT96g/blobs/bl-Gh6wW-wml5/e1406b477fbace1a60ac1e2fc422b8b1bc0204b93039ad9b605f3c8db9a022d4dba5c58d899ffec2f63708ede01ad5f88b43c112d2558439c5c57f37636340b42796dcd96ea25e566498ec7056f04e3d9227b87de1a591282d01bced42e47db8171c1257'); }
+        .slide2 { background-image: url('https://codahosted.io/docs/9bejBCT96g/blobs/bl-MujNm1Ffgu/49cb9d2fd40429de5eed3e1634c4819132c8a0bd4df7f8ec10e1512db19c3fb667593235b68e9b4b846e320bd9eb97c5b99a429a31dd6494910120470466c122dd00d2a495ae9757bfa2e68397ff3fc4920fc86c6b0c36148dd1f636f77fc5b9fc0806e9'); }
+        .slide3 { background-image: url('https://codahosted.io/docs/9bejBCT96g/blobs/bl-YeqO1jxdgT/e19019c569c23138e803e44297b85e06323c4ee4a903a33ebf735ff168e7be6a521958c4f4e5397508e4980e3dafec27a72f9116ac01e469fa99b4d07b960a13655ab6034bcad7ed47b0f2034b97cbedd8353eed98b4f6bb7ca8f98ae1190ecfc0876c7c'); }
+        .slide4 { background-image: url('https://codahosted.io/docs/9bejBCT96g/blobs/bl-cT0bjYYLGV/61d1f096e41e3e1c26fd2fd68d6a977f1c320876f75a45e701dbbda223ff4fd6820267662c6579b1b46c05630ceefd1437b4b2d8b512ad55c3fb610d678738e2a02451bca96803c6edb892c983eadd2df401077b6df64e4d00c1e4c1248e960d2569c2cf'); }
+        .slide5 { background-image: url('https://codahosted.io/docs/9bejBCT96g/blobs/bl-l57oR-22RS/ddc23b9a20634ac67909caae42cd1480c7daf0d1f20560f1f9bf9e672a33f9851639a4b0737ac7519d17510ead85e50a20871fb398227cd1a08b0d12a014065e2a86d115408dd650277eeab06e6c5d5ae9309176429a1ba1bcbcfaa81b89ee23553fd394'); }
+        .slide6 { background-image: url('https://codahosted.io/docs/9bejBCT96g/blobs/bl-baGrLPa1Os/f08ff7d1ca7afb9b0269dd53f17b9b761616469245ca75a4b2a71e269101bf85ffb91e1e392af048cc99f6595a1f37c741e53d17b2b8387126ee0ac8dd77290099c9c12121c08ed1275f8c7a8c7d9e4b8ba41112bf38c4f1880383f39c6cfaf186cb3bd4'); }
+        .slide7 { background-image: url('https://codahosted.io/docs/9bejBCT96g/blobs/bl-VeBMJcv301/037c8c253cdd55d408cc002bc31fa916da6f5847a5ff37b649a4ec1aacec126e7412af1319e6a46d4614846bd343c0bcb263a9dc05feea46fbd15388f796ef946a08ee3cb726dd4b5d04b8052e49a31ff175966dbba1146133c897a577f9a71f3cf1a06a'); }
+
+        @media (max-width: 768px) {
+            .carousel-container {
+                padding: 10px;
+            }
+            
+            .controls {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .slide {
+                width: min(var(--slide-width), 95vw);
+                height: min(var(--slide-height), 95vw);
+            }
+            
+            .slide-number {
+                right: -60px;
+                padding: 8px 12px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="carousel-container">
+        <div class="controls">
+            <div class="dimension-selector">
+                <button class="dimension-btn active" data-dimensions="1080,1080,1">Square</button>
+                <button class="dimension-btn" data-dimensions="1080,1350,0.8">Portrait</button>
+                <button class="dimension-btn" data-dimensions="1200,675,1.78">Landscape</button>
+                <button class="dimension-btn" data-dimensions="1080,1920,0.56">Stories</button>
+            </div>
+            
+            <div class="text-scaling">
+                <label>Text Scale:</label>
+                <input type="range" class="scale-range" min="0.5" max="2" step="0.1" value="1" id="textScale">
+                <span id="scaleValue">100%</span>
+            </div>
+        </div>
+
+        <!-- Slide 1 -->
+        <div class="slide slide1">
+            <div class="slide-content">
+                <h1>Charlie Kirk</h1>
+                <h2>Free Speech, Campus Culture & Democratic Discourse</h2>
+                <p>Exploring one of America's most polarizing political figures through the lens of philosophical dialogue</p>
+            </div>
+            <div class="slide-number">1/7</div>
+        </div>
+        <div class="caption">
+            <p>Charlie Kirk wasn't just another political activist—he became a lightning rod for fundamental questions about free speech, campus culture, and democracy itself. His assassination in 2025 revealed as much about our society as it did about the man himself. Let's explore what we can learn from this complex figure. 🎓💭</p>
+            <p class="hashtags">#FreeSpeech #CampusCulture #CharlieKirk #PoliticalDialogue #Democracy #ThoughtJam #Philosophy</p>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="slide slide2">
+            <div class="slide-content">
+                <h1>The Movement Builder</h1>
+                <h2>From High School Graduation to 32,000 Chapter Requests</h2>
+                <p>Founded Turning Point USA at 18. By his death: 3,500+ campus chapters and unprecedented youth political mobilization.</p>
+            </div>
+            <div class="slide-number">2/7</div>
+        </div>
+        <div class="caption">
+            <p>Kirk's story demonstrates how individual actors can reshape political landscapes. The day after graduating high school in 2012, he founded TPUSA. Within 8 days of his assassination, they received 32,000+ new chapter requests—the largest youth political mobilization in recent history. What does this surge tell us about unmet needs in political discourse? 📈</p>
+            <p class="hashtags">#YouthPolitics #TurningPointUSA #PoliticalOrganizing #Leadership #Democracy</p>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="slide slide3">
+            <div class="slide-content">
+                <h1>"Prove Me Wrong"</h1>
+                <h2>Viral Debates as Democratic Engagement</h2>
+                <p>His signature campus debates generated 2 billion social media views, transforming political discourse into viral content.</p>
+            </div>
+            <div class="slide-number">3/7</div>
+        </div>
+        <div class="caption">
+            <p>Kirk's "Prove Me Wrong" table debates became cultural phenomena. Rather than preaching to converted audiences, he positioned himself in hostile environments where ideas faced immediate challenge. Was this genuine democratic engagement or performative politics? The format created real-time fact-checking opportunities that don't exist in one-way media. 🎙️</p>
+            <p class="hashtags">#ProveMe Wrong #CampusDebates #PoliticalDebate #FreeSpeech #ViralPolitics</p>
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="slide slide4">
+            <div class="slide-content">
+                <h1>The Great Divide</h1>
+                <h2>Champion of Free Speech or Spreader of Harm?</h2>
+                <p>Supporters saw democratic engagement. Critics saw dangerous rhetoric. Both sides claimed to defend democratic values.</p>
+            </div>
+            <div class="slide-number">4/7</div>
+        </div>
+        <div class="caption">
+            <p>The polarized response to Kirk reveals competing visions of democratic discourse. Supporters praised his commitment to defeating bad ideas with better ones. Critics pointed to controversial statements and potential harm to vulnerable communities. How do we evaluate figures who simultaneously champion debate while making divisive statements? 🤔</p>
+            <p class="hashtags">#PoliticalPolarization #FreeSpeechDebate #DemocraticValues #Controversy #CriticalThinking</p>
+        </div>
+
+        <!-- Slide 5 -->
+        <div class="slide slide5">
+            <div class="slide-content">
+                <h1>Free Speech vs. Harm</h1>
+                <h2>Where Do We Draw the Line?</h2>
+                <p>2024: Worst year for campus free speech with 157 deplatforming attempts. 35% of faculty self-censor—4x worse than McCarthyism.</p>
+            </div>
+            <div class="slide-number">5/7</div>
+        </div>
+        <div class="caption">
+            <p>Kirk's career crystallized fundamental tensions about controversial speech in democratic societies. When 55% of students find the Israeli-Palestinian conflict too difficult to discuss—the highest ever recorded for any issue—we're witnessing breakdown of conversations democracy needs to function. How do we balance free expression with preventing harm? ⚖️</p>
+            <p class="hashtags">#FreeSpeech #CampusFreeSpeech #AcademicFreedom #SelfCensorship #Democracy</p>
+        </div>
+
+        <!-- Slide 6 -->
+        <div class="slide slide6">
+            <div class="slide-content">
+                <h1>The Campus Crisis</h1>
+                <h2>When Dialogue Becomes Impossible</h2>
+                <p>Universities struggle between safety concerns and open discourse. The result: intellectual timidity that threatens democratic engagement.</p>
+            </div>
+            <div class="slide-number">6/7</div>
+        </div>
+        <div class="caption">
+            <p>The broader context makes Kirk's story more urgent. Universities sometimes barred him citing "safety concerns," but who should determine when security justifies limiting speech? The crisis extends beyond any individual—it's about our institutions' ability to foster genuine intellectual exchange in an era of deep division. 🏛️</p>
+            <p class="hashtags">#CampusCrisis #IntellectualFreedom #UniversityPolitics #SafetyVsFreedom #HigherEducation</p>
+        </div>
+
+        <!-- Slide 7 -->
+        <div class="slide slide7">
+            <div class="slide-content">
+                <h1>Learning from Complexity</h1>
+                <h2>Debate to Learn, Not to Win</h2>
+                <p>Kirk's legacy challenges us to create dialogue that honors both free expression and democratic values—conversations that seek understanding.</p>
+            </div>
+            <div class="slide-number">7/7</div>
+        </div>
+        <div class="caption">
+            <p>Perhaps the most important lesson isn't about Kirk himself, but about our capacity to hold multiple perspectives simultaneously. The 32,000 chapter requests following his death show many young people hunger for political engagement. Can we channel that energy toward dialogue that challenges assumptions while maintaining human dignity—debates to learn, not just to win? 🌱</p>
+            <p class="hashtags">#PoliticalDialogue #DemocraticDiscourse #YouthEngagement #Learning #Philosophy #ThoughtJam</p>
+        </div>
+    </div>
+
+    <script>
+        // Text scaling functionality
+        const textScaleSlider = document.getElementById('textScale');
+        const scaleValueDisplay = document.getElementById('scaleValue');
+        
+        textScaleSlider.addEventListener('input', function() {
+            const scale = this.value;
+            document.documentElement.style.setProperty('--scale', scale);
+            scaleValueDisplay.textContent = Math.round(scale * 100) + '%';
+        });
+
+        // Dimension selector functionality
+        const dimensionButtons = document.querySelectorAll('.dimension-btn');
+        
+        dimensionButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                dimensionButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                
+                const [width, height, ratio] = this.dataset.dimensions.split(',');
+                document.documentElement.style.setProperty('--slide-width', width + 'px');
+                document.documentElement.style.setProperty('--slide-height', height + 'px');
+                document.documentElement.style.setProperty('--aspect-ratio', ratio);
+            });
+        });
+
+        // Smooth scrolling for better UX
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
