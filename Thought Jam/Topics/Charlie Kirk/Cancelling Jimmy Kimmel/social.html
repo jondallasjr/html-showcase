@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Kimmel Cancellation: When Pressure Becomes Censorship</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --font-scale: 1;
+            --base-headline: 52px;
+            --base-subhead: 28px;
+            --base-body: 20px;
+            --base-caption: 16px;
+            
+            --conversation-orange: #E85A2B;
+            --contemplation-purple: #6B46C1;
+            --warm-amber: #F59E0B;
+            --deep-plum: #7C2D92;
+            --charcoal-grey: #374151;
+            --warm-cream: #FEF7ED;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--charcoal-grey) 0%, #1F2937 100%);
+            min-height: 100vh;
+            color: #FFFFFF;
+            overflow-x: hidden;
+        }
+
+        .external-controls {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(0,0,0,0.95);
+            padding: 20px;
+            border-radius: 12px;
+            z-index: 9999;
+            border: 2px solid var(--conversation-orange);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .controls-header {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            margin-bottom: 15px;
+            gap: 15px;
+        }
+
+        .hide-controls-btn, .export-btn {
+            background: var(--conversation-orange);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .hide-controls-btn:hover, .export-btn:hover {
+            background: #d14d21;
+            transform: translateY(-1px);
+        }
+
+        .control-group {
+            margin-bottom: 15px;
+        }
+
+        .control-group label {
+            display: block;
+            color: var(--warm-cream);
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .font-size-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .size-btn {
+            background: var(--contemplation-purple);
+            color: white;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .size-btn:hover {
+            background: #5b3ba3;
+            transform: scale(1.05);
+        }
+
+        .font-scale-slider {
+            width: 100px;
+            margin: 0 10px;
+        }
+
+        .font-percentage {
+            color: var(--warm-amber);
+            font-weight: 600;
+            min-width: 40px;
+        }
+
+        .bg-control input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid var(--contemplation-purple);
+            border-radius: 6px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            font-size: 14px;
+        }
+
+        .bg-control input::placeholder {
+            color: rgba(255,255,255,0.5);
+        }
+
+        .reset-btn {
+            background: var(--warm-amber);
+            color: var(--charcoal-grey);
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 5px;
+        }
+
+        .navigation-controls {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.95);
+            padding: 15px 25px;
+            border-radius: 12px;
+            z-index: 9999;
+            border: 2px solid var(--contemplation-purple);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-btn {
+            background: var(--contemplation-purple);
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .nav-btn:hover:not(:disabled) {
+            background: #5b3ba3;
+            transform: translateY(-1px);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .slide-indicator {
+            color: var(--warm-cream);
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .carousel-container {
+            display: flex;
+            width: 500%;
+            transition: transform 0.8s cubic-bezier(0.4, 0.0, 0.2, 1);
+        }
+
+        .slide {
+            width: 20%;
+            height: 100vh;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .slide-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.7) 100%);
+            backdrop-filter: blur(1px) brightness(0.7);
+        }
+
+        .slide-content {
+            position: relative;
+            z-index: 10;
+            max-width: 900px;
+            padding: 60px;
+            text-align: center;
+        }
+
+        .headline {
+            font-family: 'Playfair Display', serif;
+            font-size: calc(var(--base-headline) * var(--font-scale));
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.9);
+            -webkit-text-stroke: 1px rgba(0,0,0,0.5);
+        }
+
+        .subhead {
+            font-size: calc(var(--base-subhead) * var(--font-scale));
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: 25px;
+            background: rgba(107, 70, 193, 0.9);
+            padding: 15px 25px;
+            border-radius: 8px;
+            backdrop-filter: blur(5px);
+            display: inline-block;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        .body {
+            font-size: calc(var(--base-body) * var(--font-scale));
+            line-height: 1.5;
+            margin-bottom: 30px;
+            background: rgba(0,0,0,0.8);
+            padding: 25px 30px;
+            border-radius: 12px;
+            backdrop-filter: blur(5px);
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.9);
+            border-left: 4px solid var(--conversation-orange);
+        }
+
+        .stat-highlight {
+            color: var(--warm-amber);
+            font-weight: 700;
+            font-size: 1.1em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.9);
+        }
+
+        .question-hook {
+            font-style: italic;
+            color: var(--conversation-orange);
+            font-weight: 600;
+        }
+
+        .logo {
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            background: rgba(254, 247, 237, 0.95);
+            color: var(--charcoal-grey);
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: calc(var(--base-caption) * var(--font-scale));
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            z-index: 100;
+        }
+
+        .citation {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            font-size: calc(12px * var(--font-scale));
+            color: rgba(255,255,255,0.8);
+            background: rgba(0,0,0,0.7);
+            padding: 8px 12px;
+            border-radius: 6px;
+            backdrop-filter: blur(3px);
+        }
+
+        .animated-entry {
+            animation: slideInUp 0.8s ease-out;
+        }
+
+        .staggered-entry:nth-child(1) { animation-delay: 0s; }
+        .staggered-entry:nth-child(2) { animation-delay: 0.2s; }
+        .staggered-entry:nth-child(3) { animation-delay: 0.4s; }
+        .staggered-entry:nth-child(4) { animation-delay: 0.6s; }
+
+        @keyframes slideInUp {
+            from { 
+                transform: translateY(30px); 
+                opacity: 0; 
+            }
+            to { 
+                transform: translateY(0); 
+                opacity: 1; 
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+
+        .export-mode .external-controls,
+        .export-mode .navigation-controls {
+            display: none !important;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        @media (max-width: 768px) {
+            :root {
+                --base-headline: 36px;
+                --base-subhead: 22px;
+                --base-body: 16px;
+                --base-caption: 14px;
+            }
+
+            .slide-content {
+                padding: 40px 30px;
+            }
+
+            .external-controls {
+                top: 10px;
+                left: 10px;
+                padding: 15px;
+            }
+
+            .navigation-controls {
+                bottom: 10px;
+                padding: 10px 20px;
+            }
+
+            .logo {
+                top: 20px;
+                right: 20px;
+                padding: 8px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="external-controls" id="controls">
+        <div class="controls-header">
+            <button class="hide-controls-btn" onclick="toggleControls()">Hide Controls</button>
+            <button class="export-btn" onclick="exportMode()">Export Mode</button>
+        </div>
+
+        <div class="control-group">
+            <label>Text Size:</label>
+            <div class="font-size-control">
+                <button class="size-btn" onclick="adjustSize(-0.1)">−</button>
+                <input type="range" id="fontScale" class="font-scale-slider" min="50" max="200" value="100" onchange="setFontScale(this.value/100)">
+                <button class="size-btn" onclick="adjustSize(0.1)">+</button>
+                <span class="font-percentage" id="fontPercentage">100%</span>
+            </div>
+        </div>
+
+        <div class="control-group bg-control">
+            <label for="bgInput">Background Image:</label>
+            <input type="url" id="bgInput" placeholder="Enter image URL" onchange="updateBackgroundImage(this.value)">
+            <button class="reset-btn" onclick="resetBackground()">Reset</button>
+        </div>
+    </div>
+
+    <div class="navigation-controls" id="navigation">
+        <button class="nav-btn" id="prevBtn" onclick="previousSlide()">← Previous</button>
+        <span class="slide-indicator" id="slideIndicator">1 / 5</span>
+        <button class="nav-btn" id="nextBtn" onclick="nextSlide()">Next →</button>
+    </div>
+
+    <div class="carousel-container" id="carousel">
+        <!-- Slide 1: The Catalytic Event -->
+        <div class="slide" style="background-image: url('https://codahosted.io/docs/9bejBCT96g/blobs/bl-JOWC2Uyj3B/5f0b6df1e7410e8ef8ff486c192268fe54f57f232296e981b99f651dca79300ab99bcd5ae747ba099681cf5bb10232b8f0fc5143c07eb69bb24ebaf0555a888f782b80e711ab5b9cba5e930227f46c0eb2f757c716296b2e2db5fbff43d3eb0bbab8634d')">
+            <div class="slide-overlay"></div>
+            <div class="slide-content">
+                <h1 class="headline animated-entry staggered-entry">Comedy Meets Crisis</h1>
+                <p class="subhead animated-entry staggered-entry">September 15, 2025: One monologue ignites constitutional debate</p>
+                <p class="body animated-entry staggered-entry">Kimmel's fatal misstep: <span class="question-hook">"We hit new lows with the MAGA gang trying to characterize this kid as anything other than one of them."</span> But the <span class="stat-highlight">22-year-old suspect</span> had recently evolved from Republican family toward leftist ideology. <span class="stat-highlight">33 hours later</span>, historic regulatory pressure begins.</p>
+            </div>
+            <div class="logo">THOUGHT JAM</div>
+            <div class="citation">Timeline: Charlie Kirk assassination to Kimmel controversy</div>
+        </div>
+
+        <!-- Slide 2: The Pressure Architecture -->
+        <div class="slide" style="background-image: url('https://codahosted.io/docs/9bejBCT96g/blobs/bl-nSlnZU0M8R/20eea4053189dfe8975da46dfddfa10e1c1e5eea1e5414f94168ffa03a5441d8436bf5a8e34963183ca127130215219942dec73ee8fdadfabed07181b8987e81c2a7b053d7f1353b0a7a8cd94a02a214afcb6140b67558ccb18f8fce4020d9f58cded57a')">
+            <div class="slide-overlay"></div>
+            <div class="slide-content">
+                <h1 class="headline animated-entry staggered-entry">Regulatory Leverage</h1>
+                <p class="subhead animated-entry staggered-entry">How censorship works without censors</p>
+                <p class="body animated-entry staggered-entry"><span class="question-hook">"We can do this the easy way or the hard way,"</span> warned FCC Chairman Carr. Nexstar owns <span class="stat-highlight">200+ stations</span> and needed approval for a <span class="stat-highlight">$6.2 billion merger</span>. Without affiliates, Kimmel's <span class="stat-highlight">$76.6 million</span> in annual advertising becomes impossible to justify.</p>
+            </div>
+            <div class="logo">THOUGHT JAM</div>
+            <div class="citation">Source: FCC Chairman statements, Nexstar merger data</div>
+        </div>
+
+        <!-- Slide 3: Historical Pattern -->
+        <div class="slide" style="background-image: url('https://codahosted.io/docs/9bejBCT96g/blobs/bl-M7h1zwGzaT/4c6f98b08ced57026d82b0a527f8329a0ad3ea2791192cf28211b63a0c0d544aa0d8ad0a496bc42ef96296a2d8394a18f314ae3116a64b6343c4998b2f7ddade77c01e73ad29c896a7409f5e25aa79c3071cbddab1785c5c76d74233b504fda7197226d3')">
+            <div class="slide-overlay"></div>
+            <div class="slide-content">
+                <h1 class="headline animated-entry staggered-entry">Recurring Cycle</h1>
+                <p class="subhead animated-entry staggered-entry">Kimmel replaced Maher. Who replaces Kimmel?</p>
+                <p class="body animated-entry staggered-entry"><span class="stat-highlight">2002:</span> Maher cancelled after 9/11 comments. <span class="stat-highlight">2003:</span> Kimmel fills the slot. <span class="stat-highlight">2025:</span> Colbert cancelled in May, Kimmel in September. Corporate risk calculation now prioritizes regulatory approval over creative freedom. <span class="question-hook">Pattern or coincidence?</span></p>
+            </div>
+            <div class="logo">THOUGHT JAM</div>
+            <div class="citation">Historical analysis: Late-night cancellation patterns</div>
+        </div>
+
+        <!-- Slide 4: Constitutional Questions -->
+        <div class="slide" style="background-image: url('https://codahosted.io/docs/9bejBCT96g/blobs/bl-5GFcZl_4HX/1df18b5a68949113d8989604fb96cf47073ed9799914d0c43de7bb563d7ad635d50c85978a4d2f5e0c4a908a83fa86b0ac2c2b83ac485bba41c014da8d6fd7feec2fa7c4dd95667c32674492482c3131d04998595cb730e9897ae9528feb72b27abeb901')">
+            <div class="slide-overlay"></div>
+            <div class="slide-content">
+                <h1 class="headline animated-entry staggered-entry">Free Speech Crisis?</h1>
+                <p class="subhead animated-entry staggered-entry">When government pressure meets corporate power</p>
+                <p class="body animated-entry staggered-entry">ACLU: <span class="question-hook">"Grave threat to First Amendment freedoms."</span> But broadcasters have <span class="stat-highlight">public interest obligations</span> tied to federal licenses. <span class="question-hook">Where's the line between oversight and coercion?</span> Constitutional law struggles with indirect pressure through economic leverage.</p>
+            </div>
+            <div class="logo">THOUGHT JAM</div>
+            <div class="citation">ACLU statement, FCC licensing authority analysis</div>
+        </div>
+
+        <!-- Slide 5: Living with Complexity -->
+        <div class="slide" style="background-image: url('https://codahosted.io/docs/9bejBCT96g/blobs/bl-BSXPA9mvPP/0a643953b43846a01fc03a23142ef7de8bc526022292d0337eac577e6032078c44e965082216de4925f290c9eaa49b2f99ad30d7b019d75e4c0295ae7ef91b6a1d9b8e89ff2314723b477c251cdd4c325cb6e6ba49fcc8a762f988fd5223a6f32b5d8fec')">
+            <div class="slide-overlay"></div>
+            <div class="slide-content">
+                <h1 class="headline animated-entry staggered-entry">Complex Questions</h1>
+                <p class="subhead animated-entry staggered-entry">No simple answers, only thoughtful dialogue</p>
+                <p class="body animated-entry staggered-entry">Should corporate leaders sacrifice <span class="stat-highlight">billions in stakeholder value</span> for speech principles? Does comedy deserve special protection in democracy? <span class="question-hook">How do we balance legitimate regulatory oversight with constitutional rights?</span> These tensions require ongoing conversation, not categorical answers.</p>
+            </div>
+            <div class="logo">THOUGHT JAM</div>
+            <div class="citation">Philosophical analysis: Democratic discourse and institutional power</div>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const totalSlides = 5;
+        
+        const defaultBackgrounds = [
+            'https://codahosted.io/docs/9bejBCT96g/blobs/bl-JOWC2Uyj3B/5f0b6df1e7410e8ef8ff486c192268fe54f57f232296e981b99f651dca79300ab99bcd5ae747ba099681cf5bb10232b8f0fc5143c07eb69bb24ebaf0555a888f782b80e711ab5b9cba5e930227f46c0eb2f757c716296b2e2db5fbff43d3eb0bbab8634d',
+            'https://codahosted.io/docs/9bejBCT96g/blobs/bl-nSlnZU0M8R/20eea4053189dfe8975da46dfddfa10e1c1e5eea1e5414f94168ffa03a5441d8436bf5a8e34963183ca127130215219942dec73ee8fdadfabed07181b8987e81c2a7b053d7f1353b0a7a8cd94a02a214afcb6140b67558ccb18f8fce4020d9f58cded57a',
+            'https://codahosted.io/docs/9bejBCT96g/blobs/bl-M7h1zwGzaT/4c6f98b08ced57026d82b0a527f8329a0ad3ea2791192cf28211b63a0c0d544aa0d8ad0a496bc42ef96296a2d8394a18f314ae3116a64b6343c4998b2f7ddade77c01e73ad29c896a7409f5e25aa79c3071cbddab1785c5c76d74233b504fda7197226d3',
+            'https://codahosted.io/docs/9bejBCT96g/blobs/bl-5GFcZl_4HX/1df18b5a68949113d8989604fb96cf47073ed9799914d0c43de7bb563d7ad635d50c85978a4d2f5e0c4a908a83fa86b0ac2c2b83ac485bba41c014da8d6fd7feec2fa7c4dd95667c32674492482c3131d04998595cb730e9897ae9528feb72b27abeb901',
+            'https://codahosted.io/docs/9bejBCT96g/blobs/bl-BSXPA9mvPP/0a643953b43846a01fc03a23142ef7de8bc526022292d0337eac577e6032078c44e965082216de4925f290c9eaa49b2f99ad30d7b019d75e4c0295ae7ef91b6a1d9b8e89ff2314723b477c251cdd4c325cb6e6ba49fcc8a762f988fd5223a6f32b5d8fec'
+        ];
+
+        function updateSlideIndicator() {
+            document.getElementById('slideIndicator').textContent = `${currentSlide + 1} / ${totalSlides}`;
+            
+            // Update navigation buttons
+            document.getElementById('prevBtn').disabled = currentSlide === 0;
+            document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1;
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+                updateCarousel();
+            }
+        }
+
+        function previousSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateCarousel();
+            }
+        }
+
+        function updateCarousel() {
+            const carousel = document.getElementById('carousel');
+            const translateX = -currentSlide * 20; // 20% per slide
+            carousel.style.transform = `translateX(${translateX}%)`;
+            
+            updateSlideIndicator();
+            
+            // Restart animations for current slide
+            setTimeout(() => {
+                const currentSlideElement = document.querySelectorAll('.slide')[currentSlide];
+                const animatedElements = currentSlideElement.querySelectorAll('.animated-entry');
+                animatedElements.forEach((el, index) => {
+                    el.style.animation = 'none';
+                    el.offsetHeight; // Trigger reflow
+                    el.style.animation = null;
+                });
+            }, 100);
+        }
+
+        function adjustSize(increment) {
+            const current = parseFloat(document.documentElement.style.getPropertyValue('--font-scale')) || 1;
+            const newScale = Math.max(0.5, Math.min(2, current + increment));
+            document.documentElement.style.setProperty('--font-scale', newScale);
+            document.getElementById('fontScale').value = Math.round(newScale * 100);
+            document.getElementById('fontPercentage').textContent = Math.round(newScale * 100) + '%';
+        }
+
+        function setFontScale(scale) {
+            document.documentElement.style.setProperty('--font-scale', scale);
+            document.getElementById('fontPercentage').textContent = Math.round(scale * 100) + '%';
+        }
+
+        function updateBackgroundImage(url) {
+            if (url.trim()) {
+                const slides = document.querySelectorAll('.slide');
+                slides[currentSlide].style.backgroundImage = `url(${url})`;
+            }
+        }
+
+        function resetBackground() {
+            const slides = document.querySelectorAll('.slide');
+            slides.forEach((slide, index) => {
+                slide.style.backgroundImage = `url(${defaultBackgrounds[index]})`;
+            });
+            document.getElementById('bgInput').value = '';
+        }
+
+        function toggleControls() {
+            const controls = document.getElementById('controls');
+            const navigation = document.getElementById('navigation');
+            
+            if (controls.style.display === 'none') {
+                controls.style.display = 'block';
+                navigation.style.display = 'flex';
+            } else {
+                controls.style.display = 'none';
+                navigation.style.display = 'none';
+            }
+        }
+
+        function exportMode() {
+            document.body.classList.toggle('export-mode');
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') {
+                previousSlide();
+            } else if (e.key === 'ArrowRight') {
+                nextSlide();
+            } else if (e.key === 'Escape') {
+                toggleControls();
+            }
+        });
+
+        // Initialize
+        updateSlideIndicator();
+
+        // Touch/swipe support for mobile
+        let startX = 0;
+        let startY = 0;
+
+        document.addEventListener('touchstart', function(e) {
+            startX = e.touches[0].clientX;
+            startY = e.touches[0].clientY;
+        });
+
+        document.addEventListener('touchend', function(e) {
+            const endX = e.changedTouches[0].clientX;
+            const endY = e.changedTouches[0].clientY;
+            const diffX = startX - endX;
+            const diffY = startY - endY;
+
+            // Only handle horizontal swipes
+            if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+                if (diffX > 0) {
+                    nextSlide();
+                } else {
+                    previousSlide();
+                }
+            }
+        });
+
+        // Auto-hide controls after inactivity
+        let inactivityTimer;
+        function resetInactivityTimer() {
+            clearTimeout(inactivityTimer);
+            inactivityTimer = setTimeout(() => {
+                const controls = document.getElementById('controls');
+                const navigation = document.getElementById('navigation');
+                controls.style.opacity = '0.3';
+                navigation.style.opacity = '0.3';
+            }, 10000);
+        }
+
+        document.addEventListener('mousemove', resetInactivityTimer);
+        document.addEventListener('touchstart', resetInactivityTimer);
+        resetInactivityTimer();
+
+        // Restore full opacity on interaction
+        document.getElementById('controls').addEventListener('mouseenter', function() {
+            this.style.opacity = '1';
+        });
+        document.getElementById('navigation').addEventListener('mouseenter', function() {
+            this.style.opacity = '1';
+        });
+    </script>
+</body>
+</html>
