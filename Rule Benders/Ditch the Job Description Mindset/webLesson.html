@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ditch the Job Description Mindset - Rule Benders Academy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-black: #000000;
+            --strategic-blue: #2B5CE6;
+            --action-orange: #E85D00;
+            --premium-white: #FFFFFF;
+            --professional-gray: #666666;
+            --light-gray: #f8f9fa;
+            --dark-gray: #2c2c2c;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--primary-black);
+            background: var(--premium-white);
+        }
+
+        .header {
+            background: var(--primary-black);
+            color: var(--premium-white);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--strategic-blue);
+        }
+
+        .progress-container {
+            flex: 1;
+            max-width: 300px;
+            margin: 0 2rem;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: var(--dark-gray);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--strategic-blue), var(--action-orange));
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--primary-black) 0%, var(--dark-gray) 100%);
+            color: var(--premium-white);
+            padding: 4rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--premium-white), var(--strategic-blue));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-text .subtitle {
+            font-size: 1.25rem;
+            color: var(--professional-gray);
+            margin-bottom: 2rem;
+        }
+
+        .hero-image {
+            position: relative;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(43, 92, 230, 0.2);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            padding: 4rem 0;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: var(--primary-black);
+        }
+
+        .section h3 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--strategic-blue);
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            margin-bottom: 3rem;
+        }
+
+        .content-text p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-black);
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, rgba(43, 92, 230, 0.1) 0%, rgba(232, 93, 0, 0.1) 100%);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .stat-box {
+            background: var(--light-gray);
+            padding: 2rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--strategic-blue);
+            margin: 2rem 0;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--action-orange);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-text {
+            font-size: 1.1rem;
+            color: var(--professional-gray);
+        }
+
+        .framework {
+            background: var(--primary-black);
+            color: var(--premium-white);
+            padding: 3rem;
+            border-radius: 12px;
+            margin: 3rem 0;
+        }
+
+        .framework h3 {
+            color: var(--strategic-blue);
+            margin-bottom: 2rem;
+        }
+
+        .framework-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .framework-step {
+            padding: 1.5rem;
+            background: rgba(43, 92, 230, 0.1);
+            border-radius: 8px;
+            border: 1px solid var(--strategic-blue);
+        }
+
+        .step-number {
+            background: var(--action-orange);
+            color: var(--premium-white);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .quiz-section {
+            background: var(--light-gray);
+            padding: 3rem;
+            border-radius: 12px;
+            margin: 3rem 0;
+        }
+
+        .quiz-question {
+            margin-bottom: 2rem;
+            padding: 2rem;
+            background: var(--premium-white);
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .quiz-options {
+            display: grid;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .quiz-option {
+            padding: 1rem;
+            background: var(--premium-white);
+            border: 2px solid var(--light-gray);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quiz-option:hover {
+            border-color: var(--strategic-blue);
+            background: rgba(43, 92, 230, 0.05);
+        }
+
+        .quiz-option.selected {
+            border-color: var(--strategic-blue);
+            background: rgba(43, 92, 230, 0.1);
+        }
+
+        .quiz-option.correct {
+            border-color: #28a745;
+            background: rgba(40, 167, 69, 0.1);
+        }
+
+        .quiz-option.incorrect {
+            border-color: #dc3545;
+            background: rgba(220, 53, 69, 0.1);
+        }
+
+        .feedback {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+
+        .feedback.correct {
+            background: rgba(40, 167, 69, 0.1);
+            color: #155724;
+            border: 1px solid #28a745;
+        }
+
+        .feedback.incorrect {
+            background: rgba(220, 53, 69, 0.1);
+            color: #721c24;
+            border: 1px solid #dc3545;
+        }
+
+        .action-framework {
+            background: linear-gradient(135deg, var(--strategic-blue), var(--action-orange));
+            color: var(--premium-white);
+            padding: 3rem;
+            border-radius: 12px;
+            margin: 3rem 0;
+        }
+
+        .week-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .week-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+        }
+
+        .week-number {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .accordion {
+            margin: 2rem 0;
+        }
+
+        .accordion-item {
+            border: 1px solid var(--light-gray);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .accordion-header {
+            padding: 1.5rem;
+            background: var(--light-gray);
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s ease;
+        }
+
+        .accordion-header:hover {
+            background: rgba(43, 92, 230, 0.1);
+        }
+
+        .accordion-content {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+
+        .accordion-content.open {
+            padding: 1.5rem;
+            max-height: 500px;
+        }
+
+        .cta {
+            background: var(--action-orange);
+            color: var(--premium-white);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .cta:hover {
+            background: rgba(232, 93, 0, 0.9);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(232, 93, 0, 0.3);
+        }
+
+        .footer {
+            background: var(--primary-black);
+            color: var(--premium-white);
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .toc {
+            position: fixed;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--premium-white);
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            z-index: 100;
+            max-width: 200px;
+            display: none;
+        }
+
+        .toc.show {
+            display: block;
+        }
+
+        .toc h4 {
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: var(--strategic-blue);
+        }
+
+        .toc ul {
+            list-style: none;
+        }
+
+        .toc li {
+            margin-bottom: 0.5rem;
+        }
+
+        .toc a {
+            color: var(--professional-gray);
+            text-decoration: none;
+            font-size: 0.8rem;
+            transition: color 0.3s ease;
+        }
+
+        .toc a:hover,
+        .toc a.active {
+            color: var(--strategic-blue);
+        }
+
+        @media (max-width: 768px) {
+            .hero-content,
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+
+            .section h2 {
+                font-size: 2rem;
+            }
+
+            .framework-steps,
+            .week-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .progress-container {
+                order: 2;
+                max-width: 100%;
+                margin: 0;
+            }
+
+            .toc {
+                display: none !important;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+        }
+
+        .floating-icon {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            width: 60px;
+            height: 60px;
+            background: var(--strategic-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 4px 16px rgba(43, 92, 230, 0.3);
+        }
+
+        .floating-icon:hover {
+            transform: scale(1.1);
+            background: var(--action-orange);
+        }
+
+        .confidence-slider {
+            margin: 2rem 0;
+            padding: 2rem;
+            background: rgba(43, 92, 230, 0.05);
+            border-radius: 8px;
+        }
+
+        .slider-container {
+            margin: 1rem 0;
+        }
+
+        .slider {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: var(--light-gray);
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--strategic-blue);
+            cursor: pointer;
+        }
+
+        .reflection-box {
+            background: var(--light-gray);
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+
+        .reflection-textarea {
+            width: 100%;
+            min-height: 120px;
+            padding: 1rem;
+            border: 1px solid var(--professional-gray);
+            border-radius: 6px;
+            font-family: inherit;
+            resize: vertical;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">Rule Benders Academy</div>
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </div>
+            <div style="font-size: 0.9rem;">Lesson 1.1</div>
+        </div>
+    </header>
+
+    <!-- Table of Contents -->
+    <nav class="toc" id="toc">
+        <h4>Navigation</h4>
+        <ul>
+            <li><a href="#intro">Introduction</a></li>
+            <li><a href="#trap">The Trap</a></li>
+            <li><a href="#rates">Rate Comparison</a></li>
+            <li><a href="#framework">Task vs Problem</a></li>
+            <li><a href="#identification">Problem ID</a></li>
+            <li><a href="#value">Value Creation</a></li>
+            <li><a href="#solution">Solution Ownership</a></li>
+            <li><a href="#blockers">Mental Blockers</a></li>
+            <li><a href="#action">Action Plan</a></li>
+        </ul>
+    </nav>
+
+    <!-- Floating Icon -->
+    <div class="floating-icon" onclick="toggleTOC()">
+        <svg width="24" height="24" fill="white" viewBox="0 0 24 24">
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+        </svg>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Ditch the Job Description Mindset</h1>
+                <p class="subtitle">Break free from the employee trap and start thinking like a £1,500-a-day consultant</p>
+            </div>
+            <div class="hero-image">
+                <img src="https://codahosted.io/docs/9bejBCT96g/blobs/bl-UimasOibax/2f10818566ca7d61c911494a11fbcfb0ed733cd7fdd99adf4afe49f47c44b32fd74ac00c99958fcc9d282f5a134d031408f701ac67146d35de3f304a4c10183f1cbdd9d0122e0568f4c2b4f14d58249563dbe5b86a88aff85baaa8e0e71caf95ee3a7588" alt="Breaking Free from Job Description Chains">
+            </div>
+        </div>
+    </section>
+
+    <!-- Introduction -->
+    <section class="section" id="intro">
+        <div class="container">
+            <h2>The Trap You Don't Even Know You're In</h2>
+            <div class="content-grid">
+                <div class="content-text">
+                    <p>Here's what I've learned after 20 years in consulting and government transformation: most professionals are trapped in what I call <span class="highlight">"job description thinking,"</span> and they don't even realize it's capping their income and potential.</p>
+                    
+                    <p>When I was building transformation programs at HM Treasury, I watched hundreds of smart people get stuck in this mindset. They'd wait for someone to tell them what to work on. They'd ask for clearer job descriptions. They'd want approval before taking action. And they wondered why their careers plateaued while consultants like me were billing £1,500 a day.</p>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">£500M</div>
+                    <div class="stat-text">Saved for UK taxpayers through problem-solving mindset, not task execution</div>
+                </div>
+            </div>
+            
+            <p><strong>The reality is this: job descriptions are income ceilings disguised as career guidance.</strong></p>
+            
+            <div class="quiz-section">
+                <div class="quiz-question">
+                    <h4>Quick Check: What's your current mindset?</h4>
+                    <p>When faced with an unclear situation at work, what's your first instinct?</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="selectOption(this, false)">
+                            Ask for clearer instructions and wait for guidance
+                        </div>
+                        <div class="quiz-option" onclick="selectOption(this, false)">
+                            Check if it's in your job description first
+                        </div>
+                        <div class="quiz-option" onclick="selectOption(this, true)">
+                            Identify the underlying problem and propose solutions
+                        </div>
+                        <div class="quiz-option" onclick="selectOption(this, false)">
+                            Escalate to your manager for decisions
+                        </div>
+                    </div>
+                    <div class="feedback" id="feedback1" style="display: none;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Rate Question -->
+    <section class="section" id="rates">
+        <div class="container">
+            <h2>The £550 vs £3,000 Per Day Question</h2>
+            <div class="content-grid">
+                <div class="content-text">
+                    <p>Let me give you some hard numbers that prove this point. In the UK consulting market, entry-level consultants charge around £550 per day. Director-level consultants command £3,000+ per day. <strong>That's more than a 5x difference in daily rates.</strong></p>
+                    
+                    <p>But here's what's interesting: the difference isn't just experience or seniority. I've seen consultants with 15 years of experience stuck at £600 a day, while others with 8 years are billing £2,000.</p>
+                </div>
+                <div>
+                    <img src="https://codahosted.io/docs/9bejBCT96g/blobs/bl-RXfL-dge8g/409f0c473fd36aff5da88ae06e881bf9f9f1926097cb25e6b8bb820793dd61b1820588c410783b685f8538ed0e510886be73c8f0b0bef40d0f86d1f33b1a42a67629d47d6b60b10b20e08f42eac08a50c2d3bc539575579156becb8d8ecf39e574bda84f" alt="Premium Rate Transformation" style="width: 100%; border-radius: 12px;">
+                </div>
+            </div>
+            
+            <div class="framework">
+                <h3>The Distinguishing Factor</h3>
+                <div class="framework-steps">
+                    <div class="framework-step">
+                        <div class="step-number">£550</div>
+                        <h4>Task Executor</h4>
+                        <p>"What do you want me to work on?"</p>
+                        <p><em>Executing someone else's thinking</em></p>
+                    </div>
+                    <div class="framework-step">
+                        <div class="step-number">£3k</div>
+                        <h4>Problem Solver</h4>
+                        <p>"Here's the problem I've identified, and here's how we fix it."</p>
+                        <p><em>Doing the thinking</em></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stat-box">
+                <p>Research shows that consultants using value-based pricing—which requires problem-solving mindset—are significantly more likely to land £10,000+ projects than those stuck in hourly billing.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Framework Section -->
+    <section class="section" id="framework">
+        <div class="container">
+            <h2>The Task Executioner vs Problem Solver Framework</h2>
+            
+            <div class="content-grid">
+                <div>
+                    <img src="https://codahosted.io/docs/9bejBCT96g/blobs/bl-lQ_e-RDW0J/84aa7bd73eb780ad712371e624960bc7b9153c95675dd128777a95b209d15054d62b9352a4139fa324a8a9da02e7335ba9f877b29e9d6a4d4370eabc11ad944ced88190c8a7343922eedc7ce8193b3a139da13060261cb1fafe445f793e555da42203d44" alt="Task Executioner vs Problem Solver" style="width: 100%; border-radius: 12px;">
+                </div>
+                <div class="content-text">
+                    <p>Traditional job descriptions train you to be a task executioner. They list activities: "Manage stakeholder communications," "Prepare weekly reports," "Coordinate project meetings." This creates what I call <span class="highlight">"checkbox thinking"</span>—you complete the tasks, tick the boxes, and wait for the next set of instructions.</p>
+                    
+                    <p>Consultant-level thinking is fundamentally different. Instead of asking "What should I work on?" you ask "What problems need solving?"</p>
+                </div>
+            </div>
+
+            <div class="quiz-section">
+                <div class="quiz-question">
+                    <h4>Scenario Check: Cabinet Office Communications</h4>
+                    <p>You're brought in to work on a major government transformation. Which positioning commands a premium rate?</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="selectOption(this, false)">
+                            "I'll manage the project communications" (£500/day)
+                        </div>
+                        <div class="quiz-option" onclick="selectOption(this, true)">
+                            "I'll ensure stakeholder alignment doesn't become a delivery risk" (£1,500/day)
+                        </div>
+                    </div>
+                    <div class="feedback" id="feedback2" style="display: none;"></div>
+                </div>
+            </div>
+
+            <div class="framework">
+                <h3>The Mental Model Shift</h3>
+                <p style="font-size: 1.2rem; text-align: center; margin-bottom: 2rem;"><strong>Tasks are inputs. Problems are opportunities. Solutions are products.</strong></p>
+                <p>Task executioners deliver inputs. Problem solvers deliver products. The market pays dramatically different rates for these two approaches.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Identification -->
+    <section class="section" id="identification">
+        <div class="container">
+            <h2>The Problem Identification System</h2>
+            
+            <div class="content-grid">
+                <div class="content-text">
+                    <p>Most professionals wait for problems to be handed to them in job descriptions or project briefs. Consultants actively hunt for problems because that's where the value—and the money—lies.</p>
+                    
+                    <p>After 17 years of transformation work, I've developed a systematic approach to problem identification that I call the <span class="highlight">"Consultant's Radar."</span></p>
+                </div>
+                <div>
+                    <img src="https://codahosted.io/docs/9bejBCT96g/blobs/bl-ryqLhemZzy/100727fd47b676a2d035656427f5e963117e8f1e9f48719e6ef04b80157af0119b1bb5f3062a0edd407f333eb92e0eecd9449eec1a8c55b73bf6db7a89c13b2c20dfa2c615a8974d3469fff5f5b29075a8cef33cebbb77c0bca3615fe9a4dcc14729afba" alt="The Consultant's Radar" style="width: 100%; border-radius: 12px;">
+                </div>
+            </div>
+
+            <div class="accordion">
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span><strong>Level 1: Surface Problems</strong></span>
+                        <span>+</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>These are the obvious issues people complain about. Inefficient processes, unclear communications, missed deadlines. Task executioners work on these because they're visible and well-defined.</p>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span><strong>Level 2: System Problems</strong></span>
+                        <span>+</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>These are the underlying causes creating the surface problems. Poor stakeholder alignment, conflicting priorities, inadequate governance. This is where real consultants operate because fixing system problems eliminates multiple surface problems.</p>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span><strong>Level 3: Strategic Problems</strong></span>
+                        <span>+</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>These are the fundamental misalignments between what the organization says it wants and what its structures actually deliver. Most people don't even see these problems, which is exactly why they're valuable to identify and solve.</p>
+                        <div class="stat-box" style="margin-top: 1rem;">
+                            <div class="stat-text">When I identified that the Treasury's project approval process was creating delays worth millions in taxpayer costs, that wasn't in anyone's job description. But solving it saved £500 million.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="framework">
+                <h3>The Framework</h3>
+                <p style="font-size: 1.2rem; text-align: center;"><strong>Stop asking "What should I do?" and start asking "What shouldn't be happening that is?" or "What should be happening that isn't?"</strong></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Value Creation -->
+    <section class="section" id="value">
+        <div class="container">
+            <h2>The Value Creation Mental Model</h2>
+            
+            <div class="content-grid">
+                <div>
+                    <img src="https://codahosted.io/docs/9bejBCT96g/blobs/bl-qGTC00T52_/eb5a68e5f932dff6bb481210f0a66e8c1f231330f9289cde2753bdf0205bb3d556d3b8e5027be7d893a983bc26cc5bea8772458908cc5a9e63530299a301c89bb686a347ff14cd78151cb26196819fbf3e299cb4e0379529f17e6cf3039375bdfdcb9a26" alt="Value Creation Mental Model" style="width: 100%; border-radius: 12px;">
+                </div>
+                <div class="content-text">
+                    <p>Job description thinking trains you to trade time for money. You work eight hours, you get paid for eight hours. There's a linear relationship between input and output. But consultant thinking is about creating value, not consuming time.</p>
+                    
+                    <p><strong>Here's the shift: Time is your cost. Value is your price.</strong></p>
+                    
+                    <p>When I restructured the risk management approach for a major government program, it took me three days to design the new framework. But that framework prevented cost overruns worth millions. The client wasn't buying three days of my time—they were buying risk mitigation worth millions.</p>
+                </div>
+            </div>
+
+            <div class="stat-box">
+                <div class="stat-number">30-400%</div>
+                <div class="stat-text">Typical increase in project fees when consultants transition from hourly billing to value-based pricing</div>
+            </div>
+
+            <div class="framework">
+                <h3>Mindset Comparison</h3>
+                <div class="framework-steps">
+                    <div class="framework-step">
+                        <div class="step-number">E</div>
+                        <h4>Employee Mindset</h4>
+                        <p>"I'll work 40 hours this week on your project."</p>
+                    </div>
+                    <div class="framework-step">
+                        <div class="step-number">C</div>
+                        <h4>Consultant Mindset</h4>
+                        <p>"I'll solve your stakeholder alignment problem, which is currently costing you £50,000 in delays."</p>
+                    </div>
+                </div>
+                <p style="text-align: center; margin-top: 2rem;"><em>Same person, same skills, different positioning. Dramatically different income potential.</em></p>
+            </div>
+
+            <div class="quiz-section">
+                <div class="quiz-question">
+                    <h4>Value Positioning Practice</h4>
+                    <p>A client has inefficient reporting processes causing weekly delays. How do you position your solution?</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="selectOption(this, false)">
+                            "I'll spend 20 hours streamlining your reports"
+                        </div>
+                        <div class="quiz-option" onclick="selectOption(this, true)">
+                            "I'll eliminate the weekly delays costing you £5,000 in lost productivity"
+                        </div>
+                        <div class="quiz-option" onclick="selectOption(this, false)">
+                            "I'll work on your reporting system for £800/day"
+                        </div>
+                    </div>
+                    <div class="feedback" id="feedback3" style="display: none;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Ownership -->
+    <section class="section" id="solution">
+        <div class="container">
+            <h2>The Solution Ownership Framework</h2>
+            
+            <div class="content-grid">
+                <div class="content-text">
+                    <p>Job descriptions create what I call "solution avoidance." They define problems narrowly and prescribe approaches specifically. This trains people to implement other people's thinking rather than develop their own solutions.</p>
+                    
+                    <p>But here's what I learned advising government departments: <span class="highlight">the person who owns the solution owns the value conversation.</span></p>
+                </div>
+                <div>
+                    <img src="https://codahosted.io/docs/9bejBCT96g/blobs/bl-U0iVo92N9R/6024e3d443158b90169eae4f73da3b2ab0951be92ded8806d043d81d6488be59fa4348577fbe9880dfba96c57153991e7c5c8393f08e26973b4fbfd23ea260f94618aaf573ea1d367d7611db1074fe37ae1dbaa48d433b512a888a85e11cbe091e6afac2" alt="Solution Ownership Triangle" style="width: 100%; border-radius: 12px;">
+                </div>
+            </div>
+
+            <div class="framework">
+                <h3>Problem-Solution-Value Triangulation</h3>
+                <div class="framework-steps">
+                    <div class="framework-step">
+                        <div class="step-number">1</div>
+                        <h4>Problem Articulation</h4>
+                        <p>Define the issue in business impact terms, not task terms</p>
+                    </div>
+                    <div class="framework-step">
+                        <div class="step-number">2</div>
+                        <h4>Solution Architecture</h4>
+                        <p>Present options and recommendations, not just implementation</p>
+                    </div>
+                    <div class="framework-step">
+                        <div class="step-number">3</div>
+                        <h4>Value Quantification</h4>
+                        <p>Connect your approach to measurable outcomes</p>
+                    </div>
+                </div>
+                <p style="text-align: center; margin-top: 2rem;">This transforms you from someone who executes other people's plans to someone who creates plans worth executing.</p>
+            </div>
+
+            <div class="reflection-box">
+                <h4>Reflection Exercise</h4>
+                <p>Think of a current challenge in your work. Practice the triangulation framework:</p>
+                <textarea class="reflection-textarea" placeholder="1. What's the business impact of this problem?&#10;2. What are 2-3 potential solutions?&#10;3. How would you measure success?"></textarea>
+                <button class="cta" onclick="showReflectionFeedback()">Get Feedback</button>
+                <div id="reflectionFeedback" style="display: none; margin-top: 1rem; padding: 1rem; background: rgba(43, 92, 230, 0.1); border-radius: 6px;">
+                    <p><strong>Great practice!</strong> Remember: the more specific your business impact quantification, the stronger your value proposition becomes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mental Blockers -->
+    <section class="section" id="blockers">
+        <div class="container">
+            <h2>The Mental Blocker Self-Check</h2>
+            
+            <div class="content-grid">
+                <div>
+                    <img src="https://codahosted.io/docs/9bejBCT96g/blobs/bl-5c9Ya8taS5/c2a4cf45dad0663730e7e63a8bccfa7248dddb48032312e9f4a885488c6bedc935a0965f4b428678fefd48b75f88d57dd83517115bbd7d4c1dbe92dd853326ab3ed5b4e7eb3e5661ef569e1ef0c74f31f9689f1020365155e943b814fc43ccd480b6ac65" alt="Breaking Through Mental Barriers" style="width: 100%; border-radius: 12px;">
+                </div>
+                <div class="content-text">
+                    <p>Most people have invisible barriers preventing them from thinking beyond job descriptions. After working with hundreds of professionals making this transition, I've identified the most common mental blockers:</p>
+                </div>
+            </div>
+
+            <div class="accordion">
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span><strong>"I need more experience before I can position myself as a problem-solver."</strong></span>
+                        <span>+</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p><strong>Reality check:</strong> Experience helps, but problem-solving ability matters more. Some of the most effective consultants I know started identifying problems and creating solutions in their first roles. They just positioned it differently than their peers.</p>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span><strong>"Someone else should be making these strategic decisions."</strong></span>
+                        <span>+</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>This is hierarchy thinking. In consulting, value creation trumps organizational charts. If you can solve a problem, you're qualified to propose the solution—regardless of your title or tenure.</p>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span><strong>"I don't have enough information to suggest solutions."</strong></span>
+                        <span>+</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>This is perfectionism disguised as prudence. Consultants work with incomplete information all the time. The skill isn't having perfect data—it's creating frameworks that work with available information and identifying what additional information would be valuable.</p>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span><strong>"What if my solution doesn't work?"</strong></span>
+                        <span>+</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Employee mindset fears being wrong. Consultant mindset expects iteration. The goal isn't perfect solutions—it's better solutions than the status quo.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="confidence-slider">
+                <h4>Confidence Assessment</h4>
+                <p>How confident do you feel about identifying problems in your current work environment?</p>
+                <div class="slider-container">
+                    <input type="range" min="1" max="10" value="5" class="slider" id="confidenceSlider" oninput="updateConfidence(this.value)">
+                    <div style="display: flex; justify-content: space-between; font-size: 0.9rem; margin-top: 0.5rem;">
+                        <span>Not confident</span>
+                        <span id="confidenceValue">5/10</span>
+                        <span>Very confident</span>
+                    </div>
+                </div>
+                <div id="confidenceGuidance" style="margin-top: 1rem; padding: 1rem; background: white; border-radius: 6px;">
+                    <p>Remember: confidence grows with practice. Start with small problems you can clearly see and work your way up.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Action Framework -->
+    <section class="section" id="action">
+        <div class="container">
+            <div class="action-framework">
+                <h2 style="color: white; margin-bottom: 2rem;">The Immediate Action Framework</h2>
+                <p style="margin-bottom: 2rem;">Here's how you start thinking like a consultant instead of an employee, starting tomorrow:</p>
+                
+                <div class="week-grid">
+                    <div class="week-card">
+                        <div class="week-number">Week 1</div>
+                        <h4>Problem Spotting</h4>
+                        <p>Instead of focusing on your task list, spend 30 minutes each day identifying problems around you. What's inefficient? What's unclear? What's causing delays or frustration? Write them down.</p>
+                    </div>
+                    
+                    <div class="week-card">
+                        <div class="week-number">Week 2</div>
+                        <h4>Root Cause Analysis</h4>
+                        <p>Take the problems you've identified and ask "Why is this happening?" Keep asking why until you get to system-level causes, not just surface symptoms.</p>
+                    </div>
+                    
+                    <div class="week-card">
+                        <div class="week-number">Week 3</div>
+                        <h4>Solution Sketching</h4>
+                        <p>For each system-level problem, sketch 2-3 potential solutions. Don't worry about perfect implementation details—focus on the core approach.</p>
+                    </div>
+                    
+                    <div class="week-card">
+                        <div class="week-number">Week 4</div>
+                        <h4>Value Articulation</h4>
+                        <p>For your best solutions, quantify the potential impact. Time saved, costs avoided, risks mitigated. This trains you to connect your thinking to business outcomes.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin: 2rem 0;">
+                <img src="https://codahosted.io/docs/9bejBCT96g/blobs/bl-9izWYZI5Kl/d5a0051ecfbfb6b33010bced44f2390753e15cb09e1f789f9c04efe45af62f89be97fb0aaaeef3b6e22e8728a00a654156389a75a9a98da3e9541d24be0503636247cdd2004c075ffca470078893c880eea9136a1c062cf2f524008cab518d468d332ee5" alt="Four-Week Action Framework Timeline" style="width: 100%; max-width: 600px; border-radius: 12px;">
+            </div>
+
+            <div class="quiz-section">
+                <div class="quiz-question">
+                    <h4>Final Mastery Check</h4>
+                    <p>After four weeks of this practice, what should change in your conversations?</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="selectOption(this, false)">
+                            You'll ask for more detailed job descriptions
+                        </div>
+                        <div class="quiz-option" onclick="selectOption(this, true)">
+                            You'll discuss problems instead of tasks, present options instead of asking for instructions
+                        </div>
+                        <div class="quiz-option" onclick="selectOption(this, false)">
+                            You'll wait for clearer direction before acting
+                        </div>
+                        <div class="quiz-option" onclick="selectOption(this, false)">
+                            You'll focus more on completing assigned activities
+                        </div>
+                    </div>
+                    <div class="feedback" id="feedback4" style="display: none;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Breaking Free -->
+    <section class="section">
+        <div class="container">
+            <h2>Breaking Free From the Employee Trap</h2>
+            
+            <div class="content-grid">
+                <div class="content-text">
+                    <p>The job description mindset isn't just about career limitations—it's about how you see your role in creating value. When you define yourself by someone else's task list, you've outsourced your professional identity.</p>
+                    
+                    <p>After building three consulting businesses and advising on programs worth over £10 billion, here's what I know: <span class="highlight">the market doesn't pay premium rates for task completion. It pays premium rates for problem elimination.</span></p>
+                    
+                    <p>The consulting industry has shifted dramatically toward outcome-based relationships. Clients want partners who solve complex problems, not contractors who execute predetermined tasks.</p>
+                </div>
+                <div>
+                    <img src="https://codahosted.io/docs/9bejBCT96g/blobs/bl-AH0eq4pw-d/706513519ea0117dc37823610930c2170f4d63d04d78059454d12568831aa0824bb8bfdf76b01f871d7ab14ce6d4fc884704e3408480b382e297c246116ec87a42bdc536d6d99a6da3d81a77137c12b84920a2454d134de154555c426b3ee21da85a271d" alt="Breaking Free From Employee Trap" style="width: 100%; border-radius: 12px;">
+                </div>
+            </div>
+
+            <div class="framework">
+                <h3>The Transformation Checklist</h3>
+                <p>Every time you make these shifts, you move up the value chain:</p>
+                <div style="display: grid; gap: 1rem; margin-top: 2rem;">
+                    <div style="padding: 1rem; background: rgba(255,255,255,0.1); border-radius: 6px;">
+                        ✓ Position yourself as a problem-solver instead of a task-executor
+                    </div>
+                    <div style="padding: 1rem; background: rgba(255,255,255,0.1); border-radius: 6px;">
+                        ✓ Present solutions instead of asking for instructions
+                    </div>
+                    <div style="padding: 1rem; background: rgba(255,255,255,0.1); border-radius: 6px;">
+                        ✓ Focus on outcomes instead of activities
+                    </div>
+                </div>
+            </div>
+
+            <div style="background: var(--light-gray); padding: 2rem; border-radius: 12px; margin: 3rem 0; text-align: center;">
+                <h3 style="color: var(--strategic-blue); margin-bottom: 1rem;">Your Next Step</h3>
+                <p style="font-size: 1.1rem; margin-bottom: 2rem;">This isn't about changing careers—it's about changing how you think about the career you have. Whether you're employed or independent, whether you're junior or senior, you can start thinking like a consultant.</p>
+                <p style="font-size: 1.2rem; font-weight: 600; color: var(--primary-black);">The job description is just someone else's guess about what needs doing. Your value lies in figuring out what actually needs doing—and then doing it.</p>
+                <div style="margin-top: 2rem;">
+                    <button class="cta" onclick="completeLesson()">Mark Lesson Complete</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Rule Benders Academy. Stop waiting for someone else to define your worth. Start creating it.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Progress tracking
+        let progress = 0;
+        const sections = document.querySelectorAll('.section');
+        let completedQuizzes = 0;
+        const totalQuizzes = 4;
+
+        // Intersection Observer for animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    updateProgress();
+                }
+            });
+        }, { threshold: 0.1 });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        // Progress update
+        function updateProgress() {
+            const visibleSections = document.querySelectorAll('.section.visible').length;
+            const quizProgress = (completedQuizzes / totalQuizzes) * 20;
+            progress = Math.min(((visibleSections / sections.length) * 80) + quizProgress, 100);
+            document.getElementById('progressFill').style.width = progress + '%';
+        }
+
+        // Quiz functionality
+        function selectOption(element, isCorrect) {
+            const options = element.parentElement.children;
+            const feedback = element.parentElement.nextElementSibling;
+            
+            // Remove previous selections
+            for (let option of options) {
+                option.classList.remove('selected', 'correct', 'incorrect');
+            }
+            
+            // Add selection
+            element.classList.add('selected');
+            
+            // Show result after delay
+            setTimeout(() => {
+                if (isCorrect) {
+                    element.classList.add('correct');
+                    feedback.className = 'feedback correct';
+                    feedback.innerHTML = '✓ Correct! This demonstrates consultant-level thinking - focusing on outcomes and problem-solving rather than task execution.';
+                    completedQuizzes++;
+                } else {
+                    element.classList.add('incorrect');
+                    feedback.className = 'feedback incorrect';
+                    feedback.innerHTML = '✗ This represents employee mindset. Consultants focus on identifying and solving problems, not just executing tasks or waiting for instructions.';
+                }
+                feedback.style.display = 'block';
+                updateProgress();
+            }, 500);
+        }
+
+        // Accordion functionality
+        function toggleAccordion(header) {
+            const content = header.nextElementSibling;
+            const symbol = header.querySelector('span:last-child');
+            
+            if (content.classList.contains('open')) {
+                content.classList.remove('open');
+                symbol.textContent = '+';
+            } else {
+                content.classList.add('open');
+                symbol.textContent = '−';
+            }
+        }
+
+        // TOC functionality
+        function toggleTOC() {
+            const toc = document.getElementById('toc');
+            toc.classList.toggle('show');
+        }
+
+        // Confidence slider
+        function updateConfidence(value) {
+            document.getElementById('confidenceValue').textContent = value + '/10';
+            const guidance = document.getElementById('confidenceGuidance');
+            
+            if (value <= 3) {
+                guidance.innerHTML = '<p><strong>Low confidence is normal!</strong> Start by observing obvious inefficiencies around you. Even identifying simple problems builds the consultant mindset muscle.</p>';
+            } else if (value <= 6) {
+                guidance.innerHTML = '<p><strong>You\'re building momentum.</strong> Focus on asking "why" more often. The more you practice problem identification, the more confident you\'ll become.</p>';
+            } else {
+                guidance.innerHTML = '<p><strong>Great confidence level!</strong> You\'re ready to start positioning yourself as a problem-solver. Practice articulating business impact when you identify issues.</p>';
+            }
+        }
+
+        // Reflection feedback
+        function showReflectionFeedback() {
+            document.getElementById('reflectionFeedback').style.display = 'block';
+        }
+
+        // Complete lesson
+        function completeLesson() {
+            alert('Congratulations! You\'ve completed the lesson "Ditch the Job Description Mindset." Remember: Stop asking "What should I do?" and start asking "What problems need solving?"');
+            progress = 100;
+            updateProgress();
+        }
+
+        // Smooth scroll for TOC links
+        document.querySelectorAll('.toc a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = document.querySelector(link.getAttribute('href'));
+                target.scrollIntoView({ behavior: 'smooth' });
+                toggleTOC();
+            });
+        });
+
+        // Update TOC active state
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section[id]');
+            const tocLinks = document.querySelectorAll('.toc a');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            tocLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Prefers reduced motion
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.documentElement.style.setProperty('--animation-duration', '0s');
+        }
+    </script>
+</body>
+</html>

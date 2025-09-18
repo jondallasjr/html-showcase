@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ditch the Job Description Mindset - Rule Benders Academy</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #000000 0%, #1A1A1A 100%);
+            color: #FFFFFF;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(0,0,0,0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            border-bottom: 2px solid #2B5CE6;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #FFFFFF;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: #E85D00;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 120px 0 80px;
+            text-align: center;
+            background: radial-gradient(circle at center, rgba(43,92,230,0.1) 0%, transparent 70%);
+        }
+
+        .hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(48px, 8vw, 72px);
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #FFFFFF 0%, #2B5CE6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 24px;
+            color: #E85D00;
+            margin-bottom: 40px;
+            font-weight: 500;
+        }
+
+        /* Key Stats Section */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 80px 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, rgba(43,92,230,0.1) 0%, rgba(232,93,0,0.1) 100%);
+            border: 1px solid rgba(43,92,230,0.3);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: #E85D00;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #2B5CE6, #E85D00);
+        }
+
+        .stat-number {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 700;
+            color: #E85D00;
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        .stat-label {
+            font-size: 18px;
+            color: #FFFFFF;
+            font-weight: 600;
+        }
+
+        /* Transformation Framework */
+        .framework {
+            background: rgba(26,26,26,0.8);
+            border-radius: 30px;
+            padding: 60px 40px;
+            margin: 80px 0;
+            border: 2px solid rgba(43,92,230,0.3);
+        }
+
+        .framework h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 42px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 50px;
+            color: #2B5CE6;
+        }
+
+        .transformation-path {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .mindset-box {
+            flex: 1;
+            min-width: 250px;
+            background: linear-gradient(135deg, rgba(102,102,102,0.2) 0%, rgba(26,26,26,0.8) 100%);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            border: 2px solid #666666;
+        }
+
+        .mindset-box.consultant {
+            background: linear-gradient(135deg, rgba(43,92,230,0.2) 0%, rgba(232,93,0,0.1) 100%);
+            border-color: #2B5CE6;
+        }
+
+        .mindset-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .employee .mindset-icon {
+            color: #666666;
+        }
+
+        .consultant .mindset-icon {
+            color: #E85D00;
+        }
+
+        .mindset-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .mindset-desc {
+            font-size: 16px;
+            color: #CCCCCC;
+            line-height: 1.5;
+        }
+
+        .arrow {
+            font-size: 36px;
+            color: #E85D00;
+            flex-shrink: 0;
+        }
+
+        /* Problem Levels */
+        .problem-levels {
+            margin: 80px 0;
+        }
+
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 36px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 50px;
+            color: #FFFFFF;
+        }
+
+        .levels-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .level-card {
+            background: linear-gradient(135deg, rgba(43,92,230,0.1) 0%, rgba(0,0,0,0.8) 100%);
+            border-radius: 20px;
+            padding: 40px 30px;
+            border-left: 5px solid #2B5CE6;
+            transition: all 0.3s ease;
+        }
+
+        .level-card:nth-child(2) {
+            border-left-color: #E85D00;
+        }
+
+        .level-card:nth-child(3) {
+            border-left-color: #FFFFFF;
+        }
+
+        .level-card:hover {
+            transform: translateX(10px);
+        }
+
+        .level-number {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #E85D00;
+            margin-bottom: 15px;
+        }
+
+        .level-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #FFFFFF;
+        }
+
+        .level-desc {
+            font-size: 16px;
+            color: #CCCCCC;
+            line-height: 1.6;
+        }
+
+        /* Action Framework */
+        .action-framework {
+            background: rgba(43,92,230,0.1);
+            border-radius: 30px;
+            padding: 60px 40px;
+            margin: 80px 0;
+            border: 2px solid rgba(232,93,0,0.3);
+        }
+
+        .timeline {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .week-card {
+            background: rgba(0,0,0,0.6);
+            border-radius: 15px;
+            padding: 30px 25px;
+            text-align: center;
+            border: 1px solid rgba(43,92,230,0.3);
+            position: relative;
+        }
+
+        .week-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #E85D00;
+            border-radius: 15px 15px 0 0;
+        }
+
+        .week-number {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: #E85D00;
+            margin-bottom: 15px;
+        }
+
+        .week-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #FFFFFF;
+        }
+
+        .week-desc {
+            font-size: 14px;
+            color: #CCCCCC;
+            line-height: 1.5;
+        }
+
+        /* Rate Comparison */
+        .rate-comparison {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 50px;
+            margin: 80px 0;
+            flex-wrap: wrap;
+        }
+
+        .rate-box {
+            flex: 1;
+            min-width: 250px;
+            text-align: center;
+            padding: 40px 30px;
+            border-radius: 20px;
+            border: 2px solid #666666;
+            background: rgba(102,102,102,0.1);
+        }
+
+        .rate-box.premium {
+            border-color: #E85D00;
+            background: linear-gradient(135deg, rgba(232,93,0,0.2) 0%, rgba(43,92,230,0.1) 100%);
+        }
+
+        .rate-amount {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 700;
+            color: #666666;
+            margin-bottom: 15px;
+        }
+
+        .rate-box.premium .rate-amount {
+            color: #E85D00;
+        }
+
+        .rate-label {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .rate-desc {
+            font-size: 14px;
+            color: #CCCCCC;
+        }
+
+        .vs-arrow {
+            font-size: 48px;
+            color: #2B5CE6;
+            flex-shrink: 0;
+        }
+
+        /* CTA Section */
+        .cta {
+            background: linear-gradient(135deg, rgba(43,92,230,0.2) 0%, rgba(232,93,0,0.2) 100%);
+            border-radius: 30px;
+            padding: 60px 40px;
+            text-align: center;
+            margin: 80px 0;
+            border: 2px solid #2B5CE6;
+        }
+
+        .cta h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #FFFFFF;
+        }
+
+        .cta p {
+            font-size: 18px;
+            color: #CCCCCC;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #E85D00 0%, #2B5CE6 100%);
+            color: #FFFFFF;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(232,93,0,0.3);
+        }
+
+        /* Footer */
+        .footer {
+            background: #000000;
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid rgba(43,92,230,0.3);
+        }
+
+        .footer p {
+            color: #666666;
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 48px;
+            }
+            
+            .hero-subtitle {
+                font-size: 20px;
+            }
+            
+            .transformation-path {
+                flex-direction: column;
+            }
+            
+            .arrow {
+                transform: rotate(90deg);
+            }
+            
+            .rate-comparison {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .vs-arrow {
+                transform: rotate(90deg);
+            }
+        }
+
+        @media print {
+            body {
+                background: white;
+                color: black;
+            }
+            
+            .header {
+                position: static;
+                background: white;
+                border-bottom: 2px solid #2B5CE6;
+            }
+            
+            .stat-card, .framework, .level-card {
+                border: 1px solid #333;
+                background: white;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">RULE <span>BENDERS</span></a>
+                <nav>
+                    <i class="fas fa-graduation-cap" style="color: #E85D00; font-size: 24px;"></i>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Break the £550 Ceiling</h1>
+            <div class="hero-subtitle">Transform Employee Mindset Into £3,000/Day Consultant Authority</div>
+            <i class="fas fa-arrow-down" style="font-size: 24px; color: #2B5CE6; margin-top: 20px;"></i>
+        </div>
+    </section>
+
+    <section class="container">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <span class="stat-number">5x</span>
+                <div class="stat-label">Director vs Entry-Level Rate Difference</div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">51%</span>
+                <div class="stat-label">Value-Based Consultants Land £10K+ Projects</div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">400%</span>
+                <div class="stat-label">Maximum Fee Increase From Pricing Shift</div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">£20.5B</span>
+                <div class="stat-label">UK Consulting Market Value (2023)</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container">
+        <div class="framework">
+            <h2>The Mindset Transformation</h2>
+            <div class="transformation-path">
+                <div class="mindset-box employee">
+                    <i class="fas fa-clock mindset-icon"></i>
+                    <div class="mindset-title">Employee Thinking</div>
+                    <div class="mindset-desc">"What should I work on?" • Trading time for money • Waiting for job descriptions</div>
+                </div>
+                
+                <i class="fas fa-arrow-right arrow"></i>
+                
+                <div class="mindset-box consultant">
+                    <i class="fas fa-lightbulb mindset-icon"></i>
+                    <div class="mindset-title">Consultant Authority</div>
+                    <div class="mindset-desc">"Here's the problem I've identified" • Creating value for money • Owning solutions</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container">
+        <div class="problem-levels">
+            <h2 class="section-title">The Consultant's Radar: Problem Identification System</h2>
+            <div class="levels-container">
+                <div class="level-card">
+                    <div class="level-number">LEVEL 1</div>
+                    <div class="level-title">Surface Problems</div>
+                    <div class="level-desc">Obvious issues people complain about. Inefficient processes, missed deadlines. Where task executioners operate.</div>
+                </div>
+                
+                <div class="level-card">
+                    <div class="level-number">LEVEL 2</div>
+                    <div class="level-title">System Problems</div>
+                    <div class="level-desc">Underlying causes creating surface problems. Poor stakeholder alignment, conflicting priorities. Real consultant territory.</div>
+                </div>
+                
+                <div class="level-card">
+                    <div class="level-number">LEVEL 3</div>
+                    <div class="level-title">Strategic Problems</div>
+                    <div class="level-desc">Fundamental misalignments most people don't see. Where premium rates are earned through strategic thinking.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container">
+        <div class="action-framework">
+            <h2 class="section-title" style="color: #E85D00;">4-Week Transformation Framework</h2>
+            <div class="timeline">
+                <div class="week-card">
+                    <div class="week-number">WEEK 1</div>
+                    <div class="week-title">Problem Spotting</div>
+                    <div class="week-desc">Develop your problem radar. Identify inefficiencies, unclear processes, and systemic issues.</div>
+                </div>
+                
+                <div class="week-card">
+                    <div class="week-number">WEEK 2</div>
+                    <div class="week-title">Root Cause Analysis</div>
+                    <div class="week-desc">Ask "Why?" until you reach system-level causes. Think strategically, not tactically.</div>
+                </div>
+                
+                <div class="week-card">
+                    <div class="week-number">WEEK 3</div>
+                    <div class="week-title">Solution Architecture</div>
+                    <div class="week-desc">Sketch 2-3 potential solutions for each problem. Focus on approach, not perfect details.</div>
+                </div>
+                
+                <div class="week-card">
+                    <div class="week-number">WEEK 4</div>
+                    <div class="week-title">Value Articulation</div>
+                    <div class="week-desc">Quantify impact: time saved, costs avoided, risks mitigated. Connect thinking to outcomes.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container">
+        <div class="rate-comparison">
+            <div class="rate-box">
+                <div class="rate-amount">£550</div>
+                <div class="rate-label">Task Executioner</div>
+                <div class="rate-desc">"What do you want me to work on?"</div>
+            </div>
+            
+            <i class="fas fa-arrow-right vs-arrow"></i>
+            
+            <div class="rate-box premium">
+                <div class="rate-amount">£3,000</div>
+                <div class="rate-label">Problem Solver</div>
+                <div class="rate-desc">"Here's the problem and solution"</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container">
+        <div class="cta">
+            <h2>Stop Selling Time. Start Selling Solutions.</h2>
+            <p>The job description is just someone else's guess about what needs doing. Your value lies in figuring out what actually needs doing—and then doing it.</p>
+            <a href="#" class="cta-button">
+                <i class="fas fa-rocket"></i>
+                Start Your Transformation
+            </a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Rule Benders Academy. Break Free From the Employee Trap.</p>
+        </div>
+    </footer>
+</body>
+</html>

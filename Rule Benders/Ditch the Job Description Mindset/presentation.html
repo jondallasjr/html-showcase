@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ditch the Job Description Mindset - Rule Benders Academy</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        .presentation-container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slide {
+            width: 90vw;
+            max-width: 1200px;
+            height: 80vh;
+            background: rgba(0, 0, 0, 0.9);
+            border: 2px solid #2B5CE6;
+            border-radius: 20px;
+            padding: 60px;
+            display: none;
+            position: relative;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(43, 92, 230, 0.2);
+        }
+
+        .slide.active {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            animation: slideIn 0.8s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .slide h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, #2B5CE6 0%, #E85D00 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.1;
+        }
+
+        .slide h2 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: #2B5CE6;
+            line-height: 1.2;
+        }
+
+        .slide h3 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 25px;
+            color: #E85D00;
+        }
+
+        .slide-visual {
+            width: 400px;
+            height: 400px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 15px;
+            margin: 30px 0;
+            border: 3px solid #2B5CE6;
+            box-shadow: 0 15px 30px rgba(43, 92, 230, 0.3);
+        }
+
+        .bullet-points {
+            list-style: none;
+            font-size: 1.8rem;
+            line-height: 1.6;
+            max-width: 800px;
+        }
+
+        .bullet-points li {
+            margin: 20px 0;
+            padding-left: 40px;
+            position: relative;
+        }
+
+        .bullet-points li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #E85D00;
+            font-weight: bold;
+            font-size: 2rem;
+        }
+
+        .stat-highlight {
+            font-size: 3rem;
+            font-weight: 900;
+            color: #E85D00;
+            margin: 20px 0;
+            text-shadow: 0 0 20px rgba(232, 93, 0, 0.5);
+        }
+
+        .comparison-layout {
+            display: grid;
+            grid-template-columns: 1fr 100px 1fr;
+            gap: 40px;
+            align-items: center;
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        .comparison-side {
+            text-align: center;
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px solid #333;
+        }
+
+        .comparison-side.left {
+            background: rgba(102, 102, 102, 0.1);
+            border-color: #666666;
+        }
+
+        .comparison-side.right {
+            background: rgba(43, 92, 230, 0.1);
+            border-color: #2B5CE6;
+        }
+
+        .vs-divider {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #E85D00;
+            text-align: center;
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 1000;
+        }
+
+        .nav-btn {
+            padding: 15px 30px;
+            background: #2B5CE6;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: #E85D00;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(232, 93, 0, 0.3);
+        }
+
+        .nav-btn:disabled {
+            background: #333;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .slide-counter {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            background: rgba(43, 92, 230, 0.8);
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+        }
+
+        .framework-visual {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            width: 100%;
+            margin: 40px 0;
+        }
+
+        .framework-step {
+            text-align: center;
+            padding: 20px;
+            border: 2px solid #2B5CE6;
+            border-radius: 15px;
+            background: rgba(43, 92, 230, 0.1);
+            width: 200px;
+        }
+
+        .framework-step h4 {
+            color: #E85D00;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .reveal-text {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+        .reveal-text.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .slide {
+                padding: 30px;
+                width: 95vw;
+                height: 85vh;
+            }
+            
+            .slide h1 { font-size: 2.5rem; }
+            .slide h2 { font-size: 2rem; }
+            .bullet-points { font-size: 1.3rem; }
+            .slide-visual { width: 300px; height: 300px; }
+            .comparison-layout { grid-template-columns: 1fr; gap: 20px; }
+            .vs-divider { order: 2; }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        
+        <!-- Slide 1: Title -->
+        <div class="slide active" id="slide-1">
+            <div class="slide-counter">1 / 12</div>
+            <h1>DITCH THE JOB DESCRIPTION MINDSET</h1>
+            <div class="slide-visual" style="background-image: url('https://codahosted.io/docs/9bejBCT96g/blobs/bl-UimasOibax/2f10818566ca7d61c911494a11fbcfb0ed733cd7fdd99adf4afe49f47c44b32fd74ac00c99958fcc9d282f5a134d031408f701ac67146d35de3f304a4c10183f1cbdd9d0122e0568f4c2b4f14d58249563dbe5b86a88aff85baaa8e0e71caf95ee3a7588');"></div>
+            <h3>Break free from the employee trap</h3>
+            <p class="reveal-text">Start thinking like a £1,500-a-day consultant</p>
+        </div>
+
+        <!-- Slide 2: The Trap -->
+        <div class="slide" id="slide-2">
+            <div class="slide-counter">2 / 12</div>
+            <h2>THE INVISIBLE INCOME CEILING</h2>
+            <ul class="bullet-points">
+                <li class="reveal-text">Job descriptions = income ceilings</li>
+                <li class="reveal-text">Task execution ≠ value creation</li>
+                <li class="reveal-text">"That's not in my job description"</li>
+                <li class="reveal-text">Waiting for approval = order-taker</li>
+            </ul>
+            <div class="stat-highlight">£500M+ saved by thinking differently</div>
+        </div>
+
+        <!-- Slide 3: Rate Comparison -->
+        <div class="slide" id="slide-3">
+            <div class="slide-counter">3 / 12</div>
+            <h2>THE £550 vs £3,000 QUESTION</h2>
+            <div class="comparison-layout">
+                <div class="comparison-side left">
+                    <div class="stat-highlight">£550/day</div>
+                    <p>"What do you want me to work on?"</p>
+                </div>
+                <div class="vs-divider">VS</div>
+                <div class="comparison-side right">
+                    <div class="stat-highlight">£3,000/day</div>
+                    <p>"Here's the problem I've identified"</p>
+                </div>
+            </div>
+            <p class="reveal-text">Same experience. Different mindset. 5x income.</p>
+        </div>
+
+        <!-- Slide 4: Task vs Problem Framework -->
+        <div class="slide" id="slide-4">
+            <div class="slide-counter">4 / 12</div>
+            <h2>TASK EXECUTIONER vs PROBLEM SOLVER</h2>
+            <div class="slide-visual" style="background-image: url('https://codahosted.io/docs/9bejBCT96g/blobs/bl-lQ_e-RDW0J/84aa7bd73eb780ad712371e624960bc7b9153c95675dd128777a95b209d15054d62b9352a4139fa324a8a9da02e7335ba9f877b29e9d6a4d4370eabc11ad944ced88190c8a7343922eedc7ce8193b3a139da13060261cb1fafe445f793e555da42203d44');"></div>
+            <div class="framework-visual">
+                <div class="framework-step">
+                    <h4>Tasks</h4>
+                    <p>Inputs</p>
+                </div>
+                <div class="framework-step">
+                    <h4>Problems</h4>
+                    <p>Opportunities</p>
+                </div>
+                <div class="framework-step">
+                    <h4>Solutions</h4>
+                    <p>Products</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Problem Radar -->
+        <div class="slide" id="slide-5">
+            <div class="slide-counter">5 / 12</div>
+            <h2>THE CONSULTANT'S RADAR</h2>
+            <div class="slide-visual" style="background-image: url('https://codahosted.io/docs/9bejBCT96g/blobs/bl-ryqLhemZzy/100727fd47b676a2d035656427f5e963117e8f1e9f48719e6ef04b80157af0119b1bb5f3062a0edd407f333eb92e0eecd9449eec1a8c55b73bf6db7a89c13b2c20dfa2c615a8974d3469fff5f5b29075a8cef33cebbb77c0bca3615fe9a4dcc14729afba');"></div>
+            <ul class="bullet-points">
+                <li class="reveal-text">Level 1: Surface problems (obvious)</li>
+                <li class="reveal-text">Level 2: System problems (valuable)</li>
+                <li class="reveal-text">Level 3: Strategic problems (premium)</li>
+            </ul>
+        </div>
+
+        <!-- Slide 6: Value Creation Model -->
+        <div class="slide" id="slide-6">
+            <div class="slide-counter">6 / 12</div>
+            <h2>TIME vs VALUE</h2>
+            <div class="slide-visual" style="background-image: url('https://codahosted.io/docs/9bejBCT96g/blobs/bl-qGTC00T52_/eb5a68e5f932dff6bb481210f0a66e8c1f231330f9289cde2753bdf0205bb3d556d3b8e5027be7d893a983bc26cc5bea8772458908cc5a9e63530299a301c89bb686a347ff14cd78151cb26196819fbf3e299cb4e0379529f17e6cf3039375bdfdcb9a26');"></div>
+            <div class="comparison-layout">
+                <div class="comparison-side left">
+                    <h4>Employee Mindset</h4>
+                    <p>Time = Cost</p>
+                </div>
+                <div class="vs-divider">→</div>
+                <div class="comparison-side right">
+                    <h4>Consultant Mindset</h4>
+                    <p>Value = Price</p>
+                </div>
+            </div>
+            <div class="stat-highlight">30-400% fee increase</div>
+        </div>
+
+        <!-- Slide 7: Solution Ownership -->
+        <div class="slide" id="slide-7">
+            <div class="slide-counter">7 / 12</div>
+            <h2>SOLUTION OWNERSHIP TRIANGLE</h2>
+            <div class="slide-visual" style="background-image: url('https://codahosted.io/docs/9bejBCT96g/blobs/bl-U0iVo92N9R/6024e3d443158b90169eae4f73da3b2ab0951be92ded8806d043d81d6488be59fa4348577fbe9880dfba96c57153991e7c5c8393f08e26973b4fbfd23ea260f94618aaf573ea1d367d7611db1074fe37ae1dbaa48d433b512a888a85e11cbe091e6afac2');"></div>
+            <div class="framework-visual">
+                <div class="framework-step">
+                    <h4>Problem</h4>
+                    <p>Articulate</p>
+                </div>
+                <div class="framework-step">
+                    <h4>Solution</h4>
+                    <p>Architect</p>
+                </div>
+                <div class="framework-step">
+                    <h4>Value</h4>
+                    <p>Quantify</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Mental Blockers -->
+        <div class="slide" id="slide-8">
+            <div class="slide-counter">8 / 12</div>
+            <h2>BREAKING MENTAL BLOCKERS</h2>
+            <div class="slide-visual" style="background-image: url('https://codahosted.io/docs/9bejBCT96g/blobs/bl-5c9Ya8taS5/c2a4cf45dad0663730e7e63a8bccfa7248dddb48032312e9f4a885488c6bedc935a0965f4b428678fefd48b75f88d57dd83517115bbd7d4c1dbe92dd853326ab3ed5b4e7eb3e5661ef569e1ef0c74f31f9689f1020365155e943b814fc43ccd480b6ac65');"></div>
+            <ul class="bullet-points">
+                <li class="reveal-text">"I need more experience" ✗</li>
+                <li class="reveal-text">"Someone else should decide" ✗</li>
+                <li class="reveal-text">"I don't have enough info" ✗</li>
+                <li class="reveal-text">"What if I'm wrong?" ✗</li>
+            </ul>
+        </div>
+
+        <!-- Slide 9: Four Week Framework -->
+        <div class="slide" id="slide-9">
+            <div class="slide-counter">9 / 12</div>
+            <h2>4-WEEK TRANSFORMATION</h2>
+            <div class="slide-visual" style="background-image: url('https://codahosted.io/docs/9bejBCT96g/blobs/bl-9izWYZI5Kl/d5a0051ecfbfb6b33010bced44f2390753e15cb09e1f789f9c04efe45af62f89be97fb0aaaeef3b6e22e8728a00a654156389a75a9a98da3e9541d24be0503636247cdd2004c075ffca470078893c880eea9136a1c062cf2f524008cab518d468d332ee5');"></div>
+            <div class="framework-visual">
+                <div class="framework-step">
+                    <h4>Week 1</h4>
+                    <p>Problem Spotting</p>
+                </div>
+                <div class="framework-step">
+                    <h4>Week 2</h4>
+                    <p>Root Cause</p>
+                </div>
+                <div class="framework-step">
+                    <h4>Week 3</h4>
+                    <p>Solution Design</p>
+                </div>
+                <div class="framework-step">
+                    <h4>Week 4</h4>
+                    <p>Value Proof</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: Market Reality -->
+        <div class="slide" id="slide-10">
+            <div class="slide-counter">10 / 12</div>
+            <h2>MARKET PAYS FOR PROBLEMS SOLVED</h2>
+            <div class="stat-highlight">£20.5 BILLION</div>
+            <p class="reveal-text">UK consulting market 2023</p>
+            <ul class="bullet-points">
+                <li class="reveal-text">Outcome-based relationships</li>
+                <li class="reveal-text">Strategic thinking premium</li>
+                <li class="reveal-text">AI handles routine tasks</li>
+            </ul>
+        </div>
+
+        <!-- Slide 11: Transformation Path -->
+        <div class="slide" id="slide-11">
+            <div class="slide-counter">11 / 12</div>
+            <h2>THE TRANSFORMATION</h2>
+            <div class="slide-visual" style="background-image: url('https://codahosted.io/docs/9bejBCT96g/blobs/bl-RXfL-dge8g/409f0c473fd36aff5da88ae06e881bf9f9f1926097cb25e6b8bb820793dd61b1820588c410783b685f8538ed0e510886be73c8f0b0bef40d0f86d1f33b1a42a67629d47d6b60b10b20e08f42eac08a50c2d3bc539575579156becb8d8ecf39e574bda84f');"></div>
+            <div class="comparison-layout">
+                <div class="comparison-side left">
+                    <h4>Before</h4>
+                    <p>Task executor</p>
+                    <p>Time trader</p>
+                    <p>Order taker</p>
+                </div>
+                <div class="vs-divider">→</div>
+                <div class="comparison-side right">
+                    <h4>After</h4>
+                    <p>Problem solver</p>
+                    <p>Value creator</p>
+                    <p>Solution owner</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12: Call to Action -->
+        <div class="slide" id="slide-12">
+            <div class="slide-counter">12 / 12</div>
+            <h1>BREAK FREE</h1>
+            <div class="slide-visual" style="background-image: url('https://codahosted.io/docs/9bejBCT96g/blobs/bl-AH0eq4pw-d/706513519ea0117dc37823610930c2170f4d63d04d78059454d12568831aa0824bb8bfdf76b01f871d7ab14ce6d4fc884704e3408480b382e297c246116ec87a42bdc536d6d99a6da3d81a77137c12b84920a2454d134de154555c426b3ee21da85a271d');"></div>
+            <h3>Stop waiting for job descriptions</h3>
+            <p class="reveal-text">Start creating value</p>
+            <div class="stat-highlight">Your worth = Your thinking</div>
+        </div>
+    </div>
+
+    <div class="navigation">
+        <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">← Previous</button>
+        <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Next →</button>
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 12;
+
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.slide');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            
+            if (n > totalSlides) currentSlide = 1;
+            if (n < 1) currentSlide = totalSlides;
+            
+            slides.forEach(slide => slide.classList.remove('active'));
+            document.getElementById(`slide-${currentSlide}`).classList.add('active');
+            
+            // Update navigation buttons
+            prevBtn.disabled = currentSlide === 1;
+            nextBtn.disabled = currentSlide === totalSlides;
+            
+            // Trigger reveal animations
+            setTimeout(() => {
+                const revealElements = document.querySelectorAll(`#slide-${currentSlide} .reveal-text`);
+                revealElements.forEach((element, index) => {
+                    setTimeout(() => {
+                        element.classList.add('visible');
+                    }, index * 300);
+                });
+            }, 400);
+        }
+
+        function changeSlide(direction) {
+            currentSlide += direction;
+            showSlide(currentSlide);
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                changeSlide(-1);
+            } else if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                changeSlide(1);
+            }
+        });
+
+        // Initialize
+        showSlide(1);
+
+        // Auto-reveal first slide elements
+        setTimeout(() => {
+            document.querySelectorAll('#slide-1 .reveal-text').forEach(element => {
+                element.classList.add('visible');
+            });
+        }, 800);
+    </script>
+</body>
+</html>
