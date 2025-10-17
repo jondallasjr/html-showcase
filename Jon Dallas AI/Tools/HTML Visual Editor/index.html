@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual HTML/CSS/JS Editor - Powered by GrapesJS</title>
+    
+    <!-- GrapesJS CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/grapesjs/dist/css/grapes.min.css">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            height: 100vh;
+            overflow: hidden;
+            background: #1a1a1a;
+        }
+        
+        .header {
+            background: #2c2c2c;
+            padding: 10px 20px;
+            border-bottom: 1px solid #444;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 50px;
+        }
+        
+        .header h1 {
+            color: #fff;
+            font-size: 18px;
+            font-weight: 500;
+        }
+        
+        .header-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            background: #4a90e2;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .btn:hover {
+            background: #357abd;
+        }
+        
+        .btn-secondary {
+            background: #555;
+        }
+        
+        .btn-secondary:hover {
+            background: #666;
+        }
+        
+        .btn-success {
+            background: #5cb85c;
+        }
+        
+        .btn-success:hover {
+            background: #449d44;
+        }
+        
+        #editor-container {
+            height: calc(100vh - 50px);
+            background: #222;
+        }
+        
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: #2c2c2c;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+        
+        .modal-header {
+            padding: 15px 20px;
+            border-bottom: 1px solid #444;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-header h2 {
+            color: #fff;
+            font-size: 18px;
+            margin: 0;
+        }
+        
+        .modal-close {
+            background: none;
+            border: none;
+            color: #999;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-close:hover {
+            color: #fff;
+        }
+        
+        .modal-body {
+            padding: 20px;
+            flex: 1;
+            overflow-y: auto;
+        }
+        
+        .modal-footer {
+            padding: 15px 20px;
+            border-top: 1px solid #444;
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+        
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #444;
+        }
+        
+        .tab {
+            background: none;
+            border: none;
+            color: #999;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 14px;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        .tab.active {
+            color: #4a90e2;
+            border-bottom-color: #4a90e2;
+        }
+        
+        .tab:hover {
+            color: #fff;
+        }
+        
+        .code-input {
+            width: 100%;
+            min-height: 400px;
+            padding: 15px;
+            background: #1a1a1a;
+            border: 1px solid #444;
+            border-radius: 4px;
+            color: #fff;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 13px;
+            resize: vertical;
+            line-height: 1.5;
+        }
+        
+        .code-input:focus {
+            outline: none;
+            border-color: #4a90e2;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* Custom GrapesJS overrides */
+        .gjs-cv-canvas {
+            background: #f5f5f5;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .copy-notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #5cb85c;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 4px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s;
+            z-index: 10001;
+        }
+        
+        .copy-notification.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Visual HTML/CSS/JS Editor</h1>
+        <div class="header-buttons">
+            <button class="btn btn-secondary" onclick="openImportModal()">
+                <i class="fas fa-file-import"></i> Import Code
+            </button>
+            <button class="btn btn-success" onclick="openExportModal()">
+                <i class="fas fa-file-export"></i> Export Code
+            </button>
+        </div>
+    </div>
+    
+    <div id="editor-container"></div>
+    
+    <!-- Import Modal -->
+    <div id="importModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Import HTML/CSS/JS</h2>
+                <button class="modal-close" onclick="closeImportModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="tabs">
+                    <button class="tab active" onclick="switchImportTab('combined')">Combined HTML</button>
+                    <button class="tab" onclick="switchImportTab('separate')">Separate Files</button>
+                </div>
+                
+                <div id="combined-tab" class="tab-content active">
+                    <p style="color: #999; margin-bottom: 10px;">
+                        Paste your complete HTML document (with embedded CSS and JS):
+                    </p>
+                    <textarea id="combinedCode" class="code-input" 
+                        placeholder="Paste your complete HTML document here..."></textarea>
+                </div>
+                
+                <div id="separate-tab" class="tab-content">
+                    <p style="color: #999; margin-bottom: 10px;">HTML:</p>
+                    <textarea id="htmlCode" class="code-input" style="min-height: 120px;" 
+                        placeholder="Paste your HTML here..."></textarea>
+                    
+                    <p style="color: #999; margin: 15px 0 10px;">CSS:</p>
+                    <textarea id="cssCode" class="code-input" style="min-height: 120px;" 
+                        placeholder="Paste your CSS here..."></textarea>
+                    
+                    <p style="color: #999; margin: 15px 0 10px;">JavaScript (optional):</p>
+                    <textarea id="jsCode" class="code-input" style="min-height: 120px;" 
+                        placeholder="Paste your JavaScript here..."></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeImportModal()">Cancel</button>
+                <button class="btn" onclick="importCode()">
+                    <i class="fas fa-check"></i> Import
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Export Modal -->
+    <div id="exportModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Export Code</h2>
+                <button class="modal-close" onclick="closeExportModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="tabs">
+                    <button class="tab active" onclick="switchExportTab('full')">Full HTML</button>
+                    <button class="tab" onclick="switchExportTab('html')">HTML Only</button>
+                    <button class="tab" onclick="switchExportTab('css')">CSS Only</button>
+                    <button class="tab" onclick="switchExportTab('js')">JS Only</button>
+                </div>
+                
+                <div id="full-export" class="tab-content active">
+                    <textarea id="fullExport" class="code-input" readonly></textarea>
+                    <button class="btn" style="margin-top: 10px" onclick="copyToClipboard('fullExport')">
+                        <i class="fas fa-copy"></i> Copy to Clipboard
+                    </button>
+                </div>
+                
+                <div id="html-export" class="tab-content">
+                    <textarea id="htmlExport" class="code-input" readonly></textarea>
+                    <button class="btn" style="margin-top: 10px" onclick="copyToClipboard('htmlExport')">
+                        <i class="fas fa-copy"></i> Copy to Clipboard
+                    </button>
+                </div>
+                
+                <div id="css-export" class="tab-content">
+                    <textarea id="cssExport" class="code-input" readonly></textarea>
+                    <button class="btn" style="margin-top: 10px" onclick="copyToClipboard('cssExport')">
+                        <i class="fas fa-copy"></i> Copy to Clipboard
+                    </button>
+                </div>
+                
+                <div id="js-export" class="tab-content">
+                    <textarea id="jsExport" class="code-input" readonly></textarea>
+                    <button class="btn" style="margin-top: 10px" onclick="copyToClipboard('jsExport')">
+                        <i class="fas fa-copy"></i> Copy to Clipboard
+                    </button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeExportModal()">Close</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Copy notification -->
+    <div id="copyNotification" class="copy-notification">
+        <i class="fas fa-check-circle"></i> Copied to clipboard!
+    </div>
+    
+    <!-- GrapesJS -->
+    <script src="https://unpkg.com/grapesjs"></script>
+    
+    <!-- GrapesJS Webpage Preset for more blocks/components -->
+    <script src="https://unpkg.com/grapesjs-preset-webpage"></script>
+    
+    <script>
+        let editor;
+        let currentImportTab = 'combined';
+        let currentExportTab = 'full';
+        
+        // Initialize GrapesJS
+        function initEditor() {
+            editor = grapesjs.init({
+                container: '#editor-container',
+                height: '100%',
+                width: 'auto',
+                plugins: ['gjs-preset-webpage'],
+                pluginsOpts: {
+                    'gjs-preset-webpage': {}
+                },
+                storageManager: false,
+                canvas: {
+                    styles: [
+                        'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap'
+                    ]
+                },
+                deviceManager: {
+                    devices: [
+                        {
+                            name: 'Desktop',
+                            width: ''
+                        },
+                        {
+                            name: 'Tablet',
+                            width: '768px'
+                        },
+                        {
+                            name: 'Mobile',
+                            width: '320px'
+                        }
+                    ]
+                },
+                panels: {
+                    defaults: [
+                        {
+                            id: 'basic-actions',
+                            el: '.panel__basic-actions',
+                            buttons: [
+                                {
+                                    id: 'visibility',
+                                    active: true,
+                                    className: 'btn-toggle-borders',
+                                    label: '<i class="fa fa-clone"></i>',
+                                    command: 'sw-visibility'
+                                }
+                            ]
+                        }
+                    ]
+                }
+            });
+            
+            // Add default content
+            editor.setComponents('<div style="padding: 40px; text-align: center;"><h1>Welcome to Visual Editor</h1><p>Click "Import Code" to paste your HTML/CSS/JS, or start building visually!</p></div>');
+            editor.setStyle('body { font-family: Inter, sans-serif; } h1 { color: #333; }');
+        }
+        
+        // Modal functions
+        function openImportModal() {
+            document.getElementById('importModal').classList.add('active');
+        }
+        
+        function closeImportModal() {
+            document.getElementById('importModal').classList.remove('active');
+        }
+        
+        function openExportModal() {
+            // Get current code from editor
+            const html = editor.getHtml();
+            const css = editor.getCss();
+            const js = editor.getJs();
+            
+            // Create full HTML document - using string concatenation to avoid template literal issues
+            const fullHtml = '<!DOCTYPE html>\n' +
+                '<html lang="en">\n' +
+                '<head>\n' +
+                '    <meta charset="UTF-8">\n' +
+                '    <meta name="viewport" content="width=device-width, initial-scale=1.0">\n' +
+                '    <title>Exported from Visual Editor</title>\n' +
+                '    <style>\n' +
+                css + '\n' +
+                '    </style>\n' +
+                '</head>\n' +
+                '<body>\n' +
+                html + '\n' +
+                (js ? '    <script>\n' + js + '\n    </' + 'script>\n' : '') +
+                '</body>\n' +
+                '</html>';
+            
+            // Populate export textareas
+            document.getElementById('fullExport').value = fullHtml;
+            document.getElementById('htmlExport').value = html;
+            document.getElementById('cssExport').value = css;
+            document.getElementById('jsExport').value = js || '// No JavaScript code';
+            
+            document.getElementById('exportModal').classList.add('active');
+        }
+        
+        function closeExportModal() {
+            document.getElementById('exportModal').classList.remove('active');
+        }
+        
+        // Tab switching
+        function switchImportTab(tab) {
+            currentImportTab = tab;
+            
+            // Update tab buttons
+            document.querySelectorAll('#importModal .tab').forEach(function(t) {
+                t.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Update tab content
+            document.querySelectorAll('#importModal .tab-content').forEach(function(c) {
+                c.classList.remove('active');
+            });
+            if (tab === 'combined') {
+                document.getElementById('combined-tab').classList.add('active');
+            } else {
+                document.getElementById('separate-tab').classList.add('active');
+            }
+        }
+        
+        function switchExportTab(tab) {
+            currentExportTab = tab;
+            
+            // Update tab buttons
+            document.querySelectorAll('#exportModal .tab').forEach(function(t) {
+                t.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Update tab content
+            document.querySelectorAll('#exportModal .tab-content').forEach(function(c) {
+                c.classList.remove('active');
+            });
+            document.getElementById(tab + '-export').classList.add('active');
+        }
+        
+        // Import code into editor
+        function importCode() {
+            if (currentImportTab === 'combined') {
+                const combinedCode = document.getElementById('combinedCode').value;
+                if (!combinedCode.trim()) {
+                    alert('Please paste some HTML code to import');
+                    return;
+                }
+                
+                // Parse the combined HTML
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(combinedCode, 'text/html');
+                
+                // Extract CSS from style tags
+                let css = '';
+                doc.querySelectorAll('style').forEach(function(style) {
+                    css += style.innerHTML + '\n';
+                });
+                
+                // Extract JavaScript from script tags
+                let js = '';
+                doc.querySelectorAll('script').forEach(function(script) {
+                    js += script.innerHTML + '\n';
+                });
+                
+                // Remove style and script tags from body for clean HTML
+                const bodyClone = doc.body.cloneNode(true);
+                bodyClone.querySelectorAll('style, script').forEach(function(el) {
+                    el.remove();
+                });
+                
+                // Set in editor
+                editor.setComponents(bodyClone.innerHTML);
+                if (css) editor.setStyle(css);
+                if (js) editor.setJs(js);
+                
+            } else {
+                const html = document.getElementById('htmlCode').value;
+                const css = document.getElementById('cssCode').value;
+                const js = document.getElementById('jsCode').value;
+                
+                if (!html.trim() && !css.trim()) {
+                    alert('Please provide at least some HTML or CSS');
+                    return;
+                }
+                
+                // Set in editor
+                if (html) editor.setComponents(html);
+                if (css) editor.setStyle(css);
+                if (js) editor.setJs(js);
+            }
+            
+            closeImportModal();
+        }
+        
+        // Copy to clipboard
+        function copyToClipboard(elementId) {
+            const element = document.getElementById(elementId);
+            element.select();
+            element.setSelectionRange(0, 99999); // For mobile devices
+            
+            try {
+                document.execCommand('copy');
+                
+                // Show notification
+                const notification = document.getElementById('copyNotification');
+                notification.classList.add('show');
+                setTimeout(function() {
+                    notification.classList.remove('show');
+                }, 2000);
+            } catch (err) {
+                alert('Failed to copy to clipboard');
+            }
+        }
+        
+        // Initialize editor when page loads
+        window.onload = function() {
+            initEditor();
+        };
+    </script>
+</body>
+</html>
