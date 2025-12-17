@@ -1,0 +1,1941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reforecast & Scenario Planning | Alix Admin Doc</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --coda-bg: #ffffff;
+            --coda-sidebar-bg: #f7f7f7;
+            --coda-border: #e5e5e5;
+            --coda-text: #1a1a1a;
+            --coda-text-secondary: #6b6b6b;
+            --coda-text-muted: #9b9b9b;
+            --coda-accent: #f26522;
+            --coda-accent-light: #fff5f0;
+            --coda-green: #0d8050;
+            --coda-green-bg: #e6f4ed;
+            --coda-red: #c23030;
+            --coda-red-bg: #fce8e8;
+            --coda-yellow: #bf7326;
+            --coda-yellow-bg: #fff8e6;
+            --coda-blue: #2965cc;
+            --coda-blue-bg: #e8f1fc;
+            --coda-purple: #7c3aed;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--coda-bg);
+            color: var(--coda-text);
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* Coda-style layout */
+        .app-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 240px;
+            background: var(--coda-sidebar-bg);
+            border-right: 1px solid var(--coda-border);
+            padding: 16px 0;
+            flex-shrink: 0;
+        }
+
+        .sidebar-header {
+            padding: 8px 16px 16px;
+            border-bottom: 1px solid var(--coda-border);
+            margin-bottom: 8px;
+        }
+
+        .doc-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--coda-text);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .doc-icon {
+            width: 20px;
+            height: 20px;
+            background: var(--coda-accent);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .nav-section {
+            padding: 8px 0;
+        }
+
+        .nav-section-title {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--coda-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 8px 16px 4px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            color: var(--coda-text-secondary);
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.15s;
+        }
+
+        .nav-item:hover {
+            background: rgba(0,0,0,0.04);
+        }
+
+        .nav-item.active {
+            background: rgba(242, 101, 34, 0.08);
+            color: var(--coda-accent);
+            font-weight: 500;
+        }
+
+        .nav-item svg {
+            width: 16px;
+            height: 16px;
+            opacity: 0.7;
+        }
+
+        .nav-item.active svg {
+            opacity: 1;
+        }
+
+        .nav-badge {
+            margin-left: auto;
+            background: var(--coda-accent);
+            color: white;
+            font-size: 10px;
+            font-weight: 600;
+            padding: 2px 6px;
+            border-radius: 10px;
+        }
+
+        /* Main content */
+        .main-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 32px 48px;
+            max-width: 1400px;
+        }
+
+        /* Page header */
+        .page-header {
+            margin-bottom: 24px;
+        }
+
+        .page-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--coda-text);
+            margin-bottom: 8px;
+        }
+
+        .page-description {
+            font-size: 14px;
+            color: var(--coda-text-secondary);
+            max-width: 800px;
+        }
+
+        /* Scenario selector */
+        .scenario-selector {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+            padding: 16px 20px;
+            background: white;
+            border: 1px solid var(--coda-border);
+            border-radius: 8px;
+        }
+
+        .scenario-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--coda-text);
+        }
+
+        .scenario-tabs {
+            display: flex;
+            gap: 4px;
+            flex: 1;
+        }
+
+        .scenario-tab {
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.15s;
+            border: 1px solid transparent;
+        }
+
+        .scenario-tab:hover {
+            background: var(--coda-sidebar-bg);
+        }
+
+        .scenario-tab.active {
+            background: var(--coda-accent);
+            color: white;
+        }
+
+        .scenario-tab.baseline {
+            color: var(--coda-blue);
+        }
+
+        .scenario-tab.baseline.active {
+            background: var(--coda-blue);
+            color: white;
+        }
+
+        .btn-new-scenario {
+            background: white;
+            border: 1px solid var(--coda-border);
+            border-radius: 6px;
+            padding: 6px 12px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--coda-text);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.15s;
+        }
+
+        .btn-new-scenario:hover {
+            background: var(--coda-sidebar-bg);
+        }
+
+        .btn-new-scenario svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* Callout */
+        .callout {
+            background: var(--coda-yellow-bg);
+            border-left: 3px solid var(--coda-yellow);
+            border-radius: 4px;
+            padding: 12px 16px;
+            margin-bottom: 24px;
+        }
+
+        .callout-title {
+            font-weight: 600;
+            font-size: 13px;
+            color: var(--coda-yellow);
+            margin-bottom: 4px;
+        }
+
+        .callout-text {
+            font-size: 13px;
+            color: var(--coda-text-secondary);
+        }
+
+        /* Comparison Grid */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .comparison-card {
+            background: white;
+            border: 2px solid var(--coda-border);
+            border-radius: 8px;
+            padding: 20px;
+            position: relative;
+        }
+
+        .comparison-card.active {
+            border-color: var(--coda-accent);
+            box-shadow: 0 0 0 3px rgba(242, 101, 34, 0.1);
+        }
+
+        .scenario-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .scenario-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--coda-text);
+        }
+
+        .scenario-badge {
+            font-size: 10px;
+            font-weight: 600;
+            padding: 3px 8px;
+            border-radius: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .scenario-badge.baseline {
+            background: var(--coda-blue-bg);
+            color: var(--coda-blue);
+        }
+
+        .scenario-badge.optimistic {
+            background: var(--coda-green-bg);
+            color: var(--coda-green);
+        }
+
+        .scenario-badge.conservative {
+            background: var(--coda-yellow-bg);
+            color: var(--coda-yellow);
+        }
+
+        .scenario-metric {
+            margin-bottom: 12px;
+        }
+
+        .metric-label {
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--coda-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            margin-bottom: 4px;
+        }
+
+        .metric-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--coda-text);
+        }
+
+        .metric-delta {
+            font-size: 12px;
+            font-weight: 500;
+            margin-top: 2px;
+        }
+
+        .metric-delta.positive {
+            color: var(--coda-green);
+        }
+
+        .metric-delta.negative {
+            color: var(--coda-red);
+        }
+
+        .scenario-assumptions {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--coda-border);
+        }
+
+        .assumptions-title {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--coda-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            margin-bottom: 8px;
+        }
+
+        .assumption-item {
+            font-size: 12px;
+            color: var(--coda-text-secondary);
+            margin-bottom: 4px;
+            display: flex;
+            align-items: flex-start;
+            gap: 6px;
+        }
+
+        .assumption-item::before {
+            content: "•";
+            color: var(--coda-accent);
+            font-weight: 700;
+        }
+
+        /* Section */
+        .section {
+            margin-bottom: 32px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--coda-text);
+        }
+
+        .section-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn {
+            background: white;
+            border: 1px solid var(--coda-border);
+            border-radius: 6px;
+            padding: 6px 12px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--coda-text);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.15s;
+        }
+
+        .btn:hover {
+            background: var(--coda-sidebar-bg);
+        }
+
+        .btn-primary {
+            background: var(--coda-accent);
+            color: white;
+            border-color: var(--coda-accent);
+        }
+
+        .btn-primary:hover {
+            background: #d95a1c;
+        }
+
+        .btn svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* Table styles */
+        .table-container {
+            background: white;
+            border: 1px solid var(--coda-border);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .table-header-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--coda-border);
+            background: var(--coda-sidebar-bg);
+        }
+
+        .table-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--coda-text);
+        }
+
+        .table-count {
+            font-size: 12px;
+            color: var(--coda-text-muted);
+            margin-left: 8px;
+            font-weight: 400;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead th {
+            background: var(--coda-sidebar-bg);
+            border-bottom: 1px solid var(--coda-border);
+            padding: 10px 12px;
+            text-align: left;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--coda-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        tbody td {
+            padding: 12px;
+            border-bottom: 1px solid var(--coda-border);
+            font-size: 13px;
+            color: var(--coda-text);
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        tbody tr:hover {
+            background: rgba(0,0,0,0.02);
+        }
+
+        .editable-cell {
+            background: var(--coda-accent-light);
+            border-radius: 4px;
+            padding: 4px 8px;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .editable-cell:hover {
+            background: rgba(242, 101, 34, 0.15);
+        }
+
+        .platform-cell {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .platform-icon {
+            width: 24px;
+            height: 24px;
+            background: var(--coda-purple);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .currency {
+            font-variant-numeric: tabular-nums;
+            font-weight: 500;
+        }
+
+        .variance-positive {
+            color: var(--coda-green);
+            background: var(--coda-green-bg);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 500;
+            font-size: 12px;
+        }
+
+        .variance-negative {
+            color: var(--coda-red);
+            background: var(--coda-red-bg);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 500;
+            font-size: 12px;
+        }
+
+        .variance-neutral {
+            color: var(--coda-yellow);
+            background: var(--coda-yellow-bg);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 500;
+            font-size: 12px;
+        }
+
+        /* Chart container */
+        .chart-card {
+            background: white;
+            border: 1px solid var(--coda-border);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+
+        .chart-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--coda-text);
+            margin-bottom: 16px;
+        }
+
+        .chart-container {
+            height: 320px;
+            position: relative;
+        }
+
+        /* Legend */
+        .legend {
+            display: flex;
+            gap: 16px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: var(--coda-text-secondary);
+        }
+
+        .legend-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 2px;
+        }
+
+        /* Adjustment controls */
+        .adjustment-panel {
+            background: white;
+            border: 1px solid var(--coda-border);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+
+        .adjustment-panel-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--coda-text);
+            margin-bottom: 16px;
+        }
+
+        .adjustment-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .adjustment-field {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .adjustment-label {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--coda-text-secondary);
+        }
+
+        .adjustment-input {
+            padding: 8px 10px;
+            border: 1px solid var(--coda-border);
+            border-radius: 6px;
+            font-size: 13px;
+            font-family: inherit;
+            transition: all 0.15s;
+        }
+
+        .adjustment-input:focus {
+            outline: none;
+            border-color: var(--coda-accent);
+            box-shadow: 0 0 0 3px rgba(242, 101, 34, 0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+            .adjustment-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                display: none;
+            }
+            .main-content {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="doc-title">
+                    <span class="doc-icon">A</span>
+                    Alix Admin Doc
+                </div>
+            </div>
+
+            <nav class="nav-section">
+                <div class="nav-section-title">Requests</div>
+                <div class="nav-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+                    All Requests
+                </div>
+                <div class="nav-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    Pending Review
+                    <span class="nav-badge">12</span>
+                </div>
+                <div class="nav-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>
+                    Approved
+                </div>
+            </nav>
+
+            <nav class="nav-section">
+                <div class="nav-section-title">Financial Tracking</div>
+                <div class="nav-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                    Actual vs Budget
+                </div>
+                <div class="nav-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"/></svg>
+                    P&L Forecast
+                </div>
+                <div class="nav-item active">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                    Reforecast & Scenarios
+                </div>
+                <div class="nav-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                    Costs by Item Codes
+                </div>
+            </nav>
+
+            <nav class="nav-section">
+                <div class="nav-section-title">Dashboards</div>
+                <div class="nav-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"/></svg>
+                    Executive Dashboard
+                </div>
+                <div class="nav-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                    Priority Budgeting
+                </div>
+            </nav>
+
+            <nav class="nav-section">
+                <div class="nav-section-title">Settings</div>
+                <div class="nav-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                    Settings
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="page-header">
+                <h1 class="page-title">Reforecast & Scenario Planning</h1>
+                <p class="page-description">
+                    Create and compare budget scenarios to model the impact of changes like new vendors, hiring shifts, churn, investment reprioritization, and unapproved expenses. Compare scenarios side-by-side to make informed decisions.
+                </p>
+            </header>
+
+            <!-- Scenario Selector -->
+            <div class="scenario-selector">
+                <span class="scenario-label">Active Scenario:</span>
+                <div class="scenario-tabs">
+                    <div class="scenario-tab baseline active">FY26 Baseline</div>
+                    <div class="scenario-tab">Optimistic Case</div>
+                    <div class="scenario-tab">Conservative Case</div>
+                    <div class="scenario-tab">Q2 Vendor Rate Increase</div>
+                </div>
+                <button class="btn-new-scenario">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4v16m8-8H4"/></svg>
+                    New Scenario
+                </button>
+            </div>
+
+            <!-- Callout -->
+            <div class="callout">
+                <div class="callout-title">⚡ Scenario Planning</div>
+                <div class="callout-text">
+                    Each scenario is a complete copy of your FY26 budget. Make adjustments to model different situations (vendor changes, headcount shifts, investment cuts). All scenarios are saved and can be compared to help leadership make decisions.
+                </div>
+            </div>
+
+            <!-- Scenario Comparison Cards -->
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-title">Scenario Comparison</div>
+                    <div class="section-actions">
+                        <button class="btn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                            Export Comparison
+                        </button>
+                    </div>
+                </div>
+
+                <div class="comparison-grid">
+                    <!-- Baseline Scenario -->
+                    <div class="comparison-card active">
+                        <div class="scenario-header">
+                            <div class="scenario-name">FY26 Baseline</div>
+                            <div class="scenario-badge baseline">Baseline</div>
+                        </div>
+                        <div class="scenario-metric">
+                            <div class="metric-label">Total Budget</div>
+                            <div class="metric-value">$4.20M</div>
+                        </div>
+                        <div class="scenario-metric">
+                            <div class="metric-label">Labor Costs</div>
+                            <div class="metric-value">$2.85M</div>
+                            <div class="metric-delta">68% of budget</div>
+                        </div>
+                        <div class="scenario-metric">
+                            <div class="metric-label">Non-Labor Costs</div>
+                            <div class="metric-value">$1.35M</div>
+                            <div class="metric-delta">32% of budget</div>
+                        </div>
+                        <div class="scenario-assumptions">
+                            <div class="assumptions-title">Key Assumptions</div>
+                            <div class="assumption-item">Original approved budget</div>
+                            <div class="assumption-item">All platforms at full headcount</div>
+                            <div class="assumption-item">Current vendor rates</div>
+                        </div>
+                    </div>
+
+                    <!-- Optimistic Scenario -->
+                    <div class="comparison-card">
+                        <div class="scenario-header">
+                            <div class="scenario-name">Optimistic Case</div>
+                            <div class="scenario-badge optimistic">Optimistic</div>
+                        </div>
+                        <div class="scenario-metric">
+                            <div class="metric-label">Total Budget</div>
+                            <div class="metric-value">$3.92M</div>
+                            <div class="metric-delta positive">↓ $280K vs baseline</div>
+                        </div>
+                        <div class="scenario-metric">
+                            <div class="metric-label">Labor Costs</div>
+                            <div class="metric-value">$2.64M</div>
+                            <div class="metric-delta positive">↓ $210K (7.4%)</div>
+                        </div>
+                        <div class="scenario-metric">
+                            <div class="metric-label">Non-Labor Costs</div>
+                            <div class="metric-value">$1.28M</div>
+                            <div class="metric-delta positive">↓ $70K (5.2%)</div>
+                        </div>
+                        <div class="scenario-assumptions">
+                            <div class="assumptions-title">Key Assumptions</div>
+                            <div class="assumption-item">15% improvement in vendor rates</div>
+                            <div class="assumption-item">Delayed hiring for 3 positions (Q3)</div>
+                            <div class="assumption-item">Reduced travel expenses (-25%)</div>
+                            <div class="assumption-item">Technology cost optimization</div>
+                        </div>
+                    </div>
+
+                    <!-- Conservative Scenario -->
+                    <div class="comparison-card">
+                        <div class="scenario-header">
+                            <div class="scenario-name">Conservative Case</div>
+                            <div class="scenario-badge conservative">Conservative</div>
+                        </div>
+                        <div class="scenario-metric">
+                            <div class="metric-label">Total Budget</div>
+                            <div class="metric-value">$4.68M</div>
+                            <div class="metric-delta negative">↑ $480K vs baseline</div>
+                        </div>
+                        <div class="scenario-metric">
+                            <div class="metric-label">Labor Costs</div>
+                            <div class="metric-value">$3.12M</div>
+                            <div class="metric-delta negative">↑ $270K (9.5%)</div>
+                        </div>
+                        <div class="scenario-metric">
+                            <div class="metric-label">Non-Labor Costs</div>
+                            <div class="metric-value">$1.56M</div>
+                            <div class="metric-delta negative">↑ $210K (15.6%)</div>
+                        </div>
+                        <div class="scenario-assumptions">
+                            <div class="assumptions-title">Key Assumptions</div>
+                            <div class="assumption-item">Vendor rates increase 12% (Q2)</div>
+                            <div class="assumption-item">2 unplanned senior hires</div>
+                            <div class="assumption-item">20% team churn requiring backfill</div>
+                            <div class="assumption-item">Marketing spend increase</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scenario Adjustment Panel -->
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-title">Adjust Current Scenario: FY26 Baseline</div>
+                </div>
+
+                <div class="adjustment-panel">
+                    <div class="adjustment-panel-title">Labor Adjustments</div>
+                    <div class="adjustment-grid">
+                        <div class="adjustment-field">
+                            <label class="adjustment-label">Vendor Rate Change (%)</label>
+                            <input type="number" class="adjustment-input" value="0" step="0.5">
+                        </div>
+                        <div class="adjustment-field">
+                            <label class="adjustment-label">Expected Churn Rate (%)</label>
+                            <input type="number" class="adjustment-input" value="15" step="1">
+                        </div>
+                        <div class="adjustment-field">
+                            <label class="adjustment-label">Delayed Hires (Count)</label>
+                            <input type="number" class="adjustment-input" value="0" step="1">
+                        </div>
+                        <div class="adjustment-field">
+                            <label class="adjustment-label">New Unplanned Hires</label>
+                            <input type="number" class="adjustment-input" value="0" step="1">
+                        </div>
+                        <div class="adjustment-field">
+                            <label class="adjustment-label">Avg. Seniority Shift</label>
+                            <select class="adjustment-input">
+                                <option>No change</option>
+                                <option>More senior (+15%)</option>
+                                <option>More junior (-15%)</option>
+                            </select>
+                        </div>
+                        <div class="adjustment-field">
+                            <label class="adjustment-label">Hiring Delay (Months)</label>
+                            <input type="number" class="adjustment-input" value="0" step="0.5">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="adjustment-panel">
+                    <div class="adjustment-panel-title">Non-Labor Adjustments</div>
+                    <div class="adjustment-grid">
+                        <div class="adjustment-field">
+                            <label class="adjustment-label">Travel Budget Change (%)</label>
+                            <input type="number" class="adjustment-input" value="0" step="5">
+                        </div>
+                        <div class="adjustment-field">
+                            <label class="adjustment-label">Technology Costs (%)</label>
+                            <input type="number" class="adjustment-input" value="0" step="5">
+                        </div>
+                        <div class="adjustment-field">
+                            <label class="adjustment-label">Marketing Budget (%)</label>
+                            <input type="number" class="adjustment-input" value="0" step="5">
+                        </div>
+                        <div class="adjustment-field">
+                            <label class="adjustment-label">Data Subscriptions</label>
+                            <input type="text" class="adjustment-input" value="$0" placeholder="e.g. $5,000">
+                        </div>
+                        <div class="adjustment-field">
+                            <label class="adjustment-label">Other Expenses</label>
+                            <input type="text" class="adjustment-input" value="$0" placeholder="e.g. $10,000">
+                        </div>
+                        <div class="adjustment-field">
+                            <label class="adjustment-label">Professional Fees (%)</label>
+                            <input type="number" class="adjustment-input" value="0" step="5">
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display: flex; justify-content: flex-end; gap: 8px; margin-top: 16px;">
+                    <button class="btn">Reset to Baseline</button>
+                    <button class="btn-primary btn">Apply Changes</button>
+                    <button class="btn-primary btn">Save as New Scenario</button>
+                </div>
+            </div>
+
+            <!-- Scenario Impact Chart -->
+            <div class="chart-card">
+                <div class="chart-title">Monthly Forecast Comparison Across Scenarios</div>
+                <div class="chart-container">
+                    <canvas id="scenarioChart"></canvas>
+                </div>
+                <div class="legend">
+                    <div class="legend-item"><span class="legend-dot" style="background: #2965cc;"></span> Baseline</div>
+                    <div class="legend-item"><span class="legend-dot" style="background: #0d8050;"></span> Optimistic</div>
+                    <div class="legend-item"><span class="legend-dot" style="background: #bf7326;"></span> Conservative</div>
+                    <div class="legend-item"><span class="legend-dot" style="background: #7c3aed;"></span> Q2 Vendor Increase</div>
+                </div>
+            </div>
+
+            <!-- Platform Impact Table -->
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-title">Platform-Level Impact Analysis</div>
+                    <div class="section-actions">
+                        <button class="btn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/></svg>
+                            Filter
+                        </button>
+                        <button class="btn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                            Export
+                        </button>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <div class="table-header-bar">
+                        <div>
+                            <span class="table-title">All Platforms</span>
+                            <span class="table-count">Comparing: FY26 Baseline vs Conservative Case</span>
+                        </div>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Platform</th>
+                                <th>Baseline Budget</th>
+                                <th>Scenario Budget</th>
+                                <th>Variance</th>
+                                <th>Primary Driver</th>
+                                <th>Impact</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="platform-cell">
+                                        <span class="platform-icon" style="background: #0d8050;">CA</span>
+                                        Core AI Squad
+                                    </div>
+                                </td>
+                                <td class="currency">$580,000</td>
+                                <td class="currency">$652,000</td>
+                                <td><span class="variance-negative">+$72,000</span></td>
+                                <td>Vendor rate increase (12%)</td>
+                                <td><span class="editable-cell">High</span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="platform-cell">
+                                        <span class="platform-icon" style="background: #2965cc;">CW</span>
+                                        Commercial Workbench
+                                    </div>
+                                </td>
+                                <td class="currency">$420,000</td>
+                                <td class="currency">$478,000</td>
+                                <td><span class="variance-negative">+$58,000</span></td>
+                                <td>Unplanned senior hire</td>
+                                <td><span class="editable-cell">High</span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="platform-cell">
+                                        <span class="platform-icon" style="background: #7c3aed;">DE</span>
+                                        Deedi (PE)
+                                    </div>
+                                </td>
+                                <td class="currency">$350,000</td>
+                                <td class="currency">$398,000</td>
+                                <td><span class="variance-negative">+$48,000</span></td>
+                                <td>Churn backfill costs</td>
+                                <td><span class="editable-cell">Medium</span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="platform-cell">
+                                        <span class="platform-icon" style="background: #bf7326;">JA</span>
+                                        Janus
+                                    </div>
+                                </td>
+                                <td class="currency">$290,000</td>
+                                <td class="currency">$318,000</td>
+                                <td><span class="variance-negative">+$28,000</span></td>
+                                <td>Vendor rates + marketing</td>
+                                <td><span class="editable-cell">Medium</span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="platform-cell">
+                                        <span class="platform-icon" style="background: #c23030;">PA</span>
+                                        Partnerships
+                                    </div>
+                                </td>
+                                <td class="currency">$180,000</td>
+                                <td class="currency">$195,000</td>
+                                <td><span class="variance-negative">+$15,000</span></td>
+                                <td>Travel expense increase</td>
+                                <td><span class="editable-cell">Low</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        // Scenario data model
+        const scenarios = {
+            baseline: {
+                name: 'FY26 Baseline',
+                badge: 'baseline',
+                totalBudget: 4200000,
+                laborCosts: 2850000,
+                nonLaborCosts: 1350000,
+                adjustments: {
+                    vendorRateChange: 0,
+                    churnRate: 15,
+                    delayedHires: 0,
+                    unplannedHires: 0,
+                    seniorityShift: 0,
+                    hiringDelay: 0,
+                    travelChange: 0,
+                    techChange: 0,
+                    marketingChange: 0,
+                    dataSubscriptions: 0,
+                    otherExpenses: 0,
+                    professionalFeesChange: 0
+                },
+                assumptions: [
+                    'Original approved budget',
+                    'All platforms at full headcount',
+                    'Current vendor rates'
+                ]
+            },
+            optimistic: {
+                name: 'Optimistic Case',
+                badge: 'optimistic',
+                totalBudget: 3920000,
+                laborCosts: 2640000,
+                nonLaborCosts: 1280000,
+                adjustments: {
+                    vendorRateChange: -15,
+                    churnRate: 10,
+                    delayedHires: 3,
+                    unplannedHires: 0,
+                    seniorityShift: -10,
+                    hiringDelay: 2,
+                    travelChange: -25,
+                    techChange: -8,
+                    marketingChange: 0,
+                    dataSubscriptions: -20000,
+                    otherExpenses: 0,
+                    professionalFeesChange: -5
+                },
+                assumptions: [
+                    '15% improvement in vendor rates',
+                    'Delayed hiring for 3 positions (Q3)',
+                    'Reduced travel expenses (-25%)',
+                    'Technology cost optimization'
+                ]
+            },
+            conservative: {
+                name: 'Conservative Case',
+                badge: 'conservative',
+                totalBudget: 4680000,
+                laborCosts: 3120000,
+                nonLaborCosts: 1560000,
+                adjustments: {
+                    vendorRateChange: 12,
+                    churnRate: 20,
+                    delayedHires: 0,
+                    unplannedHires: 2,
+                    seniorityShift: 15,
+                    hiringDelay: 0,
+                    travelChange: 0,
+                    techChange: 5,
+                    marketingChange: 20,
+                    dataSubscriptions: 50000,
+                    otherExpenses: 30000,
+                    professionalFeesChange: 10
+                },
+                assumptions: [
+                    'Vendor rates increase 12% (Q2)',
+                    '2 unplanned senior hires',
+                    '20% team churn requiring backfill',
+                    'Marketing spend increase'
+                ]
+            },
+            vendorIncrease: {
+                name: 'Q2 Vendor Rate Increase',
+                badge: 'conservative',
+                totalBudget: 4550000,
+                laborCosts: 3100000,
+                nonLaborCosts: 1450000,
+                adjustments: {
+                    vendorRateChange: 12,
+                    churnRate: 15,
+                    delayedHires: 0,
+                    unplannedHires: 0,
+                    seniorityShift: 0,
+                    hiringDelay: 0,
+                    travelChange: 5,
+                    techChange: 8,
+                    marketingChange: 0,
+                    dataSubscriptions: 25000,
+                    otherExpenses: 15000,
+                    professionalFeesChange: 0
+                },
+                assumptions: [
+                    'Vendor rates increase 12% starting Q2',
+                    'No headcount changes',
+                    'Slight increase in travel and tech'
+                ]
+            }
+        };
+
+        let currentScenario = 'baseline';
+        let scenarioChart = null;
+        let customScenarioCounter = 1;
+
+        // Platform data
+        const platformData = {
+            baseline: {
+                'Core AI Squad': { budget: 580000, scenario: 580000, driver: 'No changes', impact: 'Low' },
+                'Commercial Workbench': { budget: 420000, scenario: 420000, driver: 'No changes', impact: 'Low' },
+                'Deedi (PE)': { budget: 350000, scenario: 350000, driver: 'No changes', impact: 'Low' },
+                'Janus': { budget: 290000, scenario: 290000, driver: 'No changes', impact: 'Low' },
+                'Partnerships': { budget: 180000, scenario: 180000, driver: 'No changes', impact: 'Low' }
+            },
+            optimistic: {
+                'Core AI Squad': { budget: 580000, scenario: 522000, driver: 'Delayed hiring + vendor optimization', impact: 'High' },
+                'Commercial Workbench': { budget: 420000, scenario: 378000, driver: 'Vendor rate improvement', impact: 'Medium' },
+                'Deedi (PE)': { budget: 350000, scenario: 315000, driver: 'Technology cost reduction', impact: 'Medium' },
+                'Janus': { budget: 290000, scenario: 261000, driver: 'Travel + hiring delays', impact: 'Low' },
+                'Partnerships': { budget: 180000, scenario: 162000, driver: 'Reduced travel budget', impact: 'Low' }
+            },
+            conservative: {
+                'Core AI Squad': { budget: 580000, scenario: 652000, driver: 'Vendor rate increase (12%)', impact: 'High' },
+                'Commercial Workbench': { budget: 420000, scenario: 478000, driver: 'Unplanned senior hire', impact: 'High' },
+                'Deedi (PE)': { budget: 350000, scenario: 398000, driver: 'Churn backfill costs', impact: 'Medium' },
+                'Janus': { budget: 290000, scenario: 318000, driver: 'Vendor rates + marketing', impact: 'Medium' },
+                'Partnerships': { budget: 180000, scenario: 195000, driver: 'Travel expense increase', impact: 'Low' }
+            },
+            vendorIncrease: {
+                'Core AI Squad': { budget: 580000, scenario: 635000, driver: 'Q2 vendor rate increase', impact: 'High' },
+                'Commercial Workbench': { budget: 420000, scenario: 460000, driver: 'Vendor rate increase', impact: 'Medium' },
+                'Deedi (PE)': { budget: 350000, scenario: 385000, driver: 'Vendor rate + tech costs', impact: 'Medium' },
+                'Janus': { budget: 290000, scenario: 315000, driver: 'Vendor rate increase', impact: 'Medium' },
+                'Partnerships': { budget: 180000, scenario: 198000, driver: 'Vendor + travel increase', impact: 'Low' }
+            }
+        };
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeScenarioTabs();
+            initializeComparisonCards();
+            initializeAdjustmentInputs();
+            initializeButtons();
+            initializeChart();
+            updateView();
+            updateComparisonCards();
+        });
+
+        function initializeScenarioTabs() {
+            const tabs = document.querySelectorAll('.scenario-tab');
+            tabs.forEach((tab, index) => {
+                const scenarioKeys = ['baseline', 'optimistic', 'conservative', 'vendorIncrease'];
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    currentScenario = scenarioKeys[index];
+                    updateView();
+                    updateComparisonCards();
+                });
+            });
+        }
+
+        function initializeComparisonCards() {
+            const cards = document.querySelectorAll('.comparison-card');
+            cards.forEach((card, index) => {
+                const scenarioKeys = ['baseline', 'optimistic', 'conservative'];
+                card.addEventListener('click', () => {
+                    cards.forEach(c => c.classList.remove('active'));
+                    card.classList.add('active');
+                    currentScenario = scenarioKeys[index];
+                    updateView();
+
+                    // Update scenario tab to match
+                    const tabs = document.querySelectorAll('.scenario-tab');
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tabs[index].classList.add('active');
+                });
+            });
+        }
+
+        function updateComparisonCards() {
+            const cards = document.querySelectorAll('.comparison-card');
+            const scenarioKeys = ['baseline', 'optimistic', 'conservative'];
+
+            cards.forEach((card, index) => {
+                const scenario = scenarios[scenarioKeys[index]];
+                const isActive = currentScenario === scenarioKeys[index];
+
+                if (isActive) {
+                    card.classList.add('active');
+                } else {
+                    card.classList.remove('active');
+                }
+
+                // Update the card content
+                const totalBudget = card.querySelector('.metric-value');
+                const laborCosts = card.querySelectorAll('.metric-value')[1];
+                const nonLaborCosts = card.querySelectorAll('.metric-value')[2];
+
+                if (totalBudget) {
+                    totalBudget.textContent = formatCurrency(scenario.totalBudget);
+                }
+                if (laborCosts) {
+                    laborCosts.textContent = formatCurrency(scenario.laborCosts);
+                    const laborDelta = card.querySelectorAll('.metric-delta')[0];
+                    if (laborDelta) {
+                        const pct = ((scenario.laborCosts / scenario.totalBudget) * 100).toFixed(0);
+                        laborDelta.textContent = `${pct}% of budget`;
+                    }
+                }
+                if (nonLaborCosts) {
+                    nonLaborCosts.textContent = formatCurrency(scenario.nonLaborCosts);
+                    const nonLaborDelta = card.querySelectorAll('.metric-delta')[1];
+                    if (nonLaborDelta) {
+                        const pct = ((scenario.nonLaborCosts / scenario.totalBudget) * 100).toFixed(0);
+                        nonLaborDelta.textContent = `${pct}% of budget`;
+                    }
+                }
+
+                // Update deltas compared to baseline
+                if (scenarioKeys[index] !== 'baseline') {
+                    const baseline = scenarios.baseline;
+                    const totalDelta = scenario.totalBudget - baseline.totalBudget;
+                    const laborDelta = scenario.laborCosts - baseline.laborCosts;
+                    const nonLaborDelta = scenario.nonLaborCosts - baseline.nonLaborCosts;
+
+                    const totalDeltaEl = card.querySelector('.metric-delta');
+                    if (totalDeltaEl && totalDelta !== 0) {
+                        const sign = totalDelta > 0 ? '↑' : '↓';
+                        const className = totalDelta > 0 ? 'negative' : 'positive';
+                        totalDeltaEl.className = `metric-delta ${className}`;
+                        totalDeltaEl.textContent = `${sign} ${formatCurrency(Math.abs(totalDelta))} vs baseline`;
+                    }
+                }
+            });
+        }
+
+        function formatCurrency(value) {
+            if (value >= 1000000) {
+                return '$' + (value / 1000000).toFixed(2) + 'M';
+            } else if (value >= 1000) {
+                return '$' + (value / 1000).toFixed(0) + 'K';
+            }
+            return '$' + value.toLocaleString();
+        }
+
+        function initializeAdjustmentInputs() {
+            const inputs = document.querySelectorAll('.adjustment-input');
+            let debounceTimer;
+
+            inputs.forEach(input => {
+                // Real-time calculation on input change
+                input.addEventListener('input', () => {
+                    // Add visual feedback
+                    input.style.backgroundColor = '#fff5f0';
+
+                    // Debounce the calculation to avoid too many updates
+                    clearTimeout(debounceTimer);
+                    debounceTimer = setTimeout(() => {
+                        calculateScenarioImpact();
+                        input.style.backgroundColor = '';
+                    }, 500);
+                });
+
+                // Immediate calculation on blur (when clicking away)
+                input.addEventListener('blur', () => {
+                    clearTimeout(debounceTimer);
+                    calculateScenarioImpact();
+                    input.style.backgroundColor = '';
+                });
+            });
+        }
+
+        function initializeButtons() {
+            // New Scenario button
+            document.querySelector('.btn-new-scenario').addEventListener('click', () => {
+                createNewScenario();
+            });
+
+            // Reset button
+            document.querySelectorAll('.btn').forEach(btn => {
+                if (btn.textContent.includes('Reset')) {
+                    btn.addEventListener('click', resetToBaseline);
+                }
+            });
+
+            // Apply Changes button
+            const applyButtons = document.querySelectorAll('.btn-primary');
+            applyButtons.forEach(btn => {
+                if (btn.textContent.includes('Apply Changes')) {
+                    btn.addEventListener('click', () => {
+                        calculateScenarioImpact();
+                        alert('Changes applied to current scenario!');
+                    });
+                }
+                if (btn.textContent.includes('Save as New')) {
+                    btn.addEventListener('click', () => {
+                        const name = prompt('Enter new scenario name:', 'Modified ' + scenarios[currentScenario].name);
+                        if (name) {
+                            alert('Scenario saved as "' + name + '"!');
+                        }
+                    });
+                }
+            });
+        }
+
+        function resetToBaseline() {
+            const baseline = scenarios.baseline.adjustments;
+            document.querySelectorAll('.adjustment-input').forEach(input => {
+                const label = input.previousElementSibling.textContent;
+                if (label.includes('Vendor Rate')) input.value = baseline.vendorRateChange;
+                else if (label.includes('Churn')) input.value = baseline.churnRate;
+                else if (label.includes('Delayed')) input.value = baseline.delayedHires;
+                else if (label.includes('Unplanned')) input.value = baseline.unplannedHires;
+                else if (label.includes('Hiring Delay')) input.value = baseline.hiringDelay;
+                else if (label.includes('Travel')) input.value = baseline.travelChange;
+                else if (label.includes('Technology')) input.value = baseline.techChange;
+                else if (label.includes('Marketing')) input.value = baseline.marketingChange;
+                else if (label.includes('Professional')) input.value = baseline.professionalFeesChange;
+                else if (label.includes('Data')) input.value = '$0';
+                else if (label.includes('Other')) input.value = '$0';
+                else if (label.includes('Seniority')) input.selectedIndex = 0;
+            });
+            calculateScenarioImpact();
+        }
+
+        function calculateScenarioImpact() {
+            // Get current adjustment values
+            const inputs = document.querySelectorAll('.adjustment-input');
+            const adjustments = {};
+
+            inputs.forEach(input => {
+                const label = input.previousElementSibling.textContent;
+                if (label.includes('Vendor Rate')) adjustments.vendorRate = parseFloat(input.value) || 0;
+                else if (label.includes('Churn')) adjustments.churn = parseFloat(input.value) || 0;
+                else if (label.includes('Delayed')) adjustments.delayed = parseInt(input.value) || 0;
+                else if (label.includes('Unplanned')) adjustments.unplanned = parseInt(input.value) || 0;
+                else if (label.includes('Travel')) adjustments.travel = parseFloat(input.value) || 0;
+                else if (label.includes('Technology')) adjustments.tech = parseFloat(input.value) || 0;
+                else if (label.includes('Marketing')) adjustments.marketing = parseFloat(input.value) || 0;
+                else if (label.includes('Data')) {
+                    const val = input.value.replace(/[$,]/g, '');
+                    adjustments.dataSubscriptions = parseFloat(val) || 0;
+                }
+                else if (label.includes('Other')) {
+                    const val = input.value.replace(/[$,]/g, '');
+                    adjustments.otherExpenses = parseFloat(val) || 0;
+                }
+                else if (label.includes('Professional')) adjustments.professionalFees = parseFloat(input.value) || 0;
+            });
+
+            // Calculate impact
+            const baseLabor = scenarios.baseline.laborCosts;
+            const baseNonLabor = scenarios.baseline.nonLaborCosts;
+
+            // Labor impact calculation
+            const vendorImpact = baseLabor * (adjustments.vendorRate / 100);
+            const hiringImpact = (adjustments.unplanned * 150000) - (adjustments.delayed * 120000);
+            const churnImpact = baseLabor * ((adjustments.churn - 15) / 100) * 0.15; // Additional churn cost
+            const laborImpact = vendorImpact + hiringImpact + churnImpact;
+
+            // Non-labor impact calculation
+            const travelImpact = (baseNonLabor * 0.35) * (adjustments.travel / 100); // 35% of non-labor is travel
+            const techImpact = (baseNonLabor * 0.25) * (adjustments.tech / 100); // 25% is tech
+            const marketingImpact = (baseNonLabor * 0.15) * (adjustments.marketing / 100); // 15% is marketing
+            const professionalFeesImpact = (baseNonLabor * 0.25) * (adjustments.professionalFees / 100); // 25% is prof fees
+            const nonLaborImpact = travelImpact + techImpact + marketingImpact + professionalFeesImpact +
+                                   adjustments.dataSubscriptions + adjustments.otherExpenses;
+
+            // Update current scenario with new values
+            const newLaborCosts = baseLabor + laborImpact;
+            const newNonLaborCosts = baseNonLabor + nonLaborImpact;
+            const newTotalBudget = newLaborCosts + newNonLaborCosts;
+
+            scenarios[currentScenario].laborCosts = newLaborCosts;
+            scenarios[currentScenario].nonLaborCosts = newNonLaborCosts;
+            scenarios[currentScenario].totalBudget = newTotalBudget;
+            scenarios[currentScenario].adjustments = { ...adjustments };
+
+            // Update platform data (distribute impact proportionally with some variation)
+            const platforms = platformData[currentScenario];
+            const totalImpact = laborImpact + nonLaborImpact;
+            const impactPct = totalImpact / scenarios.baseline.totalBudget;
+
+            // Platform-specific multipliers (some platforms are more affected by certain changes)
+            const platformMultipliers = {
+                'Core AI Squad': {
+                    vendor: 1.3,  // More vendor-heavy
+                    hiring: 1.1,
+                    travel: 0.8,
+                    tech: 1.2
+                },
+                'Commercial Workbench': {
+                    vendor: 1.1,
+                    hiring: 1.3,  // More hiring-heavy
+                    travel: 1.0,
+                    tech: 1.0
+                },
+                'Deedi (PE)': {
+                    vendor: 1.0,
+                    hiring: 1.0,
+                    travel: 0.9,
+                    tech: 1.4    // More tech-heavy
+                },
+                'Janus': {
+                    vendor: 1.2,
+                    hiring: 0.9,
+                    travel: 1.3,  // More travel-heavy
+                    tech: 1.1
+                },
+                'Partnerships': {
+                    vendor: 0.8,
+                    hiring: 0.8,
+                    travel: 1.5,  // Most travel-heavy
+                    tech: 0.9
+                }
+            };
+
+            Object.keys(platforms).forEach(platformName => {
+                const baseline = platformData.baseline[platformName].budget;
+                const multipliers = platformMultipliers[platformName];
+
+                // Calculate platform-specific impact
+                let platformImpactPct = 0;
+
+                // Vendor impact
+                if (adjustments.vendorRate) {
+                    platformImpactPct += (adjustments.vendorRate / 100) * 0.6 * multipliers.vendor;
+                }
+
+                // Hiring impact
+                if (adjustments.unplanned || adjustments.delayed) {
+                    const hiringPct = ((adjustments.unplanned * 0.03) - (adjustments.delayed * 0.025)) * multipliers.hiring;
+                    platformImpactPct += hiringPct;
+                }
+
+                // Travel impact
+                if (adjustments.travel) {
+                    platformImpactPct += (adjustments.travel / 100) * 0.15 * multipliers.travel;
+                }
+
+                // Tech impact
+                if (adjustments.tech) {
+                    platformImpactPct += (adjustments.tech / 100) * 0.12 * multipliers.tech;
+                }
+
+                // Marketing impact (affects all somewhat equally)
+                if (adjustments.marketing) {
+                    platformImpactPct += (adjustments.marketing / 100) * 0.08;
+                }
+
+                // Churn impact
+                if (adjustments.churn && adjustments.churn !== 15) {
+                    platformImpactPct += ((adjustments.churn - 15) / 100) * 0.1 * multipliers.hiring;
+                }
+
+                platforms[platformName].scenario = Math.round(baseline * (1 + platformImpactPct));
+
+                // Update driver text based on what changed most
+                const drivers = [];
+                const impacts = [];
+
+                if (Math.abs(adjustments.vendorRate) > 5) {
+                    const vendorImpact = Math.abs(adjustments.vendorRate) * multipliers.vendor;
+                    impacts.push({ name: 'Vendor rate change', value: vendorImpact });
+                }
+                if (adjustments.unplanned > 0) {
+                    const hiringImpact = adjustments.unplanned * multipliers.hiring * 10;
+                    impacts.push({ name: 'Unplanned hires', value: hiringImpact });
+                }
+                if (adjustments.delayed > 0) {
+                    const delayImpact = adjustments.delayed * multipliers.hiring * 8;
+                    impacts.push({ name: 'Delayed hiring', value: delayImpact });
+                }
+                if (Math.abs(adjustments.travel) > 10) {
+                    const travelImpact = Math.abs(adjustments.travel) * multipliers.travel;
+                    impacts.push({ name: 'Travel adjustments', value: travelImpact });
+                }
+                if (Math.abs(adjustments.tech) > 5) {
+                    const techImpact = Math.abs(adjustments.tech) * multipliers.tech;
+                    impacts.push({ name: 'Tech cost changes', value: techImpact });
+                }
+                if (Math.abs(adjustments.marketing) > 10) {
+                    impacts.push({ name: 'Marketing changes', value: Math.abs(adjustments.marketing) });
+                }
+                if (adjustments.churn && Math.abs(adjustments.churn - 15) > 5) {
+                    const churnImpact = Math.abs(adjustments.churn - 15) * multipliers.hiring;
+                    impacts.push({ name: 'Churn rate change', value: churnImpact });
+                }
+
+                // Sort by impact value and take top 2
+                impacts.sort((a, b) => b.value - a.value);
+                const topImpacts = impacts.slice(0, 2).map(i => i.name);
+
+                platforms[platformName].driver = topImpacts.length > 0 ? topImpacts.join(' + ') : 'No significant changes';
+
+                // Update impact level
+                const variance = Math.abs(platforms[platformName].scenario - baseline);
+                const variancePct = variance / baseline;
+
+                if (variancePct > 0.15) platforms[platformName].impact = 'High';
+                else if (variancePct > 0.05) platforms[platformName].impact = 'Medium';
+                else platforms[platformName].impact = 'Low';
+            });
+
+            // Update the UI
+            updateComparisonCards();
+            updatePlatformTable();
+            updateChart();
+
+            console.log('Recalculated:', {
+                laborImpact: formatCurrency(laborImpact),
+                nonLaborImpact: formatCurrency(nonLaborImpact),
+                totalImpact: formatCurrency(totalImpact),
+                newTotal: formatCurrency(newTotalBudget)
+            });
+        }
+
+        function updateView() {
+            const scenario = scenarios[currentScenario];
+
+            // Update page title
+            document.querySelector('.section-title').textContent = `Adjust Current Scenario: ${scenario.name}`;
+
+            // Update adjustment inputs
+            const adj = scenario.adjustments;
+            document.querySelectorAll('.adjustment-input').forEach(input => {
+                const label = input.previousElementSibling.textContent;
+                if (label.includes('Vendor Rate')) input.value = adj.vendorRateChange;
+                else if (label.includes('Churn')) input.value = adj.churnRate;
+                else if (label.includes('Delayed')) input.value = adj.delayedHires;
+                else if (label.includes('Unplanned')) input.value = adj.unplannedHires;
+                else if (label.includes('Hiring Delay')) input.value = adj.hiringDelay;
+                else if (label.includes('Travel')) input.value = adj.travelChange;
+                else if (label.includes('Technology')) input.value = adj.techChange;
+                else if (label.includes('Marketing')) input.value = adj.marketingChange;
+                else if (label.includes('Professional')) input.value = adj.professionalFeesChange;
+                else if (label.includes('Data')) input.value = adj.dataSubscriptions === 0 ? '$0' : '$' + adj.dataSubscriptions.toLocaleString();
+                else if (label.includes('Other')) input.value = adj.otherExpenses === 0 ? '$0' : '$' + adj.otherExpenses.toLocaleString();
+            });
+
+            // Update platform table
+            updatePlatformTable();
+
+            // Update comparison table header
+            const tableCount = document.querySelector('.table-count');
+            if (currentScenario === 'baseline') {
+                tableCount.textContent = 'Comparing: FY26 Baseline (no variance)';
+            } else {
+                tableCount.textContent = `Comparing: FY26 Baseline vs ${scenario.name}`;
+            }
+        }
+
+        function updatePlatformTable() {
+            const tbody = document.querySelector('table tbody');
+            const platforms = platformData[currentScenario];
+
+            tbody.innerHTML = '';
+
+            Object.keys(platforms).forEach((platformName, index) => {
+                const data = platforms[platformName];
+                const variance = data.scenario - data.budget;
+                const varianceClass = variance > 0 ? 'variance-negative' : variance < 0 ? 'variance-positive' : 'variance-neutral';
+                const varianceSign = variance > 0 ? '+' : '';
+
+                const colors = ['#0d8050', '#2965cc', '#7c3aed', '#bf7326', '#c23030'];
+                const abbrevs = ['CA', 'CW', 'DE', 'JA', 'PA'];
+
+                const row = `
+                    <tr>
+                        <td>
+                            <div class="platform-cell">
+                                <span class="platform-icon" style="background: ${colors[index]};">${abbrevs[index]}</span>
+                                ${platformName}
+                            </div>
+                        </td>
+                        <td class="currency">$${data.budget.toLocaleString()}</td>
+                        <td class="currency">$${data.scenario.toLocaleString()}</td>
+                        <td><span class="${varianceClass}">${varianceSign}$${Math.abs(variance).toLocaleString()}</span></td>
+                        <td>${data.driver}</td>
+                        <td><span class="editable-cell">${data.impact}</span></td>
+                    </tr>
+                `;
+                tbody.insertAdjacentHTML('beforeend', row);
+            });
+        }
+
+        function initializeChart() {
+            const scenarioCtx = document.getElementById('scenarioChart').getContext('2d');
+            scenarioChart = new Chart(scenarioCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                    datasets: []
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            backgroundColor: '#1a1a1a',
+                            titleFont: { size: 12, weight: '600' },
+                            bodyFont: { size: 11 },
+                            padding: 10,
+                            cornerRadius: 6,
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': $' + context.raw + 'K';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: { display: false },
+                            ticks: { color: '#6b6b6b', font: { size: 11 } }
+                        },
+                        y: {
+                            grid: { color: '#e5e5e5' },
+                            ticks: {
+                                color: '#6b6b6b',
+                                font: { size: 11 },
+                                callback: function(value) {
+                                    return '$' + value + 'K';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            updateChart();
+        }
+
+        function generateMonthlyData(scenario) {
+            const totalBudgetMonthly = (scenario.totalBudget / 1000) / 12; // Convert to K and divide by 12 months
+            const months = [];
+
+            // Generate realistic monthly progression based on scenario characteristics
+            const adj = scenario.adjustments;
+            const hasVendorChange = adj.vendorRateChange !== 0;
+            const hasHiringChange = adj.delayedHires !== 0 || adj.unplannedHires !== 0;
+            const hasQ2Change = scenario.name.includes('Q2');
+
+            for (let i = 0; i < 12; i++) {
+                let monthlyValue = totalBudgetMonthly;
+
+                // Add some variance
+                if (hasVendorChange && i >= 3) {
+                    // Vendor changes take effect in Q2 (month 3+)
+                    const changeMultiplier = 1 + (adj.vendorRateChange / 100);
+                    monthlyValue = totalBudgetMonthly * changeMultiplier;
+                }
+
+                if (hasQ2Change && i >= 3) {
+                    // Q2 changes start at month 3
+                    monthlyValue = totalBudgetMonthly * 1.13;
+                }
+
+                if (hasHiringChange) {
+                    // Gradual ramp based on hiring changes
+                    const rampFactor = 1 + ((i / 12) * (adj.unplannedHires * 0.02 - adj.delayedHires * 0.02));
+                    monthlyValue = monthlyValue * rampFactor;
+                }
+
+                // Add slight month-to-month variance
+                const variance = (Math.random() - 0.5) * 10;
+                months.push(Math.round(monthlyValue + variance));
+            }
+
+            return months;
+        }
+
+        function updateChart() {
+            if (!scenarioChart) return;
+
+            const datasets = [
+                {
+                    label: 'Baseline',
+                    data: generateMonthlyData(scenarios.baseline),
+                    borderColor: '#2965cc',
+                    backgroundColor: 'rgba(41, 101, 204, 0.1)',
+                    borderWidth: 3,
+                    tension: 0.3,
+                    pointRadius: 5,
+                    pointBackgroundColor: '#2965cc'
+                },
+                {
+                    label: 'Optimistic Case',
+                    data: generateMonthlyData(scenarios.optimistic),
+                    borderColor: '#0d8050',
+                    backgroundColor: 'rgba(13, 128, 80, 0.1)',
+                    borderWidth: 3,
+                    tension: 0.3,
+                    pointRadius: 5,
+                    pointBackgroundColor: '#0d8050'
+                },
+                {
+                    label: 'Conservative Case',
+                    data: generateMonthlyData(scenarios.conservative),
+                    borderColor: '#bf7326',
+                    backgroundColor: 'rgba(191, 115, 38, 0.1)',
+                    borderWidth: 3,
+                    tension: 0.3,
+                    pointRadius: 5,
+                    pointBackgroundColor: '#bf7326'
+                },
+                {
+                    label: 'Q2 Vendor Increase',
+                    data: generateMonthlyData(scenarios.vendorIncrease),
+                    borderColor: '#7c3aed',
+                    backgroundColor: 'rgba(124, 58, 237, 0.1)',
+                    borderWidth: 3,
+                    tension: 0.3,
+                    pointRadius: 5,
+                    pointBackgroundColor: '#7c3aed',
+                    borderDash: [5, 5]
+                }
+            ];
+
+            scenarioChart.data.datasets = datasets;
+            scenarioChart.update();
+        }
+
+        function createNewScenario() {
+            const name = prompt('Enter new scenario name:', `Custom Scenario ${customScenarioCounter}`);
+            if (!name || name.trim() === '') return;
+
+            // Generate unique key
+            const scenarioKey = 'custom' + customScenarioCounter;
+            customScenarioCounter++;
+
+            // Copy current scenario as starting point
+            const currentData = scenarios[currentScenario];
+            scenarios[scenarioKey] = {
+                name: name,
+                badge: 'conservative', // Default badge color
+                totalBudget: currentData.totalBudget,
+                laborCosts: currentData.laborCosts,
+                nonLaborCosts: currentData.nonLaborCosts,
+                adjustments: { ...currentData.adjustments },
+                assumptions: [
+                    `Based on ${currentData.name}`,
+                    'Custom scenario - adjust parameters below'
+                ]
+            };
+
+            // Copy platform data
+            platformData[scenarioKey] = {};
+            Object.keys(platformData[currentScenario]).forEach(platformName => {
+                platformData[scenarioKey][platformName] = {
+                    ...platformData[currentScenario][platformName]
+                };
+            });
+
+            // Add new tab to UI
+            const scenarioTabs = document.querySelector('.scenario-tabs');
+            const newTab = document.createElement('div');
+            newTab.className = 'scenario-tab';
+            newTab.textContent = name;
+            newTab.setAttribute('data-scenario-key', scenarioKey);
+
+            // Add click handler
+            newTab.addEventListener('click', () => {
+                document.querySelectorAll('.scenario-tab').forEach(t => t.classList.remove('active'));
+                newTab.classList.add('active');
+                currentScenario = scenarioKey;
+                updateView();
+                updateComparisonCards();
+            });
+
+            scenarioTabs.appendChild(newTab);
+
+            // Switch to new scenario
+            document.querySelectorAll('.scenario-tab').forEach(t => t.classList.remove('active'));
+            newTab.classList.add('active');
+            currentScenario = scenarioKey;
+            updateView();
+            updateChart();
+
+            // Show success message
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #0d8050;
+                color: white;
+                padding: 16px 20px;
+                border-radius: 8px;
+                font-size: 14px;
+                font-weight: 500;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                z-index: 10000;
+                animation: slideIn 0.3s ease;
+            `;
+            notification.textContent = `✓ Created "${name}" - adjust parameters below`;
+
+            // Add animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes slideIn {
+                    from { transform: translateX(400px); opacity: 0; }
+                    to { transform: translateX(0); opacity: 1; }
+                }
+                @keyframes slideOut {
+                    from { transform: translateX(0); opacity: 1; }
+                    to { transform: translateX(400px); opacity: 0; }
+                }
+            `;
+            document.head.appendChild(style);
+            document.body.appendChild(notification);
+
+            // Remove after 3 seconds
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+
+        function deleteScenario(scenarioKey) {
+            if (scenarioKey === 'baseline' || scenarioKey === 'optimistic' ||
+                scenarioKey === 'conservative' || scenarioKey === 'vendorIncrease') {
+                alert('Cannot delete built-in scenarios');
+                return;
+            }
+
+            const scenarioName = scenarios[scenarioKey].name;
+            if (!confirm(`Delete scenario "${scenarioName}"?`)) return;
+
+            // Remove from data
+            delete scenarios[scenarioKey];
+            delete platformData[scenarioKey];
+
+            // Remove tab
+            const tab = document.querySelector(`.scenario-tab[data-scenario-key="${scenarioKey}"]`);
+            if (tab) tab.remove();
+
+            // Switch to baseline
+            currentScenario = 'baseline';
+            document.querySelectorAll('.scenario-tab').forEach(t => t.classList.remove('active'));
+            document.querySelector('.scenario-tab').classList.add('active');
+            updateView();
+            updateChart();
+        }
+    </script>
+</body>
+</html>

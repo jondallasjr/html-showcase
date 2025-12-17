@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actual vs Budget Tracking | Alix Admin Doc</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --coda-bg: #ffffff;
+            --coda-sidebar-bg: #f7f7f7;
+            --coda-border: #e5e5e5;
+            --coda-text: #1a1a1a;
+            --coda-text-secondary: #6b6b6b;
+            --coda-text-muted: #9b9b9b;
+            --coda-accent: #f26522;
+            --coda-accent-light: #fff5f0;
+            --coda-green: #0d8050;
+            --coda-green-bg: #e6f4ed;
+            --coda-red: #c23030;
+            --coda-red-bg: #fce8e8;
+            --coda-yellow: #bf7326;
+            --coda-yellow-bg: #fff8e6;
+            --coda-blue: #2965cc;
+            --coda-blue-bg: #e8f1fc;
+            --coda-purple: #7c3aed;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--coda-bg);
+            color: var(--coda-text);
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* Coda-style layout */
+        .app-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 240px;
+            background: var(--coda-sidebar-bg);
+            border-right: 1px solid var(--coda-border);
+            padding: 16px 0;
+            flex-shrink: 0;
+        }
+
+        .sidebar-header {
+            padding: 8px 16px 16px;
+            border-bottom: 1px solid var(--coda-border);
+            margin-bottom: 8px;
+        }
+
+        .doc-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--coda-text);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .doc-icon {
+            width: 20px;
+            height: 20px;
+            background: var(--coda-accent);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .nav-section {
+            padding: 8px 0;
+        }
+
+        .nav-section-title {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--coda-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 8px 16px 4px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            color: var(--coda-text-secondary);
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.15s;
+        }
+
+        .nav-item:hover {
+            background: rgba(0,0,0,0.04);
+        }
+
+        .nav-item.active {
+            background: rgba(242, 101, 34, 0.08);
+            color: var(--coda-accent);
+            font-weight: 500;
+        }
+
+        .nav-item svg {
+            width: 16px;
+            height: 16px;
+            opacity: 0.7;
+        }
+
+        .nav-item.active svg {
+            opacity: 1;
+        }
+
+        .nav-badge {
+            margin-left: auto;
+            background: var(--coda-accent);
+            color: white;
+            font-size: 10px;
+            font-weight: 600;
+            padding: 2px 6px;
+            border-radius: 10px;
+        }
+
+        /* Main content */
+        .main-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 32px 48px;
+            max-width: 1200px;
+        }
+
+        /* Page header */
+        .page-header {
+            margin-bottom: 32px;
+        }
+
+        .page-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--coda-text);
+            margin-bottom: 8px;
+        }
+
+        .page-description {
+            font-size: 14px;
+            color: var(--coda-text-secondary);
+            max-width: 700px;
+        }
+
+        /* Sync status banner */
+        .sync-banner {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--coda-green-bg);
+            border: 1px solid rgba(13, 128, 80, 0.2);
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-bottom: 24px;
+        }
+
+        .sync-banner.syncing {
+            background: var(--coda-yellow-bg);
+            border-color: rgba(191, 115, 38, 0.2);
+        }
+
+        .sync-banner.error {
+            background: var(--coda-red-bg);
+            border-color: rgba(194, 48, 48, 0.2);
+        }
+
+        .sync-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--coda-green);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sync-banner.syncing .sync-icon {
+            background: var(--coda-yellow);
+        }
+
+        .sync-icon svg {
+            width: 18px;
+            height: 18px;
+            color: white;
+        }
+
+        .sync-info {
+            flex: 1;
+        }
+
+        .sync-title {
+            font-weight: 600;
+            font-size: 13px;
+            color: var(--coda-text);
+        }
+
+        .sync-detail {
+            font-size: 12px;
+            color: var(--coda-text-secondary);
+        }
+
+        .sync-button {
+            background: white;
+            border: 1px solid var(--coda-border);
+            border-radius: 6px;
+            padding: 8px 14px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--coda-text);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.15s;
+        }
+
+        .sync-button:hover {
+            background: var(--coda-sidebar-bg);
+            border-color: #ccc;
+        }
+
+        .sync-button svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* Filter bar */
+        .filter-bar {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .filter-label {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--coda-text-secondary);
+        }
+
+        .filter-select {
+            background: white;
+            border: 1px solid var(--coda-border);
+            border-radius: 6px;
+            padding: 6px 28px 6px 10px;
+            font-size: 13px;
+            color: var(--coda-text);
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b6b6b' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 8px center;
+        }
+
+        .filter-select:hover {
+            border-color: #ccc;
+        }
+
+        .filter-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--coda-accent-light);
+            border: 1px solid rgba(242, 101, 34, 0.2);
+            border-radius: 16px;
+            padding: 4px 10px;
+            font-size: 12px;
+            color: var(--coda-accent);
+            font-weight: 500;
+        }
+
+        .filter-chip-remove {
+            cursor: pointer;
+            opacity: 0.7;
+        }
+
+        .filter-chip-remove:hover {
+            opacity: 1;
+        }
+
+        /* KPI Cards */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .kpi-card {
+            background: white;
+            border: 1px solid var(--coda-border);
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .kpi-label {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--coda-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            margin-bottom: 8px;
+        }
+
+        .kpi-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--coda-text);
+            margin-bottom: 4px;
+        }
+
+        .kpi-subtext {
+            font-size: 12px;
+            color: var(--coda-text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .kpi-positive {
+            color: var(--coda-green);
+        }
+
+        .kpi-negative {
+            color: var(--coda-red);
+        }
+
+        .kpi-neutral {
+            color: var(--coda-yellow);
+        }
+
+        /* Section */
+        .section {
+            margin-bottom: 32px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--coda-text);
+        }
+
+        .section-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn {
+            background: white;
+            border: 1px solid var(--coda-border);
+            border-radius: 6px;
+            padding: 6px 12px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--coda-text);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.15s;
+        }
+
+        .btn:hover {
+            background: var(--coda-sidebar-bg);
+        }
+
+        .btn-primary {
+            background: var(--coda-accent);
+            color: white;
+            border-color: var(--coda-accent);
+        }
+
+        .btn-primary:hover {
+            background: #d95a1c;
+        }
+
+        .btn svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* Charts container */
+        .charts-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .chart-card {
+            background: white;
+            border: 1px solid var(--coda-border);
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .chart-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--coda-text);
+            margin-bottom: 16px;
+        }
+
+        .chart-container {
+            height: 280px;
+            position: relative;
+        }
+
+        /* Table styles - Coda-like */
+        .table-container {
+            background: white;
+            border: 1px solid var(--coda-border);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .table-header-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--coda-border);
+            background: var(--coda-sidebar-bg);
+        }
+
+        .table-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--coda-text);
+        }
+
+        .table-count {
+            font-size: 12px;
+            color: var(--coda-text-muted);
+            margin-left: 8px;
+            font-weight: 400;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead th {
+            background: var(--coda-sidebar-bg);
+            border-bottom: 1px solid var(--coda-border);
+            padding: 10px 12px;
+            text-align: left;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--coda-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        tbody td {
+            padding: 12px;
+            border-bottom: 1px solid var(--coda-border);
+            font-size: 13px;
+            color: var(--coda-text);
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        tbody tr:hover {
+            background: rgba(0,0,0,0.02);
+        }
+
+        .platform-cell {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .platform-icon {
+            width: 24px;
+            height: 24px;
+            background: var(--coda-purple);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .currency {
+            font-variant-numeric: tabular-nums;
+            font-weight: 500;
+        }
+
+        .variance-positive {
+            color: var(--coda-green);
+            background: var(--coda-green-bg);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 500;
+            font-size: 12px;
+        }
+
+        .variance-negative {
+            color: var(--coda-red);
+            background: var(--coda-red-bg);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 500;
+            font-size: 12px;
+        }
+
+        .variance-neutral {
+            color: var(--coda-yellow);
+            background: var(--coda-yellow-bg);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 500;
+            font-size: 12px;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 12px;
+            font-weight: 500;
+            padding: 3px 8px;
+            border-radius: 4px;
+        }
+
+        .status-on-track {
+            background: var(--coda-green-bg);
+            color: var(--coda-green);
+        }
+
+        .status-at-risk {
+            background: var(--coda-yellow-bg);
+            color: var(--coda-yellow);
+        }
+
+        .status-over {
+            background: var(--coda-red-bg);
+            color: var(--coda-red);
+        }
+
+        .progress-bar {
+            width: 100px;
+            height: 6px;
+            background: #eee;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 3px;
+            transition: width 0.3s;
+        }
+
+        .progress-fill.green { background: var(--coda-green); }
+        .progress-fill.yellow { background: var(--coda-yellow); }
+        .progress-fill.red { background: var(--coda-red); }
+
+        /* Coda-style callout */
+        .callout {
+            background: var(--coda-blue-bg);
+            border-left: 3px solid var(--coda-blue);
+            border-radius: 4px;
+            padding: 12px 16px;
+            margin-bottom: 24px;
+        }
+
+        .callout-title {
+            font-weight: 600;
+            font-size: 13px;
+            color: var(--coda-blue);
+            margin-bottom: 4px;
+        }
+
+        .callout-text {
+            font-size: 13px;
+            color: var(--coda-text-secondary);
+        }
+
+        /* Legend */
+        .legend {
+            display: flex;
+            gap: 16px;
+            margin-top: 12px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: var(--coda-text-secondary);
+        }
+
+        .legend-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 2px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .kpi-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                display: none;
+            }
+            .main-content {
+                padding: 24px;
+            }
+            .kpi-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="doc-title">
+                    <span class="doc-icon">A</span>
+                    Alix Admin Doc
+                </div>
+            </div>
+            
+            <nav class="nav-section">
+                <div class="nav-section-title">Requests</div>
+                <div class="nav-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+                    All Requests
+                </div>
+                <div class="nav-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    Pending Review
+                    <span class="nav-badge">12</span>
+                </div>
+                <div class="nav-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>
+                    Approved
+                </div>
+            </nav>
+
+            <nav class="nav-section">
+                <div class="nav-section-title">Financial Tracking</div>
+                <div class="nav-item active">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                    Actual vs Budget
+                </div>
+                <div class="nav-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"/></svg>
+                    P&L Forecast
+                </div>
+                <div class="nav-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                    Reforecast
+                </div>
+                <div class="nav-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                    Costs by Item Codes
+                </div>
+            </nav>
+
+            <nav class="nav-section">
+                <div class="nav-section-title">Dashboards</div>
+                <div class="nav-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"/></svg>
+                    Executive Dashboard
+                </div>
+                <div class="nav-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                    Priority Budgeting
+                </div>
+            </nav>
+
+            <nav class="nav-section">
+                <div class="nav-section-title">Settings</div>
+                <div class="nav-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                    Settings
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="page-header">
+                <h1 class="page-title">Actual vs Budget Tracking</h1>
+                <p class="page-description">
+                    Compare actual spend from Azure Data Lake against approved budgets and reforecasted amounts. 
+                    Data syncs automatically every 4 hours from your SAP financial systems.
+                </p>
+            </header>
+
+            <!-- Azure Sync Status -->
+            <div class="sync-banner">
+                <div class="sync-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>
+                </div>
+                <div class="sync-info">
+                    <div class="sync-title">Azure Data Lake Connected</div>
+                    <div class="sync-detail">Last synced: Dec 17, 2025 at 8:00 AM EST • Next sync in 3h 42m</div>
+                </div>
+                <button class="sync-button">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                    Sync Now
+                </button>
+            </div>
+
+            <!-- Callout -->
+            <div class="callout">
+                <div class="callout-title">ℹ️ Data Source</div>
+                <div class="callout-text">
+                    Actual spend is pulled from GL accounts 560000-667000 via the Azure Data Lake integration. 
+                    Budget and reforecast data comes from approved requests in this doc.
+                </div>
+            </div>
+
+            <!-- Filters -->
+            <div class="filter-bar">
+                <span class="filter-label">Platform:</span>
+                <select class="filter-select">
+                    <option>All Platforms</option>
+                    <option>Core AI Squad</option>
+                    <option>Commercial Workbench</option>
+                    <option>Deedi (PE)</option>
+                    <option>Janus</option>
+                    <option>Partnerships</option>
+                </select>
+                
+                <span class="filter-label" style="margin-left: 12px;">Period:</span>
+                <select class="filter-select">
+                    <option>FY26 YTD</option>
+                    <option>Q1 FY26</option>
+                    <option>Q2 FY26</option>
+                    <option>December 2025</option>
+                    <option>November 2025</option>
+                </select>
+
+                <span class="filter-label" style="margin-left: 12px;">Category:</span>
+                <select class="filter-select">
+                    <option>All Categories</option>
+                    <option>Labor Only</option>
+                    <option>Non-Labor Only</option>
+                </select>
+
+                <div class="filter-chip" style="margin-left: auto;">
+                    Status: Approved
+                    <span class="filter-chip-remove">×</span>
+                </div>
+            </div>
+
+            <!-- KPI Cards -->
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-label">Approved Budget</div>
+                    <div class="kpi-value">$4.2M</div>
+                    <div class="kpi-subtext">FY26 Total across 20 platforms</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Actual Spend (YTD)</div>
+                    <div class="kpi-value">$892K</div>
+                    <div class="kpi-subtext">
+                        <span class="kpi-positive">↓ 8% under budget</span>
+                    </div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Reforecasted Total</div>
+                    <div class="kpi-value">$4.05M</div>
+                    <div class="kpi-subtext">
+                        <span class="kpi-neutral">$150K below original</span>
+                    </div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Variance to Reforecast</div>
+                    <div class="kpi-value">-$42K</div>
+                    <div class="kpi-subtext">
+                        <span class="kpi-positive">Favorable variance</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts -->
+            <div class="charts-grid">
+                <div class="chart-card">
+                    <div class="chart-title">Monthly Spend: Budget vs Actual vs Reforecast</div>
+                    <div class="chart-container">
+                        <canvas id="monthlyChart"></canvas>
+                    </div>
+                    <div class="legend">
+                        <div class="legend-item"><span class="legend-dot" style="background: #2965cc;"></span> Budget</div>
+                        <div class="legend-item"><span class="legend-dot" style="background: #f26522;"></span> Actual</div>
+                        <div class="legend-item"><span class="legend-dot" style="background: #7c3aed;"></span> Reforecast</div>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <div class="chart-title">Spend by Category</div>
+                    <div class="chart-container">
+                        <canvas id="categoryChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Platform Breakdown Table -->
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-title">Platform Breakdown</div>
+                    <div class="section-actions">
+                        <button class="btn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/></svg>
+                            Filter
+                        </button>
+                        <button class="btn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                            Export
+                        </button>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <div class="table-header-bar">
+                        <div>
+                            <span class="table-title">All Platforms</span>
+                            <span class="table-count">20 platforms</span>
+                        </div>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Platform</th>
+                                <th>Budget</th>
+                                <th>Actual (YTD)</th>
+                                <th>Reforecast</th>
+                                <th>Variance</th>
+                                <th>% Used</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="platform-cell">
+                                        <span class="platform-icon" style="background: #0d8050;">CA</span>
+                                        Core AI Squad
+                                    </div>
+                                </td>
+                                <td class="currency">$580,000</td>
+                                <td class="currency">$142,800</td>
+                                <td class="currency">$565,000</td>
+                                <td><span class="variance-positive">+$12,200</span></td>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: 8px;">
+                                        <div class="progress-bar"><div class="progress-fill green" style="width: 24.6%;"></div></div>
+                                        <span style="font-size: 12px; color: var(--coda-text-secondary);">24.6%</span>
+                                    </div>
+                                </td>
+                                <td><span class="status-badge status-on-track">● On Track</span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="platform-cell">
+                                        <span class="platform-icon" style="background: #2965cc;">CW</span>
+                                        Commercial Workbench
+                                    </div>
+                                </td>
+                                <td class="currency">$420,000</td>
+                                <td class="currency">$98,500</td>
+                                <td class="currency">$410,000</td>
+                                <td><span class="variance-positive">+$8,400</span></td>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: 8px;">
+                                        <div class="progress-bar"><div class="progress-fill green" style="width: 23.5%;"></div></div>
+                                        <span style="font-size: 12px; color: var(--coda-text-secondary);">23.5%</span>
+                                    </div>
+                                </td>
+                                <td><span class="status-badge status-on-track">● On Track</span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="platform-cell">
+                                        <span class="platform-icon" style="background: #7c3aed;">DE</span>
+                                        Deedi (PE)
+                                    </div>
+                                </td>
+                                <td class="currency">$350,000</td>
+                                <td class="currency">$112,400</td>
+                                <td class="currency">$380,000</td>
+                                <td><span class="variance-negative">-$18,200</span></td>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: 8px;">
+                                        <div class="progress-bar"><div class="progress-fill yellow" style="width: 32.1%;"></div></div>
+                                        <span style="font-size: 12px; color: var(--coda-text-secondary);">32.1%</span>
+                                    </div>
+                                </td>
+                                <td><span class="status-badge status-at-risk">● At Risk</span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="platform-cell">
+                                        <span class="platform-icon" style="background: #bf7326;">JA</span>
+                                        Janus
+                                    </div>
+                                </td>
+                                <td class="currency">$290,000</td>
+                                <td class="currency">$68,200</td>
+                                <td class="currency">$285,000</td>
+                                <td><span class="variance-positive">+$3,100</span></td>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: 8px;">
+                                        <div class="progress-bar"><div class="progress-fill green" style="width: 23.5%;"></div></div>
+                                        <span style="font-size: 12px; color: var(--coda-text-secondary);">23.5%</span>
+                                    </div>
+                                </td>
+                                <td><span class="status-badge status-on-track">● On Track</span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="platform-cell">
+                                        <span class="platform-icon" style="background: #c23030;">PA</span>
+                                        Partnerships
+                                    </div>
+                                </td>
+                                <td class="currency">$180,000</td>
+                                <td class="currency">$72,800</td>
+                                <td class="currency">$195,000</td>
+                                <td><span class="variance-negative">-$12,400</span></td>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: 8px;">
+                                        <div class="progress-bar"><div class="progress-fill red" style="width: 40.4%;"></div></div>
+                                        <span style="font-size: 12px; color: var(--coda-text-secondary);">40.4%</span>
+                                    </div>
+                                </td>
+                                <td><span class="status-badge status-over">● Over Budget</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- GL Account Breakdown -->
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-title">Spend by GL Account</div>
+                </div>
+
+                <div class="table-container">
+                    <div class="table-header-bar">
+                        <div>
+                            <span class="table-title">GL Account Summary</span>
+                            <span class="table-count">Mapped from SAP</span>
+                        </div>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>GL Account</th>
+                                <th>Description</th>
+                                <th>FS Item</th>
+                                <th>Budget</th>
+                                <th>Actual (YTD)</th>
+                                <th>Variance</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="font-family: monospace; font-weight: 500;">560000</td>
+                                <td>S&W - Other</td>
+                                <td>Salaries & Wages</td>
+                                <td class="currency">$1,850,000</td>
+                                <td class="currency">$412,500</td>
+                                <td><span class="variance-positive">+$49,800</span></td>
+                            </tr>
+                            <tr>
+                                <td style="font-family: monospace; font-weight: 500;">587000</td>
+                                <td>Computer Exp</td>
+                                <td>Technology</td>
+                                <td class="currency">$680,000</td>
+                                <td class="currency">$168,200</td>
+                                <td><span class="variance-positive">+$1,800</span></td>
+                            </tr>
+                            <tr>
+                                <td style="font-family: monospace; font-weight: 500;">589000</td>
+                                <td>Marketing</td>
+                                <td>Marketing & BD</td>
+                                <td class="currency">$240,000</td>
+                                <td class="currency">$82,400</td>
+                                <td><span class="variance-negative">-$22,400</span></td>
+                            </tr>
+                            <tr>
+                                <td style="font-family: monospace; font-weight: 500;">665000</td>
+                                <td>Travel</td>
+                                <td>Travel & Entertainment</td>
+                                <td class="currency">$320,000</td>
+                                <td class="currency">$94,600</td>
+                                <td><span class="variance-positive">+$25,400</span></td>
+                            </tr>
+                            <tr>
+                                <td style="font-family: monospace; font-weight: 500;">667000</td>
+                                <td>Due Member</td>
+                                <td>Professional Fees</td>
+                                <td class="currency">$890,000</td>
+                                <td class="currency">$134,300</td>
+                                <td><span class="variance-neutral">-$11,550</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Monthly comparison chart
+        const monthlyCtx = document.getElementById('monthlyChart').getContext('2d');
+        new Chart(monthlyCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                datasets: [
+                    {
+                        label: 'Budget',
+                        data: [350, 350, 350, 350, 350, 350, 350, 350, 350, 350, 350, 350],
+                        backgroundColor: '#2965cc',
+                        borderRadius: 4,
+                        barPercentage: 0.7,
+                        categoryPercentage: 0.8
+                    },
+                    {
+                        label: 'Actual',
+                        data: [312, 328, 252, null, null, null, null, null, null, null, null, null],
+                        backgroundColor: '#f26522',
+                        borderRadius: 4,
+                        barPercentage: 0.7,
+                        categoryPercentage: 0.8
+                    },
+                    {
+                        label: 'Reforecast',
+                        data: [312, 328, 252, 340, 360, 380, 345, 338, 350, 342, 355, 348],
+                        backgroundColor: 'rgba(124, 58, 237, 0.3)',
+                        borderColor: '#7c3aed',
+                        borderWidth: 2,
+                        borderRadius: 4,
+                        barPercentage: 0.7,
+                        categoryPercentage: 0.8,
+                        type: 'line',
+                        fill: false,
+                        tension: 0.3,
+                        pointRadius: 4,
+                        pointBackgroundColor: '#7c3aed'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        backgroundColor: '#1a1a1a',
+                        titleFont: { size: 12, weight: '600' },
+                        bodyFont: { size: 11 },
+                        padding: 10,
+                        cornerRadius: 6,
+                        callbacks: {
+                            label: function(context) {
+                                return context.dataset.label + ': $' + (context.raw ? context.raw + 'K' : 'N/A');
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: { display: false },
+                        ticks: { color: '#6b6b6b', font: { size: 11 } }
+                    },
+                    y: {
+                        grid: { color: '#e5e5e5' },
+                        ticks: {
+                            color: '#6b6b6b',
+                            font: { size: 11 },
+                            callback: function(value) {
+                                return '$' + value + 'K';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Category breakdown chart
+        const categoryCtx = document.getElementById('categoryChart').getContext('2d');
+        new Chart(categoryCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Labor', 'Technology', 'Travel', 'Marketing', 'Prof. Fees'],
+                datasets: [{
+                    data: [412.5, 168.2, 94.6, 82.4, 134.3],
+                    backgroundColor: [
+                        '#2965cc',
+                        '#0d8050',
+                        '#bf7326',
+                        '#7c3aed',
+                        '#c23030'
+                    ],
+                    borderWidth: 0,
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '65%',
+                plugins: {
+                    legend: {
+                        position: 'right',
+                        labels: {
+                            color: '#6b6b6b',
+                            font: { size: 11 },
+                            padding: 12,
+                            usePointStyle: true,
+                            pointStyle: 'rectRounded'
+                        }
+                    },
+                    tooltip: {
+                        backgroundColor: '#1a1a1a',
+                        titleFont: { size: 12, weight: '600' },
+                        bodyFont: { size: 11 },
+                        padding: 10,
+                        cornerRadius: 6,
+                        callbacks: {
+                            label: function(context) {
+                                return context.label + ': $' + context.raw + 'K';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
