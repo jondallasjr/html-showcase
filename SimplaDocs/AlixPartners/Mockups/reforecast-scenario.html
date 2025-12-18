@@ -698,46 +698,28 @@
             color: white;
         }
 
-        /* Labor cost masking for PM view */
-        .labor-cost-masked {
-            filter: blur(6px);
-            user-select: none;
-            cursor: help;
-            position: relative;
+        /* Labor cost hiding for PM view */
+        .labor-metric {
+            display: block;
         }
 
-        .labor-cost-masked::after {
-            content: "🔒";
-            position: absolute;
-            right: -20px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 14px;
-            opacity: 0.5;
-        }
-
-        .labor-costs-hidden {
+        body.pm-view .labor-metric {
             display: none;
         }
 
         .labor-placeholder {
             display: none;
-            font-size: 13px;
+            font-size: 12px;
             color: var(--coda-text-muted);
+            padding: 12px;
+            background: var(--coda-sidebar-bg);
+            border-radius: 6px;
+            text-align: center;
             font-style: italic;
-        }
-
-        body.pm-view .labor-costs-hidden {
-            display: block;
         }
 
         body.pm-view .labor-placeholder {
             display: block;
-        }
-
-        body.pm-view .metric-value.labor-cost {
-            filter: blur(6px);
-            user-select: none;
         }
 
         /* Admin-only sections */
@@ -1083,6 +1065,107 @@
                 </div>
             </div>
 
+            <!-- Budget Version History -->
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-title">📜 Budget Version History</div>
+                    <div class="section-actions">
+                        <button class="btn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                            Export History
+                        </button>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <div class="table-header-bar">
+                        <div>
+                            <span class="table-title">Approved Budget Snapshots</span>
+                            <span class="table-count">FY26 (July 2025 - June 2026)</span>
+                        </div>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Version</th>
+                                <th>Reforecast Format</th>
+                                <th>Effective Date</th>
+                                <th>Total Budget</th>
+                                <th>Change from Prior</th>
+                                <th>Key Changes</th>
+                                <th>Approved By</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: 8px;">
+                                        <span style="font-weight: 600; color: var(--coda-blue);">v1.0</span>
+                                        <span style="font-size: 10px; background: var(--coda-blue-bg); color: var(--coda-blue); padding: 2px 6px; border-radius: 4px; font-weight: 600;">ORIGINAL</span>
+                                    </div>
+                                </td>
+                                <td><strong>0+12</strong> (Pure forecast)</td>
+                                <td>June 15, 2025</td>
+                                <td class="currency"><strong>$4,200,000</strong></td>
+                                <td>—</td>
+                                <td>Original approved budget for FY26</td>
+                                <td>Rose & Kevin</td>
+                                <td><span class="approval-status approved">Approved</span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: 8px;">
+                                        <span style="font-weight: 600;">v1.1</span>
+                                    </div>
+                                </td>
+                                <td><strong>2+10</strong> (2mo actual, 10mo forecast)</td>
+                                <td>September 8, 2025</td>
+                                <td class="currency"><strong>$4,550,000</strong></td>
+                                <td><span class="variance-negative">+$350,000 (+8.3%)</span></td>
+                                <td>Q2 vendor rate increase (12%)</td>
+                                <td>Kevin</td>
+                                <td><span class="approval-status approved">Approved</span></td>
+                            </tr>
+                            <tr style="background: var(--coda-yellow-bg);">
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: 8px;">
+                                        <span style="font-weight: 600;">v1.2</span>
+                                        <span style="font-size: 10px; background: var(--coda-yellow); color: white; padding: 2px 6px; border-radius: 4px; font-weight: 600;">PENDING</span>
+                                    </div>
+                                </td>
+                                <td><strong>2+10</strong> (2mo actual, 10mo forecast)</td>
+                                <td>Pending approval</td>
+                                <td class="currency">$3,920,000</td>
+                                <td><span class="variance-positive">-$630,000 (-13.8%)</span></td>
+                                <td>Cost optimization: delayed hiring, reduced travel</td>
+                                <td>Awaiting Rose/Kevin</td>
+                                <td><span class="approval-status pending">Pending</span></td>
+                            </tr>
+                            <tr style="opacity: 0.6;">
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: 8px;">
+                                        <span style="font-weight: 600;">v1.3</span>
+                                        <span style="font-size: 10px; background: var(--coda-border); color: var(--coda-text-secondary); padding: 2px 6px; border-radius: 4px; font-weight: 600;">DRAFT</span>
+                                    </div>
+                                </td>
+                                <td><strong>3+9</strong> (3mo actual, 9mo forecast)</td>
+                                <td>Not submitted</td>
+                                <td class="currency">$4,680,000</td>
+                                <td><span class="variance-negative">+$130,000 (+2.9%)</span></td>
+                                <td>Conservative: unplanned hires, churn backfill</td>
+                                <td>Not submitted</td>
+                                <td><span class="approval-status draft">Draft</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div style="margin-top: 12px; padding: 12px 16px; background: var(--coda-blue-bg); border-left: 3px solid var(--coda-blue); border-radius: 4px; font-size: 12px; color: var(--coda-text-secondary);">
+                    <strong style="color: var(--coda-blue);">💡 Budget Tracking Policy:</strong> Per Rose & Kevin's guidance, the original budget (v1.0) is preserved to track variance over time. Each approved reforecast creates a new version snapshot. All versions remain accessible for historical comparison and audit purposes.
+                </div>
+            </div>
+
             <!-- Platform Impact Table -->
             <div class="section">
                 <div class="section-header">
@@ -1121,8 +1204,8 @@
                             <tr>
                                 <td>
                                     <div class="platform-cell">
-                                        <span class="platform-icon" style="background: #0d8050;">CA</span>
-                                        Core AI Squad
+                                        <span class="platform-icon" style="background: #0d8050;">PA</span>
+                                        Platform Alpha
                                     </div>
                                 </td>
                                 <td class="currency">$580,000</td>
@@ -1134,8 +1217,8 @@
                             <tr>
                                 <td>
                                     <div class="platform-cell">
-                                        <span class="platform-icon" style="background: #2965cc;">CW</span>
-                                        Commercial Workbench
+                                        <span class="platform-icon" style="background: #2965cc;">PB</span>
+                                        Platform Beta
                                     </div>
                                 </td>
                                 <td class="currency">$420,000</td>
@@ -1147,8 +1230,8 @@
                             <tr>
                                 <td>
                                     <div class="platform-cell">
-                                        <span class="platform-icon" style="background: #7c3aed;">DE</span>
-                                        Deedi (PE)
+                                        <span class="platform-icon" style="background: #7c3aed;">PG</span>
+                                        Platform Gamma
                                     </div>
                                 </td>
                                 <td class="currency">$350,000</td>
@@ -1160,8 +1243,8 @@
                             <tr>
                                 <td>
                                     <div class="platform-cell">
-                                        <span class="platform-icon" style="background: #bf7326;">JA</span>
-                                        Janus
+                                        <span class="platform-icon" style="background: #bf7326;">PD</span>
+                                        Platform Delta
                                     </div>
                                 </td>
                                 <td class="currency">$290,000</td>
@@ -1173,8 +1256,8 @@
                             <tr>
                                 <td>
                                     <div class="platform-cell">
-                                        <span class="platform-icon" style="background: #c23030;">PA</span>
-                                        Partnerships
+                                        <span class="platform-icon" style="background: #c23030;">PE</span>
+                                        Platform Epsilon
                                     </div>
                                 </td>
                                 <td class="currency">$180,000</td>
@@ -1238,7 +1321,7 @@
                 forecastMonths: 10,
                 asOfDate: 'September 1, 2025',
                 approvalStatus: 'pending',
-                requestedBy: 'PM - Core AI Squad',
+                requestedBy: 'PM - Platform Alpha',
                 requestedDate: 'September 5, 2025',
                 adjustments: {
                     vendorRateChange: -15,
@@ -1308,7 +1391,7 @@
                 approvalStatus: 'approved',
                 approvedBy: 'Kevin',
                 approvedDate: 'September 8, 2025',
-                requestedBy: 'PM - Commercial Workbench',
+                requestedBy: 'PM - Platform Beta',
                 requestedDate: 'September 1, 2025',
                 adjustments: {
                     vendorRateChange: 12,
@@ -1337,35 +1420,35 @@
         let scenarioChart = null;
         let customScenarioCounter = 1;
 
-        // Platform data
+        // Platform data (dummy names for public mockup)
         const platformData = {
             baseline: {
-                'Core AI Squad': { budget: 580000, scenario: 580000, driver: 'No changes', impact: 'Low' },
-                'Commercial Workbench': { budget: 420000, scenario: 420000, driver: 'No changes', impact: 'Low' },
-                'Deedi (PE)': { budget: 350000, scenario: 350000, driver: 'No changes', impact: 'Low' },
-                'Janus': { budget: 290000, scenario: 290000, driver: 'No changes', impact: 'Low' },
-                'Partnerships': { budget: 180000, scenario: 180000, driver: 'No changes', impact: 'Low' }
+                'Platform Alpha': { budget: 580000, scenario: 580000, driver: 'No changes', impact: 'Low' },
+                'Platform Beta': { budget: 420000, scenario: 420000, driver: 'No changes', impact: 'Low' },
+                'Platform Gamma': { budget: 350000, scenario: 350000, driver: 'No changes', impact: 'Low' },
+                'Platform Delta': { budget: 290000, scenario: 290000, driver: 'No changes', impact: 'Low' },
+                'Platform Epsilon': { budget: 180000, scenario: 180000, driver: 'No changes', impact: 'Low' }
             },
             optimistic: {
-                'Core AI Squad': { budget: 580000, scenario: 522000, driver: 'Delayed hiring + vendor optimization', impact: 'High' },
-                'Commercial Workbench': { budget: 420000, scenario: 378000, driver: 'Vendor rate improvement', impact: 'Medium' },
-                'Deedi (PE)': { budget: 350000, scenario: 315000, driver: 'Technology cost reduction', impact: 'Medium' },
-                'Janus': { budget: 290000, scenario: 261000, driver: 'Travel + hiring delays', impact: 'Low' },
-                'Partnerships': { budget: 180000, scenario: 162000, driver: 'Reduced travel budget', impact: 'Low' }
+                'Platform Alpha': { budget: 580000, scenario: 522000, driver: 'Delayed hiring + vendor optimization', impact: 'High' },
+                'Platform Beta': { budget: 420000, scenario: 378000, driver: 'Vendor rate improvement', impact: 'Medium' },
+                'Platform Gamma': { budget: 350000, scenario: 315000, driver: 'Technology cost reduction', impact: 'Medium' },
+                'Platform Delta': { budget: 290000, scenario: 261000, driver: 'Travel + hiring delays', impact: 'Low' },
+                'Platform Epsilon': { budget: 180000, scenario: 162000, driver: 'Reduced travel budget', impact: 'Low' }
             },
             conservative: {
-                'Core AI Squad': { budget: 580000, scenario: 652000, driver: 'Vendor rate increase (12%)', impact: 'High' },
-                'Commercial Workbench': { budget: 420000, scenario: 478000, driver: 'Unplanned senior hire', impact: 'High' },
-                'Deedi (PE)': { budget: 350000, scenario: 398000, driver: 'Churn backfill costs', impact: 'Medium' },
-                'Janus': { budget: 290000, scenario: 318000, driver: 'Vendor rates + marketing', impact: 'Medium' },
-                'Partnerships': { budget: 180000, scenario: 195000, driver: 'Travel expense increase', impact: 'Low' }
+                'Platform Alpha': { budget: 580000, scenario: 652000, driver: 'Vendor rate increase (12%)', impact: 'High' },
+                'Platform Beta': { budget: 420000, scenario: 478000, driver: 'Unplanned senior hire', impact: 'High' },
+                'Platform Gamma': { budget: 350000, scenario: 398000, driver: 'Churn backfill costs', impact: 'Medium' },
+                'Platform Delta': { budget: 290000, scenario: 318000, driver: 'Vendor rates + marketing', impact: 'Medium' },
+                'Platform Epsilon': { budget: 180000, scenario: 195000, driver: 'Travel expense increase', impact: 'Low' }
             },
             vendorIncrease: {
-                'Core AI Squad': { budget: 580000, scenario: 635000, driver: 'Q2 vendor rate increase', impact: 'High' },
-                'Commercial Workbench': { budget: 420000, scenario: 460000, driver: 'Vendor rate increase', impact: 'Medium' },
-                'Deedi (PE)': { budget: 350000, scenario: 385000, driver: 'Vendor rate + tech costs', impact: 'Medium' },
-                'Janus': { budget: 290000, scenario: 315000, driver: 'Vendor rate increase', impact: 'Medium' },
-                'Partnerships': { budget: 180000, scenario: 198000, driver: 'Vendor + travel increase', impact: 'Low' }
+                'Platform Alpha': { budget: 580000, scenario: 635000, driver: 'Q2 vendor rate increase', impact: 'High' },
+                'Platform Beta': { budget: 420000, scenario: 460000, driver: 'Vendor rate increase', impact: 'Medium' },
+                'Platform Gamma': { budget: 350000, scenario: 385000, driver: 'Vendor rate + tech costs', impact: 'Medium' },
+                'Platform Delta': { budget: 290000, scenario: 315000, driver: 'Vendor rate increase', impact: 'Medium' },
+                'Platform Epsilon': { budget: 180000, scenario: 198000, driver: 'Vendor + travel increase', impact: 'Low' }
             }
         };
 
@@ -1599,11 +1682,13 @@
                             <div class="metric-value">${formatCurrency(scenario.totalBudget)}</div>
                             ${totalDeltaHTML}
                         </div>
-                        <div class="scenario-metric">
+                        <div class="scenario-metric labor-metric">
                             <div class="metric-label">Labor Costs</div>
-                            <div class="metric-value labor-cost">${formatCurrency(scenario.laborCosts)}</div>
-                            <div class="labor-placeholder">Visible to Admin Only</div>
-                            <div class="metric-delta labor-costs-hidden">${laborPct}% of budget</div>
+                            <div class="metric-value">${formatCurrency(scenario.laborCosts)}</div>
+                            <div class="metric-delta">${laborPct}% of budget</div>
+                        </div>
+                        <div class="labor-placeholder">
+                            🔒 Labor cost details are visible to admin only
                         </div>
                         <div class="scenario-metric">
                             <div class="metric-label">Non-Labor Costs</div>
@@ -1755,31 +1840,31 @@
 
             // Platform-specific multipliers (some platforms are more affected by certain changes)
             const platformMultipliers = {
-                'Core AI Squad': {
+                'Platform Alpha': {
                     vendor: 1.3,  // More vendor-heavy
                     hiring: 1.1,
                     travel: 0.8,
                     tech: 1.2
                 },
-                'Commercial Workbench': {
+                'Platform Beta': {
                     vendor: 1.1,
                     hiring: 1.3,  // More hiring-heavy
                     travel: 1.0,
                     tech: 1.0
                 },
-                'Deedi (PE)': {
+                'Platform Gamma': {
                     vendor: 1.0,
                     hiring: 1.0,
                     travel: 0.9,
                     tech: 1.4    // More tech-heavy
                 },
-                'Janus': {
+                'Platform Delta': {
                     vendor: 1.2,
                     hiring: 0.9,
                     travel: 1.3,  // More travel-heavy
                     tech: 1.1
                 },
-                'Partnerships': {
+                'Platform Epsilon': {
                     vendor: 0.8,
                     hiring: 0.8,
                     travel: 1.5,  // Most travel-heavy
@@ -1981,7 +2066,7 @@
                 const varianceSign = variance > 0 ? '+' : '';
 
                 const colors = ['#0d8050', '#2965cc', '#7c3aed', '#bf7326', '#c23030'];
-                const abbrevs = ['CA', 'CW', 'DE', 'JA', 'PA'];
+                const abbrevs = ['PA', 'PB', 'PG', 'PD', 'PE'];
 
                 const row = `
                     <tr>
