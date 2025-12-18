@@ -656,6 +656,182 @@
             box-shadow: 0 0 0 3px rgba(242, 101, 34, 0.1);
         }
 
+        /* View Mode Toggle */
+        .view-mode-toggle {
+            position: fixed;
+            top: 16px;
+            right: 16px;
+            background: white;
+            border: 1px solid var(--coda-border);
+            border-radius: 8px;
+            padding: 4px;
+            display: flex;
+            gap: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .view-mode-btn {
+            padding: 6px 14px;
+            border: none;
+            background: transparent;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--coda-text-secondary);
+            cursor: pointer;
+            transition: all 0.15s;
+            font-family: inherit;
+        }
+
+        .view-mode-btn:hover {
+            background: var(--coda-sidebar-bg);
+        }
+
+        .view-mode-btn.active {
+            background: var(--coda-accent);
+            color: white;
+        }
+
+        .view-mode-btn.admin-active {
+            background: var(--coda-purple);
+            color: white;
+        }
+
+        /* Labor cost masking for PM view */
+        .labor-cost-masked {
+            filter: blur(6px);
+            user-select: none;
+            cursor: help;
+            position: relative;
+        }
+
+        .labor-cost-masked::after {
+            content: "🔒";
+            position: absolute;
+            right: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 14px;
+            opacity: 0.5;
+        }
+
+        .labor-costs-hidden {
+            display: none;
+        }
+
+        .labor-placeholder {
+            display: none;
+            font-size: 13px;
+            color: var(--coda-text-muted);
+            font-style: italic;
+        }
+
+        body.pm-view .labor-costs-hidden {
+            display: block;
+        }
+
+        body.pm-view .labor-placeholder {
+            display: block;
+        }
+
+        body.pm-view .metric-value.labor-cost {
+            filter: blur(6px);
+            user-select: none;
+        }
+
+        /* Admin-only sections */
+        .admin-only {
+            position: relative;
+        }
+
+        body.pm-view .admin-only::before {
+            content: "👨‍💼 Admin Only";
+            position: absolute;
+            top: -8px;
+            right: 0;
+            background: var(--coda-purple);
+            color: white;
+            font-size: 10px;
+            font-weight: 600;
+            padding: 3px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            opacity: 0.8;
+        }
+
+        body.pm-view .adjustment-panel {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        /* Approval status badges */
+        .approval-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 10px;
+            font-weight: 600;
+            padding: 3px 8px;
+            border-radius: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            margin-left: 8px;
+        }
+
+        .approval-status.draft {
+            background: var(--coda-border);
+            color: var(--coda-text-secondary);
+        }
+
+        .approval-status.pending {
+            background: var(--coda-yellow-bg);
+            color: var(--coda-yellow);
+        }
+
+        .approval-status.approved {
+            background: var(--coda-green-bg);
+            color: var(--coda-green);
+        }
+
+        .approval-status.rejected {
+            background: var(--coda-red-bg);
+            color: var(--coda-red);
+        }
+
+        /* Approval workflow panel */
+        .approval-panel {
+            background: var(--coda-blue-bg);
+            border: 1px solid var(--coda-blue);
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 16px;
+            display: none;
+        }
+
+        .approval-panel.visible {
+            display: block;
+        }
+
+        .approval-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .approval-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--coda-blue);
+        }
+
+        .approval-actions {
+            display: flex;
+            gap: 8px;
+        }
+
         /* Responsive */
         @media (max-width: 1200px) {
             .comparison-grid {
@@ -673,10 +849,20 @@
             .main-content {
                 padding: 24px;
             }
+            .view-mode-toggle {
+                top: 8px;
+                right: 8px;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- View Mode Toggle -->
+    <div class="view-mode-toggle">
+        <button class="view-mode-btn admin-active" data-view="admin">Admin View</button>
+        <button class="view-mode-btn" data-view="pm">PM View</button>
+    </div>
+
     <div class="app-container">
         <!-- Sidebar -->
         <aside class="sidebar">
@@ -750,7 +936,7 @@
             <header class="page-header">
                 <h1 class="page-title">Reforecast & Scenario Planning</h1>
                 <p class="page-description">
-                    Create and compare budget scenarios to model the impact of changes like new vendors, hiring shifts, churn, investment reprioritization, and unapproved expenses. Compare scenarios side-by-side to make informed decisions.
+                    Create and compare budget scenarios to model the impact of changes like new vendors, hiring shifts, churn, investment reprioritization, and unapproved expenses. Use "2+10" format (2 months actual + 10 months forecast) to track reforecasts with actuals. Compare scenarios side-by-side to make informed decisions.
                 </p>
             </header>
 
@@ -771,9 +957,9 @@
 
             <!-- Callout -->
             <div class="callout">
-                <div class="callout-title">⚡ Scenario Planning</div>
+                <div class="callout-title">⚡ Scenario Planning & Reforecasting</div>
                 <div class="callout-text">
-                    Each scenario is a complete copy of your FY26 budget. Make adjustments to model different situations (vendor changes, headcount shifts, investment cuts). All scenarios are saved and can be compared to help leadership make decisions.
+                    Each scenario is a complete copy of your FY26 budget. Make adjustments to model different situations (vendor changes, headcount shifts, investment cuts). Use "2+10" reforecast format (2 months actual + 10 months forecast) to blend actual spend with projections. All scenarios are saved with version history and can be compared to help leadership make decisions.
                 </div>
             </div>
 
@@ -789,99 +975,13 @@
                     </div>
                 </div>
 
-                <div class="comparison-grid">
-                    <!-- Baseline Scenario -->
-                    <div class="comparison-card active">
-                        <div class="scenario-header">
-                            <div class="scenario-name">FY26 Baseline</div>
-                            <div class="scenario-badge baseline">Baseline</div>
-                        </div>
-                        <div class="scenario-metric">
-                            <div class="metric-label">Total Budget</div>
-                            <div class="metric-value">$4.20M</div>
-                        </div>
-                        <div class="scenario-metric">
-                            <div class="metric-label">Labor Costs</div>
-                            <div class="metric-value">$2.85M</div>
-                            <div class="metric-delta">68% of budget</div>
-                        </div>
-                        <div class="scenario-metric">
-                            <div class="metric-label">Non-Labor Costs</div>
-                            <div class="metric-value">$1.35M</div>
-                            <div class="metric-delta">32% of budget</div>
-                        </div>
-                        <div class="scenario-assumptions">
-                            <div class="assumptions-title">Key Assumptions</div>
-                            <div class="assumption-item">Original approved budget</div>
-                            <div class="assumption-item">All platforms at full headcount</div>
-                            <div class="assumption-item">Current vendor rates</div>
-                        </div>
-                    </div>
-
-                    <!-- Optimistic Scenario -->
-                    <div class="comparison-card">
-                        <div class="scenario-header">
-                            <div class="scenario-name">Optimistic Case</div>
-                            <div class="scenario-badge optimistic">Optimistic</div>
-                        </div>
-                        <div class="scenario-metric">
-                            <div class="metric-label">Total Budget</div>
-                            <div class="metric-value">$3.92M</div>
-                            <div class="metric-delta positive">↓ $280K vs baseline</div>
-                        </div>
-                        <div class="scenario-metric">
-                            <div class="metric-label">Labor Costs</div>
-                            <div class="metric-value">$2.64M</div>
-                            <div class="metric-delta positive">↓ $210K (7.4%)</div>
-                        </div>
-                        <div class="scenario-metric">
-                            <div class="metric-label">Non-Labor Costs</div>
-                            <div class="metric-value">$1.28M</div>
-                            <div class="metric-delta positive">↓ $70K (5.2%)</div>
-                        </div>
-                        <div class="scenario-assumptions">
-                            <div class="assumptions-title">Key Assumptions</div>
-                            <div class="assumption-item">15% improvement in vendor rates</div>
-                            <div class="assumption-item">Delayed hiring for 3 positions (Q3)</div>
-                            <div class="assumption-item">Reduced travel expenses (-25%)</div>
-                            <div class="assumption-item">Technology cost optimization</div>
-                        </div>
-                    </div>
-
-                    <!-- Conservative Scenario -->
-                    <div class="comparison-card">
-                        <div class="scenario-header">
-                            <div class="scenario-name">Conservative Case</div>
-                            <div class="scenario-badge conservative">Conservative</div>
-                        </div>
-                        <div class="scenario-metric">
-                            <div class="metric-label">Total Budget</div>
-                            <div class="metric-value">$4.68M</div>
-                            <div class="metric-delta negative">↑ $480K vs baseline</div>
-                        </div>
-                        <div class="scenario-metric">
-                            <div class="metric-label">Labor Costs</div>
-                            <div class="metric-value">$3.12M</div>
-                            <div class="metric-delta negative">↑ $270K (9.5%)</div>
-                        </div>
-                        <div class="scenario-metric">
-                            <div class="metric-label">Non-Labor Costs</div>
-                            <div class="metric-value">$1.56M</div>
-                            <div class="metric-delta negative">↑ $210K (15.6%)</div>
-                        </div>
-                        <div class="scenario-assumptions">
-                            <div class="assumptions-title">Key Assumptions</div>
-                            <div class="assumption-item">Vendor rates increase 12% (Q2)</div>
-                            <div class="assumption-item">2 unplanned senior hires</div>
-                            <div class="assumption-item">20% team churn requiring backfill</div>
-                            <div class="assumption-item">Marketing spend increase</div>
-                        </div>
-                    </div>
+                <div class="comparison-grid" id="comparisonGrid">
+                    <!-- Dynamically populated by renderComparisonCards() -->
                 </div>
             </div>
 
             <!-- Scenario Adjustment Panel -->
-            <div class="section">
+            <div class="section admin-only">
                 <div class="section-header">
                     <div class="section-title">Adjust Current Scenario: FY26 Baseline</div>
                 </div>
@@ -952,8 +1052,20 @@
 
                 <div style="display: flex; justify-content: flex-end; gap: 8px; margin-top: 16px;">
                     <button class="btn">Reset to Baseline</button>
-                    <button class="btn-primary btn">Apply Changes</button>
-                    <button class="btn-primary btn">Save as New Scenario</button>
+                    <button class="btn-primary btn" id="submitForApprovalBtn">Submit for Approval</button>
+                    <button class="btn-primary btn" id="saveScenarioBtn" style="display: none;">Save as New Scenario</button>
+                </div>
+
+                <!-- Approval Workflow Panel -->
+                <div class="approval-panel" id="approvalPanel">
+                    <div class="approval-header">
+                        <div class="approval-title">📋 Approval Workflow</div>
+                        <div class="approval-actions admin-only">
+                            <button class="btn" style="background: var(--coda-green); color: white; border-color: var(--coda-green);">✓ Approve</button>
+                            <button class="btn" style="background: var(--coda-red); color: white; border-color: var(--coda-red);">✗ Reject</button>
+                        </div>
+                    </div>
+                    <div id="approvalDetails" style="font-size: 12px; color: var(--coda-text-secondary);"></div>
                 </div>
             </div>
 
@@ -1088,6 +1200,13 @@
                 totalBudget: 4200000,
                 laborCosts: 2850000,
                 nonLaborCosts: 1350000,
+                reforecastFormat: '0+12',
+                actualMonths: 0,
+                forecastMonths: 12,
+                asOfDate: 'July 1, 2025',
+                approvalStatus: 'approved',
+                approvedBy: 'Rose & Kevin',
+                approvedDate: 'June 15, 2025',
                 adjustments: {
                     vendorRateChange: 0,
                     churnRate: 15,
@@ -1103,7 +1222,7 @@
                     professionalFeesChange: 0
                 },
                 assumptions: [
-                    'Original approved budget',
+                    'Original approved budget (0+12 pure forecast)',
                     'All platforms at full headcount',
                     'Current vendor rates'
                 ]
@@ -1114,6 +1233,13 @@
                 totalBudget: 3920000,
                 laborCosts: 2640000,
                 nonLaborCosts: 1280000,
+                reforecastFormat: '2+10',
+                actualMonths: 2,
+                forecastMonths: 10,
+                asOfDate: 'September 1, 2025',
+                approvalStatus: 'pending',
+                requestedBy: 'PM - Core AI Squad',
+                requestedDate: 'September 5, 2025',
                 adjustments: {
                     vendorRateChange: -15,
                     churnRate: 10,
@@ -1129,10 +1255,10 @@
                     professionalFeesChange: -5
                 },
                 assumptions: [
+                    '2+10 reforecast (2mo actual, 10mo forecast)',
                     '15% improvement in vendor rates',
                     'Delayed hiring for 3 positions (Q3)',
-                    'Reduced travel expenses (-25%)',
-                    'Technology cost optimization'
+                    'Reduced travel expenses (-25%)'
                 ]
             },
             conservative: {
@@ -1141,6 +1267,13 @@
                 totalBudget: 4680000,
                 laborCosts: 3120000,
                 nonLaborCosts: 1560000,
+                reforecastFormat: '3+9',
+                actualMonths: 3,
+                forecastMonths: 9,
+                asOfDate: 'October 1, 2025',
+                approvalStatus: 'draft',
+                createdBy: 'Finance Team',
+                createdDate: 'October 3, 2025',
                 adjustments: {
                     vendorRateChange: 12,
                     churnRate: 20,
@@ -1156,10 +1289,10 @@
                     professionalFeesChange: 10
                 },
                 assumptions: [
+                    '3+9 reforecast (3mo actual, 9mo forecast)',
                     'Vendor rates increase 12% (Q2)',
                     '2 unplanned senior hires',
-                    '20% team churn requiring backfill',
-                    'Marketing spend increase'
+                    '20% team churn requiring backfill'
                 ]
             },
             vendorIncrease: {
@@ -1168,6 +1301,15 @@
                 totalBudget: 4550000,
                 laborCosts: 3100000,
                 nonLaborCosts: 1450000,
+                reforecastFormat: '2+10',
+                actualMonths: 2,
+                forecastMonths: 10,
+                asOfDate: 'September 1, 2025',
+                approvalStatus: 'approved',
+                approvedBy: 'Kevin',
+                approvedDate: 'September 8, 2025',
+                requestedBy: 'PM - Commercial Workbench',
+                requestedDate: 'September 1, 2025',
                 adjustments: {
                     vendorRateChange: 12,
                     churnRate: 15,
@@ -1183,6 +1325,7 @@
                     professionalFeesChange: 0
                 },
                 assumptions: [
+                    '2+10 reforecast based on Q1 actuals',
                     'Vendor rates increase 12% starting Q2',
                     'No headcount changes',
                     'Slight increase in travel and tech'
@@ -1229,13 +1372,36 @@
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
             initializeScenarioTabs();
-            initializeComparisonCards();
+            renderComparisonCards(); // Render cards first
             initializeAdjustmentInputs();
             initializeButtons();
             initializeChart();
+            initializeViewModeToggle();
             updateView();
-            updateComparisonCards();
         });
+
+        function initializeViewModeToggle() {
+            const toggleBtns = document.querySelectorAll('.view-mode-btn');
+
+            toggleBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const view = btn.getAttribute('data-view');
+
+                    // Update button states
+                    toggleBtns.forEach(b => {
+                        b.classList.remove('active', 'admin-active');
+                    });
+
+                    if (view === 'admin') {
+                        btn.classList.add('admin-active');
+                        document.body.classList.remove('pm-view');
+                    } else {
+                        btn.classList.add('active');
+                        document.body.classList.add('pm-view');
+                    }
+                });
+            });
+        }
 
         function initializeScenarioTabs() {
             const tabs = document.querySelectorAll('.scenario-tab');
@@ -1246,25 +1412,45 @@
                     tab.classList.add('active');
                     currentScenario = scenarioKeys[index];
                     updateView();
-                    updateComparisonCards();
+                    renderComparisonCards();
                 });
             });
         }
 
         function initializeComparisonCards() {
             const cards = document.querySelectorAll('.comparison-card');
-            cards.forEach((card, index) => {
-                const scenarioKeys = ['baseline', 'optimistic', 'conservative'];
+            cards.forEach((card) => {
+                const scenarioKey = card.getAttribute('data-scenario-key');
                 card.addEventListener('click', () => {
+                    // Update active state
                     cards.forEach(c => c.classList.remove('active'));
                     card.classList.add('active');
-                    currentScenario = scenarioKeys[index];
+
+                    // Switch to this scenario
+                    currentScenario = scenarioKey;
                     updateView();
 
                     // Update scenario tab to match
-                    const tabs = document.querySelectorAll('.scenario-tab');
-                    tabs.forEach(t => t.classList.remove('active'));
-                    tabs[index].classList.add('active');
+                    const allScenarioKeys = ['baseline', 'optimistic', 'conservative', 'vendorIncrease'];
+                    const tabIndex = allScenarioKeys.indexOf(scenarioKey);
+
+                    if (tabIndex !== -1) {
+                        const tabs = document.querySelectorAll('.scenario-tab');
+                        tabs.forEach(t => t.classList.remove('active'));
+                        tabs[tabIndex].classList.add('active');
+                    } else {
+                        // It's a custom scenario, find the tab by data attribute
+                        const tabs = document.querySelectorAll('.scenario-tab');
+                        tabs.forEach(t => {
+                            if (t.getAttribute('data-scenario-key') === scenarioKey) {
+                                tabs.forEach(t2 => t2.classList.remove('active'));
+                                t.classList.add('active');
+                            }
+                        });
+                    }
+
+                    // Rebuild cards to reflect selection
+                    renderComparisonCards();
                 });
             });
         }
@@ -1335,6 +1521,106 @@
             return '$' + value.toLocaleString();
         }
 
+        function renderComparisonCards() {
+            const grid = document.getElementById('comparisonGrid');
+            if (!grid) return;
+
+            // Determine which 3 scenarios to show
+            let scenariosToShow = [];
+
+            // Always include current scenario
+            scenariosToShow.push(currentScenario);
+
+            // Always include baseline if it's not current
+            if (currentScenario !== 'baseline') {
+                scenariosToShow.push('baseline');
+            }
+
+            // Add other scenarios to fill up to 3
+            const allScenarioKeys = Object.keys(scenarios);
+            for (const key of allScenarioKeys) {
+                if (!scenariosToShow.includes(key) && scenariosToShow.length < 3) {
+                    scenariosToShow.push(key);
+                }
+            }
+
+            // Build HTML for each card
+            grid.innerHTML = '';
+
+            scenariosToShow.forEach((scenarioKey, index) => {
+                const scenario = scenarios[scenarioKey];
+                const isActive = scenarioKey === currentScenario;
+                const baseline = scenarios.baseline;
+
+                // Calculate deltas vs baseline
+                const totalDelta = scenario.totalBudget - baseline.totalBudget;
+                const laborPct = ((scenario.laborCosts / scenario.totalBudget) * 100).toFixed(0);
+                const nonLaborPct = ((scenario.nonLaborCosts / scenario.totalBudget) * 100).toFixed(0);
+
+                let totalDeltaHTML = '';
+                if (scenarioKey !== 'baseline' && totalDelta !== 0) {
+                    const sign = totalDelta > 0 ? '↑' : '↓';
+                    const className = totalDelta > 0 ? 'negative' : 'positive';
+                    totalDeltaHTML = `<div class="metric-delta ${className}">${sign} ${formatCurrency(Math.abs(totalDelta))} vs baseline</div>`;
+                }
+
+                // Build assumptions HTML
+                let assumptionsHTML = '';
+                if (scenario.assumptions && scenario.assumptions.length > 0) {
+                    assumptionsHTML = '<div class="scenario-assumptions"><div class="assumptions-title">Key Assumptions</div>';
+                    scenario.assumptions.forEach(assumption => {
+                        assumptionsHTML += `<div class="assumption-item">${assumption}</div>`;
+                    });
+                    assumptionsHTML += '</div>';
+                }
+
+                // Reforecast format badge
+                const reforecastHTML = scenario.reforecastFormat ?
+                    `<div style="font-size: 11px; color: var(--coda-text-muted); margin-bottom: 8px;">
+                        <strong>${scenario.reforecastFormat}</strong> Reforecast • As of ${scenario.asOfDate}
+                    </div>` : '';
+
+                // Approval status badge
+                const approvalHTML = scenario.approvalStatus ?
+                    `<span class="approval-status ${scenario.approvalStatus}">${scenario.approvalStatus}</span>` : '';
+
+                const cardHTML = `
+                    <div class="comparison-card ${isActive ? 'active' : ''}" data-scenario-key="${scenarioKey}">
+                        <div class="scenario-header">
+                            <div class="scenario-name">
+                                ${scenario.name}
+                                ${approvalHTML}
+                            </div>
+                            <div class="scenario-badge ${scenario.badge}">${scenario.badge.toUpperCase()}</div>
+                        </div>
+                        ${reforecastHTML}
+                        <div class="scenario-metric">
+                            <div class="metric-label">Total Budget</div>
+                            <div class="metric-value">${formatCurrency(scenario.totalBudget)}</div>
+                            ${totalDeltaHTML}
+                        </div>
+                        <div class="scenario-metric">
+                            <div class="metric-label">Labor Costs</div>
+                            <div class="metric-value labor-cost">${formatCurrency(scenario.laborCosts)}</div>
+                            <div class="labor-placeholder">Visible to Admin Only</div>
+                            <div class="metric-delta labor-costs-hidden">${laborPct}% of budget</div>
+                        </div>
+                        <div class="scenario-metric">
+                            <div class="metric-label">Non-Labor Costs</div>
+                            <div class="metric-value">${formatCurrency(scenario.nonLaborCosts)}</div>
+                            <div class="metric-delta">${nonLaborPct}% of budget</div>
+                        </div>
+                        ${assumptionsHTML}
+                    </div>
+                `;
+
+                grid.insertAdjacentHTML('beforeend', cardHTML);
+            });
+
+            // Add click handlers to the newly created cards
+            initializeComparisonCards();
+        }
+
         function initializeAdjustmentInputs() {
             const inputs = document.querySelectorAll('.adjustment-input');
             let debounceTimer;
@@ -1375,15 +1661,9 @@
                 }
             });
 
-            // Apply Changes button
+            // Save as New Scenario button
             const applyButtons = document.querySelectorAll('.btn-primary');
             applyButtons.forEach(btn => {
-                if (btn.textContent.includes('Apply Changes')) {
-                    btn.addEventListener('click', () => {
-                        calculateScenarioImpact();
-                        alert('Changes applied to current scenario!');
-                    });
-                }
                 if (btn.textContent.includes('Save as New')) {
                     btn.addEventListener('click', () => {
                         const name = prompt('Enter new scenario name:', 'Modified ' + scenarios[currentScenario].name);
@@ -1595,7 +1875,7 @@
             });
 
             // Update the UI
-            updateComparisonCards();
+            renderComparisonCards();
             updatePlatformTable();
             updateChart();
 
@@ -1610,8 +1890,11 @@
         function updateView() {
             const scenario = scenarios[currentScenario];
 
-            // Update page title
-            document.querySelector('.section-title').textContent = `Adjust Current Scenario: ${scenario.name}`;
+            // Update page title - target the second section-title (the adjustment panel)
+            const sectionTitles = document.querySelectorAll('.section-title');
+            if (sectionTitles[1]) {
+                sectionTitles[1].textContent = `Adjust Current Scenario: ${scenario.name}`;
+            }
 
             // Update adjustment inputs
             const adj = scenario.adjustments;
@@ -1630,6 +1913,9 @@
                 else if (label.includes('Other')) input.value = adj.otherExpenses === 0 ? '$0' : '$' + adj.otherExpenses.toLocaleString();
             });
 
+            // Update approval panel visibility and content
+            updateApprovalPanel();
+
             // Update platform table
             updatePlatformTable();
 
@@ -1640,6 +1926,46 @@
             } else {
                 tableCount.textContent = `Comparing: FY26 Baseline vs ${scenario.name}`;
             }
+        }
+
+        function updateApprovalPanel() {
+            const scenario = scenarios[currentScenario];
+            const panel = document.getElementById('approvalPanel');
+            const details = document.getElementById('approvalDetails');
+
+            if (!scenario.approvalStatus || scenario.approvalStatus === 'approved') {
+                panel.classList.remove('visible');
+                return;
+            }
+
+            panel.classList.add('visible');
+
+            let detailsHTML = '';
+            if (scenario.approvalStatus === 'pending') {
+                detailsHTML = `
+                    <div style="margin-bottom: 8px;"><strong>Status:</strong> Pending Approval</div>
+                    <div style="margin-bottom: 8px;"><strong>Requested by:</strong> ${scenario.requestedBy || 'Unknown'}</div>
+                    <div><strong>Requested on:</strong> ${scenario.requestedDate || 'Unknown'}</div>
+                `;
+            } else if (scenario.approvalStatus === 'draft') {
+                detailsHTML = `
+                    <div style="margin-bottom: 8px;"><strong>Status:</strong> Draft (Not Submitted)</div>
+                    <div style="margin-bottom: 8px;"><strong>Created by:</strong> ${scenario.createdBy || 'Unknown'}</div>
+                    <div><strong>Created on:</strong> ${scenario.createdDate || 'Unknown'}</div>
+                    <div style="margin-top: 12px; padding: 8px; background: var(--coda-yellow-bg); border-radius: 4px; font-size: 11px;">
+                        💡 This scenario is in draft status. Click "Submit for Approval" to request budget approval from leadership.
+                    </div>
+                `;
+            } else if (scenario.approvalStatus === 'rejected') {
+                detailsHTML = `
+                    <div style="margin-bottom: 8px;"><strong>Status:</strong> Rejected</div>
+                    <div style="margin-bottom: 8px;"><strong>Rejected by:</strong> ${scenario.rejectedBy || 'Unknown'}</div>
+                    <div><strong>Rejected on:</strong> ${scenario.rejectedDate || 'Unknown'}</div>
+                    <div style="margin-top: 8px;"><strong>Reason:</strong> ${scenario.rejectionReason || 'No reason provided'}</div>
+                `;
+            }
+
+            details.innerHTML = detailsHTML;
         }
 
         function updatePlatformTable() {
@@ -1859,7 +2185,7 @@
                 newTab.classList.add('active');
                 currentScenario = scenarioKey;
                 updateView();
-                updateComparisonCards();
+                renderComparisonCards();
             });
 
             scenarioTabs.appendChild(newTab);
@@ -1869,6 +2195,7 @@
             newTab.classList.add('active');
             currentScenario = scenarioKey;
             updateView();
+            renderComparisonCards();
             updateChart();
 
             // Show success message
