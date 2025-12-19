@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Actual vs Budget Tracking | Alix Admin Doc</title>
+    <title>Actual vs Budget Tracking | Budget Dashboard</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
@@ -663,8 +663,8 @@
         <aside class="sidebar">
             <div class="sidebar-header">
                 <div class="doc-title">
-                    <span class="doc-icon">A</span>
-                    Alix Admin Doc
+                    <span class="doc-icon">BD</span>
+                    Budget Dashboard
                 </div>
             </div>
             
@@ -731,19 +731,19 @@
             <header class="page-header">
                 <h1 class="page-title">Actual vs Budget Tracking</h1>
                 <p class="page-description">
-                    Compare actual spend from Azure Data Lake against approved budgets and reforecasted amounts. 
-                    Data syncs automatically every 4 hours from your SAP financial systems.
+                    Compare actual spend from data warehouse against approved budgets and reforecasted amounts.
+                    Data syncs automatically every 4 hours from your financial systems.
                 </p>
             </header>
 
-            <!-- Azure Sync Status -->
+            <!-- Data Sync Status -->
             <div class="sync-banner">
                 <div class="sync-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>
                 </div>
                 <div class="sync-info">
-                    <div class="sync-title">Azure Data Lake Connected</div>
-                    <div class="sync-detail">Last synced: Dec 17, 2025 at 8:00 AM EST • Next sync in 3h 42m</div>
+                    <div class="sync-title">Data Warehouse Connected</div>
+                    <div class="sync-detail">Last synced: Today at 8:00 AM • Next sync in 3h 42m</div>
                 </div>
                 <button class="sync-button">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
@@ -755,30 +755,30 @@
             <div class="callout">
                 <div class="callout-title">ℹ️ Data Source</div>
                 <div class="callout-text">
-                    Actual spend is pulled from GL accounts 560000-667000 via the Azure Data Lake integration. 
+                    Actual spend is pulled from GL accounts 500000-600000 via the data warehouse integration.
                     Budget and reforecast data comes from approved requests in this doc.
                 </div>
             </div>
 
             <!-- Filters -->
             <div class="filter-bar">
-                <span class="filter-label">Platform:</span>
+                <span class="filter-label">Product:</span>
                 <select class="filter-select">
-                    <option>All Platforms</option>
-                    <option>Core AI Squad</option>
-                    <option>Commercial Workbench</option>
-                    <option>Deedi (PE)</option>
-                    <option>Janus</option>
-                    <option>Partnerships</option>
+                    <option>All Products</option>
+                    <option>Product Alpha</option>
+                    <option>Product Beta</option>
+                    <option>Product Gamma</option>
+                    <option>Product Delta</option>
+                    <option>Product Epsilon</option>
                 </select>
-                
+
                 <span class="filter-label" style="margin-left: 12px;">Period:</span>
                 <select class="filter-select">
-                    <option>FY26 YTD</option>
-                    <option>Q1 FY26</option>
-                    <option>Q2 FY26</option>
-                    <option>December 2025</option>
-                    <option>November 2025</option>
+                    <option>FY25 YTD</option>
+                    <option>Q1 FY25</option>
+                    <option>Q2 FY25</option>
+                    <option>Q3 FY25</option>
+                    <option>Q4 FY25</option>
                 </select>
 
                 <span class="filter-label" style="margin-left: 12px;">Category:</span>
@@ -798,26 +798,26 @@
             <div class="kpi-grid">
                 <div class="kpi-card">
                     <div class="kpi-label">Approved Budget</div>
-                    <div class="kpi-value">$4.2M</div>
-                    <div class="kpi-subtext">FY26 Total across 20 platforms</div>
+                    <div class="kpi-value">$3.8M</div>
+                    <div class="kpi-subtext">FY25 Total across 15 products</div>
                 </div>
                 <div class="kpi-card">
                     <div class="kpi-label">Actual Spend (YTD)</div>
-                    <div class="kpi-value">$892K</div>
+                    <div class="kpi-value">$765K</div>
                     <div class="kpi-subtext">
-                        <span class="kpi-positive">↓ 8% under budget</span>
+                        <span class="kpi-positive">↓ 5% under budget</span>
                     </div>
                 </div>
                 <div class="kpi-card">
                     <div class="kpi-label">Reforecasted Total</div>
-                    <div class="kpi-value">$4.05M</div>
+                    <div class="kpi-value">$3.65M</div>
                     <div class="kpi-subtext">
                         <span class="kpi-neutral">$150K below original</span>
                     </div>
                 </div>
                 <div class="kpi-card">
                     <div class="kpi-label">Variance to Reforecast</div>
-                    <div class="kpi-value">-$42K</div>
+                    <div class="kpi-value">-$38K</div>
                     <div class="kpi-subtext">
                         <span class="kpi-positive">Favorable variance</span>
                     </div>
@@ -845,10 +845,10 @@
                 </div>
             </div>
 
-            <!-- Platform Breakdown Table -->
+            <!-- Product Breakdown Table -->
             <div class="section">
                 <div class="section-header">
-                    <div class="section-title">Platform Breakdown</div>
+                    <div class="section-title">Product Breakdown</div>
                     <div class="section-actions">
                         <button class="btn">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/></svg>
@@ -864,14 +864,14 @@
                 <div class="table-container">
                     <div class="table-header-bar">
                         <div>
-                            <span class="table-title">All Platforms</span>
-                            <span class="table-count">20 platforms</span>
+                            <span class="table-title">All Products</span>
+                            <span class="table-count">15 products</span>
                         </div>
                     </div>
                     <table>
                         <thead>
                             <tr>
-                                <th>Platform</th>
+                                <th>Product</th>
                                 <th>Budget</th>
                                 <th>Actual (YTD)</th>
                                 <th>Reforecast</th>
@@ -884,18 +884,18 @@
                             <tr>
                                 <td>
                                     <div class="platform-cell">
-                                        <span class="platform-icon" style="background: #0d8050;">CA</span>
-                                        Core AI Squad
+                                        <span class="platform-icon" style="background: #0d8050;">PA</span>
+                                        Product Alpha
                                     </div>
                                 </td>
-                                <td class="currency">$580,000</td>
-                                <td class="currency">$142,800</td>
-                                <td class="currency">$565,000</td>
-                                <td><span class="variance-positive">+$12,200</span></td>
+                                <td class="currency">$520,000</td>
+                                <td class="currency">$128,400</td>
+                                <td class="currency">$505,000</td>
+                                <td><span class="variance-positive">+$11,000</span></td>
                                 <td>
                                     <div style="display: flex; align-items: center; gap: 8px;">
-                                        <div class="progress-bar"><div class="progress-fill green" style="width: 24.6%;"></div></div>
-                                        <span style="font-size: 12px; color: var(--coda-text-secondary);">24.6%</span>
+                                        <div class="progress-bar"><div class="progress-fill green" style="width: 24.7%;"></div></div>
+                                        <span style="font-size: 12px; color: var(--coda-text-secondary);">24.7%</span>
                                     </div>
                                 </td>
                                 <td><span class="status-badge status-on-track">● On Track</span></td>
@@ -903,14 +903,14 @@
                             <tr>
                                 <td>
                                     <div class="platform-cell">
-                                        <span class="platform-icon" style="background: #2965cc;">CW</span>
-                                        Commercial Workbench
+                                        <span class="platform-icon" style="background: #2965cc;">PB</span>
+                                        Product Beta
                                     </div>
                                 </td>
-                                <td class="currency">$420,000</td>
-                                <td class="currency">$98,500</td>
-                                <td class="currency">$410,000</td>
-                                <td><span class="variance-positive">+$8,400</span></td>
+                                <td class="currency">$380,000</td>
+                                <td class="currency">$89,200</td>
+                                <td class="currency">$370,000</td>
+                                <td><span class="variance-positive">+$7,500</span></td>
                                 <td>
                                     <div style="display: flex; align-items: center; gap: 8px;">
                                         <div class="progress-bar"><div class="progress-fill green" style="width: 23.5%;"></div></div>
@@ -922,14 +922,14 @@
                             <tr>
                                 <td>
                                     <div class="platform-cell">
-                                        <span class="platform-icon" style="background: #7c3aed;">DE</span>
-                                        Deedi (PE)
+                                        <span class="platform-icon" style="background: #7c3aed;">PG</span>
+                                        Product Gamma
                                     </div>
                                 </td>
-                                <td class="currency">$350,000</td>
-                                <td class="currency">$112,400</td>
-                                <td class="currency">$380,000</td>
-                                <td><span class="variance-negative">-$18,200</span></td>
+                                <td class="currency">$315,000</td>
+                                <td class="currency">$101,200</td>
+                                <td class="currency">$342,000</td>
+                                <td><span class="variance-negative">-$16,400</span></td>
                                 <td>
                                     <div style="display: flex; align-items: center; gap: 8px;">
                                         <div class="progress-bar"><div class="progress-fill yellow" style="width: 32.1%;"></div></div>
@@ -941,18 +941,18 @@
                             <tr>
                                 <td>
                                     <div class="platform-cell">
-                                        <span class="platform-icon" style="background: #bf7326;">JA</span>
-                                        Janus
+                                        <span class="platform-icon" style="background: #bf7326;">PD</span>
+                                        Product Delta
                                     </div>
                                 </td>
-                                <td class="currency">$290,000</td>
-                                <td class="currency">$68,200</td>
-                                <td class="currency">$285,000</td>
-                                <td><span class="variance-positive">+$3,100</span></td>
+                                <td class="currency">$260,000</td>
+                                <td class="currency">$61,400</td>
+                                <td class="currency">$255,000</td>
+                                <td><span class="variance-positive">+$2,800</span></td>
                                 <td>
                                     <div style="display: flex; align-items: center; gap: 8px;">
-                                        <div class="progress-bar"><div class="progress-fill green" style="width: 23.5%;"></div></div>
-                                        <span style="font-size: 12px; color: var(--coda-text-secondary);">23.5%</span>
+                                        <div class="progress-bar"><div class="progress-fill green" style="width: 23.6%;"></div></div>
+                                        <span style="font-size: 12px; color: var(--coda-text-secondary);">23.6%</span>
                                     </div>
                                 </td>
                                 <td><span class="status-badge status-on-track">● On Track</span></td>
@@ -960,14 +960,14 @@
                             <tr>
                                 <td>
                                     <div class="platform-cell">
-                                        <span class="platform-icon" style="background: #c23030;">PA</span>
-                                        Partnerships
+                                        <span class="platform-icon" style="background: #c23030;">PE</span>
+                                        Product Epsilon
                                     </div>
                                 </td>
-                                <td class="currency">$180,000</td>
-                                <td class="currency">$72,800</td>
-                                <td class="currency">$195,000</td>
-                                <td><span class="variance-negative">-$12,400</span></td>
+                                <td class="currency">$162,000</td>
+                                <td class="currency">$65,500</td>
+                                <td class="currency">$175,000</td>
+                                <td><span class="variance-negative">-$11,200</span></td>
                                 <td>
                                     <div style="display: flex; align-items: center; gap: 8px;">
                                         <div class="progress-bar"><div class="progress-fill red" style="width: 40.4%;"></div></div>
@@ -991,7 +991,7 @@
                     <div class="table-header-bar">
                         <div>
                             <span class="table-title">GL Account Summary</span>
-                            <span class="table-count">Mapped from SAP</span>
+                            <span class="table-count">Mapped from ERP</span>
                         </div>
                     </div>
                     <table>
@@ -1007,44 +1007,44 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td style="font-family: monospace; font-weight: 500;">560000</td>
-                                <td>S&W - Other</td>
+                                <td style="font-family: monospace; font-weight: 500;">510000</td>
+                                <td>Labor - FTE</td>
                                 <td>Salaries & Wages</td>
-                                <td class="currency">$1,850,000</td>
-                                <td class="currency">$412,500</td>
-                                <td><span class="variance-positive">+$49,800</span></td>
+                                <td class="currency">$1,650,000</td>
+                                <td class="currency">$371,000</td>
+                                <td><span class="variance-positive">+$44,500</span></td>
                             </tr>
                             <tr>
-                                <td style="font-family: monospace; font-weight: 500;">587000</td>
-                                <td>Computer Exp</td>
+                                <td style="font-family: monospace; font-weight: 500;">540000</td>
+                                <td>IT Services</td>
                                 <td>Technology</td>
-                                <td class="currency">$680,000</td>
-                                <td class="currency">$168,200</td>
-                                <td><span class="variance-positive">+$1,800</span></td>
+                                <td class="currency">$615,000</td>
+                                <td class="currency">$151,400</td>
+                                <td><span class="variance-positive">+$1,600</span></td>
                             </tr>
                             <tr>
-                                <td style="font-family: monospace; font-weight: 500;">589000</td>
-                                <td>Marketing</td>
+                                <td style="font-family: monospace; font-weight: 500;">550000</td>
+                                <td>Marketing & Comm</td>
                                 <td>Marketing & BD</td>
-                                <td class="currency">$240,000</td>
-                                <td class="currency">$82,400</td>
-                                <td><span class="variance-negative">-$22,400</span></td>
+                                <td class="currency">$215,000</td>
+                                <td class="currency">$74,200</td>
+                                <td><span class="variance-negative">-$20,100</span></td>
                             </tr>
                             <tr>
-                                <td style="font-family: monospace; font-weight: 500;">665000</td>
-                                <td>Travel</td>
+                                <td style="font-family: monospace; font-weight: 500;">570000</td>
+                                <td>Travel & Exp</td>
                                 <td>Travel & Entertainment</td>
-                                <td class="currency">$320,000</td>
-                                <td class="currency">$94,600</td>
-                                <td><span class="variance-positive">+$25,400</span></td>
+                                <td class="currency">$285,000</td>
+                                <td class="currency">$85,100</td>
+                                <td><span class="variance-positive">+$22,800</span></td>
                             </tr>
                             <tr>
-                                <td style="font-family: monospace; font-weight: 500;">667000</td>
-                                <td>Due Member</td>
+                                <td style="font-family: monospace; font-weight: 500;">580000</td>
+                                <td>Consulting</td>
                                 <td>Professional Fees</td>
-                                <td class="currency">$890,000</td>
-                                <td class="currency">$134,300</td>
-                                <td><span class="variance-neutral">-$11,550</span></td>
+                                <td class="currency">$800,000</td>
+                                <td class="currency">$120,900</td>
+                                <td><span class="variance-neutral">-$10,400</span></td>
                             </tr>
                         </tbody>
                     </table>
