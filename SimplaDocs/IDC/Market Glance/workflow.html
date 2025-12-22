@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Market Glance Workflow</title>
+    <title>Market Glance Workflow - Enhanced</title>
     <style>
         * {
             margin: 0;
@@ -25,8 +25,15 @@
         h1 {
             text-align: center;
             color: #1a1a1a;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             font-size: 32px;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
         }
         
         .legend {
@@ -78,12 +85,62 @@
             border-color: #c62828;
         }
         
+        /* Request Management Layer */
+        .request-layer {
+            background: linear-gradient(135deg, #1e88e5 0%, #1565c0 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .request-layer h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        
+        .request-layer p {
+            font-size: 14px;
+            line-height: 1.6;
+            opacity: 0.95;
+        }
+        
         .workflow-container {
             background: white;
             padding: 40px;
             border-radius: 12px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             overflow-x: auto;
+            position: relative;
+        }
+        
+        /* Trigger Callout */
+        .trigger-callout {
+            position: relative;
+            background: linear-gradient(135deg, #43a047 0%, #2e7d32 100%);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .trigger-callout::before {
+            content: "🎯";
+            font-size: 24px;
+            margin-right: 10px;
+        }
+        
+        .trigger-callout h3 {
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+        
+        .trigger-callout p {
+            font-size: 14px;
+            line-height: 1.6;
+            opacity: 0.95;
         }
         
         .phase-header {
@@ -159,6 +216,17 @@
             font-size: 11px;
             font-weight: 600;
             color: #856404;
+        }
+        
+        .node-note {
+            display: block;
+            margin-top: 8px;
+            padding: 6px 10px;
+            background: #e3f2fd;
+            border-radius: 6px;
+            font-size: 11px;
+            color: #1565c0;
+            font-style: italic;
         }
         
         /* Process Node (Rectangle) */
@@ -360,6 +428,29 @@
             text-align: center;
         }
         
+        /* Approval Flexibility Note */
+        .approval-note {
+            background: #e8f5e9;
+            border-left: 4px solid #388e3c;
+            padding: 12px 16px;
+            margin: 20px auto;
+            max-width: 600px;
+            border-radius: 6px;
+        }
+        
+        .approval-note-title {
+            font-weight: 600;
+            font-size: 13px;
+            color: #2e7d32;
+            margin-bottom: 6px;
+        }
+        
+        .approval-note-content {
+            font-size: 12px;
+            color: #555;
+            line-height: 1.5;
+        }
+        
         @media (max-width: 1024px) {
             .branch-container {
                 flex-direction: column;
@@ -380,6 +471,7 @@
 <body>
     <div class="container">
         <h1>Market Glance End-to-End Workflow</h1>
+        <div class="subtitle">Comprehensive process flow with Request Management layer and system dependencies</div>
         
         <div class="legend">
             <div class="legend-item">
@@ -402,14 +494,20 @@
 
         <div class="workflow-container">
             
+            <!-- TRIGGER -->
+            <div class="trigger-callout">
+                <h3>SYSTEM TRIGGER: Research Schedule</h3>
+                <p><strong>Research Schedule</strong> is the master calendar driving the entire Market Glance process. It tracks ~7,067 active documents and triggers Market Glance creation either by: (1) <strong>Due date approaching</strong> for scheduled quarterly publications, or (2) <strong>Major market change detected</strong> requiring immediate analysis. The system automatically notifies the assigned analyst when a Market Glance is triggered.</p>
+            </div>
+            
             <!-- PHASE 1: PLANNING -->
             <div class="phase-header">PHASE 1: PLANNING - Determine Market & Hierarchy</div>
             
             <div class="flow-node">
                 <div class="node automation-node">
-                    <div class="node-title">System Trigger</div>
-                    <div class="node-desc">Research Schedule triggers due date OR major market change</div>
-                    <div class="node-owner">Automated</div>
+                    <div class="node-title">System Notification</div>
+                    <div class="node-desc">Research Schedule triggers Market Glance due date OR major market change</div>
+                    <div class="node-owner">Automated via Research Schedule</div>
                 </div>
             </div>
             
@@ -418,7 +516,17 @@
             <div class="flow-node">
                 <div class="node process-node">
                     <div class="node-title">Identify Market Structure</div>
-                    <div class="node-desc">Define major market, segments (min 3), sub-segments (≤50 words each, sentence case)</div>
+                    <div class="node-desc">Define major market, segments (min 3), sub-segments</div>
+                    <div class="node-owner">Analyst</div>
+                </div>
+            </div>
+            
+            <div class="connector"></div>
+            
+            <div class="flow-node">
+                <div class="node process-node">
+                    <div class="node-title">Develop Segment Definitions</div>
+                    <div class="node-desc">Create detailed definitions for each segment/sub-segment (≤50 words each, sentence case, scalable across regions)</div>
                     <div class="node-owner">Analyst</div>
                 </div>
             </div>
@@ -449,7 +557,7 @@
                     
                     <div class="node approval-node">
                         <div class="node-title">Domain Lead Approval</div>
-                        <div class="node-desc">Review taxonomy proposal. Check cross-domain implications.</div>
+                        <div class="node-desc">Review taxonomy proposal. If cross-domain implications exist, confer with other domain leads.</div>
                         <div class="node-owner">Domain Lead</div>
                         <div class="node-sla">SLA: 3 days</div>
                     </div>
@@ -458,8 +566,8 @@
                     
                     <div class="node pain-node">
                         <div class="node-title">Feedback Loop</div>
-                        <div class="node-desc">If rejected, analyst revises and resubmits</div>
-                        <div class="pain-indicator">Can cycle indefinitely. No revision limits. Bottleneck when domain leads unavailable.</div>
+                        <div class="node-desc">If rejected, analyst revises and resubmits. Analyst can choose to terminate if unviable.</div>
+                        <div class="pain-indicator">Can cycle indefinitely. No revision limits. Bottleneck when domain leads unavailable or cross-domain coordination complex.</div>
                     </div>
                 </div>
                 
@@ -525,18 +633,15 @@
                 </div>
             </div>
             
-            <!-- PHASE 2: RESEARCH -->
-            <div class="phase-header">PHASE 2: RESEARCH - Identify Vendors & Create Content</div>
-            
-            <div class="connector"></div>
-            
-            <div class="flow-node">
-                <div class="node process-node">
-                    <div class="node-title">Develop Segment Definitions</div>
-                    <div class="node-desc">Create detailed definitions for each segment/sub-segment</div>
-                    <div class="node-owner">Analyst</div>
+            <div class="approval-note">
+                <div class="approval-note-title">📌 Note: Approval Workflow Flexibility</div>
+                <div class="approval-note-content">
+                    Approvals throughout this workflow can be configured as: <strong>Sequential</strong> (one after another), <strong>Concurrent</strong> (parallel approvals, any one passes), or <strong>Dependent</strong> (conditional based on prior approval). The Request Management system handles these configurations automatically.
                 </div>
             </div>
+            
+            <!-- PHASE 2: RESEARCH -->
+            <div class="phase-header">PHASE 2: RESEARCH - Identify Vendors & Create Content</div>
             
             <div class="connector"></div>
             
@@ -553,9 +658,10 @@
             
             <div class="flow-node">
                 <div class="node process-node">
-                    <div class="node-title">Notify CoE Market Researchers</div>
-                    <div class="node-desc">Provide supporting docs, example vendors (new) or existing list (refresh)</div>
+                    <div class="node-title">Notify Market Researchers</div>
+                    <div class="node-desc">Provide supporting docs + example vendors (new) OR existing list (refresh) to Center of Excellence</div>
                     <div class="node-owner">Analyst</div>
+                    <span class="node-note">CoE = Center of Excellence (Market Researchers)</span>
                 </div>
             </div>
             
@@ -564,8 +670,8 @@
             <div class="flow-node">
                 <div class="node process-node">
                     <div class="node-title">Develop Vendor List</div>
-                    <div class="node-desc">Research vendors, check M&As, add new entries. Max 150 vendors total.</div>
-                    <div class="node-owner">CoE/Market Researcher</div>
+                    <div class="node-desc">Research vendors, check M&As, add new entries. Constraints: max 150 vendors total, minimum per sub-segment, no duplicates.</div>
+                    <div class="node-owner">Market Researcher (CoE)</div>
                 </div>
             </div>
             
@@ -574,7 +680,7 @@
             <div class="flow-node">
                 <div class="node pain-node approval-node">
                     <div class="node-title">Analyst Vendor Approval</div>
-                    <div class="node-desc">Review and approve vendor list with markups</div>
+                    <div class="node-desc">Review and approve vendor list with markups and feedback</div>
                     <div class="node-owner">Analyst</div>
                     <div class="pain-indicator">No clear acceptance criteria. Can cycle multiple times causing delays.</div>
                 </div>
@@ -594,32 +700,32 @@
                         <div class="node process-node">
                             <div class="node-title">Create PPT Template</div>
                             <div class="node-desc">Generate empty PowerPoint file</div>
-                            <div class="node-owner">CoE</div>
+                            <div class="node-owner">Market Researcher (CoE)</div>
                         </div>
                         
                         <div class="connector-short"></div>
                         
                         <div class="node process-node">
-                            <div class="node-title">Send to Publishing</div>
-                            <div class="node-desc">Vendor list + PPT → Graphics Team</div>
-                            <div class="node-owner">CoE → Publishing</div>
+                            <div class="node-title">Send to Publishing Graphics</div>
+                            <div class="node-desc">Vendor list + empty PPT → Graphics Team</div>
+                            <div class="node-owner">Market Researcher → Publishing</div>
                         </div>
                         
                         <div class="connector-short"></div>
                         
                         <div class="node pain-node automation-node">
                             <div class="node-title">Auto-Generate Logo Slide</div>
-                            <div class="node-desc">Python script + BrandFetch API retrieves logos, generates PNG alphabetically</div>
-                            <div class="node-owner">Publishing/Python</div>
-                            <div class="pain-indicator">Intermittent rendering issues. Sometimes wrong logo type or domain mismatch.</div>
+                            <div class="node-desc">Python script + BrandFetch API retrieves logos (word brands preferred), generates PNG alphabetically within segments</div>
+                            <div class="node-owner">Publishing Graphics/Python</div>
+                            <div class="pain-indicator">Intermittent rendering issues. Sometimes wrong logo type or domain mismatch requiring manual override.</div>
                         </div>
                         
                         <div class="connector-short"></div>
                         
                         <div class="node approval-node">
-                            <div class="node-title">Logo Slide Ready</div>
-                            <div class="node-desc">Notify analyst for review</div>
-                            <div class="node-owner">Publishing</div>
+                            <div class="node-title">Logo Slide Complete</div>
+                            <div class="node-desc">Notify analyst that logo slide is ready for review</div>
+                            <div class="node-owner">Publishing Graphics</div>
                         </div>
                     </div>
                     
@@ -629,32 +735,32 @@
                         
                         <div class="node process-node">
                             <div class="node-title">Draft IDC Take</div>
-                            <div class="node-desc">3-5 bullets: disruptions, M&As, emerging segments + 1-2 data points</div>
-                            <div class="node-owner">CoE</div>
+                            <div class="node-desc">Develop 3-5 bullets: market disruptions, M&As, emerging/consolidating segments, companies under threat + reference 1-2 IDC market data points</div>
+                            <div class="node-owner">Market Researcher (CoE)</div>
                         </div>
                         
                         <div class="connector-short"></div>
                         
                         <div class="node process-node">
                             <div class="node-title">Draft Abstract</div>
-                            <div class="node-desc">Create 80-word summary</div>
-                            <div class="node-owner">CoE</div>
+                            <div class="node-desc">Create exactly 80-word summary</div>
+                            <div class="node-owner">Market Researcher (CoE)</div>
                         </div>
                         
                         <div class="connector-short"></div>
                         
-                        <div class="node pain-node automation-node">
-                            <div class="node-title">AI Content Assist (Planned)</div>
-                            <div class="node-desc">ChatGPT API for drafting & style compliance</div>
-                            <div class="node-owner">AI/ChatGPT</div>
-                            <div class="pain-indicator">Implementation undefined. No guardrails or review process documented.</div>
+                        <div class="node automation-node">
+                            <div class="node-title">AI Content Assist</div>
+                            <div class="node-desc">Enterprise ChatGPT API integrated in Coda for quality control, style guide compliance, and editing assistance</div>
+                            <div class="node-owner">Enterprise ChatGPT API</div>
+                            <span class="node-note">Approved for integration - Dec 12 meeting</span>
                         </div>
                         
                         <div class="connector-short"></div>
                         
                         <div class="node process-node">
                             <div class="node-title">Analyst Finalizes</div>
-                            <div class="node-desc">Review, refine, and approve all content</div>
+                            <div class="node-desc">Review, refine, apply market expertise, and approve all content</div>
                             <div class="node-owner">Analyst</div>
                         </div>
                     </div>
@@ -679,7 +785,7 @@
             <div class="flow-node">
                 <div class="node process-node">
                     <div class="node-title">Submit to Editorial</div>
-                    <div class="node-desc">Share complete package with Editorial/Publishing team</div>
+                    <div class="node-desc">Share complete package with Editorial Publishing Team</div>
                     <div class="node-owner">Analyst</div>
                 </div>
             </div>
@@ -689,8 +795,8 @@
             <div class="flow-node">
                 <div class="node automation-node">
                     <div class="node-title">Create Pub4.0 Work Case</div>
-                    <div class="node-desc">Generate work case in publishing system</div>
-                    <div class="node-owner">Publishing</div>
+                    <div class="node-desc">Generate work case in publishing management system</div>
+                    <div class="node-owner">Editorial Publishing</div>
                 </div>
             </div>
             
@@ -699,9 +805,9 @@
             <div class="flow-node">
                 <div class="node pain-node approval-node">
                     <div class="node-title">Editorial Review</div>
-                    <div class="node-desc">Check style guide, grammar, formatting, completeness, pre-publish checklist</div>
-                    <div class="node-owner">Editorial</div>
-                    <div class="pain-indicator">Checklist sync issues between doc and Research Calendar. No revision limits or dispute resolution.</div>
+                    <div class="node-desc">Check style guide, grammar, formatting, content completeness, pre-publish checklist</div>
+                    <div class="node-owner">Editorial Publishing</div>
+                    <div class="pain-indicator">Checklist sync issues between Market Glance doc and Research Calendar. No revision limits or dispute resolution procedures.</div>
                 </div>
             </div>
             
@@ -720,8 +826,9 @@
             <div class="flow-node">
                 <div class="node process-node">
                     <div class="node-title">Classify & Convert</div>
-                    <div class="node-desc">Apply IDC taxonomy, convert to web format</div>
-                    <div class="node-owner">Publishing</div>
+                    <div class="node-desc">Apply IDC taxonomy classification and wrap PowerPoint in Word document for metadata. Convert to XML for web.</div>
+                    <div class="node-owner">Editorial Publishing</div>
+                    <span class="node-note">Pub4.0 handles Word docs; PowerPoint included as downloadable attachment</span>
                 </div>
             </div>
             
@@ -729,9 +836,10 @@
             
             <div class="flow-node">
                 <div class="node automation-node">
-                    <div class="node-title">Publish to IDC.com</div>
-                    <div class="node-desc">Upload to website. Pub4.0 auto-notifies Analyst & Market Researcher</div>
-                    <div class="node-owner">Publishing System</div>
+                    <div class="node-title">Upload to IDC.com</div>
+                    <div class="node-desc">Publish Market Glance to website. Pub4.0 auto-notifies Analyst & Market Researcher.</div>
+                    <div class="node-owner">Pub4.0 Publishing System</div>
+                    <span class="node-note">Manual process currently - automation being explored</span>
                 </div>
             </div>
             
@@ -743,7 +851,7 @@
             <div class="flow-node">
                 <div class="node process-node">
                     <div class="node-title">Change Request Received</div>
-                    <div class="node-desc">Client requests update (via CSM/Sales) OR quarterly reminder triggers</div>
+                    <div class="node-desc">Client requests update (via CSM/Sales) OR quarterly reminder from Research Schedule triggers review</div>
                     <div class="node-owner">Client → Analyst</div>
                 </div>
             </div>
@@ -765,8 +873,8 @@
                     <div class="branch-label optional">IF SUBSTANTIAL</div>
                     
                     <div class="node approval-node">
-                        <div class="node-title">Domain Lead Approval</div>
-                        <div class="node-desc">Approve or reject change request</div>
+                        <div class="node-title">Domain Lead Change Approval</div>
+                        <div class="node-desc">Review and approve/reject substantial changes affecting market positioning</div>
                         <div class="node-owner">Domain Lead</div>
                     </div>
                 </div>
@@ -775,7 +883,7 @@
                     <div class="branch-label">IF MINOR</div>
                     <div class="node process-node" style="opacity: 0.3; pointer-events: none;">
                         <div class="node-title">Skip Escalation</div>
-                        <div class="node-desc">Proceed directly to update</div>
+                        <div class="node-desc">Proceed directly to updates (corrections, typos, etc.)</div>
                     </div>
                 </div>
             </div>
@@ -785,9 +893,9 @@
             <div class="flow-node">
                 <div class="node pain-node process-node">
                     <div class="node-title">Update & Republish</div>
-                    <div class="node-desc">Make changes (must update both logo slide and IDC Take minimum), route through editorial, republish</div>
-                    <div class="node-owner">Analyst → Publishing</div>
-                    <div class="pain-indicator">No version control or change tracking. Unclear what changed, when, and why.</div>
+                    <div class="node-desc">Make changes (minimum: update both logo slide AND IDC Take), route through editorial, republish to IDC.com</div>
+                    <div class="node-owner">Analyst → Editorial → Publishing</div>
+                    <div class="pain-indicator">No version control or change tracking. Unclear what changed, when, and why across quarterly updates.</div>
                 </div>
             </div>
             
@@ -796,8 +904,8 @@
             <div class="flow-node">
                 <div class="node automation-node">
                     <div class="node-title">Updated Market Glance Published</div>
-                    <div class="node-desc">New version live on IDC.com</div>
-                    <div class="node-owner">System</div>
+                    <div class="node-desc">New version live on IDC.com. Research Schedule updated with publication date.</div>
+                    <div class="node-owner">Pub4.0 System</div>
                 </div>
             </div>
             
@@ -810,32 +918,32 @@
                 
                 <div class="node pain-node">
                     <div class="node-title">User Management Limitations</div>
-                    <div class="pain-indicator">Coda can't automate workspace users ↔ document people fields. Manual workarounds required. Can't detect overloaded/unavailable resources.</div>
+                    <div class="pain-indicator">Coda can't automate workspace users ↔ document people fields. Requires manual workarounds contradicting automation goals. Can't detect overloaded/unavailable resources affecting workload distribution.</div>
                 </div>
                 
                 <div class="node pain-node">
                     <div class="node-title">Notification System Unresolved</div>
-                    <div class="pain-indicator">MS Teams/Outlook integration unclear. Build custom vs. use limited Coda packs? SLA alerts at risk.</div>
+                    <div class="pain-indicator">MS Teams/Outlook integration challenges. Unclear: build custom solutions vs. use limited-functionality Coda packs? SLA notifications and escalations at risk without reliable delivery.</div>
                 </div>
                 
                 <div class="node pain-node">
                     <div class="node-title">External Integration Dependencies</div>
-                    <div class="pain-indicator">Heavy reliance on BrandFetch, Pub4.0, Active Directory, ChatGPT. No error handling documented.</div>
+                    <div class="pain-indicator">Heavy reliance on: BrandFetch API, Pub4.0, Active Directory synchronization, Enterprise ChatGPT API. No documented error handling for failed integrations or data sync conflicts.</div>
                 </div>
                 
                 <div class="node pain-node">
                     <div class="node-title">Multiple Calendar Consolidation</div>
-                    <div class="pain-indicator">Research schedule + tracker/spending guides + custom calendars need merging into single source.</div>
+                    <div class="pain-indicator">Research Schedule + Tracker/Spending Guide Schedules + Custom Content Calendars need merging into single unified calendar. Data cleansing and normalization across 7,067+ documents required.</div>
                 </div>
                 
                 <div class="node pain-node">
                     <div class="node-title">Performance & Scalability Unknown</div>
-                    <div class="pain-indicator">200 users, 7,000+ docs. Single doc vs. distributed? Python script already has issues.</div>
+                    <div class="pain-indicator">Designed for 200 concurrent users tracking 7,000+ documents. Architectural uncertainty: single large doc vs. distributed approach? Python graphic generator already shows intermittent issues at prototype scale.</div>
                 </div>
                 
                 <div class="node pain-node">
-                    <div class="node-title">Aggressive Timeline</div>
-                    <div class="pain-indicator">End-of-January deadline. 22 hrs/week capacity. Connecting POCs risks technical debt.</div>
+                    <div class="node-title">Aggressive Timeline & Capacity</div>
+                    <div class="pain-indicator">End-of-January 2026 deadline with only 22 hrs/week development capacity (Erin + Hugh). Dec 12 decision: build clean vs. connect POCs. Risk of perpetuating prototype technical debt under timeline pressure.</div>
                 </div>
                 
             </div>
