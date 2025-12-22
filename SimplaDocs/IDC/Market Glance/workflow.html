@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Market Glance Workflow</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f8f9fa;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a1a1a;
+            margin-bottom: 20px;
+            font-size: 32px;
+        }
+        
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+        }
+        
+        .legend-shape {
+            width: 40px;
+            height: 30px;
+            border: 2px solid #333;
+        }
+        
+        .legend-shape.process {
+            border-radius: 6px;
+            background: #e3f2fd;
+        }
+        
+        .legend-shape.decision {
+            width: 35px;
+            height: 35px;
+            transform: rotate(45deg);
+            background: #fff9c4;
+        }
+        
+        .legend-shape.automation {
+            border-radius: 6px;
+            background: #f3e5f5;
+            border-style: dashed;
+        }
+        
+        .legend-shape.pain {
+            border-radius: 6px;
+            background: #ffebee;
+            border-color: #c62828;
+        }
+        
+        .workflow-container {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            overflow-x: auto;
+        }
+        
+        .phase-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            font-size: 20px;
+            font-weight: 600;
+            margin: 40px 0 30px 0;
+            text-align: center;
+        }
+        
+        .phase-header:first-of-type {
+            margin-top: 0;
+        }
+        
+        /* Flowchart Nodes */
+        .flow-node {
+            position: relative;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .node {
+            position: relative;
+            padding: 16px 24px;
+            min-width: 280px;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin: 20px 0;
+        }
+        
+        .node:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        .node-title {
+            font-weight: 600;
+            font-size: 15px;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+        
+        .node-desc {
+            font-size: 13px;
+            color: #555;
+            line-height: 1.5;
+        }
+        
+        .node-owner {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 4px 12px;
+            background: #e0e0e0;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 500;
+            color: #424242;
+        }
+        
+        .node-sla {
+            display: inline-block;
+            margin-top: 6px;
+            padding: 3px 10px;
+            background: #fff3cd;
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: 600;
+            color: #856404;
+        }
+        
+        /* Process Node (Rectangle) */
+        .process-node {
+            background: #e3f2fd;
+            border: 2px solid #1976d2;
+            border-radius: 8px;
+        }
+        
+        /* Decision Node (Diamond) */
+        .decision-node {
+            background: #fff9c4;
+            border: 2px solid #f57c00;
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+            min-width: 300px;
+            min-height: 180px;
+            padding: 40px 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .decision-node .node-content {
+            max-width: 200px;
+        }
+        
+        /* Automation Node (Dashed) */
+        .automation-node {
+            background: #f3e5f5;
+            border: 2px dashed #7b1fa2;
+            border-radius: 8px;
+        }
+        
+        /* Approval Node (Green) */
+        .approval-node {
+            background: #e8f5e9;
+            border: 2px solid #388e3c;
+            border-radius: 8px;
+        }
+        
+        /* Pain Point Node (Red) */
+        .pain-node {
+            background: #ffebee;
+            border: 2px solid #c62828;
+            border-radius: 8px;
+        }
+        
+        .pain-node .node-title::before {
+            content: "⚠️ ";
+        }
+        
+        .pain-indicator {
+            margin-top: 8px;
+            padding: 8px 12px;
+            background: #ffcdd2;
+            border-radius: 6px;
+            font-size: 12px;
+            color: #b71c1c;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+        
+        /* Connectors */
+        .connector {
+            width: 3px;
+            height: 40px;
+            background: #666;
+            margin: 0 auto;
+        }
+        
+        .connector-short {
+            height: 20px;
+        }
+        
+        .connector-label {
+            text-align: center;
+            font-size: 13px;
+            font-weight: 600;
+            color: #f57c00;
+            margin: 8px 0;
+            padding: 4px 12px;
+            background: #fff9c4;
+            border-radius: 12px;
+            display: inline-block;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        /* Branching Layout */
+        .branch-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 60px;
+            margin: 30px 0;
+            position: relative;
+        }
+        
+        .branch {
+            flex: 1;
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .branch-label {
+            background: #4caf50;
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        }
+        
+        .branch-label.no {
+            background: #f44336;
+        }
+        
+        .branch-label.optional {
+            background: #ff9800;
+        }
+        
+        /* Merge Point */
+        .merge-point {
+            width: 3px;
+            height: 60px;
+            background: #666;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .merge-point::before,
+        .merge-point::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 300px;
+            height: 3px;
+            background: #666;
+        }
+        
+        .merge-point::before {
+            right: 50%;
+        }
+        
+        .merge-point::after {
+            left: 50%;
+        }
+        
+        /* Parallel Workflows */
+        .parallel-container {
+            position: relative;
+            margin: 40px 0;
+            padding: 30px 20px 20px 20px;
+            background: #fafafa;
+            border: 2px dashed #9c27b0;
+            border-radius: 12px;
+        }
+        
+        .parallel-label {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #9c27b0;
+            color: white;
+            padding: 6px 20px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        }
+        
+        .parallel-tracks {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+        
+        .track {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .track-label {
+            background: #512da8;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            width: 100%;
+            text-align: center;
+        }
+        
+        @media (max-width: 1024px) {
+            .branch-container {
+                flex-direction: column;
+                gap: 30px;
+            }
+            
+            .merge-point::before,
+            .merge-point::after {
+                display: none;
+            }
+            
+            .parallel-tracks {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Market Glance End-to-End Workflow</h1>
+        
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-shape process"></div>
+                <span>Process/Activity</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-shape decision"></div>
+                <span>Decision Point</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-shape automation"></div>
+                <span>Automation</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-shape pain"></div>
+                <span>Pain Point</span>
+            </div>
+        </div>
+
+        <div class="workflow-container">
+            
+            <!-- PHASE 1: PLANNING -->
+            <div class="phase-header">PHASE 1: PLANNING - Determine Market & Hierarchy</div>
+            
+            <div class="flow-node">
+                <div class="node automation-node">
+                    <div class="node-title">System Trigger</div>
+                    <div class="node-desc">Research Schedule triggers due date OR major market change</div>
+                    <div class="node-owner">Automated</div>
+                </div>
+            </div>
+            
+            <div class="connector"></div>
+            
+            <div class="flow-node">
+                <div class="node process-node">
+                    <div class="node-title">Identify Market Structure</div>
+                    <div class="node-desc">Define major market, segments (min 3), sub-segments (≤50 words each, sentence case)</div>
+                    <div class="node-owner">Analyst</div>
+                </div>
+            </div>
+            
+            <div class="connector"></div>
+            
+            <div class="flow-node">
+                <div class="node decision-node">
+                    <div class="node-content">
+                        <div class="node-title">Taxonomy Exists?</div>
+                        <div class="node-owner">Analyst</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Branch: No Taxonomy -->
+            <div class="branch-container">
+                <div class="branch">
+                    <div class="branch-label no">NO - Create Taxonomy</div>
+                    
+                    <div class="node process-node">
+                        <div class="node-title">Draft Taxonomy</div>
+                        <div class="node-desc">Document proposed taxonomy changes and implications</div>
+                        <div class="node-owner">Analyst</div>
+                    </div>
+                    
+                    <div class="connector-short"></div>
+                    
+                    <div class="node approval-node">
+                        <div class="node-title">Domain Lead Approval</div>
+                        <div class="node-desc">Review taxonomy proposal. Check cross-domain implications.</div>
+                        <div class="node-owner">Domain Lead</div>
+                        <div class="node-sla">SLA: 3 days</div>
+                    </div>
+                    
+                    <div class="connector-short"></div>
+                    
+                    <div class="node pain-node">
+                        <div class="node-title">Feedback Loop</div>
+                        <div class="node-desc">If rejected, analyst revises and resubmits</div>
+                        <div class="pain-indicator">Can cycle indefinitely. No revision limits. Bottleneck when domain leads unavailable.</div>
+                    </div>
+                </div>
+                
+                <div class="branch">
+                    <div class="branch-label">YES - Skip to Next</div>
+                    <div class="node process-node" style="opacity: 0.3; pointer-events: none;">
+                        <div class="node-title">Taxonomy Verified</div>
+                        <div class="node-desc">Existing taxonomy aligns with structure</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="merge-point"></div>
+            
+            <div class="flow-node">
+                <div class="node decision-node pain-node">
+                    <div class="node-content">
+                        <div class="node-title">Peer Review Needed?</div>
+                        <div class="node-owner">Analyst</div>
+                        <div class="pain-indicator" style="margin-top: 12px;">No documented criteria</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Branch: Peer Review -->
+            <div class="branch-container">
+                <div class="branch">
+                    <div class="branch-label optional">IF YES</div>
+                    
+                    <div class="node approval-node">
+                        <div class="node-title">Peer Review</div>
+                        <div class="node-desc">Peer analyst reviews hierarchy and segments, provides feedback</div>
+                        <div class="node-owner">Peer Analyst</div>
+                        <div class="node-sla">SLA: 3 days</div>
+                    </div>
+                    
+                    <div class="connector-short"></div>
+                    
+                    <div class="node process-node">
+                        <div class="node-title">Incorporate Feedback</div>
+                        <div class="node-desc">Analyst revises based on peer comments</div>
+                        <div class="node-owner">Analyst</div>
+                    </div>
+                </div>
+                
+                <div class="branch">
+                    <div class="branch-label">IF NO</div>
+                    <div class="node process-node" style="opacity: 0.3; pointer-events: none;">
+                        <div class="node-title">Skip Peer Review</div>
+                        <div class="node-desc">Proceed directly to Domain Lead</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="merge-point"></div>
+            
+            <div class="flow-node">
+                <div class="node approval-node">
+                    <div class="node-title">Final Domain Lead Approval</div>
+                    <div class="node-desc">Domain Lead approves complete Market Glance proposal</div>
+                    <div class="node-owner">Domain Lead</div>
+                    <div class="node-sla">SLA: 3 days</div>
+                </div>
+            </div>
+            
+            <!-- PHASE 2: RESEARCH -->
+            <div class="phase-header">PHASE 2: RESEARCH - Identify Vendors & Create Content</div>
+            
+            <div class="connector"></div>
+            
+            <div class="flow-node">
+                <div class="node process-node">
+                    <div class="node-title">Develop Segment Definitions</div>
+                    <div class="node-desc">Create detailed definitions for each segment/sub-segment</div>
+                    <div class="node-owner">Analyst</div>
+                </div>
+            </div>
+            
+            <div class="connector"></div>
+            
+            <div class="flow-node">
+                <div class="node decision-node">
+                    <div class="node-content">
+                        <div class="node-title">New or Refresh?</div>
+                        <div class="node-owner">Analyst</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="connector-label">Provide vendor guidance</div>
+            
+            <div class="flow-node">
+                <div class="node process-node">
+                    <div class="node-title">Notify CoE Market Researchers</div>
+                    <div class="node-desc">Provide supporting docs, example vendors (new) or existing list (refresh)</div>
+                    <div class="node-owner">Analyst</div>
+                </div>
+            </div>
+            
+            <div class="connector"></div>
+            
+            <div class="flow-node">
+                <div class="node process-node">
+                    <div class="node-title">Develop Vendor List</div>
+                    <div class="node-desc">Research vendors, check M&As, add new entries. Max 150 vendors total.</div>
+                    <div class="node-owner">CoE/Market Researcher</div>
+                </div>
+            </div>
+            
+            <div class="connector"></div>
+            
+            <div class="flow-node">
+                <div class="node pain-node approval-node">
+                    <div class="node-title">Analyst Vendor Approval</div>
+                    <div class="node-desc">Review and approve vendor list with markups</div>
+                    <div class="node-owner">Analyst</div>
+                    <div class="pain-indicator">No clear acceptance criteria. Can cycle multiple times causing delays.</div>
+                </div>
+            </div>
+            
+            <div class="connector"></div>
+            
+            <!-- PARALLEL WORKFLOWS -->
+            <div class="parallel-container">
+                <div class="parallel-label">⚡ PARALLEL WORKFLOWS</div>
+                
+                <div class="parallel-tracks">
+                    <!-- LEFT TRACK: Logo Creation -->
+                    <div class="track">
+                        <div class="track-label">Track A: Logo Slide Creation</div>
+                        
+                        <div class="node process-node">
+                            <div class="node-title">Create PPT Template</div>
+                            <div class="node-desc">Generate empty PowerPoint file</div>
+                            <div class="node-owner">CoE</div>
+                        </div>
+                        
+                        <div class="connector-short"></div>
+                        
+                        <div class="node process-node">
+                            <div class="node-title">Send to Publishing</div>
+                            <div class="node-desc">Vendor list + PPT → Graphics Team</div>
+                            <div class="node-owner">CoE → Publishing</div>
+                        </div>
+                        
+                        <div class="connector-short"></div>
+                        
+                        <div class="node pain-node automation-node">
+                            <div class="node-title">Auto-Generate Logo Slide</div>
+                            <div class="node-desc">Python script + BrandFetch API retrieves logos, generates PNG alphabetically</div>
+                            <div class="node-owner">Publishing/Python</div>
+                            <div class="pain-indicator">Intermittent rendering issues. Sometimes wrong logo type or domain mismatch.</div>
+                        </div>
+                        
+                        <div class="connector-short"></div>
+                        
+                        <div class="node approval-node">
+                            <div class="node-title">Logo Slide Ready</div>
+                            <div class="node-desc">Notify analyst for review</div>
+                            <div class="node-owner">Publishing</div>
+                        </div>
+                    </div>
+                    
+                    <!-- RIGHT TRACK: Content Creation -->
+                    <div class="track">
+                        <div class="track-label">Track B: Content Development</div>
+                        
+                        <div class="node process-node">
+                            <div class="node-title">Draft IDC Take</div>
+                            <div class="node-desc">3-5 bullets: disruptions, M&As, emerging segments + 1-2 data points</div>
+                            <div class="node-owner">CoE</div>
+                        </div>
+                        
+                        <div class="connector-short"></div>
+                        
+                        <div class="node process-node">
+                            <div class="node-title">Draft Abstract</div>
+                            <div class="node-desc">Create 80-word summary</div>
+                            <div class="node-owner">CoE</div>
+                        </div>
+                        
+                        <div class="connector-short"></div>
+                        
+                        <div class="node pain-node automation-node">
+                            <div class="node-title">AI Content Assist (Planned)</div>
+                            <div class="node-desc">ChatGPT API for drafting & style compliance</div>
+                            <div class="node-owner">AI/ChatGPT</div>
+                            <div class="pain-indicator">Implementation undefined. No guardrails or review process documented.</div>
+                        </div>
+                        
+                        <div class="connector-short"></div>
+                        
+                        <div class="node process-node">
+                            <div class="node-title">Analyst Finalizes</div>
+                            <div class="node-desc">Review, refine, and approve all content</div>
+                            <div class="node-owner">Analyst</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="connector"></div>
+            
+            <div class="flow-node">
+                <div class="node process-node">
+                    <div class="node-title">Package Complete</div>
+                    <div class="node-desc">Assemble: IDC Take + Segment Definitions + Logo Slide + Abstract</div>
+                    <div class="node-owner">Analyst</div>
+                </div>
+            </div>
+            
+            <!-- PHASE 3 & 4: AUTHOR & PUBLISH -->
+            <div class="phase-header">PHASE 3 & 4: AUTHOR & PUBLISH - Editorial & Publication</div>
+            
+            <div class="connector"></div>
+            
+            <div class="flow-node">
+                <div class="node process-node">
+                    <div class="node-title">Submit to Editorial</div>
+                    <div class="node-desc">Share complete package with Editorial/Publishing team</div>
+                    <div class="node-owner">Analyst</div>
+                </div>
+            </div>
+            
+            <div class="connector"></div>
+            
+            <div class="flow-node">
+                <div class="node automation-node">
+                    <div class="node-title">Create Pub4.0 Work Case</div>
+                    <div class="node-desc">Generate work case in publishing system</div>
+                    <div class="node-owner">Publishing</div>
+                </div>
+            </div>
+            
+            <div class="connector"></div>
+            
+            <div class="flow-node">
+                <div class="node pain-node approval-node">
+                    <div class="node-title">Editorial Review</div>
+                    <div class="node-desc">Check style guide, grammar, formatting, completeness, pre-publish checklist</div>
+                    <div class="node-owner">Editorial</div>
+                    <div class="pain-indicator">Checklist sync issues between doc and Research Calendar. No revision limits or dispute resolution.</div>
+                </div>
+            </div>
+            
+            <div class="connector-label">If changes needed</div>
+            
+            <div class="flow-node">
+                <div class="node process-node">
+                    <div class="node-title">Analyst Revisions</div>
+                    <div class="node-desc">Make changes, return to Editorial (may cycle multiple times)</div>
+                    <div class="node-owner">Analyst</div>
+                </div>
+            </div>
+            
+            <div class="connector-label">When approved</div>
+            
+            <div class="flow-node">
+                <div class="node process-node">
+                    <div class="node-title">Classify & Convert</div>
+                    <div class="node-desc">Apply IDC taxonomy, convert to web format</div>
+                    <div class="node-owner">Publishing</div>
+                </div>
+            </div>
+            
+            <div class="connector"></div>
+            
+            <div class="flow-node">
+                <div class="node automation-node">
+                    <div class="node-title">Publish to IDC.com</div>
+                    <div class="node-desc">Upload to website. Pub4.0 auto-notifies Analyst & Market Researcher</div>
+                    <div class="node-owner">Publishing System</div>
+                </div>
+            </div>
+            
+            <!-- PHASE 5: SUPPORT -->
+            <div class="phase-header">PHASE 5: SUPPORT - Post-Publication Updates</div>
+            
+            <div class="connector"></div>
+            
+            <div class="flow-node">
+                <div class="node process-node">
+                    <div class="node-title">Change Request Received</div>
+                    <div class="node-desc">Client requests update (via CSM/Sales) OR quarterly reminder triggers</div>
+                    <div class="node-owner">Client → Analyst</div>
+                </div>
+            </div>
+            
+            <div class="connector"></div>
+            
+            <div class="flow-node">
+                <div class="node decision-node">
+                    <div class="node-content">
+                        <div class="node-title">Escalation Needed?</div>
+                        <div class="node-owner">Analyst</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Branch: Escalation -->
+            <div class="branch-container">
+                <div class="branch">
+                    <div class="branch-label optional">IF SUBSTANTIAL</div>
+                    
+                    <div class="node approval-node">
+                        <div class="node-title">Domain Lead Approval</div>
+                        <div class="node-desc">Approve or reject change request</div>
+                        <div class="node-owner">Domain Lead</div>
+                    </div>
+                </div>
+                
+                <div class="branch">
+                    <div class="branch-label">IF MINOR</div>
+                    <div class="node process-node" style="opacity: 0.3; pointer-events: none;">
+                        <div class="node-title">Skip Escalation</div>
+                        <div class="node-desc">Proceed directly to update</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="merge-point"></div>
+            
+            <div class="flow-node">
+                <div class="node pain-node process-node">
+                    <div class="node-title">Update & Republish</div>
+                    <div class="node-desc">Make changes (must update both logo slide and IDC Take minimum), route through editorial, republish</div>
+                    <div class="node-owner">Analyst → Publishing</div>
+                    <div class="pain-indicator">No version control or change tracking. Unclear what changed, when, and why.</div>
+                </div>
+            </div>
+            
+            <div class="connector"></div>
+            
+            <div class="flow-node">
+                <div class="node automation-node">
+                    <div class="node-title">Updated Market Glance Published</div>
+                    <div class="node-desc">New version live on IDC.com</div>
+                    <div class="node-owner">System</div>
+                </div>
+            </div>
+            
+            <!-- SYSTEM-WIDE ISSUES -->
+            <div class="phase-header" style="background: linear-gradient(135deg, #e53935 0%, #d32f2f 100%);">
+                ⚠️ CRITICAL SYSTEM-WIDE CHALLENGES
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px; margin-top: 30px;">
+                
+                <div class="node pain-node">
+                    <div class="node-title">User Management Limitations</div>
+                    <div class="pain-indicator">Coda can't automate workspace users ↔ document people fields. Manual workarounds required. Can't detect overloaded/unavailable resources.</div>
+                </div>
+                
+                <div class="node pain-node">
+                    <div class="node-title">Notification System Unresolved</div>
+                    <div class="pain-indicator">MS Teams/Outlook integration unclear. Build custom vs. use limited Coda packs? SLA alerts at risk.</div>
+                </div>
+                
+                <div class="node pain-node">
+                    <div class="node-title">External Integration Dependencies</div>
+                    <div class="pain-indicator">Heavy reliance on BrandFetch, Pub4.0, Active Directory, ChatGPT. No error handling documented.</div>
+                </div>
+                
+                <div class="node pain-node">
+                    <div class="node-title">Multiple Calendar Consolidation</div>
+                    <div class="pain-indicator">Research schedule + tracker/spending guides + custom calendars need merging into single source.</div>
+                </div>
+                
+                <div class="node pain-node">
+                    <div class="node-title">Performance & Scalability Unknown</div>
+                    <div class="pain-indicator">200 users, 7,000+ docs. Single doc vs. distributed? Python script already has issues.</div>
+                </div>
+                
+                <div class="node pain-node">
+                    <div class="node-title">Aggressive Timeline</div>
+                    <div class="pain-indicator">End-of-January deadline. 22 hrs/week capacity. Connecting POCs risks technical debt.</div>
+                </div>
+                
+            </div>
+            
+        </div>
+    </div>
+</body>
+</html>
