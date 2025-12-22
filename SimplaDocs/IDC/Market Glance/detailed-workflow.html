@@ -12,9 +12,8 @@
         }
         
         body {
-            font-family: 'Monaco', 'Courier New', monospace;
-            background: #1e1e1e;
-            color: #d4d4d4;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f8f9fa;
             padding: 40px 20px;
         }
         
@@ -25,81 +24,141 @@
         
         h1 {
             text-align: center;
-            color: #4ec9b0;
+            color: #1a1a1a;
             margin-bottom: 10px;
-            font-size: 28px;
-            font-weight: 700;
+            font-size: 32px;
         }
         
         .subtitle {
             text-align: center;
-            color: #858585;
+            color: #666;
             margin-bottom: 30px;
-            font-size: 13px;
+            font-size: 14px;
         }
         
         .legend {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
             margin-bottom: 40px;
-            background: #252526;
+            flex-wrap: wrap;
+            background: white;
             padding: 20px;
-            border-radius: 8px;
-            border: 1px solid #3e3e42;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
         
         .legend-item {
             display: flex;
             align-items: center;
             gap: 10px;
-            font-size: 12px;
-            color: #cccccc;
+            font-size: 14px;
         }
         
         .legend-shape {
+            width: 40px;
+            height: 30px;
+            border: 2px solid #333;
+        }
+        
+        .legend-shape.process {
+            border-radius: 6px;
+            background: #e3f2fd;
+        }
+        
+        .legend-shape.decision {
             width: 35px;
-            height: 25px;
-            border: 2px solid;
-            flex-shrink: 0;
+            height: 35px;
+            transform: rotate(45deg);
+            background: #fff9c4;
+        }
+        
+        .legend-shape.automation {
+            border-radius: 6px;
+            background: #f3e5f5;
+            border-style: dashed;
+        }
+        
+        .legend-shape.pain {
+            border-radius: 6px;
+            background: #ffebee;
+            border-color: #c62828;
+        }
+        
+        /* Request Management Layer */
+        .request-layer {
+            background: linear-gradient(135deg, #1e88e5 0%, #1565c0 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .request-layer h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        
+        .request-layer p {
+            font-size: 14px;
+            line-height: 1.6;
+            opacity: 0.95;
         }
         
         .workflow-container {
-            background: #252526;
+            background: white;
             padding: 40px;
-            border-radius: 8px;
-            border: 1px solid #3e3e42;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             overflow-x: auto;
+            position: relative;
+        }
+        
+        /* Trigger Callout */
+        .trigger-callout {
+            position: relative;
+            background: linear-gradient(135deg, #43a047 0%, #2e7d32 100%);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .trigger-callout::before {
+            content: "🎯";
+            font-size: 24px;
+            margin-right: 10px;
+        }
+        
+        .trigger-callout h3 {
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+        
+        .trigger-callout p {
+            font-size: 14px;
+            line-height: 1.6;
+            opacity: 0.95;
         }
         
         .phase-header {
-            background: linear-gradient(135deg, #0098ff 0%, #0078d4 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 12px 20px;
-            border-radius: 6px;
-            font-size: 16px;
+            padding: 15px 25px;
+            border-radius: 8px;
+            font-size: 20px;
             font-weight: 600;
-            margin: 40px 0 25px 0;
+            margin: 40px 0 30px 0;
             text-align: center;
-            border: 1px solid #005a9e;
         }
         
         .phase-header:first-of-type {
             margin-top: 0;
         }
         
-        .group-header {
-            background: #37373d;
-            color: #e5e5e5;
-            padding: 10px 16px;
-            border-radius: 4px;
-            font-size: 13px;
-            font-weight: 600;
-            margin: 25px 0 15px 0;
-            border-left: 4px solid #0098ff;
-        }
-        
-        /* Flow Nodes */
+        /* Flowchart Nodes */
         .flow-node {
             position: relative;
             margin: 0 auto;
@@ -110,234 +169,218 @@
         
         .node {
             position: relative;
-            padding: 14px 20px;
-            min-width: 320px;
-            max-width: 500px;
-            text-align: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.4);
-            transition: all 0.2s;
-            margin: 15px 0;
-            border: 2px solid;
+            padding: 20px 28px;
+            min-width: 400px;
+            max-width: 800px;
+            text-align: left;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin: 20px 0;
         }
         
         .node:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 16px rgba(0,0,0,0.6);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
         
-        .element-id {
-            position: absolute;
-            top: -12px;
-            left: 12px;
-            background: #0098ff;
-            color: white;
-            padding: 3px 10px;
-            border-radius: 4px;
-            font-size: 11px;
-            font-weight: 700;
-            font-family: 'Monaco', monospace;
-            border: 1px solid #005a9e;
+        .node-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(0,0,0,0.1);
         }
         
         .node-title {
-            font-weight: 600;
-            font-size: 13px;
-            margin-bottom: 8px;
-            line-height: 1.4;
+            font-weight: 700;
+            font-size: 16px;
+            color: #1a1a1a;
+            flex: 1;
         }
         
-        .node-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 8px;
+        .node-id {
+            display: inline-block;
+            padding: 4px 10px;
+            background: rgba(0,0,0,0.15);
+            border-radius: 6px;
             font-size: 11px;
-            gap: 10px;
-            flex-wrap: wrap;
+            font-weight: 600;
+            font-family: 'Courier New', monospace;
+            color: #1a1a1a;
+            margin-left: 12px;
         }
         
         .node-owner {
-            padding: 3px 10px;
-            background: #3e3e42;
-            border-radius: 10px;
-            font-weight: 500;
-            color: #cccccc;
-        }
-        
-        .node-type {
-            padding: 3px 10px;
-            border-radius: 10px;
+            display: inline-block;
+            margin-top: 8px;
+            padding: 5px 14px;
+            background: #e0e0e0;
+            border-radius: 12px;
+            font-size: 12px;
             font-weight: 600;
-            font-size: 10px;
-            text-transform: uppercase;
+            color: #424242;
         }
         
-        /* Element Type Specific Styles */
-        .initiating-event {
-            background: #1a3a1a;
-            border-color: #4ec9b0;
-            color: #4ec9b0;
+        .node-sla {
+            display: inline-block;
+            margin-left: 8px;
+            padding: 4px 10px;
+            background: #fff3cd;
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: 600;
+            color: #856404;
         }
         
-        .initiating-event .element-id {
-            background: #4ec9b0;
-            border-color: #3a9980;
-            color: #1e1e1e;
+        .node-steps {
+            margin-top: 12px;
         }
         
-        .initiating-event .node-type {
-            background: #4ec9b0;
-            color: #1e1e1e;
-        }
-        
-        .notify-node {
-            background: #2d2d30;
-            border-color: #dcdcaa;
-            color: #dcdcaa;
-        }
-        
-        .notify-node .element-id {
-            background: #dcdcaa;
-            border-color: #b8b877;
-            color: #1e1e1e;
-        }
-        
-        .notify-node .node-type {
-            background: #dcdcaa;
-            color: #1e1e1e;
-        }
-        
-        .notify-node .node-owner {
-            background: #3a3a2e;
-        }
-        
-        .request-node {
-            background: #2d2d30;
-            border-color: #ce9178;
-            color: #ce9178;
-        }
-        
-        .request-node .element-id {
-            background: #ce9178;
-            border-color: #a56f5a;
-            color: #1e1e1e;
-        }
-        
-        .request-node .node-type {
-            background: #ce9178;
-            color: #1e1e1e;
-        }
-        
-        .request-node .node-owner {
-            background: #3a2e2e;
-        }
-        
-        .activity-node {
-            background: #1e3a5f;
-            border-color: #569cd6;
-            color: #d4d4d4;
-        }
-        
-        .activity-node .element-id {
-            background: #569cd6;
-            border-color: #3a7dba;
-        }
-        
-        .activity-node .node-type {
-            background: #569cd6;
-            color: #1e1e1e;
-        }
-        
-        .decision-node {
-            background: #3a2d1e;
-            border-color: #d7ba7d;
-            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-            min-width: 320px;
-            min-height: 200px;
-            padding: 50px 70px;
+        .node-step {
+            margin: 8px 0;
+            padding: 8px 12px;
+            background: rgba(0,0,0,0.03);
+            border-radius: 6px;
+            font-size: 13px;
+            line-height: 1.5;
+            color: #333;
             display: flex;
-            align-items: center;
-            justify-content: center;
+            align-items: flex-start;
         }
         
-        .decision-node .node-content {
-            max-width: 220px;
+        .step-id {
+            display: inline-block;
+            min-width: 45px;
+            padding: 2px 8px;
+            background: rgba(0,0,0,0.1);
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            font-family: 'Courier New', monospace;
+            margin-right: 10px;
+            flex-shrink: 0;
         }
         
-        .decision-node .element-id {
-            background: #d7ba7d;
-            border-color: #b89a5f;
-            color: #1e1e1e;
+        .step-type {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 600;
+            margin-right: 8px;
+            flex-shrink: 0;
         }
         
-        .decision-node .node-type {
-            background: #d7ba7d;
-            color: #1e1e1e;
+        .step-type.decision {
+            background: #fff9c4;
+            color: #f57c00;
         }
         
-        .decision-node .node-title {
-            color: #d7ba7d;
+        .step-type.activity {
+            background: #e3f2fd;
+            color: #1976d2;
         }
         
-        .begin-node {
-            background: #1a3a2d;
-            border-color: #4ec9b0;
-            border-style: dashed;
-            color: #4ec9b0;
+        .step-type.notify {
+            background: #e8f5e9;
+            color: #388e3c;
         }
         
-        .begin-node .element-id {
-            background: #4ec9b0;
-            border-color: #3a9980;
-            color: #1e1e1e;
+        .step-type.request {
+            background: #f3e5f5;
+            color: #7b1fa2;
         }
         
-        .begin-node .node-type {
-            background: #4ec9b0;
-            color: #1e1e1e;
+        .step-type.initiating {
+            background: #ffe0b2;
+            color: #e65100;
         }
         
-        .completion-node {
-            background: #2d3a1e;
-            border-color: #b5cea8;
-            border-style: dashed;
-            color: #b5cea8;
+        .step-type.begin, .step-type.completion, .step-type.end {
+            background: #cfd8dc;
+            color: #455a64;
         }
         
-        .completion-node .element-id {
-            background: #b5cea8;
-            border-color: #94a87a;
-            color: #1e1e1e;
+        .step-content {
+            flex: 1;
         }
         
-        .completion-node .node-type {
-            background: #b5cea8;
-            color: #1e1e1e;
+        .step-owner {
+            font-weight: 600;
+            color: #1565c0;
         }
         
-        .end-node {
-            background: #3a1e1e;
-            border-color: #f48771;
-            color: #f48771;
-            border-width: 3px;
+        .step-branches {
+            margin-top: 6px;
+            padding-top: 6px;
+            border-top: 1px dashed rgba(0,0,0,0.2);
+            font-size: 12px;
+            color: #666;
         }
         
-        .end-node .element-id {
-            background: #f48771;
-            border-color: #d16b55;
-            color: #1e1e1e;
+        /* Process Node (Rectangle) */
+        .process-node {
+            background: #e3f2fd;
+            border: 2px solid #1976d2;
+            border-radius: 8px;
         }
         
-        .end-node .node-type {
-            background: #f48771;
-            color: #1e1e1e;
+        /* Decision Node (Diamond) */
+        .decision-node {
+            background: #fff9c4;
+            border: 3px solid #f57c00;
+            border-radius: 8px;
+        }
+        
+        .decision-node .node-title::before {
+            content: "◆ ";
+            color: #f57c00;
+            font-size: 18px;
+        }
+        
+        /* Automation Node (Dashed) */
+        .automation-node {
+            background: #f3e5f5;
+            border: 2px dashed #7b1fa2;
+            border-radius: 8px;
+        }
+        
+        /* Approval Node (Green) */
+        .approval-node {
+            background: #e8f5e9;
+            border: 2px solid #388e3c;
+            border-radius: 8px;
+        }
+        
+        /* Pain Point Node (Red) */
+        .pain-node {
+            background: #ffebee;
+            border: 3px solid #c62828;
+            border-radius: 8px;
+        }
+        
+        .pain-node .node-title::before {
+            content: "⚠️ ";
+        }
+        
+        .pain-indicator {
+            margin-top: 12px;
+            padding: 10px 14px;
+            background: #ffcdd2;
+            border-radius: 6px;
+            border-left: 4px solid #c62828;
+            font-size: 13px;
+            color: #b71c1c;
+            font-weight: 500;
+            line-height: 1.5;
         }
         
         /* Connectors */
         .connector {
             width: 3px;
-            height: 35px;
-            background: #6e6e6e;
+            height: 40px;
+            background: #666;
             margin: 0 auto;
         }
         
@@ -345,55 +388,63 @@
             height: 20px;
         }
         
-        .connector-long {
-            height: 50px;
+        .connector-label {
+            text-align: center;
+            font-size: 13px;
+            font-weight: 600;
+            color: #f57c00;
+            margin: 8px 0;
+            padding: 4px 12px;
+            background: #fff9c4;
+            border-radius: 12px;
+            display: inline-block;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
         }
         
-        /* Branch Container */
+        /* Branching Layout */
         .branch-container {
             display: flex;
             justify-content: center;
             align-items: flex-start;
-            gap: 80px;
+            gap: 60px;
             margin: 30px 0;
             position: relative;
         }
         
         .branch {
             flex: 1;
-            max-width: 500px;
+            max-width: 700px;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
         
         .branch-label {
-            padding: 6px 18px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.4);
-            border: 1px solid;
-        }
-        
-        .branch-label.yes {
-            background: #107c10;
+            background: #4caf50;
             color: white;
-            border-color: #0d5e0d;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
         }
         
         .branch-label.no {
-            background: #e81123;
-            color: white;
-            border-color: #b5000f;
+            background: #f44336;
+        }
+        
+        .branch-label.optional {
+            background: #ff9800;
         }
         
         /* Merge Point */
         .merge-point {
             width: 3px;
             height: 60px;
-            background: #6e6e6e;
+            background: #666;
             margin: 0 auto;
             position: relative;
         }
@@ -403,9 +454,9 @@
             content: '';
             position: absolute;
             top: 0;
-            width: 350px;
+            width: 300px;
             height: 3px;
-            background: #6e6e6e;
+            background: #666;
         }
         
         .merge-point::before {
@@ -416,14 +467,14 @@
             left: 50%;
         }
         
-        /* Parallel Container */
+        /* Parallel Workflows */
         .parallel-container {
             position: relative;
             margin: 40px 0;
             padding: 30px 20px 20px 20px;
-            background: #2d2d30;
-            border: 2px dashed #c586c0;
-            border-radius: 8px;
+            background: #fafafa;
+            border: 2px dashed #9c27b0;
+            border-radius: 12px;
         }
         
         .parallel-label {
@@ -431,20 +482,19 @@
             top: -15px;
             left: 50%;
             transform: translateX(-50%);
-            background: #c586c0;
+            background: #9c27b0;
             color: white;
             padding: 6px 20px;
             border-radius: 20px;
-            font-size: 12px;
-            font-weight: 700;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.4);
-            border: 1px solid #a065a0;
+            font-size: 13px;
+            font-weight: 600;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
         }
         
         .parallel-tracks {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 50px;
+            gap: 40px;
         }
         
         .track {
@@ -454,28 +504,15 @@
         }
         
         .track-label {
-            background: #8b5a9d;
+            background: #512da8;
             color: white;
-            padding: 8px 20px;
-            border-radius: 6px;
-            font-size: 13px;
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-size: 15px;
             font-weight: 600;
             margin-bottom: 20px;
             width: 100%;
             text-align: center;
-            border: 1px solid #6e4579;
-        }
-        
-        .notified-party {
-            display: inline-block;
-            margin-top: 6px;
-            padding: 3px 10px;
-            background: #1e3a5f;
-            border: 1px solid #569cd6;
-            border-radius: 10px;
-            font-size: 10px;
-            color: #569cd6;
-            font-weight: 600;
         }
         
         @media (max-width: 1400px) {
@@ -497,24 +534,70 @@
 </head>
 <body>
     <div class="container">
-        <h1>Market Glance Workflow - Developer Implementation Guide</h1>
-        <div class="subtitle">Complete process flow with all elements, IDs, and implementation details</div>
+        <h1>Market Glance End-to-End Workflow</h1>
+        <div class="subtitle">Developer Implementation Guide - Complete Process Flow with Element IDs</div>
+        
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-shape process"></div>
+                <span>Process/Activity</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-shape decision"></div>
+                <span>Decision Point</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-shape automation"></div>
+                <span>Automation</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-shape pain"></div>
+                <span>Pain Point</span>
+            </div>
+        </div>
+
+        <!-- Request Management Layer -->
+        <div class="request-layer">
+            <h3>📋 Underlying Request Management System</h3>
+            <p>Every workflow step generates requests that are tracked, assigned, and monitored for SLAs. The centralized Request Management system manages all handoffs between roles, monitors approval status, triggers notifications, and provides visibility into bottlenecks. Approval workflows can be configured as: <strong>Sequential/Cascading</strong> (Erin → Jon → Hugh), <strong>Concurrent</strong> (send to 3 people, any 1 approval passes), or <strong>Dependent</strong> (Approval 2 only after Approval 1 completes).</p>
+        </div>
 
         <div class="workflow-container">
             
-            <!-- PHASE 1: PLAN -->
-            <div class="phase-header">PHASE 1.0: DETERMINE MAJOR TECH AREAS & HIERARCHY (PLAN)</div>
+            <!-- TRIGGER -->
+            <div class="trigger-callout">
+                <h3>SYSTEM TRIGGER: Research Schedule</h3>
+                <p><strong>Research Schedule</strong> is the master calendar driving the entire Market Glance process. It tracks ~7,067 active documents and triggers Market Glance creation either by: (1) <strong>Due date approaching</strong> for scheduled quarterly publications, or (2) <strong>Major market change detected</strong> requiring immediate analysis.</p>
+            </div>
             
-            <!-- Group 1: Initiate Market Glance -->
-            <div class="group-header">Group 1: Initiate Market Glance</div>
+            <!-- PHASE 1: PLANNING -->
+            <div class="phase-header">PHASE 1: PLANNING - Determine Major Tech Areas & Hierarchy</div>
             
             <div class="flow-node">
-                <div class="node initiating-event">
-                    <div class="element-id">1.1</div>
-                    <div class="node-title">Major Market Change or New Analyst Coverage (trigger); Research Schedule (trigger)</div>
-                    <div class="node-meta">
-                        <span class="node-owner">Analyst</span>
-                        <span class="node-type">Initiating Event</span>
+                <div class="node automation-node">
+                    <div class="node-header">
+                        <div class="node-title">Initiate Market Glance</div>
+                        <div class="node-id">Group 1</div>
+                    </div>
+                    <div class="node-owner">Analyst</div>
+                    
+                    <div class="node-steps">
+                        <div class="node-step">
+                            <span class="step-id">1.1</span>
+                            <span class="step-type initiating">Initiating</span>
+                            <div class="step-content">
+                                <strong>Major Market Change or New Analyst Coverage (trigger); Research Schedule (trigger)</strong>
+                                <br><span class="step-owner">Analyst</span>
+                            </div>
+                        </div>
+                        <div class="node-step">
+                            <span class="step-id">1.2</span>
+                            <span class="step-type notify">Notify</span>
+                            <div class="step-content">
+                                <strong>Check when Market Glance schedule is due or a change warrants a Market Glance</strong>
+                                <br><span class="step-owner">Analyst</span> → Notifies: Analyst
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -522,314 +605,152 @@
             <div class="connector"></div>
             
             <div class="flow-node">
-                <div class="node notify-node">
-                    <div class="element-id">1.2</div>
-                    <div class="node-title">Check when Market Glance schedule is due or a change warrants a Market Glance</div>
-                    <div class="node-meta">
-                        <span class="node-owner">Analyst</span>
-                        <span class="node-type">Notify</span>
+                <div class="node process-node">
+                    <div class="node-header">
+                        <div class="node-title">Identify Market Structure & Develop Segment Definitions</div>
+                        <div class="node-id">Groups 2, 6</div>
                     </div>
-                    <div class="notified-party">→ Analyst</div>
+                    <div class="node-owner">Analyst</div>
+                    
+                    <div class="node-steps">
+                        <div class="node-step">
+                            <span class="step-id">1.3</span>
+                            <span class="step-type activity">Activity</span>
+                            <div class="step-content">
+                                <strong>Identify the Major Market, Segments and Sub-Segments for the Market Glance</strong>
+                                <br><span class="step-owner">Analyst</span>
+                            </div>
+                        </div>
+                        <div class="node-step">
+                            <span class="step-id">2.2</span>
+                            <span class="step-type activity">Activity</span>
+                            <div class="step-content">
+                                <strong>Develop definitions for each Market segment and sub-segments</strong>
+                                <br><span class="step-owner">Analyst</span>
+                                <br><em>≤50 words each, sentence case, scalable across regions</em>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            
-            <!-- Group 2: Identity Market, Segments and Sub-Segments -->
-            <div class="group-header">Group 2: Identity Market, Segments and Sub-Segments</div>
-            
-            <div class="connector"></div>
-            
-            <div class="flow-node">
-                <div class="node activity-node">
-                    <div class="element-id">1.3</div>
-                    <div class="node-title">Identify the Major Market, Segments and Sub-Segments for the Market Glance</div>
-                    <div class="node-meta">
-                        <span class="node-owner">Analyst</span>
-                        <span class="node-type">Activity</span>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Group 3: Taxonomy Alignment -->
-            <div class="group-header">Group 3: Taxonomy Alignment</div>
             
             <div class="connector"></div>
             
             <div class="flow-node">
                 <div class="node decision-node">
-                    <div class="node-content">
-                        <div class="element-id">1.4</div>
-                        <div class="node-title">Check if Taxonomy exists for the Market Glance</div>
-                        <div class="node-meta">
-                            <span class="node-owner">Analyst</span>
-                            <span class="node-type">Decision</span>
+                    <div class="node-header">
+                        <div class="node-title">Taxonomy Exists?</div>
+                        <div class="node-id">1.4</div>
+                    </div>
+                    <div class="node-owner">Analyst</div>
+                    
+                    <div class="node-steps">
+                        <div class="node-step">
+                            <span class="step-id">1.4</span>
+                            <span class="step-type decision">Decision</span>
+                            <div class="step-content">
+                                <strong>Check if Taxonomy exists for the Market Glance</strong>
+                                <br><span class="step-owner">Analyst</span>
+                                <div class="step-branches">→ YES: Skip to 1.12 (Verify alignment)<br>→ NO: Proceed to 1.5 (Create taxonomy)</div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             
+            <!-- Branch: No Taxonomy -->
             <div class="branch-container">
                 <div class="branch">
-                    <div class="branch-label yes">YES → 1.12</div>
-                    <div class="node activity-node" style="opacity: 0.4;">
-                        <div class="element-id">-</div>
-                        <div class="node-title">Skip to 1.12: Verify alignment</div>
-                    </div>
-                </div>
-                
-                <div class="branch">
-                    <div class="branch-label no">NO → 1.5</div>
+                    <div class="branch-label no">NO - Create Taxonomy</div>
                     
-                    <div class="node activity-node">
-                        <div class="element-id">1.5</div>
-                        <div class="node-title">Draft creation or updating Taxonomy and implications to support Market Glance</div>
-                        <div class="node-meta">
-                            <span class="node-owner">Analyst</span>
-                            <span class="node-type">Activity</span>
+                    <div class="node pain-node process-node">
+                        <div class="node-header">
+                            <div class="node-title">Draft & Approve Taxonomy</div>
+                            <div class="node-id">Group 3</div>
                         </div>
-                    </div>
-                    
-                    <div class="connector-short"></div>
-                    
-                    <div class="node request-node">
-                        <div class="element-id">1.6</div>
-                        <div class="node-title">Seek creation or update approval from Domain Lead</div>
-                        <div class="node-meta">
-                            <span class="node-owner">Analyst</span>
-                            <span class="node-type">Request</span>
-                        </div>
-                        <div class="notified-party">→ Domain Lead</div>
-                    </div>
-                    
-                    <div class="connector-short"></div>
-                    
-                    <div class="node decision-node">
-                        <div class="node-content">
-                            <div class="element-id">1.7</div>
-                            <div class="node-title">Review proposed Market Glance and Taxonomy creation and update implications</div>
-                            <div class="node-meta">
-                                <span class="node-owner">Domain Lead</span>
-                                <span class="node-type">Decision</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="connector-short"></div>
-                    
-                    <!-- Nested branch for 1.7 decision -->
-                    <div class="branch-container">
-                        <div class="branch">
-                            <div class="branch-label yes">YES → 1.8</div>
-                            
-                            <div class="node request-node">
-                                <div class="element-id">1.8</div>
-                                <div class="node-title">Provide feedback on Market Glance and Taxonomy creation and update</div>
-                                <div class="node-meta">
-                                    <span class="node-owner">Domain Lead</span>
-                                    <span class="node-type">Request</span>
-                                </div>
-                                <div class="notified-party">→ Analyst</div>
-                            </div>
-                            
-                            <div class="connector-short"></div>
-                            
-                            <div class="node activity-node">
-                                <div class="element-id">1.9</div>
-                                <div class="node-title">Receive feedback on Market Glance and Taxonomy creation and update</div>
-                                <div class="node-meta">
-                                    <span class="node-owner">Analyst</span>
-                                    <span class="node-type">Activity</span>
+                        <div class="node-owner">Analyst → Domain Lead</div>
+                        
+                        <div class="node-steps">
+                            <div class="node-step">
+                                <span class="step-id">1.5</span>
+                                <span class="step-type activity">Activity</span>
+                                <div class="step-content">
+                                    <strong>Draft creation or updating Taxonomy and implications to support Market Glance</strong>
+                                    <br><span class="step-owner">Analyst</span>
                                 </div>
                             </div>
-                            
-                            <div class="connector-short"></div>
-                            
-                            <div class="node request-node">
-                                <div class="element-id">1.11</div>
-                                <div class="node-title">Submit Taxonomy creation and/or updates</div>
-                                <div class="node-meta">
-                                    <span class="node-owner">Analyst</span>
-                                    <span class="node-type">Request</span>
+                            <div class="node-step">
+                                <span class="step-id">1.6</span>
+                                <span class="step-type request">Request</span>
+                                <div class="step-content">
+                                    <strong>Seek creation or update approval from Domain Lead</strong>
+                                    <br><span class="step-owner">Analyst</span> → Notifies: Domain Lead
+                                </div>
+                            </div>
+                            <div class="node-step">
+                                <span class="step-id">1.7</span>
+                                <span class="step-type decision">Decision</span>
+                                <div class="step-content">
+                                    <strong>Review proposed Market Glance and Taxonomy creation and update implications</strong>
+                                    <br><span class="step-owner">Domain Lead</span>
+                                    <div class="step-branches">→ YES: Proceed to 1.8 (Approved)<br>→ NO: Proceed to 1.24 (Feedback loop)</div>
                                 </div>
                             </div>
                         </div>
                         
-                        <div class="branch">
-                            <div class="branch-label no">NO → 1.24</div>
-                            
-                            <div class="node decision-node">
-                                <div class="node-content">
-                                    <div class="element-id">1.24</div>
-                                    <div class="node-title">Based on feedback, determine whether or not to continue with Market Glance</div>
-                                    <div class="node-meta">
-                                        <span class="node-owner">Analyst</span>
-                                        <span class="node-type">Decision</span>
-                                    </div>
+                        <div class="pain-indicator">
+                            <strong>Feedback Loop Risk:</strong> If rejected (1.24), process cycles back through 1.8 → 1.9 → 1.11 → 1.12. Can cycle indefinitely with no revision limits. Major bottleneck when domain leads unavailable or cross-domain coordination required.
+                        </div>
+                    </div>
+                    
+                    <div class="connector-short"></div>
+                    
+                    <div class="node process-node">
+                        <div class="node-header">
+                            <div class="node-title">Feedback & Revision Loop</div>
+                            <div class="node-id">1.8-1.11</div>
+                        </div>
+                        <div class="node-owner">Domain Lead ↔ Analyst</div>
+                        
+                        <div class="node-steps">
+                            <div class="node-step">
+                                <span class="step-id">1.8</span>
+                                <span class="step-type request">Request</span>
+                                <div class="step-content">
+                                    <strong>Provide feedback on Market Glance and Taxonomy creation and update</strong>
+                                    <br><span class="step-owner">Domain Lead</span> → Notifies: Analyst
                                 </div>
                             </div>
-                            
-                            <div class="connector-short"></div>
-                            
-                            <div style="display: flex; justify-content: center; gap: 40px;">
-                                <div style="text-align: center;">
-                                    <div style="color: #107c10; font-size: 11px; font-weight: 600; margin-bottom: 8px;">YES → 1.3</div>
-                                    <div style="color: #858585; font-size: 10px;">(Return to re-identify)</div>
+                            <div class="node-step">
+                                <span class="step-id">1.9</span>
+                                <span class="step-type activity">Activity</span>
+                                <div class="step-content">
+                                    <strong>Receive feedback on Market Glance and Taxonomy creation and update</strong>
+                                    <br><span class="step-owner">Analyst</span>
                                 </div>
-                                <div style="text-align: center;">
-                                    <div style="color: #e81123; font-size: 11px; font-weight: 600; margin-bottom: 8px;">NO → 1.25</div>
-                                    <div class="node end-node" style="margin-top: 10px; min-width: 150px;">
-                                        <div class="element-id">1.25</div>
-                                        <div class="node-title">End</div>
-                                        <div class="node-type">End</div>
-                                    </div>
+                            </div>
+                            <div class="node-step">
+                                <span class="step-id">1.11</span>
+                                <span class="step-type request">Request</span>
+                                <div class="step-content">
+                                    <strong>Submit Taxonomy creation and/or updates</strong>
+                                    <br><span class="step-owner">Analyst</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            
-            <div class="merge-point"></div>
-            
-            <div class="flow-node">
-                <div class="node decision-node">
-                    <div class="node-content">
-                        <div class="element-id">1.12</div>
-                        <div class="node-title">Verify Market Segments align with Taxonomy structure</div>
-                        <div class="node-meta">
-                            <span class="node-owner">Analyst</span>
-                            <span class="node-type">Decision</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Group 4: Peer Review -->
-            <div class="group-header">Group 4: Peer Review</div>
-            
-            <div class="connector"></div>
-            
-            <div class="flow-node">
-                <div class="node decision-node">
-                    <div class="node-content">
-                        <div class="element-id">1.13</div>
-                        <div class="node-title">Determine if Market Glance needs a Peer Review?</div>
-                        <div class="node-meta">
-                            <span class="node-owner">Analyst</span>
-                            <span class="node-type">Decision</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="branch-container">
-                <div class="branch">
-                    <div class="branch-label yes">YES → 1.14</div>
-                    
-                    <div class="node request-node">
-                        <div class="element-id">1.14</div>
-                        <div class="node-title">Send proposed Market Glance outline to Peer Analyst for feedback</div>
-                        <div class="node-meta">
-                            <span class="node-owner">Analyst</span>
-                            <span class="node-type">Request</span>
-                        </div>
-                        <div class="notified-party">→ Peer Analyst</div>
-                    </div>
-                    
-                    <div class="connector-short"></div>
-                    
-                    <div class="node activity-node">
-                        <div class="element-id">1.15</div>
-                        <div class="node-title">Receive Market Glance proposal to provide feedback</div>
-                        <div class="node-meta">
-                            <span class="node-owner">Peer Review</span>
-                            <span class="node-type">Activity</span>
-                        </div>
-                    </div>
-                    
-                    <div class="connector-short"></div>
-                    
-                    <div class="node request-node">
-                        <div class="element-id">1.16</div>
-                        <div class="node-title">Provide feedback to Market Glance proposal (i.e. hierarchy and segments)</div>
-                        <div class="node-meta">
-                            <span class="node-owner">Peer Review</span>
-                            <span class="node-type">Request</span>
-                        </div>
-                        <div class="notified-party">→ Analyst</div>
-                    </div>
-                    
-                    <div class="connector-short"></div>
-                    
-                    <div class="node activity-node">
-                        <div class="element-id">1.17</div>
-                        <div class="node-title">Receive feedback to Market Glance proposal (i.e. hierarchy and segments)</div>
-                        <div class="node-meta">
-                            <span class="node-owner">Analyst</span>
-                            <span class="node-type">Activity</span>
-                        </div>
-                    </div>
-                </div>
                 
                 <div class="branch">
-                    <div class="branch-label no">NO → 1.18</div>
-                    <div class="node activity-node" style="opacity: 0.4;">
-                        <div class="element-id">-</div>
-                        <div class="node-title">Skip to 1.18: Submit to Domain Leader</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="merge-point"></div>
-            
-            <!-- Group 5: Domain Lead Approval -->
-            <div class="group-header">Group 5: Domain Lead Approval</div>
-            
-            <div class="flow-node">
-                <div class="node activity-node">
-                    <div class="element-id">1.18</div>
-                    <div class="node-title">Submit Market Glance proposal to Domain Leader for approval</div>
-                    <div class="node-meta">
-                        <span class="node-owner">Analyst</span>
-                        <span class="node-type">Activity</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="connector"></div>
-            
-            <div class="flow-node">
-                <div class="node decision-node">
-                    <div class="node-content">
-                        <div class="element-id">1.19</div>
-                        <div class="node-title">Determine if Market Glance has cross-domain implications</div>
-                        <div class="node-meta">
-                            <span class="node-owner">Domain Lead</span>
-                            <span class="node-type">Decision</span>
+                    <div class="branch-label">YES - Skip Taxonomy Creation</div>
+                    <div class="node process-node" style="opacity: 0.4; pointer-events: none;">
+                        <div class="node-header">
+                            <div class="node-title">Taxonomy Verified</div>
+                            <div class="node-id">Skip 1.5-1.11</div>
                         </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="branch-container">
-                <div class="branch">
-                    <div class="branch-label yes">YES → 1.29</div>
-                    
-                    <div class="node notify-node">
-                        <div class="element-id">1.29</div>
-                        <div class="node-title">Confer with relevant Domain Leads for approval to proceed</div>
-                        <div class="node-meta">
-                            <span class="node-owner">Domain Lead</span>
-                            <span class="node-type">Notify</span>
+                        <div style="padding: 15px; text-align: center; font-style: italic; color: #666;">
+                            Existing taxonomy aligns with structure - proceed directly to verification
                         </div>
-                        <div class="notified-party">→ Domain Leads</div>
-                    </div>
-                </div>
-                
-                <div class="branch">
-                    <div class="branch-label no">NO → 1.21</div>
-                    <div class="node activity-node" style="opacity: 0.4;">
-                        <div class="element-id">-</div>
-                        <div class="node-title">Skip to 1.21: Review proposal</div>
                     </div>
                 </div>
             </div>
@@ -838,192 +759,295 @@
             
             <div class="flow-node">
                 <div class="node decision-node">
-                    <div class="node-content">
-                        <div class="element-id">1.21</div>
-                        <div class="node-title">Review proposed Market Glance</div>
-                        <div class="node-meta">
-                            <span class="node-owner">Domain Lead</span>
-                            <span class="node-type">Decision</span>
+                    <div class="node-header">
+                        <div class="node-title">Verify Taxonomy Alignment & Determine Peer Review</div>
+                        <div class="node-id">1.12-1.13</div>
+                    </div>
+                    <div class="node-owner">Analyst</div>
+                    
+                    <div class="node-steps">
+                        <div class="node-step">
+                            <span class="step-id">1.12</span>
+                            <span class="step-type decision">Decision</span>
+                            <div class="step-content">
+                                <strong>Verify Market Segments align with Taxonomy structure</strong>
+                                <br><span class="step-owner">Analyst</span>
+                                <div class="step-branches">→ YES: Proceed to 1.13<br>→ NO: Return to 1.3 (Re-identify structure)</div>
+                            </div>
+                        </div>
+                        <div class="node-step">
+                            <span class="step-id">1.13</span>
+                            <span class="step-type decision">Decision</span>
+                            <div class="step-content">
+                                <strong>Determine if Market Glance needs a Peer Review?</strong>
+                                <br><span class="step-owner">Analyst</span>
+                                <div class="step-branches">→ YES: Proceed to 1.14 (Peer review)<br>→ NO: Skip to 1.18 (Domain Lead approval)</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="pain-indicator">
+                        <strong>Pain Point:</strong> No documented criteria for when peer review is required vs. optional. Left as judgment call.
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Branch: Peer Review -->
+            <div class="branch-container">
+                <div class="branch">
+                    <div class="branch-label optional">IF YES - Peer Review</div>
+                    
+                    <div class="node approval-node">
+                        <div class="node-header">
+                            <div class="node-title">Peer Review Process</div>
+                            <div class="node-id">Group 4</div>
+                        </div>
+                        <div class="node-owner">Analyst ↔ Peer Analyst</div>
+                        <span class="node-sla">SLA: 3 days</span>
+                        
+                        <div class="node-steps">
+                            <div class="node-step">
+                                <span class="step-id">1.14</span>
+                                <span class="step-type request">Request</span>
+                                <div class="step-content">
+                                    <strong>Send proposed Market Glance outline to Peer Analyst for feedback</strong>
+                                    <br><span class="step-owner">Analyst</span> → Notifies: Peer Analyst
+                                </div>
+                            </div>
+                            <div class="node-step">
+                                <span class="step-id">1.15</span>
+                                <span class="step-type activity">Activity</span>
+                                <div class="step-content">
+                                    <strong>Receive Market Glance proposal to provide feedback</strong>
+                                    <br><span class="step-owner">Peer Review</span>
+                                </div>
+                            </div>
+                            <div class="node-step">
+                                <span class="step-id">1.16</span>
+                                <span class="step-type request">Request</span>
+                                <div class="step-content">
+                                    <strong>Provide feedback to Market Glance proposal (i.e. hierarchy and segments)</strong>
+                                    <br><span class="step-owner">Peer Review</span> → Notifies: Analyst
+                                </div>
+                            </div>
+                            <div class="node-step">
+                                <span class="step-id">1.17</span>
+                                <span class="step-type activity">Activity</span>
+                                <div class="step-content">
+                                    <strong>Receive feedback to Market Glance proposal (i.e. hierarchy and segments)</strong>
+                                    <br><span class="step-owner">Analyst</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="branch">
+                    <div class="branch-label">IF NO - Skip Peer Review</div>
+                    <div class="node process-node" style="opacity: 0.4; pointer-events: none;">
+                        <div class="node-header">
+                            <div class="node-title">Skip to Domain Lead</div>
+                            <div class="node-id">Skip 1.14-1.17</div>
+                        </div>
+                        <div style="padding: 15px; text-align: center; font-style: italic; color: #666;">
+                            Proceed directly to Domain Lead approval
                         </div>
                     </div>
                 </div>
             </div>
             
-            <div class="branch-container">
-                <div class="branch">
-                    <div class="branch-label yes">YES → 1.26</div>
+            <div class="merge-point"></div>
+            
+            <div class="flow-node">
+                <div class="node approval-node">
+                    <div class="node-header">
+                        <div class="node-title">Final Domain Lead Approval</div>
+                        <div class="node-id">Group 5</div>
+                    </div>
+                    <div class="node-owner">Analyst → Domain Lead</div>
+                    <span class="node-sla">SLA: 3 days</span>
                     
-                    <div class="node notify-node">
-                        <div class="element-id">1.26</div>
-                        <div class="node-title">Send approval to Analyst</div>
-                        <div class="node-meta">
-                            <span class="node-owner">Domain Lead</span>
-                            <span class="node-type">Notify</span>
+                    <div class="node-steps">
+                        <div class="node-step">
+                            <span class="step-id">1.18</span>
+                            <span class="step-type activity">Activity</span>
+                            <div class="step-content">
+                                <strong>Submit Market Glance proposal to Domain Leader for approval</strong>
+                                <br><span class="step-owner">Analyst</span>
+                            </div>
                         </div>
-                        <div class="notified-party">→ Analyst</div>
-                    </div>
-                    
-                    <div class="connector-short"></div>
-                    
-                    <div class="node activity-node">
-                        <div class="element-id">1.27</div>
-                        <div class="node-title">Receive Market Glance approval from Domain Lead</div>
-                        <div class="node-meta">
-                            <span class="node-owner">Analyst</span>
-                            <span class="node-type">Activity</span>
+                        <div class="node-step">
+                            <span class="step-id">1.19</span>
+                            <span class="step-type decision">Decision</span>
+                            <div class="step-content">
+                                <strong>Determine if Market Glance has cross-domain implications</strong>
+                                <br><span class="step-owner">Domain Lead</span>
+                                <div class="step-branches">→ YES: Proceed to 1.29 (Confer with other Domain Leads)<br>→ NO: Proceed to 1.21 (Review proposal)</div>
+                            </div>
                         </div>
-                    </div>
-                    
-                    <div class="connector-short"></div>
-                    
-                    <div class="node completion-node">
-                        <div class="element-id">1.28</div>
-                        <div class="node-title">Identified Major Market, Segments and Sub-Segments for the Market Glance</div>
-                        <div class="node-type">Completion</div>
-                    </div>
-                </div>
-                
-                <div class="branch">
-                    <div class="branch-label no">NO → 1.22</div>
-                    
-                    <div class="node notify-node">
-                        <div class="element-id">1.22</div>
-                        <div class="node-title">Send non-approved with feedback to Analyst</div>
-                        <div class="node-meta">
-                            <span class="node-owner">Domain Lead</span>
-                            <span class="node-type">Notify</span>
+                        <div class="node-step">
+                            <span class="step-id">1.29</span>
+                            <span class="step-type notify">Notify</span>
+                            <div class="step-content">
+                                <strong>Confer with relevant Domain Leads for approval to proceed</strong>
+                                <br><span class="step-owner">Domain Lead</span> → Notifies: Domain Leads
+                            </div>
                         </div>
-                        <div class="notified-party">→ Analyst</div>
-                    </div>
-                    
-                    <div class="connector-short"></div>
-                    
-                    <div class="node activity-node">
-                        <div class="element-id">1.23</div>
-                        <div class="node-title">Receive non-approved with feedback to Analyst</div>
-                        <div class="node-meta">
-                            <span class="node-owner">Analyst</span>
-                            <span class="node-type">Activity</span>
+                        <div class="node-step">
+                            <span class="step-id">1.21</span>
+                            <span class="step-type decision">Decision</span>
+                            <div class="step-content">
+                                <strong>Review proposed Market Glance</strong>
+                                <br><span class="step-owner">Domain Lead</span>
+                                <div class="step-branches">→ APPROVED: Proceed to 1.26<br>→ REJECTED: Proceed to 1.22</div>
+                            </div>
                         </div>
-                    </div>
-                    
-                    <div class="connector-short"></div>
-                    
-                    <div style="color: #858585; font-size: 11px; text-align: center; margin: 10px 0;">
-                        → Loops back to 1.24 (Continue decision)
+                        <div class="node-step">
+                            <span class="step-id">1.22</span>
+                            <span class="step-type notify">Notify</span>
+                            <div class="step-content">
+                                <strong>Send non-approved with feedback to Analyst</strong>
+                                <br><span class="step-owner">Domain Lead</span> → Notifies: Analyst
+                            </div>
+                        </div>
+                        <div class="node-step">
+                            <span class="step-id">1.23</span>
+                            <span class="step-type activity">Activity</span>
+                            <div class="step-content">
+                                <strong>Receive non-approved with feedback to Analyst</strong>
+                                <br><span class="step-owner">Analyst</span>
+                            </div>
+                        </div>
+                        <div class="node-step">
+                            <span class="step-id">1.24</span>
+                            <span class="step-type decision">Decision</span>
+                            <div class="step-content">
+                                <strong>Based on feedback, determine whether or not to continue with Market Glance</strong>
+                                <br><span class="step-owner">Analyst</span>
+                                <div class="step-branches">→ CONTINUE: Return to 1.3 (Re-identify structure)<br>→ TERMINATE: Proceed to 1.25 (End)</div>
+                            </div>
+                        </div>
+                        <div class="node-step">
+                            <span class="step-id">1.25</span>
+                            <span class="step-type end">End</span>
+                            <div class="step-content">
+                                <strong>End - Market Glance terminated</strong>
+                            </div>
+                        </div>
+                        <div class="node-step">
+                            <span class="step-id">1.26</span>
+                            <span class="step-type notify">Notify</span>
+                            <div class="step-content">
+                                <strong>Send approval to Analyst</strong>
+                                <br><span class="step-owner">Domain Lead</span> → Notifies: Analyst
+                            </div>
+                        </div>
+                        <div class="node-step">
+                            <span class="step-id">1.27</span>
+                            <span class="step-type activity">Activity</span>
+                            <div class="step-content">
+                                <strong>Receive Market Glance approval from Domain Lead</strong>
+                                <br><span class="step-owner">Analyst</span>
+                            </div>
+                        </div>
+                        <div class="node-step">
+                            <span class="step-id">1.28</span>
+                            <span class="step-type completion">Completion</span>
+                            <div class="step-content">
+                                <strong>Identified Major Market, Segments and Sub-Segments for the Market Glance</strong>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             
             <!-- PHASE 2: RESEARCH -->
-            <div class="phase-header">PHASE 2.0: IDENTIFY REPRESENTATIVE VENDORS (RESEARCH / ANALYZE DATA)</div>
-            
-            <!-- Group 6: Definitions -->
-            <div class="group-header">Group 6: Definitions for each Market Segment and Sub-Segment</div>
-            
-            <div class="connector-long"></div>
-            
-            <div class="flow-node">
-                <div class="node begin-node">
-                    <div class="element-id">2.1</div>
-                    <div class="node-title">Identified Major Market, Segments and Sub-Segments for the Market Glance</div>
-                    <div class="node-type">Begin</div>
-                </div>
-            </div>
+            <div class="phase-header">PHASE 2: RESEARCH - Identify Representative Vendors</div>
             
             <div class="connector"></div>
             
             <div class="flow-node">
-                <div class="node activity-node">
-                    <div class="element-id">2.2</div>
-                    <div class="node-title">Develop definitions for each Market segment and sub-segments</div>
-                    <div class="node-meta">
-                        <span class="node-owner">Analyst</span>
-                        <span class="node-type">Activity</span>
+                <div class="node decision-node process-node">
+                    <div class="node-header">
+                        <div class="node-title">Determine New or Refresh & Notify CoE</div>
+                        <div class="node-id">Group 7</div>
                     </div>
-                </div>
-            </div>
-            
-            <!-- Group 7: Send Vendor list and guidance -->
-            <div class="group-header">Group 7: Send Vendor list and guidance to Market Researchers</div>
-            
-            <div class="connector"></div>
-            
-            <div class="flow-node">
-                <div class="node decision-node">
-                    <div class="node-content">
-                        <div class="element-id">2.3</div>
-                        <div class="node-title">Determine if this a new or refresh Market Glance</div>
-                        <div class="node-meta">
-                            <span class="node-owner">Analyst</span>
-                            <span class="node-type">Decision</span>
+                    <div class="node-owner">Analyst</div>
+                    
+                    <div class="node-steps">
+                        <div class="node-step">
+                            <span class="step-id">2.3</span>
+                            <span class="step-type decision">Decision</span>
+                            <div class="step-content">
+                                <strong>Determine if this a new or refresh Market Glance</strong>
+                                <br><span class="step-owner">Analyst</span>
+                                <div class="step-branches">→ NEW: Proceed to 2.4 (Develop example vendors)<br>→ REFRESH: Skip to 2.5 (Use existing list)</div>
+                            </div>
+                        </div>
+                        <div class="node-step">
+                            <span class="step-id">2.4</span>
+                            <span class="step-type activity">Activity</span>
+                            <div class="step-content">
+                                <strong>Develop examples of vendors for each segment and guidance to help CoE develop Vendor List</strong>
+                                <br><span class="step-owner">Analyst</span>
+                            </div>
+                        </div>
+                        <div class="node-step">
+                            <span class="step-id">2.5</span>
+                            <span class="step-type notify">Notify</span>
+                            <div class="step-content">
+                                <strong>Notify CoE of Market Glance for Vendor Identification support and provide supporting information and documents of vendors that exist</strong>
+                                <br><span class="step-owner">Analyst</span> → Notifies: COE
+                            </div>
+                        </div>
+                        <div class="node-step">
+                            <span class="step-id">2.6</span>
+                            <span class="step-type activity">Activity</span>
+                            <div class="step-content">
+                                <strong>Receive notification from Analyst for Vendor Identification support and provide supporting information and documents of vendors</strong>
+                                <br><span class="step-owner">Market Researcher</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <div class="branch-container">
-                <div class="branch">
-                    <div class="branch-label yes">NEW → 2.4</div>
+            <div class="connector"></div>
+            
+            <div class="flow-node">
+                <div class="node process-node">
+                    <div class="node-header">
+                        <div class="node-title">Market Researcher Prepares Vendor List</div>
+                        <div class="node-id">Group 8</div>
+                    </div>
+                    <div class="node-owner">Market Researcher (CoE)</div>
                     
-                    <div class="node activity-node">
-                        <div class="element-id">2.4</div>
-                        <div class="node-title">Develop examples of vendors for each segment and guidance to help CoE develop Vendor List</div>
-                        <div class="node-meta">
-                            <span class="node-owner">Analyst</span>
-                            <span class="node-type">Activity</span>
+                    <div class="node-steps">
+                        <div class="node-step">
+                            <span class="step-id">2.7</span>
+                            <span class="step-type activity">Activity</span>
+                            <div class="step-content">
+                                <strong>Check existing list of vendors and make updates (i.e. business dissolve, M&As, etc.) as needed</strong>
+                                <br><span class="step-owner">COE</span>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                
-                <div class="branch">
-                    <div class="branch-label no">REFRESH → 2.5</div>
-                    <div class="node activity-node" style="opacity: 0.4;">
-                        <div class="element-id">-</div>
-                        <div class="node-title">Use existing vendor list</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="merge-point"></div>
-            
-            <div class="flow-node">
-                <div class="node notify-node">
-                    <div class="element-id">2.5</div>
-                    <div class="node-title">Notify CoE of Market Glance for Vendor Identification support and provide supporting information and documents of vendors that exist</div>
-                    <div class="node-meta">
-                        <span class="node-owner">Analyst</span>
-                        <span class="node-type">Notify</span>
-                    </div>
-                    <div class="notified-party">→ COE</div>
-                </div>
-            </div>
-            
-            <div class="connector"></div>
-            
-            <div class="flow-node">
-                <div class="node activity-node">
-                    <div class="element-id">2.6</div>
-                    <div class="node-title">Receive notification from Analyst for Vendor Identification suport and provide supporting information and documents of vendors</div>
-                    <div class="node-meta">
-                        <span class="node-owner">Market Researcher</span>
-                        <span class="node-type">Activity</span>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Group 8: MR prepares Vendor List -->
-            <div class="group-header">Group 8: MR prepares Vendor List</div>
-            
-            <div class="connector"></div>
-            
-            <div class="flow-node">
-                <div class="node activity-node">
-                    <div class="element-id">2.7</div>
-                    <div class="node-title">Check existing list of vendors and make updates (i.e. business dissolve, M&As, etc.) as needed</div>
-                    <div class="node-meta">
-                        <span class="node-owner">COE</span>
-                        <span class="node-type">Activity</span>
+                        <div class="node-step">
+                            <span class="step-id">2.8</span>
+                            <span class="step-type activity">Activity</span>
+                            <div class="step-content">
+                                <strong>Explore and research net new vendors to include in Market Glance</strong>
+                                <br><span class="step-owner">COE</span>
+                                <br><em>Constraints: max 150 vendors total, minimum per sub-segment, no duplicates</em>
+                            </div>
+                        </div>
+                        <div class="node-step">
+                            <span class="step-id">2.9</span>
+                            <span class="step-type notify">Notify</span>
+                            <div class="step-content">
+                                <strong>Recommend proposed list of vendors w/ markups and feedback</strong>
+                                <br><span class="step-owner">COE</span> → Notifies: Analyst
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1031,302 +1055,268 @@
             <div class="connector"></div>
             
             <div class="flow-node">
-                <div class="node activity-node">
-                    <div class="element-id">2.8</div>
-                    <div class="node-title">Explore and research net new vendors to include in Market Glance</div>
-                    <div class="node-meta">
-                        <span class="node-owner">COE</span>
-                        <span class="node-type">Activity</span>
+                <div class="node pain-node approval-node">
+                    <div class="node-header">
+                        <div class="node-title">Analyst Reviews and Approves Vendor List</div>
+                        <div class="node-id">Group 9</div>
+                    </div>
+                    <div class="node-owner">Analyst ↔ Market Researcher (CoE)</div>
+                    
+                    <div class="node-steps">
+                        <div class="node-step">
+                            <span class="step-id">2.11</span>
+                            <span class="step-type activity">Activity</span>
+                            <div class="step-content">
+                                <strong>Receive proposed list of vendors w/ markups and feedback</strong>
+                                <br><span class="step-owner">Analyst</span>
+                            </div>
+                        </div>
+                        <div class="node-step">
+                            <span class="step-id">2.12</span>
+                            <span class="step-type decision">Decision</span>
+                            <div class="step-content">
+                                <strong>Approve proposed list of vendors</strong>
+                                <br><span class="step-owner">Analyst</span>
+                                <div class="step-branches">→ APPROVED: Proceed to 2.15<br>→ REJECTED: Proceed to 2.13 (Send feedback)</div>
+                            </div>
+                        </div>
+                        <div class="node-step">
+                            <span class="step-id">2.13</span>
+                            <span class="step-type activity">Activity</span>
+                            <div class="step-content">
+                                <strong>Send feedback of non-approval of proposed vendor list to Market Researcher</strong>
+                                <br><span class="step-owner">Analyst</span>
+                            </div>
+                        </div>
+                        <div class="node-step">
+                            <span class="step-id">2.14</span>
+                            <span class="step-type activity">Activity</span>
+                            <div class="step-content">
+                                <strong>Receive feedback of non-approval of proposed vendor list from the Analyst</strong>
+                                <br><span class="step-owner">COE</span> → Returns to 2.7 (revise vendor list)
+                            </div>
+                        </div>
+                        <div class="node-step">
+                            <span class="step-id">2.15</span>
+                            <span class="step-type notify">Notify</span>
+                            <div class="step-content">
+                                <strong>Send notification of Market Glance vendor list approval</strong>
+                                <br><span class="step-owner">Analyst</span> → Notifies: COE
+                            </div>
+                        </div>
+                        <div class="node-step">
+                            <span class="step-id">2.16</span>
+                            <span class="step-type activity">Activity</span>
+                            <div class="step-content">
+                                <strong>Receive notification of Market Glance vendor list approval</strong>
+                                <br><span class="step-owner">COE</span>
+                                <br><em>Note: Next Task = "2.17 and 3.0 (Parallel steps)" - Logo creation AND content development begin simultaneously</em>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="pain-indicator">
+                        <strong>Pain Point:</strong> No clear acceptance criteria for vendor list approval. Feedback loop (2.13-2.14) can cycle multiple times, causing significant delays.
                     </div>
                 </div>
             </div>
             
             <div class="connector"></div>
-            
-            <div class="flow-node">
-                <div class="node notify-node">
-                    <div class="element-id">2.9</div>
-                    <div class="node-title">Recommend proposed list of vendors w/ markups and feedback</div>
-                    <div class="node-meta">
-                        <span class="node-owner">COE</span>
-                        <span class="node-type">Notify</span>
-                    </div>
-                    <div class="notified-party">→ Analyst</div>
-                </div>
-            </div>
-            
-            <!-- Group 9: Analyst reviews and approves -->
-            <div class="group-header">Group 9: Analyst reviews and approves the Vendor list</div>
-            
-            <div class="connector"></div>
-            
-            <div class="flow-node">
-                <div class="node activity-node">
-                    <div class="element-id">2.11</div>
-                    <div class="node-title">Receive proposed list of vendors w/ markups and feedback</div>
-                    <div class="node-meta">
-                        <span class="node-owner">Analyst</span>
-                        <span class="node-type">Activity</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="connector"></div>
-            
-            <div class="flow-node">
-                <div class="node decision-node">
-                    <div class="node-content">
-                        <div class="element-id">2.12</div>
-                        <div class="node-title">Approve proposed list of vendors</div>
-                        <div class="node-meta">
-                            <span class="node-owner">Analyst</span>
-                            <span class="node-type">Decision</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="branch-container">
-                <div class="branch">
-                    <div class="branch-label yes">YES → 2.15</div>
-                    
-                    <div class="node notify-node">
-                        <div class="element-id">2.15</div>
-                        <div class="node-title">Send notification of Market Glance vendor list approval</div>
-                        <div class="node-meta">
-                            <span class="node-owner">Analyst</span>
-                            <span class="node-type">Notify</span>
-                        </div>
-                        <div class="notified-party">→ COE</div>
-                    </div>
-                    
-                    <div class="connector-short"></div>
-                    
-                    <div class="node activity-node">
-                        <div class="element-id">2.16</div>
-                        <div class="node-title">Receive notification of Market Glance vendor list approval</div>
-                        <div class="node-meta">
-                            <span class="node-owner">COE</span>
-                            <span class="node-type">Activity</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="branch">
-                    <div class="branch-label no">NO → 2.13</div>
-                    
-                    <div class="node activity-node">
-                        <div class="element-id">2.13</div>
-                        <div class="node-title">Send feedback of non-approval of proposed vendor list to Market Researcher</div>
-                        <div class="node-meta">
-                            <span class="node-owner">Analyst</span>
-                            <span class="node-type">Activity</span>
-                        </div>
-                    </div>
-                    
-                    <div class="connector-short"></div>
-                    
-                    <div class="node activity-node">
-                        <div class="element-id">2.14</div>
-                        <div class="node-title">Receive feedback of non-approval of proposed vendor list from the Analyst</div>
-                        <div class="node-meta">
-                            <span class="node-owner">COE</span>
-                            <span class="node-type">Activity</span>
-                        </div>
-                    </div>
-                    
-                    <div class="connector-short"></div>
-                    
-                    <div style="color: #858585; font-size: 11px; text-align: center; margin: 10px 0;">
-                        → Loops back to 2.7 (Check existing list)
-                    </div>
-                </div>
-            </div>
             
             <!-- PARALLEL WORKFLOWS -->
             <div class="parallel-container">
-                <div class="parallel-label">⚡ PARALLEL WORKFLOWS (2.17 and 3.0)</div>
+                <div class="parallel-label">⚡ PARALLEL WORKFLOWS - Logo Creation & Content Development</div>
                 
                 <div class="parallel-tracks">
                     <!-- LEFT TRACK: Logo Creation -->
                     <div class="track">
-                        <div class="track-label">Track A: Logo Creation (Group 10)</div>
+                        <div class="track-label">Track A: Logo Slide Creation</div>
                         
-                        <div class="node activity-node">
-                            <div class="element-id">2.17</div>
-                            <div class="node-title">Create Empty Market Glance Report File (PPT file)</div>
-                            <div class="node-meta">
-                                <span class="node-owner">COE</span>
-                                <span class="node-type">Activity</span>
+                        <div class="node pain-node automation-node">
+                            <div class="node-header">
+                                <div class="node-title">Logo Creation & Generation</div>
+                                <div class="node-id">Group 10</div>
                             </div>
-                        </div>
-                        
-                        <div class="connector-short"></div>
-                        
-                        <div class="node activity-node">
-                            <div class="element-id">2.18</div>
-                            <div class="node-title">Send list of Market Glance vendors and Empty PPT file to Publishing Graphics Team</div>
-                            <div class="node-meta">
-                                <span class="node-owner">COE</span>
-                                <span class="node-type">Activity</span>
+                            <div class="node-owner">Market Researcher → Publishing Graphics</div>
+                            
+                            <div class="node-steps">
+                                <div class="node-step">
+                                    <span class="step-id">2.17</span>
+                                    <span class="step-type activity">Activity</span>
+                                    <div class="step-content">
+                                        <strong>Create Empty Market Glance Report File (PPT file)</strong>
+                                        <br><span class="step-owner">COE</span>
+                                    </div>
+                                </div>
+                                <div class="node-step">
+                                    <span class="step-id">2.18</span>
+                                    <span class="step-type activity">Activity</span>
+                                    <div class="step-content">
+                                        <strong>Send list of Market Glance vendors and Empty PPT file to Publishing Graphics Team</strong>
+                                        <br><span class="step-owner">COE</span>
+                                    </div>
+                                </div>
+                                <div class="node-step">
+                                    <span class="step-id">2.19</span>
+                                    <span class="step-type activity">Activity</span>
+                                    <div class="step-content">
+                                        <strong>Receive list of Market Glance vendors & Empty PPT File</strong>
+                                        <br><span class="step-owner">Publishing</span>
+                                    </div>
+                                </div>
+                                <div class="node-step">
+                                    <span class="step-id">2.21</span>
+                                    <span class="step-type activity">Activity</span>
+                                    <div class="step-content">
+                                        <strong>Retrieve logos of each vendor on the vendor list</strong>
+                                        <br><span class="step-owner">Publishing</span>
+                                        <br><em>Using Python script + BrandFetch API</em>
+                                    </div>
+                                </div>
+                                <div class="node-step">
+                                    <span class="step-id">2.22</span>
+                                    <span class="step-type activity">Activity</span>
+                                    <div class="step-content">
+                                        <strong>Develop Market Glance Logo Slide in the Empty PPT file</strong>
+                                        <br><span class="step-owner">Publishing</span>
+                                        <br><em>Generate PNG alphabetically within segments</em>
+                                    </div>
+                                </div>
+                                <div class="node-step">
+                                    <span class="step-id">2.23</span>
+                                    <span class="step-type request">Request</span>
+                                    <div class="step-content">
+                                        <strong>Send notification that Market Logo Slide has been developed to Analyst</strong>
+                                        <br><span class="step-owner">Publishing</span> → Notifies: Analyst
+                                    </div>
+                                </div>
+                                <div class="node-step">
+                                    <span class="step-id">2.24</span>
+                                    <span class="step-type completion">Completion</span>
+                                    <div class="step-content">
+                                        <strong>Identified Representative Vendors w/ logo slide</strong>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        
-                        <div class="connector-short"></div>
-                        
-                        <div class="node activity-node">
-                            <div class="element-id">2.19</div>
-                            <div class="node-title">Receive list of Market Glance vendors & Empty PPT File</div>
-                            <div class="node-meta">
-                                <span class="node-owner">Publishing</span>
-                                <span class="node-type">Activity</span>
+                            
+                            <div class="pain-indicator">
+                                <strong>Pain Point:</strong> Intermittent rendering issues with Python graphic generator. Sometimes retrieves wrong logo type or domain mismatches requiring manual override.
                             </div>
-                        </div>
-                        
-                        <div class="connector-short"></div>
-                        
-                        <div class="node activity-node">
-                            <div class="element-id">2.21</div>
-                            <div class="node-title">Retrieve logos of each vendor on the vendor list</div>
-                            <div class="node-meta">
-                                <span class="node-owner">Publishing</span>
-                                <span class="node-type">Activity</span>
-                            </div>
-                        </div>
-                        
-                        <div class="connector-short"></div>
-                        
-                        <div class="node activity-node">
-                            <div class="element-id">2.22</div>
-                            <div class="node-title">Develop Market Glance Logo Slide in the Empty PPT file</div>
-                            <div class="node-meta">
-                                <span class="node-owner">Publishing</span>
-                                <span class="node-type">Activity</span>
-                            </div>
-                        </div>
-                        
-                        <div class="connector-short"></div>
-                        
-                        <div class="node request-node">
-                            <div class="element-id">2.23</div>
-                            <div class="node-title">Send notification that Market Logo Slide has been developed to Analyst</div>
-                            <div class="node-meta">
-                                <span class="node-owner">Publishing</span>
-                                <span class="node-type">Request</span>
-                            </div>
-                            <div class="notified-party">→ Analyst</div>
-                        </div>
-                        
-                        <div class="connector-short"></div>
-                        
-                        <div class="node completion-node">
-                            <div class="element-id">2.24</div>
-                            <div class="node-title">Identified Representative Vendors w/ logo slide</div>
-                            <div class="node-type">Completion</div>
                         </div>
                     </div>
                     
                     <!-- RIGHT TRACK: Content Creation -->
                     <div class="track">
-                        <div class="track-label">Track B: Create Insights (Group 11)</div>
+                        <div class="track-label">Track B: Content Development</div>
                         
-                        <div class="node begin-node">
-                            <div class="element-id">3.0</div>
-                            <div class="node-title">3.0 Create Insights</div>
-                            <div class="node-meta">
-                                <span class="node-owner">COE</span>
-                                <span class="node-type">Begin</span>
+                        <div class="node process-node">
+                            <div class="node-header">
+                                <div class="node-title">Market Researcher Creates Content</div>
+                                <div class="node-id">Group 11</div>
+                            </div>
+                            <div class="node-owner">Market Researcher (CoE)</div>
+                            
+                            <div class="node-steps">
+                                <div class="node-step">
+                                    <span class="step-id">3.0</span>
+                                    <span class="step-type begin">Begin</span>
+                                    <div class="step-content">
+                                        <strong>3.0 Create Insights</strong>
+                                        <br><span class="step-owner">COE</span>
+                                    </div>
+                                </div>
+                                <div class="node-step">
+                                    <span class="step-id">3.2</span>
+                                    <span class="step-type activity">Activity</span>
+                                    <div class="step-content">
+                                        <strong>Develop draft "IDC Take" and abstract for the Market Glance inside the PPT</strong>
+                                        <br><span class="step-owner">Market Researcher</span>
+                                        <br><em>IDC Take: 3-5 bullets (disruptions, M&As, emerging/consolidating segments, companies under threat + 1-2 market data points)</em>
+                                        <br><em>Abstract: Exactly 80 words</em>
+                                    </div>
+                                </div>
+                                <div class="node-step">
+                                    <span class="step-id">3.3</span>
+                                    <span class="step-type notify">Notify</span>
+                                    <div class="step-content">
+                                        <strong>Send draft "IDC Take" and abstract for the Market Glance inside the PPT</strong>
+                                        <br><span class="step-owner">Market Researcher</span> → Notifies: Analyst
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         
                         <div class="connector-short"></div>
                         
-                        <div class="node begin-node">
-                            <div class="element-id">3.1</div>
-                            <div class="node-title">Approved Vendor List</div>
-                            <div class="node-type">Begin</div>
-                        </div>
-                        
-                        <div class="connector-short"></div>
-                        
-                        <div class="node activity-node">
-                            <div class="element-id">3.2</div>
-                            <div class="node-title">Develop draft "IDC Take" and abstract for the Market Glance inside the PPT</div>
-                            <div class="node-meta">
-                                <span class="node-owner">Market Researcher</span>
-                                <span class="node-type">Activity</span>
+                        <div class="node automation-node">
+                            <div class="node-header">
+                                <div class="node-title">AI Content Assistance</div>
+                                <div class="node-id">N/A</div>
+                            </div>
+                            <div class="node-owner">Enterprise ChatGPT API</div>
+                            
+                            <div style="padding: 12px; text-align: center; font-size: 13px; line-height: 1.6;">
+                                <strong>Enterprise ChatGPT API</strong> integrated directly into Coda for quality control, style guide compliance, and editing assistance.
+                                <br><em>Approved for integration - Dec 12 meeting</em>
                             </div>
                         </div>
                         
                         <div class="connector-short"></div>
                         
-                        <div class="node notify-node">
-                            <div class="element-id">3.3</div>
-                            <div class="node-title">Send draft "IDC Take" and abstract for the Market Glance inside the PPT</div>
-                            <div class="node-meta">
-                                <span class="node-owner">Market Researcher</span>
-                                <span class="node-type">Notify</span>
+                        <div class="node process-node">
+                            <div class="node-header">
+                                <div class="node-title">Analyst Finalizes Content</div>
+                                <div class="node-id">Group 12</div>
                             </div>
-                            <div class="notified-party">→ Analyst</div>
-                        </div>
-                        
-                        <div class="connector-short"></div>
-                        
-                        <div class="node activity-node">
-                            <div class="element-id">3.4</div>
-                            <div class="node-title">Receive draft "IDC Take" for the Market Glance and abstract</div>
-                            <div class="node-meta">
-                                <span class="node-owner">Analyst</span>
-                                <span class="node-type">Activity</span>
-                            </div>
-                        </div>
-                        
-                        <div class="connector-short"></div>
-                        
-                        <div class="node activity-node">
-                            <div class="element-id">3.5</div>
-                            <div class="node-title">Finalize "IDC Take" and abstract for the Market Glance</div>
-                            <div class="node-meta">
-                                <span class="node-owner">Analyst</span>
-                                <span class="node-type">Activity</span>
+                            <div class="node-owner">Analyst</div>
+                            
+                            <div class="node-steps">
+                                <div class="node-step">
+                                    <span class="step-id">3.4</span>
+                                    <span class="step-type activity">Activity</span>
+                                    <div class="step-content">
+                                        <strong>Receive draft "IDC Take" for the Market Glance and abstract</strong>
+                                        <br><span class="step-owner">Analyst</span>
+                                    </div>
+                                </div>
+                                <div class="node-step">
+                                    <span class="step-id">3.5</span>
+                                    <span class="step-type activity">Activity</span>
+                                    <div class="step-content">
+                                        <strong>Finalize "IDC Take" and abstract for the Market Glance</strong>
+                                        <br><span class="step-owner">Analyst</span>
+                                        <br><em>Review, refine, apply market expertise</em>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            
+            <div class="connector"></div>
             
             <!-- PHASE 3: AUTHOR -->
-            <div class="phase-header">PHASE 3.0: DEVELOP AND FINALIZE REPORT (AUTHOR)</div>
-            
-            <!-- Group 13: Analyst submits -->
-            <div class="group-header">Group 13: Analyst submits the report along with abstract</div>
-            
-            <div class="connector-long"></div>
+            <div class="phase-header">PHASE 3: AUTHOR - Submit Complete Package</div>
             
             <div class="flow-node">
-                <div class="node notify-node">
-                    <div class="element-id">3.6</div>
-                    <div class="node-title">Share "IDC Take" for the Market Glance, Segment definitions, Vendor Logo Slide and Abstract to Editor Publishing Team</div>
-                    <div class="node-meta">
-                        <span class="node-owner">Analyst</span>
-                        <span class="node-type">Notify</span>
+                <div class="node process-node">
+                    <div class="node-header">
+                        <div class="node-title">Submit Complete Package to Publishing</div>
+                        <div class="node-id">Group 13</div>
                     </div>
-                    <div class="notified-party">→ Production and Publishing</div>
-                </div>
-            </div>
-            
-            <!-- Group 14: Publishing team creates Work Case -->
-            <div class="group-header">Group 14: Publishing team creates a Work Case</div>
-            
-            <div class="connector"></div>
-            
-            <div class="flow-node">
-                <div class="node activity-node">
-                    <div class="element-id">3.7</div>
-                    <div class="node-title">Receive "IDC Take" for the Market Glance, Segment definitions, Logo Slide and Abstract</div>
-                    <div class="node-meta">
-                        <span class="node-owner">Production and Publishing</span>
-                        <span class="node-type">Activity</span>
+                    <div class="node-owner">Analyst → Production & Publishing</div>
+                    
+                    <div class="node-steps">
+                        <div class="node-step">
+                            <span class="step-id">3.6</span>
+                            <span class="step-type notify">Notify</span>
+                            <div class="step-content">
+                                <strong>Share "IDC Take" for the Market Glance, Segment definitions, Vendor Logo Slide and Abstract to Editor Publishing Team</strong>
+                                <br><span class="step-owner">Analyst</span> → Notifies: Production and Publishing
+                                <br><em>Complete bundle: IDC Take + Segment Definitions + Logo Slide + Abstract</em>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1334,469 +1324,366 @@
             <div class="connector"></div>
             
             <div class="flow-node">
-                <div class="node activity-node">
-                    <div class="element-id">3.8</div>
-                    <div class="node-title">Create the Work Case in PUB 4.0</div>
-                    <div class="node-meta">
-                        <span class="node-owner">Production and Publishing</span>
-                        <span class="node-type">Activity</span>
+                <div class="node automation-node">
+                    <div class="node-header">
+                        <div class="node-title">Create Pub4.0 Work Case</div>
+                        <div class="node-id">Group 14</div>
                     </div>
-                </div>
-            </div>
-            
-            <div class="connector"></div>
-            
-            <div class="flow-node">
-                <div class="node completion-node">
-                    <div class="element-id">3.9</div>
-                    <div class="node-title">Market Glance Report w/ website abstract and Work Case</div>
-                    <div class="node-type">Completion</div>
+                    <div class="node-owner">Production & Publishing</div>
+                    
+                    <div class="node-steps">
+                        <div class="node-step">
+                            <span class="step-id">3.7</span>
+                            <span class="step-type activity">Activity</span>
+                            <div class="step-content">
+                                <strong>Receive "IDC Take" for the Market Glance, Segment definitions, Logo Slide and Abstract</strong>
+                                <br><span class="step-owner">Production and Publishing</span>
+                            </div>
+                        </div>
+                        <div class="node-step">
+                            <span class="step-id">3.8</span>
+                            <span class="step-type activity">Activity</span>
+                            <div class="step-content">
+                                <strong>Create the Work Case in PUB 4.0</strong>
+                                <br><span class="step-owner">Production and Publishing</span>
+                            </div>
+                        </div>
+                        <div class="node-step">
+                            <span class="step-id">3.9</span>
+                            <span class="step-type completion">Completion</span>
+                            <div class="step-content">
+                                <strong>Market Glance Report w/ website abstract and Work Case</strong>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             
             <!-- PHASE 4: PUBLISH -->
-            <div class="phase-header">PHASE 4.0: PUBLISH REPORT (PRODUCE AND PUBLISH)</div>
-            
-            <!-- Group 15: Publishing team reviews -->
-            <div class="group-header">Group 15: Publishing team reviews and sends editorial feedback</div>
-            
-            <div class="connector-long"></div>
-            
-            <div class="flow-node">
-                <div class="node begin-node">
-                    <div class="element-id">4.1</div>
-                    <div class="node-title">Market Glance Report w/ website abstract and Work Case</div>
-                    <div class="node-meta">
-                        <span class="node-owner">Production and Publishing</span>
-                        <span class="node-type">Begin</span>
-                    </div>
-                </div>
-            </div>
+            <div class="phase-header">PHASE 4: PRODUCE & PUBLISH - Editorial Review & Publication</div>
             
             <div class="connector"></div>
             
             <div class="flow-node">
-                <div class="node begin-node">
-                    <div class="element-id">4.2</div>
-                    <div class="node-title">5.0 Support Report</div>
-                    <div class="node-meta">
-                        <span class="node-owner">Production and Publishing</span>
-                        <span class="node-type">Begin</span>
+                <div class="node pain-node approval-node">
+                    <div class="node-header">
+                        <div class="node-title">Editorial Review</div>
+                        <div class="node-id">Group 15</div>
+                    </div>
+                    <div class="node-owner">Production & Publishing</div>
+                    
+                    <div class="node-steps">
+                        <div class="node-step">
+                            <span class="step-id">4.1</span>
+                            <span class="step-type begin">Begin</span>
+                            <div class="step-content">
+                                <strong>Market Glance Report w/ website abstract and Work Case</strong>
+                                <br><span class="step-owner">Production and Publishing</span>
+                            </div>
+                        </div>
+                        <div class="node-step">
+                            <span class="step-id">4.3</span>
+                            <span class="step-type activity">Activity</span>
+                            <div class="step-content">
+                                <strong>Receives notification of Market Glance w abstract ready for publishing</strong>
+                                <br><span class="step-owner">Production and Publishing</span>
+                            </div>
+                        </div>
+                        <div class="node-step">
+                            <span class="step-id">4.4</span>
+                            <span class="step-type decision">Decision</span>
+                            <div class="step-content">
+                                <strong>Review (Editorial, Style Guide Compliance, etc) Market Glance and/or questions</strong>
+                                <br><span class="step-owner">Production and Publishing</span>
+                                <div class="step-branches">→ APPROVED: Proceed to 4.11 (Publish)<br>→ NEEDS CHANGES: Proceed to 4.5 (Send feedback)</div>
+                            </div>
+                        </div>
+                        <div class="node-step">
+                            <span class="step-id">4.5</span>
+                            <span class="step-type notify">Notify</span>
+                            <div class="step-content">
+                                <strong>Send Editorial feedback and/or questions to Analyst</strong>
+                                <br><span class="step-owner">Production and Publishing</span> → Notifies: Analyst
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="pain-indicator">
+                        <strong>Pain Point:</strong> Checklist sync issues between Market Glance doc and Research Calendar. No revision limits or dispute resolution procedures. Can cycle indefinitely.
                     </div>
                 </div>
             </div>
             
-            <div class="connector"></div>
+            <div class="connector-label">If changes needed</div>
             
             <div class="flow-node">
-                <div class="node activity-node">
-                    <div class="element-id">4.3</div>
-                    <div class="node-title">Receives notification of Market Glance w abstract ready for publishing</div>
-                    <div class="node-meta">
-                        <span class="node-owner">Production and Publishing</span>
-                        <span class="node-type">Activity</span>
+                <div class="node process-node">
+                    <div class="node-header">
+                        <div class="node-title">Analyst Makes Revisions</div>
+                        <div class="node-id">Group 16</div>
                     </div>
-                </div>
-            </div>
-            
-            <div class="connector"></div>
-            
-            <div class="flow-node">
-                <div class="node decision-node">
-                    <div class="node-content">
-                        <div class="element-id">4.4</div>
-                        <div class="node-title">Review (Editorial, Style Guide Compliance, etc) Market Glance and/or questions</div>
-                        <div class="node-meta">
-                            <span class="node-owner">Production and Publishing</span>
-                            <span class="node-type">Decision</span>
+                    <div class="node-owner">Analyst → Production & Publishing</div>
+                    
+                    <div class="node-steps">
+                        <div class="node-step">
+                            <span class="step-id">4.6</span>
+                            <span class="step-type activity">Activity</span>
+                            <div class="step-content">
+                                <strong>Receive Editorial feedback and/or questions to Analyst</strong>
+                                <br><span class="step-owner">Analyst</span>
+                            </div>
+                        </div>
+                        <div class="node-step">
+                            <span class="step-id">4.7</span>
+                            <span class="step-type activity">Activity</span>
+                            <div class="step-content">
+                                <strong>Make appropriate changes based on feedback</strong>
+                                <br><span class="step-owner">Analyst</span>
+                            </div>
+                        </div>
+                        <div class="node-step">
+                            <span class="step-id">4.8</span>
+                            <span class="step-type notify">Notify</span>
+                            <div class="step-content">
+                                <strong>Send changes based on feedback and notify Publishing Team; via pub 4.0 (current) or workflow tool (future)</strong>
+                                <br><span class="step-owner">Analyst</span> → Notifies: Production and Publishing
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <div class="branch-container">
-                <div class="branch">
-                    <div class="branch-label yes">APPROVED → 4.11</div>
-                    <div class="node activity-node" style="opacity: 0.4;">
-                        <div class="element-id">-</div>
-                        <div class="node-title">Skip to 4.11: Classify report</div>
+            <div class="connector-label">When approved</div>
+            
+            <div class="flow-node">
+                <div class="node pain-node automation-node">
+                    <div class="node-header">
+                        <div class="node-title">Classify, Convert & Publish to IDC.com</div>
+                        <div class="node-id">Group 17</div>
                     </div>
-                </div>
-                
-                <div class="branch">
-                    <div class="branch-label no">NEEDS CHANGES → 4.5</div>
+                    <div class="node-owner">Production & Publishing → Pub4.0</div>
                     
-                    <div class="node notify-node">
-                        <div class="element-id">4.5</div>
-                        <div class="node-title">Send Editorial feedback and/or questions to Analyst</div>
-                        <div class="node-meta">
-                            <span class="node-owner">Production and Publishing</span>
-                            <span class="node-type">Notify</span>
+                    <div class="node-steps">
+                        <div class="node-step">
+                            <span class="step-id">4.9</span>
+                            <span class="step-type activity">Activity</span>
+                            <div class="step-content">
+                                <strong>Receive Analysts changes via or pub 4.0 (current) or workflow tool (future)</strong>
+                                <br><span class="step-owner">Production and Publishing</span>
+                            </div>
                         </div>
-                        <div class="notified-party">→ Analyst</div>
-                    </div>
-                    
-                    <div class="connector-short"></div>
-                    
-                    <div class="node activity-node">
-                        <div class="element-id">4.6</div>
-                        <div class="node-title">Receive Editorial feedback and/or questions to Analyst</div>
-                        <div class="node-meta">
-                            <span class="node-owner">Analyst</span>
-                            <span class="node-type">Activity</span>
+                        <div class="node-step">
+                            <span class="step-id">4.11</span>
+                            <span class="step-type activity">Activity</span>
+                            <div class="step-content">
+                                <strong>Classify Market Glance report</strong>
+                                <br><span class="step-owner">Production and Publishing</span>
+                                <br><em>Apply IDC taxonomy classification</em>
+                            </div>
+                        </div>
+                        <div class="node-step">
+                            <span class="step-id">4.12</span>
+                            <span class="step-type activity">Activity</span>
+                            <div class="step-content">
+                                <strong>Convert Market Glance report to appropriate file format</strong>
+                                <br><span class="step-owner">Production and Publishing</span>
+                                <br><em>Wrap PowerPoint in Word document for metadata. Convert to XML for web. PPT included as downloadable attachment.</em>
+                            </div>
+                        </div>
+                        <div class="node-step">
+                            <span class="step-id">4.13</span>
+                            <span class="step-type activity">Activity</span>
+                            <div class="step-content">
+                                <strong>Upload Market Glance report to IDC.com</strong>
+                                <br><span class="step-owner">Production and Publishing</span>
+                                <br><em>Manual process currently - automation being explored</em>
+                            </div>
+                        </div>
+                        <div class="node-step">
+                            <span class="step-id">4.14</span>
+                            <span class="step-type notify">Notify</span>
+                            <div class="step-content">
+                                <strong>Notify that Market Glance has been published (automatically done currently via Pub 4.0)</strong>
+                                <br><span class="step-owner">Pub4.0</span> → Notifies: Analyst and MR
+                            </div>
+                        </div>
+                        <div class="node-step">
+                            <span class="step-id">4.15</span>
+                            <span class="step-type activity">Activity</span>
+                            <div class="step-content">
+                                <strong>Receive notification that Market Glance has been published (automatically done currently via Pub 4.0)</strong>
+                                <br><span class="step-owner">Analyst</span>
+                            </div>
+                        </div>
+                        <div class="node-step">
+                            <span class="step-id">4.16</span>
+                            <span class="step-type completion">Completion</span>
+                            <div class="step-content">
+                                <strong>Market Glance Report has been published on IDC.com</strong>
+                            </div>
                         </div>
                     </div>
                     
-                    <div class="connector-short"></div>
-                    
-                    <div class="node activity-node">
-                        <div class="element-id">4.7</div>
-                        <div class="node-title">Make appropriate changes based on feedback</div>
-                        <div class="node-meta">
-                            <span class="node-owner">Analyst</span>
-                            <span class="node-type">Activity</span>
-                        </div>
+                    <div class="pain-indicator">
+                        <strong>Pain Point:</strong> No version control or change tracking. Cannot see what changed between versions or rollback to previous versions.
                     </div>
-                    
-                    <div class="connector-short"></div>
-                    
-                    <div class="node notify-node">
-                        <div class="element-id">4.8</div>
-                        <div class="node-title">Send changes based on feedback and notify Publishing Team; via pub 4.0 (current) or workflow tool (future)</div>
-                        <div class="node-meta">
-                            <span class="node-owner">Analyst</span>
-                            <span class="node-type">Notify</span>
-                        </div>
-                        <div class="notified-party">→ Production and Publishing</div>
-                    </div>
-                    
-                    <div class="connector-short"></div>
-                    
-                    <div class="node activity-node">
-                        <div class="element-id">4.9</div>
-                        <div class="node-title">Receive Analysts changes via or pub 4.0 (current) or workflow tool (future)</div>
-                        <div class="node-meta">
-                            <span class="node-owner">Production and Publishing</span>
-                            <span class="node-type">Activity</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="merge-point"></div>
-            
-            <!-- Group 17: Publishing the MG report -->
-            <div class="group-header">Group 17: Publishing the MG report on idc.com</div>
-            
-            <div class="flow-node">
-                <div class="node activity-node">
-                    <div class="element-id">4.11</div>
-                    <div class="node-title">Classify Market Glance report</div>
-                    <div class="node-meta">
-                        <span class="node-owner">Production and Publishing</span>
-                        <span class="node-type">Activity</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="connector"></div>
-            
-            <div class="flow-node">
-                <div class="node activity-node">
-                    <div class="element-id">4.12</div>
-                    <div class="node-title">Convert Market Glance report to appropriate file format</div>
-                    <div class="node-meta">
-                        <span class="node-owner">Production and Publishing</span>
-                        <span class="node-type">Activity</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="connector"></div>
-            
-            <div class="flow-node">
-                <div class="node activity-node">
-                    <div class="element-id">4.13</div>
-                    <div class="node-title">Upload Market Glance report to IDC.com</div>
-                    <div class="node-meta">
-                        <span class="node-owner">Production and Publishing</span>
-                        <span class="node-type">Activity</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="connector"></div>
-            
-            <div class="flow-node">
-                <div class="node notify-node">
-                    <div class="element-id">4.14</div>
-                    <div class="node-title">Notify that Market Glance has been published (automatically done currently via Pub 4.0)</div>
-                    <div class="node-meta">
-                        <span class="node-owner">Pub4.0</span>
-                        <span class="node-type">Notify</span>
-                    </div>
-                    <div class="notified-party">→ Analyst and MR</div>
-                </div>
-            </div>
-            
-            <div class="connector"></div>
-            
-            <div class="flow-node">
-                <div class="node activity-node">
-                    <div class="element-id">4.15</div>
-                    <div class="node-title">Receive notification that Market Glance has been published (automatically done currently via Pub 4.0)</div>
-                    <div class="node-meta">
-                        <span class="node-owner">Analyst</span>
-                        <span class="node-type">Activity</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="connector"></div>
-            
-            <div class="flow-node">
-                <div class="node completion-node">
-                    <div class="element-id">4.16</div>
-                    <div class="node-title">Market Glance Report has been published on IDC.com</div>
-                    <div class="node-type">Completion</div>
                 </div>
             </div>
             
             <!-- PHASE 5: SUPPORT -->
-            <div class="phase-header">PHASE 5.0: SUPPORT REPORT (SUPPORT)</div>
-            
-            <!-- Group 18: Support -->
-            <div class="group-header">Group 18: Support (to edit a MG Report)</div>
-            
-            <div class="connector-long"></div>
-            
-            <div class="flow-node">
-                <div class="node begin-node">
-                    <div class="element-id">5.1</div>
-                    <div class="node-title">Market Glance Report has been published on IDC.com</div>
-                    <div class="node-type">Begin</div>
-                </div>
-            </div>
+            <div class="phase-header">PHASE 5: SUPPORT - Post-Publication Updates</div>
             
             <div class="connector"></div>
             
             <div class="flow-node">
-                <div class="node notify-node">
-                    <div class="element-id">5.2</div>
-                    <div class="node-title">Send request for change on Market Glance report (may go through via CSM/Sales)</div>
-                    <div class="node-meta">
-                        <span class="node-owner">Client</span>
-                        <span class="node-type">Notify</span>
+                <div class="node process-node">
+                    <div class="node-header">
+                        <div class="node-title">Change Request & Support Workflow</div>
+                        <div class="node-id">Group 18</div>
                     </div>
-                </div>
-            </div>
-            
-            <div class="connector"></div>
-            
-            <div class="flow-node">
-                <div class="node notify-node">
-                    <div class="element-id">5.3</div>
-                    <div class="node-title">Receive request for change on Market Glance report</div>
-                    <div class="node-meta">
-                        <span class="node-owner">Analyst</span>
-                        <span class="node-type">Notify</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="connector"></div>
-            
-            <div class="flow-node">
-                <div class="node decision-node">
-                    <div class="node-content">
-                        <div class="element-id">5.4</div>
-                        <div class="node-title">Determine if request to change Market Glance requires escalation</div>
-                        <div class="node-meta">
-                            <span class="node-owner">Analyst</span>
-                            <span class="node-type">Decision</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="branch-container">
-                <div class="branch">
-                    <div class="branch-label yes">YES → 5.5</div>
+                    <div class="node-owner">Client → Analyst → Domain Lead → Publishing</div>
                     
-                    <div class="node notify-node">
-                        <div class="element-id">5.5</div>
-                        <div class="node-title">Escalate Market Glance change to Domain Leader</div>
-                        <div class="node-meta">
-                            <span class="node-owner">Analyst</span>
-                            <span class="node-type">Notify</span>
-                        </div>
-                    </div>
-                    
-                    <div class="connector-short"></div>
-                    
-                    <div class="node notify-node">
-                        <div class="element-id">5.6</div>
-                        <div class="node-title">Receive escalation of Market Glance change</div>
-                        <div class="node-meta">
-                            <span class="node-owner">Domain Leader</span>
-                            <span class="node-type">Notify</span>
-                        </div>
-                    </div>
-                    
-                    <div class="connector-short"></div>
-                    
-                    <div class="node decision-node">
-                        <div class="node-content">
-                            <div class="element-id">5.7</div>
-                            <div class="node-title">Approve Market Glance Change Request</div>
-                            <div class="node-meta">
-                                <span class="node-owner">Domain Leader</span>
-                                <span class="node-type">Decision</span>
+                    <div class="node-steps">
+                        <div class="node-step">
+                            <span class="step-id">5.1</span>
+                            <span class="step-type begin">Begin</span>
+                            <div class="step-content">
+                                <strong>Market Glance Report has been published on IDC.com</strong>
                             </div>
                         </div>
-                    </div>
-                    
-                    <div class="connector-short"></div>
-                    
-                    <!-- Nested approval decision -->
-                    <div class="branch-container">
-                        <div class="branch">
-                            <div class="branch-label yes">APPROVED → 5.8</div>
-                            
-                            <div class="node notify-node">
-                                <div class="element-id">5.8</div>
-                                <div class="node-title">Send approval of Market Glance changes to Analyst</div>
-                                <div class="node-meta">
-                                    <span class="node-owner">Domain Leader</span>
-                                    <span class="node-type">Notify</span>
-                                </div>
-                            </div>
-                            
-                            <div class="connector-short"></div>
-                            
-                            <div style="color: #858585; font-size: 11px; text-align: center; margin: 10px 0;">
-                                → Proceeds to 5.14 (Send to Publishing)
+                        <div class="node-step">
+                            <span class="step-id">5.2</span>
+                            <span class="step-type notify">Notify</span>
+                            <div class="step-content">
+                                <strong>Send request for change on Market Glance report (may go through via CSM/Sales)</strong>
+                                <br><span class="step-owner">Client</span>
+                                <br><em>OR quarterly reminder from Research Schedule triggers review</em>
                             </div>
                         </div>
-                        
-                        <div class="branch">
-                            <div class="branch-label no">REJECTED → 5.9</div>
-                            
-                            <div class="node notify-node">
-                                <div class="element-id">5.9</div>
-                                <div class="node-title">Send rejection of Market Glance changes w/ feedback to Analyst</div>
-                                <div class="node-meta">
-                                    <span class="node-owner">Domain Leader</span>
-                                    <span class="node-type">Notify</span>
-                                </div>
+                        <div class="node-step">
+                            <span class="step-id">5.3</span>
+                            <span class="step-type notify">Notify</span>
+                            <div class="step-content">
+                                <strong>Receive request for change on Market Glance report</strong>
+                                <br><span class="step-owner">Analyst</span>
                             </div>
-                            
-                            <div class="connector-short"></div>
-                            
-                            <div class="node notify-node">
-                                <div class="element-id">5.11</div>
-                                <div class="node-title">Receives rejection of Market Glance changes w/ feedback</div>
-                                <div class="node-meta">
-                                    <span class="node-owner">Analyst</span>
-                                    <span class="node-type">Notify</span>
-                                </div>
+                        </div>
+                        <div class="node-step">
+                            <span class="step-id">5.4</span>
+                            <span class="step-type decision">Decision</span>
+                            <div class="step-content">
+                                <strong>Determine if request to change Market Glance requires escalation</strong>
+                                <br><span class="step-owner">Analyst</span>
+                                <div class="step-branches">→ SUBSTANTIAL: Proceed to 5.5 (Escalate)<br>→ MINOR: Skip to 5.14 (Make changes)</div>
                             </div>
-                            
-                            <div class="connector-short"></div>
-                            
-                            <div class="node notify-node">
-                                <div class="element-id">5.12</div>
-                                <div class="node-title">Contact Market Glance change requestor of non-approval of changes</div>
-                                <div class="node-meta">
-                                    <span class="node-owner">Analyst</span>
-                                    <span class="node-type">Notify</span>
-                                </div>
+                        </div>
+                        <div class="node-step">
+                            <span class="step-id">5.5</span>
+                            <span class="step-type notify">Notify</span>
+                            <div class="step-content">
+                                <strong>Escalate Market Glance change to Domain Leader</strong>
+                                <br><span class="step-owner">Analyst</span>
                             </div>
-                            
-                            <div class="connector-short"></div>
-                            
-                            <div class="node end-node">
-                                <div class="element-id">5.13</div>
-                                <div class="node-title">End</div>
-                                <div class="node-type">End</div>
+                        </div>
+                        <div class="node-step">
+                            <span class="step-id">5.6</span>
+                            <span class="step-type notify">Notify</span>
+                            <div class="step-content">
+                                <strong>Receive escalation of Market Glance change</strong>
+                                <br><span class="step-owner">Domain Leader</span>
+                            </div>
+                        </div>
+                        <div class="node-step">
+                            <span class="step-id">5.7</span>
+                            <span class="step-type decision">Decision</span>
+                            <div class="step-content">
+                                <strong>Approve Market Glance Change Request</strong>
+                                <br><span class="step-owner">Domain Leader</span>
+                                <div class="step-branches">→ APPROVED: Proceed to 5.8<br>→ REJECTED: Proceed to 5.9</div>
+                            </div>
+                        </div>
+                        <div class="node-step">
+                            <span class="step-id">5.8</span>
+                            <span class="step-type notify">Notify</span>
+                            <div class="step-content">
+                                <strong>Send approval of Market Glance changes to Analyst</strong>
+                                <br><span class="step-owner">Domain Leader</span>
+                            </div>
+                        </div>
+                        <div class="node-step">
+                            <span class="step-id">5.9</span>
+                            <span class="step-type notify">Notify</span>
+                            <div class="step-content">
+                                <strong>Send rejection of Market Glance changes w/ feedback to Analyst</strong>
+                                <br><span class="step-owner">Domain Leader</span>
+                            </div>
+                        </div>
+                        <div class="node-step">
+                            <span class="step-id">5.11</span>
+                            <span class="step-type notify">Notify</span>
+                            <div class="step-content">
+                                <strong>Receives rejection of Market Glance changes w/ feedback</strong>
+                                <br><span class="step-owner">Analyst</span>
+                            </div>
+                        </div>
+                        <div class="node-step">
+                            <span class="step-id">5.12</span>
+                            <span class="step-type notify">Notify</span>
+                            <div class="step-content">
+                                <strong>Contact Market Glance change requestor of non-approval of changes</strong>
+                                <br><span class="step-owner">Analyst</span>
+                            </div>
+                        </div>
+                        <div class="node-step">
+                            <span class="step-id">5.13</span>
+                            <span class="step-type end">End</span>
+                            <div class="step-content">
+                                <strong>End - Change request rejected and closed</strong>
+                            </div>
+                        </div>
+                        <div class="node-step">
+                            <span class="step-id">5.14</span>
+                            <span class="step-type notify">Notify</span>
+                            <div class="step-content">
+                                <strong>Send Market Glance change request to Editor Publishing Team</strong>
+                                <br><span class="step-owner">Analyst</span>
+                            </div>
+                        </div>
+                        <div class="node-step">
+                            <span class="step-id">5.15</span>
+                            <span class="step-type notify">Notify</span>
+                            <div class="step-content">
+                                <strong>Receive Market Glance change request</strong>
+                                <br><span class="step-owner">Publishing</span>
+                            </div>
+                        </div>
+                        <div class="node-step">
+                            <span class="step-id">5.16</span>
+                            <span class="step-type activity">Activity</span>
+                            <div class="step-content">
+                                <strong>Make Market Glance changes per request</strong>
+                                <br><span class="step-owner">Publishing</span>
+                                <br><em>Minimum: update both logo slide AND IDC Take</em>
+                            </div>
+                        </div>
+                        <div class="node-step">
+                            <span class="step-id">5.17</span>
+                            <span class="step-type notify">Notify</span>
+                            <div class="step-content">
+                                <strong>Notify PS&T of Market Glance changes per request</strong>
+                                <br><span class="step-owner">Publishing</span>
+                            </div>
+                        </div>
+                        <div class="node-step">
+                            <span class="step-id">5.18</span>
+                            <span class="step-type completion">Completion</span>
+                            <div class="step-content">
+                                <strong>4.0 Publish Report</strong>
+                                <br><em>Returns to Phase 4 editorial review and publication workflow</em>
                             </div>
                         </div>
                     </div>
                 </div>
-                
-                <div class="branch">
-                    <div class="branch-label no">NO → 5.14</div>
-                    <div class="node activity-node" style="opacity: 0.4;">
-                        <div class="element-id">-</div>
-                        <div class="node-title">Proceed directly to 5.14</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="merge-point"></div>
-            
-            <div class="flow-node">
-                <div class="node notify-node">
-                    <div class="element-id">5.14</div>
-                    <div class="node-title">Send Market Glance change request to Editor Publishing Team</div>
-                    <div class="node-meta">
-                        <span class="node-owner">Analyst</span>
-                        <span class="node-type">Notify</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="connector"></div>
-            
-            <div class="flow-node">
-                <div class="node notify-node">
-                    <div class="element-id">5.15</div>
-                    <div class="node-title">Receive Market Glance change request</div>
-                    <div class="node-meta">
-                        <span class="node-owner">Publishing</span>
-                        <span class="node-type">Notify</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="connector"></div>
-            
-            <div class="flow-node">
-                <div class="node activity-node">
-                    <div class="element-id">5.16</div>
-                    <div class="node-title">Make Market Glance changes per request</div>
-                    <div class="node-meta">
-                        <span class="node-owner">Publishing</span>
-                        <span class="node-type">Activity</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="connector"></div>
-            
-            <div class="flow-node">
-                <div class="node notify-node">
-                    <div class="element-id">5.17</div>
-                    <div class="node-title">Notify PS&T of Market Glance changes per request</div>
-                    <div class="node-meta">
-                        <span class="node-owner">Publishing</span>
-                        <span class="node-type">Notify</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="connector"></div>
-            
-            <div class="flow-node">
-                <div class="node completion-node">
-                    <div class="element-id">5.18</div>
-                    <div class="node-title">4.0 Publish Report</div>
-                    <div class="node-type">Completion</div>
-                </div>
-            </div>
-            
-            <div style="color: #858585; font-size: 12px; text-align: center; margin: 30px 0 0 0; padding: 20px; background: #2d2d30; border-radius: 6px;">
-                → Loops back to Phase 4.0 (Publish Report) for republication
             </div>
             
         </div>
