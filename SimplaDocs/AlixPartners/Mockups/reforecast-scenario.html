@@ -707,45 +707,92 @@
             display: none;
         }
 
-        .labor-placeholder {
+        /* Hide total budget in PM view - PMs should NOT know the budget number */
+        body.pm-view .scenario-metric.total-budget {
             display: none;
-            font-size: 12px;
-            color: var(--coda-text-muted);
-            padding: 12px;
-            background: var(--coda-sidebar-bg);
-            border-radius: 6px;
-            text-align: center;
-            font-style: italic;
         }
 
-        body.pm-view .labor-placeholder {
-            display: block;
+        /* Hide approval workflow panel in PM view */
+        body.pm-view .approval-panel {
+            display: none;
         }
 
-        /* Admin-only sections */
+        /* Admin-only sections - completely hidden in PM view */
         .admin-only {
             position: relative;
         }
 
-        body.pm-view .admin-only::before {
-            content: "👨‍💼 Admin Only";
-            position: absolute;
-            top: -8px;
-            right: 0;
-            background: var(--coda-purple);
-            color: white;
-            font-size: 10px;
-            font-weight: 600;
-            padding: 3px 8px;
-            border-radius: 4px;
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-            opacity: 0.8;
+        body.pm-view .admin-only {
+            display: none !important;
         }
 
-        body.pm-view .adjustment-panel {
-            opacity: 0.6;
-            pointer-events: none;
+        /* Hide labor adjustment fields in PM view - modeling happens on admin doc */
+        body.pm-view .adjustment-panel.labor-adjustments {
+            display: none !important;
+        }
+
+        /* Hide platform budget comparison table in PM view */
+        body.pm-view .platform-impact-section {
+            display: none !important;
+        }
+
+        /* Hide scenario comparison cards in PM view - they show total budget */
+        body.pm-view .comparison-grid {
+            display: none !important;
+        }
+
+        /* Hide chart section in PM view - shows total budget trends */
+        body.pm-view .chart-card {
+            display: none !important;
+        }
+
+        /* PM-specific styles */
+        .pm-only {
+            display: none;
+        }
+
+        body.pm-view .pm-only {
+            display: block;
+        }
+
+        /* PM request form */
+        .pm-request-form {
+            background: var(--coda-blue-bg);
+            border: 2px solid var(--coda-blue);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+
+        .pm-request-form-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--coda-blue);
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .pm-request-form-subtitle {
+            font-size: 12px;
+            color: var(--coda-text-secondary);
+            margin-bottom: 16px;
+        }
+
+        .pm-info-card {
+            background: white;
+            border: 1px solid var(--coda-border);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+
+        .pm-info-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--coda-text);
+            margin-bottom: 12px;
         }
 
         /* Approval status badges */
@@ -922,34 +969,255 @@
                 </p>
             </header>
 
-            <!-- Scenario Selector -->
-            <div class="scenario-selector">
-                <span class="scenario-label">Active Scenario:</span>
-                <div class="scenario-tabs">
-                    <div class="scenario-tab baseline active">FY26 Baseline</div>
-                    <div class="scenario-tab">Optimistic Case</div>
-                    <div class="scenario-tab">Conservative Case</div>
-                    <div class="scenario-tab">Q2 Vendor Rate Increase</div>
-                </div>
-                <button class="btn-new-scenario">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4v16m8-8H4"/></svg>
-                    New Scenario
-                </button>
-            </div>
-
-            <!-- Callout -->
-            <div class="callout">
+            <!-- Admin Callout -->
+            <div class="callout admin-only">
                 <div class="callout-title">⚡ Scenario Planning & Reforecasting</div>
                 <div class="callout-text">
                     Each scenario is a complete copy of your FY26 budget. Make adjustments to model different situations (vendor changes, headcount shifts, investment cuts). Use "2+10" reforecast format (2 months actual + 10 months forecast) to blend actual spend with projections. All scenarios are saved with version history and can be compared to help leadership make decisions.
                 </div>
             </div>
 
+            <!-- PM View: Non-Labor Budget Request Form -->
+            <div class="pm-only">
+                <div class="pm-info-card">
+                    <div class="pm-info-title">📊 Your Project: Platform Alpha</div>
+                    <p style="font-size: 12px; color: var(--coda-text-secondary); margin-bottom: 12px;">
+                        Submit non-labor budget requests and adjustments. Labor resource requests (start dates, levels) should be submitted through the Request Workflow page.
+                    </p>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 16px;">
+                        <div>
+                            <div style="font-size: 11px; font-weight: 500; color: var(--coda-text-muted); text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 4px;">Approved Non-Labor Budget</div>
+                            <div style="font-size: 20px; font-weight: 700; color: var(--coda-text);">$145,000</div>
+                            <div style="font-size: 11px; color: var(--coda-text-secondary); margin-top: 2px;">FY26 Allocation</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 11px; font-weight: 500; color: var(--coda-text-muted); text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 4px;">Spent to Date</div>
+                            <div style="font-size: 20px; font-weight: 700; color: var(--coda-text);">$52,000</div>
+                            <div style="font-size: 11px; color: var(--coda-green); margin-top: 2px;">36% utilized</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 11px; font-weight: 500; color: var(--coda-text-muted); text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 4px;">Remaining</div>
+                            <div style="font-size: 20px; font-weight: 700; color: var(--coda-text);">$93,000</div>
+                            <div style="font-size: 11px; color: var(--coda-text-secondary); margin-top: 2px;">Available</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pm-request-form">
+                    <div class="pm-request-form-title">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px;"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+                        Request Budget Adjustment (Non-Labor)
+                    </div>
+                    <div class="pm-request-form-subtitle">
+                        Adjust your non-labor budget allocations. Changes will be submitted to Rose & Kevin for approval.
+                    </div>
+
+                    <div class="adjustment-grid">
+                        <div class="adjustment-field">
+                            <label class="adjustment-label">Travel Budget Adjustment</label>
+                            <input type="text" class="adjustment-input" value="$0" placeholder="e.g. +$5,000">
+                        </div>
+                        <div class="adjustment-field">
+                            <label class="adjustment-label">Data Subscriptions</label>
+                            <input type="text" class="adjustment-input" value="$0" placeholder="e.g. +$2,500">
+                        </div>
+                        <div class="adjustment-field">
+                            <label class="adjustment-label">Marketing Expenses</label>
+                            <input type="text" class="adjustment-input" value="$0" placeholder="e.g. +$8,000">
+                        </div>
+                        <div class="adjustment-field">
+                            <label class="adjustment-label">Software/Tools</label>
+                            <input type="text" class="adjustment-input" value="$0" placeholder="e.g. +$3,000">
+                        </div>
+                        <div class="adjustment-field">
+                            <label class="adjustment-label">Professional Services</label>
+                            <input type="text" class="adjustment-input" value="$0" placeholder="e.g. +$10,000">
+                        </div>
+                        <div class="adjustment-field">
+                            <label class="adjustment-label">Other Expenses</label>
+                            <input type="text" class="adjustment-input" value="$0" placeholder="e.g. +$1,500">
+                        </div>
+                    </div>
+
+                    <div class="adjustment-field" style="margin-top: 16px;">
+                        <label class="adjustment-label">Justification</label>
+                        <textarea class="adjustment-input" rows="3" placeholder="Explain the business need for this budget adjustment..."></textarea>
+                    </div>
+
+                    <div style="display: flex; justify-content: flex-end; gap: 8px; margin-top: 16px;">
+                        <button class="btn">Reset</button>
+                        <button class="btn-primary btn">Submit Request</button>
+                    </div>
+
+                    <div style="margin-top: 16px; padding: 12px; background: var(--coda-blue-bg); border-left: 3px solid var(--coda-blue); border-radius: 4px; font-size: 12px; color: var(--coda-text-secondary);">
+                        <strong style="color: var(--coda-blue);">ℹ️ Note:</strong> You can only adjust non-labor budget items. For labor resource changes (hiring, start/end dates, seniority levels), use the Labor Request Workflow.
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-header">
+                        <div class="section-title">My Non-Labor Budget Breakdown</div>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Category</th>
+                                    <th>Approved Budget</th>
+                                    <th>Spent YTD</th>
+                                    <th>Remaining</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Travel</td>
+                                    <td class="currency">$45,000</td>
+                                    <td class="currency">$18,500</td>
+                                    <td class="currency">$26,500</td>
+                                    <td><span class="variance-positive">On track</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Data Subscriptions</td>
+                                    <td class="currency">$35,000</td>
+                                    <td class="currency">$14,200</td>
+                                    <td class="currency">$20,800</td>
+                                    <td><span class="variance-positive">On track</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Marketing</td>
+                                    <td class="currency">$28,000</td>
+                                    <td class="currency">$9,800</td>
+                                    <td class="currency">$18,200</td>
+                                    <td><span class="variance-positive">On track</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Software/Tools</td>
+                                    <td class="currency">$22,000</td>
+                                    <td class="currency">$6,500</td>
+                                    <td class="currency">$15,500</td>
+                                    <td><span class="variance-positive">On track</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Professional Services</td>
+                                    <td class="currency">$12,000</td>
+                                    <td class="currency">$2,800</td>
+                                    <td class="currency">$9,200</td>
+                                    <td><span class="variance-positive">On track</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Other</td>
+                                    <td class="currency">$3,000</td>
+                                    <td class="currency">$200</td>
+                                    <td class="currency">$2,800</td>
+                                    <td><span class="variance-positive">On track</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- PM Labor Request View: Approved Resources (NO COSTS) -->
+                <div class="section">
+                    <div class="section-header">
+                        <div class="section-title">👥 My Approved Resources</div>
+                        <button class="btn-primary btn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 14px; height: 14px;"><path d="M12 4v16m8-8H4"/></svg>
+                            Request New Resource
+                        </button>
+                    </div>
+                    <div style="margin-bottom: 12px; padding: 12px; background: var(--coda-blue-bg); border-left: 3px solid var(--coda-blue); border-radius: 4px; font-size: 12px; color: var(--coda-text-secondary);">
+                        <strong style="color: var(--coda-blue);">ℹ️ Note:</strong> You can adjust start/end dates and seniority levels for approved resources. Changes will be submitted to Rose & Kevin for approval. Labor costs are managed by Finance.
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Role / Title</th>
+                                    <th>Vendor Type</th>
+                                    <th>Seniority Level</th>
+                                    <th>Start Date</th>
+                                    <th>End Date</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Senior Full Stack Developer</strong></td>
+                                    <td>Distillery</td>
+                                    <td>
+                                        <select class="adjustment-input" style="padding: 4px 8px; font-size: 12px;">
+                                            <option>Senior</option>
+                                            <option>Mid-Level</option>
+                                            <option>Junior</option>
+                                        </select>
+                                    </td>
+                                    <td><input type="date" class="adjustment-input" value="2025-07-01" style="padding: 4px 8px; font-size: 12px;"></td>
+                                    <td><input type="date" class="adjustment-input" value="2026-06-30" style="padding: 4px 8px; font-size: 12px;"></td>
+                                    <td><span class="approval-status approved">Approved</span></td>
+                                    <td><button class="btn" style="padding: 4px 8px; font-size: 11px;">Submit Change</button></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Product Manager</strong></td>
+                                    <td>TPS</td>
+                                    <td>
+                                        <select class="adjustment-input" style="padding: 4px 8px; font-size: 12px;">
+                                            <option>Senior</option>
+                                            <option>Mid-Level</option>
+                                            <option>Junior</option>
+                                        </select>
+                                    </td>
+                                    <td><input type="date" class="adjustment-input" value="2025-08-15" style="padding: 4px 8px; font-size: 12px;"></td>
+                                    <td><input type="date" class="adjustment-input" value="2026-06-30" style="padding: 4px 8px; font-size: 12px;"></td>
+                                    <td><span class="approval-status approved">Approved</span></td>
+                                    <td><button class="btn" style="padding: 4px 8px; font-size: 11px;">Submit Change</button></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>UX Designer</strong></td>
+                                    <td>Distillery</td>
+                                    <td>
+                                        <select class="adjustment-input" style="padding: 4px 8px; font-size: 12px;">
+                                            <option selected>Mid-Level</option>
+                                            <option>Senior</option>
+                                            <option>Junior</option>
+                                        </select>
+                                    </td>
+                                    <td><input type="date" class="adjustment-input" value="2025-09-01" style="padding: 4px 8px; font-size: 12px;"></td>
+                                    <td><input type="date" class="adjustment-input" value="2026-03-31" style="padding: 4px 8px; font-size: 12px;"></td>
+                                    <td><span class="approval-status approved">Approved</span></td>
+                                    <td><button class="btn" style="padding: 4px 8px; font-size: 11px;">Submit Change</button></td>
+                                </tr>
+                                <tr style="background: var(--coda-yellow-bg);">
+                                    <td><strong>Backend Developer</strong></td>
+                                    <td>TPS</td>
+                                    <td>
+                                        <select class="adjustment-input" style="padding: 4px 8px; font-size: 12px;" disabled>
+                                            <option>Senior</option>
+                                            <option selected>Mid-Level</option>
+                                            <option>Junior</option>
+                                        </select>
+                                    </td>
+                                    <td><input type="date" class="adjustment-input" value="2025-10-01" style="padding: 4px 8px; font-size: 12px;" disabled></td>
+                                    <td><input type="date" class="adjustment-input" value="2026-06-30" style="padding: 4px 8px; font-size: 12px;" disabled></td>
+                                    <td><span class="approval-status pending">Pending</span></td>
+                                    <td><button class="btn" style="padding: 4px 8px; font-size: 11px;" disabled>Pending Review</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
             <!-- Scenario Comparison Cards -->
             <div class="section">
                 <div class="section-header">
-                    <div class="section-title">Scenario Comparison</div>
+                    <div class="section-title">Budget Scenarios</div>
                     <div class="section-actions">
+                        <button class="btn-new-scenario btn-primary">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4v16m8-8H4"/></svg>
+                            New Scenario
+                        </button>
                         <button class="btn">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
                             Export Comparison
@@ -966,9 +1234,27 @@
             <div class="section admin-only">
                 <div class="section-header">
                     <div class="section-title">Adjust Current Scenario: FY26 Baseline</div>
+                    <div class="section-actions">
+                        <div style="display: flex; align-items: center; gap: 8px; background: white; border: 1px solid var(--coda-border); border-radius: 6px; padding: 4px;">
+                            <button class="view-mode-btn active" data-mode="model" style="padding: 6px 12px; border: none; background: var(--coda-blue); color: white; border-radius: 4px; font-size: 12px; font-weight: 500; cursor: pointer; font-family: inherit;">
+                                What-If Model
+                            </button>
+                            <button class="view-mode-btn" data-mode="forecast" style="padding: 6px 12px; border: none; background: transparent; color: var(--coda-text-secondary); border-radius: 4px; font-size: 12px; font-weight: 500; cursor: pointer; font-family: inherit;">
+                                Commit to Forecast
+                            </button>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="adjustment-panel">
+                <div id="modelingModeInfo" style="margin-bottom: 16px; padding: 12px 16px; background: var(--coda-blue-bg); border-left: 3px solid var(--coda-blue); border-radius: 4px; font-size: 12px; color: var(--coda-text-secondary);">
+                    <strong style="color: var(--coda-blue);">💡 What-If Mode:</strong> Changes are temporary and not saved. Use this to explore different scenarios without affecting official forecasts. Switch to "Commit to Forecast" to save changes.
+                </div>
+
+                <div id="forecastModeInfo" style="display: none; margin-bottom: 16px; padding: 12px 16px; background: var(--coda-yellow-bg); border-left: 3px solid var(--coda-yellow); border-radius: 4px; font-size: 12px; color: var(--coda-text-secondary);">
+                    <strong style="color: var(--coda-yellow);">⚠️ Forecast Mode:</strong> Changes will be saved to this scenario. Submit for approval when ready. All adjustments will update the official reforecast.
+                </div>
+
+                <div class="adjustment-panel labor-adjustments">
                     <div class="adjustment-panel-title">Labor Adjustments</div>
                     <div class="adjustment-grid">
                         <div class="adjustment-field">
@@ -1066,15 +1352,23 @@
             </div>
 
             <!-- Budget Version History -->
-            <div class="section">
+            <div class="section admin-only">
                 <div class="section-header">
                     <div class="section-title">📜 Budget Version History</div>
                     <div class="section-actions">
+                        <label style="display: flex; align-items: center; gap: 8px; padding: 6px 12px; background: white; border: 1px solid var(--coda-border); border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 500; color: var(--coda-text);">
+                            <input type="checkbox" id="showPendingToggle" style="cursor: pointer;">
+                            <span>Show Pending in Totals</span>
+                        </label>
                         <button class="btn">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
                             Export History
                         </button>
                     </div>
+                </div>
+
+                <div id="pendingPreviewInfo" style="display: none; margin-bottom: 16px; padding: 12px 16px; background: var(--coda-yellow-bg); border-left: 3px solid var(--coda-yellow); border-radius: 4px; font-size: 12px; color: var(--coda-text-secondary);">
+                    <strong style="color: var(--coda-yellow);">👁️ Preview Mode:</strong> Pending requests are now included in scenario totals and charts. This shows the projected impact if all pending changes are approved. Toggle off to see official approved-only numbers.
                 </div>
 
                 <div class="table-container">
@@ -1167,7 +1461,7 @@
             </div>
 
             <!-- Platform Impact Table -->
-            <div class="section">
+            <div class="section platform-impact-section">
                 <div class="section-header">
                     <div class="section-title">Platform-Level Impact Analysis</div>
                     <div class="section-actions">
@@ -1283,6 +1577,9 @@
                 totalBudget: 4200000,
                 laborCosts: 2850000,
                 nonLaborCosts: 1350000,
+                grossSpend: 4200000, // Total spend before capitalization
+                capitalizableAmount: 1680000, // 40% of labor costs
+                netEBITDAImpact: 2520000, // Total budget - capitalizable amount
                 reforecastFormat: '0+12',
                 actualMonths: 0,
                 forecastMonths: 12,
@@ -1460,11 +1757,12 @@
             initializeButtons();
             initializeChart();
             initializeViewModeToggle();
+            initializeModelingModeToggle();
             updateView();
         });
 
         function initializeViewModeToggle() {
-            const toggleBtns = document.querySelectorAll('.view-mode-btn');
+            const toggleBtns = document.querySelectorAll('[data-view]');
 
             toggleBtns.forEach(btn => {
                 btn.addEventListener('click', () => {
@@ -1481,6 +1779,40 @@
                     } else {
                         btn.classList.add('active');
                         document.body.classList.add('pm-view');
+                    }
+                });
+            });
+        }
+
+        function initializeModelingModeToggle() {
+            const modeBtns = document.querySelectorAll('[data-mode]');
+            const modelInfo = document.getElementById('modelingModeInfo');
+            const forecastInfo = document.getElementById('forecastModeInfo');
+            let currentMode = 'model';
+
+            modeBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const mode = btn.getAttribute('data-mode');
+                    currentMode = mode;
+
+                    // Update button states
+                    modeBtns.forEach(b => {
+                        b.classList.remove('active');
+                        b.style.background = 'transparent';
+                        b.style.color = 'var(--coda-text-secondary)';
+                    });
+
+                    btn.classList.add('active');
+                    if (mode === 'model') {
+                        btn.style.background = 'var(--coda-blue)';
+                        btn.style.color = 'white';
+                        modelInfo.style.display = 'block';
+                        forecastInfo.style.display = 'none';
+                    } else {
+                        btn.style.background = 'var(--coda-yellow)';
+                        btn.style.color = 'white';
+                        modelInfo.style.display = 'none';
+                        forecastInfo.style.display = 'block';
                     }
                 });
             });
@@ -1512,25 +1844,6 @@
                     // Switch to this scenario
                     currentScenario = scenarioKey;
                     updateView();
-
-                    // Update scenario tab to match
-                    const allScenarioKeys = ['baseline', 'optimistic', 'conservative', 'vendorIncrease'];
-                    const tabIndex = allScenarioKeys.indexOf(scenarioKey);
-
-                    if (tabIndex !== -1) {
-                        const tabs = document.querySelectorAll('.scenario-tab');
-                        tabs.forEach(t => t.classList.remove('active'));
-                        tabs[tabIndex].classList.add('active');
-                    } else {
-                        // It's a custom scenario, find the tab by data attribute
-                        const tabs = document.querySelectorAll('.scenario-tab');
-                        tabs.forEach(t => {
-                            if (t.getAttribute('data-scenario-key') === scenarioKey) {
-                                tabs.forEach(t2 => t2.classList.remove('active'));
-                                t.classList.add('active');
-                            }
-                        });
-                    }
 
                     // Rebuild cards to reflect selection
                     renderComparisonCards();
@@ -1605,27 +1918,12 @@
         }
 
         function renderComparisonCards() {
+            console.log('renderComparisonCards() called');
             const grid = document.getElementById('comparisonGrid');
             if (!grid) return;
 
-            // Determine which 3 scenarios to show
-            let scenariosToShow = [];
-
-            // Always include current scenario
-            scenariosToShow.push(currentScenario);
-
-            // Always include baseline if it's not current
-            if (currentScenario !== 'baseline') {
-                scenariosToShow.push('baseline');
-            }
-
-            // Add other scenarios to fill up to 3
-            const allScenarioKeys = Object.keys(scenarios);
-            for (const key of allScenarioKeys) {
-                if (!scenariosToShow.includes(key) && scenariosToShow.length < 3) {
-                    scenariosToShow.push(key);
-                }
-            }
+            // Show ALL scenarios
+            const scenariosToShow = Object.keys(scenarios);
 
             // Build HTML for each card
             grid.innerHTML = '';
@@ -1639,6 +1937,12 @@
                 const totalDelta = scenario.totalBudget - baseline.totalBudget;
                 const laborPct = ((scenario.laborCosts / scenario.totalBudget) * 100).toFixed(0);
                 const nonLaborPct = ((scenario.nonLaborCosts / scenario.totalBudget) * 100).toFixed(0);
+
+                // Calculate capitalization metrics (40% of labor costs is capitalizable)
+                const capRate = 0.40;
+                const grossSpend = scenario.totalBudget;
+                const capitalizableAmount = scenario.laborCosts * capRate;
+                const netEBITDAImpact = grossSpend - capitalizableAmount;
 
                 let totalDeltaHTML = '';
                 if (scenarioKey !== 'baseline' && totalDelta !== 0) {
@@ -1677,18 +1981,25 @@
                             <div class="scenario-badge ${scenario.badge}">${scenario.badge.toUpperCase()}</div>
                         </div>
                         ${reforecastHTML}
-                        <div class="scenario-metric">
+                        <div class="scenario-metric total-budget">
                             <div class="metric-label">Total Budget</div>
                             <div class="metric-value">${formatCurrency(scenario.totalBudget)}</div>
                             ${totalDeltaHTML}
                         </div>
                         <div class="scenario-metric labor-metric">
-                            <div class="metric-label">Labor Costs</div>
+                            <div class="metric-label">Gross Spend (Labor)</div>
                             <div class="metric-value">${formatCurrency(scenario.laborCosts)}</div>
                             <div class="metric-delta">${laborPct}% of budget</div>
                         </div>
-                        <div class="labor-placeholder">
-                            🔒 Labor cost details are visible to admin only
+                        <div class="scenario-metric labor-metric" style="border-top: 1px solid var(--coda-border); padding-top: 12px; margin-top: 8px;">
+                            <div class="metric-label">Capitalizable Amount</div>
+                            <div class="metric-value" style="font-size: 18px;">${formatCurrency(capitalizableAmount)}</div>
+                            <div class="metric-delta" style="color: var(--coda-blue);">${(capRate * 100).toFixed(0)}% cap rate</div>
+                        </div>
+                        <div class="scenario-metric labor-metric">
+                            <div class="metric-label">Net EBITDA Impact</div>
+                            <div class="metric-value" style="font-size: 20px; color: var(--coda-blue);">${formatCurrency(netEBITDAImpact)}</div>
+                            <div class="metric-delta" style="color: var(--coda-blue);">What hits P&L</div>
                         </div>
                         <div class="scenario-metric">
                             <div class="metric-label">Non-Labor Costs</div>
@@ -1735,9 +2046,15 @@
 
         function initializeButtons() {
             // New Scenario button
-            document.querySelector('.btn-new-scenario').addEventListener('click', () => {
-                createNewScenario();
-            });
+            const newScenarioBtn = document.querySelector('.btn-new-scenario');
+            if (newScenarioBtn) {
+                newScenarioBtn.addEventListener('click', () => {
+                    console.log('New Scenario button clicked');
+                    createNewScenario();
+                });
+            } else {
+                console.error('New Scenario button not found!');
+            }
 
             // Reset button
             document.querySelectorAll('.btn').forEach(btn => {
@@ -1746,18 +2063,123 @@
                 }
             });
 
-            // Save as New Scenario button
-            const applyButtons = document.querySelectorAll('.btn-primary');
-            applyButtons.forEach(btn => {
-                if (btn.textContent.includes('Save as New')) {
-                    btn.addEventListener('click', () => {
-                        const name = prompt('Enter new scenario name:', 'Modified ' + scenarios[currentScenario].name);
-                        if (name) {
-                            alert('Scenario saved as "' + name + '"!');
-                        }
+            // Pending preview toggle
+            const pendingToggle = document.getElementById('showPendingToggle');
+            const pendingInfo = document.getElementById('pendingPreviewInfo');
+            if (pendingToggle && pendingInfo) {
+                pendingToggle.addEventListener('change', (e) => {
+                    if (e.target.checked) {
+                        pendingInfo.style.display = 'block';
+                        // In real implementation, this would recalculate totals including pending requests
+                        showNotification('Preview mode enabled: pending requests included in totals', 'info');
+                    } else {
+                        pendingInfo.style.display = 'none';
+                        showNotification('Preview mode disabled: showing approved-only totals', 'info');
+                    }
+                });
+            }
+
+            // Submit for Approval button
+            const submitBtn = document.getElementById('submitForApprovalBtn');
+            if (submitBtn) {
+                submitBtn.addEventListener('click', () => {
+                    const scenario = scenarios[currentScenario];
+                    if (scenario.approvalStatus === 'approved') {
+                        alert('This scenario is already approved.');
+                        return;
+                    }
+
+                    scenario.approvalStatus = 'pending';
+                    scenario.requestedBy = 'Current User (PM)';
+                    scenario.requestedDate = new Date().toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
                     });
+
+                    updateView();
+                    renderComparisonCards();
+
+                    showNotification(`✓ "${scenario.name}" submitted for approval`, 'success');
+                });
+            }
+
+            // Approval buttons (dynamically added, so use event delegation)
+            document.addEventListener('click', (e) => {
+                const approveBtn = e.target.closest('.btn[style*="coda-green"]');
+                const rejectBtn = e.target.closest('.btn[style*="coda-red"]');
+
+                if (approveBtn) {
+                    approveScenario();
+                } else if (rejectBtn) {
+                    rejectScenario();
                 }
             });
+        }
+
+        function approveScenario() {
+            const scenario = scenarios[currentScenario];
+
+            scenario.approvalStatus = 'approved';
+            scenario.approvedBy = 'Kevin'; // In real system, would be current admin user
+            scenario.approvedDate = new Date().toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+
+            updateView();
+            renderComparisonCards();
+
+            showNotification(`✓ "${scenario.name}" has been approved by Kevin`, 'success');
+        }
+
+        function rejectScenario() {
+            const reason = prompt('Enter rejection reason (optional):');
+
+            const scenario = scenarios[currentScenario];
+            scenario.approvalStatus = 'rejected';
+            scenario.rejectedBy = 'Kevin'; // In real system, would be current admin user
+            scenario.rejectedDate = new Date().toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            scenario.rejectionReason = reason || 'No reason provided';
+
+            updateView();
+            renderComparisonCards();
+
+            showNotification(`✗ "${scenario.name}" has been rejected`, 'error');
+        }
+
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            const bgColor = type === 'success' ? '#0d8050' : type === 'error' ? '#c23030' : '#2965cc';
+
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${bgColor};
+                color: white;
+                padding: 16px 20px;
+                border-radius: 8px;
+                font-size: 14px;
+                font-weight: 500;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                z-index: 10000;
+                animation: slideIn 0.3s ease;
+            `;
+            notification.textContent = message;
+
+            document.body.appendChild(notification);
+
+            // Remove after 3 seconds
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
         }
 
         function resetToBaseline() {
@@ -1832,6 +2254,12 @@
             scenarios[currentScenario].nonLaborCosts = newNonLaborCosts;
             scenarios[currentScenario].totalBudget = newTotalBudget;
             scenarios[currentScenario].adjustments = { ...adjustments };
+
+            console.log(`Updated ${currentScenario}:`, {
+                laborCosts: formatCurrency(newLaborCosts),
+                nonLaborCosts: formatCurrency(newNonLaborCosts),
+                totalBudget: formatCurrency(newTotalBudget)
+            });
 
             // Update platform data (distribute impact proportionally with some variation)
             const platforms = platformData[currentScenario];
@@ -1973,13 +2401,17 @@
         }
 
         function updateView() {
+            console.log('updateView() called for scenario:', currentScenario);
             const scenario = scenarios[currentScenario];
 
-            // Update page title - target the second section-title (the adjustment panel)
-            const sectionTitles = document.querySelectorAll('.section-title');
-            if (sectionTitles[1]) {
-                sectionTitles[1].textContent = `Adjust Current Scenario: ${scenario.name}`;
-            }
+            // Update page title - target the specific adjustment panel section title
+            const allSectionTitles = document.querySelectorAll('.section-title');
+            allSectionTitles.forEach(title => {
+                if (title.textContent.includes('Adjust Current Scenario')) {
+                    title.textContent = `Adjust Current Scenario: ${scenario.name}`;
+                    console.log('Updated title to:', title.textContent);
+                }
+            });
 
             // Update adjustment inputs
             const adj = scenario.adjustments;
@@ -2176,6 +2608,7 @@
         }
 
         function updateChart() {
+            console.log('updateChart() called');
             if (!scenarioChart) return;
 
             const datasets = [
@@ -2242,12 +2675,20 @@
                 totalBudget: currentData.totalBudget,
                 laborCosts: currentData.laborCosts,
                 nonLaborCosts: currentData.nonLaborCosts,
+                reforecastFormat: currentData.reforecastFormat || '0+12',
+                actualMonths: currentData.actualMonths || 0,
+                forecastMonths: currentData.forecastMonths || 12,
+                asOfDate: currentData.asOfDate || new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }),
+                approvalStatus: 'draft',
+                createdBy: 'Current User',
+                createdDate: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }),
                 adjustments: { ...currentData.adjustments },
                 assumptions: [
                     `Based on ${currentData.name}`,
                     'Custom scenario - adjust parameters below'
                 ]
             };
+            console.log('Created new scenario:', scenarioKey, scenarios[scenarioKey]);
 
             // Copy platform data
             platformData[scenarioKey] = {};
