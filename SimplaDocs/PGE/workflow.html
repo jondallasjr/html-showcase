@@ -1,0 +1,1367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PGE Quote Automation Flowchart - Interactive</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8fafc;
+            padding: 20px;
+            overflow-x: auto;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            color: #64748b;
+            font-size: 1rem;
+        }
+
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .legend-shape {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .legend-shape.process {
+            background: #dbeafe;
+            border: 2px solid #3b82f6;
+            border-radius: 6px;
+        }
+
+        .legend-shape.decision {
+            background: #fef3c7;
+            border: 2px solid #f59e0b;
+            width: 40px;
+            height: 40px;
+            transform: rotate(45deg);
+        }
+
+        .legend-shape.manual {
+            background: #fecaca;
+            border: 2px solid #ef4444;
+            border-radius: 50%;
+        }
+
+        .legend-shape.automated {
+            background: #d1fae5;
+            border: 2px solid #10b981;
+            border-radius: 6px;
+        }
+
+        /* Stage navigation */
+        .stage-nav {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .stage-nav-btn {
+            flex: 1;
+            min-width: 200px;
+            padding: 16px 24px;
+            background: white;
+            border: 3px solid #e2e8f0;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: #64748b;
+            text-align: center;
+        }
+
+        .stage-nav-btn:hover {
+            border-color: #cbd5e1;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .stage-nav-btn.active {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+            border-color: #3b82f6;
+        }
+
+        .stage-nav-btn.stage1 { border-left: 6px solid #3b82f6; }
+        .stage-nav-btn.stage2 { border-left: 6px solid #a855f7; }
+        .stage-nav-btn.stage3 { border-left: 6px solid #f59e0b; }
+        .stage-nav-btn.stage4 { border-left: 6px solid #eab308; }
+        .stage-nav-btn.stage5 { border-left: 6px solid #10b981; }
+
+        /* Stage container */
+        .stage-section {
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .stage-header {
+            padding: 20px 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+
+        .stage-header:hover {
+            background: #f8fafc;
+        }
+
+        .stage-section.stage1 .stage-header {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+        }
+
+        .stage-section.stage2 .stage-header {
+            background: linear-gradient(135deg, #a855f7 0%, #9333ea 100%);
+            color: white;
+        }
+
+        .stage-section.stage3 .stage-header {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: white;
+        }
+
+        .stage-section.stage4 .stage-header {
+            background: linear-gradient(135deg, #eab308 0%, #ca8a04 100%);
+            color: white;
+        }
+
+        .stage-section.stage5 .stage-header {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+        }
+
+        .stage-number {
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .stage-title {
+            flex: 1;
+        }
+
+        .stage-title h2 {
+            font-size: 1.5rem;
+            margin-bottom: 4px;
+        }
+
+        .stage-title p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .expand-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            background: rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .stage-section.collapsed .expand-icon {
+            transform: rotate(-90deg);
+        }
+
+        .stage-content {
+            max-height: 5000px;
+            overflow: hidden;
+            transition: max-height 0.5s ease, padding 0.3s ease;
+            padding: 24px;
+        }
+
+        .stage-section.collapsed .stage-content {
+            max-height: 0;
+            padding: 0 24px;
+        }
+
+        /* Flow elements */
+        .flow-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .flow-row {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Node styles with tooltips */
+        .node {
+            position: relative;
+            padding: 16px 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            min-width: 200px;
+            max-width: 280px;
+        }
+
+        .node:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+            z-index: 100;
+        }
+
+        .node.process {
+            background: #dbeafe;
+            border: 3px solid #3b82f6;
+            border-radius: 8px;
+            color: #1e40af;
+        }
+
+        .node.decision {
+            background: #fef3c7;
+            border: 3px solid #f59e0b;
+            color: #92400e;
+            width: 200px;
+            height: 200px;
+            transform: rotate(45deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px;
+        }
+
+        .node.decision:hover {
+            transform: rotate(45deg) translateY(-4px) scale(1.02);
+        }
+
+        .node.decision .text {
+            transform: rotate(-45deg);
+            width: 140px;
+        }
+
+        .node.manual {
+            background: #fecaca;
+            border: 3px solid #ef4444;
+            border-radius: 50%;
+            color: #991b1b;
+            width: 200px;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+        }
+
+        .node.automated {
+            background: #d1fae5;
+            border: 3px solid #10b981;
+            border-radius: 8px;
+            color: #065f46;
+        }
+
+        .node.start-end {
+            background: #e0e7ff;
+            border: 3px solid #6366f1;
+            border-radius: 50px;
+            color: #3730a3;
+            padding: 16px 32px;
+        }
+
+        /* Tooltip */
+        .tooltip {
+            position: absolute;
+            bottom: calc(100% + 12px);
+            left: 50%;
+            transform: translateX(-50%) translateY(-10px);
+            background: #1e293b;
+            color: white;
+            padding: 16px 20px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            white-space: normal;
+            width: 320px;
+            max-width: 90vw;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        .tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-top: 8px solid #1e293b;
+        }
+
+        .node:hover .tooltip {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .tooltip-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .tooltip-details {
+            color: #cbd5e1;
+            font-size: 0.8rem;
+        }
+
+        .tooltip-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-top: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .tooltip-badge.automated {
+            background: #10b981;
+            color: white;
+        }
+
+        .tooltip-badge.manual {
+            background: #ef4444;
+            color: white;
+        }
+
+        /* Arrows */
+        .arrow-vertical {
+            width: 3px;
+            height: 20px;
+            background: #cbd5e1;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .arrow-vertical::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-top: 10px solid #cbd5e1;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+        }
+
+        .branch-container {
+            display: flex;
+            gap: 40px;
+            justify-content: center;
+            flex-wrap: wrap;
+            width: 100%;
+        }
+
+        .branch {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .branch-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #64748b;
+            background: #f1f5f9;
+            padding: 6px 16px;
+            border-radius: 20px;
+            border: 2px solid #e2e8f0;
+        }
+
+        /* Expand/Collapse all button */
+        .controls {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .control-btn {
+            padding: 10px 20px;
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            color: #64748b;
+            transition: all 0.3s ease;
+        }
+
+        .control-btn:hover {
+            border-color: #3b82f6;
+            color: #3b82f6;
+            transform: translateY(-2px);
+        }
+
+        .node-label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+            opacity: 0.7;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 768px) {
+            .stage-nav-btn {
+                min-width: 100%;
+            }
+            
+            .branch-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>PGE Quote Automation Workflow</h1>
+            <p>Complete Process Flow: P&G Request → Customer Quote</p>
+        </div>
+
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-shape process"></div>
+                <span><strong>Process Step</strong></span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-shape automated"></div>
+                <span><strong>Automated</strong></span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-shape decision"></div>
+                <span><strong>Decision</strong></span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-shape manual"></div>
+                <span><strong>Manual</strong></span>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="control-btn" onclick="expandAll()">Expand All</button>
+            <button class="control-btn" onclick="collapseAll()">Collapse All</button>
+        </div>
+
+        <!-- START NODE -->
+        <div style="background: white; padding: 24px; border-radius: 12px; margin-bottom: 20px; text-align: center;">
+            <div class="node start-end">
+                <strong>START</strong><br>
+                P&G Sends Quote Request
+                <div class="tooltip">
+                    <div class="tooltip-title">Process Start</div>
+                    <div class="tooltip-details">
+                        P&G emails quote request to customerservice@pgequipment.net with:<br>
+                        • P&G part number<br>
+                        • Part description<br>
+                        • Manufacturer name<br>
+                        • Manufacturer part number<br>
+                        • Quantity<br>
+                        • Plant location
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STAGE 1: INTAKE & VALIDATION -->
+        <div class="stage-section stage1" id="stage1">
+            <div class="stage-header" onclick="toggleStage('stage1')">
+                <div class="stage-number">1</div>
+                <div class="stage-title">
+                    <h2>Intake & Validation</h2>
+                    <p>Receive, parse, and validate quote requests</p>
+                </div>
+                <div class="expand-icon">▼</div>
+            </div>
+            <div class="stage-content">
+                <div class="flow-container">
+                    <div class="node automated">
+                        <div class="node-label">Step 1-2</div>
+                        Email Received<br>(Outlook Pack)<br>→ Parse with Claude
+                        <div class="tooltip">
+                            <div class="tooltip-title">Email Reception & Parsing</div>
+                            <div class="tooltip-details">
+                                <strong>Outlook Pack:</strong> Receives email and triggers automation<br><br>
+                                <strong>Claude Pack:</strong> AI parsing extracts structured data:<br>
+                                • Part numbers<br>
+                                • Manufacturer<br>
+                                • Quantity<br>
+                                • Description<br>
+                                • Plant location
+                            </div>
+                            <div class="tooltip-badge automated">Automated</div>
+                        </div>
+                    </div>
+
+                    <div class="arrow-vertical"></div>
+
+                    <div class="node process">
+                        <div class="node-label">Step 3</div>
+                        Create Quote Record in Coda
+                        <div class="tooltip">
+                            <div class="tooltip-title">Quote Record Creation</div>
+                            <div class="tooltip-details">
+                                New row added to Quote Requests table with status "Intake - Pending Validation"<br><br>
+                                Record includes all parsed data and is assigned a unique tracking reference number.
+                            </div>
+                            <div class="tooltip-badge automated">Automated</div>
+                        </div>
+                    </div>
+
+                    <div class="arrow-vertical"></div>
+
+                    <div class="node decision">
+                        <div class="text">Manufacturer in PVL?</div>
+                        <div class="tooltip">
+                            <div class="tooltip-title">Manufacturer Lookup</div>
+                            <div class="tooltip-details">
+                                System checks if manufacturer exists in Preferred Vendor List (PVL) database.<br><br>
+                                PVL contains manufacturer → vendor mappings with contact information.
+                            </div>
+                            <div class="tooltip-badge automated">Automated Check</div>
+                        </div>
+                    </div>
+
+                    <div class="branch-container">
+                        <div class="branch">
+                            <div class="branch-label">YES</div>
+                            <div class="arrow-vertical"></div>
+                            <div class="node process">
+                                Retrieve Preferred Vendor
+                                <div class="tooltip">
+                                    <div class="tooltip-title">Vendor Retrieved</div>
+                                    <div class="tooltip-details">
+                                        System retrieves preferred vendor contact information from PVL and proceeds to next validation step.
+                                    </div>
+                                    <div class="tooltip-badge automated">Automated</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="branch">
+                            <div class="branch-label">NO - STOP</div>
+                            <div class="arrow-vertical"></div>
+                            <div class="node manual">
+                                <div class="text">ISR: Research & Add Vendor to PVL</div>
+                                <div class="tooltip">
+                                    <div class="tooltip-title">Missing Vendor - Manual Action</div>
+                                    <div class="tooltip-details">
+                                        Status: "Stage 1: Missing Vendor"<br><br>
+                                        ISR must:<br>
+                                        • Research vendor for manufacturer<br>
+                                        • Obtain contact information<br>
+                                        • Add to PVL database<br>
+                                        • Then continue workflow
+                                    </div>
+                                    <div class="tooltip-badge manual">Manual Required</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="arrow-vertical"></div>
+
+                    <div class="node decision">
+                        <div class="text">Vendor Type?</div>
+                        <div class="tooltip">
+                            <div class="tooltip-title">Vendor Type Check</div>
+                            <div class="tooltip-details">
+                                Determines how to contact vendor:<br>
+                                • Email Contact - Can auto-send RFQ<br>
+                                • Online Portal - Requires manual login<br>
+                                • Multiple - Price comparison needed
+                            </div>
+                            <div class="tooltip-badge automated">Automated Check</div>
+                        </div>
+                    </div>
+
+                    <div class="branch-container">
+                        <div class="branch">
+                            <div class="branch-label">Email</div>
+                            <div class="arrow-vertical"></div>
+                            <div class="node process">
+                                Continue to Line Item Check
+                                <div class="tooltip">
+                                    <div class="tooltip-title">Email Vendor</div>
+                                    <div class="tooltip-details">
+                                        Vendor has email contact available. Can proceed with automated RFQ sending.
+                                    </div>
+                                    <div class="tooltip-badge automated">Automated</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="branch">
+                            <div class="branch-label">Portal - STOP</div>
+                            <div class="arrow-vertical"></div>
+                            <div class="node manual">
+                                <div class="text">ISR: Log into Vendor Portal Manually</div>
+                                <div class="tooltip">
+                                    <div class="tooltip-title">Online Portal Vendor</div>
+                                    <div class="tooltip-details">
+                                        Status: "Stage 1: Online Vendors"<br><br>
+                                        Vendor requires portal login (e.g., Grainger.com). ISR must manually obtain pricing and enter into Coda. Skip to Stage 4.
+                                    </div>
+                                    <div class="tooltip-badge manual">Manual Required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="branch">
+                            <div class="branch-label">Multiple</div>
+                            <div class="arrow-vertical"></div>
+                            <div class="node manual">
+                                <div class="text">ISR: Select Vendors for Price Check</div>
+                                <div class="tooltip">
+                                    <div class="tooltip-title">Multiple Vendor Price Check</div>
+                                    <div class="tooltip-details">
+                                        Status: "Stage 1: Assign Vendor Manually"<br><br>
+                                        ISR selects 2-4 vendors for price comparison. RFQs will be sent to all selected vendors in parallel.
+                                    </div>
+                                    <div class="tooltip-badge manual">Manual Selection</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="arrow-vertical"></div>
+
+                    <div class="node decision">
+                        <div class="text">Line Items ≤10?</div>
+                        <div class="tooltip">
+                            <div class="tooltip-title">Line Item Count Validation</div>
+                            <div class="tooltip-details">
+                                System limits quotes to 10 line items maximum for automation. Large quotes require batching or special approval.
+                            </div>
+                            <div class="tooltip-badge automated">Automated Check</div>
+                        </div>
+                    </div>
+
+                    <div class="branch-container">
+                        <div class="branch">
+                            <div class="branch-label">YES</div>
+                            <div class="arrow-vertical"></div>
+                            <div class="node process">
+                                Proceed to Data Validation
+                                <div class="tooltip">
+                                    <div class="tooltip-title">Within Limit</div>
+                                    <div class="tooltip-details">
+                                        Quote has 10 or fewer line items. Proceeds to final data validation check.
+                                    </div>
+                                    <div class="tooltip-badge automated">Automated</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="branch">
+                            <div class="branch-label">NO - STOP</div>
+                            <div class="arrow-vertical"></div>
+                            <div class="node manual">
+                                <div class="text">ISR: Batch Items or Get Override</div>
+                                <div class="tooltip">
+                                    <div class="tooltip-title">Line Item Limit Exceeded</div>
+                                    <div class="tooltip-details">
+                                        Status: "Stage 1: Line Item Limit"<br><br>
+                                        More than 10 line items. ISR must:<br>
+                                        • Split into multiple quotes, or<br>
+                                        • Get manual approval to proceed
+                                    </div>
+                                    <div class="tooltip-badge manual">Manual Required</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="arrow-vertical"></div>
+
+                    <div class="node decision">
+                        <div class="text">Data Valid?</div>
+                        <div class="tooltip">
+                            <div class="tooltip-title">Data Quality Check</div>
+                            <div class="tooltip-details">
+                                Final validation:<br>
+                                • Manufacturer name present<br>
+                                • Part number present<br>
+                                • Valid email format<br>
+                                • All required fields complete
+                            </div>
+                            <div class="tooltip-badge automated">Automated Check</div>
+                        </div>
+                    </div>
+
+                    <div class="branch-container">
+                        <div class="branch">
+                            <div class="branch-label">YES</div>
+                            <div class="arrow-vertical"></div>
+                            <div class="node automated">
+                                Status: Ready for Vendor Outreach
+                                <div class="tooltip">
+                                    <div class="tooltip-title">Validation Complete</div>
+                                    <div class="tooltip-details">
+                                        All checks passed. Quote advances to Stage 2: Vendor Engagement.
+                                    </div>
+                                    <div class="tooltip-badge automated">Automated</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="branch">
+                            <div class="branch-label">NO - STOP</div>
+                            <div class="arrow-vertical"></div>
+                            <div class="node manual">
+                                <div class="text">ISR: Review & Correct Data</div>
+                                <div class="tooltip">
+                                    <div class="tooltip-title">Data Issues Found</div>
+                                    <div class="tooltip-details">
+                                        Status: "Stage 1: Technical Error"<br><br>
+                                        Data quality issues detected. ISR must review and correct before proceeding.
+                                    </div>
+                                    <div class="tooltip-badge manual">Manual Required</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STAGE 2: VENDOR ENGAGEMENT -->
+        <div class="stage-section stage2" id="stage2">
+            <div class="stage-header" onclick="toggleStage('stage2')">
+                <div class="stage-number">2</div>
+                <div class="stage-title">
+                    <h2>Vendor Engagement</h2>
+                    <p>Send RFQs and manage vendor communication</p>
+                </div>
+                <div class="expand-icon">▼</div>
+            </div>
+            <div class="stage-content">
+                <div class="flow-container">
+                    <div class="node automated">
+                        <div class="node-label">Step 8</div>
+                        Generate RFQ Email Text
+                        <div class="tooltip">
+                            <div class="tooltip-title">RFQ Generation</div>
+                            <div class="tooltip-details">
+                                Coda generates professional RFQ email with:<br>
+                                • Part details and specifications<br>
+                                • Quantity needed<br>
+                                • Request for net pricing and lead time<br>
+                                • PGE contact information<br>
+                                • Unique tracking reference number
+                            </div>
+                            <div class="tooltip-badge automated">Automated</div>
+                        </div>
+                    </div>
+
+                    <div class="arrow-vertical"></div>
+
+                    <div class="node automated">
+                        <div class="node-label">Step 9</div>
+                        Send Automated RFQ<br>(Outlook Pack) + Form Link
+                        <div class="tooltip">
+                            <div class="tooltip-title">Automated RFQ Sending</div>
+                            <div class="tooltip-details">
+                                <strong>Outlook Pack</strong> sends email to vendor(s) including:<br>
+                                • RFQ details<br>
+                                • Link to custom HTML form<br>
+                                • Quote reference number<br><br>
+                                Status: "Stage 2: Vendor Quote - Waiting"<br>
+                                Logs timestamp and recipient
+                            </div>
+                            <div class="tooltip-badge automated">Automated</div>
+                        </div>
+                    </div>
+
+                    <div class="arrow-vertical"></div>
+
+                    <div class="node process">
+                        <div class="node-label">Step 10</div>
+                        Monitor Response<br>
+                        Day 3: Reminder #1<br>
+                        Day 5: Reminder #2<br>
+                        Day 7: Flag No Reply
+                        <div class="tooltip">
+                            <div class="tooltip-title">Automated Follow-Up Logic</div>
+                            <div class="tooltip-details">
+                                System monitors for vendor response and automatically sends reminders:<br><br>
+                                <strong>Day 3:</strong> First reminder<br>
+                                <strong>Day 5:</strong> Second reminder<br>
+                                <strong>Day 7:</strong> Flag as "No Vendor Reply" for manual intervention
+                            </div>
+                            <div class="tooltip-badge automated">Automated</div>
+                        </div>
+                    </div>
+
+                    <div class="arrow-vertical"></div>
+
+                    <div class="node decision">
+                        <div class="text">Vendor Response?</div>
+                        <div class="tooltip">
+                            <div class="tooltip-title">Response Check</div>
+                            <div class="tooltip-details">
+                                System checks for vendor response via:<br>
+                                • Email reply<br>
+                                • Form submission<br>
+                                • PDF attachment<br><br>
+                                Or identifies issues like bounced emails or no response.
+                            </div>
+                            <div class="tooltip-badge automated">Automated Check</div>
+                        </div>
+                    </div>
+
+                    <div class="branch-container">
+                        <div class="branch">
+                            <div class="branch-label">Responded</div>
+                            <div class="arrow-vertical"></div>
+                            <div class="node process">
+                                Continue to Stage 3
+                                <div class="tooltip">
+                                    <div class="tooltip-title">Response Received</div>
+                                    <div class="tooltip-details">
+                                        Vendor responded via email, form, or PDF. Proceed to Stage 3 for response processing.
+                                    </div>
+                                    <div class="tooltip-badge automated">Automated</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="branch">
+                            <div class="branch-label">No Reply</div>
+                            <div class="arrow-vertical"></div>
+                            <div class="node manual">
+                                <div class="text">ISR: Manual Follow-up or Alt Vendor</div>
+                                <div class="tooltip">
+                                    <div class="tooltip-title">No Vendor Reply</div>
+                                    <div class="tooltip-details">
+                                        Status: "Stage 2: No Vendor Reply"<br><br>
+                                        No response after 7 days and 2 reminders. ISR must:<br>
+                                        • Call vendor directly<br>
+                                        • Source alternative vendor<br>
+                                        • Escalate to P&G if needed
+                                    </div>
+                                    <div class="tooltip-badge manual">Manual Required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="branch">
+                            <div class="branch-label">Bounced</div>
+                            <div class="arrow-vertical"></div>
+                            <div class="node manual">
+                                <div class="text">ISR: Update Vendor Contact Info</div>
+                                <div class="tooltip">
+                                    <div class="tooltip-title">Email Undeliverable</div>
+                                    <div class="tooltip-details">
+                                        Status: "Stage 2: Email Undeliverable"<br><br>
+                                        Email bounced. ISR must:<br>
+                                        • Find correct vendor contact<br>
+                                        • Update PVL database<br>
+                                        • Return to Step 9 to resend RFQ
+                                    </div>
+                                    <div class="tooltip-badge manual">Manual Required</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STAGE 3: VENDOR RESPONSE -->
+        <div class="stage-section stage3" id="stage3">
+            <div class="stage-header" onclick="toggleStage('stage3')">
+                <div class="stage-number">3</div>
+                <div class="stage-title">
+                    <h2>Vendor Response</h2>
+                    <p>Receive and process vendor quotes</p>
+                </div>
+                <div class="expand-icon">▼</div>
+            </div>
+            <div class="stage-content">
+                <div class="flow-container">
+                    <div class="node decision">
+                        <div class="text">Response Channel?</div>
+                        <div class="tooltip">
+                            <div class="tooltip-title">Response Channel Detection</div>
+                            <div class="tooltip-details">
+                                Vendors can respond through 3 channels:<br>
+                                • Email body text<br>
+                                • Custom HTML form<br>
+                                • PDF attachment<br><br>
+                                System automatically detects and routes to appropriate parser.
+                            </div>
+                            <div class="tooltip-badge automated">Automated</div>
+                        </div>
+                    </div>
+
+                    <div class="branch-container">
+                        <div class="branch">
+                            <div class="branch-label">Email Body</div>
+                            <div class="arrow-vertical"></div>
+                            <div class="node automated">
+                                Claude Pack Parses Email for Quote Data
+                                <div class="tooltip">
+                                    <div class="tooltip-title">Email Parsing</div>
+                                    <div class="tooltip-details">
+                                        <strong>Outlook Pack:</strong> Receives email<br>
+                                        <strong>Claude Pack:</strong> AI extracts:<br>
+                                        • Price<br>
+                                        • Lead time<br>
+                                        • Part number confirmation<br>
+                                        • Special notes or conditions<br><br>
+                                        Then checks for quote reference number.
+                                    </div>
+                                    <div class="tooltip-badge automated">Automated</div>
+                                </div>
+                            </div>
+                            <div class="arrow-vertical"></div>
+                            <div style="text-align: center; font-size: 0.85rem; color: #64748b; font-weight: 600;">
+                                Reference # Found? → Auto-match | Missing? → ISR Manual Match
+                            </div>
+                        </div>
+                        <div class="branch">
+                            <div class="branch-label">HTML Form</div>
+                            <div class="arrow-vertical"></div>
+                            <div class="node automated">
+                                Form Submits via API to Coda (Structured Data)
+                                <div class="tooltip">
+                                    <div class="tooltip-title">Form Submission</div>
+                                    <div class="tooltip-details">
+                                        Custom HTML form submits structured data directly to Coda via API:<br>
+                                        • Price (required)<br>
+                                        • Lead time (required)<br>
+                                        • Part number<br>
+                                        • Notes<br>
+                                        • Quote reference (auto-included)<br><br>
+                                        Auto-matches to quote request.
+                                    </div>
+                                    <div class="tooltip-badge automated">Automated</div>
+                                </div>
+                            </div>
+                            <div class="arrow-vertical"></div>
+                            <div class="node process">
+                                Auto-match via Reference Number
+                                <div class="tooltip">
+                                    <div class="tooltip-title">Automatic Matching</div>
+                                    <div class="tooltip-details">
+                                        Status: "Stage 3: Vendor Quote - By Form"<br><br>
+                                        Form includes reference number, allowing instant matching to original quote request.
+                                    </div>
+                                    <div class="tooltip-badge automated">Automated</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="branch">
+                            <div class="branch-label">PDF Attachment</div>
+                            <div class="arrow-vertical"></div>
+                            <div class="node automated">
+                                PDF → JPEG → Claude Vision Extracts Data
+                                <div class="tooltip">
+                                    <div class="tooltip-title">PDF Processing</div>
+                                    <div class="tooltip-details">
+                                        <strong>Process:</strong><br>
+                                        1. Detect PDF attachment<br>
+                                        2. Convert PDF to JPEG image<br>
+                                        3. Claude Vision reads image<br>
+                                        4. Extract pricing data from multi-column formats<br><br>
+                                        Better than OCR for complex layouts and tables.
+                                    </div>
+                                    <div class="tooltip-badge automated">Automated</div>
+                                </div>
+                            </div>
+                            <div class="arrow-vertical"></div>
+                            <div style="text-align: center; font-size: 0.85rem; color: #64748b; font-weight: 600;">
+                                Reference # Found? → Auto-match | Missing? → ISR Manual Match
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STAGE 4: REVIEW & SEND -->
+        <div class="stage-section stage4" id="stage4">
+            <div class="stage-header" onclick="toggleStage('stage4')">
+                <div class="stage-number">4</div>
+                <div class="stage-title">
+                    <h2>Review & Send</h2>
+                    <p>Validate, calculate, and deliver customer quote</p>
+                </div>
+                <div class="expand-icon">▼</div>
+            </div>
+            <div class="stage-content">
+                <div class="flow-container">
+                    <div class="node decision">
+                        <div class="text">Quote Valid?</div>
+                        <div class="tooltip">
+                            <div class="tooltip-title">Quote Validation</div>
+                            <div class="tooltip-details">
+                                ISR reviews vendor quote data for:<br>
+                                • Price reasonability<br>
+                                • Acceptable lead time<br>
+                                • Part number match<br>
+                                • Vendor legitimacy (not spam)<br>
+                                • Complete information
+                            </div>
+                            <div class="tooltip-badge manual">Manual Review</div>
+                        </div>
+                    </div>
+
+                    <div class="branch-container">
+                        <div class="branch">
+                            <div class="branch-label">Valid</div>
+                            <div class="arrow-vertical"></div>
+                            <div class="node process">
+                                Continue to Calculate
+                                <div class="tooltip">
+                                    <div class="tooltip-title">Validation Passed</div>
+                                    <div class="tooltip-details">
+                                        Quote data is complete and valid. Proceed to pricing calculation.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="branch">
+                            <div class="branch-label">Missing</div>
+                            <div class="arrow-vertical"></div>
+                            <div class="node manual">
+                                <div class="text">ISR: Request from Vendor Again</div>
+                                <div class="tooltip">
+                                    <div class="tooltip-title">Missing Information</div>
+                                    <div class="tooltip-details">
+                                        Status: "Stage 4: Vendor Missing Attachment"<br><br>
+                                        Vendor claimed to send quote but attachment missing or incomplete. ISR requests again.
+                                    </div>
+                                    <div class="tooltip-badge manual">Manual</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="branch">
+                            <div class="branch-label">Needs Confirm</div>
+                            <div class="arrow-vertical"></div>
+                            <div class="node manual">
+                                <div class="text">ISR: Email Vendor via Outlook</div>
+                                <div class="tooltip">
+                                    <div class="tooltip-title">Requires Clarification</div>
+                                    <div class="tooltip-details">
+                                        Status: "Stage 4: Vendor Quote - To Confirm"<br><br>
+                                        Pricing or terms unclear. ISR manually emails vendor via Outlook for clarification.
+                                    </div>
+                                    <div class="tooltip-badge manual">Manual</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="branch">
+                            <div class="branch-label">Blocked</div>
+                            <div class="arrow-vertical"></div>
+                            <div class="node manual">
+                                <div class="text">ISR: Alt Vendor or No-Bid to P&G</div>
+                                <div class="tooltip">
+                                    <div class="tooltip-title">Quote Blocked</div>
+                                    <div class="tooltip-details">
+                                        Status: "Stage 4: Vendor Quote - Blocked"<br><br>
+                                        Invalid pricing, vendor rejected, or part obsolete. ISR must source alternative vendor or inform P&G of no-bid.
+                                    </div>
+                                    <div class="tooltip-badge manual">Manual</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="arrow-vertical"></div>
+
+                    <div class="node manual">
+                        <div class="text">
+                            <div class="node-label">Step 13</div>
+                            ISR: Calculate<br>Price + 20%<br>Lead Time + 7d
+                        </div>
+                        <div class="tooltip">
+                            <div class="tooltip-title">Pricing Calculation</div>
+                            <div class="tooltip-details">
+                                ISR calculates final customer pricing:<br><br>
+                                <strong>Price:</strong> Vendor price + 20% margin (standard)<br>
+                                <strong>Lead Time:</strong> Vendor lead time + 7 days buffer<br><br>
+                                ISR enters calculated values into Coda.
+                            </div>
+                            <div class="tooltip-badge manual">Manual Entry</div>
+                        </div>
+                    </div>
+
+                    <div class="arrow-vertical"></div>
+
+                    <div class="node automated">
+                        <div class="node-label">Step 14</div>
+                        Generate PDF Quote (Documint)
+                        <div class="tooltip">
+                            <div class="tooltip-title">PDF Generation</div>
+                            <div class="tooltip-details">
+                                <strong>Documint</strong> generates professional PDF quote including:<br>
+                                • PGE branding<br>
+                                • P&G part details<br>
+                                • Manufacturer info<br>
+                                • Quantity and pricing<br>
+                                • Lead time<br>
+                                • Terms and conditions
+                            </div>
+                            <div class="tooltip-badge automated">Automated</div>
+                        </div>
+                    </div>
+
+                    <div class="arrow-vertical"></div>
+
+                    <div class="node manual">
+                        <div class="text">
+                            <div class="node-label">Step 15</div>
+                            ISR: Review PDF for Accuracy
+                        </div>
+                        <div class="tooltip">
+                            <div class="tooltip-title">Final PDF Review</div>
+                            <div class="tooltip-details">
+                                ISR reviews generated PDF for:<br>
+                                • Data accuracy<br>
+                                • Proper formatting<br>
+                                • No typos or errors<br>
+                                • Professional appearance<br><br>
+                                If corrections needed, return to calculation step.
+                            </div>
+                            <div class="tooltip-badge manual">Manual Review</div>
+                        </div>
+                    </div>
+
+                    <div class="arrow-vertical"></div>
+
+                    <div class="node manual">
+                        <div class="text">
+                            <div class="node-label">Step 16</div>
+                            ISR: Send Email to P&G via Outlook (PDF Attached)
+                        </div>
+                        <div class="tooltip">
+                            <div class="tooltip-title">Manual Email Sending</div>
+                            <div class="tooltip-details">
+                                ISR manually composes professional email in Outlook:<br>
+                                • Attached PDF quote<br>
+                                • Professional message<br>
+                                • Any relevant notes<br>
+                                • Direct send to P&G contact<br><br>
+                                Then marks quote as sent in Coda with timestamp.
+                            </div>
+                            <div class="tooltip-badge manual">Manual</div>
+                        </div>
+                    </div>
+
+                    <div class="arrow-vertical"></div>
+
+                    <div class="node automated">
+                        <div class="node-label">Step 17</div>
+                        Update Status: Quote Sent
+                        <div class="tooltip">
+                            <div class="tooltip-title">Status Update</div>
+                            <div class="tooltip-details">
+                                Status: "Stage 4: Review & Send - Complete"<br><br>
+                                System logs:<br>
+                                • Sent timestamp<br>
+                                • Sent by ISR name<br>
+                                • Advances to Stage 5
+                            </div>
+                            <div class="tooltip-badge automated">Automated</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STAGE 5: COMPLETE/ARCHIVED -->
+        <div class="stage-section stage5" id="stage5">
+            <div class="stage-header" onclick="toggleStage('stage5')">
+                <div class="stage-number">5</div>
+                <div class="stage-title">
+                    <h2>Complete/Archived</h2>
+                    <p>Final status and long-term storage</p>
+                </div>
+                <div class="expand-icon">▼</div>
+            </div>
+            <div class="stage-content">
+                <div class="flow-container">
+                    <div class="node automated">
+                        <div class="node-label">Step 18</div>
+                        Status: Quote Processed
+                        <div class="tooltip">
+                            <div class="tooltip-title">Quote Processed</div>
+                            <div class="tooltip-details">
+                                Status: "Stage 5: Quote - Processed"<br><br>
+                                Quote successfully sent to P&G. Record remains accessible for reporting, analytics, and reference.
+                            </div>
+                            <div class="tooltip-badge automated">Automated</div>
+                        </div>
+                    </div>
+
+                    <div class="arrow-vertical"></div>
+
+                    <div style="background: #f1f5f9; padding: 20px; border-radius: 8px; text-align: center;">
+                        <strong style="color: #475569;">Alternative Outcomes:</strong>
+                        <div style="margin-top: 12px; display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+                            <div class="node process" style="min-width: 200px;">
+                                No Bid Quote
+                                <div class="tooltip">
+                                    <div class="tooltip-title">No Bid Scenario</div>
+                                    <div class="tooltip-details">
+                                        Status: "Stage 5: No Bid Quote"<br><br>
+                                        Vendor declined to quote, part is obsolete, or cannot fulfill. ISR manually emails P&G explaining why part cannot be quoted.
+                                    </div>
+                                    <div class="tooltip-badge manual">Manual</div>
+                                </div>
+                            </div>
+                            <div class="node process" style="min-width: 200px;">
+                                Customer Cancelled
+                                <div class="tooltip">
+                                    <div class="tooltip-title">Cancellation</div>
+                                    <div class="tooltip-details">
+                                        Status: "Stage 5: Quote - Cancelled"<br><br>
+                                        P&G cancelled request before quote was sent. Quote closed without completion.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="arrow-vertical"></div>
+
+                    <div class="node automated">
+                        <div class="node-label">Step 20</div>
+                        After 30 Days: Archive Quote
+                        <div class="tooltip">
+                            <div class="tooltip-title">Automatic Archiving</div>
+                            <div class="tooltip-details">
+                                After 30 days, quote automatically moves to archived status.<br><br>
+                                Data is retained but flagged as inactive to keep active dashboard clean while preserving history for reporting.
+                            </div>
+                            <div class="tooltip-badge automated">Automated</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- END NODE -->
+        <div style="background: white; padding: 24px; border-radius: 12px; margin-top: 20px; text-align: center;">
+            <div class="node start-end">
+                <strong>END</strong><br>
+                Quote Complete
+                <div class="tooltip">
+                    <div class="tooltip-title">Process Complete</div>
+                    <div class="tooltip-details">
+                        Quote has been successfully processed, sent to P&G, and archived. Process complete.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleStage(stageId) {
+            const stage = document.getElementById(stageId);
+            stage.classList.toggle('collapsed');
+        }
+
+        function expandAll() {
+            document.querySelectorAll('.stage-section').forEach(stage => {
+                stage.classList.remove('collapsed');
+            });
+        }
+
+        function collapseAll() {
+            document.querySelectorAll('.stage-section').forEach(stage => {
+                stage.classList.add('collapsed');
+            });
+        }
+
+        // Initialize with all stages expanded
+        document.addEventListener('DOMContentLoaded', function() {
+            // All stages start expanded by default
+        });
+    </script>
+</body>
+</html>
