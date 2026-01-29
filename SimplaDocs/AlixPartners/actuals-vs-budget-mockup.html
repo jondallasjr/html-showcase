@@ -1,0 +1,1667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlixPartners - Budget vs Actuals Dashboard</title>
+    <style>
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Colors */
+            --color-bg-primary: #FFFFFF;
+            --color-bg-secondary: #F8F9FA;
+            --color-bg-tertiary: #F1F3F4;
+            --color-border: #E0E0E0;
+            --color-text-primary: #202124;
+            --color-text-secondary: #5F6368;
+            --color-text-tertiary: #9AA0A6;
+            
+            /* Brand */
+            --color-primary: #4285F4;
+            --color-success: #34C759;
+            --color-warning: #FF9500;
+            --color-danger: #FF3B30;
+            --color-info: #007AFF;
+            
+            /* Interactive */
+            --color-hover-bg: rgba(0,0,0,0.04);
+            --color-active-bg: rgba(0,0,0,0.08);
+            --color-focus-ring: rgba(66, 133, 244, 0.2);
+            
+            /* Spacing */
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 32px;
+            --space-2xl: 48px;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--color-bg-secondary);
+            color: var(--color-text-primary);
+            line-height: 1.6;
+        }
+
+        /* ===== LAYOUT ===== */
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 260px;
+            background: var(--color-bg-primary);
+            border-right: 1px solid var(--color-border);
+            padding: var(--space-md);
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .sidebar-header {
+            padding-bottom: var(--space-lg);
+            border-bottom: 1px solid var(--color-border);
+            margin-bottom: var(--space-md);
+        }
+
+        .sidebar-header h2 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+
+        .sidebar-header p {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            margin-top: var(--space-xs);
+        }
+
+        .nav-item {
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            color: var(--color-text-primary);
+            cursor: pointer;
+            transition: background 150ms ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 4px;
+        }
+
+        .nav-item:hover {
+            background: var(--color-hover-bg);
+        }
+
+        .nav-item.active {
+            background: var(--color-active-bg);
+            font-weight: 500;
+        }
+
+        .nav-section {
+            margin-top: var(--space-lg);
+        }
+
+        .nav-section-title {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--color-text-tertiary);
+            padding: 6px 12px;
+            margin-bottom: 4px;
+        }
+
+        .main-content {
+            margin-left: 260px;
+            flex: 1;
+            padding: var(--space-2xl) var(--space-2xl);
+        }
+
+        /* ===== HEADER ===== */
+        .page-header {
+            margin-bottom: var(--space-xl);
+        }
+
+        .page-header h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: var(--space-sm);
+        }
+
+        .page-meta {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            font-size: 13px;
+            color: var(--color-text-secondary);
+        }
+
+        .breadcrumbs {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-md);
+        }
+
+        .breadcrumb-separator {
+            color: var(--color-border);
+        }
+
+        /* ===== CARDS ===== */
+        .card {
+            background: var(--color-bg-primary);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: var(--space-lg);
+            margin-bottom: var(--space-md);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-md);
+            padding-bottom: var(--space-md);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        /* ===== STATS GRID ===== */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-md);
+            margin-bottom: var(--space-xl);
+        }
+
+        .stat-card {
+            background: var(--color-bg-primary);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: var(--space-lg);
+        }
+
+        .stat-label {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-sm);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 500;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: var(--space-xs);
+        }
+
+        .stat-value.positive {
+            color: var(--color-success);
+        }
+
+        .stat-value.negative {
+            color: var(--color-danger);
+        }
+
+        .stat-change {
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .stat-change.up {
+            color: var(--color-danger);
+        }
+
+        .stat-change.down {
+            color: var(--color-success);
+        }
+
+        /* ===== TABLES ===== */
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        .table-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-md);
+            gap: var(--space-md);
+        }
+
+        .table-filters {
+            display: flex;
+            gap: var(--space-sm);
+        }
+
+        .coda-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        .coda-table th {
+            background: var(--color-bg-secondary);
+            padding: 10px 12px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            border-bottom: 2px solid var(--color-border);
+            white-space: nowrap;
+        }
+
+        .coda-table th.number {
+            text-align: right;
+        }
+
+        .coda-table td {
+            padding: 12px;
+            border-bottom: 1px solid var(--color-border);
+            vertical-align: middle;
+        }
+
+        .coda-table td.number {
+            text-align: right;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .coda-table tr:hover {
+            background: var(--color-bg-tertiary);
+        }
+
+        /* ===== BADGES ===== */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .badge-green {
+            background: rgba(52, 199, 89, 0.15);
+            color: rgb(40, 167, 69);
+        }
+
+        .badge-yellow {
+            background: rgba(255, 149, 0, 0.15);
+            color: rgb(200, 100, 0);
+        }
+
+        .badge-red {
+            background: rgba(255, 59, 48, 0.15);
+            color: rgb(220, 38, 38);
+        }
+
+        .badge-blue {
+            background: rgba(0, 122, 255, 0.15);
+            color: rgb(0, 100, 210);
+        }
+
+        .badge-gray {
+            background: rgba(0, 0, 0, 0.08);
+            color: var(--color-text-secondary);
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            transition: all 150ms ease;
+        }
+
+        .btn-primary {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--color-text-primary);
+            border: 1px solid var(--color-border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--color-hover-bg);
+        }
+
+        .btn-small {
+            padding: 6px 12px;
+            font-size: 13px;
+        }
+
+        /* ===== FORM ELEMENTS ===== */
+        .input, .select {
+            padding: 8px 12px;
+            border: 1px solid var(--color-border);
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: border-color 150ms ease;
+        }
+
+        .input:focus, .select:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px var(--color-focus-ring);
+        }
+
+        /* ===== CALLOUTS ===== */
+        .callout {
+            display: flex;
+            gap: 12px;
+            padding: 16px 20px;
+            border-radius: 8px;
+            border-left: 3px solid;
+            margin: 16px 0;
+        }
+
+        .callout-icon {
+            font-size: 20px;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+
+        .callout-content {
+            flex: 1;
+        }
+
+        .callout-info {
+            background: rgba(0, 122, 255, 0.1);
+            border-color: rgb(0, 122, 255);
+        }
+
+        .callout-warning {
+            background: rgba(255, 149, 0, 0.1);
+            border-color: rgb(255, 149, 0);
+        }
+
+        .callout-success {
+            background: rgba(52, 199, 89, 0.1);
+            border-color: rgb(52, 199, 89);
+        }
+
+        /* ===== TABS ===== */
+        .tabs {
+            display: flex;
+            gap: var(--space-sm);
+            border-bottom: 2px solid var(--color-border);
+            margin-bottom: var(--space-xl);
+        }
+
+        .tab {
+            padding: 12px 20px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -2px;
+            transition: all 150ms ease;
+        }
+
+        .tab:hover {
+            color: var(--color-text-primary);
+            background: var(--color-hover-bg);
+            border-radius: 6px 6px 0 0;
+        }
+
+        .tab.active {
+            color: var(--color-primary);
+            border-bottom-color: var(--color-primary);
+        }
+
+        /* ===== PROGRESS BAR ===== */
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--color-bg-tertiary);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--color-primary);
+            border-radius: 4px;
+            transition: width 300ms ease;
+        }
+
+        .progress-fill.over-budget {
+            background: var(--color-danger);
+        }
+
+        .progress-fill.warning {
+            background: var(--color-warning);
+        }
+
+        /* ===== VARIANCE INDICATOR ===== */
+        .variance {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-weight: 500;
+        }
+
+        .variance.positive {
+            color: var(--color-success);
+        }
+
+        .variance.negative {
+            color: var(--color-danger);
+        }
+
+        /* ===== CHART PLACEHOLDER ===== */
+        .chart-placeholder {
+            background: var(--color-bg-tertiary);
+            border-radius: 8px;
+            padding: var(--space-2xl);
+            text-align: center;
+            color: var(--color-text-secondary);
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chart-placeholder-icon {
+            font-size: 48px;
+            margin-bottom: var(--space-md);
+        }
+
+        /* ===== FILTERS BAR ===== */
+        .filters-bar {
+            background: var(--color-bg-primary);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: var(--space-md);
+            margin-bottom: var(--space-md);
+            display: flex;
+            gap: var(--space-md);
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .filter-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--color-text-tertiary);
+        }
+
+        /* ===== EMPTY STATE ===== */
+        .empty-state {
+            text-align: center;
+            padding: var(--space-2xl);
+            color: var(--color-text-secondary);
+        }
+
+        .empty-icon {
+            font-size: 64px;
+            margin-bottom: var(--space-md);
+        }
+
+        .empty-state h3 {
+            font-size: 18px;
+            margin-bottom: var(--space-sm);
+            color: var(--color-text-primary);
+        }
+
+        /* ===== TOGGLE SWITCH ===== */
+        .toggle-group {
+            display: flex;
+            gap: 4px;
+            background: var(--color-bg-secondary);
+            padding: 4px;
+            border-radius: 8px;
+        }
+
+        .toggle-btn {
+            padding: 6px 14px;
+            font-size: 13px;
+            font-weight: 500;
+            border-radius: 6px;
+            border: none;
+            background: transparent;
+            color: var(--color-text-secondary);
+            cursor: pointer;
+            transition: all 150ms ease;
+        }
+
+        .toggle-btn:hover {
+            color: var(--color-text-primary);
+        }
+
+        .toggle-btn.active {
+            background: white;
+            color: var(--color-primary);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        /* ===== ALERT INDICATOR ===== */
+        .alert-indicator {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .alert-critical {
+            background: var(--color-danger);
+            color: white;
+        }
+
+        .alert-warning {
+            background: var(--color-warning);
+            color: white;
+        }
+
+        /* ===== EXPANDABLE ROW ===== */
+        .expandable-row {
+            cursor: pointer;
+        }
+
+        .expand-icon {
+            display: inline-block;
+            transition: transform 150ms ease;
+            margin-right: 8px;
+        }
+
+        .expand-icon.expanded {
+            transform: rotate(90deg);
+        }
+
+        .detail-row {
+            background: var(--color-bg-tertiary) !important;
+        }
+
+        .detail-row td {
+            padding: var(--space-md) var(--space-lg);
+        }
+
+        .detail-content {
+            display: grid;
+            gap: var(--space-md);
+        }
+
+        .detail-section {
+            background: white;
+            padding: var(--space-md);
+            border-radius: 6px;
+            border: 1px solid var(--color-border);
+        }
+
+        .detail-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--color-text-tertiary);
+            margin-bottom: 4px;
+        }
+
+        .detail-value {
+            font-size: 14px;
+            color: var(--color-text-primary);
+        }
+
+        /* ===== MODAL ===== */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: var(--space-lg);
+        }
+
+        .modal {
+            background: white;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .modal-header {
+            padding: var(--space-lg);
+            border-bottom: 1px solid var(--color-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .modal-close {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: none;
+            background: var(--color-bg-secondary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: var(--color-text-secondary);
+        }
+
+        .modal-close:hover {
+            background: var(--color-hover-bg);
+        }
+
+        .modal-body {
+            padding: var(--space-lg);
+            overflow-y: auto;
+        }
+
+        .modal-footer {
+            padding: var(--space-lg);
+            border-top: 1px solid var(--color-border);
+            display: flex;
+            justify-content: flex-end;
+            gap: var(--space-sm);
+        }
+
+        /* ===== DATA FRESHNESS ===== */
+        .freshness-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .freshness-current {
+            background: rgba(52, 199, 89, 0.15);
+            color: rgb(40, 167, 69);
+        }
+
+        .freshness-stale {
+            background: rgba(255, 149, 0, 0.15);
+            color: rgb(200, 100, 0);
+        }
+
+        .freshness-overdue {
+            background: rgba(255, 59, 48, 0.15);
+            color: rgb(220, 38, 38);
+        }
+
+        /* ===== FORECAST METRICS ===== */
+        .forecast-card {
+            background: linear-gradient(135deg, var(--color-bg-secondary), var(--color-bg-tertiary));
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: var(--space-lg);
+        }
+
+        .forecast-label {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-xs);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .forecast-value {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: var(--space-xs);
+        }
+
+        .forecast-trend {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+        }
+
+        /* ===== QUICK FILTER CHIPS ===== */
+        .quick-filters {
+            display: flex;
+            gap: var(--space-sm);
+            flex-wrap: wrap;
+            margin-bottom: var(--space-md);
+        }
+
+        .filter-chip {
+            padding: 6px 12px;
+            border-radius: 16px;
+            font-size: 13px;
+            font-weight: 500;
+            border: 1px solid var(--color-border);
+            background: white;
+            cursor: pointer;
+            transition: all 150ms ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .filter-chip:hover {
+            background: var(--color-hover-bg);
+            border-color: var(--color-text-tertiary);
+        }
+
+        .filter-chip.active {
+            background: var(--color-primary);
+            color: white;
+            border-color: var(--color-primary);
+        }
+
+        .filter-chip-remove {
+            margin-left: 4px;
+            font-weight: 700;
+        }
+
+        /* ===== BENCHMARK INDICATOR ===== */
+        .benchmark {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+        }
+
+        .benchmark-bar {
+            width: 80px;
+            height: 6px;
+            background: var(--color-bg-tertiary);
+            border-radius: 3px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .benchmark-fill {
+            height: 100%;
+            background: var(--color-primary);
+            border-radius: 3px;
+        }
+
+        .benchmark-marker {
+            position: absolute;
+            top: -2px;
+            width: 2px;
+            height: 10px;
+            background: var(--color-danger);
+        }
+
+        /* ===== THRESHOLD SETTINGS ===== */
+        .threshold-row {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            padding: var(--space-sm) 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .threshold-label {
+            flex: 1;
+            font-size: 14px;
+        }
+
+        .threshold-input {
+            width: 80px;
+            text-align: right;
+        }
+
+        /* ===== NOTE INDICATOR ===== */
+        .note-indicator {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--color-warning);
+            color: white;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 150ms ease;
+        }
+
+        .note-indicator:hover {
+            transform: scale(1.1);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .note-indicator.has-note {
+            background: var(--color-info);
+        }
+
+        /* ===== YOY COMPARISON ===== */
+        .yoy-comparison {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 12px;
+        }
+
+        .yoy-arrow {
+            font-weight: 700;
+        }
+
+        .yoy-up {
+            color: var(--color-danger);
+        }
+
+        .yoy-down {
+            color: var(--color-success);
+        }
+
+        /* ===== RUN RATE CHART ===== */
+        .mini-chart {
+            width: 100px;
+            height: 30px;
+            display: flex;
+            align-items: flex-end;
+            gap: 2px;
+        }
+
+        .chart-bar {
+            flex: 1;
+            background: var(--color-primary);
+            opacity: 0.3;
+            border-radius: 2px 2px 0 0;
+            transition: opacity 150ms ease;
+        }
+
+        .chart-bar:hover {
+            opacity: 1;
+        }
+
+        .chart-bar.current {
+            opacity: 1;
+            background: var(--color-warning);
+        }
+
+        /* ===== EXPORT MENU ===== */
+        .export-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 4px;
+            background: white;
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            min-width: 200px;
+            z-index: 100;
+        }
+
+        .export-menu-item {
+            padding: 10px 16px;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 150ms ease;
+        }
+
+        .export-menu-item:first-child {
+            border-radius: 8px 8px 0 0;
+        }
+
+        .export-menu-item:last-child {
+            border-radius: 0 0 8px 8px;
+        }
+
+        .export-menu-item:hover {
+            background: var(--color-hover-bg);
+        }
+
+        .export-menu-divider {
+            height: 1px;
+            background: var(--color-border);
+            margin: 4px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h2>📊 P&P Budget System</h2>
+                <p>FY 2026 Financial Tracking</p>
+            </div>
+            
+            <div class="nav-section">
+                <div class="nav-section-title">Views</div>
+                <div class="nav-item active">📈 Budget vs Actuals</div>
+                <div class="nav-item">📋 Budget Requests</div>
+                <div class="nav-item">✅ Approvals</div>
+                <div class="nav-item">🔄 Reforecast</div>
+                <div class="nav-item">🎯 Scenarios</div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Analysis</div>
+                <div class="nav-item">🏢 By Platform</div>
+                <div class="nav-item">💰 By FS Item</div>
+                <div class="nav-item">📊 By GL Account</div>
+                <div class="nav-item">👥 By Resource Type</div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Data Sources</div>
+                <div class="nav-item">💾 Monthly Actuals</div>
+                <div class="nav-item">☁️ Azure Billing</div>
+                <div class="nav-item">📑 SAP Transactions</div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Admin</div>
+                <div class="nav-item">⚙️ Settings</div>
+                <div class="nav-item">📥 Import Data</div>
+                <div class="nav-item">📤 Export Report</div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Breadcrumbs -->
+            <div class="breadcrumbs">
+                <span>P&P Budget System</span>
+                <span class="breadcrumb-separator">›</span>
+                <span>Budget vs Actuals</span>
+            </div>
+
+            <!-- Page Header -->
+            <div class="page-header">
+                <h1>Budget vs Actuals Dashboard</h1>
+                <div class="page-meta">
+                    <span>Last updated: Jan 29, 2026 3:45 PM ET</span>
+                    <span>•</span>
+                    <span class="freshness-indicator freshness-current">
+                        <span style="font-size: 16px;">●</span> Data Current
+                    </span>
+                    <span>•</span>
+                    <span style="color: var(--color-text-tertiary);">Next import: Feb 5, 2026</span>
+                </div>
+            </div>
+
+
+
+            <!-- Key Metrics -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-label">Total Budget (Annual)</div>
+                    <div class="stat-value">$24.5M</div>
+                    <div class="stat-change">FY 2026 Allocation</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-label">YTD Budget (Jan)</div>
+                    <div class="stat-value">$2.04M</div>
+                    <div class="stat-change">1/12 of annual budget</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-label">YTD Actuals (Jan)</div>
+                    <div class="stat-value">$1.02M</div>
+                    <div class="stat-change down">▼ $1.02M under budget</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-label">Variance</div>
+                    <div class="stat-value positive">50%</div>
+                    <div class="stat-change down">Under budget (favorable)</div>
+                </div>
+            </div>
+
+            <!-- Forecast Metrics -->
+            <div class="stats-grid" style="margin-top: var(--space-md);">
+                <div class="forecast-card">
+                    <div class="forecast-label">
+                        📈 Projected Annual Spend
+                        <span style="cursor: help;" title="Based on current run rate: ($1.02M × 12 months)">ⓘ</span>
+                    </div>
+                    <div class="forecast-value">$12.2M</div>
+                    <div class="forecast-trend">
+                        <span class="variance positive">$12.3M under budget</span> if current pace continues
+                    </div>
+                </div>
+
+                <div class="forecast-card">
+                    <div class="forecast-label">
+                        🔥 Monthly Run Rate
+                        <span style="cursor: help;" title="Average monthly spend based on January actuals">ⓘ</span>
+                    </div>
+                    <div class="forecast-value">$1.02M/mo</div>
+                    <div class="forecast-trend">
+                        Target: $2.04M/mo (50% of target)
+                    </div>
+                </div>
+
+                <div class="forecast-card">
+                    <div class="forecast-label">
+                        ⚠️ Alert Count
+                        <span style="cursor: help;" title="Platforms exceeding threshold settings">ⓘ</span>
+                    </div>
+                    <div class="forecast-value" style="color: var(--color-danger);">1</div>
+                    <div class="forecast-trend">
+                        GTO over budget by 6%
+                    </div>
+                </div>
+
+                <div class="forecast-card">
+                    <div class="forecast-label">
+                        📊 Budget Health Score
+                        <span style="cursor: help;" title="Overall budget performance indicator">ⓘ</span>
+                    </div>
+                    <div class="forecast-value" style="color: var(--color-success);">95/100</div>
+                    <div class="forecast-trend">
+                        Excellent - Well under budget
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabs -->
+            <div class="tabs">
+                <div class="tab active">Platform Summary</div>
+                <div class="tab" title="View not yet implemented - will show detailed FS Item breakdown by platform and time">FS Item Analysis</div>
+                <div class="tab" title="View not yet implemented - will show detailed GL Account spending with drill-down to transactions">GL Account Details</div>
+                <div class="tab" title="View not yet implemented - will show month-over-month trends with charts and variance analysis">Monthly Trends</div>
+            </div>
+
+            <!-- Filters -->
+            <div class="filters-bar">
+                <div class="filter-group">
+                    <label class="filter-label">Time Period</label>
+                    <select class="select">
+                        <option>January 2026</option>
+                        <option>Q1 2026</option>
+                        <option>YTD 2026</option>
+                        <option>Full Year 2026</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label">Scenario</label>
+                    <select class="select">
+                        <option>Original Budget</option>
+                        <option>Current Reforecast</option>
+                        <option>Q1 Reforecast</option>
+                        <option>Stay the Course</option>
+                        <option>Innovate</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label">Budget Type</label>
+                    <select class="select">
+                        <option>P&P Budget</option>
+                        <option>IMC / Non-P&P</option>
+                        <option>All Budgets</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label">Cost Type</label>
+                    <div class="toggle-group">
+                        <button class="toggle-btn active">All</button>
+                        <button class="toggle-btn">Labor</button>
+                        <button class="toggle-btn">Non-Labor</button>
+                    </div>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label">Accounting</label>
+                    <select class="select">
+                        <option>All</option>
+                        <option>OPEX Only</option>
+                        <option>Revenue Only</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label">Platform Type</label>
+                    <select class="select">
+                        <option>All Platforms</option>
+                        <option>Build</option>
+                        <option>Buy</option>
+                        <option>Partner</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label">Status</label>
+                    <select class="select">
+                        <option>All Status</option>
+                        <option>Under Budget</option>
+                        <option>On Track</option>
+                        <option>Over Budget</option>
+                    </select>
+                </div>
+                <div style="margin-left: auto; display: flex; gap: 8px; align-items: flex-end;">
+                    <button class="btn btn-secondary btn-small" title="Configure budget variance alert thresholds">🔔 Alert Settings</button>
+                    <button class="btn btn-secondary btn-small" title="Export options: Excel, PDF, or scheduled reports">📊 Export ▼</button>
+                    <button class="btn btn-primary btn-small">📥 Import Actuals</button>
+                </div>
+            </div>
+
+            <!-- Quick Filters -->
+            <div class="quick-filters">
+                <div class="filter-chip active">
+                    🔴 Over Budget (1)
+                    <span class="filter-chip-remove">×</span>
+                </div>
+                <div class="filter-chip">
+                    👤 My Platforms
+                </div>
+                <div class="filter-chip">
+                    📝 Has Notes
+                </div>
+                <div class="filter-chip">
+                    🆕 New This Month
+                </div>
+                <div class="filter-chip">
+                    💤 Zero Spend
+                </div>
+                <div class="filter-chip">
+                    📈 YoY Comparison
+                </div>
+            </div>
+
+            <!-- Platform Budget vs Actuals Table -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Platform Budget vs Actuals</h2>
+                    <button class="btn btn-secondary btn-small" title="Show/hide columns and customize table view">⚙️ Configure Columns</button>
+                </div>
+
+                <div class="table-wrapper">
+                    <table class="coda-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 30px;"></th>
+                                <th>Platform</th>
+                                <th>WBS Element</th>
+                                <th class="number">Monthly Budget</th>
+                                <th class="number">Actual Spend</th>
+                                <th class="number">Variance</th>
+                                <th class="number">% of Budget</th>
+                                <th class="number" title="Year-over-year comparison to same month prior year">YoY</th>
+                                <th title="Monthly spending trend">Run Rate</th>
+                                <th title="Efficiency vs peer platforms">Benchmark</th>
+                                <th>Status</th>
+                                <th style="width: 150px;">Progress</th>
+                                <th style="width: 40px;" title="Variance explanation notes">📝</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="expandable-row" onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'none' ? 'table-row' : 'none'; this.querySelector('.expand-icon').classList.toggle('expanded');">
+                                <td><span class="expand-icon">▶</span></td>
+                                <td>
+                                    <strong>Global Trade Optimization (GTO)</strong>
+                                    <span class="alert-indicator alert-critical" title="Critical: Over budget by more than 5%">!</span>
+                                </td>
+                                <td style="font-size: 12px; color: var(--color-text-secondary);">S.US02-2100001.01.03</td>
+                                <td class="number">$450,000</td>
+                                <td class="number">$476,906</td>
+                                <td class="number"><span class="variance negative">-$26,906</span></td>
+                                <td class="number"><span class="variance negative">106%</span></td>
+                                <td class="number">
+                                    <div class="yoy-comparison yoy-up">
+                                        <span class="yoy-arrow">↑</span> 23%
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="mini-chart">
+                                        <div class="chart-bar" style="height: 60%;"></div>
+                                        <div class="chart-bar" style="height: 75%;"></div>
+                                        <div class="chart-bar current" style="height: 100%;"></div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="benchmark">
+                                        <div class="benchmark-bar">
+                                            <div class="benchmark-fill" style="width: 106%;"></div>
+                                            <div class="benchmark-marker" style="left: 95%;"></div>
+                                        </div>
+                                        <span style="color: var(--color-danger);">6% over</span>
+                                    </div>
+                                </td>
+                                <td><span class="badge badge-red">⚠️ Over Budget</span></td>
+                                <td>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill over-budget" style="width: 106%;"></div>
+                                    </div>
+                                </td>
+                                <td style="text-align: center;">
+                                    <span class="note-indicator has-note" title="Click to view variance explanation">💬</span>
+                                </td>
+                            </tr>
+                            <tr class="detail-row" style="display: none;">
+                                <td colspan="13">
+                                    <div class="detail-content" style="grid-template-columns: 1fr 1fr 1fr;">
+                                        <div class="detail-section">
+                                            <div class="detail-label">Variance Explanation</div>
+                                            <div class="detail-value">
+                                                Unexpected spike in third-party consultant fees due to accelerated timeline for Q1 feature release. Additional $27K in professional services from Distillery.
+                                                <div style="margin-top: 8px; font-size: 12px; color: var(--color-text-secondary);">
+                                                    Added by Rose Luo on Jan 28, 2026
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="detail-section">
+                                            <div class="detail-label">Projected Year-End</div>
+                                            <div class="detail-value">
+                                                At current pace: <strong style="color: var(--color-danger);">$5.72M</strong> (107% of annual budget)
+                                                <div style="margin-top: 4px; font-size: 13px;">
+                                                    Annual Budget: $5.4M
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="detail-section">
+                                            <div class="detail-label">Top GL Accounts (Jan)</div>
+                                            <div class="detail-value">
+                                                <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                                                    <span>Accrued Professional Fees</span>
+                                                    <strong>$285,000</strong>
+                                                </div>
+                                                <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                                                    <span>Software Development</span>
+                                                    <strong>$115,000</strong>
+                                                </div>
+                                                <div style="display: flex; justify-content: space-between;">
+                                                    <span>Salaries & Wages</span>
+                                                    <strong>$76,906</strong>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="expandable-row" onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'none' ? 'table-row' : 'none'; this.querySelector('.expand-icon').classList.toggle('expanded');">
+                                <td><span class="expand-icon">▶</span></td>
+                                <td><strong>AI/ML Due Diligence Dev</strong></td>
+                                <td style="font-size: 12px; color: var(--color-text-secondary);">S.US02-2199991.01.32</td>
+                                <td class="number">$250,000</td>
+                                <td class="number">$218,418</td>
+                                <td class="number"><span class="variance positive">+$31,582</span></td>
+                                <td class="number"><span class="variance positive">87%</span></td>
+                                <td class="number">
+                                    <div class="yoy-comparison yoy-up">
+                                        <span class="yoy-arrow">↑</span> 142%
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="mini-chart">
+                                        <div class="chart-bar" style="height: 40%;"></div>
+                                        <div class="chart-bar" style="height: 65%;"></div>
+                                        <div class="chart-bar current" style="height: 87%;"></div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="benchmark">
+                                        <div class="benchmark-bar">
+                                            <div class="benchmark-fill" style="width: 87%;"></div>
+                                            <div class="benchmark-marker" style="left: 95%;"></div>
+                                        </div>
+                                        <span style="color: var(--color-success);">Efficient</span>
+                                    </div>
+                                </td>
+                                <td><span class="badge badge-green">✓ Under Budget</span></td>
+                                <td>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 87%;"></div>
+                                    </div>
+                                </td>
+                                <td style="text-align: center;">
+                                    <span class="note-indicator" title="Click to add variance note">💭</span>
+                                </td>
+                            </tr>
+                            <tr class="detail-row" style="display: none;">
+                                <td colspan="13">
+                                    <div class="detail-content" style="grid-template-columns: 1fr 1fr;">
+                                        <div class="detail-section">
+                                            <div class="detail-label">No Variance Notes</div>
+                                            <div class="detail-value">
+                                                Platform is tracking well under budget. No explanation needed.
+                                            </div>
+                                        </div>
+                                        <div class="detail-section">
+                                            <div class="detail-label">YoY Context</div>
+                                            <div class="detail-value">
+                                                New platform launched Q4 2025. Comparing to initial test phase spending last year shows significant scale-up in development activity.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="expandable-row" onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'none' ? 'table-row' : 'none'; this.querySelector('.expand-icon').classList.toggle('expanded');">
+                                <td><span class="expand-icon">▶</span></td>
+                                <td><strong>Promo X-Ray (PXR)</strong></td>
+                                <td style="font-size: 12px; color: var(--color-text-secondary);">S.UK02-2199991.01.54</td>
+                                <td class="number">$175,000</td>
+                                <td class="number">$158,673</td>
+                                <td class="number"><span class="variance positive">+$16,327</span></td>
+                                <td class="number"><span class="variance positive">91%</span></td>
+                                <td class="number">
+                                    <div class="yoy-comparison yoy-down">
+                                        <span class="yoy-arrow">↓</span> 8%
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="mini-chart">
+                                        <div class="chart-bar" style="height: 95%;"></div>
+                                        <div class="chart-bar" style="height: 93%;"></div>
+                                        <div class="chart-bar current" style="height: 91%;"></div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="benchmark">
+                                        <div class="benchmark-bar">
+                                            <div class="benchmark-fill" style="width: 91%;"></div>
+                                            <div class="benchmark-marker" style="left: 95%;"></div>
+                                        </div>
+                                        <span style="color: var(--color-success);">Efficient</span>
+                                    </div>
+                                </td>
+                                <td><span class="badge badge-green">✓ Under Budget</span></td>
+                                <td>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 91%;"></div>
+                                    </div>
+                                </td>
+                                <td style="text-align: center;">
+                                    <span class="note-indicator" title="Click to add variance note">💭</span>
+                                </td>
+                            </tr>
+                            <tr class="detail-row" style="display: none;">
+                                <td colspan="13">
+                                    <div class="detail-content">
+                                        <div class="detail-section">
+                                            <div class="detail-label">Drill-Down View</div>
+                                            <div class="detail-value">
+                                                Click "View Full Breakdown" to see transaction-level detail with GL Accounts and individual line items.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="expandable-row" onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'none' ? 'table-row' : 'none'; this.querySelector('.expand-icon').classList.toggle('expanded');">
+                                <td><span class="expand-icon">▶</span></td>
+                                <td><strong>Smart Factory Dev</strong></td>
+                                <td style="font-size: 12px; color: var(--color-text-secondary);">S.US02-2199991.01.04</td>
+                                <td class="number">$150,000</td>
+                                <td class="number">$129,590</td>
+                                <td class="number"><span class="variance positive">+$20,410</span></td>
+                                <td class="number"><span class="variance positive">86%</span></td>
+                                <td class="number">
+                                    <div class="yoy-comparison yoy-up">
+                                        <span class="yoy-arrow">↑</span> 15%
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="mini-chart">
+                                        <div class="chart-bar" style="height: 80%;"></div>
+                                        <div class="chart-bar" style="height: 85%;"></div>
+                                        <div class="chart-bar current" style="height: 86%;"></div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="benchmark">
+                                        <div class="benchmark-bar">
+                                            <div class="benchmark-fill" style="width: 86%;"></div>
+                                            <div class="benchmark-marker" style="left: 95%;"></div>
+                                        </div>
+                                        <span style="color: var(--color-success);">Efficient</span>
+                                    </div>
+                                </td>
+                                <td><span class="badge badge-green">✓ Under Budget</span></td>
+                                <td>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 86%;"></div>
+                                    </div>
+                                </td>
+                                <td style="text-align: center;">
+                                    <span class="note-indicator" title="Click to add variance note">💭</span>
+                                </td>
+                            </tr>
+                            <tr class="detail-row" style="display: none;">
+                                <td colspan="13">
+                                    <div class="detail-content">
+                                        <div class="detail-section">
+                                            <div class="detail-label">Historical Comparison</div>
+                                            <div class="detail-value">
+                                                Spending trending up slightly month-over-month as platform scales. Hiring freeze in December 2025 delayed some contractor onboarding to January 2026.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr style="background: var(--color-bg-secondary); font-weight: 600;">
+                                <td></td>
+                                <td colspan="2"><strong>TOTAL (Top 4 Platforms Shown)</strong></td>
+                                <td class="number">$1,025,000</td>
+                                <td class="number">$983,587</td>
+                                <td class="number"><span class="variance positive">+$41,413</span></td>
+                                <td class="number"><span class="variance positive">96%</span></td>
+                                <td class="number">
+                                    <div class="yoy-comparison yoy-up">
+                                        <span class="yoy-arrow">↑</span> 28%
+                                    </div>
+                                </td>
+                                <td colspan="2"></td>
+                                <td><span class="badge badge-green">✓ On Track</span></td>
+                                <td>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 96%;"></div>
+                                    </div>
+                                </td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div style="margin-top: var(--space-md); padding-top: var(--space-md); border-top: 1px solid var(--color-border); font-size: 13px; color: var(--color-text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                    <span>Showing 4 of 34 platforms with actuals data • Click ▶ to expand platform details</span>
+                    <button class="btn btn-secondary btn-small">Show All Platforms</button>
+                </div>
+            </div>
+
+            <!-- FS Item Analysis -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Spend by Financial Statement Item</h2>
+                    <button class="btn btn-secondary btn-small" title="Drill down to see individual GL Accounts, platforms, and transactions that make up each FS Item total">📊 View Breakdown</button>
+                </div>
+
+                <div class="table-wrapper">
+                    <table class="coda-table">
+                        <thead>
+                            <tr>
+                                <th>FS Item</th>
+                                <th>Category</th>
+                                <th class="number">Monthly Budget</th>
+                                <th class="number">Actual Spend</th>
+                                <th class="number">Variance</th>
+                                <th class="number">% of Budget</th>
+                                <th class="number" title="Year-over-year comparison to same month prior year">YoY</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Software Development - Internal</strong></td>
+                                <td><span class="badge badge-blue">Non-Labor</span></td>
+                                <td class="number">$420,000</td>
+                                <td class="number">$396,027</td>
+                                <td class="number"><span class="variance positive">+$23,973</span></td>
+                                <td class="number">94%</td>
+                                <td class="number">
+                                    <div class="yoy-comparison yoy-up">
+                                        <span class="yoy-arrow">↑</span> 18%
+                                    </div>
+                                </td>
+                                <td><span class="badge badge-green">✓ On Track</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Salaries & Wages</strong></td>
+                                <td><span class="badge badge-yellow">Labor</span></td>
+                                <td class="number">$380,000</td>
+                                <td class="number">$396,769</td>
+                                <td class="number"><span class="variance negative">-$16,769</span></td>
+                                <td class="number">104%</td>
+                                <td class="number">
+                                    <div class="yoy-comparison yoy-up">
+                                        <span class="yoy-arrow">↑</span> 12%
+                                    </div>
+                                </td>
+                                <td><span class="badge badge-yellow">⚠️ Slightly Over</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Accrued Professional Fees</strong></td>
+                                <td><span class="badge badge-blue">Non-Labor</span></td>
+                                <td class="number">$650,000</td>
+                                <td class="number">$730,835</td>
+                                <td class="number"><span class="variance negative">-$80,835</span></td>
+                                <td class="number">112%</td>
+                                <td class="number">
+                                    <div class="yoy-comparison yoy-up">
+                                        <span class="yoy-arrow">↑</span> 34%
+                                    </div>
+                                </td>
+                                <td><span class="badge badge-red">⚠️ Over Budget</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Software License Agreements</strong></td>
+                                <td><span class="badge badge-blue">Non-Labor</span></td>
+                                <td class="number">$500,000</td>
+                                <td class="number">$495,000</td>
+                                <td class="number"><span class="variance positive">+$5,000</span></td>
+                                <td class="number">99%</td>
+                                <td class="number">
+                                    <div class="yoy-comparison yoy-up">
+                                        <span class="yoy-arrow">↑</span> 5%
+                                    </div>
+                                </td>
+                                <td><span class="badge badge-green">✓ On Track</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Computer Consulting</strong></td>
+                                <td><span class="badge badge-blue">Non-Labor</span></td>
+                                <td class="number">$50,000</td>
+                                <td class="number">$45,051</td>
+                                <td class="number"><span class="variance positive">+$4,949</span></td>
+                                <td class="number">90%</td>
+                                <td class="number">
+                                    <div class="yoy-comparison yoy-down">
+                                        <span class="yoy-arrow">↓</span> 3%
+                                    </div>
+                                </td>
+                                <td><span class="badge badge-green">✓ Under Budget</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Airfare</strong></td>
+                                <td><span class="badge badge-gray">Travel</span></td>
+                                <td class="number">$45,000</td>
+                                <td class="number">$40,528</td>
+                                <td class="number"><span class="variance positive">+$4,472</span></td>
+                                <td class="number">90%</td>
+                                <td class="number">
+                                    <div class="yoy-comparison yoy-up">
+                                        <span class="yoy-arrow">↑</span> 67%
+                                    </div>
+                                </td>
+                                <td><span class="badge badge-green">✓ Under Budget</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Payroll Taxes</strong></td>
+                                <td><span class="badge badge-yellow">Labor</span></td>
+                                <td class="number">$38,000</td>
+                                <td class="number">$35,879</td>
+                                <td class="number"><span class="variance positive">+$2,121</span></td>
+                                <td class="number">94%</td>
+                                <td class="number">
+                                    <div class="yoy-comparison yoy-up">
+                                        <span class="yoy-arrow">↑</span> 11%
+                                    </div>
+                                </td>
+                                <td><span class="badge badge-green">✓ On Track</span></td>
+                            </tr>
+                            <tr style="background: var(--color-bg-secondary); font-weight: 600;">
+                                <td colspan="2"><strong>TOTAL (Top 7 FS Items)</strong></td>
+                                <td class="number">$2,083,000</td>
+                                <td class="number">$2,140,089</td>
+                                <td class="number"><span class="variance negative">-$57,089</span></td>
+                                <td class="number">103%</td>
+                                <td class="number">
+                                    <div class="yoy-comparison yoy-up">
+                                        <span class="yoy-arrow">↑</span> 19%
+                                    </div>
+                                </td>
+                                <td><span class="badge badge-yellow">⚠️ Monitor</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div style="margin-top: var(--space-md); padding-top: var(--space-md); border-top: 1px solid var(--color-border); font-size: 13px; color: var(--color-text-secondary);">
+                    💡 <strong>Insight:</strong> Professional fees spike is primarily driven by GTO platform consultant costs. Travel up 67% YoY due to increased client engagement in Europe.
+                </div>
+            </div>
+
+
+        </main>
+    </div>
+</body>
+</html>
