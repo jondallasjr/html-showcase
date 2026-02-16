@@ -1,0 +1,734 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mexico Relocation Plan — Oaxaca 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Fraunces:ital,wght@0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FFFFFF;
+    --accent: #B5432A;
+    --accent-dark: #8B3420;
+    --text: #1A1A1A;
+    --text-muted: #5C5C5C;
+    --green: #2D6E3A;
+    --green-bg: #E6F4E8;
+    --yellow: #926B15;
+    --yellow-bg: #FDF6E3;
+    --red: #B5432A;
+    --red-bg: #FDECEA;
+    --blue: #1D6FA5;
+    --blue-bg: #E8F2FA;
+    --border: #E0E0E0;
+    --surface: #F5F5F5;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { background: #FFFFFF; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #FFFFFF;
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0 20px 80px;
+    background: #FFFFFF;
+  }
+
+  header {
+    padding: 40px 0 24px;
+    border-bottom: 3px solid var(--accent);
+    margin-bottom: 32px;
+  }
+
+  header h1 {
+    font-family: 'Fraunces', serif;
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1.15;
+    margin-bottom: 8px;
+  }
+
+  header p.subtitle { font-size: 0.95rem; color: var(--text-muted); font-style: italic; }
+  header .date { font-size: 0.8rem; color: var(--text-muted); margin-top: 8px; text-transform: uppercase; letter-spacing: 0.05em; }
+
+  section { margin-bottom: 36px; }
+
+  h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  h3 { font-size: 1rem; font-weight: 700; margin-bottom: 10px; color: var(--text); }
+  p { margin-bottom: 12px; font-size: 0.95rem; color: var(--text); }
+
+  .phase-label {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 12px;
+  }
+
+  .phase-now { background: var(--red-bg); color: var(--red); border: 1px solid var(--red); }
+  .phase-later { background: var(--surface); color: var(--text-muted); border: 1px solid var(--border); }
+
+  .alert {
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 16px;
+    font-size: 0.9rem;
+    border-left: 4px solid;
+  }
+
+  .alert-red { background: var(--red-bg); border-color: var(--red); }
+  .alert-red .alert-title { color: var(--red); }
+  .alert-yellow { background: var(--yellow-bg); border-color: var(--yellow); }
+  .alert-yellow .alert-title { color: var(--yellow); }
+  .alert-green { background: var(--green-bg); border-color: var(--green); }
+  .alert-green .alert-title { color: var(--green); }
+  .alert-blue { background: var(--blue-bg); border-color: var(--blue); }
+  .alert-blue .alert-title { color: var(--blue); }
+  .alert-title { font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 6px; }
+  .alert p, .alert li { color: var(--text); }
+
+  .card {
+    background: var(--surface);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+    border: 1px solid var(--border);
+  }
+
+  .checklist { list-style: none; padding: 0; }
+  .checklist li {
+    padding: 10px 0 10px 32px;
+    position: relative;
+    font-size: 0.9rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .checklist li::before { content: '☐'; position: absolute; left: 4px; top: 10px; font-size: 1.1rem; color: var(--accent); }
+  .checklist li strong { display: block; margin-bottom: 2px; color: var(--text); }
+  .checklist li .note { font-size: 0.82rem; color: var(--text-muted); font-style: italic; }
+
+  .email-box {
+    background: #FFFFFF;
+    border-radius: 10px;
+    padding: 16px;
+    margin: 16px 0;
+    font-size: 0.85rem;
+    border: 1px dashed var(--border);
+  }
+  .email-box .label { font-weight: 700; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-muted); margin-bottom: 4px; }
+  .email-box .value { font-weight: 600; color: var(--accent); word-break: break-all; margin-bottom: 12px; }
+  .email-box .body { white-space: pre-line; line-height: 1.7; color: var(--text); }
+
+  .timeline-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin-top: 12px; }
+  .timeline-table thead { background: var(--accent); color: #FFF; }
+  .timeline-table th { padding: 10px 8px; text-align: left; font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.04em; color: #FFFFFF; }
+  .timeline-table td { padding: 10px 8px; border-bottom: 1px solid var(--border); vertical-align: top; color: var(--text); }
+  .timeline-table tr:nth-child(even) { background: var(--surface); }
+  .timeline-table .phase { font-weight: 700; color: var(--accent); white-space: nowrap; }
+
+  .who { display: inline-block; font-size: 0.7rem; font-weight: 600; padding: 2px 6px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.02em; }
+  .who-jon { background: var(--blue-bg); color: var(--blue); }
+  .who-jess { background: var(--green-bg); color: var(--green); }
+  .who-all { background: var(--yellow-bg); color: var(--yellow); }
+
+  .person-tag { display: inline-block; font-size: 0.75rem; font-weight: 700; padding: 3px 10px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 10px; }
+  .tag-jon { background: var(--blue-bg); color: var(--blue); }
+  .tag-jess { background: var(--green-bg); color: var(--green); }
+  .tag-bodhi { background: var(--yellow-bg); color: var(--yellow); }
+
+  .cost-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; color: var(--text); }
+  .cost-row:last-child { border-bottom: none; }
+  .cost-row .amount { font-weight: 700; color: var(--accent); }
+  .cost-total { display: flex; justify-content: space-between; padding: 12px 0 0; margin-top: 4px; border-top: 2px solid var(--text); font-weight: 700; font-size: 1rem; color: var(--text); }
+
+  /* Why Oaxaca - expanded */
+  .why-hero {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+    color: #FFFFFF;
+    border-radius: 12px;
+    padding: 28px 24px;
+    margin: 24px 0;
+  }
+
+  .why-hero h2 { color: #FFFFFF; border-bottom-color: rgba(255,255,255,0.3); }
+  .why-hero p { color: #FFFFFF; opacity: 0.95; }
+
+  .why-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 20px;
+  }
+
+  .why-card {
+    background: rgba(255,255,255,0.12);
+    border-radius: 10px;
+    padding: 14px;
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+
+  .why-card .why-icon {
+    font-size: 1.4rem;
+    margin-bottom: 6px;
+    display: block;
+  }
+
+  .why-card .why-title {
+    font-weight: 700;
+    font-size: 0.82rem;
+    color: #FFFFFF;
+    margin-bottom: 4px;
+    display: block;
+  }
+
+  .why-card .why-desc {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.5;
+  }
+
+  .why-card-full {
+    grid-column: 1 / -1;
+  }
+
+  .decision-row {
+    text-align: center;
+    background: var(--surface) !important;
+    font-family: 'Fraunces', serif;
+    font-size: 0.95rem;
+    color: var(--text);
+    padding: 14px 8px;
+  }
+
+  footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); font-size: 0.8rem; color: var(--text-muted); text-align: center; }
+
+  details { margin-bottom: 12px; }
+  details summary { cursor: pointer; font-weight: 600; font-size: 0.92rem; padding: 8px 0; color: var(--accent); }
+  details[open] summary { margin-bottom: 8px; }
+  details p, details li { color: var(--text); }
+
+  .divider { height: 1px; background: var(--border); margin: 32px 0; }
+  a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+  strong { color: inherit; }
+  li { color: var(--text); }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <h1>Oaxaca Relocation Plan</h1>
+  <p class="subtitle">Jon, Jess &amp; Bodhi → Mexico</p>
+  <p class="date">Created Feb 15, 2026 · Cape Town</p>
+</header>
+
+<!-- WHY OAXACA — EXPANDED -->
+<div class="why-hero">
+  <h2>Why Oaxaca</h2>
+  <p style="margin-bottom: 6px; font-size: 1.05rem;"><strong style="color:#FFF">The timezone changes everything.</strong></p>
+  <p style="margin-bottom: 20px;">Work 9–5 on US Eastern Time. Yoga in the evening. Date nights with Jess. Social time with Bodhi while he's awake, not while he's sleeping. End the 2am grind that's breaking the family.</p>
+
+  <div class="why-grid">
+    <div class="why-card">
+      <span class="why-icon">🕐</span>
+      <span class="why-title">Timezone</span>
+      <span class="why-desc">CST = EST-1. Full overlap with US East Coast clients. Normal working hours for the first time in years.</span>
+    </div>
+    <div class="why-card">
+      <span class="why-icon">👨‍👩‍👦</span>
+      <span class="why-title">Family Time</span>
+      <span class="why-desc">Jess gets her life back — therapy, wellness, socializing. Bodhi gets an active, present dad. Dinner together every night.</span>
+    </div>
+    <div class="why-card">
+      <span class="why-icon">💰</span>
+      <span class="why-title">Tax Situation</span>
+      <span class="why-desc">Weak tax enforcement on expat remote income. Effectively pay only US self-employment tax (~$17k). No additional local tax burden in practice.</span>
+    </div>
+    <div class="why-card">
+      <span class="why-icon">🏖️</span>
+      <span class="why-title">Nature</span>
+      <span class="why-desc">Near the Pacific coast and the Sierra Madre mountains. Hiking, beaches, waterfalls, hot springs — all within day-trip range.</span>
+    </div>
+    <div class="why-card">
+      <span class="why-icon">🎵</span>
+      <span class="why-title">Culture</span>
+      <span class="why-desc">Live music, museums, theatre, galleries, festivals. More cultural depth than Chiang Mai. UNESCO World Heritage center.</span>
+    </div>
+    <div class="why-card">
+      <span class="why-icon">🏫</span>
+      <span class="why-title">Schools</span>
+      <span class="why-desc">Alternative education options for Bodhi including Waldorf schools. Bilingual programs. Growing family-oriented expat community.</span>
+    </div>
+    <div class="why-card">
+      <span class="why-icon">🧘</span>
+      <span class="why-title">Wellness</span>
+      <span class="why-desc">Yoga studios, meditation centers, vegetarian/vegan restaurants. Active wellness scene for both Jon and Jess.</span>
+    </div>
+    <div class="why-card">
+      <span class="why-icon">👫</span>
+      <span class="why-title">Community</span>
+      <span class="why-desc">Settled English-speaking expat parents scene. People putting down roots, not just passing through. Real friendships.</span>
+    </div>
+    <div class="why-card">
+      <span class="why-icon">🏍️</span>
+      <span class="why-title">Motorbikes</span>
+      <span class="why-desc">Ride motorbikes through the mountains and countryside. Similar freedom to Southeast Asia.</span>
+    </div>
+    <div class="why-card">
+      <span class="why-icon">💵</span>
+      <span class="why-title">Low Cost</span>
+      <span class="why-desc">Affordable rent, food, childcare. Similar cost of living to Chiang Mai. Dollar goes far.</span>
+    </div>
+    <div class="why-card why-card-full">
+      <span class="why-icon">✨</span>
+      <span class="why-title">Similar Vibe to Chiang Mai — But With the Right Timezone</span>
+      <span class="why-desc">The culture, the food, the expat scene, the cost, the motorbikes, the mountains, the warmth — it's the same lifestyle you love, but in a timezone that lets you actually live it as a family.</span>
+    </div>
+  </div>
+</div>
+
+<!-- VISA SHORTCUT -->
+<section>
+  <div class="alert alert-green">
+    <div class="alert-title">🚀 July Return — Jess Is Double-Covered</div>
+    <p style="margin-bottom: 8px;">Jess doesn't need a second Pretoria trip for the July return. She has two independent ways back into Mexico:</p>
+    <p style="margin-bottom: 6px;"><strong>1. Her visa sticker</strong> — valid 6 months from issue with multiple entries. If issued in March → valid through September.</p>
+    <p style="margin-bottom: 0;"><strong>2. Her used Schengen visa</strong> — after the Europe trip, Mexico exempts any nationality holding a valid, used Schengen visa from needing a tourist visa (up to 180 days).</p>
+  </div>
+</section>
+
+<!-- THE PLAN -->
+<section>
+  <h2>The Plan</h2>
+  <div class="card">
+    <p style="font-size: 0.9rem; margin-bottom: 8px;"><strong>Phase 1 — Test Oaxaca (Mar–May)</strong><br>
+    Stay in Cape Town until Jess's tourist visa comes through (best case ~2 weeks, likely 2–4 weeks from today). All three fly to Oaxaca together. Test the life until May. Keep paying Chiang Mai rent ($500/mo), nanny, and cleaners as retainer.</p>
+
+    <p style="font-size: 0.9rem; margin-bottom: 8px;"><strong>Europe — Summer (May–July)</strong><br>
+    Amsterdam May 20 → travel (Portugal? Germany?) → England for Bodhi's birthday with Jess's mum and brother → Olivia's wedding June 30.</p>
+
+    <p style="font-size: 0.9rem; margin-bottom: 8px;"><strong>Phase 2 — The Decision (July)</strong><br>
+    After England: return to Mexico or return to Chiang Mai. If Mexico → re-enter on Jess's visa sticker or Schengen exemption (no second Pretoria trip). Jon flies to US for consulate interview (~10–12 days), returns as resident, sponsors Jess at INM. Ship belongings from Chiang Mai.</p>
+
+    <p style="font-size: 0.9rem; margin-bottom: 0;"><strong>If it's not Mexico:</strong> Return to Chiang Mai. Everything still intact.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===================== -->
+<!-- PHASE 1: DO NOW -->
+<!-- ===================== -->
+
+<section>
+  <span class="phase-label phase-now">Do Now — Today</span>
+  <h2>📧 Jess's Email to Pretoria</h2>
+
+  <p>This is a <strong>pre-assessment</strong> for Jess's <strong>tourist visa</strong>. The embassy reviews documents by email, then schedules an in-person appointment in Pretoria. It's a small-volume embassy and Mexican tourist visas process fast (2–10 business days after interview). <strong>Expect ~2–3 weeks total from email to visa in hand.</strong></p>
+
+  <div class="email-box">
+    <div class="label">To</div>
+    <div class="value">consularsud@sre.gob.mx</div>
+    <div class="label">Subject</div>
+    <div class="value">Visa Pre-Assessment — Jessica [Surname] — Zimbabwean National — Tourist Visa (Visitante)</div>
+    <div class="label">Body</div>
+    <div class="body">Dear Consular Section,
+
+I am a Zimbabwean national currently residing in Cape Town, South Africa. I would like to apply for a tourist visa (visitante sin permiso para realizar actividades remuneradas) to visit Mexico.
+
+Please find attached the following documents for pre-assessment:
+
+1. Passport bio page (valid until [date])
+2. Passport-size photo (white background)
+3. Proof of legal entry to South Africa
+4. Bank statements — last 3 months (joint account with spouse)
+5. Brief travel plan
+
+My husband is a US citizen. We plan to travel to Oaxaca, Mexico together with our son in early March.
+
+I am available to travel to Pretoria for an in-person appointment at your earliest convenience. Please advise on any additional documentation required and available appointment dates.
+
+Kind regards,
+Jessica [Surname]
+[Phone / WhatsApp number]</div>
+  </div>
+
+  <h3>Documents to Attach (5 PDFs)</h3>
+  <ul class="checklist">
+    <li>
+      <strong>1. Passport bio page</strong>
+      Clear color scan. Must be valid 6+ months beyond travel.
+    </li>
+    <li>
+      <strong>2. Passport photo</strong>
+      Color, white background, no glasses, no earrings, hair behind ears. 3.9cm × 3.1cm.
+    </li>
+    <li>
+      <strong>3. Proof of legal entry to South Africa</strong>
+      Scan of SA visa stamp or immigration permit in passport.
+    </li>
+    <li>
+      <strong>4. Bank statements — last 3 months</strong>
+      PDF downloads from Bank of America online banking are fine for pre-assessment. Use the joint account (Jess's name is on it). Regular deposits from Jon's employer show consistent income — matters more than current balance.
+      <span class="note">Embassy may request certified/stamped statements for the actual interview — deal with that if they ask.</span>
+    </li>
+    <li>
+      <strong>5. Travel plan</strong>
+      One paragraph: "Traveling to Oaxaca, Mexico with my husband and son. Approximate dates: early March through May 2026. Accommodation to be arranged in Oaxaca." No confirmed flights needed.
+    </li>
+  </ul>
+
+  <div class="alert alert-green">
+    <div class="alert-title">✅ Optional but helpful</div>
+    <p style="margin:0;">Jon's employment letter on company letterhead (confirming remote role and salary) explains the source of the deposits. Not required for pre-assessment but worth attaching if you have it.</p>
+  </div>
+
+  <div class="alert alert-blue">
+    <div class="alert-title">💡 That's all for now</div>
+    <p style="margin:0;">The apostille, Spanish translations, marriage certificate, birth certificate, and BofA verification letter are all <strong>only needed if you decide to move to Mexico permanently</strong> — after the Europe trip. None are needed for the tourist visa.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- TIMELINE -->
+<section>
+  <h2>📅 Timeline</h2>
+  <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 16px;">Dates are estimates based on typical processing times.</p>
+
+  <div style="overflow-x: auto;">
+    <table class="timeline-table">
+      <thead>
+        <tr>
+          <th>When</th>
+          <th>What</th>
+          <th>Who</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="background: var(--red-bg);">
+          <td class="phase">Today<br>Feb 15</td>
+          <td><strong>Jess emails Pretoria embassy</strong> with tourist visa pre-assessment docs. The speed of their reply tells you everything.</td>
+          <td><span class="who who-jess">Jess</span></td>
+        </tr>
+        <tr>
+          <td class="phase">Feb 15–21</td>
+          <td>Wait for embassy response. Follow up by phone after 4–5 days: +27 12 460 1004</td>
+          <td><span class="who who-jess">Jess</span></td>
+        </tr>
+        <tr>
+          <td class="phase">~1 week<br>later</td>
+          <td>Jess flies CPT → JNB for visa interview at Pretoria embassy (day trip or overnight)</td>
+          <td><span class="who who-jess">Jess</span></td>
+        </tr>
+        <tr>
+          <td class="phase">2–10 biz<br>days later</td>
+          <td>Visa processed. Collect passport from Pretoria (2nd trip or courier). Post-interview processing is the fast part — 2–10 business days is the norm.</td>
+          <td><span class="who who-jess">Jess</span></td>
+        </tr>
+        <tr style="background: var(--green-bg);">
+          <td class="phase">Early–mid<br>Mar ✈️</td>
+          <td><strong>All three fly to Oaxaca together.</strong> Enter as tourists (up to 180 days). Timing depends entirely on how fast Pretoria moves — could be as early as first week of March.</td>
+          <td><span class="who who-all">All</span></td>
+        </tr>
+        <tr>
+          <td class="phase">Mar–May</td>
+          <td>Test the Oaxaca life. Find housing, childcare, Waldorf schools, community. Hire a Spanish assistant. Enjoy the timezone.</td>
+          <td><span class="who who-all">All</span></td>
+        </tr>
+        <tr style="background: var(--blue-bg);">
+          <td class="phase">May 20 ✈️</td>
+          <td><strong>Fly to Amsterdam.</strong> Mexican tourist visas end.</td>
+          <td><span class="who who-all">All</span></td>
+        </tr>
+        <tr>
+          <td class="phase">May 20–<br>Jun 1</td>
+          <td>Amsterdam</td>
+          <td><span class="who who-all">All</span></td>
+        </tr>
+        <tr>
+          <td class="phase">Jun</td>
+          <td>Travel Europe — Portugal? Germany? Flexible.</td>
+          <td><span class="who who-all">All</span></td>
+        </tr>
+        <tr>
+          <td class="phase">Late Jun</td>
+          <td>England — Bodhi's birthday with Jess's mum and brother</td>
+          <td><span class="who who-all">All</span></td>
+        </tr>
+        <tr>
+          <td class="phase">Jun 30</td>
+          <td><strong>Olivia's wedding</strong> — England</td>
+          <td><span class="who who-all">All</span></td>
+        </tr>
+        <tr>
+          <td class="decision-row" colspan="3">— <strong>Decision point: Mexico or Chiang Mai?</strong> —</td>
+        </tr>
+        <tr style="background: var(--green-bg);">
+          <td class="phase">Jul ✈️</td>
+          <td><strong>If Mexico:</strong> All fly back to Oaxaca. Jess re-enters on her visa sticker (valid 6 months, multiple entry) or via Schengen exemption. Fresh FMM for everyone.</td>
+          <td><span class="who who-all">All</span></td>
+        </tr>
+        <tr>
+          <td class="phase">Jul–Aug</td>
+          <td>Settle in. Jon books US consulate appointment on MiConsulado, flies to US once date confirmed. ~10–12 days.</td>
+          <td><span class="who who-jon">Jon</span></td>
+        </tr>
+        <tr>
+          <td class="phase">Aug–Sep</td>
+          <td>Jon re-enters Mexico as <strong>RESIDENT</strong> (not tourist — critical). Completes canje at INM within 30 days.</td>
+          <td><span class="who who-jon">Jon</span></td>
+        </tr>
+        <tr>
+          <td class="phase">Sep–Oct</td>
+          <td>Jon sponsors Jess for family unity at INM. Both appear in person. 2–4 weeks processing.</td>
+          <td><span class="who who-all">Both</span></td>
+        </tr>
+        <tr style="background: var(--green-bg);">
+          <td class="phase">Oct</td>
+          <td><strong>All three have Temporary Resident Cards.</strong> Ship belongings from Chiang Mai.</td>
+          <td><span class="who who-all">All</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="alert alert-blue" style="margin-top: 16px;">
+    <div class="alert-title">📊 Pretoria Processing — ~2–3 Weeks Total</div>
+    <p style="margin-bottom: 6px;"><strong>Email → response:</strong> A few days</p>
+    <p style="margin-bottom: 6px;"><strong>Response → appointment:</strong> ~1 week (small-volume embassy, low demand)</p>
+    <p style="margin-bottom: 0;"><strong>Interview → visa in passport:</strong> 2–10 business days</p>
+  </div>
+
+  <div class="alert alert-green" style="margin-top: 16px;">
+    <div class="alert-title">✅ One Visa Covers Both Trips</div>
+    <p style="margin-bottom: 8px;">The <strong>visa sticker</strong> in Jess's passport is valid for <strong>6 months with multiple entries</strong>. If issued in early March → valid through early September → covers both the March arrival and the July return.</p>
+    <p style="margin-bottom: 8px;">The <strong>FMM tourist card</strong> (issued at the airport on arrival) is single entry — you surrender it when you leave and get a fresh one each time you re-enter. But the visa sticker stays in the passport and allows re-entry.</p>
+    <p style="margin-bottom: 0;"><strong>Backup for July:</strong> After Europe, Jess will also have a used Schengen visa — which independently qualifies her for visa-free Mexico entry up to 180 days. So she's double-covered for the return trip. No second Pretoria visit needed.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- DOCUMENTS FOR RESIDENCY -->
+<section>
+  <span class="phase-label phase-later">Only If We Decide on Mexico — After Europe</span>
+  <h2>📋 Documents for Residency</h2>
+  <p>None of these are needed until after the Europe trip, once you've decided Mexico is home. Start gathering them in July.</p>
+
+  <div class="card">
+    <h3>For Jon's Residente Temporal (US Consulate)</h3>
+    <ul class="checklist">
+      <li>
+        <strong>Marriage certificate — APOSTILLED</strong>
+        Your notarized Colorado copies are NOT sufficient for Mexican immigration. Need an apostille from the Colorado Secretary of State (~$10 by mail, 5–10 biz days). Have family in Colorado handle it. Mail to Oaxaca address.
+      </li>
+      <li>
+        <strong>6 months bank statements — certified</strong>
+        Must show $3,738+/month income. Call Bank of America to request a "bank account verification letter for immigration purposes" — $10, mailed to your registered US address. Time it for your US consulate trip.
+      </li>
+      <li>
+        <strong>Employment letter / contract</strong>
+        From your company on letterhead confirming remote work and compensation.
+      </li>
+      <li>
+        <strong>Bodhi's CRBA (Consular Report of Birth Abroad)</strong>
+        Currently in Chiang Mai. Have it shipped to Oaxaca, or request a replacement from the US State Department. This includes him as a dependent.
+        <span class="note">Born in Zimbabwe. Has both a Zim birth certificate and US CRBA — the CRBA is the document you'll use.</span>
+      </li>
+      <li>
+        <strong>Spanish translations</strong>
+        Marriage certificate and CRBA translated by a licensed perito traductor. Easy and cheap in Oaxaca.
+      </li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>For Jess's Family Unity (INM in Oaxaca)</h3>
+    <ul class="checklist">
+      <li><strong>Jon's Temporary Resident Card</strong> — original + copy</li>
+      <li><strong>Apostilled marriage certificate</strong> — translated to Spanish</li>
+      <li><strong>Jess's passport</strong> — original + copy</li>
+      <li><strong>Jess's FMM tourist card</strong> — form from immigration on entry</li>
+      <li><strong>Proof of address in Mexico</strong> — utility bill (doesn't need to be in your name)</li>
+      <li><strong>INM fees</strong> — ~6,000 MXN (~$300 USD)</li>
+    </ul>
+    <p style="font-size: 0.85rem; color: var(--text-muted);"><strong>No financial solvency proof required</strong> for spouse when done at INM. Both must appear in person (2026 requirement). Cannot leave Mexico while processing.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROCESS BY PERSON -->
+<section>
+  <h2>👤 Visa Process by Person</h2>
+
+  <div class="card">
+    <span class="person-tag tag-jess">Jess — Zimbabwean Citizen</span>
+    <h3>Tourist Entry → Family Unity</h3>
+    <details open>
+      <summary>Now: Tourist visa from Pretoria</summary>
+      <p style="font-size: 0.88rem; margin-bottom: 8px;">Zimbabwean nationals need a visa to enter Mexico. No embassy in Harare — must apply at <strong>Pretoria, South Africa</strong>.</p>
+      <p style="font-size: 0.88rem; margin-bottom: 8px;">Email pre-assessment → appointment → interview → processing (2–10 biz days). <strong>~2–3 weeks total.</strong></p>
+      <p style="font-size: 0.88rem;">The visa sticker is <strong>valid 6 months with multiple entries</strong>. One Pretoria trip covers both the March departure and the July return. Plus, after Europe, her used Schengen visa independently qualifies her for visa-free Mexico entry.</p>
+    </details>
+    <details>
+      <summary>Later: Convert to resident in Mexico</summary>
+      <p style="font-size: 0.88rem;">Once Jon has his Temporary Resident Card, he sponsors Jess at the local INM office. Jess converts from tourist to temporary resident <strong>without leaving Mexico.</strong> Processing: 2–4 weeks. Cannot leave Mexico while pending.</p>
+    </details>
+  </div>
+
+  <div class="card">
+    <span class="person-tag tag-jon">Jon — US Citizen</span>
+    <h3>Tourist → Residente Temporal</h3>
+    <details>
+      <summary>Now: Enter as tourist (with family)</summary>
+      <p style="font-size: 0.88rem;">US citizens enter Mexico visa-free for up to 180 days. No advance paperwork.</p>
+    </details>
+    <details>
+      <summary>Later: Residente Temporal from US consulate</summary>
+      <p style="font-size: 0.88rem;">After deciding on Mexico (July): book appointment on <a href="https://www.miconsulado.sre.gob.mx/" target="_blank">MiConsulado</a> → fly to US once date confirmed → interview → visa sticker (~10 working days) → return to Mexico and enter as RESIDENT (tell immigration: canje). Exchange sticker for card at INM within 30 days. <strong>Total US trip: ~10–12 days.</strong></p>
+    </details>
+  </div>
+
+  <div class="card">
+    <span class="person-tag tag-bodhi">Bodhi — US Citizen (minor)</span>
+    <h3>Dependent on Jon's Application</h3>
+    <p style="font-size: 0.88rem;">Enters Mexico visa-free as US citizen. Later included as dependent on Jon's Residente Temporal. Needs his CRBA. Gets his own Temporary Resident Card.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- COSTS -->
+<section>
+  <h2>💰 Estimated Costs</h2>
+  <div class="card">
+    <h3 style="margin-bottom: 12px;">Now — Tourist Entry</h3>
+    <div class="cost-row">
+      <span>Jess's tourist visa (Pretoria) — covers both trips</span>
+      <span class="amount">Free*</span>
+    </div>
+    <div class="cost-row">
+      <span>Jess's CPT ↔ Pretoria (interview + collect, 1–2 trips)</span>
+      <span class="amount">~$150–300</span>
+    </div>
+    <div class="cost-row">
+      <span>Flights to Oaxaca (×3 people)</span>
+      <span class="amount">Varies</span>
+    </div>
+
+    <h3 style="margin-bottom: 12px; margin-top: 20px;">Later — Residency (if staying)</h3>
+    <div class="cost-row">
+      <span>Jon's Residente Temporal — consulate</span>
+      <span class="amount">$56</span>
+    </div>
+    <div class="cost-row">
+      <span>Jon's canje — INM card (1 year)</span>
+      <span class="amount">~$240</span>
+    </div>
+    <div class="cost-row">
+      <span>Bodhi's canje — INM card (1 year)</span>
+      <span class="amount">~$240</span>
+    </div>
+    <div class="cost-row">
+      <span>Jess's family unity — INM</span>
+      <span class="amount">~$300</span>
+    </div>
+    <div class="cost-row">
+      <span>Colorado apostille</span>
+      <span class="amount">~$10–100</span>
+    </div>
+    <div class="cost-row">
+      <span>Spanish translations (Oaxaca)</span>
+      <span class="amount">~$50–150</span>
+    </div>
+    <div class="cost-row">
+      <span>Jon's US trip (flights + ~12 days)</span>
+      <span class="amount">Varies</span>
+    </div>
+    <div class="cost-total">
+      <span>Residency Fees Total</span>
+      <span>~$900–1,100</span>
+    </div>
+    <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 8px;">*Confirm tourist visa fee with embassy. Plus travel costs.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SAFETY NET -->
+<section>
+  <h2>🛡️ Safety Net</h2>
+  <div class="card">
+    <p style="font-size: 0.9rem;"><strong>Chiang Mai stays intact.</strong> Keep paying rent ($500/mo), nanny, and cleaners as retainer throughout. If Mexico doesn't work → return to Chiang Mai after Europe. If it does → team packs and ships belongings to Oaxaca.</p>
+    <p style="font-size: 0.9rem;"><strong>Decision point: July, after Olivia's wedding.</strong> By then you'll have ~6 weeks of Oaxaca experience to draw on.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SPANISH ASSISTANT -->
+<section>
+  <h2>🇲🇽 Spanish Personal Assistant</h2>
+  <div class="card">
+    <p style="font-size: 0.9rem;">Hire a bilingual assistant in Oaxaca for: INM paperwork, connecting with a licensed perito traductor, housing and childcare setup, general life admin in Spanish.</p>
+    <p style="font-size: 0.88rem;"><strong>Where to find:</strong> "Relocation assistant Oaxaca" or "immigration facilitator Oaxaca" on expat Facebook groups. ~$15–25/hr USD.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACTS -->
+<section>
+  <h2>📞 Key Contacts</h2>
+  <div class="card">
+    <div style="margin-bottom: 20px;">
+      <h3 style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em;">Mexican Embassy — Pretoria</h3>
+      <p style="font-size: 0.9rem; margin-bottom: 4px;"><strong>Email:</strong> consularsud@sre.gob.mx</p>
+      <p style="font-size: 0.9rem; margin-bottom: 4px;"><strong>Phone:</strong> +27 12 460 1004</p>
+      <p style="font-size: 0.9rem;">Parkdev Building, 570 Fehrsen St, Brooklyn 0181, Pretoria</p>
+    </div>
+    <div style="margin-bottom: 20px;">
+      <h3 style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em;">MiConsulado — US Appointment (Later)</h3>
+      <p style="font-size: 0.9rem;"><a href="https://www.miconsulado.sre.gob.mx/" target="_blank">miconsulado.sre.gob.mx</a></p>
+    </div>
+    <div>
+      <h3 style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em;">Colorado Secretary of State — Apostille (Later)</h3>
+      <p style="font-size: 0.9rem; margin-bottom: 4px;"><a href="https://www.sos.state.co.us" target="_blank">sos.state.co.us</a></p>
+      <p style="font-size: 0.9rem;">1700 Broadway, Suite 550, Denver, CO 80290</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Built for Jon &amp; Jess · Feb 15, 2026</p>
+  <p style="margin-top: 4px;">Verify all details with embassies — requirements change.</p>
+</footer>
+
+</div>
+</body>
+</html>
