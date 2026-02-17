@@ -37,7 +37,7 @@ header {
   background: var(--ocean);
   background-image: linear-gradient(135deg, #17596F 0%, var(--ocean) 50%, #1E7A9E 100%);
   color: var(--white);
-  padding: 2rem 1.5rem 1.5rem;
+  padding: 1.5rem 1.5rem 1.25rem;
   position: sticky;
   top: 0;
   z-index: 100;
@@ -89,33 +89,67 @@ header .sub {
   white-space: nowrap;
 }
 
-.filters {
-  padding: 0.65rem 1.5rem;
+.filter-panel {
   background: var(--white);
   border-bottom: 1px solid var(--sand-dark);
+  position: sticky;
+  top: 92px;
+  z-index: 90;
+  padding: 0.4rem 0.75rem 0.45rem;
+}
+.filter-row {
   display: flex;
-  gap: 0.35rem;
+  gap: 0.25rem;
+  align-items: center;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
+  margin-bottom: 0.25rem;
 }
-.filters::-webkit-scrollbar { display: none; }
+.filter-row:last-child { margin-bottom: 0; }
+.filter-row::-webkit-scrollbar { display: none; }
+.filter-label {
+  font-size: 0.58rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--rock-light);
+  flex-shrink: 0;
+  margin-right: 0.1rem;
+  min-width: 30px;
+}
 
 .chip {
-  padding: 0.3rem 0.65rem;
-  border-radius: 20px;
-  font-size: 0.72rem;
-  font-weight: 500;
+  padding: 0.22rem 0.5rem;
+  border-radius: 16px;
+  font-size: 0.65rem;
+  font-weight: 600;
   white-space: nowrap;
   cursor: pointer;
   border: 1.5px solid var(--sand-dark);
   background: var(--white);
   color: var(--rock-mid);
-  transition: all 0.15s;
+  transition: all 0.12s;
   user-select: none;
 }
 .chip:hover { border-color: var(--ocean); color: var(--ocean); }
 .chip.active { background: var(--ocean); color: var(--white); border-color: var(--ocean); }
+.chip.off { opacity: 0.3; }
+
+.select-btns { display: flex; gap: 0.2rem; flex-shrink: 0; margin-left: 0.15rem; }
+.sel-btn {
+  padding: 0.14rem 0.4rem;
+  border-radius: 10px;
+  border: 1px solid var(--sand-dark);
+  background: var(--sand);
+  font-size: 0.55rem;
+  font-weight: 700;
+  color: var(--rock-mid);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.1s;
+}
+.sel-btn:hover { background: var(--sand-dark); }
 
 main {
   max-width: 720px;
@@ -226,8 +260,8 @@ main {
   border-radius: 3px;
   font-weight: 500;
 }
-.tag-time { background: var(--ocean-pale); color: var(--ocean); }
 .tag-area { background: var(--kelp-light); color: var(--kelp); }
+.tag-hood { background: var(--ocean-pale); color: var(--ocean); }
 .tag-free { background: var(--sunset-light); color: var(--sunset); }
 
 .maps-arrow {
@@ -281,9 +315,9 @@ main {
 .scroll-top.visible { opacity: 1; transform: translateY(0); }
 
 @media (max-width: 480px) {
-  header { padding: 1.25rem 1rem 1rem; }
-  header h1 { font-size: 1.35rem; }
-  .filters { padding: 0.5rem 0.75rem; }
+  header { padding: 1.15rem 0.85rem 0.85rem; }
+  header h1 { font-size: 1.3rem; }
+  .filter-panel { top: 84px; padding: 0.35rem 0.6rem 0.4rem; }
   main { padding: 0.5rem 0.6rem 3rem; }
 }
 </style>
@@ -299,7 +333,10 @@ main {
   </div>
 </header>
 
-<div class="filters" id="filters"></div>
+<div class="filter-panel">
+  <div class="filter-row" id="catFilters"><span class="filter-label">Type</span></div>
+  <div class="filter-row" id="hoodFilters"><span class="filter-label">Area</span></div>
+</div>
 
 <main id="main">
   <div class="empty" id="empty" style="display:none">
@@ -763,16 +800,61 @@ function mapsUrl(name, area) {
   return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(name + ', ' + area + ', Cape Town, South Africa')}`;
 }
 
+// ── NEIGHBORHOOD MAPPING ──
+const HOODS = {
+  muiz:     "Muizenberg",
+  falsebay: "False Bay",
+  cpt:      "CBD / Gardens",
+  atlantic: "Atlantic",
+  obs:      "Obs / Woodstock",
+  south:    "Southern Suburbs",
+  deep:     "Deep South",
+  hout:     "Hout Bay",
+  stell:    "Stellenbosch",
+  other:    "Other",
+};
+
+function locToHood(area) {
+  const l = (area || '').toLowerCase();
+  if (/muizenberg|york rd.*muiz|surfer.*corner|commons.*muiz|albertyn.*muiz|church st.*muiz/i.test(l)) return 'muiz';
+  if (/kalk bay|st james|fish hoek|simon|false bay|dalebrook|kirstenhof|glencairn/i.test(l)) return 'falsebay';
+  if (/sea point|regent rd|green point|mouille|waterkant|de waterkant/i.test(l)) return 'atlantic';
+  if (/camps bay|clifton|llandudno|bakoven/i.test(l)) return 'atlantic';
+  if (/observatory|woodstock|biscuit mill|bee-stro|lower main.*obs|salt river|black river/i.test(l)) return 'obs';
+  if (/cbd|bree st|wale st|roeland|hatfield|gardens|kloof st|buitengracht|cathedral|baran|hout st.*cbd|cticc|loop st|long st|v&a|waterfront|granger bay/i.test(l)) return 'cpt';
+  if (/claremont|newlands|rondebosch|kenilworth|harfield|constantia|alphen|diep river|tokai|sufi temple|plumstead|bergvliet|wynberg|civic centre|pinelands|rosebank|steenberg|lynfrae|hemlock|table mountain|signal hill/i.test(l)) return 'south';
+  if (/noordhoek|kommetjie|scarborough|cape point vin|crofters|sea cottage/i.test(l)) return 'deep';
+  if (/hout bay|harbour.*hout|boskykloof|surcingle|empire ave.*hout/i.test(l)) return 'hout';
+  if (/stellenbosch|spier|root 44|paradyskloof|franschhoek|paarl|babylonstoren/i.test(l)) return 'stell';
+  if (/silvermine/i.test(l)) return 'muiz';
+  if (/kirstenbosch/i.test(l)) return 'south';
+  if (/cape point/i.test(l)) return 'deep';
+  return 'other';
+}
+
 function init() {
   const main = document.getElementById('main');
-  const filtersEl = document.getElementById('filters');
+  const catFiltersEl = document.getElementById('catFilters');
+  const hoodFiltersEl = document.getElementById('hoodFilters');
   const empty = document.getElementById('empty');
 
-  filtersEl.innerHTML = `<span class="chip active" data-cat="all">All</span>` +
+  // State
+  let activeCat = 'all';
+  let hoodState = {};
+  Object.keys(HOODS).forEach(k => hoodState[k] = true);
+  let query = '';
+
+  // Build category chips
+  catFiltersEl.innerHTML = '<span class="filter-label">Type</span>' +
+    `<span class="chip active" data-cat="all">All</span>` +
     DATA.map(c => `<span class="chip" data-cat="${c.cat}">${c.icon} ${c.cat}</span>`).join('');
 
-  let activeCat = 'all';
-  let query = '';
+  // Build hood chips with All/None
+  hoodFiltersEl.innerHTML = '<span class="filter-label">Area</span>' +
+    Object.entries(HOODS).map(([k, label]) =>
+      `<span class="chip active" data-hood="${k}">${label}</span>`
+    ).join('') +
+    '<span class="select-btns"><span class="sel-btn" id="selAllHood">All</span><span class="sel-btn" id="selNoneHood">None</span></span>';
 
   function applyFilters() {
     const q = query.toLowerCase();
@@ -784,7 +866,9 @@ function init() {
       let catVisible = 0;
 
       el.querySelectorAll('.venue').forEach(v => {
-        const show = catMatch && (!q || v.dataset.s.includes(q));
+        const hood = v.dataset.hood;
+        const hoodMatch = hoodState[hood];
+        const show = catMatch && hoodMatch && (!q || v.dataset.s.includes(q));
         v.classList.toggle('hidden', !show);
         if (show) catVisible++;
       });
@@ -798,7 +882,7 @@ function init() {
     empty.style.display = total === 0 ? 'block' : 'none';
   }
 
-  // Build HTML
+  // Build venue HTML
   let html = '';
   DATA.forEach(cat => {
     html += `<div class="category" data-cat="${cat.cat}">
@@ -807,15 +891,17 @@ function init() {
       <span class="cat-toggle">▾</span></div><div class="venues">`;
 
     cat.venues.forEach(v => {
-      const s = `${v.n} ${v.area} ${v.d||''} ${v.time||''} ${cat.cat} ${v.free||''}`.toLowerCase();
-      html += `<a class="venue" href="${mapsUrl(v.n, v.area)}" target="_blank" rel="noopener" data-s="${s}">
+      const hood = locToHood(v.area);
+      const hoodLabel = HOODS[hood] || 'Other';
+      const s = `${v.n} ${v.area} ${v.d||''} ${cat.cat} ${v.free||''} ${hoodLabel}`.toLowerCase();
+      html += `<a class="venue" href="${mapsUrl(v.n, v.area)}" target="_blank" rel="noopener" data-s="${s}" data-hood="${hood}">
         <div class="venue-pin">${pinSvg}</div>
         <div class="venue-info">
           <div class="venue-name">${v.n}</div>
           <div class="venue-detail">${v.d||''}</div>
           <div class="venue-tags">
             <span class="tag tag-area">${v.area.split(',')[0]}</span>
-            ${v.time ? `<span class="tag tag-time">${v.time}</span>` : ''}
+            <span class="tag tag-hood">${hoodLabel}</span>
             ${v.free ? `<span class="tag tag-free">${v.free}</span>` : ''}
           </div>
         </div>
@@ -828,18 +914,39 @@ function init() {
 
   main.insertAdjacentHTML('afterbegin', html);
 
-  // Events
-  filtersEl.addEventListener('click', e => {
+  // Category filter events
+  catFiltersEl.addEventListener('click', e => {
     const chip = e.target.closest('.chip');
-    if (!chip) return;
-    filtersEl.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+    if (!chip || !chip.dataset.cat) return;
+    catFiltersEl.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
     chip.classList.add('active');
     activeCat = chip.dataset.cat;
     applyFilters();
-    // Scroll to top of main
     main.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 
+  // Hood filter events
+  hoodFiltersEl.querySelectorAll('.chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      const k = chip.dataset.hood;
+      hoodState[k] = !hoodState[k];
+      chip.classList.toggle('active');
+      applyFilters();
+    });
+  });
+
+  document.getElementById('selAllHood').addEventListener('click', () => {
+    Object.keys(HOODS).forEach(k => hoodState[k] = true);
+    hoodFiltersEl.querySelectorAll('.chip').forEach(c => c.classList.add('active'));
+    applyFilters();
+  });
+  document.getElementById('selNoneHood').addEventListener('click', () => {
+    Object.keys(HOODS).forEach(k => hoodState[k] = false);
+    hoodFiltersEl.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+    applyFilters();
+  });
+
+  // Collapse/expand categories
   document.querySelectorAll('.cat-header').forEach(h => {
     h.addEventListener('click', e => {
       if (e.target.closest('.venue')) return;
@@ -848,11 +955,13 @@ function init() {
     });
   });
 
+  // Search
   document.getElementById('search').addEventListener('input', e => {
     query = e.target.value;
     applyFilters();
   });
 
+  // Scroll-to-top
   const scrollBtn = document.getElementById('scrollTop');
   window.addEventListener('scroll', () => {
     scrollBtn.classList.toggle('visible', window.scrollY > 500);
