@@ -1,0 +1,485 @@
+{
+  "library": {
+    "oax_papel": {
+      "source": "flickr",
+      "id": "54893100875_9c7bcbc001",
+      "credit": "Keith Mac Uidhir",
+      "flickr_user": "10909746@N05"
+    },
+    "oax_night": {
+      "source": "flickr",
+      "id": "54897178535_8becdc8972",
+      "credit": "Keith Mac Uidhir",
+      "flickr_user": "10909746@N05"
+    },
+    "oax_sunnyclr": {
+      "source": "flickr",
+      "id": "54892315215_15d05d1637",
+      "credit": "Keith Mac Uidhir",
+      "flickr_user": "10909746@N05"
+    },
+    "oax_stodom": {
+      "source": "flickr",
+      "id": "55071618605_99707eab41",
+      "credit": "Don Cacheton",
+      "flickr_user": "204228832@N08"
+    },
+    "oax_stodom2": {
+      "source": "flickr",
+      "id": "43713108940_6e19ae4a90",
+      "credit": "linkogecko",
+      "flickr_user": "127492972@N04"
+    },
+    "oax_colorst": {
+      "source": "flickr",
+      "id": "55023826180_6b3dd01bcc",
+      "credit": "sparverius81",
+      "flickr_user": "8065544@N08"
+    },
+    "oax_colorst2": {
+      "source": "flickr",
+      "id": "55023504176_0eb7568f0f",
+      "credit": "sparverius81",
+      "flickr_user": "8065544@N08"
+    },
+    "oax_mitla": {
+      "source": "flickr",
+      "id": "55096562763_1df553c63f",
+      "credit": "Don Cacheton",
+      "flickr_user": "204228832@N08"
+    },
+    "oax_colonial": {
+      "source": "flickr",
+      "id": "53480889123_88eb44015b",
+      "credit": "Voyages Lambert",
+      "flickr_user": "48068124@N06"
+    },
+    "oax_streetart": {
+      "source": "flickr",
+      "id": "54885954077_9a0d7e30b3",
+      "credit": "Keith Mac Uidhir",
+      "flickr_user": "10909746@N05"
+    },
+    "fest_devil": {
+      "source": "flickr",
+      "id": "55093282477_d0c7f9c330",
+      "credit": "Ilhuicamina",
+      "flickr_user": "52796712@N00"
+    },
+    "fest_bigeyes": {
+      "source": "flickr",
+      "id": "55094370743_ac7d9ba5cd",
+      "credit": "Ilhuicamina",
+      "flickr_user": "52796712@N00"
+    },
+    "fest_calenda": {
+      "source": "flickr",
+      "id": "55069733824_250dc9aa88",
+      "credit": "Ilhuicamina",
+      "flickr_user": "52796712@N00"
+    },
+    "fest_wedding": {
+      "source": "flickr",
+      "id": "55091827222_c0a051fb53",
+      "credit": "Ilhuicamina",
+      "flickr_user": "52796712@N00"
+    },
+    "fest_alebrije": {
+      "source": "flickr",
+      "id": "55044572521_3dde9dc77d",
+      "credit": "andywoolf",
+      "flickr_user": "181847970@N06"
+    },
+    "fest_flowers": {
+      "source": "flickr",
+      "id": "54886442641_5f97f33449",
+      "credit": "Keith Mac Uidhir",
+      "flickr_user": "10909746@N05"
+    },
+    "fest_masks": {
+      "source": "flickr",
+      "id": "54564587505_a3a98d64c3",
+      "credit": "nickolosgomez",
+      "flickr_user": "105099636@N04"
+    },
+    "fest_guela": {
+      "source": "flickr",
+      "id": "54751721370_c8ff6f3a7e",
+      "credit": "Odd American",
+      "flickr_user": "23586094@N00"
+    },
+    "food_mole": {
+      "source": "flickr",
+      "id": "53616800141_65be340ec0",
+      "credit": "knightbefore_99",
+      "flickr_user": "9817122@N05"
+    },
+    "food_tlayuda": {
+      "source": "flickr",
+      "id": "55085012307_a2799e77ed",
+      "credit": "knightbefore_99",
+      "flickr_user": "9817122@N05"
+    },
+    "food_tlayuda2": {
+      "source": "flickr",
+      "id": "54964412898_9953fdacb8",
+      "credit": "-AX-",
+      "flickr_user": "8250978@N04"
+    },
+    "food_almendr": {
+      "source": "flickr",
+      "id": "55023686523_14e552f1f9",
+      "credit": "sparverius81",
+      "flickr_user": "8065544@N08"
+    },
+    "food_mezcal": {
+      "source": "flickr",
+      "id": "55079878691_b343a8a123",
+      "credit": "Ilhuicamina",
+      "flickr_user": "52796712@N00"
+    },
+    "food_choco": {
+      "source": "flickr",
+      "id": "54878709467_64f45436f8",
+      "credit": "The Sloths",
+      "flickr_user": "12552537@N04"
+    },
+    "food_chiles": {
+      "source": "flickr",
+      "id": "54130211345_9afb797bf6",
+      "credit": "Ilhuicamina",
+      "flickr_user": "52796712@N00"
+    },
+    "food_cooking": {
+      "source": "flickr",
+      "id": "46040123392_15e2e1b557",
+      "credit": "GlobalGoebel",
+      "flickr_user": "49244654@N00"
+    },
+    "yoga_outdoor": {
+      "source": "flickr",
+      "id": "54649554309_436181de6f",
+      "credit": "alejandrovmf",
+      "flickr_user": "144495825@N06"
+    },
+    "yoga_sound": {
+      "source": "flickr",
+      "id": "53578856210_519b72efc1",
+      "credit": "Massimiliano 73",
+      "flickr_user": "200147911@N05"
+    },
+    "yoga_cacao": {
+      "source": "flickr",
+      "id": "54825137805_61c89e6708",
+      "credit": "australian ceremonial",
+      "flickr_user": "202598285@N08"
+    },
+    "yoga_temazcal": {
+      "source": "flickr",
+      "id": "51441336682_8999bfe51c",
+      "credit": "Ars Electronica",
+      "flickr_user": "36085842@N06"
+    },
+    "yoga1": {
+      "source": "unsplash",
+      "id": "photo-1506126613408-eca07ce68773",
+      "credit": "Jared Rice",
+      "user": "jareddrice"
+    },
+    "yoga2": {
+      "source": "unsplash",
+      "id": "photo-1528319725582-ddc096101511",
+      "credit": "Yayan Sopian",
+      "user": "yfrSOPIAN"
+    },
+    "music_jarocho": {
+      "source": "flickr",
+      "id": "55013899553_4228608d2e",
+      "credit": "danielaherreriasfoto",
+      "flickr_user": "15228325@N00"
+    },
+    "music_jarocho2": {
+      "source": "flickr",
+      "id": "55013899298_2117fa883a",
+      "credit": "danielaherreriasfoto",
+      "flickr_user": "15228325@N00"
+    },
+    "music_marimba": {
+      "source": "flickr",
+      "id": "54709287582_1921714903",
+      "credit": "Mzuriana",
+      "flickr_user": "45074625@N00"
+    },
+    "music_marimba2": {
+      "source": "flickr",
+      "id": "54156039301_74d220cc29",
+      "credit": "Teyacapan",
+      "flickr_user": "60047372@N00"
+    },
+    "music_acoustic": {
+      "source": "flickr",
+      "id": "55096091080_b41c552154",
+      "credit": "Grudnick",
+      "flickr_user": "9716802@N02"
+    },
+    "music_jazz": {
+      "source": "unsplash",
+      "id": "photo-1546872006-43d8f499a0e1",
+      "credit": "Jens Thekkeveettil",
+      "user": "jensthekkeveettil"
+    },
+    "dance_salsa": {
+      "source": "flickr",
+      "id": "55079597898_ef3f4f5edb",
+      "credit": "TakenByExclusiveEvents",
+      "flickr_user": "41827639@N06"
+    },
+    "dance_folk": {
+      "source": "flickr",
+      "id": "54872718554_182c9152b7",
+      "credit": "josejuanzavala",
+      "flickr_user": "126469407@N07"
+    },
+    "dance_preh": {
+      "source": "flickr",
+      "id": "54655382490_f850e0e4ce",
+      "credit": "josejuanzavala",
+      "flickr_user": "126469407@N07"
+    },
+    "dance_band": {
+      "source": "flickr",
+      "id": "55035557567_8033d72165",
+      "credit": "I saw_that",
+      "flickr_user": "88196436@N04"
+    },
+    "dance1": {
+      "source": "unsplash",
+      "id": "photo-1535525153412-5a42439a210d",
+      "credit": "Preillumination SeTh",
+      "user": "preillumination"
+    },
+    "comm_cafe": {
+      "source": "flickr",
+      "id": "54969045484_b4fe99278d",
+      "credit": "Alex Saurel",
+      "flickr_user": "59870440@N08"
+    },
+    "comm_cafe2": {
+      "source": "flickr",
+      "id": "54641455213_c853938801",
+      "credit": "nenadstojkovicart",
+      "flickr_user": "201879762@N03"
+    },
+    "comm_openmic": {
+      "source": "flickr",
+      "id": "37612038104_a96620a22c",
+      "credit": "photographer695",
+      "flickr_user": "41087279@N00"
+    },
+    "community1": {
+      "source": "unsplash",
+      "id": "photo-1522008594266-d681be57a79b",
+      "credit": "Andrew Knechel",
+      "user": "andknecht"
+    },
+    "community2": {
+      "source": "unsplash",
+      "id": "photo-1573860838444-ae841678963d",
+      "credit": "Priscilla Du Preez",
+      "user": "priscilladupreez"
+    },
+    "hike_hierve": {
+      "source": "flickr",
+      "id": "55058894814_82e84b7d5e",
+      "credit": "www.dokumentaristen.dk",
+      "flickr_user": "70584754@N00"
+    },
+    "hike_hierve2": {
+      "source": "flickr",
+      "id": "55058999985_2a7d34544a",
+      "credit": "www.dokumentaristen.dk",
+      "flickr_user": "70584754@N00"
+    },
+    "hike_monte": {
+      "source": "flickr",
+      "id": "55078583822_54782251c1",
+      "credit": "michael.veltman",
+      "flickr_user": "73331227@N05"
+    },
+    "hike_monte2": {
+      "source": "flickr",
+      "id": "55070361757_2d0d91b024",
+      "credit": "Don Cacheton",
+      "flickr_user": "204228832@N08"
+    },
+    "hike_forest": {
+      "source": "flickr",
+      "id": "55033950311_7db1db16f0",
+      "credit": "sparverius81",
+      "flickr_user": "8065544@N08"
+    },
+    "hike_forest2": {
+      "source": "flickr",
+      "id": "55033047242_61e8068542",
+      "credit": "sparverius81",
+      "flickr_user": "8065544@N08"
+    },
+    "art_huipil": {
+      "source": "flickr",
+      "id": "55092503521_554e3b9ea9",
+      "credit": "Teyacapan",
+      "flickr_user": "60047372@N00"
+    },
+    "art_huipil2": {
+      "source": "flickr",
+      "id": "55087381801_90800a97cc",
+      "credit": "Teyacapan",
+      "flickr_user": "60047372@N00"
+    },
+    "art_barro": {
+      "source": "flickr",
+      "id": "54261875230_a1f0faaae7",
+      "credit": "Thomas Roland",
+      "flickr_user": "30738927@N06"
+    },
+    "art_barro2": {
+      "source": "flickr",
+      "id": "54261689994_dfa3587666",
+      "credit": "Thomas Roland",
+      "flickr_user": "30738927@N06"
+    },
+    "art_mural": {
+      "source": "flickr",
+      "id": "54886698223_aa93dec5ab",
+      "credit": "Keith Mac Uidhir",
+      "flickr_user": "10909746@N05"
+    },
+    "art_zapotec": {
+      "source": "flickr",
+      "id": "55100211820_fac2d2a37d",
+      "credit": "Teyacapan",
+      "flickr_user": "60047372@N00"
+    },
+    "cowork1": {
+      "source": "unsplash",
+      "id": "photo-1501163109389-abf37ca1276a",
+      "credit": "Shridhar Gupta",
+      "user": "shridhar"
+    },
+    "cowork2": {
+      "source": "unsplash",
+      "id": "photo-1548610325-a4e09766d5b6",
+      "credit": "Mimi Thian",
+      "user": "mimithian"
+    },
+    "cowork_laptop": {
+      "source": "flickr",
+      "id": "54961333095_4833a9dd91",
+      "credit": "dejankrsmanovic",
+      "flickr_user": "155403590@N07"
+    },
+    "fam_3gen": {
+      "source": "flickr",
+      "id": "54914902839_d5eea7e3b2",
+      "credit": "Ilhuicamina",
+      "flickr_user": "52796712@N00"
+    },
+    "fam_oaxkids": {
+      "source": "flickr",
+      "id": "54863232586_18662a057b",
+      "credit": "N. Delbrück",
+      "flickr_user": "87714242@N06"
+    },
+    "fam_oaxkids2": {
+      "source": "flickr",
+      "id": "54785036290_aff14f5998",
+      "credit": "N. Delbrück",
+      "flickr_user": "87714242@N06"
+    },
+    "fam_park": {
+      "source": "flickr",
+      "id": "55034429335_65172061b4",
+      "credit": "N. Delbrück",
+      "flickr_user": "87714242@N06"
+    }
+  },
+  "category_pools": {
+    "community": [
+      "community1",
+      "community2",
+      "comm_cafe",
+      "comm_cafe2",
+      "comm_openmic"
+    ],
+    "music": [
+      "music_jarocho",
+      "music_marimba",
+      "music_acoustic",
+      "music_jazz",
+      "music_jarocho2",
+      "music_marimba2"
+    ],
+    "yoga": [
+      "yoga1",
+      "yoga2",
+      "yoga_outdoor",
+      "yoga_sound",
+      "yoga_cacao",
+      "yoga_temazcal"
+    ],
+    "festival": [
+      "fest_devil",
+      "fest_bigeyes",
+      "fest_calenda",
+      "fest_alebrije",
+      "fest_flowers",
+      "fest_masks",
+      "fest_guela",
+      "fest_wedding"
+    ],
+    "arts": [
+      "art_huipil",
+      "art_barro",
+      "art_mural",
+      "art_zapotec",
+      "art_huipil2",
+      "art_barro2"
+    ],
+    "food": [
+      "food_mole",
+      "food_tlayuda",
+      "food_mezcal",
+      "food_choco",
+      "food_almendr",
+      "food_chiles",
+      "food_cooking",
+      "food_tlayuda2"
+    ],
+    "hiking": [
+      "hike_hierve",
+      "hike_monte",
+      "hike_forest",
+      "hike_hierve2",
+      "hike_monte2",
+      "hike_forest2"
+    ],
+    "family": [
+      "fam_3gen",
+      "fam_oaxkids",
+      "fam_park",
+      "fam_oaxkids2"
+    ],
+    "dance": [
+      "dance_salsa",
+      "dance_folk",
+      "dance_preh",
+      "dance_band",
+      "dance1"
+    ],
+    "cowork": [
+      "cowork1",
+      "cowork2",
+      "cowork_laptop"
+    ]
+  }
+}

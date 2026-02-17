@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oaxaca City — Feb & Mar 2026 Events</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F5F0E8;
+    --bg-card: #FFFDF8;
+    --text: #2C2418;
+    --text-muted: #7A6F60;
+    --border: #E0D6C8;
+    --shadow: rgba(44,36,24,0.08);
+    --community: #B85C38; --community-bg: #FDF0EB;
+    --music: #5C3D8F; --music-bg: #F3EEF9;
+    --yoga: #2D7D5F; --yoga-bg: #EAF5F0;
+    --festival: #C4421A; --festival-bg: #FDE8E1;
+    --arts: #C08B30; --arts-bg: #FBF4E4;
+    --food: #8B6C42; --food-bg: #F8F2E8;
+    --hiking: #3A7CA5; --hiking-bg: #E8F1F7;
+    --family: #D4785C; --family-bg: #FDF0EB;
+    --dance: #A63D82; --dance-bg: #F8EBF4;
+    --cowork: #5A7052; --cowork-bg: #EEF3EC;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'DM Sans',sans-serif; background:var(--bg); color:var(--text); line-height:1.5; }
+
+  /* HERO */
+  .hero {
+    position: relative; height: 340px; overflow: hidden;
+    display: flex; align-items: flex-end; justify-content: center;
+  }
+  .hero-img {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; filter: brightness(0.55) saturate(1.2);
+  }
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(44,36,24,0.85) 0%, rgba(44,36,24,0.3) 50%, rgba(44,36,24,0.15) 100%);
+  }
+  .hero-content {
+    position: relative; z-index: 2; text-align: center; color: #F5F0E8; padding: 0 24px 40px;
+  }
+  .hero-content h1 {
+    font-family:'Playfair Display',serif; font-weight:900;
+    font-size: clamp(2.4rem,6vw,3.8rem); letter-spacing:-0.02em;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.4);
+  }
+  .hero-content h1 span { color:#E8C36A; }
+  .hero-content p { font-size:1rem; opacity:0.8; margin-top:6px; text-shadow: 0 1px 8px rgba(0,0,0,0.5); }
+  .hero-credit {
+    position:absolute; bottom:8px; right:12px; z-index:3;
+    font-size:0.6rem; color:rgba(255,255,255,0.4);
+  }
+  .hero-credit a { color:rgba(255,255,255,0.5); text-decoration:none; }
+  .hero-credit a:hover { color:rgba(255,255,255,0.8); }
+
+  .container { max-width:1100px; margin:0 auto; padding:0 16px; }
+
+  /* LOADING */
+  .loading { text-align:center; padding:60px 20px; color:var(--text-muted); }
+  .loading .spinner { display:inline-block; width:32px; height:32px; border:3px solid var(--border); border-top-color:var(--community); border-radius:50%; animation:spin 0.8s linear infinite; margin-bottom:12px; }
+  @keyframes spin { to { transform:rotate(360deg); } }
+  .error-msg { text-align:center; padding:40px 20px; color:var(--community); }
+  .error-msg code { display:block; margin-top:8px; font-size:0.8rem; color:var(--text-muted); }
+
+  /* FILTERS */
+  .filters-section {
+    position:sticky; top:0; z-index:100; background:var(--bg);
+    padding:14px 0 10px; border-bottom:1px solid var(--border);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .filters-wrap { display:flex; flex-wrap:wrap; gap:6px; justify-content:center; }
+  .filter-btn {
+    display:inline-flex; align-items:center; gap:5px;
+    padding:5px 12px; border-radius:20px; border:2px solid;
+    font-family:'DM Sans',sans-serif; font-size:0.75rem; font-weight:600;
+    cursor:pointer; transition:all 0.2s; user-select:none; background:white;
+  }
+  .filter-btn .dot { width:9px; height:9px; border-radius:50%; flex-shrink:0; }
+  .filter-btn.off { opacity:0.3; background:transparent; }
+  .filter-btn.off .dot { opacity:0.4; }
+  .filter-btn[data-cat="community"] { border-color:var(--community); color:var(--community); }
+  .filter-btn[data-cat="community"] .dot { background:var(--community); }
+  .filter-btn[data-cat="music"] { border-color:var(--music); color:var(--music); }
+  .filter-btn[data-cat="music"] .dot { background:var(--music); }
+  .filter-btn[data-cat="yoga"] { border-color:var(--yoga); color:var(--yoga); }
+  .filter-btn[data-cat="yoga"] .dot { background:var(--yoga); }
+  .filter-btn[data-cat="festival"] { border-color:var(--festival); color:var(--festival); }
+  .filter-btn[data-cat="festival"] .dot { background:var(--festival); }
+  .filter-btn[data-cat="arts"] { border-color:var(--arts); color:var(--arts); }
+  .filter-btn[data-cat="arts"] .dot { background:var(--arts); }
+  .filter-btn[data-cat="food"] { border-color:var(--food); color:var(--food); }
+  .filter-btn[data-cat="food"] .dot { background:var(--food); }
+  .filter-btn[data-cat="hiking"] { border-color:var(--hiking); color:var(--hiking); }
+  .filter-btn[data-cat="hiking"] .dot { background:var(--hiking); }
+  .filter-btn[data-cat="family"] { border-color:var(--family); color:var(--family); }
+  .filter-btn[data-cat="family"] .dot { background:var(--family); }
+  .filter-btn[data-cat="dance"] { border-color:var(--dance); color:var(--dance); }
+  .filter-btn[data-cat="dance"] .dot { background:var(--dance); }
+  .filter-btn[data-cat="cowork"] { border-color:var(--cowork); color:var(--cowork); }
+  .filter-btn[data-cat="cowork"] .dot { background:var(--cowork); }
+
+  .controls { display:flex; gap:12px; justify-content:center; margin-top:8px; }
+  .ctrl-btn {
+    font-family:'DM Sans',sans-serif; font-size:0.7rem; font-weight:600;
+    text-transform:uppercase; letter-spacing:0.08em;
+    border:none; background:none; color:var(--text-muted); cursor:pointer;
+    padding:2px 8px; border-radius:4px; transition:0.15s;
+  }
+  .ctrl-btn:hover { color:var(--text); background:rgba(0,0,0,0.04); }
+
+  /* VIEW TOGGLE */
+  .view-toggle { display:flex; justify-content:center; gap:4px; margin:16px 0 8px; }
+  .view-btn {
+    font-family:'DM Sans',sans-serif; font-size:0.82rem; font-weight:600;
+    padding:8px 20px; border:2px solid var(--border); background:white;
+    cursor:pointer; transition:0.15s; color:var(--text-muted);
+  }
+  .view-btn:first-child { border-radius:8px 0 0 8px; }
+  .view-btn:last-child { border-radius:0 8px 8px 0; }
+  .view-btn.active { background:var(--text); color:white; border-color:var(--text); }
+
+  /* MONTH HEADER */
+  .month-header {
+    font-family:'Playfair Display',serif; font-weight:900; font-size:1.6rem;
+    margin:28px 0 16px; padding-bottom:8px; border-bottom:3px solid var(--text);
+    display:flex; align-items:baseline; gap:10px;
+  }
+  .month-header small { font-family:'DM Sans',sans-serif; font-size:0.8rem; font-weight:500; color:var(--text-muted); }
+
+  /* GRID VIEW */
+  .cal-grid {
+    display:grid; grid-template-columns:repeat(7,1fr); gap:2px;
+    background:var(--border); border-radius:12px; overflow:hidden; margin-bottom:32px;
+  }
+  .cal-grid .day-label {
+    background:var(--text); color:#F5F0E8; font-size:0.7rem; font-weight:700;
+    text-transform:uppercase; letter-spacing:0.1em; text-align:center; padding:8px 2px;
+  }
+  .cal-grid .day-cell { background:var(--bg-card); min-height:90px; padding:4px; position:relative; }
+  .cal-grid .day-cell.empty { background:#F0EBE2; }
+  .cal-grid .day-cell.today { box-shadow:inset 0 0 0 2px var(--community); }
+  .day-num { font-size:0.75rem; font-weight:700; color:var(--text-muted); margin-bottom:2px; padding:1px 4px; }
+  .day-cell.today .day-num { background:var(--community); color:white; border-radius:4px; display:inline-block; }
+  .cal-dot {
+    display:inline-block; width:7px; height:7px; border-radius:50%;
+    margin:1px; cursor:pointer; transition:transform 0.15s;
+  }
+  .cal-dot:hover { transform:scale(1.6); }
+  .day-events-mini { display:flex; flex-wrap:wrap; gap:0; padding:0 2px; }
+
+  /* LIST VIEW — EVENT CARD */
+  .list-view { margin-bottom:32px; }
+  .day-group { margin-bottom:2px; }
+  .day-group-header {
+    display:flex; align-items:center; gap:12px; padding:10px 0 6px;
+    position:sticky; top:108px; background:var(--bg); z-index:10;
+  }
+  .day-group-date { font-family:'Playfair Display',serif; font-weight:900; font-size:1.8rem; line-height:1; min-width:44px; }
+  .day-group-info { font-size:0.8rem; color:var(--text-muted); font-weight:500; }
+
+  .event-card {
+    display:flex; align-items:stretch; gap:0;
+    margin:6px 0; border-radius:12px; overflow:hidden;
+    background:var(--bg-card); border-left:4px solid;
+    transition:all 0.25s; box-shadow:0 1px 4px var(--shadow);
+  }
+  .event-card:hover { box-shadow:0 6px 20px var(--shadow); transform:translateY(-2px); }
+  .event-card.hidden { display:none; }
+
+  .event-card[data-cat="community"] { border-left-color:var(--community); }
+  .event-card[data-cat="music"] { border-left-color:var(--music); }
+  .event-card[data-cat="yoga"] { border-left-color:var(--yoga); }
+  .event-card[data-cat="festival"] { border-left-color:var(--festival); }
+  .event-card[data-cat="arts"] { border-left-color:var(--arts); }
+  .event-card[data-cat="food"] { border-left-color:var(--food); }
+  .event-card[data-cat="hiking"] { border-left-color:var(--hiking); }
+  .event-card[data-cat="family"] { border-left-color:var(--family); }
+  .event-card[data-cat="dance"] { border-left-color:var(--dance); }
+  .event-card[data-cat="cowork"] { border-left-color:var(--cowork); }
+
+  .event-img-wrap {
+    width:140px; min-height:100px; flex-shrink:0;
+    position:relative; overflow:hidden; background:#E0D6C8;
+  }
+  .event-img-wrap img { width:100%; height:100%; object-fit:cover; transition:transform 0.4s; }
+  .event-card:hover .event-img-wrap img { transform:scale(1.08); }
+  .event-img-wrap .cat-badge {
+    position:absolute; bottom:6px; left:6px; padding:2px 8px; border-radius:4px;
+    font-size:0.6rem; font-weight:700; text-transform:uppercase; letter-spacing:0.05em;
+    color:white; backdrop-filter:blur(4px); -webkit-backdrop-filter:blur(4px);
+  }
+
+  .event-body { flex:1; min-width:0; padding:12px 16px; }
+  .event-title { font-weight:700; font-size:0.9rem; margin-bottom:3px; }
+  .event-meta { font-size:0.76rem; color:var(--text-muted); display:flex; flex-wrap:wrap; gap:3px 12px; }
+  .event-desc { font-size:0.76rem; color:var(--text-muted); margin-top:4px; line-height:1.45; }
+  .event-actions { display:flex; gap:6px; align-items:center; margin-top:8px; flex-wrap:wrap; }
+  .action-btn {
+    display:inline-flex; align-items:center; gap:4px;
+    padding:4px 10px; border-radius:6px; font-size:0.68rem; font-weight:600;
+    text-decoration:none; color:white; transition:0.15s; white-space:nowrap;
+  }
+  .action-btn:hover { opacity:0.8; }
+  .action-btn.gcal { background:var(--text); }
+  .action-btn.wa { background:#25D366; }
+  .action-btn.ig { background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); }
+  .action-btn.web { background:#3A7CA5; }
+  .action-btn.tickets { background:var(--community); }
+  .action-btn svg { width:11px; height:11px; fill:currentColor; }
+  .photo-credit { font-size:0.58rem; color:var(--text-muted); opacity:0.5; }
+  .photo-credit a { color:var(--text-muted); text-decoration:none; }
+  .photo-credit a:hover { opacity:0.8; text-decoration:underline; }
+  .event-price { display:inline-block; font-size:0.68rem; font-weight:600; color:var(--yoga); background:var(--yoga-bg); padding:2px 8px; border-radius:4px; }
+  .event-host { font-size:0.72rem; color:var(--text-muted); font-weight:500; }
+
+  /* RECURRING EVENTS */
+  .recurring-section { margin:32px 0; padding:24px; background:var(--bg-card); border-radius:16px; border:1px solid var(--border); }
+  .recurring-section h2 { font-family:'Playfair Display',serif; font-weight:900; font-size:1.3rem; margin-bottom:16px; }
+  .recurring-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:10px; }
+  .recurring-card {
+    display:flex; align-items:stretch; gap:0; border-radius:10px; overflow:hidden;
+    border-left:4px solid; transition:0.15s;
+    background:var(--bg-card); box-shadow:0 1px 3px var(--shadow);
+  }
+  .recurring-card.hidden { display:none; }
+  .recurring-card[data-cat="community"] { border-left-color:var(--community); }
+  .recurring-card[data-cat="music"] { border-left-color:var(--music); }
+  .recurring-card[data-cat="yoga"] { border-left-color:var(--yoga); }
+  .recurring-card[data-cat="festival"] { border-left-color:var(--festival); }
+  .recurring-card[data-cat="arts"] { border-left-color:var(--arts); }
+  .recurring-card[data-cat="food"] { border-left-color:var(--food); }
+  .recurring-card[data-cat="hiking"] { border-left-color:var(--hiking); }
+  .recurring-card[data-cat="family"] { border-left-color:var(--family); }
+  .recurring-card[data-cat="dance"] { border-left-color:var(--dance); }
+  .recurring-card[data-cat="cowork"] { border-left-color:var(--cowork); }
+  .rc-img { width:80px; flex-shrink:0; overflow:hidden; }
+  .rc-img img { width:100%; height:100%; object-fit:cover; }
+  .rc-body { padding:10px 12px; flex:1; min-width:0; }
+  .rc-body strong { display:block; font-weight:700; font-size:0.82rem; margin-bottom:2px; }
+  .rc-body .rc-when { font-size:0.72rem; font-weight:600; color:var(--text-muted); }
+  .rc-body .rc-place { font-size:0.7rem; color:var(--text-muted); opacity:0.7; }
+  .rc-body .rc-desc { font-size:0.68rem; color:var(--text-muted); opacity:0.6; margin-top:2px; }
+  .rc-body .rc-links { display:flex; gap:4px; margin-top:4px; flex-wrap:wrap; }
+  .rc-body .rc-links a { font-size:0.62rem; color:var(--text-muted); text-decoration:none; opacity:0.6; }
+  .rc-body .rc-links a:hover { opacity:1; }
+
+  /* TOOLTIP */
+  .tooltip {
+    display:none; position:fixed; z-index:1000;
+    background:var(--text); color:#F5F0E8;
+    padding:8px 12px; border-radius:8px; font-size:0.78rem;
+    max-width:260px; pointer-events:none;
+    box-shadow:0 8px 24px rgba(0,0,0,0.3); line-height:1.4;
+  }
+  .tooltip.show { display:block; }
+  .tooltip strong { display:block; margin-bottom:2px; }
+
+  .footer {
+    text-align:center; padding:32px 16px; font-size:0.72rem;
+    color:var(--text-muted); border-top:1px solid var(--border); margin-top:40px;
+  }
+  .footer a { color:var(--text-muted); }
+
+  @media (max-width:700px) {
+    .hero { height:240px; }
+    .event-img-wrap { width:100px; }
+    .rc-img { width:60px; }
+    .cal-grid .day-cell { min-height:60px; }
+    .cal-grid .day-label { font-size:0.6rem; padding:6px 1px; }
+    .day-num { font-size:0.65rem; }
+    .cal-dot { width:5px; height:5px; }
+    .filter-btn { font-size:0.68rem; padding:4px 9px; }
+    .recurring-grid { grid-template-columns:1fr; }
+  }
+  @media (max-width:480px) {
+    .event-img-wrap { width:80px; }
+    .event-title { font-size:0.82rem; }
+    .event-body { padding:8px 10px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <img class="hero-img" src="https://live.staticflickr.com/65535/54893100875_9c7bcbc001_b.jpg" alt="Colorful papel picado banners over Oaxaca streets at night" loading="eager">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1>Oaxaca <span>City</span></h1>
+    <p>Every event worth knowing · February & March 2026</p>
+  </div>
+  <div class="hero-credit">Photo by <a href="https://www.flickr.com/photos/10909746@N05/" target="_blank">Keith Mac Uidhir</a> on <a href="https://www.flickr.com/" target="_blank">Flickr</a></div>
+</div>
+
+<div class="container">
+  <div class="filters-section">
+    <div class="filters-wrap" id="filters"></div>
+    <div class="controls">
+      <button class="ctrl-btn" onclick="toggleAll(true)">Show All</button>
+      <button class="ctrl-btn" onclick="toggleAll(false)">Hide All</button>
+    </div>
+  </div>
+  <div class="view-toggle">
+    <button class="view-btn active" onclick="setView('list')">List</button>
+    <button class="view-btn" onclick="setView('grid')">Calendar</button>
+  </div>
+  <div id="list-container"><div class="loading"><div class="spinner"></div><br>Loading events…</div></div>
+  <div id="grid-container" style="display:none"></div>
+  <div class="recurring-section">
+    <h2>↻ Weekly & Recurring Events</h2>
+    <div class="recurring-grid" id="recurring-grid"><div class="loading"><div class="spinner"></div></div></div>
+  </div>
+</div>
+
+<div class="footer">
+  Compiled from the Oaxaca City Events Guide, Community Flyers & Complete Guide to Settling · Feb 2026<br>
+  Photos via <a href="https://www.flickr.com/" target="_blank">Flickr</a> and <a href="https://unsplash.com" target="_blank">Unsplash</a> — used under <a href="https://creativecommons.org/licenses/" target="_blank">Creative Commons</a> and <a href="https://unsplash.com/license" target="_blank">Unsplash</a> licenses<br>
+  Event details may change — check Instagram & WhatsApp for latest info
+</div>
+
+<div class="tooltip" id="tooltip"></div>
+
+<script>
+// =============================================================================
+// OAXACA EVENTS CALENDAR — SHELL
+// All event data loaded from data/*.json — edit those files to add/change events
+// =============================================================================
+
+// ===== CATEGORIES (fixed — change here to add new categories) =====
+const CATEGORIES = {
+  community: { label:'Community & Social', color:'#B85C38' },
+  music:     { label:'Music & Nightlife',  color:'#5C3D8F' },
+  yoga:      { label:'Yoga & Meditation',  color:'#2D7D5F' },
+  festival:  { label:'Festivals & Culture', color:'#C4421A' },
+  arts:      { label:'Arts & Workshops',   color:'#C08B30' },
+  food:      { label:'Food & Dining',      color:'#8B6C42' },
+  hiking:    { label:'Hiking & Outdoors',  color:'#3A7CA5' },
+  family:    { label:'Family & Kids',      color:'#D4785C' },
+  dance:     { label:'Dance',              color:'#A63D82' },
+  cowork:    { label:'Coworking & Nomad',  color:'#5A7052' },
+};
+
+// ===== STATE =====
+let EVENTS = [], RECURRING = [], IMG_LIB = {}, CAT_POOLS = {};
+let activeFilters = {};
+Object.keys(CATEGORIES).forEach(k => activeFilters[k] = true);
+let currentView = 'list';
+let imgCounter = {};
+
+// ===== DATA LOADING =====
+async function loadData() {
+  try {
+    const [evRes, recRes, imgRes] = await Promise.all([
+      fetch('data/events.json'),
+      fetch('data/recurring.json'),
+      fetch('data/images.json'),
+    ]);
+    if (!evRes.ok || !recRes.ok || !imgRes.ok) throw new Error('Failed to load data files');
+    EVENTS = await evRes.json();
+    RECURRING = await recRes.json();
+    const imgData = await imgRes.json();
+    IMG_LIB = imgData.library;
+    CAT_POOLS = imgData.category_pools;
+    init();
+  } catch (err) {
+    document.getElementById('list-container').innerHTML =
+      `<div class="error-msg">
+        <strong>Could not load event data.</strong>
+        <code>${err.message}</code>
+        <p style="margin-top:12px;font-size:0.8rem;color:var(--text-muted)">
+          If opening locally, run a server:<br>
+          <code>python3 -m http.server 8000</code> then visit
+          <code>http://localhost:8000</code>
+        </p>
+      </div>`;
+  }
+}
+
+// ===== IMAGE HELPERS =====
+function imgUrl(key, w=400, h=280) {
+  const i = IMG_LIB[key];
+  if (!i) return '';
+  if (i.source === 'flickr') {
+    const suffix = w > 800 ? '_b' : w > 640 ? '_c' : w > 240 ? '_z' : '_m';
+    return `https://live.staticflickr.com/65535/${i.id}${suffix}.jpg`;
+  }
+  return `https://images.unsplash.com/${i.id}?w=${w}&h=${h}&fit=crop&auto=format&q=80`;
+}
+
+function imgCredit(key) {
+  const i = IMG_LIB[key];
+  if (!i) return '';
+  if (i.source === 'flickr') {
+    return `<a href="https://www.flickr.com/photos/${i.flickr_user}/" target="_blank">${i.credit}</a>`;
+  }
+  return `<a href="https://unsplash.com/@${i.user}?utm_source=oaxaca_calendar&utm_medium=referral" target="_blank">${i.credit}</a>`;
+}
+
+function nextCatImg(cat) {
+  const pool = CAT_POOLS[cat] || [];
+  if (!pool.length) return null;
+  if (!imgCounter[cat]) imgCounter[cat] = 0;
+  const key = pool[imgCounter[cat] % pool.length];
+  imgCounter[cat]++;
+  return key;
+}
+
+// ===== GOOGLE CALENDAR LINK (auto-generated from event data) =====
+function gcalUrl(ev) {
+  const d = ev.start_date.replace(/-/g, '');
+  let startTime = '120000';
+  if (ev.start_time) {
+    const [h, m] = ev.start_time.split(':');
+    startTime = h + m + '00';
+  }
+  let dates;
+  if (ev.end_date) {
+    const edObj = new Date(ev.end_date);
+    edObj.setDate(edObj.getDate() + 1);
+    dates = d + '/' + edObj.toISOString().slice(0, 10).replace(/-/g, '');
+  } else if (ev.end_time) {
+    const [eh, em] = ev.end_time.split(':');
+    dates = d + 'T' + startTime + '/' + d + 'T' + eh + em + '00';
+  } else {
+    const dur = ev.duration_hours || 2;
+    const sh = parseInt(ev.start_time ? ev.start_time.split(':')[0] : 12);
+    const sm = parseInt(ev.start_time ? ev.start_time.split(':')[1] : 0);
+    const endH = sh + Math.floor(dur);
+    const endM = sm + Math.round((dur % 1) * 60);
+    dates = d + 'T' + startTime + '/' + d + 'T' + String(endH).padStart(2, '0') + String(endM).padStart(2, '0') + '00';
+  }
+  return 'https://calendar.google.com/calendar/render?' + new URLSearchParams({
+    action: 'TEMPLATE', text: ev.title, dates,
+    details: ev.description || '',
+    location: ev.address || ev.venue || 'Oaxaca City',
+    ctz: 'America/Mexico_City'
+  }).toString();
+}
+
+// ===== FORMAT HELPERS =====
+const DAYS = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const DAYS_S = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+
+function formatDate(ds) {
+  const d = new Date(ds + 'T12:00:00');
+  return DAYS[d.getDay()] + ', ' + MONTHS[d.getMonth()] + ' ' + d.getDate();
+}
+
+function formatTime(t) {
+  if (!t) return '';
+  const [h, m] = t.split(':').map(Number);
+  return (h > 12 ? h - 12 : (h === 0 ? 12 : h)) + (m > 0 ? ':' + String(m).padStart(2, '0') : '') + ' ' + (h >= 12 ? 'PM' : 'AM');
+}
+
+function esc(s) { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+
+// ===== BUILD ACTION BUTTONS =====
+function actionButtons(ev) {
+  let html = '';
+  // Google Cal
+  html += `<a class="action-btn gcal" href="${gcalUrl(ev)}" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/></svg>
+    Add to Cal</a>`;
+  // WhatsApp
+  if (ev.contact && ev.contact.whatsapp) {
+    const num = ev.contact.whatsapp.replace(/[^0-9+]/g, '').replace('+', '');
+    html += `<a class="action-btn wa" href="https://wa.me/${num}" target="_blank" rel="noopener">💬 WhatsApp</a>`;
+  }
+  // Instagram
+  if (ev.contact && ev.contact.instagram) {
+    const handle = ev.contact.instagram.replace('@', '');
+    html += `<a class="action-btn ig" href="https://instagram.com/${handle}" target="_blank" rel="noopener">📷 ${ev.contact.instagram}</a>`;
+  }
+  // Website
+  const url = ev.links && (ev.links.website || ev.links.registration);
+  if (url) {
+    html += `<a class="action-btn web" href="${url}" target="_blank" rel="noopener">🔗 Info</a>`;
+  }
+  // Tickets
+  if (ev.links && ev.links.tickets) {
+    html += `<a class="action-btn tickets" href="${ev.links.tickets}" target="_blank" rel="noopener">🎟 Tickets</a>`;
+  }
+  return html;
+}
+
+// ===== RENDER FILTERS =====
+function renderFilters() {
+  const wrap = document.getElementById('filters');
+  wrap.innerHTML = '';
+  Object.entries(CATEGORIES).forEach(([key, val]) => {
+    const btn = document.createElement('button');
+    btn.className = 'filter-btn' + (activeFilters[key] ? '' : ' off');
+    btn.dataset.cat = key;
+    btn.innerHTML = `<span class="dot"></span>${val.label}`;
+    btn.onclick = () => { activeFilters[key] = !activeFilters[key]; btn.classList.toggle('off'); applyFilters(); };
+    wrap.appendChild(btn);
+  });
+}
+
+function toggleAll(on) {
+  Object.keys(activeFilters).forEach(k => activeFilters[k] = on);
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('off', !on));
+  applyFilters();
+}
+
+function applyFilters() {
+  document.querySelectorAll('.event-card,.recurring-card').forEach(el => {
+    el.classList.toggle('hidden', !activeFilters[el.dataset.cat]);
+  });
+  document.querySelectorAll('.cal-dot').forEach(el => {
+    el.style.display = activeFilters[el.dataset.cat] ? '' : 'none';
+  });
+  document.querySelectorAll('.day-group').forEach(g => {
+    g.style.display = g.querySelectorAll('.event-card:not(.hidden)').length ? '' : 'none';
+  });
+}
+
+// ===== RENDER LIST VIEW =====
+function renderList() {
+  const c = document.getElementById('list-container');
+  c.innerHTML = '';
+  imgCounter = {};
+  const sorted = [...EVENTS].sort((a, b) =>
+    a.start_date.localeCompare(b.start_date) || (a.start_time || '').localeCompare(b.start_time || '')
+  );
+  let curMonth = '', curDay = '';
+  sorted.forEach(ev => {
+    const d = new Date(ev.start_date + 'T12:00:00');
+    const mKey = d.getFullYear() + '-' + d.getMonth();
+    if (mKey !== curMonth) {
+      curMonth = mKey;
+      const count = sorted.filter(e => {
+        const ed = new Date(e.start_date + 'T12:00:00');
+        return (ed.getFullYear() + '-' + ed.getMonth()) === mKey;
+      }).length;
+      const mh = document.createElement('div');
+      mh.className = 'month-header';
+      mh.innerHTML = MONTHS[d.getMonth()] + ' ' + d.getFullYear() + ` <small>${count} events</small>`;
+      c.appendChild(mh);
+    }
+    if (ev.start_date !== curDay) {
+      curDay = ev.start_date;
+      const dg = document.createElement('div');
+      dg.className = 'day-group';
+      dg.innerHTML = `<div class="day-group-header"><div class="day-group-date">${d.getDate()}</div><div class="day-group-info">${DAYS[d.getDay()]}, ${MONTHS[d.getMonth()]} ${d.getDate()}</div></div>`;
+      c.appendChild(dg);
+    }
+    const lastGroup = c.querySelector('.day-group:last-child');
+    const imgKey = ev.image || nextCatImg(ev.category);
+    const card = document.createElement('div');
+    card.className = 'event-card';
+    card.dataset.cat = ev.category;
+
+    let meta = '';
+    if (ev.start_time) meta += `<span>⏰ ${formatTime(ev.start_time)}${ev.end_time ? '–' + formatTime(ev.end_time) : ''}</span>`;
+    if (ev.end_date) meta += `<span>📅 Through ${formatDate(ev.end_date)}</span>`;
+    else if (ev.duration_hours && !ev.end_time) meta += `<span>⏱ ${ev.duration_hours}h</span>`;
+    if (ev.venue) meta += `<span>📍 ${esc(ev.venue)}</span>`;
+
+    let extras = '';
+    if (ev.host) extras += `<div class="event-host">Hosted by ${esc(ev.host)}</div>`;
+    if (ev.price) extras += `<span class="event-price">${esc(ev.price)}</span> `;
+
+    card.innerHTML = `
+      <div class="event-img-wrap">
+        ${imgKey ? `<img src="${imgUrl(imgKey)}" alt="" loading="lazy">` : ''}
+        <span class="cat-badge" style="background:${CATEGORIES[ev.category].color}cc">${CATEGORIES[ev.category].label}</span>
+      </div>
+      <div class="event-body">
+        <div class="event-title">${esc(ev.title)}</div>
+        <div class="event-meta">${meta}</div>
+        ${ev.description ? `<div class="event-desc">${esc(ev.description)}</div>` : ''}
+        ${extras}
+        <div class="event-actions">
+          ${actionButtons(ev)}
+          ${imgKey ? `<span class="photo-credit">📷 ${imgCredit(imgKey)}</span>` : ''}
+        </div>
+      </div>`;
+    lastGroup.appendChild(card);
+  });
+}
+
+// ===== RENDER GRID VIEW =====
+function renderGrid() {
+  const c = document.getElementById('grid-container');
+  c.innerHTML = '';
+  [[2026, 1, 'February'], [2026, 2, 'March']].forEach(([year, mi, mn]) => {
+    const mh = document.createElement('div');
+    mh.className = 'month-header';
+    mh.textContent = mn + ' ' + year;
+    c.appendChild(mh);
+    const grid = document.createElement('div');
+    grid.className = 'cal-grid';
+    DAYS_S.forEach(d => { const l = document.createElement('div'); l.className = 'day-label'; l.textContent = d; grid.appendChild(l); });
+    const first = new Date(year, mi, 1), dim = new Date(year, mi + 1, 0).getDate(), sd = first.getDay();
+    for (let i = 0; i < sd; i++) { const ce = document.createElement('div'); ce.className = 'day-cell empty'; grid.appendChild(ce); }
+    const today = new Date();
+    for (let d = 1; d <= dim; d++) {
+      const cell = document.createElement('div');
+      const ds = year + '-' + String(mi + 1).padStart(2, '0') + '-' + String(d).padStart(2, '0');
+      cell.className = 'day-cell';
+      if (today.getFullYear() === year && today.getMonth() === mi && today.getDate() === d) cell.classList.add('today');
+      cell.innerHTML = `<div class="day-num">${d}</div><div class="day-events-mini"></div>`;
+      EVENTS.filter(ev => ev.start_date === ds || (ev.end_date && ev.start_date <= ds && ev.end_date >= ds)).forEach(ev => {
+        const dot = document.createElement('span');
+        dot.className = 'cal-dot';
+        dot.dataset.cat = ev.category;
+        dot.style.background = CATEGORIES[ev.category].color;
+        dot.dataset.title = ev.title;
+        dot.dataset.time = ev.start_time ? formatTime(ev.start_time) : '';
+        dot.dataset.venue = ev.venue || '';
+        dot.onmouseenter = showTooltip;
+        dot.onmouseleave = hideTooltip;
+        dot.onclick = () => window.open(gcalUrl(ev), '_blank');
+        cell.querySelector('.day-events-mini').appendChild(dot);
+      });
+      grid.appendChild(cell);
+    }
+    c.appendChild(grid);
+  });
+}
+
+// ===== TOOLTIP =====
+function showTooltip(e) {
+  const t = document.getElementById('tooltip'), d = e.target;
+  t.innerHTML = `<strong>${d.dataset.title}</strong>${d.dataset.time ? d.dataset.time + '<br>' : ''}${d.dataset.venue ? '<span style="opacity:.7">' + d.dataset.venue + '</span>' : ''}<br><span style="font-size:.65rem;opacity:.5">Click to add to Google Calendar</span>`;
+  t.classList.add('show');
+  const r = d.getBoundingClientRect();
+  t.style.left = Math.min(r.left, window.innerWidth - 280) + 'px';
+  t.style.top = (r.bottom + 8) + 'px';
+}
+function hideTooltip() { document.getElementById('tooltip').classList.remove('show'); }
+
+// ===== RENDER RECURRING =====
+function renderRecurring() {
+  const g = document.getElementById('recurring-grid');
+  g.innerHTML = '';
+  imgCounter = {};
+  RECURRING.forEach(r => {
+    const imgKey = r.image || nextCatImg(r.category);
+    const card = document.createElement('div');
+    card.className = 'recurring-card';
+    card.dataset.cat = r.category;
+
+    let links = '';
+    if (r.contact && r.contact.whatsapp) {
+      const num = r.contact.whatsapp.replace(/[^0-9+]/g, '').replace('+', '');
+      links += `<a href="https://wa.me/${num}" target="_blank">💬 WhatsApp</a> `;
+    }
+    if (r.contact && r.contact.instagram) {
+      const handle = r.contact.instagram.replace('@', '');
+      links += `<a href="https://instagram.com/${handle}" target="_blank">📷 ${r.contact.instagram}</a> `;
+    }
+    if (r.links && r.links.website) {
+      links += `<a href="${r.links.website}" target="_blank">🔗 Info</a> `;
+    }
+
+    card.innerHTML = `
+      ${imgKey ? `<div class="rc-img"><img src="${imgUrl(imgKey, 160, 160)}" alt="" loading="lazy"></div>` : ''}
+      <div class="rc-body">
+        <strong>${esc(r.title)}</strong>
+        <div class="rc-when">${esc(r.schedule)}</div>
+        <div class="rc-place">${esc(r.venue)}</div>
+        ${r.description ? `<div class="rc-desc">${esc(r.description)}</div>` : ''}
+        ${r.price ? `<div class="rc-desc">${esc(r.price)}</div>` : ''}
+        ${links ? `<div class="rc-links">${links}</div>` : ''}
+      </div>`;
+    g.appendChild(card);
+  });
+}
+
+// ===== VIEW TOGGLE =====
+function setView(v) {
+  currentView = v;
+  document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+  if (v === 'list') {
+    document.querySelectorAll('.view-btn')[0].classList.add('active');
+    document.getElementById('list-container').style.display = '';
+    document.getElementById('grid-container').style.display = 'none';
+  } else {
+    document.querySelectorAll('.view-btn')[1].classList.add('active');
+    document.getElementById('list-container').style.display = 'none';
+    document.getElementById('grid-container').style.display = '';
+  }
+}
+
+// ===== INIT =====
+function init() {
+  renderFilters();
+  renderList();
+  renderGrid();
+  renderRecurring();
+  applyFilters();
+}
+
+// Start loading
+loadData();
+</script>
+</body>
+</html>

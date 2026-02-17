@@ -1,0 +1,830 @@
+[
+  {
+    "id": "oll-welcome-to-oaxaca-q-a",
+    "title": "OLL Welcome to Oaxaca Q&A",
+    "category": "community",
+    "schedule": "Mondays 11AM–12PM",
+    "venue": "Oaxaca Lending Library",
+    "address": null,
+    "google_maps_url": null,
+    "description": null,
+    "image": "community2",
+    "price": null,
+    "contact": {
+      "phone": null,
+      "whatsapp": null,
+      "email": null,
+      "instagram": null,
+      "facebook": null
+    },
+    "links": {
+      "website": "https://oaxlibrary.org",
+      "registration": null
+    }
+  },
+  {
+    "id": "oll-intercambio-language-exchange",
+    "title": "OLL Intercambio (Language Exchange)",
+    "category": "community",
+    "schedule": "Saturdays 10AM–12PM",
+    "venue": "Bertelli Pavilion, OLL",
+    "address": null,
+    "google_maps_url": null,
+    "description": null,
+    "image": "community1",
+    "price": null,
+    "contact": {
+      "phone": null,
+      "whatsapp": null,
+      "email": null,
+      "instagram": null,
+      "facebook": null
+    },
+    "links": {
+      "website": "https://oaxlibrary.org",
+      "registration": null
+    }
+  },
+  {
+    "id": "oll-zoom-intercambio",
+    "title": "OLL Zoom Intercambio",
+    "category": "community",
+    "schedule": "Sundays 4–6PM",
+    "venue": "Zoom",
+    "address": null,
+    "google_maps_url": null,
+    "description": null,
+    "image": null,
+    "price": null,
+    "contact": {
+      "phone": null,
+      "whatsapp": null,
+      "email": null,
+      "instagram": null,
+      "facebook": null
+    },
+    "links": {
+      "website": "https://oaxlibrary.org",
+      "registration": null
+    }
+  },
+  {
+    "id": "oll-stitches-knitting-crochet",
+    "title": "OLL Stitches (Knitting/Crochet)",
+    "category": "community",
+    "schedule": "Tuesdays 10AM–1PM",
+    "venue": "OLL (20-peso donation)",
+    "address": null,
+    "google_maps_url": null,
+    "description": null,
+    "image": null,
+    "price": null,
+    "contact": {
+      "phone": null,
+      "whatsapp": null,
+      "email": null,
+      "instagram": null,
+      "facebook": null
+    },
+    "links": {
+      "website": "https://oaxlibrary.org",
+      "registration": null
+    }
+  },
+  {
+    "id": "oll-terrace-talks",
+    "title": "OLL Terrace Talks",
+    "category": "community",
+    "schedule": "Most evenings 4:30–6PM",
+    "venue": "OLL · oaxlibrary.org",
+    "address": null,
+    "google_maps_url": null,
+    "description": null,
+    "image": null,
+    "price": null,
+    "contact": {
+      "phone": null,
+      "whatsapp": null,
+      "email": null,
+      "instagram": null,
+      "facebook": null
+    },
+    "links": {
+      "website": "https://oaxlibrary.org",
+      "registration": null
+    }
+  },
+  {
+    "id": "oll-ni-os-adelante-kids",
+    "title": "OLL Niños Adelante (Kids)",
+    "category": "family",
+    "schedule": "Saturdays 11AM–12:30PM",
+    "venue": "OLL · Ages 5–10, free",
+    "address": null,
+    "google_maps_url": null,
+    "description": null,
+    "image": "fam_3gen",
+    "price": null,
+    "contact": {
+      "phone": null,
+      "whatsapp": null,
+      "email": null,
+      "instagram": null,
+      "facebook": null
+    },
+    "links": {
+      "website": "https://oaxlibrary.org",
+      "registration": null
+    }
+  },
+  {
+    "id": "philosophy-meetups-casa-del-elfo",
+    "title": "Philosophy Meetups — Casa Del Elfo",
+    "category": "community",
+    "schedule": "Thu 11AM–1PM, Fri 1–3PM, 2nd Wed (en español)",
+    "venue": "Casa Del Elfo, Reforma 703 · Free",
+    "address": null,
+    "google_maps_url": null,
+    "description": "AI & consciousness, nature of time, Buddhism & Western thought, and more. All welcome.",
+    "image": "community2",
+    "price": null,
+    "contact": {
+      "phone": null,
+      "whatsapp": "+52 951 259 8062",
+      "email": null,
+      "instagram": "@casadelelfo.oax",
+      "facebook": null
+    },
+    "links": {
+      "website": null,
+      "registration": null
+    }
+  },
+  {
+    "id": "wombat-language-exchange-karaoke",
+    "title": "Wombat Language Exchange + Karaoke",
+    "category": "community",
+    "schedule": "Thursdays 6–9PM",
+    "venue": "Wombat Oaxaca",
+    "address": null,
+    "google_maps_url": null,
+    "description": null,
+    "image": null,
+    "price": null,
+    "contact": {
+      "phone": null,
+      "whatsapp": null,
+      "email": null,
+      "instagram": null,
+      "facebook": null
+    },
+    "links": {
+      "website": null,
+      "registration": null
+    }
+  },
+  {
+    "id": "tarde-de-lenguas-multi-language",
+    "title": "Tarde de Lenguas (Multi-language)",
+    "category": "community",
+    "schedule": "Saturday afternoons",
+    "venue": "Rotating cafés",
+    "address": null,
+    "google_maps_url": null,
+    "description": null,
+    "image": null,
+    "price": null,
+    "contact": {
+      "phone": null,
+      "whatsapp": null,
+      "email": null,
+      "instagram": null,
+      "facebook": null
+    },
+    "links": {
+      "website": null,
+      "registration": null
+    }
+  },
+  {
+    "id": "maka-hostel-happy-hour",
+    "title": "Maka Hostel Happy Hour",
+    "category": "community",
+    "schedule": "Daily 6–7PM",
+    "venue": "Maka Hostel, Arteaga 310",
+    "address": null,
+    "google_maps_url": null,
+    "description": null,
+    "image": null,
+    "price": null,
+    "contact": {
+      "phone": null,
+      "whatsapp": null,
+      "email": null,
+      "instagram": null,
+      "facebook": null
+    },
+    "links": {
+      "website": null,
+      "registration": null
+    }
+  },
+  {
+    "id": "la-nueva-babel-live-music",
+    "title": "La Nueva Babel — Live Music",
+    "category": "music",
+    "schedule": "Nightly ~9–10PM",
+    "venue": "Porfirio Díaz 224 · Free",
+    "address": null,
+    "google_maps_url": null,
+    "description": null,
+    "image": "music_jarocho",
+    "price": null,
+    "contact": {
+      "phone": null,
+      "whatsapp": null,
+      "email": null,
+      "instagram": null,
+      "facebook": null
+    },
+    "links": {
+      "website": null,
+      "registration": null
+    }
+  },
+  {
+    "id": "zapotec-mixology-le-n-nafate-band",
+    "title": "Zapotec Mixology — León Nafate / Band",
+    "category": "music",
+    "schedule": "Fri & Sat evenings",
+    "venue": "Tinoco y Palacios 604",
+    "address": null,
+    "google_maps_url": null,
+    "description": null,
+    "image": "music_marimba",
+    "price": null,
+    "contact": {
+      "phone": null,
+      "whatsapp": null,
+      "email": null,
+      "instagram": null,
+      "facebook": null
+    },
+    "links": {
+      "website": null,
+      "registration": null
+    }
+  },
+  {
+    "id": "txalaparta-salsa-night",
+    "title": "Txalaparta — Salsa Night",
+    "category": "dance",
+    "schedule": "Thursdays 10:30PM",
+    "venue": "Matamoros 208",
+    "address": null,
+    "google_maps_url": null,
+    "description": null,
+    "image": "dance1",
+    "price": null,
+    "contact": {
+      "phone": null,
+      "whatsapp": null,
+      "email": null,
+      "instagram": null,
+      "facebook": null
+    },
+    "links": {
+      "website": null,
+      "registration": null
+    }
+  },
+  {
+    "id": "txalaparta-live-bands-djs",
+    "title": "Txalaparta — Live Bands/DJs",
+    "category": "music",
+    "schedule": "Fridays & Saturdays",
+    "venue": "Matamoros 208",
+    "address": null,
+    "google_maps_url": null,
+    "description": null,
+    "image": null,
+    "price": null,
+    "contact": {
+      "phone": null,
+      "whatsapp": null,
+      "email": null,
+      "instagram": null,
+      "facebook": null
+    },
+    "links": {
+      "website": null,
+      "registration": null
+    }
+  },
+  {
+    "id": "rep-blica-cozana-rooftop-shows",
+    "title": "República Cozana — Rooftop Shows",
+    "category": "music",
+    "schedule": "Thu–Sat",
+    "venue": "Murguía 102",
+    "address": null,
+    "google_maps_url": null,
+    "description": null,
+    "image": "music_acoustic",
+    "price": null,
+    "contact": {
+      "phone": null,
+      "whatsapp": null,
+      "email": null,
+      "instagram": null,
+      "facebook": null
+    },
+    "links": {
+      "website": null,
+      "registration": null
+    }
+  },
+  {
+    "id": "la-j-cara-live-music-readings",
+    "title": "La Jícara — Live Music & Readings",
+    "category": "music",
+    "schedule": "Evenings (check IG)",
+    "venue": "Porfirio Díaz 1105",
+    "address": null,
+    "google_maps_url": null,
+    "description": null,
+    "image": null,
+    "price": null,
+    "contact": {
+      "phone": null,
+      "whatsapp": null,
+      "email": null,
+      "instagram": null,
+      "facebook": null
+    },
+    "links": {
+      "website": null,
+      "registration": null
+    }
+  },
+  {
+    "id": "casa-t-bet-free-meditation",
+    "title": "Casa Tíbet — Free Meditation",
+    "category": "yoga",
+    "schedule": "Wed 7–8PM, Sat 12–1PM",
+    "venue": "San Martín 100-A",
+    "address": null,
+    "google_maps_url": null,
+    "description": null,
+    "image": "yoga1",
+    "price": null,
+    "contact": {
+      "phone": null,
+      "whatsapp": null,
+      "email": null,
+      "instagram": null,
+      "facebook": null
+    },
+    "links": {
+      "website": null,
+      "registration": null
+    }
+  },
+  {
+    "id": "maka-yoga-vinyasa-flow",
+    "title": "MaKa Yoga — Vinyasa Flow",
+    "category": "yoga",
+    "schedule": "Tue & Thu 7:30–8:45AM",
+    "venue": "Rufino Tamayo 917 · 80 MXN",
+    "address": null,
+    "google_maps_url": null,
+    "description": null,
+    "image": null,
+    "price": null,
+    "contact": {
+      "phone": null,
+      "whatsapp": null,
+      "email": null,
+      "instagram": null,
+      "facebook": null
+    },
+    "links": {
+      "website": null,
+      "registration": null
+    }
+  },
+  {
+    "id": "prana-yoga-bilingual-classes",
+    "title": "Prana Yoga — Bilingual Classes",
+    "category": "yoga",
+    "schedule": "Daily (check @prana_yoga_oax)",
+    "venue": "Callejón del Carmen 104",
+    "address": null,
+    "google_maps_url": null,
+    "description": null,
+    "image": null,
+    "price": null,
+    "contact": {
+      "phone": null,
+      "whatsapp": null,
+      "email": null,
+      "instagram": "@prana_yoga_oax",
+      "facebook": null
+    },
+    "links": {
+      "website": null,
+      "registration": null
+    }
+  },
+  {
+    "id": "casa-del-angel-yoga-meditation",
+    "title": "Casa del Angel — Yoga & Meditation",
+    "category": "yoga",
+    "schedule": "Daily (casadelangel.com.mx)",
+    "venue": "Blvd la Paz 105, San Felipe",
+    "address": null,
+    "google_maps_url": null,
+    "description": null,
+    "image": "yoga2",
+    "price": null,
+    "contact": {
+      "phone": null,
+      "whatsapp": null,
+      "email": null,
+      "instagram": null,
+      "facebook": null
+    },
+    "links": {
+      "website": "https://casadelangel.com.mx",
+      "registration": null
+    }
+  },
+  {
+    "id": "oaxaca-zen-meditation-conversation",
+    "title": "Oaxaca Zen — Meditation & Conversation",
+    "category": "yoga",
+    "schedule": "Thursdays 12–1:30PM",
+    "venue": "Email queave@gmail.com",
+    "address": null,
+    "google_maps_url": null,
+    "description": null,
+    "image": null,
+    "price": null,
+    "contact": {
+      "phone": null,
+      "whatsapp": null,
+      "email": "queave@gmail.com",
+      "instagram": null,
+      "facebook": null
+    },
+    "links": {
+      "website": null,
+      "registration": null
+    }
+  },
+  {
+    "id": "ecstatic-dance-oaxaca",
+    "title": "Ecstatic Dance Oaxaca",
+    "category": "dance",
+    "schedule": "Twice monthly (check IG)",
+    "venue": "Espacio Morillo · ~150 pesos",
+    "address": null,
+    "google_maps_url": null,
+    "description": null,
+    "image": "dance_folk",
+    "price": "~150 pesos",
+    "contact": {
+      "phone": null,
+      "whatsapp": null,
+      "email": null,
+      "instagram": null,
+      "facebook": null
+    },
+    "links": {
+      "website": null,
+      "registration": null
+    }
+  },
+  {
+    "id": "colectivo-aguanil-salsa-bachata-cumbia",
+    "title": "Colectivo Aguanilé — Salsa/Bachata/Cumbia",
+    "category": "dance",
+    "schedule": "Check social media",
+    "venue": "Centro · Donation-based",
+    "address": null,
+    "google_maps_url": null,
+    "description": null,
+    "image": "dance_preh",
+    "price": null,
+    "contact": {
+      "phone": null,
+      "whatsapp": null,
+      "email": null,
+      "instagram": null,
+      "facebook": null
+    },
+    "links": {
+      "website": null,
+      "registration": null
+    }
+  },
+  {
+    "id": "zapotec-bar-bachata-salsa",
+    "title": "Zapotec Bar — Bachata & Salsa",
+    "category": "dance",
+    "schedule": "Evenings (8:30 & 9:30)",
+    "venue": "@zapotec_oaxaca · Donation",
+    "address": null,
+    "google_maps_url": null,
+    "description": null,
+    "image": null,
+    "price": null,
+    "contact": {
+      "phone": null,
+      "whatsapp": null,
+      "email": null,
+      "instagram": "@zapotec_oaxaca",
+      "facebook": null
+    },
+    "links": {
+      "website": null,
+      "registration": null
+    }
+  },
+  {
+    "id": "parque-bicentenario-carousel-train",
+    "title": "Parque Bicentenario — Carousel & Train",
+    "category": "family",
+    "schedule": "Daily · Rides ~1:30/5:30PM",
+    "venue": "Blvd. Vasconcelos 617 · Free",
+    "address": null,
+    "google_maps_url": null,
+    "description": null,
+    "image": "fam_oaxkids",
+    "price": null,
+    "contact": {
+      "phone": null,
+      "whatsapp": null,
+      "email": null,
+      "instagram": null,
+      "facebook": null
+    },
+    "links": {
+      "website": null,
+      "registration": null
+    }
+  },
+  {
+    "id": "bicentenario-arts-crafts",
+    "title": "Bicentenario — Arts & Crafts",
+    "category": "family",
+    "schedule": "Tue & Thu 2–3PM",
+    "venue": "Parque Bicentenario · Free",
+    "address": null,
+    "google_maps_url": null,
+    "description": null,
+    "image": null,
+    "price": null,
+    "contact": {
+      "phone": null,
+      "whatsapp": null,
+      "email": null,
+      "instagram": null,
+      "facebook": null
+    },
+    "links": {
+      "website": null,
+      "registration": null
+    }
+  },
+  {
+    "id": "casa-organic-market",
+    "title": "CaSa Organic Market",
+    "category": "food",
+    "schedule": "Sundays",
+    "venue": "San Agustín Etla",
+    "address": null,
+    "google_maps_url": null,
+    "description": null,
+    "image": "food_mole",
+    "price": null,
+    "contact": {
+      "phone": null,
+      "whatsapp": null,
+      "email": null,
+      "instagram": null,
+      "facebook": null
+    },
+    "links": {
+      "website": null,
+      "registration": null
+    }
+  },
+  {
+    "id": "co404-family-dinner-activities",
+    "title": "Co404 — Family Dinner & Activities",
+    "category": "cowork",
+    "schedule": "Wednesdays + rotating",
+    "venue": "Benito Juárez 202",
+    "address": null,
+    "google_maps_url": null,
+    "description": null,
+    "image": "cowork1",
+    "price": null,
+    "contact": {
+      "phone": null,
+      "whatsapp": null,
+      "email": null,
+      "instagram": null,
+      "facebook": null
+    },
+    "links": {
+      "website": null,
+      "registration": null
+    }
+  },
+  {
+    "id": "convivio-coworking-events",
+    "title": "Convivio — Coworking & Events",
+    "category": "cowork",
+    "schedule": "Daily cowork · Events Wed–Sun",
+    "venue": "407 Murguía · ~$100 USD/mo",
+    "address": null,
+    "google_maps_url": null,
+    "description": null,
+    "image": null,
+    "price": null,
+    "contact": {
+      "phone": null,
+      "whatsapp": null,
+      "email": null,
+      "instagram": null,
+      "facebook": null
+    },
+    "links": {
+      "website": null,
+      "registration": null
+    }
+  },
+  {
+    "id": "temazcal-oaxaca-nathan-dawson",
+    "title": "Temazcal Oaxaca (Nathan Dawson)",
+    "category": "yoga",
+    "schedule": "Mon–Sat by appointment",
+    "venue": "Santa María Coyotepec · ~1000 MXN",
+    "address": null,
+    "google_maps_url": null,
+    "description": null,
+    "image": null,
+    "price": null,
+    "contact": {
+      "phone": null,
+      "whatsapp": null,
+      "email": null,
+      "instagram": null,
+      "facebook": null
+    },
+    "links": {
+      "website": null,
+      "registration": null
+    }
+  },
+  {
+    "id": "nabani-spacio-hol-stico-temazcal",
+    "title": "Nabani SPAcio Holístico — Temazcal",
+    "category": "yoga",
+    "schedule": "Usually Saturdays",
+    "venue": "WhatsApp +52 951 165 0777",
+    "address": null,
+    "google_maps_url": null,
+    "description": null,
+    "image": null,
+    "price": null,
+    "contact": {
+      "phone": null,
+      "whatsapp": "+52 951 165 0777",
+      "email": null,
+      "instagram": null,
+      "facebook": null
+    },
+    "links": {
+      "website": null,
+      "registration": null
+    }
+  },
+  {
+    "id": "writers-club",
+    "title": "Writers Club",
+    "category": "community",
+    "schedule": "Tuesdays 4–6PM",
+    "venue": "La Petrona Café Bistro, Hidalgo",
+    "address": null,
+    "google_maps_url": null,
+    "description": "Gather to work on projects together for company, support, and accountability. All levels welcome.",
+    "image": "comm_cafe",
+    "price": null,
+    "contact": {
+      "phone": null,
+      "whatsapp": null,
+      "email": null,
+      "instagram": null,
+      "facebook": null
+    },
+    "links": {
+      "website": null,
+      "registration": null
+    }
+  },
+  {
+    "id": "casa-del-elfo-nightly-live-music",
+    "title": "Casa Del Elfo — Nightly Live Music",
+    "category": "music",
+    "schedule": "Tue–Sun 7–9PM",
+    "venue": "Reforma 703, Casa de Barro Mall · Free entry",
+    "address": null,
+    "google_maps_url": null,
+    "description": null,
+    "image": "music_jazz",
+    "price": null,
+    "contact": {
+      "phone": null,
+      "whatsapp": "+52 951 259 8062",
+      "email": null,
+      "instagram": "@casadelelfo.oax",
+      "facebook": null
+    },
+    "links": {
+      "website": null,
+      "registration": null
+    }
+  },
+  {
+    "id": "solidarity-collection-with-cuba",
+    "title": "Solidarity Collection with Cuba",
+    "category": "community",
+    "schedule": "Ongoing",
+    "venue": "Morena Oaxaca, Av. Símbolos Patrios 119, Xoxocotlán",
+    "address": null,
+    "google_maps_url": null,
+    "description": null,
+    "image": null,
+    "price": null,
+    "contact": {
+      "phone": null,
+      "whatsapp": null,
+      "email": null,
+      "instagram": null,
+      "facebook": null
+    },
+    "links": {
+      "website": "https://morena.org/relacion-de-suministros-humanitarios/",
+      "registration": null
+    }
+  },
+  {
+    "id": "norte-ito-taco-tuesday",
+    "title": "Norteñito — Taco Tuesday",
+    "category": "food",
+    "schedule": "Tuesdays 6–10PM",
+    "venue": "220 Gómez Farías · Free entry",
+    "address": null,
+    "google_maps_url": null,
+    "description": null,
+    "image": null,
+    "price": null,
+    "contact": {
+      "phone": null,
+      "whatsapp": null,
+      "email": null,
+      "instagram": null,
+      "facebook": null
+    },
+    "links": {
+      "website": null,
+      "registration": null
+    }
+  },
+  {
+    "id": "ceviarem-temazcal",
+    "title": "Ceviarem Temazcal",
+    "category": "yoga",
+    "schedule": "Tue–Fri 11–6, Sat 11–1",
+    "venue": "Tlalixtac de Cabrera · ~$75 USD",
+    "address": null,
+    "google_maps_url": null,
+    "description": null,
+    "image": null,
+    "price": null,
+    "contact": {
+      "phone": null,
+      "whatsapp": null,
+      "email": null,
+      "instagram": null,
+      "facebook": null
+    },
+    "links": {
+      "website": null,
+      "registration": null
+    }
+  }
+]
