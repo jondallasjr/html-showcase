@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muizenberg Weekly Events</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+:root {
+  /* Category colors — saturated but not neon */
+  --c-yoga: #7B5EA7;
+  --c-yoga-bg: #F3EEF8;
+  --c-meditation: #2E7D8C;
+  --c-meditation-bg: #E6F3F5;
+  --c-swim: #1976A8;
+  --c-swim-bg: #E3F0F8;
+  --c-surf: #0E8A6E;
+  --c-surf-bg: #E2F5F0;
+  --c-music: #C2553A;
+  --c-music-bg: #FAEAE6;
+  --c-jazz: #B8860B;
+  --c-jazz-bg: #FBF3E0;
+  --c-openmic: #D4644E;
+  --c-openmic-bg: #FCEEE9;
+  --c-art: #A0522D;
+  --c-art-bg: #F8EDE5;
+  --c-philosophy: #4A5899;
+  --c-philosophy-bg: #ECEEF8;
+  --c-kids: #E67E22;
+  --c-kids-bg: #FDF1E3;
+  --c-social: #27AE60;
+  --c-social-bg: #E5F6EC;
+  --c-fitness: #3C8F3C;
+  --c-fitness-bg: #E7F3E7;
+  --c-workshop: #8B5E3C;
+  --c-workshop-bg: #F5EDE5;
+  --c-spiritual: #8A5BA5;
+  --c-spiritual-bg: #F2ECF6;
+  --c-market: #C0392B;
+  --c-market-bg: #FBEAE8;
+  --c-shadow: #5B4A6B;
+  --c-shadow-bg: #F0EBF3;
+  --c-books: #6B7B3B;
+  --c-books-bg: #F0F3E5;
+
+  --bg: #FAF8F5;
+  --bg-card: #FFFFFF;
+  --border: #E8E3DC;
+  --text: #2C2620;
+  --text-mid: #6B6058;
+  --text-light: #9B9088;
+  --radius: 10px;
+}
+
+body {
+  font-family: 'DM Sans', -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* HEADER */
+.header {
+  background: linear-gradient(135deg, #1B3A4B 0%, #2C5F7C 60%, #3A7CA5 100%);
+  color: #fff;
+  padding: 1.75rem 1.5rem 1.25rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 4px 20px rgba(27,58,75,0.3);
+}
+.header h1 {
+  font-family: 'Fraunces', serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.1rem;
+}
+.header .sub { font-size: 0.78rem; opacity: 0.65; }
+
+/* VIEW TOGGLE */
+.view-toggle {
+  display: flex;
+  gap: 0.25rem;
+  margin-top: 0.75rem;
+  background: rgba(255,255,255,0.1);
+  border-radius: 8px;
+  padding: 0.2rem;
+}
+.view-btn {
+  flex: 1;
+  padding: 0.4rem 0.6rem;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: rgba(255,255,255,0.65);
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.view-btn.active { background: rgba(255,255,255,0.22); color: #fff; }
+
+/* FILTERS */
+.filters-bar {
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border);
+  padding: 0.6rem 1rem;
+  display: flex;
+  gap: 0.3rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  position: sticky;
+  top: 106px;
+  z-index: 90;
+}
+.filters-bar::-webkit-scrollbar { display: none; }
+
+.ftag {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.28rem 0.6rem;
+  border-radius: 20px;
+  border: 1.5px solid var(--border);
+  background: var(--bg-card);
+  font-size: 0.7rem;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.15s;
+  color: var(--text-mid);
+}
+.ftag .dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition: opacity 0.15s;
+}
+.ftag.off { opacity: 0.4; }
+.ftag.off .dot { opacity: 0.3; }
+
+/* MAIN */
+main {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0.5rem 0.75rem 4rem;
+}
+
+/* DAY SECTIONS */
+.day-section { margin-bottom: 1.25rem; }
+.day-header {
+  font-family: 'Fraunces', serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  padding: 0.5rem 0 0.35rem;
+  border-bottom: 2px solid var(--text);
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+.day-header .day-count {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text-light);
+  background: var(--border);
+  padding: 0.1rem 0.4rem;
+  border-radius: 8px;
+}
+
+/* EVENT CARDS */
+.events-list { display: flex; flex-direction: column; gap: 0.3rem; }
+
+.event-card {
+  display: flex;
+  gap: 0.6rem;
+  padding: 0.6rem 0.7rem;
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  border-left: 4px solid transparent;
+  transition: all 0.12s;
+  align-items: flex-start;
+}
+.event-card:hover {
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+  transform: translateY(-1px);
+}
+
+.event-time {
+  flex-shrink: 0;
+  width: 52px;
+  text-align: center;
+  padding-top: 0.15rem;
+}
+.event-time .t {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.2;
+}
+.event-time .period {
+  font-size: 0.62rem;
+  font-weight: 600;
+  color: var(--text-light);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.event-body { flex: 1; min-width: 0; }
+.event-name {
+  font-weight: 700;
+  font-size: 0.85rem;
+  line-height: 1.3;
+  color: var(--text);
+}
+.event-meta {
+  font-size: 0.73rem;
+  color: var(--text-mid);
+  margin-top: 0.08rem;
+  line-height: 1.35;
+}
+.event-tags { display: flex; gap: 0.25rem; flex-wrap: wrap; margin-top: 0.25rem; }
+.event-cat {
+  font-size: 0.6rem;
+  font-weight: 700;
+  padding: 0.1rem 0.4rem;
+  border-radius: 3px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.event-loc {
+  font-size: 0.6rem;
+  font-weight: 500;
+  padding: 0.1rem 0.35rem;
+  border-radius: 3px;
+  background: #F0EDE8;
+  color: var(--text-mid);
+}
+.event-price {
+  font-size: 0.6rem;
+  font-weight: 600;
+  padding: 0.1rem 0.35rem;
+  border-radius: 3px;
+  background: #E2F5E9;
+  color: #1B7A3D;
+}
+
+/* GCAL BUTTON */
+.gcal-btn {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  border: 1.5px solid var(--border);
+  background: var(--bg-card);
+  cursor: pointer;
+  transition: all 0.15s;
+  margin-top: 0.1rem;
+  text-decoration: none;
+}
+.gcal-btn:hover {
+  border-color: #4285F4;
+  background: #EBF2FF;
+}
+.gcal-btn svg { width: 16px; height: 16px; }
+
+/* CATEGORY VIEW */
+.cat-section { margin-bottom: 1.25rem; }
+.cat-header-row {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 0 0.35rem;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+}
+.cat-color-bar {
+  width: 4px;
+  height: 20px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+.cat-header-row h2 {
+  font-family: 'Fraunces', serif;
+  font-size: 1rem;
+  font-weight: 600;
+  flex: 1;
+}
+.cat-header-row .day-count {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text-light);
+  background: var(--border);
+  padding: 0.1rem 0.4rem;
+  border-radius: 8px;
+}
+
+.event-card.hidden, .day-section.hidden, .cat-section.hidden { display: none; }
+
+.empty-state {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--text-light);
+  font-size: 0.88rem;
+}
+
+/* RESPONSIVE */
+@media (max-width: 480px) {
+  .header { padding: 1.25rem 1rem 1rem; }
+  .header h1 { font-size: 1.3rem; }
+  .filters-bar { padding: 0.5rem 0.75rem; top: 98px; }
+  main { padding: 0.4rem 0.5rem 3rem; }
+  .event-time { width: 44px; }
+  .event-time .t { font-size: 0.72rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Muizenberg Weekly Events</h1>
+  <p class="sub">Recurring events · Cape Town False Bay corridor</p>
+  <div class="view-toggle">
+    <button class="view-btn active" data-view="day" onclick="setView('day')">By Day</button>
+    <button class="view-btn" data-view="cat" onclick="setView('cat')">By Category</button>
+  </div>
+</div>
+
+<div class="filters-bar" id="filters"></div>
+<main id="main"></main>
+
+<script>
+const CATS = {
+  yoga:       {label:"Yoga",        color:"#7B5EA7", bg:"#F3EEF8"},
+  meditation: {label:"Meditation",  color:"#2E7D8C", bg:"#E6F3F5"},
+  swim:       {label:"Cold Swim",   color:"#1976A8", bg:"#E3F0F8"},
+  surf:       {label:"Surf",        color:"#0E8A6E", bg:"#E2F5F0"},
+  music:      {label:"Music Jam",   color:"#C2553A", bg:"#FAEAE6"},
+  jazz:       {label:"Jazz",        color:"#B8860B", bg:"#FBF3E0"},
+  openmic:    {label:"Open Mic",    color:"#D4644E", bg:"#FCEEE9"},
+  art:        {label:"Art",         color:"#A0522D", bg:"#F8EDE5"},
+  philosophy: {label:"Philosophy",  color:"#4A5899", bg:"#ECEEF8"},
+  kids:       {label:"Kids",        color:"#E67E22", bg:"#FDF1E3"},
+  social:     {label:"Social",      color:"#27AE60", bg:"#E5F6EC"},
+  fitness:    {label:"Fitness",     color:"#3C8F3C", bg:"#E7F3E7"},
+  workshop:   {label:"Workshop",    color:"#8B5E3C", bg:"#F5EDE5"},
+  spiritual:  {label:"Spiritual",   color:"#8A5BA5", bg:"#F2ECF6"},
+  market:     {label:"Market",      color:"#C0392B", bg:"#FBEAE8"},
+  shadow:     {label:"Shadow Work", color:"#5B4A6B", bg:"#F0EBF3"},
+  books:      {label:"Books",       color:"#6B7B3B", bg:"#F0F3E5"},
+  wellness:   {label:"Wellness",    color:"#D35494", bg:"#FCEEF5"},
+};
+
+const DAYS = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
+
+// sortKey: 24hr for sorting. freq: "weekly","biweekly","monthly","daily"
+const EVENTS = [
+  // MONDAY
+  {day:"Monday",time:"6:00am",sort:600,n:"Mysore Ashtanga",loc:"AYCT, Vredehoek",d:"Mon–Thu 6–8am. Traditional Mysore with Ulrike Lamprecht",cat:"yoga",price:"~R1,500/mo",freq:"weekly"},
+  {day:"Monday",time:"6:30pm",sort:1830,n:"Diamond Way Buddhist Meditation",loc:"Cape Town",d:"Intro meditation. Diamond Way tradition",cat:"meditation",freq:"weekly"},
+  {day:"Monday",time:"7:00pm",sort:1900,n:"Fat Harry's Jazz Jam",loc:"Kenilworth",d:"Hosted by Dan Shout. Free for jammers, R50 listen. 166 2nd Ave",cat:"music",price:"Free/R50",freq:"weekly"},
+  {day:"Monday",time:"7:00pm",sort:1900,n:"Watercolour Painting",loc:"Peter Clarke Art Centre, Newlands",d:"Monday morning watercolour classes",cat:"workshop",price:"R1,600/7",freq:"weekly"},
+  {day:"Monday",time:"8:00pm",sort:2000,n:"Armchair Theatre Jam Night",loc:"Observatory",d:"Open jam session. 135 Lower Main Rd",cat:"music",price:"Free",freq:"weekly"},
+  {day:"Monday",time:"8:00am",sort:800,n:"Waterblommetjies Cold Swim",loc:"Camps Bay Tidal Pool",d:"Women's cold-water group. Contact Florence: 073 352 0994",cat:"swim",price:"Free",freq:"weekly"},
+  {day:"Monday",time:"7:00pm",sort:1900,n:"Cape Town Writers' Network",loc:"The Bee-stro, Observatory",d:"Weekly writing workshops. Bring food/drink",cat:"books",price:"Free",freq:"weekly"},
+  {day:"Monday",time:"Evening",sort:1930,n:"Ananda Kutir Monday Programme",loc:"Rondebosch East",d:"Mar–Jul 2026. Yoga, meditation, discourse",cat:"spiritual",freq:"weekly"},
+
+  // TUESDAY
+  {day:"Tuesday",time:"6:00am",sort:600,n:"Mysore Ashtanga",loc:"AYCT, Vredehoek",d:"Mon–Thu 6–8am",cat:"yoga",freq:"weekly"},
+  {day:"Tuesday",time:"8:00am",sort:800,n:"Running Wild Trail Run",loc:"False Bay",d:"Tue & Thu 8am. Beginner-friendly Snail Trail programme",cat:"fitness",freq:"weekly"},
+  {day:"Tuesday",time:"Morning",sort:900,n:"Moms on Board — Free Surf Lessons",loc:"Lifestyle Surf Shop, Muizenberg",d:"Free lessons for moms every Tuesday!",cat:"surf",price:"Free",freq:"weekly"},
+  {day:"Tuesday",time:"Morning",sort:930,n:"Wriggle and Rhyme",loc:"Claremont / Rondebosch",d:"Music & movement for 6mo–6yr. Multiple sessions",cat:"kids",price:"Paid",freq:"weekly"},
+  {day:"Tuesday",time:"6:00pm",sort:1800,n:"Ground Culture Open Mic",loc:"Observatory",d:"6–10pm. 170 Lower Main Rd. All welcome",cat:"openmic",price:"Free",freq:"weekly"},
+  {day:"Tuesday",time:"6:30pm",sort:1830,n:"Rotary Club of Cape of Good Hope",loc:"Galley Restaurant, Fish Hoek",d:"Weekly dinner meeting",cat:"social",freq:"weekly"},
+  {day:"Tuesday",time:"7:00pm",sort:1900,n:"Kagyu Samye Dzong Meditation",loc:"Kenilworth",d:"Tibetan Buddhist meditation. R60/class",cat:"meditation",price:"R60",freq:"weekly"},
+  {day:"Tuesday",time:"7:30pm",sort:1930,n:"Amber on Bree Jazz Jam",loc:"CBD",d:"Curated by Muneeb Hermans. Free",cat:"jazz",price:"Free",freq:"weekly"},
+  {day:"Tuesday",time:"7:30pm",sort:1930,n:"Mojo Market Jazzy Tuesdays",loc:"Sea Point",d:"Live jazz. Great food market setting",cat:"jazz",freq:"weekly"},
+  {day:"Tuesday",time:"8:00pm",sort:2000,n:"House of Machines Songwriter Showcase",loc:"CBD",d:"Every Tuesday. Free",cat:"openmic",price:"Free",freq:"weekly"},
+  {day:"Tuesday",time:"8:00pm",sort:2000,n:"UCT Philosophy Society",loc:"UCT, Rondebosch",d:"Monthly Tue 8–9:30pm. Open to all. Free",cat:"philosophy",price:"Free",freq:"monthly"},
+
+  // WEDNESDAY
+  {day:"Wednesday",time:"6:00am",sort:600,n:"Mysore Ashtanga",loc:"AYCT, Vredehoek",d:"Mon–Thu 6–8am",cat:"yoga",freq:"weekly"},
+  {day:"Wednesday",time:"10:00am",sort:1000,n:"Zeitz MOCAA — Africa Wednesdays",loc:"V&A Waterfront",d:"Free for African citizens 10am–1pm",cat:"art",price:"Free",freq:"weekly"},
+  {day:"Wednesday",time:"7:00pm",sort:1900,n:"The Melting Pot Live Music",loc:"Muizenberg",d:"From 7pm. 15 Church St. Jazz, folk, rock, comedy",cat:"openmic",freq:"weekly"},
+  {day:"Wednesday",time:"7:00pm",sort:1900,n:"The Blue Room Jazz",loc:"Grub & Vine, CBD",d:"Wed–Sat from 7pm. Speakeasy. Jazz, blues, soul",cat:"jazz",freq:"weekly"},
+  {day:"Wednesday",time:"7:00pm",sort:1900,n:"The Crypt Jazz Restaurant",loc:"St George's Cathedral, CBD",d:"Tue–Sat from 7pm. R50–R100 cover",cat:"jazz",price:"R50–R100",freq:"weekly"},
+  {day:"Wednesday",time:"8:00pm",sort:2000,n:"The Striped Horse Open Jam",loc:"Muizenberg",d:"Bi-weekly Wed 8–11pm. York Rd. Hosted by Ted Bauman",cat:"music",price:"Free",freq:"biweekly"},
+  {day:"Wednesday",time:"Evening",sort:1930,n:"Verses Spoken Word",loc:"Baran's, CBD",d:"Last Wed monthly. Poetry + live band + open mic",cat:"openmic",freq:"monthly"},
+  {day:"Wednesday",time:"Evening",sort:1930,n:"ABC Painting",loc:"Peter Clarke Art Centre, Newlands",d:"7 sessions. Wed evenings. R1,600",cat:"workshop",price:"R1,600",freq:"weekly"},
+
+  // THURSDAY
+  {day:"Thursday",time:"6:00am",sort:600,n:"Mysore Ashtanga",loc:"AYCT, Vredehoek",d:"Mon–Thu 6–8am",cat:"yoga",freq:"weekly"},
+  {day:"Thursday",time:"8:00am",sort:800,n:"Running Wild Trail Run",loc:"False Bay",d:"Tue & Thu 8am",cat:"fitness",freq:"weekly"},
+  {day:"Thursday",time:"Morning",sort:900,n:"Stories and Voices Writing",loc:"Newlands",d:"AWA method workshops. ~2 hours. Thu mornings",cat:"books",freq:"weekly"},
+  {day:"Thursday",time:"Morning",sort:930,n:"Fish Hoek Library Story Hour",loc:"Fish Hoek",d:"Running since the 1950s. Free",cat:"kids",price:"Free",freq:"weekly"},
+  {day:"Thursday",time:"4:00pm",sort:1600,n:"Blue Bird Garage Market",loc:"Muizenberg",d:"Thu & Fri 4–10pm. Live bands, food, Kids Zone. 39 Albertyn Rd",cat:"market",price:"Free entry",freq:"weekly"},
+  {day:"Thursday",time:"6:00pm",sort:1800,n:"Harvest Café Open Mic",loc:"Muizenberg",d:"6–9pm. York Rd. Singers, poets, musicians",cat:"openmic",price:"Free",freq:"weekly"},
+  {day:"Thursday",time:"6:30pm",sort:1830,n:"Dance Awake Ecstatic Dance",loc:"Claremont Civic Centre",d:"Conscious dance/moving meditation. R150",cat:"meditation",price:"R150",freq:"weekly"},
+  {day:"Thursday",time:"6:30pm",sort:1830,n:"Rotary Club of South Peninsula",loc:"Fish Hoek Beach",d:"Weekly meeting. New club (est. Jan 2024)",cat:"social",freq:"weekly"},
+  {day:"Thursday",time:"Evening",sort:1900,n:"First Thursdays Cape Town",loc:"CBD Galleries",d:"1st Thu monthly. ~35 galleries open til 9pm+",cat:"art",price:"Free",freq:"monthly"},
+  {day:"Thursday",time:"Evening",sort:1900,n:"First Thursdays Down South",loc:"Muizenberg / Kalk Bay",d:"1st Thu. Local galleries, shops, bars. ~R200 pass",cat:"art",price:"~R200",freq:"monthly"},
+  {day:"Thursday",time:"Evening",sort:1930,n:"ABC Drawing",loc:"Peter Clarke Art Centre, Newlands",d:"Thu evenings. Drawing course",cat:"workshop",freq:"weekly"},
+
+  // FRIDAY
+  {day:"Friday",time:"6:00am",sort:600,n:"Led Primary Ashtanga",loc:"AYCT, Vredehoek",d:"Friday 6am led class",cat:"yoga",freq:"weekly"},
+  {day:"Friday",time:"Morning",sort:900,n:"Roam Parenting Playgroup",loc:"Cape Town",d:"Guided 90-min. RIE + mindfulness. Age-grouped",cat:"kids",freq:"weekly"},
+  {day:"Friday",time:"10:30am",sort:1030,n:"Waterblommetjies Cold Swim",loc:"Camps Bay Tidal Pool",d:"Women's group. Fridays 10:30am",cat:"swim",price:"Free",freq:"weekly"},
+  {day:"Friday",time:"4:00pm",sort:1600,n:"Blue Bird Garage Market",loc:"Muizenberg",d:"Thu & Fri 4–10pm. Live bands, food, Kids Zone",cat:"market",price:"Free entry",freq:"weekly"},
+  {day:"Friday",time:"Evening",sort:1900,n:"Temple Israel Shabbat Service",loc:"Wynberg",d:"Friday night. Hebrew & English. All welcome (inc. non-Jews)",cat:"spiritual",freq:"weekly"},
+  {day:"Friday",time:"Evening",sort:1900,n:"Muizenberg Synagogue Shabbat",loc:"Muizenberg",d:"Friday evening service. Historic 1920s Orthodox synagogue",cat:"spiritual",freq:"weekly"},
+  {day:"Friday",time:"7:30pm",sort:1930,n:"The Piano Bar Live Music",loc:"De Waterkant",d:"Every night from 7:30pm. No cover. Funk, soul, jazz",cat:"jazz",price:"Free",freq:"weekly"},
+
+  // SATURDAY
+  {day:"Saturday",time:"8:00am",sort:800,n:"Zandvlei parkrun",loc:"Muizenberg",d:"5km flat. Pushchairs + dogs welcome. Register at parkrun.co.za",cat:"fitness",price:"Free",freq:"weekly"},
+  {day:"Saturday",time:"8:00am",sort:800,n:"Fish Hoek parkrun",loc:"Fish Hoek",d:"5km gravel/trail",cat:"fitness",price:"Free",freq:"weekly"},
+  {day:"Saturday",time:"9:00am",sort:900,n:"Neighbourgoods Market",loc:"Old Biscuit Mill, Woodstock",d:"9am–3pm. 100+ traders, live music, street food",cat:"market",price:"Free entry",freq:"weekly"},
+  {day:"Saturday",time:"9:00am",sort:900,n:"OZCF Market",loc:"V&A Waterfront",d:"Saturday morning farmers' market",cat:"market",freq:"weekly"},
+  {day:"Saturday",time:"9:00am",sort:900,n:"All About Writing Creative Saturday",loc:"Casa Labia, Muizenberg",d:"1st Sat every 2nd month. R425. 9am start",cat:"workshop",price:"R425",freq:"monthly"},
+  {day:"Saturday",time:"9:30am",sort:930,n:"Anthony Shapiro Pottery",loc:"CBD",d:"Drop-in Sat 9:30am–12:30pm. R1,200",cat:"workshop",price:"R1,200",freq:"weekly"},
+  {day:"Saturday",time:"Morning",sort:930,n:"Muizenberg Synagogue Shabbat",loc:"Muizenberg",d:"Saturday morning service",cat:"spiritual",freq:"weekly"},
+  {day:"Saturday",time:"Morning",sort:930,n:"Temple Israel Shabbat/Shiurim",loc:"Wynberg",d:"Saturday morning. All welcome",cat:"spiritual",freq:"weekly"},
+  {day:"Saturday",time:"3:00pm",sort:1500,n:"Jazz at Cool Runnings",loc:"Claremont",d:"Saturdays 3–6pm (not every week)",cat:"jazz",freq:"biweekly"},
+  {day:"Saturday",time:"2:30pm",sort:1430,n:"Bergvliet Writers' Circle",loc:"Diep River",d:"2nd Sat monthly. 25+ years running",cat:"books",freq:"monthly"},
+  {day:"Saturday",time:"6:00pm",sort:1800,n:"ISKCON Spirit Matters",loc:"Rondebosch",d:"Kirtan + discussions. Saturday evenings",cat:"spiritual",freq:"weekly"},
+  {day:"Saturday",time:"Evening",sort:1900,n:"Ananda Kutir Satsang",loc:"Rondebosch East",d:"Prayers, kirtans, discourse, prasad. Free (booking req)",cat:"spiritual",price:"Free",freq:"weekly"},
+  {day:"Saturday",time:"Morning",sort:930,n:"Mercury Woodwork Course",loc:"Cape Town",d:"Foundation Saturday courses. Parent & Child option",cat:"workshop",freq:"weekly"},
+  {day:"Saturday",time:"9:00am",sort:900,n:"Jean Knighton-Fitt Writers' Retreat",loc:"Garden setting",d:"3rd Sat monthly 9am–1pm. Exercises + silent writing",cat:"books",freq:"monthly"},
+
+  // SUNDAY
+  {day:"Sunday",time:"9:30am",sort:930,n:"Quaker Meeting for Worship",loc:"Mowbray / South Peninsula",d:"Silent worship. Also meets in South Peninsula homes 2–3x/month",cat:"spiritual",price:"Free",freq:"weekly"},
+  {day:"Sunday",time:"10:00am",sort:1000,n:"Southreach Church",loc:"Muizenberg",d:"Evangelical, multicultural. Also 6pm evening service",cat:"spiritual",freq:"weekly"},
+  {day:"Sunday",time:"10:00am",sort:1000,n:"Cape Town Unitarians Gathering",loc:"64 Hout St, CBD",d:"Multifaith seekers. No dogma required. All welcome",cat:"spiritual",freq:"weekly"},
+  {day:"Sunday",time:"11:00am",sort:1100,n:"ISKCON Sunday Love Feast",loc:"Rondebosch",d:"11am–1pm+. Chanting, discourse, free vegetarian lunch",cat:"spiritual",price:"Free",freq:"weekly"},
+  {day:"Sunday",time:"1:00pm",sort:1300,n:"Kloof Street House Sunday Jazz",loc:"Gardens",d:"Free jazz 1–3pm on veranda. Family-friendly garden",cat:"jazz",price:"Free",freq:"weekly"},
+  {day:"Sunday",time:"1:00pm",sort:1300,n:"Woodstock Brewery Sunday Jazz",loc:"Woodstock",d:"Glenn Robertson Band from 1pm. R140",cat:"jazz",price:"R140",freq:"weekly"},
+  {day:"Sunday",time:"1:00pm",sort:1300,n:"Mojo Market Sunday Jazz",loc:"Sea Point",d:"Jazz from 1pm. Family-friendly",cat:"jazz",freq:"weekly"},
+  {day:"Sunday",time:"Afternoon",sort:1400,n:"Lekker Chats",loc:"Cape Town",d:"Structured meaningful conversation. 2x/month. Ages 25–45",cat:"philosophy",price:"Free",freq:"biweekly"},
+  {day:"Sunday",time:"Afternoon",sort:1400,n:"Silent Book Club",loc:"The Commons, Muizenberg",d:"3x/month. Bring your book, read, socialize. Free",cat:"books",price:"Free",freq:"weekly"},
+  {day:"Sunday",time:"3:00pm",sort:1500,n:"Curious to Change",loc:"Cape Town",d:"Deep conversation / personal development. Meetup",cat:"philosophy",freq:"weekly"},
+  {day:"Sunday",time:"3:00pm",sort:1500,n:"The Shed Jazz Jam",loc:"Muizenberg",d:"Every Sun from 3pm. 165 Main Rd. Bring instruments!",cat:"music",price:"Free",freq:"weekly"},
+  {day:"Sunday",time:"4:00pm",sort:1600,n:"Openwine Sunday Jazz Jam",loc:"72 Wale St, CBD",d:"Every Sunday from 4pm. Free entry",cat:"jazz",price:"Free",freq:"weekly"},
+  {day:"Sunday",time:"4:00pm",sort:1600,n:"Kirstenbosch Sunset Concert",loc:"Kirstenbosch, Newlands",d:"Every Sun Nov–Mar. Gates 4pm. Kids 0–5 free. R360",cat:"kids",price:"R360",freq:"weekly"},
+  {day:"Sunday",time:"6:00pm",sort:1800,n:"Southreach Church Evening",loc:"Muizenberg",d:"Evening gathering",cat:"spiritual",freq:"weekly"},
+
+  // DAILY / FLEXIBLE
+  {day:"Daily",time:"Dawn",sort:500,n:"Dalebrook Dawn Swim",loc:"Kalk Bay",d:"Growing community of 'swimrisers'. Year-round. Free",cat:"swim",price:"Free",freq:"daily"},
+  {day:"Daily",time:"Morning",sort:700,n:"Surfer's Corner Surf",loc:"Muizenberg",d:"Multiple schools. Warm water, gentle waves, lifeguards",cat:"surf",freq:"daily"},
+  {day:"Daily",time:"4:30am",sort:430,n:"ISKCON Morning Kirtan",loc:"Rondebosch",d:"Daily kirtan from 4:30am",cat:"spiritual",price:"Free",freq:"daily"},
+];
+
+// STATE
+let activeView = 'day';
+let catState = {};
+Object.keys(CATS).forEach(k => catState[k] = true);
+
+// GOOGLE CALENDAR URL BUILDER
+function gcalUrl(ev) {
+  const dayMap = {Monday:0,Tuesday:1,Wednesday:2,Thursday:3,Friday:4,Saturday:5,Sunday:6};
+  const today = new Date();
+  const todayDay = (today.getDay() + 6) % 7; // Mon=0
+  let targetDay = dayMap[ev.day] ?? 0;
+  let diff = targetDay - todayDay;
+  if (diff <= 0) diff += 7;
+  const eventDate = new Date(today);
+  eventDate.setDate(today.getDate() + diff);
+
+  // Parse time
+  let startH = 9, startM = 0;
+  const tm = ev.time.match(/(\d{1,2}):?(\d{2})?\s*(am|pm)?/i);
+  if (tm) {
+    startH = parseInt(tm[1]);
+    startM = tm[2] ? parseInt(tm[2]) : 0;
+    if (tm[3] && tm[3].toLowerCase() === 'pm' && startH < 12) startH += 12;
+    if (tm[3] && tm[3].toLowerCase() === 'am' && startH === 12) startH = 0;
+  } else if (/morning/i.test(ev.time)) { startH = 9; }
+  else if (/afternoon/i.test(ev.time)) { startH = 14; }
+  else if (/evening/i.test(ev.time)) { startH = 19; }
+  else if (/dawn/i.test(ev.time)) { startH = 6; }
+
+  const endH = startH + 1;
+
+  const pad = n => String(n).padStart(2, '0');
+  const y = eventDate.getFullYear();
+  const m = pad(eventDate.getMonth() + 1);
+  const d = pad(eventDate.getDate());
+  const startStr = `${y}${m}${d}T${pad(startH)}${pad(startM)}00`;
+  const endStr = `${y}${m}${d}T${pad(endH)}${pad(startM)}00`;
+
+  // Recurrence
+  let recur = '';
+  if (ev.freq === 'weekly') recur = '&recur=RRULE:FREQ=WEEKLY';
+  else if (ev.freq === 'biweekly') recur = '&recur=RRULE:FREQ=WEEKLY;INTERVAL=2';
+  else if (ev.freq === 'monthly') {
+    // Use BYDAY for monthly (e.g., first Tuesday)
+    const weekNum = Math.ceil(eventDate.getDate() / 7);
+    const dayAbbrs = ['MO','TU','WE','TH','FR','SA','SU'];
+    recur = `&recur=RRULE:FREQ=MONTHLY;BYDAY=${weekNum}${dayAbbrs[targetDay]}`;
+  }
+
+  const details = [ev.d, ev.price ? `Price: ${ev.price}` : ''].filter(Boolean).join('\\n');
+
+  return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(ev.n)}&dates=${startStr}/${endStr}&ctz=Africa/Johannesburg&location=${encodeURIComponent(ev.loc + ', Cape Town')}&details=${encodeURIComponent(details)}${recur}`;
+}
+
+function freqBadge(f) {
+  if (f === 'weekly') return '';
+  if (f === 'biweekly') return '<span style="font-size:0.58rem;padding:0.05rem 0.3rem;border-radius:3px;background:#FFF3CD;color:#856404;font-weight:600">2× / month</span>';
+  if (f === 'monthly') return '<span style="font-size:0.58rem;padding:0.05rem 0.3rem;border-radius:3px;background:#D1ECF1;color:#0C5460;font-weight:600">Monthly</span>';
+  if (f === 'daily') return '<span style="font-size:0.58rem;padding:0.05rem 0.3rem;border-radius:3px;background:#D4EDDA;color:#155724;font-weight:600">Daily</span>';
+  return '';
+}
+
+function renderCard(ev) {
+  const c = CATS[ev.cat];
+  const hidden = !catState[ev.cat] ? ' hidden' : '';
+  return `<div class="event-card${hidden}" data-cat="${ev.cat}" style="border-left-color:${c.color}">
+    <div class="event-time">
+      <div class="t">${ev.time.replace(/am/i,'').replace(/pm/i,'')}</div>
+      <div class="period">${/am/i.test(ev.time)?'AM':/pm/i.test(ev.time)?'PM':''}</div>
+    </div>
+    <div class="event-body">
+      <div class="event-name">${ev.n}</div>
+      <div class="event-meta">${ev.d}</div>
+      <div class="event-tags">
+        <span class="event-cat" style="background:${c.bg};color:${c.color}">${c.label}</span>
+        <span class="event-loc">${ev.loc.split(',')[0]}</span>
+        ${ev.price ? `<span class="event-price">${ev.price}</span>` : ''}
+        ${freqBadge(ev.freq)}
+      </div>
+    </div>
+    <a class="gcal-btn" href="${gcalUrl(ev)}" target="_blank" rel="noopener" title="Add to Google Calendar">
+      <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="${c.color}" stroke-width="2"/><path d="M3 10h18" stroke="${c.color}" stroke-width="2"/><path d="M8 2v4M16 2v4" stroke="${c.color}" stroke-width="2" stroke-linecap="round"/><path d="M8 14h2v2H8zM14 14h2v2h-2z" fill="${c.color}"/></svg>
+    </a>
+  </div>`;
+}
+
+function renderDayView() {
+  let html = '';
+  // Daily events first
+  const dailyEvs = EVENTS.filter(e => e.day === 'Daily').sort((a,b) => a.sort - b.sort);
+  if (dailyEvs.length) {
+    const vis = dailyEvs.filter(e => catState[e.cat]).length;
+    html += `<div class="day-section" ${vis===0?'style="display:none"':''}>
+      <div class="day-header">Every Day <span class="day-count">${vis}</span></div>
+      <div class="events-list">${dailyEvs.map(renderCard).join('')}</div></div>`;
+  }
+
+  DAYS.forEach(day => {
+    const dayEvs = EVENTS.filter(e => e.day === day).sort((a,b) => a.sort - b.sort);
+    if (!dayEvs.length) return;
+    const vis = dayEvs.filter(e => catState[e.cat]).length;
+    html += `<div class="day-section" ${vis===0?'style="display:none"':''}>
+      <div class="day-header">${day} <span class="day-count">${vis}</span></div>
+      <div class="events-list">${dayEvs.map(renderCard).join('')}</div></div>`;
+  });
+  return html;
+}
+
+function renderCatView() {
+  let html = '';
+  Object.entries(CATS).forEach(([key, cat]) => {
+    const evs = EVENTS.filter(e => e.cat === key).sort((a,b) => {
+      const dayOrder = {Daily:-1,Monday:0,Tuesday:1,Wednesday:2,Thursday:3,Friday:4,Saturday:5,Sunday:6};
+      return (dayOrder[a.day]??0) - (dayOrder[b.day]??0) || a.sort - b.sort;
+    });
+    if (!evs.length) return;
+    if (!catState[key]) return;
+    html += `<div class="cat-section" data-cat="${key}">
+      <div class="cat-header-row">
+        <div class="cat-color-bar" style="background:${cat.color}"></div>
+        <h2>${cat.label}</h2>
+        <span class="day-count">${evs.length}</span>
+      </div>
+      <div class="events-list">${evs.map(e => {
+        const card = renderCard(e);
+        // Add day indicator in cat view
+        return card.replace('</div>\n    <div class="event-body">', `</div><div class="event-body">`);
+      }).map((card, i) => {
+        const ev = evs[i];
+        return card.replace('<div class="event-meta">', `<div class="event-meta"><strong style="color:${cat.color}">${ev.day}</strong> · `);
+      }).join('')}</div></div>`;
+  });
+  return html || '<div class="empty-state">No events visible — toggle some categories on</div>';
+}
+
+function render() {
+  const main = document.getElementById('main');
+  main.innerHTML = activeView === 'day' ? renderDayView() : renderCatView();
+  if (!document.querySelectorAll('.event-card:not(.hidden)').length && activeView === 'day') {
+    main.innerHTML += '<div class="empty-state">No events visible — toggle some categories on</div>';
+  }
+}
+
+function renderFilters() {
+  const el = document.getElementById('filters');
+  el.innerHTML = Object.entries(CATS).map(([key, cat]) => {
+    const count = EVENTS.filter(e => e.cat === key).length;
+    if (!count) return '';
+    return `<span class="ftag ${catState[key]?'':'off'}" data-cat="${key}">
+      <span class="dot" style="background:${cat.color}"></span>${cat.label}
+    </span>`;
+  }).join('');
+
+  el.querySelectorAll('.ftag').forEach(tag => {
+    tag.addEventListener('click', () => {
+      const cat = tag.dataset.cat;
+      catState[cat] = !catState[cat];
+      tag.classList.toggle('off');
+      render();
+    });
+  });
+}
+
+function setView(v) {
+  activeView = v;
+  document.querySelectorAll('.view-btn').forEach(b => b.classList.toggle('active', b.dataset.view === v));
+  render();
+}
+
+// INIT
+renderFilters();
+render();
+</script>
+</body>
+</html>

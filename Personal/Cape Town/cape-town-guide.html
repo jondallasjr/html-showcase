@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Muizenberg Guide — Cape Town for Families</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+  --ink:#1A1612;
+  --ink-soft:#3D362E;
+  --ink-mid:#6B6058;
+  --ink-light:#9B9088;
+  --parchment:#FAF7F2;
+  --cream:#F3EDE3;
+  --linen:#E8E0D0;
+  --ocean:#1B6B8A;
+  --ocean-deep:#14536B;
+  --ocean-pale:#D4EDF5;
+  --kelp:#2D5E3A;
+  --kelp-pale:#E0F0E4;
+  --sunset:#C45A2C;
+  --sunset-pale:#FAEAE2;
+  --wine:#8B3A5E;
+  --wine-pale:#F5E6EE;
+  --sand:#D4C4A8;
+  --gold:#B8960B;
+  --serif:'Playfair Display',Georgia,serif;
+  --sans:'Source Sans 3',-apple-system,sans-serif;
+  --max:740px;
+}
+
+body{font-family:var(--sans);background:var(--parchment);color:var(--ink-soft);line-height:1.68;-webkit-font-smoothing:antialiased;font-size:16.5px}
+
+/* UTILITY */
+.container{max-width:var(--max);margin:0 auto;padding:0 1.5rem}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+
+/* HERO */
+.hero{
+  background:linear-gradient(165deg,#0D2B3A 0%,#1B5068 35%,#2A7A9A 70%,#48A5B8 100%);
+  color:#fff;
+  padding:3.5rem 1.5rem 3rem;
+  position:relative;
+  overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;top:0;left:0;right:0;bottom:0;
+  background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0C13.43 0 0 13.43 0 30c0 2.76.37 5.43 1.07 7.97C5.3 23.66 16.8 13 30 13s24.7 10.66 28.93 24.97A30.07 30.07 0 0060 30C60 13.43 46.57 0 30 0z' fill='rgba(255,255,255,0.015)'/%3E%3C/svg%3E") repeat;
+  opacity:0.5;
+}
+.hero>*{position:relative}
+.hero-kicker{
+  font-family:var(--sans);font-size:0.72rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:0.15em;
+  color:rgba(255,255,255,0.5);margin-bottom:0.6rem;
+}
+.hero h1{
+  font-family:var(--serif);font-size:2.6rem;font-weight:700;
+  line-height:1.12;letter-spacing:-0.02em;
+  max-width:580px;margin-bottom:0.6rem;
+}
+.hero h1 em{font-style:italic;color:#8ED4E8}
+.hero .lead{
+  font-size:1.05rem;line-height:1.55;
+  color:rgba(255,255,255,0.78);max-width:560px;
+  margin-bottom:1.5rem;
+}
+
+/* NAV LINKS */
+.nav-links{
+  display:flex;gap:0.6rem;flex-wrap:wrap;
+}
+.nav-link{
+  display:inline-flex;align-items:center;gap:0.4rem;
+  padding:0.55rem 1.1rem;
+  border-radius:8px;
+  font-size:0.82rem;font-weight:700;
+  text-decoration:none;transition:all 0.15s;
+}
+.nav-link.primary{background:#fff;color:var(--ocean-deep)}
+.nav-link.primary:hover{background:#E8F6FB;transform:translateY(-1px)}
+.nav-link.secondary{background:rgba(255,255,255,0.15);color:#fff;border:1.5px solid rgba(255,255,255,0.25)}
+.nav-link.secondary:hover{background:rgba(255,255,255,0.25);transform:translateY(-1px)}
+
+/* SECTION FRAMEWORK */
+section{padding:2.5rem 0}
+section+section{border-top:1px solid var(--linen)}
+
+.section-kicker{
+  font-family:var(--sans);font-size:0.68rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:0.14em;
+  color:var(--ocean);margin-bottom:0.35rem;
+}
+.section-title{
+  font-family:var(--serif);font-size:1.65rem;font-weight:700;
+  color:var(--ink);line-height:1.2;letter-spacing:-0.015em;
+  margin-bottom:0.9rem;
+}
+.section-intro{
+  font-size:1.02rem;color:var(--ink-mid);
+  margin-bottom:1.5rem;max-width:620px;
+}
+
+/* PROSE */
+p{margin-bottom:1rem}
+p strong{color:var(--ink);font-weight:600}
+p a{color:var(--ocean);text-decoration:underline;text-underline-offset:2px}
+
+/* PULLQUOTE */
+.pullquote{
+  font-family:var(--serif);font-size:1.35rem;font-style:italic;
+  color:var(--ink);line-height:1.4;
+  border-left:4px solid var(--ocean);
+  padding:0.5rem 0 0.5rem 1.25rem;
+  margin:1.5rem 0;max-width:560px;
+}
+
+/* STAT ROW */
+.stats{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+  gap:0.75rem;margin:1.5rem 0;
+}
+.stat{
+  background:var(--cream);border-radius:10px;
+  padding:1rem 1rem 0.8rem;text-align:center;
+}
+.stat-num{
+  font-family:var(--serif);font-size:1.8rem;font-weight:700;
+  color:var(--ocean);line-height:1.1;
+}
+.stat-label{font-size:0.72rem;color:var(--ink-mid);font-weight:600;margin-top:0.15rem}
+
+/* TOP PICK CARDS */
+.picks{display:flex;flex-direction:column;gap:0.6rem;margin:1.25rem 0}
+.pick{
+  display:flex;gap:0.75rem;padding:0.75rem 0.85rem;
+  background:#fff;border-radius:10px;
+  border-left:4px solid var(--ocean);
+  align-items:flex-start;
+}
+.pick-rank{
+  flex-shrink:0;width:28px;height:28px;
+  border-radius:50%;background:var(--ocean);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.75rem;font-weight:700;margin-top:0.15rem;
+}
+.pick-body{flex:1;min-width:0}
+.pick-name{font-weight:700;font-size:0.9rem;color:var(--ink);line-height:1.3}
+.pick-meta{font-size:0.78rem;color:var(--ink-mid);line-height:1.4;margin-top:0.05rem}
+
+/* CORRIDOR MAP VISUAL */
+.corridor{
+  background:linear-gradient(135deg,var(--ocean-deep) 0%,#1B7A9A 100%);
+  color:#fff;border-radius:12px;padding:1.5rem;margin:1.5rem 0;
+  position:relative;overflow:hidden;
+}
+.corridor::after{
+  content:'';position:absolute;bottom:-20px;right:-20px;
+  width:120px;height:120px;border-radius:50%;
+  background:rgba(255,255,255,0.05);
+}
+.corridor h3{font-family:var(--serif);font-size:1.15rem;margin-bottom:0.75rem}
+.corridor-stops{display:flex;flex-direction:column;gap:0.45rem}
+.corridor-stop{
+  display:flex;align-items:center;gap:0.6rem;
+  font-size:0.82rem;line-height:1.35;
+}
+.corridor-dot{
+  width:10px;height:10px;border-radius:50%;
+  background:rgba(255,255,255,0.3);flex-shrink:0;
+  border:2px solid rgba(255,255,255,0.7);
+}
+.corridor-stop.home .corridor-dot{background:#48D4A0;border-color:#48D4A0;width:12px;height:12px}
+.corridor-time{
+  font-weight:700;min-width:42px;color:rgba(255,255,255,0.6);
+  font-size:0.72rem;text-align:right;
+}
+
+/* INFO GRID */
+.info-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:0.6rem;margin:1.5rem 0;
+}
+.info-card{
+  background:#fff;border-radius:10px;padding:1rem;
+  border:1px solid var(--linen);
+}
+.info-card h4{
+  font-family:var(--serif);font-size:0.95rem;font-weight:600;
+  color:var(--ink);margin-bottom:0.35rem;
+}
+.info-card p{font-size:0.8rem;color:var(--ink-mid);margin-bottom:0;line-height:1.45}
+.info-card .highlight{
+  display:inline-block;margin-top:0.35rem;
+  font-size:0.72rem;font-weight:700;
+  padding:0.15rem 0.45rem;border-radius:4px;
+}
+
+/* THEMED CARDS */
+.theme-ocean .highlight{background:var(--ocean-pale);color:var(--ocean)}
+.theme-kelp .highlight{background:var(--kelp-pale);color:var(--kelp)}
+.theme-sunset .highlight{background:var(--sunset-pale);color:var(--sunset)}
+.theme-wine .highlight{background:var(--wine-pale);color:var(--wine)}
+
+/* WEEK GRID */
+.week{display:flex;flex-direction:column;gap:0.35rem;margin:1.25rem 0}
+.week-day{
+  display:flex;gap:0;background:#fff;border-radius:8px;
+  overflow:hidden;font-size:0.78rem;
+}
+.week-label{
+  background:var(--ocean-deep);color:#fff;
+  padding:0.5rem 0.6rem;font-weight:700;
+  min-width:56px;text-align:center;
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.7rem;text-transform:uppercase;letter-spacing:0.05em;
+}
+.week-content{
+  padding:0.45rem 0.75rem;flex:1;
+  color:var(--ink-mid);line-height:1.4;
+}
+.week-content strong{color:var(--ink);font-weight:600}
+
+/* GROUPS LIST */
+.groups{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:0.4rem 0.75rem;margin:1rem 0;
+}
+.group-item{
+  font-size:0.8rem;padding:0.3rem 0;
+  border-bottom:1px solid var(--linen);
+  color:var(--ink-mid);
+}
+.group-item strong{color:var(--ink);font-weight:600;font-size:0.82rem}
+
+/* TIP CALLOUT */
+.tip{
+  background:var(--cream);border-radius:10px;
+  padding:1rem 1.25rem;margin:1.25rem 0;
+  border-left:4px solid var(--gold);
+}
+.tip-label{
+  font-size:0.68rem;font-weight:700;color:var(--gold);
+  text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.25rem;
+}
+.tip p{font-size:0.88rem;margin-bottom:0;color:var(--ink-soft)}
+
+/* VERDICT BADGE */
+.verdict{
+  display:inline-flex;align-items:center;gap:0.3rem;
+  padding:0.2rem 0.6rem;border-radius:20px;font-size:0.72rem;
+  font-weight:700;text-transform:uppercase;letter-spacing:0.06em;
+}
+.verdict.best{background:var(--kelp-pale);color:var(--kelp)}
+.verdict.good{background:var(--ocean-pale);color:var(--ocean)}
+.verdict.ok{background:#FFF3CD;color:#856404}
+
+/* FOOTER */
+footer{
+  background:var(--ink);color:rgba(255,255,255,0.5);
+  padding:2rem 1.5rem;text-align:center;font-size:0.78rem;
+}
+footer strong{color:rgba(255,255,255,0.8)}
+
+/* RESPONSIVE */
+@media(max-width:600px){
+  .hero{padding:2.5rem 1.25rem 2rem}
+  .hero h1{font-size:2rem}
+  .container{padding:0 1.15rem}
+  .section-title{font-size:1.4rem}
+  .info-grid{grid-template-columns:1fr}
+  .groups{grid-template-columns:1fr}
+  .stats{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-kicker">A Comprehensive Guide for Families</div>
+  <h1>Life in <em>Muizenberg</em>, Cape Town</h1>
+  <p class="lead">After researching 33 categories of activities across eight neighborhoods, one place emerged as the clear winner for a wellness-oriented family working US hours. This is everything we found.</p>
+  <div class="nav-links">
+    <a href="muizenberg-events.html" class="nav-link primary">📅 Weekly Events Calendar</a>
+    <a href="muizenberg-locations.html" class="nav-link secondary">📍 All Locations &amp; Map Links</a>
+  </div>
+</div>
+
+<!-- WHY MUIZENBERG -->
+<section>
+<div class="container">
+  <div class="section-kicker">The Verdict</div>
+  <h2 class="section-title">Why Muizenberg wins and nowhere else comes close</h2>
+
+  <p>Muizenberg is a former railway village on the warm side of the Cape Peninsula where <strong>surf culture, yoga, art, and a growing family community</strong> have converged into something genuinely rare: an affordable, walkable, bohemian coastal neighborhood with world-class nature reserves ten minutes above it and Cape Town's cultural infrastructure thirty minutes away.</p>
+
+  <p>We compared Muizenberg against Kalk Bay, Kommetjie, Observatory, Woodstock, Sea Point, Noordhoek, and Gardens across every criterion that matters — wellness infrastructure, childcare, safety, community depth, nature access, nightlife, cost, and walkability. No other suburb delivered across all of them simultaneously.</p>
+
+  <div class="stats">
+    <div class="stat"><div class="stat-num">180+</div><div class="stat-label">Venues researched</div></div>
+    <div class="stat"><div class="stat-num">33</div><div class="stat-label">Activity categories</div></div>
+    <div class="stat"><div class="stat-num">75+</div><div class="stat-label">Recurring weekly events</div></div>
+    <div class="stat"><div class="stat-num">R14k</div><div class="stat-label">Avg monthly rent (2BR)</div></div>
+  </div>
+
+  <div class="pullquote">The family won't lack for community. They'll lack for time.</div>
+
+  <p><strong>Kalk Bay</strong> (runner-up) has the charm and restaurants but limited, expensive housing. <strong>Kommetjie</strong> suits families wanting extreme tranquility and Imhoff Waldorf, but the cold Atlantic water and lack of amenities are limiting. <strong>Observatory</strong> is bohemian and affordable but has no beach and higher crime. <strong>Sea Point</strong> scored well for safety and walkability but costs twice as much, has cold water, and lacks the wellness community.</p>
+
+  <div class="tip">
+    <div class="tip-label">Strategy</div>
+    <p><strong>Live in Muizenberg, leverage the corridor.</strong> Kalk Bay's restaurants and galleries are 5 minutes away. Fish Hoek's library and clubs are 10 minutes. Noordhoek's wild beaches are a weekend treat. And central Cape Town's jazz, art, and intellectual scenes are accessible every evening after 8pm.</p>
+  </div>
+</div>
+</section>
+
+<!-- THE CORRIDOR -->
+<section>
+<div class="container">
+  <div class="section-kicker">Geography</div>
+  <h2 class="section-title">The False Bay Corridor</h2>
+  <p class="section-intro">Muizenberg's secret weapon is its position on the False Bay rail line. A string of characterful villages runs south along the coast, each adding depth to daily life. This is the "multiplier effect" — you're not living in one suburb, you're living in an interconnected string of them.</p>
+
+  <div class="corridor">
+    <h3>Drive times from Muizenberg</h3>
+    <div class="corridor-stops">
+      <div class="corridor-stop home"><span class="corridor-dot"></span><span class="corridor-time">home</span> <strong>Muizenberg</strong> — Surf, yoga, markets, Starseed Waldorf, The Commons, parkrun</div>
+      <div class="corridor-stop"><span class="corridor-dot"></span><span class="corridor-time">3 min</span> <strong>St James</strong> — Tidal pool, coloured beach huts, Folk Café</div>
+      <div class="corridor-stop"><span class="corridor-dot"></span><span class="corridor-time">5 min</span> <strong>Kalk Bay</strong> — Galleries, restaurants, bookshop, harbour, Dalebrook pool</div>
+      <div class="corridor-stop"><span class="corridor-dot"></span><span class="corridor-time">10 min</span> <strong>Fish Hoek</strong> — Library story hour, chess club, Rotary, parkrun, Lions</div>
+      <div class="corridor-stop"><span class="corridor-dot"></span><span class="corridor-time">10 min</span> <strong>Silvermine</strong> — Nature reserve, toddler-friendly boardwalk, Elephant's Eye hike</div>
+      <div class="corridor-stop"><span class="corridor-dot"></span><span class="corridor-time">10 min</span> <strong>Diep River</strong> — Bloc11 bouldering gym (closest to Muizenberg)</div>
+      <div class="corridor-stop"><span class="corridor-dot"></span><span class="corridor-time">15 min</span> <strong>Tokai</strong> — Forest trails, pottery studio, adventure parks</div>
+      <div class="corridor-stop"><span class="corridor-dot"></span><span class="corridor-time">20 min</span> <strong>Simon's Town</strong> — Penguin colony, Warrior Toy Museum, naval heritage</div>
+      <div class="corridor-stop"><span class="corridor-dot"></span><span class="corridor-time">25 min</span> <strong>Kommetjie</strong> — Imhoff Waldorf, Imhoff Farm, wild beaches</div>
+      <div class="corridor-stop"><span class="corridor-dot"></span><span class="corridor-time">25 min</span> <strong>Kirstenbosch</strong> — Botanical garden, sunset concerts, Boomslang walkway</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- SCHEDULE ANALYSIS -->
+<section>
+<div class="container">
+  <div class="section-kicker">Work-Life</div>
+  <h2 class="section-title">Your schedule, optimized</h2>
+  <p class="section-intro">Working 12pm–8pm SAST (overlapping with US Eastern 6am–2pm) creates three distinct windows for activities. The key insight: <strong>every evening after 8pm is open</strong>, and about two evenings per week you're probably free from 5pm.</p>
+
+  <div class="info-grid">
+    <div class="info-card theme-kelp">
+      <h4>🌅 Morning Window</h4>
+      <p>6am–11:30am daily. The golden hours. Surf, yoga, ocean swim, trail run, playgroups — Cape Town's best activities happen before noon.</p>
+      <span class="highlight">5+ hours daily</span>
+    </div>
+    <div class="info-card theme-ocean">
+      <h4>🌙 Evening Window</h4>
+      <p>After 8pm every night. Jazz jams, open mics, meditation, philosophy — Cape Town's nightlife starts late and runs deep.</p>
+      <span class="highlight">7 nights / week</span>
+    </div>
+    <div class="info-card theme-sunset">
+      <h4>🌇 Early Evening</h4>
+      <p>5pm–8pm, ~2 nights per week. Blue Bird Garage Market, ecstatic dance, early gigs, First Thursdays art walk.</p>
+      <span class="highlight">~2 evenings / week</span>
+    </div>
+    <div class="info-card theme-wine">
+      <h4>☀️ Weekends</h4>
+      <p>Fully free. Winelands day trips, Kirstenbosch concerts, hiking, markets, workshops, family festivals.</p>
+      <span class="highlight">All day Sat & Sun</span>
+    </div>
+  </div>
+
+  <div class="tip">
+    <div class="tip-label">Insight</div>
+    <p>Cape Town's activity calendar is biased toward mornings and Sundays — exactly when you're free. Parkrun is Saturday 8am. Jazz jams are Sunday 3pm. Kirstenbosch concerts are Sunday 4pm. The city's rhythm syncs with your schedule better than almost anywhere in the world at this timezone offset.</p>
+  </div>
+</div>
+</section>
+
+<!-- TOP PICKS -->
+<section>
+<div class="container">
+  <div class="section-kicker">Curated</div>
+  <h2 class="section-title">10 things to do in your first week</h2>
+  <p class="section-intro">Skip the tourist circuit. These are the community entry points — the places where you'll meet the people who become your life in Cape Town.</p>
+
+  <div class="picks">
+    <div class="pick"><div class="pick-rank">1</div><div class="pick-body"><div class="pick-name">Saturday 8am — Zandvlei parkrun</div><div class="pick-meta">Literally in your neighborhood. 5km flat loop, pushchairs welcome, dogs welcome. Free. You'll see the same faces every week. This is how you meet Muizenberg.</div></div></div>
+    <div class="pick"><div class="pick-rank">2</div><div class="pick-body"><div class="pick-name">Dawn swim at Dalebrook Tidal Pool</div><div class="pick-meta">5 min from home. A growing community of "swimrisers" brave the cold water at dawn. Chardonnay Deli across the road for warm drinks after. Show up, say hello. Free.</div></div></div>
+    <div class="pick"><div class="pick-rank">3</div><div class="pick-body"><div class="pick-name">Sunday 3pm — The Shed Jazz Jam</div><div class="pick-meta">165 Main Road, Muizenberg. Rotating host band, bring instruments if you play. Free entry. Toddler-friendly. This is the village's Sunday gathering point.</div></div></div>
+    <div class="pick"><div class="pick-rank">4</div><div class="pick-body"><div class="pick-name">Tuesday morning — Moms on Board (free surf)</div><div class="pick-meta">Lifestyle Surf Shop gives free lessons to moms every Tuesday. Perfect for Jess. Board + wetsuit included. No experience needed.</div></div></div>
+    <div class="pick"><div class="pick-rank">5</div><div class="pick-body"><div class="pick-name">Thursday evening — Blue Bird Garage Market</div><div class="pick-meta">39 Albertyn Road, an old postal-plane hangar. Live bands, craft food, Kids Zone. Free entry. Thu & Fri 4–10pm. The social center of the village.</div></div></div>
+    <div class="pick"><div class="pick-rank">6</div><div class="pick-body"><div class="pick-name">Lekker Chats (Sunday, biweekly)</div><div class="pick-meta">Structured meaningful conversation in groups of 3–4, then shuffle. Free. 80% aged 25–45. Almost identical format to Real Talk — a potential collaboration partner.</div></div></div>
+    <div class="pick"><div class="pick-rank">7</div><div class="pick-body"><div class="pick-name">Silent Book Club at The Commons</div><div class="pick-meta">3× per month in Muizenberg's beachfront community hub. Bring any book, read in silence, then socialize. 65+ people at the first event. Free.</div></div></div>
+    <div class="pick"><div class="pick-rank">8</div><div class="pick-body"><div class="pick-name">Harvest Café Open Mic (Thursday 6–9pm)</div><div class="pick-meta">York Road, Muizenberg. Poets, musicians, storytellers. Intimate, welcoming. Free. Walk home after.</div></div></div>
+    <div class="pick"><div class="pick-rank">9</div><div class="pick-body"><div class="pick-name">Starseed Community School playgroup visit</div><div class="pick-meta">Waldorf-based, uses the beach, vlei, and mountain as classrooms. Decolonized approach, diverse families. Visit to see if it's right for Bodhi.</div></div></div>
+    <div class="pick"><div class="pick-rank">10</div><div class="pick-body"><div class="pick-name">Walk the Muizenberg Catwalk</div><div class="pick-meta">3km flat coastal path to St James. Pram-perfect. False Bay views. Do this on your first morning and you'll understand why people stay.</div></div></div>
+  </div>
+</div>
+</section>
+
+<!-- DEEP DIVES -->
+<section>
+<div class="container">
+  <div class="section-kicker">Deep Dives</div>
+  <h2 class="section-title">What the research revealed</h2>
+
+  <h3 style="font-family:var(--serif);font-size:1.15rem;color:var(--ink);margin:1.5rem 0 0.5rem">Yoga: world-class Ashtanga, affordable Vinyasa</h3>
+  <p>Cape Town has <strong>three authorized Ashtanga teachers</strong> — a remarkable density for a city this size. Ulrike Lamprecht at AYCT (Vredehoek) trained directly with Sharath Jois in Mysore; Charmelle at Ashtanga Yoga Centre (Gardens) assisted in the main Mysore shala. Mysore classes run 6–8am Monday through Thursday, slotting perfectly into the morning window.</p>
+  <p>For Jess's more spiritual-leaning practice, the options are even richer: Johann Kotze's sea-view studio on Beach Road (R60 drop-in), Soul Space in Kommetjie (infrared heated, Jivamukti-trained, kids' yoga on offer), and Light House Holistic in the CBD for ecstatic dance and cacao ceremonies. <strong>YogaWithin in Noordhoek</strong> deserves special mention — philosophy-centered Blissology in a bamboo-floored space at the Garden Emporium.</p>
+
+  <h3 style="font-family:var(--serif);font-size:1.15rem;color:var(--ink);margin:1.5rem 0 0.5rem">The jazz scene is extraordinary — and Sunday is the sweet spot</h3>
+  <p>Cape Town's jazz heritage is deep, and the live scene reflects it. What's surprising is how <strong>Sunday-centric</strong> it is: The Shed jam at 3pm (Muizenberg, free), Kloof Street House at 1pm (free, family-friendly garden), Woodstock Brewery from 1pm, Mojo Market from 1pm, and Openwine from 4pm. You could hit a different venue every Sunday for a month without repeating.</p>
+  <p>For weeknights: <strong>Fat Harry's</strong> on Monday (hosted by Dan Shout), <strong>Amber on Bree</strong> on Tuesday (curated by Muneeb Hermans, free), and <strong>The Crypt</strong> under St George's Cathedral Tuesday through Saturday. The <strong>Cape Town International Jazz Festival</strong> (27–28 March 2026) features Jacob Collier, Nduduzo Makhathini, and BCUC — book early.</p>
+
+  <h3 style="font-family:var(--serif);font-size:1.15rem;color:var(--ink);margin:1.5rem 0 0.5rem">Philosophy: you already have a collaboration partner</h3>
+  <p><strong>Lekker Chats</strong> is the discovery of this research. Founded by Drew Mohoric, it runs biweekly Sunday afternoons with structured conversation in groups of 3–4 — essentially the same format as Real Talk. The demographic is 80% aged 25–45, events are free, and attendance hit 65+ at the first session. This isn't competition; it's a ready-made audience and potential co-host.</p>
+  <p>Beyond that: <strong>UCT's Philosophy Society</strong> holds monthly Tuesday evening lectures (free, open to anyone) — Jon could easily be invited as a guest speaker. The <strong>Practical Philosophy Club</strong> has 50+ global chapters but no Cape Town branch yet — an opening to start one with organizational support.</p>
+
+  <h3 style="font-family:var(--serif);font-size:1.15rem;color:var(--ink);margin:1.5rem 0 0.5rem">Spiritual diversity that few cities match</h3>
+  <p>This was the surprise finding. Within 25 minutes of Muizenberg, you can attend: <strong>Quaker silent worship</strong> (they actually meet in South Peninsula homes, so practically in your neighborhood), <strong>Temple Israel's Progressive Shabbat</strong> in Wynberg (explicitly welcoming to non-Jews), <strong>ISKCON's Sunday Love Feast</strong> (free vegetarian lunch for everyone), <strong>Ananda Kutir Ashrama's Saturday satsang</strong> (kirtan, discourse, prasad — also free), and the <strong>Cape Town Unitarians</strong> (a genuinely multifaith community including humanists, Buddhists, and pagans under one roof).</p>
+  <p>The <strong>Cape Town Interfaith Initiative</strong> ties it all together — 50 member organizations hosting quarterly dialogue, heritage bus tours of worship spaces, and school exchange programs. For a family drawn to spiritual exploration without dogma, this city offers a lifetime of paths.</p>
+
+  <h3 style="font-family:var(--serif);font-size:1.15rem;color:var(--ink);margin:1.5rem 0 0.5rem">Shadow work and men's communities go deep</h3>
+  <p>The <strong>ManKind Project</strong> has trained 3,500+ men in South Africa, and their next Cape Town "Adventure" weekend is <strong>April 10, 2026</strong> — book it. The model (King/Warrior/Magician/Lover archetypes, shadow work in a group setting) aligns precisely with the kind of depth work that creates lasting transformation. Free ongoing men's groups follow the weekend.</p>
+  <p>The <strong>C.G. Jung Centre</strong> in Rosebank runs a one-year Certificate Course open to anyone: Individuation, Shadow, Dreams, Archetypes. A Jungian analyst named <strong>Fred Borchardt</strong> practices right in Plumstead, 10 minutes away. And Light House Holistic runs a free men's group in the CBD.</p>
+
+  <h3 style="font-family:var(--serif);font-size:1.15rem;color:var(--ink);margin:1.5rem 0 0.5rem">Childcare and parent communities are robust</h3>
+  <p><strong>The Parent Hub</strong> is South Africa's largest in-person mom community with weekly pram walks, wellness meetups, and suburb-specific WhatsApp groups. <strong>Roam Parenting</strong> runs guided 90-minute playgroups using RIE and mindfulness principles. <strong>Music 4 Mini's</strong> takes babies from 3 months. <strong>Wriggle and Rhyme</strong> runs morning movement classes across multiple southern suburbs.</p>
+  <p>For nanny search: <strong>"Expat Mums Cape Town"</strong> on Facebook has suburb-specific WhatsApp groups where nanny recommendations flow constantly. The informal network of domestic workers in the southern suburbs is well-established — ask at Starseed School or any of the playgroups for vetted referrals.</p>
+
+  <div class="pullquote">2024 recorded an all-time record of 1,176 Southern Right Whales off the Cape coast. From Boyes Drive above Kalk Bay, you can watch them from your morning coffee.</div>
+
+  <h3 style="font-family:var(--serif);font-size:1.15rem;color:var(--ink);margin:1.5rem 0 0.5rem">Date night is genuinely possible</h3>
+  <p>This matters for the marriage. With nanny access and evening freedom, Cape Town offers remarkable date nights: <strong>The Crypt Jazz Restaurant</strong> in the literal crypt beneath St George's Cathedral. <strong>The Grotto Spa</strong>'s Couples Date Night package (R3,300 for massage, spa, and dinner). <strong>Pencil Ceramics</strong>' Wine & Clay evening (mindfulness-focused pottery by an ex-Google coach). <strong>The Piano Bar</strong> in De Waterkant — live jazz/soul/funk every night, no cover. And the <strong>Imago Couples Workshop</strong> by Angela Fox — an evidence-based weekend retreat with 70–75% effectiveness rates recognized by the APA.</p>
+</div>
+</section>
+
+<!-- SAMPLE WEEK -->
+<section>
+<div class="container">
+  <div class="section-kicker">In Practice</div>
+  <h2 class="section-title">A sample week</h2>
+  <p class="section-intro">This is what life actually looks like. Every day has morning activity, evening options after 8pm, and weekend adventures. Nothing is hypothetical — these are real events at confirmed times.</p>
+
+  <div class="week">
+    <div class="week-day">
+      <div class="week-label">Mon</div>
+      <div class="week-content"><strong>6am</strong> Mysore at AYCT or sunrise surf → playgroup with Bodhi → work 12–8pm. <strong>After 8:</strong> Fat Harry's jazz jam or Armchair Theatre jam or Diamond Way meditation.</div>
+    </div>
+    <div class="week-day">
+      <div class="week-label">Tue</div>
+      <div class="week-content"><strong>8am</strong> Dawn swim at Dalebrook → Wriggle & Rhyme with Bodhi → work 12–8pm. <strong>After 8:</strong> Kagyu meditation, Amber jazz jam, Ground Culture open mic, or UCT Philosophy (monthly).</div>
+    </div>
+    <div class="week-day">
+      <div class="week-label">Wed</div>
+      <div class="week-content"><strong>8am</strong> Running Wild trail run → nature walk at Zandvlei with Bodhi → work 12–8pm. <strong>After 8:</strong> Striped Horse Open Jam (Muizenberg) or Melting Pot live music.</div>
+    </div>
+    <div class="week-day">
+      <div class="week-label">Thu</div>
+      <div class="week-content"><strong>6am</strong> yoga → Fish Hoek story hour or Music 4 Mini's → work. <strong>Early finish?</strong> Blue Bird Market from 5pm. <strong>After 8:</strong> Harvest Café open mic or Dance Awake ecstatic dance. <em>1st Thu: art walk.</em></div>
+    </div>
+    <div class="week-day">
+      <div class="week-label">Fri</div>
+      <div class="week-content"><strong>Sunrise</strong> surf → Roam Parenting playgroup → work 12–8pm. <strong>After 8:</strong> Date night — Crypt Jazz, Piano Bar, or Grotto Spa couples package.</div>
+    </div>
+    <div class="week-day">
+      <div class="week-label">Sat</div>
+      <div class="week-content"><strong>8am</strong> Zandvlei parkrun → Neighbourgoods Market or OZCF → afternoon Silvermine hike → Ananda Kutir satsang (evening) or pottery or spa.</div>
+    </div>
+    <div class="week-day">
+      <div class="week-label">Sun</div>
+      <div class="week-content"><strong>Morning:</strong> Kirstenbosch concert or Winelands trip or Quaker meeting. <strong>1pm:</strong> Silent Book Club or Lekker Chats. <strong>3pm:</strong> The Shed jazz jam. <strong>4pm:</strong> Kirstenbosch sunset concert (kids free).</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- HIDDEN GEMS -->
+<section>
+<div class="container">
+  <div class="section-kicker">Insider Knowledge</div>
+  <h2 class="section-title">11 things you won't find in the tourist guides</h2>
+
+  <div class="picks">
+    <div class="pick" style="border-left-color:var(--wine)"><div class="pick-rank" style="background:var(--wine)">1</div><div class="pick-body"><div class="pick-name">The Muizenberg Synagogue still holds services</div><div class="pick-meta">That beautiful red-and-white building from the 1920s isn't just a relic — it opens for Shabbat every Friday evening and Saturday morning. A gorgeous piece of living heritage right in the village.</div></div></div>
+
+    <div class="pick" style="border-left-color:var(--kelp)"><div class="pick-rank" style="background:var(--kelp)">2</div><div class="pick-body"><div class="pick-name">Quakers meet in South Peninsula homes</div><div class="pick-meta">The main Quaker meeting is in Mowbray, but 2–3 Sundays per month they gather in Friends' homes in the South Peninsula — meaning potentially walking distance from your house in Muizenberg. Silent worship, no leaders, no creed.</div></div></div>
+
+    <div class="pick" style="border-left-color:var(--sunset)"><div class="pick-rank" style="background:var(--sunset)">3</div><div class="pick-body"><div class="pick-name">St George's Cathedral has a black Christ and a jazz club</div><div class="pick-meta">The west window depicts a black Christ. Gandhi appears in the stained glass. The Dean is one of SA's first openly gay clergy. And beneath it all, The Crypt serves jazz Tue–Sat from 7pm. Tutu's remains are interred before the high altar.</div></div></div>
+
+    <div class="pick" style="border-left-color:var(--ocean)"><div class="pick-rank" style="background:var(--ocean)">4</div><div class="pick-body"><div class="pick-name">Fish Hoek Library story hour has run since the 1950s</div><div class="pick-meta">Seven decades of uninterrupted Friday morning storytime. The children's section has a mural. The library stays open until 8pm on Mon/Tue/Thu. A national treasure hiding in a suburb.</div></div></div>
+
+    <div class="pick" style="border-left-color:var(--gold)"><div class="pick-rank" style="background:var(--gold)">5</div><div class="pick-body"><div class="pick-name">Woolley's Tidal Pool is the locals' secret</div><div class="pick-meta">Everyone knows Dalebrook and St James. But Woolley's, tucked between Kalk Bay and Glencairn, is where the actual locals swim. Quiet, uncrowded, spectacular sunrises.</div></div></div>
+
+    <div class="pick" style="border-left-color:var(--wine)"><div class="pick-rank" style="background:var(--wine)">6</div><div class="pick-body"><div class="pick-name">ShuShu Sauna moves around the coast</div><div class="pick-meta">A mobile Finnish sauna that sets up at different tidal pools for the "Nordic Cycle" — hot sauna, cold ocean plunge, repeat. Join their WhatsApp group to find out where they'll be each weekend. Strong community.</div></div></div>
+
+    <div class="pick" style="border-left-color:var(--kelp)"><div class="pick-rank" style="background:var(--kelp)">7</div><div class="pick-body"><div class="pick-name">Pencil Ceramics was founded by an ex-Google/Spotify coach</div><div class="pick-meta">They offer "Wine & Clay" date nights that combine mindfulness meditation with pottery and wine. It's essentially couples therapy disguised as a creative experience.</div></div></div>
+
+    <div class="pick" style="border-left-color:var(--sunset)"><div class="pick-rank" style="background:var(--sunset)">8</div><div class="pick-body"><div class="pick-name">Vergenoegd Wine Estate has a daily Duck Parade</div><div class="pick-meta">1,600 Indian Runner Ducks march through the vineyards every day at 9:45am. They're the estate's organic pest control. Combined with kids' cookie decorating and juice tasting — perfect toddler outing. 45 minutes from Muizenberg.</div></div></div>
+
+    <div class="pick" style="border-left-color:var(--ocean)"><div class="pick-rank" style="background:var(--ocean)">9</div><div class="pick-body"><div class="pick-name">The Cape Town Museum of Childhood is free</div><div class="pick-meta">First of its kind in Africa, hands-on interactive exhibits designed specifically for young children. In Rondebosch, 15 minutes away. Open Wed–Sat 10am–4pm. Completely free.</div></div></div>
+
+    <div class="pick" style="border-left-color:var(--gold)"><div class="pick-rank" style="background:var(--gold)">10</div><div class="pick-body"><div class="pick-name">The 1st Muizenberg Sea Scouts were founded in 1909</div><div class="pick-meta">One of the oldest scout groups in the country. Based right on Sandvlei lagoon. The "Meerkats" program starts at age 5 — Bodhi has a place waiting.</div></div></div>
+
+    <div class="pick" style="border-left-color:var(--wine)"><div class="pick-rank" style="background:var(--wine)">11</div><div class="pick-body"><div class="pick-name">Ananda Kutir Ashrama started a school for traumatized children</div><div class="pick-meta">Mother Yogeshwari, who's been teaching since 1967, founded the Children of Light School for kids from informal settlements. Monthly yoga classes for ~25 children. The Saturday satsang (free) includes kirtans, discourse, and prasad.</div></div></div>
+  </div>
+</div>
+</section>
+
+<!-- NEIGHBORHOOD QUICK COMPARE -->
+<section>
+<div class="container">
+  <div class="section-kicker">Comparison</div>
+  <h2 class="section-title">Neighborhood scorecards</h2>
+  <p class="section-intro">How the eight neighborhoods we analyzed stack up on the criteria that matter most.</p>
+
+  <div class="info-grid">
+    <div class="info-card">
+      <h4>Muizenberg</h4>
+      <p>Surf, yoga, wellness, walkable village, Waldorf school, growing arts scene. Rent R12k–R23k/mo.</p>
+      <span class="verdict best">Best overall</span>
+    </div>
+    <div class="info-card">
+      <h4>Kalk Bay</h4>
+      <p>Charm, galleries, restaurants, harbour. But limited housing and expensive. Best as a 5-min neighbor.</p>
+      <span class="verdict good">Runner-up</span>
+    </div>
+    <div class="info-card">
+      <h4>Kommetjie</h4>
+      <p>Imhoff Waldorf, wild beaches, extreme tranquility. Cold Atlantic water, few amenities, isolated.</p>
+      <span class="verdict ok">Niche fit</span>
+    </div>
+    <div class="info-card">
+      <h4>Observatory</h4>
+      <p>Bohemian, affordable, good nightlife, near UCT. No beach, higher crime, less family-oriented.</p>
+      <span class="verdict ok">Singles/couples</span>
+    </div>
+    <div class="info-card">
+      <h4>Sea Point</h4>
+      <p>Safe, walkable promenade, great amenities. Cold water, expensive, no wellness/surf community.</p>
+      <span class="verdict good">Safe but pricey</span>
+    </div>
+    <div class="info-card">
+      <h4>Woodstock</h4>
+      <p>Art epicenter, Biscuit Mill, galleries. Safety concerns for families, no nature access.</p>
+      <span class="verdict ok">Visit, don't live</span>
+    </div>
+    <div class="info-card">
+      <h4>Noordhoek</h4>
+      <p>Stunning beach, farm living, Ashtanga school. Remote, limited infrastructure, car-dependent.</p>
+      <span class="verdict ok">Weekend escape</span>
+    </div>
+    <div class="info-card">
+      <h4>Gardens / CBD</h4>
+      <p>Central, walkable, cultural access. Urban, no beach, expensive, less community-oriented.</p>
+      <span class="verdict ok">Visit for events</span>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- PRACTICAL TIPS -->
+<section>
+<div class="container">
+  <div class="section-kicker">Practical</div>
+  <h2 class="section-title">Groups to join on day one</h2>
+  <p class="section-intro">Community infrastructure runs through Facebook groups and WhatsApp. Join these before you arrive.</p>
+
+  <div class="groups">
+    <div class="group-item"><strong>Cape Town Digital Nomads</strong> — Run by Johannes Völkner</div>
+    <div class="group-item"><strong>American Expats in SA</strong> — Facebook group</div>
+    <div class="group-item"><strong>Expat Mums Cape Town</strong> — Links to suburb WhatsApp groups</div>
+    <div class="group-item"><strong>Worldschoolers Cape Town</strong> — Nomadic families</div>
+    <div class="group-item"><strong>Mindful Mamas SA</strong> — Conscious parenting</div>
+    <div class="group-item"><strong>Work Wanderers</strong> — WhatsApp nomad community</div>
+    <div class="group-item"><strong>ShuShu Sauna</strong> — WhatsApp, cold plunge locations</div>
+    <div class="group-item"><strong>Lekker Chats</strong> — Instagram/Meetup, philosophy events</div>
+    <div class="group-item"><strong>Silent Book Club CT</strong> — @cptsilentbookclub</div>
+    <div class="group-item"><strong>InterNations Cape Town</strong> — Expat networking</div>
+    <div class="group-item"><strong>CT Jazz Gig Guide</strong> — capetownjazz.weebly.com</div>
+    <div class="group-item"><strong>CT Unitarians</strong> — Meetup + WhatsApp via Nima</div>
+    <div class="group-item"><strong>CT Interfaith Initiative</strong> — capeinterfaith.org.za</div>
+    <div class="group-item"><strong>Ananda Kutir</strong> — Saturday satsang bookings</div>
+  </div>
+
+  <div class="tip">
+    <div class="tip-label">First-week priority</div>
+    <p>Join "Expat Mums Cape Town" immediately — the suburb-specific WhatsApp groups are where nanny recommendations, playdate invitations, and school tips flow. This single group solves childcare, community, and local knowledge simultaneously.</p>
+  </div>
+</div>
+</section>
+
+<!-- DAY TRIPS -->
+<section>
+<div class="container">
+  <div class="section-kicker">Weekend Adventures</div>
+  <h2 class="section-title">Best day trips with a toddler</h2>
+
+  <div class="picks">
+    <div class="pick" style="border-left-color:var(--kelp)"><div class="pick-rank" style="background:var(--kelp)">1</div><div class="pick-body"><div class="pick-name">Kirstenbosch Botanical Garden (25 min)</div><div class="pick-meta">Boomslang canopy walkway, pram-accessible paths, Sunday sunset concerts (kids 0–5 free). The March 29 Cape Town Philharmonic performs <em>Peter and the Wolf</em> — don't miss it.</div></div></div>
+    <div class="pick" style="border-left-color:var(--kelp)"><div class="pick-rank" style="background:var(--kelp)">2</div><div class="pick-body"><div class="pick-name">Boulders Beach Penguins (20 min)</div><div class="pick-meta">Boardwalks through an African penguin colony. Combine with the Warrior Toy Museum (4,000+ miniatures, R10) in Simon's Town for a full morning.</div></div></div>
+    <div class="pick" style="border-left-color:var(--kelp)"><div class="pick-rank" style="background:var(--kelp)">3</div><div class="pick-body"><div class="pick-name">Spier Wine Farm, Stellenbosch (45 min)</div><div class="pick-meta">Kids' juice tasting, Eagle Encounter birds of prey, enormous playground, picnic lawns. The wine is for you; the eagles are for Bodhi.</div></div></div>
+    <div class="pick" style="border-left-color:var(--kelp)"><div class="pick-rank" style="background:var(--kelp)">4</div><div class="pick-body"><div class="pick-name">Kraalbaai Beach, Langebaan (1.5 hrs)</div><div class="pick-meta">Turquoise lagoon, shallow warm water, white sand. Arguably the most beautiful toddler-safe beach in the Western Cape. R78 adults to enter the national park.</div></div></div>
+    <div class="pick" style="border-left-color:var(--kelp)"><div class="pick-rank" style="background:var(--kelp)">5</div><div class="pick-body"><div class="pick-name">Vergenoegd Duck Parade (45 min)</div><div class="pick-meta">1,600 ducks march through the vineyards daily at 9:45am. Cookie decorating, juice tasting. A toddler's perfect morning.</div></div></div>
+  </div>
+</div>
+</section>
+
+<!-- SCHOOLS OVERVIEW -->
+<section>
+<div class="container">
+  <div class="section-kicker">Education</div>
+  <h2 class="section-title">Alternative schools: the landscape</h2>
+
+  <p>Cape Town has <strong>four Waldorf schools</strong> within reach of Muizenberg and <strong>two strong Montessori options</strong>. Fees range from community-supported (Starseed, ask for rates) to established institutions (Constantia Waldorf, R3k–R5k/month depending on grade).</p>
+
+  <div class="info-grid">
+    <div class="info-card theme-kelp">
+      <h4>Starseed Community School</h4>
+      <p>In Muizenberg itself. Waldorf-based, decolonized approach. Uses beach, vlei, and mountain as classrooms. Playgroup through Class 7. The most aligned with your values.</p>
+      <span class="highlight">In Muizenberg</span>
+    </div>
+    <div class="info-card theme-ocean">
+      <h4>Imhoff Waldorf</h4>
+      <p>On Imhoff Farm, Kommetjie (25 min). Playgroup through high school. Off-grid, environmental ethos. Strong community of eco-conscious families.</p>
+      <span class="highlight">25 min drive</span>
+    </div>
+    <div class="info-card theme-sunset">
+      <h4>Gaia Waldorf</h4>
+      <p>Pinelands (20 min). Most diverse Waldorf in SA. Horses, chickens, gardens. The school where the city's progressive families send their kids.</p>
+      <span class="highlight">20 min drive</span>
+    </div>
+    <div class="info-card theme-wine">
+      <h4>Cape Town Montessori</h4>
+      <p>Oranjezicht (25 min). 40+ years, SAMA accredited. Toddler program from 18 months. The established option if Montessori resonates more than Waldorf.</p>
+      <span class="highlight">From 18 months</span>
+    </div>
+  </div>
+
+  <div class="tip">
+    <div class="tip-label">Advice</div>
+    <p>Visit Starseed first — it's in your neighborhood and philosophically the closest match. But don't commit before seeing Gaia and Imhoff. Each Waldorf school has a distinct personality, and the "right" one depends on how the teachers relate to Bodhi more than any curriculum description.</p>
+  </div>
+</div>
+</section>
+
+<!-- WELLNESS FOR JESS -->
+<section>
+<div class="container">
+  <div class="section-kicker">For Jess</div>
+  <h2 class="section-title">The wellness infrastructure is real</h2>
+
+  <p>This is the section that matters most for the family's long-term sustainability. Jess's self-care depends on two things existing simultaneously: <strong>childcare</strong> (so she has free hours) and <strong>wellness options</strong> (so she has somewhere to go). Cape Town delivers on both.</p>
+
+  <p>The morning window is the primary opportunity. While Bodhi naps (11:30–1:30), Jess has 2 hours. With a nanny in the morning, she gets the full 6am–noon block. Here's what fills it:</p>
+
+  <p><strong>Yoga</strong> — Johann Kotze's studio on Beach Road is the easy daily option (R60, 2-minute walk from most Muizenberg rentals). For deeper practice: Soul Space in Kommetjie offers Kids Yoga (Bodhi) while Jess does Vinyasa or infrared Power Yoga. <strong>Rise Beach Yoga</strong> runs sunrise sessions right on Muizenberg sand.</p>
+
+  <p><strong>Movement</strong> — <strong>Dance Awake</strong> ecstatic dance every Thursday 6:30pm in Claremont (perfect for an early-finish evening). <strong>"Breathe Stretch Shake"</strong> at Surfer's Corner combines sound journeys with conscious dance. <strong>Moms on Board</strong> gives free surf lessons every Tuesday.</p>
+
+  <p><strong>Healing</strong> — <strong>Leandra Besters</strong> in Muizenberg does crystal singing bowl sound baths (432 Hz). <strong>Expand Health</strong> in De Waterkant has rooftop cold plunge + infrared sauna (R150). The <strong>Vipassana centre</strong> in Worcester is 1.5 hours away but completely free (donation-based) — Africa's first.</p>
+
+  <p><strong>Community</strong> — The Parent Hub's pram walks and wellness meetups. Roam Parenting's mindfulness-based playgroups. The Starseed parent community. And when Bodhi starts school, the school gate becomes the primary social network.</p>
+</div>
+</section>
+
+<!-- CTA FOOTER -->
+<section style="background:var(--cream);border-top:none;padding:2.5rem 0">
+<div class="container" style="text-align:center">
+  <h2 style="font-family:var(--serif);font-size:1.4rem;color:var(--ink);margin-bottom:0.5rem">Ready to explore?</h2>
+  <p style="color:var(--ink-mid);margin-bottom:1.25rem;font-size:0.95rem">Dive into the detailed listings and start building your calendar.</p>
+  <div class="nav-links" style="justify-content:center">
+    <a href="muizenberg-events.html" class="nav-link primary" style="background:var(--ocean);color:#fff">📅 Weekly Events Calendar</a>
+    <a href="muizenberg-locations.html" class="nav-link secondary" style="background:#fff;color:var(--ocean);border-color:var(--ocean)">📍 All 180+ Locations</a>
+  </div>
+</div>
+</section>
+
+<footer>
+  <p>Researched February 2026 · Based on 33 activity categories across 8 Cape Town neighborhoods</p>
+  <p style="margin-top:0.35rem"><strong>Muizenberg Guide</strong> — Built for a family finding home</p>
+</footer>
+
+</body>
+</html>

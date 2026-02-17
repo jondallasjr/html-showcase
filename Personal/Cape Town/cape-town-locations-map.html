@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muizenberg Guide — All Locations</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sand: #F5F0E8;
+  --sand-dark: #E8E0D0;
+  --ocean: #1B6B8A;
+  --ocean-light: #2A8FB2;
+  --ocean-pale: #D4EDF5;
+  --kelp: #2D5E3A;
+  --kelp-light: #E8F2EA;
+  --sunset: #D4764E;
+  --sunset-light: #FCEEE7;
+  --rock: #3D3630;
+  --rock-mid: #6B5E54;
+  --rock-light: #9B8E84;
+  --white: #FEFCF9;
+  --shadow: rgba(61,54,48,0.08);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--sand);
+  color: var(--rock);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+header {
+  background: var(--ocean);
+  background-image: linear-gradient(135deg, #17596F 0%, var(--ocean) 50%, #1E7A9E 100%);
+  color: var(--white);
+  padding: 2rem 1.5rem 1.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 4px 24px rgba(27,107,138,0.35);
+}
+
+header h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.6rem;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.1rem;
+}
+
+header .sub {
+  font-size: 0.8rem;
+  opacity: 0.7;
+  margin-bottom: 1rem;
+}
+
+.search-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+#search {
+  flex: 1;
+  padding: 0.6rem 1rem 0.6rem 2.4rem;
+  border: 2px solid rgba(255,255,255,0.2);
+  border-radius: 8px;
+  background: rgba(255,255,255,0.12) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='rgba(255,255,255,0.5)' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85zm-5.242.656a5 5 0 1 1 0-10 5 5 0 0 1 0 10z'/%3E%3C/svg%3E") no-repeat 0.8rem center;
+  color: var(--white);
+  font-family: inherit;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+#search::placeholder { color: rgba(255,255,255,0.5); }
+#search:focus { border-color: rgba(255,255,255,0.5); background-color: rgba(255,255,255,0.18); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='rgba(255,255,255,0.7)' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85zm-5.242.656a5 5 0 1 1 0-10 5 5 0 0 1 0 10z'/%3E%3C/svg%3E"); }
+
+.count-badge {
+  display: flex;
+  align-items: center;
+  padding: 0 0.9rem;
+  background: rgba(255,255,255,0.15);
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.filters {
+  padding: 0.65rem 1.5rem;
+  background: var(--white);
+  border-bottom: 1px solid var(--sand-dark);
+  display: flex;
+  gap: 0.35rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.filters::-webkit-scrollbar { display: none; }
+
+.chip {
+  padding: 0.3rem 0.65rem;
+  border-radius: 20px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
+  border: 1.5px solid var(--sand-dark);
+  background: var(--white);
+  color: var(--rock-mid);
+  transition: all 0.15s;
+  user-select: none;
+}
+.chip:hover { border-color: var(--ocean); color: var(--ocean); }
+.chip.active { background: var(--ocean); color: var(--white); border-color: var(--ocean); }
+
+main {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0.75rem 1rem 4rem;
+}
+
+.category { margin-bottom: 1.25rem; }
+
+.cat-header {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.5rem 0;
+  margin-bottom: 0.3rem;
+  border-bottom: 2px solid var(--ocean);
+  cursor: pointer;
+  user-select: none;
+}
+
+.cat-icon { font-size: 0.95rem; flex-shrink: 0; }
+
+.cat-header h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.05rem;
+  font-weight: 400;
+  flex: 1;
+}
+
+.cat-count {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--rock-light);
+  background: var(--sand-dark);
+  padding: 0.12rem 0.45rem;
+  border-radius: 10px;
+}
+
+.cat-toggle {
+  font-size: 0.7rem;
+  color: var(--rock-light);
+  transition: transform 0.3s;
+}
+.cat-toggle.collapsed { transform: rotate(-90deg); }
+
+.venues { display: flex; flex-direction: column; gap: 0.25rem; }
+
+.venue {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  padding: 0.55rem 0.65rem;
+  background: var(--white);
+  border-radius: 8px;
+  border: 1px solid transparent;
+  transition: all 0.12s;
+  text-decoration: none;
+  color: inherit;
+}
+.venue:hover {
+  border-color: var(--ocean-pale);
+  box-shadow: 0 2px 8px var(--shadow);
+  transform: translateY(-1px);
+}
+
+.venue-pin {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--ocean-pale);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 0.65rem;
+  margin-top: 0.05rem;
+  transition: background 0.12s;
+}
+.venue:hover .venue-pin { background: var(--ocean); }
+.venue:hover .venue-pin svg path { fill: #fff; }
+
+.venue-info { flex: 1; min-width: 0; }
+
+.venue-name {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--rock);
+  line-height: 1.3;
+}
+
+.venue-detail {
+  font-size: 0.75rem;
+  color: var(--rock-light);
+  margin-top: 0.05rem;
+  line-height: 1.35;
+}
+
+.venue-tags {
+  display: flex;
+  gap: 0.25rem;
+  flex-wrap: wrap;
+  margin-top: 0.2rem;
+}
+
+.tag {
+  font-size: 0.62rem;
+  padding: 0.08rem 0.35rem;
+  border-radius: 3px;
+  font-weight: 500;
+}
+.tag-time { background: var(--ocean-pale); color: var(--ocean); }
+.tag-area { background: var(--kelp-light); color: var(--kelp); }
+.tag-free { background: var(--sunset-light); color: var(--sunset); }
+
+.maps-arrow {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  background: var(--sand);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.05rem;
+  transition: all 0.12s;
+}
+.maps-arrow svg { transition: all 0.12s; }
+.venue:hover .maps-arrow { background: var(--ocean); }
+.venue:hover .maps-arrow svg path { fill: #fff; }
+
+.venue.hidden, .category.hidden { display: none; }
+.venues.collapsed { display: none; }
+
+.empty {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--rock-light);
+}
+.empty-icon { font-size: 2.5rem; margin-bottom: 0.5rem; opacity: 0.4; }
+.empty p { font-size: 0.88rem; }
+
+.scroll-top {
+  position: fixed;
+  bottom: 1.25rem;
+  right: 1.25rem;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--ocean);
+  color: var(--white);
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
+  box-shadow: 0 3px 12px rgba(27,107,138,0.3);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.scroll-top.visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 480px) {
+  header { padding: 1.25rem 1rem 1rem; }
+  header h1 { font-size: 1.35rem; }
+  .filters { padding: 0.5rem 0.75rem; }
+  main { padding: 0.5rem 0.6rem 3rem; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Muizenberg Location Guide</h1>
+  <p class="sub">Tap any venue to open in Google Maps</p>
+  <div class="search-row">
+    <input type="text" id="search" placeholder="Search venues, areas, keywords…">
+    <div class="count-badge"><span id="count">0</span>&thinsp;places</div>
+  </div>
+</header>
+
+<div class="filters" id="filters"></div>
+
+<main id="main">
+  <div class="empty" id="empty" style="display:none">
+    <div class="empty-icon">🔍</div>
+    <p>No venues match your search</p>
+  </div>
+</main>
+
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 4l-8 8h5v8h6v-8h5L12 4z" fill="white"/></svg>
+</button>
+
+<script>
+const pinSvg = `<svg width="14" height="14" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="#1B6B8A"/></svg>`;
+const arrowSvg = `<svg width="14" height="14" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" stroke="#1B6B8A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>`;
+
+const DATA = [
+  {cat:"Yoga",icon:"🧘",venues:[
+    {n:"Ashtanga Yoga School (AYS)",area:"Noordhoek",d:"Traditional Mysore-style. Community-oriented, healing-focused",time:"Morning"},
+    {n:"Ashtanga Yoga Cape Town (AYCT)",area:"Vredehoek",d:"Mysore Mon–Thu 6–8am. Teacher trained with Sharath Jois. 23 Derry St",time:"Morning"},
+    {n:"Ashtanga Yoga Centre",area:"Gardens, Cape Town",d:"Daily Mysore mornings. Authorized Level 2 teacher. 31 Wesley St",time:"Morning"},
+    {n:"Johann Kotze Music & Yoga",area:"Muizenberg",d:"Hatha Vinyasa, sea-view studio. 24 Beach Rd. R60 drop-in",time:"Morning"},
+    {n:"Rise Beach Yoga",area:"Muizenberg Beach",d:"Sunrise Vinyasa on the sand",time:"Morning"},
+    {n:"Soul Space Studio",area:"Kommetjie",d:"Infrared Power Yoga, Vinyasa, Yin, Kids Yoga. Sacred Sundays",time:"Morning"},
+    {n:"YogaWithin",area:"Noordhoek",d:"Philosophy-centered Vinyasa at Noordhoek Garden Emporium",time:"Morning"},
+    {n:"Noordhoek Yoga Studio",area:"Noordhoek",d:"Iyengar Yoga and rope yoga. Also Qigong. 19 Sea Cottage Dr",time:"Daytime"},
+    {n:"Ayama Yoga",area:"Kalk Bay",d:"Private Iyengar yoga. Pay-what-you-can option",time:"Flexible"},
+    {n:"Light House Holistic",area:"50 Bree St, Cape Town CBD",d:"Yoga, breathwork, sound, ecstatic dance, cacao ceremonies",time:"Various"},
+  ]},
+  {cat:"Meditation & Kirtan",icon:"🕉️",venues:[
+    {n:"Kagyu Samye Dzong",area:"Kenilworth, Cape Town",d:"Tibetan Buddhist (Karma Kagyu). Meditation Tue 7pm. R60/class",time:"Evening"},
+    {n:"ISKCON Cape Town",area:"Rondebosch, Cape Town",d:"Hare Krishna. Daily kirtan 4:30am. Sat 6pm. Sun Love Feast 11am",time:"Various",free:"Free/donation"},
+    {n:"Diamond Way Buddhist Centre",area:"Cape Town",d:"Intro meditation Mondays 6:30pm",time:"Evening"},
+    {n:"Tushita Kadampa Meditation Centre",area:"Observatory, Cape Town",d:"Drop-in meditation, weekend courses. Also Simon's Town",time:"Various"},
+    {n:"Dhamma Patākā Vipassana Centre",area:"Worcester, Western Cape",d:"10-day Goenka courses. Free (donation). Africa's first",time:"Retreats",free:"Free"},
+    {n:"Dance Awake Ecstatic Dance",area:"Claremont Civic Centre",d:"Thu 6:30–8:30pm. Conscious dance. R150",time:"Evening"},
+    {n:"Leandra Besters Sound Healing",area:"Muizenberg",d:"Crystal singing bowl sound baths (432 Hz bowls)",time:"Flexible"},
+    {n:"Bhakti Marga South Africa",area:"Cape Town",d:"Periodic darshan and kirtan events",time:"Events"},
+  ]},
+  {cat:"Cold Plunge & Swim",icon:"🧊",venues:[
+    {n:"Dalebrook Tidal Pool",area:"Kalk Bay",d:"Dawn swim community. Built 1907. Chardonnay Deli nearby",time:"Morning",free:"Free"},
+    {n:"St James Tidal Pool",area:"St James, Cape Town",d:"Iconic coloured beach huts. Shallow sections for kids",time:"Anytime",free:"Free"},
+    {n:"Woolley's Tidal Pool",area:"Kalk Bay",d:"Between Kalk Bay & Glencairn. Locals' secret, quiet",time:"Morning",free:"Free"},
+    {n:"ShuShu Sauna",area:"Various, Cape Town",d:"Mobile Finnish sauna + cold ocean plunge. WhatsApp group",time:"Weekend"},
+    {n:"Expand Health",area:"De Waterkant, Cape Town",d:"Rooftop cold plunge, infrared sauna, PEMF. R150",time:"Morning"},
+  ]},
+  {cat:"Surfing",icon:"🏄",venues:[
+    {n:"Surf Emporium",area:"Muizenberg",d:"SA's leading school. 9x SA champion. From R340pp",time:"Morning"},
+    {n:"Lifestyle Surf Shop",area:"Muizenberg",d:"Moms on Board: free lessons Tuesdays! Rental R200/2hrs",time:"Morning",free:"Free (Moms)"},
+    {n:"Gary's Surf School",area:"Muizenberg",d:"Oldest in CT (est. 1989). Money-back guarantee",time:"Morning"},
+    {n:"African Soul Surfer",area:"Muizenberg",d:"Surf + yoga combos. Yellow building, Surfer's Corner",time:"Morning"},
+    {n:"SurfXCape",area:"Muizenberg",d:"HSP/Anxiety lesson option. Private R600",time:"Morning"},
+    {n:"Surfshack",area:"Muizenberg",d:"22-year family-run. SUP tours past penguin colony",time:"Morning"},
+  ]},
+  {cat:"Rock Climbing",icon:"🧗",venues:[
+    {n:"Bloc11 Bouldering",area:"Diep River, Cape Town",d:"Closest to Muizenberg (~10 min). Day R100–R120. Monthly R650",time:"Morning"},
+    {n:"CityROCK",area:"Paarden Eiland, Cape Town",d:"SA's premier. 4,000m², 16m walls. Day R210",time:"Various"},
+    {n:"HangTime",area:"Pinelands, Cape Town",d:"Indoor + outdoor walls. 13m outdoor wall",time:"Various"},
+    {n:"Mountain Club of SA (MCSA)",area:"Cape Town",d:"Founded 1891. 200+ meets/year. R900/year",time:"Weekend"},
+  ]},
+  {cat:"Children & Play",icon:"👶",venues:[
+    {n:"Starseed Community School Playgroup",area:"Muizenberg",d:"Waldorf-based. Beach, vlei, mountain as classrooms",time:"Morning"},
+    {n:"Planet Kids",area:"Muizenberg",d:"Indoor play. Under-3s Astronautees area. OT on staff",time:"Various"},
+    {n:"Music 4 Mini's",area:"Cape Town",d:"Ages 3mo–5yr. 30-min lessons + socializing. ~R380",time:"Morning"},
+    {n:"Wriggle and Rhyme",area:"Claremont, Cape Town",d:"Music & movement 6mo–6yr. Tue–Fri mornings",time:"Morning"},
+    {n:"Roam Parenting",area:"Cape Town",d:"Guided 90-min playgroups. RIE + mindfulness",time:"Morning"},
+    {n:"Be.Up Indoor Adventure",area:"Pinelands, Cape Town",d:"Toddler Zone (under 4s) R55. Trampolines, maze",time:"Various"},
+    {n:"Freedom Adventure Park",area:"Tokai, Cape Town",d:"Ages 1–12. Dedicated toddler zones. From R150",time:"Various"},
+    {n:"Muizenberg Pavilion & Waterslides",area:"Muizenberg",d:"Pools, lawn space, waterslides at beachfront",time:"Various"},
+  ]},
+  {cat:"Family Events",icon:"🎪",venues:[
+    {n:"Kirstenbosch Sunset Concerts",area:"Kirstenbosch, Newlands",d:"Every Sun Nov–Mar. Kids 0–5 free. Adults R360",time:"Sunday"},
+    {n:"Blue Bird Garage Market",area:"39 Albertyn Rd, Muizenberg",d:"Thu & Fri 4–10pm. Live bands, food, Kids Zone",time:"Evening",free:"Free entry"},
+    {n:"Galileo Open Air Cinema",area:"Various, Cape Town",d:"Multiple venues Oct–May. From R155",time:"Evening"},
+    {n:"Neighbourgoods Market",area:"Old Biscuit Mill, Woodstock",d:"Sat 9am–3pm. 100+ traders, live music",time:"Saturday",free:"Free entry"},
+    {n:"OZCF Market",area:"V&A Waterfront, Cape Town",d:"Saturday morning farmers' market",time:"Saturday"},
+  ]},
+  {cat:"Parks & Nature",icon:"🌿",venues:[
+    {n:"Muizenberg Beach",area:"Muizenberg",d:"Warm water, gentle waves, lifeguards, shark spotters",time:"Anytime",free:"Free"},
+    {n:"Zandvlei Recreational Park",area:"Muizenberg",d:"Wetland, picnic areas, playground, sailing, canoeing",time:"Various",free:"Free"},
+    {n:"Zandvlei Estuary Nature Reserve",area:"Muizenberg",d:"1.5km circular walk, bird hides. Flat toddler paths",time:"Morning",free:"Free"},
+    {n:"Kirstenbosch Botanical Garden",area:"Newlands, Cape Town",d:"Boomslang canopy walkway. Under 6 free. R40–R250",time:"Various"},
+    {n:"Rondevlei Nature Reserve",area:"Grassy Park, Cape Town",d:"290ha bird sanctuary, ~230 species + hippos",time:"Morning",free:"Free"},
+    {n:"Silvermine Nature Reserve",area:"Silvermine, above Muizenberg",d:"Reservoir boardwalk, Elephant's Eye Cave. R44",time:"Morning"},
+    {n:"Muizenberg Catwalk",area:"Muizenberg",d:"3km flat coastal walk. Pram-suitable",time:"Morning",free:"Free"},
+    {n:"Green Point Urban Park",area:"Green Point, Cape Town",d:"Three age-grouped playgrounds. Biodiversity trail",time:"Various",free:"Free"},
+  ]},
+  {cat:"Libraries",icon:"📚",venues:[
+    {n:"Muizenberg Public Library",area:"Atlantic Rd, Muizenberg",d:"Storytelling sessions. Tel: 021 444 3197",time:"Morning",free:"Free"},
+    {n:"Fish Hoek Public Library",area:"Fish Hoek",d:"Friday Story Hour (since 1950s). Children's section",time:"Morning",free:"Free"},
+    {n:"Simon's Town Public Library",area:"Simon's Town",d:"Historic heritage building (1897)",time:"Morning",free:"Free"},
+    {n:"Kalk Bay Books",area:"Main Road, Kalk Bay",d:"Independent bookshop. Readings, clubs, author events",time:"Daily"},
+  ]},
+  {cat:"Museums",icon:"🏛️",venues:[
+    {n:"Two Oceans Aquarium",area:"V&A Waterfront, Cape Town",d:"Touch pools, penguins, jellyfish. Under 4 free",time:"Various"},
+    {n:"Cape Town Museum of Childhood",area:"Rondebosch",d:"First in Africa. Hands-on. Wed–Sat. Free",time:"Morning",free:"Free"},
+    {n:"Iziko South African Museum",area:"Company's Garden, CBD",d:"Whale skeletons, dinosaurs. Under 5 free",time:"Various"},
+    {n:"Boulders Beach Penguin Colony",area:"Simon's Town",d:"Live penguins on boardwalks. 20 min from Muizenberg",time:"Morning"},
+    {n:"Warrior Toy Museum",area:"Simon's Town",d:"4,000+ model cars, trains, dolls. R10",time:"Morning"},
+    {n:"Cape Town Science Centre",area:"Observatory, Cape Town",d:"Kids play area, air rockets, giant chess. R80",time:"Various"},
+    {n:"South African Jewish Museum",area:"CBD, Cape Town",d:"First synagogue (1863). Rare artifacts. Under 5 free",time:"Various"},
+  ]},
+  {cat:"Philosophy",icon:"💭",venues:[
+    {n:"Lekker Chats",area:"Cape Town",d:"Structured conversation events. Sun 2x/month. Ages 25–45",time:"Sunday",free:"Free"},
+    {n:"UCT Philosophy Society",area:"UCT, Rondebosch",d:"Monthly Tue evening lectures 8–9:30pm. Open to all",time:"Evening",free:"Free"},
+    {n:"TEDxCapeTown",area:"Workshop17, V&A Waterfront",d:"Annual events + periodic salons. ~R250",time:"Weekend"},
+    {n:"Curious to Change",area:"Cape Town",d:"Deep conversation community. Sun 3pm Meetup",time:"Sunday"},
+  ]},
+  {cat:"Parenting",icon:"👪",venues:[
+    {n:"The Parent Hub",area:"Cape Town",d:"SA's largest mom community. Pram walks, wellness meetups",time:"Various"},
+    {n:"The Parent Centre",area:"Cape Town",d:"SA's NCT-equivalent (est. 1983). Workshops. Tel: 021 762 0116",time:"Various"},
+    {n:"Fiona Couchman",area:"Plumstead, Cape Town",d:"Attachment specialist. Parent workshops",time:"Various"},
+  ]},
+  {cat:"Scouts",icon:"⚜️",venues:[
+    {n:"1st Muizenberg Sea Scouts",area:"Sandvlei, Muizenberg",d:"Founded 1909. On Sandvlei lagoon. Meerkats from age 5",time:"Various"},
+    {n:"1st Claremont Scout Group",area:"Claremont, Cape Town",d:"Early Meerkat program. Ranked 4th WC 2024",time:"Various"},
+  ]},
+  {cat:"Service Clubs",icon:"🤝",venues:[
+    {n:"Rotary Club of Cape of Good Hope",area:"Galley Restaurant, Fish Hoek",d:"Tuesdays 6:30pm",time:"Evening"},
+    {n:"Rotary Club of South Peninsula",area:"Fish Hoek Beach",d:"Thursdays 6:30pm. Chartered Jan 2024",time:"Evening"},
+    {n:"Fish Hoek Lions Club",area:"Fish Hoek Bowling Club",d:"2nd Mon monthly 7pm. Leos Club for youth",time:"Evening"},
+    {n:"Round Table Southern Africa",area:"Cape Town",d:"Men 18–40. Business + social meetings monthly",time:"Evening"},
+  ]},
+  {cat:"Writers",icon:"✍️",venues:[
+    {n:"All About Writing Creative Saturdays",area:"Casa Labia, Muizenberg",d:"1st Sat every 2nd month. 9am. R425",time:"Saturday"},
+    {n:"Cape Town Writers' Network",area:"The Bee-stro, Observatory",d:"Weekly Mon evenings. Free (buy food)",time:"Evening",free:"Free"},
+    {n:"Red Wheelbarrow Poetry Collective",area:"The Commons, Muizenberg",d:"Open-mic poetry. Multiple events/month",time:"Evening"},
+    {n:"Stories and Voices",area:"Newlands, Cape Town",d:"AWA method workshops. Thu mornings",time:"Morning"},
+    {n:"The Book Lounge",area:"71 Roeland St, CBD",d:"Premier bookstore. Launches, talks, readings",time:"Evening"},
+  ]},
+  {cat:"Open Mics",icon:"🎤",venues:[
+    {n:"Harvest Café",area:"York Rd, Muizenberg",d:"Thu 6–9pm. Singers, poets, musicians, dancers",time:"Evening",free:"Free"},
+    {n:"The Melting Pot",area:"15 Church St, Muizenberg",d:"Wed from 7pm. Jazz, folk, rock, comedy",time:"Evening"},
+    {n:"Ground Culture Café",area:"170 Lower Main Rd, Observatory",d:"Tue 6–10pm open mic + 1st Thu Sandbox Jam",time:"Evening",free:"Free"},
+    {n:"The Armchair Theatre",area:"135 Lower Main Rd, Observatory",d:"Mon Jam 8pm. Comedy Wed & Sun",time:"Evening"},
+    {n:"House of Machines",area:"CBD, Cape Town",d:"Songwriter showcase every Tuesday",time:"Evening",free:"Free"},
+    {n:"Third House Poetry",area:"Cape Town",d:"Premier spoken word. Last Tue monthly. ~R50–R80",time:"Evening"},
+  ]},
+  {cat:"Music Jams",icon:"🎵",venues:[
+    {n:"The Shed Jazz Jam",area:"165 Main Rd, Muizenberg",d:"Every Sun from 3pm. Bring instruments & join",time:"Sunday",free:"Free"},
+    {n:"The Striped Horse Open Jam",area:"York Rd, Muizenberg",d:"Bi-weekly Wed 8–11pm. All welcome",time:"Evening",free:"Free"},
+    {n:"Fat Harry's Reloaded Jazz Jam",area:"166 2nd Ave, Kenilworth",d:"Weekly Mon 7pm. Hosted by Dan Shout",time:"Evening"},
+    {n:"Amber on Bree Jazz Jam",area:"Bree St, CBD",d:"Weekly Tue 7:30pm. Curated by Muneeb Hermans",time:"Evening",free:"Free"},
+    {n:"Sunday Jazz Jam at Openwine",area:"72 Wale St, CBD",d:"Every Sun from 4pm",time:"Sunday",free:"Free"},
+  ]},
+  {cat:"Art & Galleries",icon:"🎨",venues:[
+    {n:"Zeitz MOCAA",area:"V&A Waterfront, Cape Town",d:"Largest contemporary African art museum. ~R230",time:"Various"},
+    {n:"First Thursdays Cape Town",area:"Bree, Loop, Wale Streets, CBD",d:"1st Thu monthly. ~35 galleries open til 9pm+",time:"Evening",free:"Free"},
+    {n:"First Thursdays Down South",area:"Muizenberg / Kalk Bay",d:"1st Thu. Local galleries, shops, bars",time:"Evening"},
+    {n:"Stevenson Gallery",area:"Woodstock, Cape Town",d:"Leading contemporary. Mon–Fri 9–5, Sat 10–1",time:"Various",free:"Free"},
+    {n:"Goodman Gallery",area:"Woodstock, Cape Town",d:"Est. 1966. International. Tue–Sat",time:"Various",free:"Free"},
+    {n:"Norval Foundation",area:"Steenberg, Cape Town",d:"Major art museum + sculpture garden. ~R180",time:"Various"},
+    {n:"Gallery South",area:"Muizenberg",d:"Local and Pan-African art with performance space",time:"Daytime",free:"Free"},
+    {n:"Artvark Gallery",area:"Kalk Bay",d:"Contemporary art in seaside setting",time:"Daytime",free:"Free"},
+  ]},
+  {cat:"Theatre",icon:"🎭",venues:[
+    {n:"Baxter Theatre Centre",area:"UCT, Rondebosch",d:"Morning Melodies 10:30am R80. Opera, pantomime",time:"Various"},
+    {n:"Masque Theatre",area:"37 Main Rd, Muizenberg",d:"Community theatre right in Muizenberg village",time:"Evening"},
+  ]},
+  {cat:"Jazz Venues",icon:"🎷",venues:[
+    {n:"Kloof Street House",area:"Kloof St, Gardens",d:"Free jazz Sun 1–3pm on veranda. Family-friendly",time:"Sunday",free:"Free"},
+    {n:"Woodstock Brewery",area:"Woodstock, Cape Town",d:"Glenn Robertson Jazz Band Sun from 1pm. R140",time:"Sunday"},
+    {n:"Mojo Market",area:"Sea Point, Cape Town",d:"Jazzy Tuesdays 7:30pm + Sunday jazz from 1pm",time:"Various"},
+    {n:"The Piano Bar",area:"De Waterkant, Cape Town",d:"Live music every night from 7:30pm. No cover",time:"Evening",free:"Free"},
+    {n:"The Crypt Jazz Restaurant",area:"St George's Cathedral, CBD",d:"Jazz club in the crypt. Tue–Sat 7pm. R50–R100",time:"Evening"},
+    {n:"The Blue Room at Grub & Vine",area:"CBD, Cape Town",d:"Speakeasy. Jazz, blues, soul. Wed–Sat 7pm",time:"Evening"},
+  ]},
+  {cat:"Day Trips",icon:"🗺️",venues:[
+    {n:"Spier Wine Farm",area:"Stellenbosch",d:"Kids' juice tasting, Eagle Encounter, playground. 45 min",time:"Weekend"},
+    {n:"Vergenoegd Wine Estate",area:"Stellenbosch",d:"Famous Duck Parade, cookie decorating",time:"Weekend"},
+    {n:"Boschendal",area:"Franschhoek",d:"Tree House play centre, Splish Splash water area",time:"Weekend"},
+    {n:"Groot Constantia",area:"Constantia, Cape Town",d:"Cape's original wine region. Closest to Muizenberg",time:"Weekend"},
+    {n:"Kraalbaai Beach, West Coast National Park",area:"Langebaan",d:"Turquoise lagoon, shallow, perfect for toddlers",time:"Weekend"},
+    {n:"Cape Point & Cape of Good Hope",area:"Cape Point",d:"Dramatic cliffs, wildlife, tidal pools. 40 min",time:"Weekend"},
+    {n:"Imhoff Farm",area:"Kommetjie",d:"Art studios, horse riding, camel rides, petting farm",time:"Weekend"},
+  ]},
+  {cat:"Workshops",icon:"🎯",venues:[
+    {n:"Anthony Shapiro Pottery Studio",area:"CBD, Cape Town",d:"Drop-in R1,200. Tue–Thu + Sat mornings & evenings",time:"Various"},
+    {n:"Calico Ceramics",area:"Salt River, Cape Town",d:"Full-day pottery + champagne + lunch. R1,950pp",time:"Weekend"},
+    {n:"Pencil Ceramics",area:"Cape Town",d:"Mindfulness-focused. Wine & Clay date nights",time:"Weekend"},
+    {n:"All Fired Up Pottery",area:"Tokai, Cape Town",d:"Closest pottery to Muizenberg. 40+ years. Saturday",time:"Saturday"},
+    {n:"Heart Art by Gail Schoeman",area:"Muizenberg",d:"Intuitive expressive art + mindfulness therapy",time:"Various"},
+    {n:"Mercury School of Woodwork",area:"Cape Town",d:"Saturday courses. Parent & Child course",time:"Saturday"},
+    {n:"Imago Couples Workshop (Angela Fox)",area:"Cape Town",d:"Weekend workshop Fri–Sun. R6,500/couple",time:"Weekend"},
+  ]},
+  {cat:"Shadow Work & Jungian",icon:"🌑",venues:[
+    {n:"ManKind Project South Africa",area:"Cape Town",d:"Weekend Apr 10 2026. Free ongoing men's groups",time:"Weekend"},
+    {n:"C.G. Jung Centre",area:"87 Main Rd, Rosebank",d:"1-year certificate. Library. Tel: 021 689 2090",time:"Various"},
+    {n:"Authentic Relating Cape Town",area:"Cape Town",d:"Circling, NVC-inspired games. Meetup group",time:"Evening"},
+    {n:"Light House Holistic Men's Group",area:"50 Bree St, CBD",d:"Safe space for men. Free/donation",time:"Evening",free:"Free"},
+  ]},
+  {cat:"Book Clubs",icon:"📖",venues:[
+    {n:"Silent Book Club Cape Town",area:"The Commons, Muizenberg",d:"3x/month. Bring your book, read, socialize",time:"Various",free:"Free"},
+    {n:"Kalk Bay Books",area:"124 Main Rd, Kalk Bay",d:"Book clubs, launches, poetry readings",time:"Various"},
+    {n:"The Book Lounge",area:"71 Roeland St, CBD",d:"Literary epicenter. Regular launches & events",time:"Evening"},
+  ]},
+  {cat:"Social Clubs",icon:"🍻",venues:[
+    {n:"Cape Town Hikes and Social Group",area:"Cape Town",d:"1,000+ members. Monthly 1st Sat hikes",time:"Saturday",free:"Free"},
+    {n:"Social Coffee Hike Society",area:"Cape Town",d:"Hiking + coffee. Weekly meetups",time:"Morning"},
+    {n:"Cape Town Community for Connection",area:"Cape Town",d:"2,672 Meetup members. Hikes, dinners, beach",time:"Various"},
+  ]},
+  {cat:"Hiking",icon:"🥾",venues:[
+    {n:"Silvermine Reservoir Boardwalk",area:"Silvermine, above Muizenberg",d:"20-min flat loop. Stroller-friendly",time:"Morning",free:"R44"},
+    {n:"Silvermine Elephant's Eye Cave",area:"Silvermine, above Muizenberg",d:"6km family-friendly hike. Great views",time:"Morning",free:"R44"},
+    {n:"MCSA Cape Town Section",area:"Cape Town",d:"200+ meets/year. Easy to demanding. R900/yr",time:"Weekend"},
+    {n:"Meridian Hiking Club",area:"Cape Town",d:"Est. 1989. 300+ members. Day hikes + social",time:"Weekend"},
+    {n:"ComeHike",area:"Cape Town",d:"Structured club. Children welcome. R50/hike",time:"Weekend"},
+    {n:"Muizenberg–St James Coastal Walk",area:"Muizenberg to St James",d:"3km flat. Pram-perfect. Beautiful coastal views",time:"Morning",free:"Free"},
+    {n:"Newlands Forest",area:"Newlands, Cape Town",d:"Easy trails, pram-friendly, year-round stream. R36",time:"Morning"},
+  ]},
+  {cat:"Running",icon:"🏃",venues:[
+    {n:"Zandvlei parkrun",area:"Zandvlei, Muizenberg",d:"Every Sat 8am. 5km flat. Pushchairs & dogs OK",time:"Saturday",free:"Free"},
+    {n:"Fish Hoek parkrun",area:"Fish Hoek",d:"Every Sat 8am. 5km gravel/trail",time:"Saturday",free:"Free"},
+    {n:"Running Wild — False Bay Crew",area:"False Bay, Cape Town",d:"Trail running Tue & Thu 8am",time:"Morning"},
+    {n:"Celtic Harriers",area:"Claremont, Cape Town",d:"Est. 1906. Founded Two Oceans Marathon. Tue & Thu",time:"Morning"},
+  ]},
+  {cat:"Chess",icon:"♟️",venues:[
+    {n:"Fish Hoek Chess Club",area:"Fish Hoek Library",d:"Closest to Muizenberg. Tel: 071 053 9001",time:"Various"},
+    {n:"Observatory Chess Club",area:"Woodstock Brewery, Observatory",d:"Social atmosphere at taproom",time:"Evening"},
+  ]},
+  {cat:"Massage & Spa",icon:"💆",venues:[
+    {n:"International School of Massage",area:"Cape Town",d:"Couples R1,650. Baby Massage R4,300. Thai R4,300",time:"Flexible"},
+    {n:"Shen Mantra",area:"Cape Town",d:"Thai Yoga Massage courses. Level 1+2 = 72 hours",time:"Afternoon"},
+    {n:"The Majestic Spa",area:"Majestic Village, Kalk Bay",d:"5 min from Muiz. 60-min massage ~R400–R700",time:"Various"},
+    {n:"Reef Beachfront Massage",area:"Muizenberg Beach",d:"Sports massage on the beach. 30-min R400",time:"Various"},
+    {n:"The Grotto Spa",area:"CBD, Cape Town",d:"Couples Date Night R3,300 (massage + dinner)",time:"Evening"},
+  ]},
+  {cat:"Coworking",icon:"💻",venues:[
+    {n:"Workshop17 Muizenberg",area:"Muizenberg",d:"Opening mid-2026. Premium coworking",time:"Weekday"},
+    {n:"CoworkSurf Muizenberg",area:"Muizenberg",d:"Coworking + coliving + surfing",time:"Weekday"},
+    {n:"Ideas Cartel",area:"CBD, Cape Town",d:"Day pass R200, monthly from R1,000",time:"Weekday"},
+  ]},
+  {cat:"Schools",icon:"🏫",venues:[
+    {n:"Starseed Community School",area:"Muizenberg",d:"Waldorf-based. Playgroup–Class 7. Beach as classroom",time:"Weekday"},
+    {n:"Imhoff Waldorf School",area:"Imhoff Farm, Kommetjie",d:"Playgroup–High School. Off-grid, environmental ethos",time:"Weekday"},
+    {n:"Constantia Waldorf School",area:"Constantia, Cape Town",d:"First Waldorf in Africa (est. 1967). Playgroup–Matric",time:"Weekday"},
+    {n:"Gaia Waldorf School",area:"Pinelands, Cape Town",d:"Most diverse Waldorf in SA. Horses, chickens, gardens",time:"Weekday"},
+    {n:"Cape Town Montessori School",area:"Oranjezicht, Cape Town",d:"40+ years, SAMA accredited. Toddler from 18 months",time:"Weekday"},
+    {n:"Honeycomb Montessori",area:"Bergvliet, Cape Town",d:"Parent-run, 18 months–6 years",time:"Weekday"},
+  ]},
+  {cat:"Churches & Spiritual",icon:"✨",venues:[
+    {n:"Southreach Church",area:"Muizenberg",d:"Evangelical, multicultural. Sun 10am & 6pm",time:"Sunday"},
+    {n:"Joshua Generation Church (JoshGen)",area:"3 Wherry Rd, Muizenberg",d:"Multisite (SA, USA, Zimbabwe). Home fellowship",time:"Sunday"},
+    {n:"Bay Community Church",area:"Capricorn Blvd, Muizenberg",d:"New Frontiers Church",time:"Sunday"},
+    {n:"Kalk Bay Community Church",area:"Kalk Bay",d:"Non-denominational, evangelical, multicultural",time:"Sunday"},
+    {n:"CHS Life Centre",area:"Kirstenhof, Cape Town",d:"Co-working, café, outreach. 10 min from Muizenberg",time:"Various"},
+    {n:"Encounter Church",area:"Cape Town",d:"Charismatic, presence-focused. Kids program 4–12",time:"Sunday"},
+    {n:"St George's Cathedral",area:"5 Wale St, CBD",d:"The People's Cathedral. Tutu's legacy. Labyrinth, tours",time:"Sunday"},
+    {n:"Muizenberg Synagogue",area:"Muizenberg",d:"Historic 1920s Orthodox. Fri evening, Sat morning",time:"Fri/Sat"},
+    {n:"Temple Israel Wynberg (Progressive)",area:"Wynberg, Cape Town",d:"Reform. Welcomes non-Jews. Hebrew & English services",time:"Fri/Sat"},
+    {n:"Gardens Shul",area:"Gardens, Cape Town",d:"Oldest active in SA (1905). Egyptian-revival. Seats 1,400+",time:"Various"},
+    {n:"Quaker Meeting (Western Cape)",area:"2 Rye Rd, Mowbray",d:"Sun 9:30am silent worship. Also South Peninsula homes",time:"Sunday"},
+    {n:"Cape Town Unitarians",area:"64 Hout St, CBD",d:"Multifaith seekers. No dogma. Zen, Buddhist, Vedic events",time:"Sunday"},
+    {n:"Bahá'í Community",area:"Cape Town",d:"Interfaith worship. Children's classes. Study circles",time:"Various"},
+    {n:"Cape Town Interfaith Initiative",area:"Rondebosch, Cape Town",d:"50 member orgs. Quarterly dialogue. Heritage tours",time:"Various"},
+    {n:"Habibia Soofie Masjid (Sufi)",area:"63 Flat Rd, Rylands",d:"Sufi mosque est. 1905. Chishti order — love & tolerance",time:"Various"},
+    {n:"Ananda Kutir Ashrama",area:"24 Sprigg Rd, Rondebosch East",d:"Integral Yoga ashram. Sat evening satsang (free). Est. 1982",time:"Saturday",free:"Free"},
+  ]},
+];
+
+function mapsUrl(name, area) {
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(name + ', ' + area + ', Cape Town, South Africa')}`;
+}
+
+function init() {
+  const main = document.getElementById('main');
+  const filtersEl = document.getElementById('filters');
+  const empty = document.getElementById('empty');
+
+  filtersEl.innerHTML = `<span class="chip active" data-cat="all">All</span>` +
+    DATA.map(c => `<span class="chip" data-cat="${c.cat}">${c.icon} ${c.cat}</span>`).join('');
+
+  let activeCat = 'all';
+  let query = '';
+
+  function applyFilters() {
+    const q = query.toLowerCase();
+    let total = 0;
+
+    document.querySelectorAll('.category').forEach(el => {
+      const cat = el.dataset.cat;
+      const catMatch = activeCat === 'all' || activeCat === cat;
+      let catVisible = 0;
+
+      el.querySelectorAll('.venue').forEach(v => {
+        const show = catMatch && (!q || v.dataset.s.includes(q));
+        v.classList.toggle('hidden', !show);
+        if (show) catVisible++;
+      });
+
+      el.classList.toggle('hidden', catVisible === 0);
+      el.querySelector('.cat-count').textContent = catVisible;
+      total += catVisible;
+    });
+
+    document.getElementById('count').textContent = total;
+    empty.style.display = total === 0 ? 'block' : 'none';
+  }
+
+  // Build HTML
+  let html = '';
+  DATA.forEach(cat => {
+    html += `<div class="category" data-cat="${cat.cat}">
+      <div class="cat-header"><span class="cat-icon">${cat.icon}</span>
+      <h2>${cat.cat}</h2><span class="cat-count">${cat.venues.length}</span>
+      <span class="cat-toggle">▾</span></div><div class="venues">`;
+
+    cat.venues.forEach(v => {
+      const s = `${v.n} ${v.area} ${v.d||''} ${v.time||''} ${cat.cat} ${v.free||''}`.toLowerCase();
+      html += `<a class="venue" href="${mapsUrl(v.n, v.area)}" target="_blank" rel="noopener" data-s="${s}">
+        <div class="venue-pin">${pinSvg}</div>
+        <div class="venue-info">
+          <div class="venue-name">${v.n}</div>
+          <div class="venue-detail">${v.d||''}</div>
+          <div class="venue-tags">
+            <span class="tag tag-area">${v.area.split(',')[0]}</span>
+            ${v.time ? `<span class="tag tag-time">${v.time}</span>` : ''}
+            ${v.free ? `<span class="tag tag-free">${v.free}</span>` : ''}
+          </div>
+        </div>
+        <div class="maps-arrow">${arrowSvg}</div>
+      </a>`;
+    });
+
+    html += `</div></div>`;
+  });
+
+  main.insertAdjacentHTML('afterbegin', html);
+
+  // Events
+  filtersEl.addEventListener('click', e => {
+    const chip = e.target.closest('.chip');
+    if (!chip) return;
+    filtersEl.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+    activeCat = chip.dataset.cat;
+    applyFilters();
+    // Scroll to top of main
+    main.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  document.querySelectorAll('.cat-header').forEach(h => {
+    h.addEventListener('click', e => {
+      if (e.target.closest('.venue')) return;
+      h.nextElementSibling.classList.toggle('collapsed');
+      h.querySelector('.cat-toggle').classList.toggle('collapsed');
+    });
+  });
+
+  document.getElementById('search').addEventListener('input', e => {
+    query = e.target.value;
+    applyFilters();
+  });
+
+  const scrollBtn = document.getElementById('scrollTop');
+  window.addEventListener('scroll', () => {
+    scrollBtn.classList.toggle('visible', window.scrollY > 500);
+  });
+
+  // Initial count
+  const totalVenues = DATA.reduce((a, c) => a + c.venues.length, 0);
+  document.getElementById('count').textContent = totalVenues;
+}
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
