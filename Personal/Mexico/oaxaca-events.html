@@ -247,13 +247,13 @@
   }
   .gcal-link:hover { opacity:0.8; }
   .gcal-link svg { width:11px; height:11px; fill:currentColor; }
-  .unsplash-credit {
+  .photo-credit {
     font-size:0.58rem;
     color:var(--text-muted);
     opacity:0.5;
   }
-  .unsplash-credit a { color:var(--text-muted); text-decoration:none; }
-  .unsplash-credit a:hover { opacity:0.8; text-decoration:underline; }
+  .photo-credit a { color:var(--text-muted); text-decoration:none; }
+  .photo-credit a:hover { opacity:0.8; text-decoration:underline; }
 
   /* RECURRING EVENTS */
   .recurring-section { margin:32px 0; padding:24px; background:var(--bg-card); border-radius:16px; border:1px solid var(--border); }
@@ -323,13 +323,13 @@
 <body>
 
 <div class="hero">
-  <img class="hero-img" src="https://images.unsplash.com/photo-1641511255914-a30e17ef2071?w=1400&h=500&fit=crop&auto=format&q=80" alt="Oaxaca City skyline" loading="eager">
+  <img class="hero-img" src="https://live.staticflickr.com/65535/54893100875_9c7bcbc001_b.jpg" alt="Colorful papel picado banners over Oaxaca streets at night" loading="eager">
   <div class="hero-overlay"></div>
   <div class="hero-content">
     <h1>Oaxaca <span>City</span></h1>
     <p>Every event worth knowing · February & March 2026</p>
   </div>
-  <div class="hero-credit">Photo by <a href="https://unsplash.com/@onegrandtrip" target="_blank">Alice Kotlyarenko</a> on <a href="https://unsplash.com" target="_blank">Unsplash</a></div>
+  <div class="hero-credit">Photo by <a href="https://www.flickr.com/photos/10909746@N05/" target="_blank">Keith Mac Uidhir</a> on <a href="https://www.flickr.com/" target="_blank">Flickr</a></div>
 </div>
 
 <div class="container">
@@ -354,7 +354,7 @@
 
 <div class="footer">
   Compiled from the Oaxaca City Events Guide & Complete Guide to Settling · Feb 2026<br>
-  Photos via <a href="https://unsplash.com" target="_blank">Unsplash</a> — free to use under the <a href="https://unsplash.com/license" target="_blank">Unsplash License</a><br>
+  Photos via <a href="https://www.flickr.com/" target="_blank">Flickr</a> and <a href="https://unsplash.com" target="_blank">Unsplash</a> — used under <a href="https://creativecommons.org/licenses/" target="_blank">Creative Commons</a> and <a href="https://unsplash.com/license" target="_blank">Unsplash</a> licenses<br>
   Event details may change — check Instagram & WhatsApp for latest info
 </div>
 
@@ -364,69 +364,132 @@
 // ===== UNSPLASH IMAGE LIBRARY =====
 // Curated CDN URLs by category with photographer credits
 const IMG = {
-  // Oaxaca-specific
-  oax_streamers: { url:'photo-1650472679316-ca37e65cceef', credit:'Sergio Mena Ferreira', user:'sergiomenamx' },
-  oax_street: { url:'photo-1562215589-b6d0ed3cfec8', credit:'Roman Lopez', user:'romanll' },
-  oax_wall: { url:'photo-1572999490988-4bf6bc62da0d', credit:'José Pablo Domínguez', user:'jdomito' },
-  oax_city: { url:'photo-1641511255914-a30e17ef2071', credit:'Alice Kotlyarenko', user:'onegrandtrip' },
-  oax_textiles: { url:'photo-1562869929-bda0650edb1f', credit:'analuisa gamboa', user:'anigmb' },
-  oax_market: { url:'photo-1646954843635-126c0fe8f3d7', credit:'Eric Prouzet', user:'eprouzet' },
-  oax_altar: { url:'photo-1643584872305-9dffde0d7a0f', credit:'Eric Prouzet', user:'eprouzet' },
-  oax_mezcal: { url:'photo-1598294032141-b4818a331ad7', credit:'YesMore Content', user:'yesmorecontent' },
-  oax_montalban: { url:'photo-1530455235907-0a59ea1e04ea', credit:'Matthew Essman', user:'thetruth23' },
-  oax_church: { url:'photo-1759255263134-dd8367a0a88c', credit:'paws and prints', user:'paws_and_prints' },
-  // More Oaxaca
-  oax_color1: { url:'photo-1578940421555-2dcc68d56e50', credit:'Israel Piña', user:'israpg' },
-  oax_color2: { url:'photo-1594530070128-b4022cfb32b1', credit:'Lorraine Mojica', user:'lomojicaa' },
-  oax_color3: { url:'photo-1664375262621-af849f3bc937', credit:'Ale Cisneros', user:'alecisneros' },
-  oax_color4: { url:'photo-1635444562722-e7ff3ea20730', credit:'Abraham De La Cruz', user:'abmdlc' },
+  // ===== FLICKR IMAGES (Oaxaca-specific photography) =====
+  // URL pattern: https://live.staticflickr.com/65535/{id}_{size}.jpg
+  // Sizes: _m=240, _z=640, _c=800, _b=1024
 
-  // Category-generic
-  yoga1: { url:'photo-1506126613408-eca07ce68773', credit:'Jared Rice', user:'jareddrice' },
-  yoga2: { url:'photo-1687436874174-977fdd9e2cb8', credit:'Marea Wellness', user:'mareawellness' },
-  music1: { url:'photo-1546708770-589dab7b22c7', credit:'Sebastian Ervi', user:'sebastianervi' },
-  music2: { url:'photo-1565035010268-a3816f98589a', credit:'Tijs van Leur', user:'tijsvl' },
-  music3: { url:'photo-1519660837772-a823cd69d885', credit:'Chad Kirchoff', user:'cakirchoff' },
-  dance1: { url:'photo-1504609813442-a8924e83f76e', credit:'Ardian Lumi', user:'ardianlumi' },
-  dance2: { url:'photo-1508642054-5e6cade8ff13', credit:'Ahmad Odeh', user:'aoddeh' },
-  dance3: { url:'photo-1545959570-a94084071b5d', credit:'Juan Camilo Nariño', user:'juancamilon' },
-  art1: { url:'photo-1573421706309-8e71afba54a3', credit:'Yannis H', user:'yannis_h' },
-  art2: { url:'photo-1599224597680-b3990582ece2', credit:'Andrian Valeanu', user:'andrianvaleanu' },
-  food1: { url:'photo-1552332386-f8dd00dc2f85', credit:'Spencer Davis', user:'spencerdavis' },
-  food2: { url:'photo-1624300629298-e9de39c13be5', credit:'Markus Winkler', user:'markuswinkler' },
-  hike1: { url:'photo-1548713466-70b0e7bb7cd2', credit:'Ashim DSilva', user:'randomlies' },
-  hike2: { url:'photo-1605661480059-884578ac8ec8', credit:'Timo Stern', user:'timon_k' },
-  hike3: { url:'photo-1623622863859-2931a6c3bc80', credit:'Fineas Gavre', user:'fineas' },
-  family1: { url:'photo-1551368732-1151c92ca810', credit:'Ashley Williams', user:'ash_williams' },
-  family2: { url:'photo-1595981685360-02d21ed6afde', credit:'Markus Spiske', user:'markusspiske' },
-  cowork1: { url:'photo-1519389950473-47ba0277781c', credit:'Marvin Meyer', user:'marvelous' },
-  community1: { url:'photo-1522008594266-d681be57a79b', credit:'Andrew Knechel', user:'andknecht' },
-  community2: { url:'photo-1573860838444-ae841678963d', credit:'Priscilla Du Preez', user:'priscilladupreez' },
+  // Oaxaca general / hero
+  oax_papel:     { src:'flickr', id:'54893100875_9c7bcbc001', credit:'Keith Mac Uidhir', flickr_user:'10909746@N05' },
+  oax_night:     { src:'flickr', id:'54897178535_8becdc8972', credit:'Keith Mac Uidhir', flickr_user:'10909746@N05' },
+  oax_sunnyclr:  { src:'flickr', id:'54892315215_15d05d1637', credit:'Keith Mac Uidhir', flickr_user:'10909746@N05' },
+  oax_stodom:    { src:'flickr', id:'55071618605_99707eab41', credit:'Don Cacheton', flickr_user:'204228832@N08' },
+  oax_stodom2:   { src:'flickr', id:'43713108940_6e19ae4a90', credit:'linkogecko', flickr_user:'127492972@N04' },
+  oax_colorst:   { src:'flickr', id:'55023826180_6b3dd01bcc', credit:'sparverius81', flickr_user:'8065544@N08' },
+  oax_colorst2:  { src:'flickr', id:'55023504176_0eb7568f0f', credit:'sparverius81', flickr_user:'8065544@N08' },
+  oax_mitla:     { src:'flickr', id:'55096562763_1df553c63f', credit:'Don Cacheton', flickr_user:'204228832@N08' },
+  oax_colonial:  { src:'flickr', id:'53480889123_88eb44015b', credit:'Voyages Lambert', flickr_user:'48068124@N06' },
+  oax_streetart: { src:'flickr', id:'54885954077_9a0d7e30b3', credit:'Keith Mac Uidhir', flickr_user:'10909746@N05' },
+
+  // Festival / Cultural (Oaxaca!)
+  fest_devil:    { src:'flickr', id:'55093282477_d0c7f9c330', credit:'Ilhuicamina', flickr_user:'52796712@N00' },
+  fest_bigeyes:  { src:'flickr', id:'55094370743_ac7d9ba5cd', credit:'Ilhuicamina', flickr_user:'52796712@N00' },
+  fest_calenda:  { src:'flickr', id:'55069733824_250dc9aa88', credit:'Ilhuicamina', flickr_user:'52796712@N00' },
+  fest_wedding:  { src:'flickr', id:'55091827222_c0a051fb53', credit:'Ilhuicamina', flickr_user:'52796712@N00' },
+  fest_alebrije: { src:'flickr', id:'55044572521_3dde9dc77d', credit:'andywoolf', flickr_user:'181847970@N06' },
+  fest_flowers:  { src:'flickr', id:'54886442641_5f97f33449', credit:'Keith Mac Uidhir', flickr_user:'10909746@N05' },
+  fest_masks:    { src:'flickr', id:'54564587505_a3a98d64c3', credit:'nickolosgomez', flickr_user:'105099636@N04' },
+  fest_guela:    { src:'flickr', id:'54751721370_c8ff6f3a7e', credit:'Odd American', flickr_user:'23586094@N00' },
+
+  // Food (Oaxaca!)
+  food_mole:     { src:'flickr', id:'53616800141_65be340ec0', credit:'knightbefore_99', flickr_user:'9817122@N05' },
+  food_tlayuda:  { src:'flickr', id:'55085012307_a2799e77ed', credit:'knightbefore_99', flickr_user:'9817122@N05' },
+  food_tlayuda2: { src:'flickr', id:'54964412898_9953fdacb8', credit:'-AX-', flickr_user:'8250978@N04' },
+  food_almendr:  { src:'flickr', id:'55023686523_14e552f1f9', credit:'sparverius81', flickr_user:'8065544@N08' },
+  food_mezcal:   { src:'flickr', id:'55079878691_b343a8a123', credit:'Ilhuicamina', flickr_user:'52796712@N00' },
+  food_choco:    { src:'flickr', id:'54878709467_64f45436f8', credit:'The Sloths', flickr_user:'12552537@N04' },
+  food_chiles:   { src:'flickr', id:'54130211345_9afb797bf6', credit:'Ilhuicamina', flickr_user:'52796712@N00' },
+  food_cooking:  { src:'flickr', id:'46040123392_15e2e1b557', credit:'GlobalGoebel', flickr_user:'49244654@N00' },
+
+  // Yoga / Wellness
+  yoga_outdoor:  { src:'flickr', id:'54649554309_436181de6f', credit:'alejandrovmf', flickr_user:'144495825@N06' },
+  yoga_sound:    { src:'flickr', id:'53578856210_519b72efc1', credit:'Massimiliano 73', flickr_user:'200147911@N05' },
+  yoga_cacao:    { src:'flickr', id:'54825137805_61c89e6708', credit:'australian ceremonial', flickr_user:'202598285@N08' },
+  yoga_temazcal: { src:'flickr', id:'51441336682_8999bfe51c', credit:'Ars Electronica', flickr_user:'36085842@N06' },
+  yoga1:         { src:'unsplash', id:'photo-1506126613408-eca07ce68773', credit:'Jared Rice', user:'jareddrice' },
+  yoga2:         { src:'unsplash', id:'photo-1528319725582-ddc096101511', credit:'Yayan Sopian', user:'yfrSOPIAN' },
+
+  // Music
+  music_jarocho: { src:'flickr', id:'55013899553_4228608d2e', credit:'danielaherreriasfoto', flickr_user:'15228325@N00' },
+  music_jarocho2:{ src:'flickr', id:'55013899298_2117fa883a', credit:'danielaherreriasfoto', flickr_user:'15228325@N00' },
+  music_marimba: { src:'flickr', id:'54709287582_1921714903', credit:'Mzuriana', flickr_user:'45074625@N00' },
+  music_marimba2:{ src:'flickr', id:'54156039301_74d220cc29', credit:'Teyacapan', flickr_user:'60047372@N00' },
+  music_acoustic:{ src:'flickr', id:'55096091080_b41c552154', credit:'Grudnick', flickr_user:'9716802@N02' },
+  music_jazz:    { src:'unsplash', id:'photo-1546872006-43d8f499a0e1', credit:'Jens Thekkeveettil', user:'jensthekkeveettil' },
+
+  // Dance
+  dance_salsa:   { src:'flickr', id:'55079597898_ef3f4f5edb', credit:'TakenByExclusiveEvents', flickr_user:'41827639@N06' },
+  dance_folk:    { src:'flickr', id:'54872718554_182c9152b7', credit:'josejuanzavala', flickr_user:'126469407@N07' },
+  dance_preh:    { src:'flickr', id:'54655382490_f850e0e4ce', credit:'josejuanzavala', flickr_user:'126469407@N07' },
+  dance_band:    { src:'flickr', id:'55035557567_8033d72165', credit:'I saw_that', flickr_user:'88196436@N04' },
+  dance1:        { src:'unsplash', id:'photo-1535525153412-5a42439a210d', credit:'Preillumination SeTh', user:'preillumination' },
+
+  // Community
+  comm_cafe:     { src:'flickr', id:'54969045484_b4fe99278d', credit:'Alex Saurel', flickr_user:'59870440@N08' },
+  comm_cafe2:    { src:'flickr', id:'54641455213_c853938801', credit:'nenadstojkovicart', flickr_user:'201879762@N03' },
+  comm_openmic:  { src:'flickr', id:'37612038104_a96620a22c', credit:'photographer695', flickr_user:'41087279@N00' },
+  community1:    { src:'unsplash', id:'photo-1522008594266-d681be57a79b', credit:'Andrew Knechel', user:'andknecht' },
+  community2:    { src:'unsplash', id:'photo-1573860838444-ae841678963d', credit:'Priscilla Du Preez', user:'priscilladupreez' },
+
+  // Hiking (Oaxaca!)
+  hike_hierve:   { src:'flickr', id:'55058894814_82e84b7d5e', credit:'www.dokumentaristen.dk', flickr_user:'70584754@N00' },
+  hike_hierve2:  { src:'flickr', id:'55058999985_2a7d34544a', credit:'www.dokumentaristen.dk', flickr_user:'70584754@N00' },
+  hike_monte:    { src:'flickr', id:'55078583822_54782251c1', credit:'michael.veltman', flickr_user:'73331227@N05' },
+  hike_monte2:   { src:'flickr', id:'55070361757_2d0d91b024', credit:'Don Cacheton', flickr_user:'204228832@N08' },
+  hike_forest:   { src:'flickr', id:'55033950311_7db1db16f0', credit:'sparverius81', flickr_user:'8065544@N08' },
+  hike_forest2:  { src:'flickr', id:'55033047242_61e8068542', credit:'sparverius81', flickr_user:'8065544@N08' },
+
+  // Arts (Oaxaca!)
+  art_huipil:    { src:'flickr', id:'55092503521_554e3b9ea9', credit:'Teyacapan', flickr_user:'60047372@N00' },
+  art_huipil2:   { src:'flickr', id:'55087381801_90800a97cc', credit:'Teyacapan', flickr_user:'60047372@N00' },
+  art_barro:     { src:'flickr', id:'54261875230_a1f0faaae7', credit:'Thomas Roland', flickr_user:'30738927@N06' },
+  art_barro2:    { src:'flickr', id:'54261689994_dfa3587666', credit:'Thomas Roland', flickr_user:'30738927@N06' },
+  art_mural:     { src:'flickr', id:'54886698223_aa93dec5ab', credit:'Keith Mac Uidhir', flickr_user:'10909746@N05' },
+  art_zapotec:   { src:'flickr', id:'55100211820_fac2d2a37d', credit:'Teyacapan', flickr_user:'60047372@N00' },
+
+  // Coworking
+  cowork1:       { src:'unsplash', id:'photo-1501163109389-abf37ca1276a', credit:'Shridhar Gupta', user:'shridhar' },
+  cowork2:       { src:'unsplash', id:'photo-1548610325-a4e09766d5b6', credit:'Mimi Thian', user:'mimithian' },
+  cowork_laptop: { src:'flickr', id:'54961333095_4833a9dd91', credit:'dejankrsmanovic', flickr_user:'155403590@N07' },
+
+  // Family (Oaxaca!)
+  fam_3gen:      { src:'flickr', id:'54914902839_d5eea7e3b2', credit:'Ilhuicamina', flickr_user:'52796712@N00' },
+  fam_oaxkids:   { src:'flickr', id:'54863232586_18662a057b', credit:'N. Delbrück', flickr_user:'87714242@N06' },
+  fam_oaxkids2:  { src:'flickr', id:'54785036290_aff14f5998', credit:'N. Delbrück', flickr_user:'87714242@N06' },
+  fam_park:      { src:'flickr', id:'55034429335_65172061b4', credit:'N. Delbrück', flickr_user:'87714242@N06' },
 };
 
 function imgUrl(key, w=400, h=280) {
   const i = IMG[key];
   if (!i) return '';
-  return `https://images.unsplash.com/${i.url}?w=${w}&h=${h}&fit=crop&auto=format&q=80`;
+  if (i.src === 'flickr') {
+    // Flickr: choose size suffix based on requested width
+    const suffix = w > 800 ? '_b' : w > 640 ? '_c' : w > 240 ? '_z' : '_m';
+    return `https://live.staticflickr.com/65535/${i.id}${suffix}.jpg`;
+  }
+  // Unsplash CDN with resize params
+  return `https://images.unsplash.com/${i.id}?w=${w}&h=${h}&fit=crop&auto=format&q=80`;
 }
 function imgCredit(key) {
   const i = IMG[key];
   if (!i) return '';
+  if (i.src === 'flickr') {
+    return `<a href="https://www.flickr.com/photos/${i.flickr_user}/" target="_blank">${i.credit}</a>`;
+  }
   return `<a href="https://unsplash.com/@${i.user}?utm_source=oaxaca_calendar&utm_medium=referral" target="_blank">${i.credit}</a>`;
 }
 
 // ===== CATEGORY IMAGE POOLS =====
 const CAT_IMAGES = {
-  community: ['community1','community2','oax_street','oax_color2'],
-  music: ['music1','music2','music3','oax_color4'],
-  yoga: ['yoga1','yoga2','oax_church'],
-  festival: ['oax_streamers','oax_altar','oax_color1','oax_color3'],
-  arts: ['oax_textiles','art1','art2','oax_market'],
-  food: ['oax_mezcal','food1','food2','oax_color2'],
-  hiking: ['hike1','hike2','hike3','oax_montalban'],
-  family: ['family1','family2','oax_color1'],
-  dance: ['dance1','dance2','dance3'],
-  cowork: ['cowork1','oax_street','community1'],
+  community: ['community1','community2','comm_cafe','comm_cafe2','comm_openmic'],
+  music: ['music_jarocho','music_marimba','music_acoustic','music_jazz','music_jarocho2','music_marimba2'],
+  yoga: ['yoga1','yoga2','yoga_outdoor','yoga_sound','yoga_cacao','yoga_temazcal'],
+  festival: ['fest_devil','fest_bigeyes','fest_calenda','fest_alebrije','fest_flowers','fest_masks','fest_guela','fest_wedding'],
+  arts: ['art_huipil','art_barro','art_mural','art_zapotec','art_huipil2','art_barro2'],
+  food: ['food_mole','food_tlayuda','food_mezcal','food_choco','food_almendr','food_chiles','food_cooking','food_tlayuda2'],
+  hiking: ['hike_hierve','hike_monte','hike_forest','hike_hierve2','hike_monte2','hike_forest2'],
+  family: ['fam_3gen','fam_oaxkids','fam_park','fam_oaxkids2'],
+  dance: ['dance_salsa','dance_folk','dance_preh','dance_band','dance1'],
+  cowork: ['cowork1','cowork2','cowork_laptop'],
 };
 
 let imgCounter = {};
@@ -455,49 +518,49 @@ const CATEGORIES = {
 // ===== EVENT DATA =====
 // img: specific image key override (optional)
 const EVENTS = [
-  { date:'2026-02-13', title:'10th Muestra de Carnavales — Opening Parade', cat:'festival', time:'17:00', duration:3, venue:'Cruz de Piedra → Plaza de la Danza', desc:'400–500 participants from 14 communities across 8 Oaxacan regions', img:'oax_streamers' },
-  { date:'2026-02-13', title:'Talisman Carnaval Art Workshop begins', cat:'arts', time:'10:00', endDate:'2026-02-22', venue:'Talismán Oaxaca, Santa Cruz Amilpas', desc:'7-day watercolor, mixed media & mask workshop. LAST CALL.', img:'oax_textiles' },
+  { date:'2026-02-13', title:'10th Muestra de Carnavales — Opening Parade', cat:'festival', time:'17:00', duration:3, venue:'Cruz de Piedra → Plaza de la Danza', desc:'400–500 participants from 14 communities across 8 Oaxacan regions', img:'fest_devil' },
+  { date:'2026-02-13', title:'Talisman Carnaval Art Workshop begins', cat:'arts', time:'10:00', endDate:'2026-02-22', venue:'Talismán Oaxaca, Santa Cruz Amilpas', desc:'7-day watercolor, mixed media & mask workshop. LAST CALL.', img:'art_huipil' },
   { date:'2026-02-13', title:'Dream Yoga Retreat — Lama Tony Karam', cat:'yoga', time:'09:00', endDate:'2026-02-15', venue:'San Agustín Etla', desc:'Casa Tíbet México. SOLD OUT — waitlist available.', img:'yoga1' },
-  { date:'2026-02-14', title:'Carnaval Main City Parade', cat:'festival', time:'17:00', duration:3, venue:'Oaxaca Centro', desc:'The main carnival parade through the historic center.', img:'oax_color1' },
-  { date:'2026-02-17', title:'Fat Tuesday — Village Celebrations', cat:'festival', time:'10:00', duration:8, venue:'Zaachila & San Martín Tilcajete', desc:'Zaachila: Los Zancudos stilt dancers. Tilcajete: Danza de Los Diablitos with elaborate masks.', img:'oax_altar' },
+  { date:'2026-02-14', title:'Carnaval Main City Parade', cat:'festival', time:'17:00', duration:3, venue:'Oaxaca Centro', desc:'The main carnival parade through the historic center.', img:'oax_colorst' },
+  { date:'2026-02-17', title:'Fat Tuesday — Village Celebrations', cat:'festival', time:'10:00', duration:8, venue:'Zaachila & San Martín Tilcajete', desc:'Zaachila: Los Zancudos stilt dancers. Tilcajete: Danza de Los Diablitos with elaborate masks.', img:'fest_flowers' },
   { date:'2026-02-17', title:'OLL Terrace Talk: Dispatches from U.S. Labor Movement', cat:'community', time:'16:30', duration:1.5, venue:'Oaxaca Lending Library', desc:'Lecture series. Tickets at oaxlibrary.org.', img:'community2' },
-  { date:'2026-02-18', title:'Hike: San Miguel Chicahua → Apoala Gorge', cat:'hiking', time:'08:00', duration:7, venue:'Departs Calle de Los Libres 710', desc:'Mod-Difficult. ~400 pesos for OLL members.', img:'hike2' },
-  { date:'2026-02-23', title:'Hike: Zautla EcoPark', cat:'hiking', time:'08:00', duration:6, venue:'Departs Calle de Los Libres 710', desc:'Moderate difficulty. OLL Hoofing It program.', img:'hike3' },
-  { date:'2026-02-24', title:'Hike: Guacamaya – Cascada y Mirador', cat:'hiking', time:'08:00', duration:6, venue:'Departs Calle de Los Libres 710', desc:'Easy–Difficult options.', img:'hike1' },
-  { date:'2026-02-24', title:'Lenten Tuesday #1 — Xoxocotlán', cat:'festival', time:'18:00', duration:3, venue:'Santa Cruz Xoxocotlán', desc:'Weekly Lenten celebrations begin. Food vendors, family-friendly.', img:'oax_color3' },
-  { date:'2026-02-25', title:'2nd Oaxaca Food & Wine Festival opens', cat:'food', time:'12:00', endDate:'2026-03-01', venue:'Various Centro venues', desc:'8 events with top chefs. VIP $909 USD. 18+ only.', img:'oax_mezcal' },
+  { date:'2026-02-18', title:'Hike: San Miguel Chicahua → Apoala Gorge', cat:'hiking', time:'08:00', duration:7, venue:'Departs Calle de Los Libres 710', desc:'Mod-Difficult. ~400 pesos for OLL members.', img:'hike_monte' },
+  { date:'2026-02-23', title:'Hike: Zautla EcoPark', cat:'hiking', time:'08:00', duration:6, venue:'Departs Calle de Los Libres 710', desc:'Moderate difficulty. OLL Hoofing It program.', img:'hike_forest' },
+  { date:'2026-02-24', title:'Hike: Guacamaya – Cascada y Mirador', cat:'hiking', time:'08:00', duration:6, venue:'Departs Calle de Los Libres 710', desc:'Easy–Difficult options.', img:'hike_hierve' },
+  { date:'2026-02-24', title:'Lenten Tuesday #1 — Xoxocotlán', cat:'festival', time:'18:00', duration:3, venue:'Santa Cruz Xoxocotlán', desc:'Weekly Lenten celebrations begin. Food vendors, family-friendly.', img:'oax_colonial' },
+  { date:'2026-02-25', title:'2nd Oaxaca Food & Wine Festival opens', cat:'food', time:'12:00', endDate:'2026-03-01', venue:'Various Centro venues', desc:'8 events with top chefs. VIP $909 USD. 18+ only.', img:'food_mezcal' },
   { date:'2026-02-26', title:'Mezcal Tasting + Lunch — Food & Wine Fest', cat:'food', time:'13:00', duration:3, venue:'El Tendajón', desc:'Part of the Oaxaca Food & Wine Festival.' },
-  { date:'2026-02-27', title:'Caloncho in Concert', cat:'music', time:'20:00', duration:2.5, venue:'Auditorio de la URSE', desc:'Indie/Latin concert.', img:'music2' },
+  { date:'2026-02-27', title:'Caloncho in Concert', cat:'music', time:'20:00', duration:2.5, venue:'Auditorio de la URSE', desc:'Indie/Latin concert.', img:'music_marimba' },
   { date:'2026-02-27', title:'Hike: Llano Grande (Waterfall)', cat:'hiking', time:'08:00', duration:6, venue:'Departs Calle de Los Libres 710', desc:'Moderate difficulty.' },
-  { date:'2026-02-27', title:'Talisman "Paint, Stitch, Collage" Retreat begins', cat:'arts', time:'10:00', endDate:'2026-03-08', venue:'Talismán Oaxaca', desc:'With Lisa Pressman & Susan Stover. SOLD OUT — waitlist.', img:'art1' },
-  { date:'2026-02-28', title:'Panteón Rococó in Concert', cat:'music', time:'20:00', duration:3, venue:'Auditorio Guelaguetza', desc:'Alt-Latin Rock.', img:'music1' },
-  { date:'2026-02-28', title:'Mole & Mezcal Calenda — Food & Wine Fest', cat:'food', time:'17:00', duration:3, venue:'Oaxaca Centro streets', desc:'Street parade with mole and mezcal.', img:'oax_color2' },
+  { date:'2026-02-27', title:'Talisman "Paint, Stitch, Collage" Retreat begins', cat:'arts', time:'10:00', endDate:'2026-03-08', venue:'Talismán Oaxaca', desc:'With Lisa Pressman & Susan Stover. SOLD OUT — waitlist.', img:'art_barro' },
+  { date:'2026-02-28', title:'Panteón Rococó in Concert', cat:'music', time:'20:00', duration:3, venue:'Auditorio Guelaguetza', desc:'Alt-Latin Rock.', img:'music_jarocho' },
+  { date:'2026-02-28', title:'Mole & Mezcal Calenda — Food & Wine Fest', cat:'food', time:'17:00', duration:3, venue:'Oaxaca Centro streets', desc:'Street parade with mole and mezcal.', img:'oax_colorst2' },
   { date:'2026-02-28', title:'"In Search of Genuine Happiness" Seminar begins', cat:'yoga', time:'10:00', endDate:'2026-03-01', venue:'Casa Tíbet CDMX (online available)', desc:'Gateway seminar for regular Buddhist classes starting March.', img:'yoga2' },
   { date:'2026-02-28', title:'Co404: La Cosecha Organic Market outing', cat:'cowork', time:'10:00', duration:3, venue:'La Cosecha Market', desc:'Co404 community activity.' },
   { date:'2026-03-01', title:'Brunch Guelaguetza — Food & Wine Fest finale', cat:'food', time:'11:00', duration:3, venue:'Origen Restaurant', desc:'Closing event of the Oaxaca Food & Wine Festival.' },
-  { date:'2026-03-03', title:'Nargaroth in Concert', cat:'music', time:'21:00', duration:2.5, venue:'Jijos del Maíz', desc:'Metal.', img:'music3' },
+  { date:'2026-03-03', title:'Nargaroth in Concert', cat:'music', time:'21:00', duration:2.5, venue:'Jijos del Maíz', desc:'Metal.', img:'music_acoustic' },
   { date:'2026-03-03', title:'Lenten Tuesday: Regional Food & Marimba', cat:'festival', time:'18:00', duration:3, venue:'Santa Cruz Xoxocotlán', desc:'Themed Lenten Tuesday with regional food and marimba.' },
   { date:'2026-03-07', title:'Elefante in Concert', cat:'music', time:'20:00', duration:2.5, venue:'Auditorio Guelaguetza', desc:'Rock/Pop.' },
   { date:'2026-03-09', title:'Hike: Guacamaya – Cascada y Mirador', cat:'hiking', time:'08:00', duration:6, venue:'Departs Calle de Los Libres 710', desc:'Easy–Difficult options.' },
-  { date:'2026-03-10', title:'Lenten Tuesday: Traditional Dance', cat:'festival', time:'18:00', duration:3, venue:'Santa Cruz Xoxocotlán', desc:'Featuring traditional dance. Family-friendly.', img:'oax_streamers' },
+  { date:'2026-03-10', title:'Lenten Tuesday: Traditional Dance', cat:'festival', time:'18:00', duration:3, venue:'Santa Cruz Xoxocotlán', desc:'Featuring traditional dance. Family-friendly.', img:'fest_devil' },
   { date:'2026-03-11', title:'Hike: Llano de las Flores (wild horses, caves)', cat:'hiking', time:'08:00', duration:7, venue:'Departs Calle de Los Libres 710', desc:'Difficult. Wild horses and caves.' },
   { date:'2026-03-11', title:'Oaxaca Salsa & Bachata Paramount Cup opens', cat:'dance', time:'10:00', endDate:'2026-03-15', venue:'Hotel Misión Oaxaca', desc:'5-day festival: workshops, competitions, social dances, pool parties.', img:'dance1' },
   { date:'2026-03-13', title:'Ed Maverick in Concert', cat:'music', time:'20:00', duration:2, venue:'Teatro Macedonio Alcalá', desc:'Indie/Folk.' },
-  { date:'2026-03-13', title:'Día de la Samaritana', cat:'festival', time:'10:00', duration:8, venue:'Throughout Centro Histórico', desc:'Free aguas frescas distributed citywide. Wonderful with a toddler.', img:'oax_color1' },
+  { date:'2026-03-13', title:'Día de la Samaritana', cat:'festival', time:'10:00', duration:8, venue:'Throughout Centro Histórico', desc:'Free aguas frescas distributed citywide. Wonderful with a toddler.', img:'oax_colorst' },
   { date:'2026-03-13', title:'Hike: Suchilquiltongo', cat:'hiking', time:'07:00', duration:5, venue:'Departs Calle de Los Libres 710', desc:'Easy–Moderate.' },
   { date:'2026-03-14', title:'Hike: San Luis Beltran "Pink Bus Hike"', cat:'hiking', time:'08:00', duration:6, venue:'Departs Calle de Los Libres 710', desc:'Moderate.' },
   { date:'2026-03-18', title:'Hike: La Cumbre – Cabeza de Vaca', cat:'hiking', time:'08:00', duration:7, venue:'Departs Calle de Los Libres 710', desc:'Moderate–Difficult.' },
   { date:'2026-03-20', title:'"The Four Immeasurables" Retreat', cat:'yoga', time:'09:00', endDate:'2026-03-22', venue:'Casa Tíbet México, Oaxaca', desc:'Major Buddhist retreat. Register at casatibet.org.mx.' },
-  { date:'2026-03-20', title:'Talisman "Made with Paper" Workshop begins', cat:'arts', time:'10:00', endDate:'2026-03-29', venue:'Talismán Oaxaca, Santa Cruz Amilpas', desc:'Barro papel mask making + mixed media collage. 7 days.', img:'oax_market' },
+  { date:'2026-03-20', title:'Talisman "Made with Paper" Workshop begins', cat:'arts', time:'10:00', endDate:'2026-03-29', venue:'Talismán Oaxaca, Santa Cruz Amilpas', desc:'Barro papel mask making + mixed media collage. 7 days.', img:'food_chiles' },
   { date:'2026-03-21', title:'Flans in Concert', cat:'music', time:'20:00', duration:2.5, venue:'Auditorio Guelaguetza', desc:'Pop en Español.' },
   { date:'2026-03-24', title:'Lenten Tuesday: Music Night', cat:'festival', time:'18:00', duration:3, venue:'Santa Cruz Xoxocotlán', desc:'Music performances.' },
   { date:'2026-03-25', title:'Hike: El Carrizal (forest, waterfall)', cat:'hiking', time:'08:00', duration:6, venue:'Departs Calle de Los Libres 710', desc:'Moderate.' },
   { date:'2026-03-26', title:'Hridaya Bilingual Silent Meditation Retreat', cat:'yoga', time:'09:00', endDate:'2026-03-28', venue:'Hridaya Yoga, Mazunte', desc:'3-day bilingual silent meditation on the Oaxacan coast.' },
   { date:'2026-03-27', title:'Mick Jenkins in Concert', cat:'music', time:'21:00', duration:2, venue:'Pannela Callejón', desc:'Hip-Hop.' },
-  { date:'2026-03-27', title:'Viernes de Dolores — Altar Displays', cat:'festival', time:'10:00', duration:10, venue:'Churches & homes, especially Jalatlaco', desc:'Beautiful altar displays. Particularly stunning in Jalatlaco.', img:'oax_altar' },
+  { date:'2026-03-27', title:'Viernes de Dolores — Altar Displays', cat:'festival', time:'10:00', duration:10, venue:'Churches & homes, especially Jalatlaco', desc:'Beautiful altar displays. Particularly stunning in Jalatlaco.', img:'fest_flowers' },
   { date:'2026-03-28', title:'José Madero in Concert', cat:'music', time:'20:00', duration:2.5, venue:'Auditorio Guelaguetza', desc:'Rock/Pop.' },
   { date:'2026-03-28', title:'Co404: Taco Night', cat:'cowork', time:'19:00', duration:2, venue:'Co404, Benito Juárez 202', desc:'Community social event.' },
-  { date:'2026-03-29', title:'Palm Sunday — Feria del Tejate', cat:'festival', time:'10:00', duration:10, venue:'San Andrés Huayápam + churches', desc:'Palm weaving, Feria del Tejate: traditional drink, tamales, nieves.', img:'oax_color3' },
+  { date:'2026-03-29', title:'Palm Sunday — Feria del Tejate', cat:'festival', time:'10:00', duration:10, venue:'San Andrés Huayápam + churches', desc:'Palm weaving, Feria del Tejate: traditional drink, tamales, nieves.', img:'oax_colonial' },
 ];
 
 const RECURRING = [
@@ -506,29 +569,29 @@ const RECURRING = [
   { title:'OLL Zoom Intercambio', cat:'community', when:'Sundays 4–6PM', place:'Zoom' },
   { title:'OLL Stitches (Knitting/Crochet)', cat:'community', when:'Tuesdays 10AM–1PM', place:'OLL (20-peso donation)' },
   { title:'OLL Terrace Talks', cat:'community', when:'Most evenings 4:30–6PM', place:'OLL · oaxlibrary.org' },
-  { title:'OLL Niños Adelante (Kids)', cat:'family', when:'Saturdays 11AM–12:30PM', place:'OLL · Ages 5–10, free', img:'family1' },
+  { title:'OLL Niños Adelante (Kids)', cat:'family', when:'Saturdays 11AM–12:30PM', place:'OLL · Ages 5–10, free', img:'fam_3gen' },
   { title:'Philosophy Meetups Oaxaca', cat:'community', when:'Weekly (check WhatsApp)', place:'Café del Elfo, Casa de Barro', img:'community2' },
   { title:"Dary's Language Exchange", cat:'community', when:'Weekly (check IG @mezcal_speaks)', place:'Rotating · ~100 attendees' },
   { title:'Wombat Language Exchange + Karaoke', cat:'community', when:'Thursdays 6–9PM', place:'Wombat Oaxaca' },
   { title:'Tarde de Lenguas (Multi-language)', cat:'community', when:'Saturday afternoons', place:'Rotating cafés' },
   { title:'Maka Hostel Happy Hour', cat:'community', when:'Daily 6–7PM', place:'Maka Hostel, Arteaga 310' },
-  { title:'La Nueva Babel — Live Music', cat:'music', when:'Nightly ~9–10PM', place:'Porfirio Díaz 224 · Free', img:'music1' },
-  { title:'Zapotec Mixology — León Nafate / Band', cat:'music', when:'Fri & Sat evenings', place:'Tinoco y Palacios 604', img:'music2' },
+  { title:'La Nueva Babel — Live Music', cat:'music', when:'Nightly ~9–10PM', place:'Porfirio Díaz 224 · Free', img:'music_jarocho' },
+  { title:'Zapotec Mixology — León Nafate / Band', cat:'music', when:'Fri & Sat evenings', place:'Tinoco y Palacios 604', img:'music_marimba' },
   { title:'Txalaparta — Salsa Night', cat:'dance', when:'Thursdays 10:30PM', place:'Matamoros 208', img:'dance1' },
   { title:'Txalaparta — Live Bands/DJs', cat:'music', when:'Fridays & Saturdays', place:'Matamoros 208' },
-  { title:'República Cozana — Rooftop Shows', cat:'music', when:'Thu–Sat', place:'Murguía 102', img:'music3' },
+  { title:'República Cozana — Rooftop Shows', cat:'music', when:'Thu–Sat', place:'Murguía 102', img:'music_acoustic' },
   { title:'La Jícara — Live Music & Readings', cat:'music', when:'Evenings (check IG)', place:'Porfirio Díaz 1105' },
   { title:'Casa Tíbet — Free Meditation', cat:'yoga', when:'Wed 7–8PM, Sat 12–1PM', place:'San Martín 100-A', img:'yoga1' },
   { title:'MaKa Yoga — Vinyasa Flow', cat:'yoga', when:'Tue & Thu 7:30–8:45AM', place:'Rufino Tamayo 917 · 80 MXN' },
   { title:'Prana Yoga — Bilingual Classes', cat:'yoga', when:'Daily (check @prana_yoga_oax)', place:'Callejón del Carmen 104' },
   { title:'Casa del Angel — Yoga & Meditation', cat:'yoga', when:'Daily (casadelangel.com.mx)', place:'Blvd la Paz 105, San Felipe', img:'yoga2' },
   { title:'Oaxaca Zen — Meditation & Conversation', cat:'yoga', when:'Thursdays 12–1:30PM', place:'Email queave@gmail.com' },
-  { title:'Ecstatic Dance Oaxaca', cat:'dance', when:'Twice monthly (check IG)', place:'Espacio Morillo · ~150 pesos', img:'dance2' },
-  { title:'Colectivo Aguanilé — Salsa/Bachata/Cumbia', cat:'dance', when:'Check social media', place:'Centro · Donation-based', img:'dance3' },
+  { title:'Ecstatic Dance Oaxaca', cat:'dance', when:'Twice monthly (check IG)', place:'Espacio Morillo · ~150 pesos', img:'dance_folk' },
+  { title:'Colectivo Aguanilé — Salsa/Bachata/Cumbia', cat:'dance', when:'Check social media', place:'Centro · Donation-based', img:'dance_preh' },
   { title:'Zapotec Bar — Bachata & Salsa', cat:'dance', when:'Evenings (8:30 & 9:30)', place:'@zapotec_oaxaca · Donation' },
-  { title:'Parque Bicentenario — Carousel & Train', cat:'family', when:'Daily · Rides ~1:30/5:30PM', place:'Blvd. Vasconcelos 617 · Free', img:'family2' },
+  { title:'Parque Bicentenario — Carousel & Train', cat:'family', when:'Daily · Rides ~1:30/5:30PM', place:'Blvd. Vasconcelos 617 · Free', img:'fam_oaxkids' },
   { title:'Bicentenario — Arts & Crafts', cat:'family', when:'Tue & Thu 2–3PM', place:'Parque Bicentenario · Free' },
-  { title:'CaSa Organic Market', cat:'food', when:'Sundays', place:'San Agustín Etla', img:'food1' },
+  { title:'CaSa Organic Market', cat:'food', when:'Sundays', place:'San Agustín Etla', img:'food_mole' },
   { title:'Co404 — Family Dinner & Activities', cat:'cowork', when:'Wednesdays + rotating', place:'Benito Juárez 202', img:'cowork1' },
   { title:'Convivio — Coworking & Events', cat:'cowork', when:'Daily cowork · Events Wed–Sun', place:'407 Murguía · ~$100 USD/mo' },
   { title:'Temazcal Oaxaca (Nathan Dawson)', cat:'yoga', when:'Mon–Sat by appointment', place:'Santa María Coyotepec · ~1000 MXN' },
@@ -646,7 +709,7 @@ function renderList() {
             <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/></svg>
             Add to Google Cal
           </a>
-          <span class="unsplash-credit">📷 ${imgCredit(imgKey)} / Unsplash</span>
+          <span class="photo-credit">📷 ${imgCredit(imgKey)} / Unsplash</span>
         </div>
       </div>`;
     lastGroup.appendChild(card);
