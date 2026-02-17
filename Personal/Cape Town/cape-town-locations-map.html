@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Muizenberg Guide — All Locations</title>
+<title>Cape Town Guide — All Locations</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -291,8 +291,8 @@ main {
 <body>
 
 <header>
-  <h1>Muizenberg Location Guide</h1>
-  <p class="sub">Tap any venue to open in Google Maps</p>
+  <h1>Cape Town Location Guide</h1>
+  <p class="sub">All neighborhoods · Tap any venue to open in Google Maps</p>
   <div class="search-row">
     <input type="text" id="search" placeholder="Search venues, areas, keywords…">
     <div class="count-badge"><span id="count">0</span>&thinsp;places</div>
@@ -312,40 +312,87 @@ main {
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 4l-8 8h5v8h6v-8h5L12 4z" fill="white"/></svg>
 </button>
 
+
 <script>
 const pinSvg = `<svg width="14" height="14" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="#1B6B8A"/></svg>`;
 const arrowSvg = `<svg width="14" height="14" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" stroke="#1B6B8A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>`;
 
 const DATA = [
   {cat:"Yoga",icon:"🧘",venues:[
+    // FALSE BAY
     {n:"Ashtanga Yoga School (AYS)",area:"Noordhoek",d:"Traditional Mysore-style. Community-oriented, healing-focused",time:"Morning"},
     {n:"Ashtanga Yoga Cape Town (AYCT)",area:"Vredehoek",d:"Mysore Mon–Thu 6–8am. Teacher trained with Sharath Jois. 23 Derry St",time:"Morning"},
     {n:"Ashtanga Yoga Centre",area:"Gardens, Cape Town",d:"Daily Mysore mornings. Authorized Level 2 teacher. 31 Wesley St",time:"Morning"},
     {n:"Johann Kotze Music & Yoga",area:"Muizenberg",d:"Hatha Vinyasa, sea-view studio. 24 Beach Rd. R60 drop-in",time:"Morning"},
     {n:"Rise Beach Yoga",area:"Muizenberg Beach",d:"Sunrise Vinyasa on the sand",time:"Morning"},
     {n:"Soul Space Studio",area:"Kommetjie",d:"Infrared Power Yoga, Vinyasa, Yin, Kids Yoga. Sacred Sundays",time:"Morning"},
-    {n:"YogaWithin",area:"Noordhoek",d:"Philosophy-centered Vinyasa at Noordhoek Garden Emporium",time:"Morning"},
-    {n:"Noordhoek Yoga Studio",area:"Noordhoek",d:"Iyengar Yoga and rope yoga. Also Qigong. 19 Sea Cottage Dr",time:"Daytime"},
+    {n:"YogaWithin",area:"Noordhoek Garden Emporium",d:"Philosophy-centered Vinyasa/Blissology. Bamboo floors, glass walls. Retreats",time:"Morning"},
+    {n:"Noordhoek Yoga Studio",area:"19 Sea Cottage Dr, Noordhoek",d:"Iyengar Yoga, rope yoga, Qigong. Certified since 2011",time:"Daytime"},
     {n:"Ayama Yoga",area:"Kalk Bay",d:"Private Iyengar yoga. Pay-what-you-can option",time:"Flexible"},
+    {n:"Noordhoek Yoga Collective",area:"9A Noordhoek Main Rd",d:"Open-level Vinyasa Wed 8–9am. R150/class",time:"Morning"},
+    // SEA POINT / GREEN POINT
+    {n:"Hot Dog Yoga",area:"202 Main Rd, Sea Point",d:"Heated + standard rooms. Vinyasa, Iyengar, Yin, Kids, Pregnancy",time:"Various"},
+    {n:"The Yoga Sanctuary",area:"Sea Point",d:"Alignment-based Hatha and Vinyasa. Plant-filled studio",time:"Various"},
+    {n:"Yoga(Space)",area:"Sea Point",d:"Brand new studio (opened May 2025)",time:"Various"},
+    {n:"One Flow",area:"Sea Point",d:"Yoga + Journey Sauna (red-light therapy, curated music)",time:"Various"},
+    {n:"CoreFit",area:"601 The Regent, 19 Regent Rd, Sea Point",d:"Yoga + Pilates",time:"Various"},
+    // GARDENS / CBD
+    {n:"The Shala",area:"117 Hatfield St, Gardens",d:"Cape Town's most beloved studio. Aerial yoga, teacher training. Under R200/class",time:"Various"},
+    {n:"Shangrila Yoga",area:"6 Park Rd, Gardens",d:"Kundalini, Ashtanga, Vinyasa. Strong breathwork focus",time:"Various"},
+    {n:"Unraveled Yoga",area:"107 Bree St, CBD",d:"Graffiti-covered walls. Vinyasa with beats",time:"Various"},
+    {n:"The Om Revolution",area:"Corner Buitenkant & Roeland St",d:"Outdoor group yoga. R50/class",time:"Morning",free:"R50"},
+    // OBSERVATORY / WOODSTOCK
+    {n:"Ananda Sanctuary",area:"Woodstock",d:"Yoga, meditation, cacao ceremonies, sound healing, breathwork. Victorian building",time:"Various"},
+    {n:"Holding Space",area:"196 Victoria Rd, Woodstock",d:"Cape Town's first Black-owned yoga studio. Affordable, inclusive. Tue–Sat",time:"Various"},
+    {n:"Yoyoga",area:"2 Fir St, Black River Park, Observatory",d:"Ashtanga, Yin, Restorative, Vinyasa. From 5:30am",time:"Morning"},
+    // CONSTANTIA / TOKAI
+    {n:"YogaSpirit",area:"Constantia Village",d:"Heated + non-heated. Moon Room. Spirit Café next door",time:"Various"},
+    {n:"Tokai Yoga Studio",area:"Tokai",d:"Operating since 2003. Mon–Thu classes. Community WhatsApp",time:"Various"},
+    {n:"The Source Yoga & Pilates",area:"Constantia",d:"Beginners focus. Teacher training available",time:"Various"},
+    // CLAREMONT / NEWLANDS
+    {n:"House of Yoga",area:"Lynfrae, Claremont",d:"Hatha, Iyengar, Vinyasa, Scaravelli, Ashtanga, Yin, Restorative. Small classes",time:"Various"},
+    {n:"Yogaway",area:"Newlands Village",d:"Yoga-Pilates fusion at foot of Table Mountain",time:"Various"},
+    {n:"Body & More",area:"10 Hemlock St, Newlands",d:"Heated yoga, café, plunge pool on-site",time:"Various"},
+    // HOUT BAY
+    {n:"The Yoga Collective",area:"Empire Ave, Hout Bay",d:"Heated/non-heated Vinyasa, Yin, Pilates, Reformer. Mountain views",time:"Various"},
+    {n:"Wellness Connection Yoga Academy",area:"1 Boskykloof Rd, Hout Bay",d:"Two wood-framed studios in indigenous forest. Teacher training + scholarships",time:"Various"},
+    // CAMPS BAY
+    {n:"Adi Shakti Yoga Centre",area:"1 Shanklin Crescent, Camps Bay",d:"Kundalini, Hatha, Pre/Post-Natal, Mom & Baby, Yoga Nidra. Rooftop between palms",time:"Various"},
+    // LIGHT HOUSE (CBD)
     {n:"Light House Holistic",area:"50 Bree St, Cape Town CBD",d:"Yoga, breathwork, sound, ecstatic dance, cacao ceremonies",time:"Various"},
   ]},
+
   {cat:"Meditation & Kirtan",icon:"🕉️",venues:[
     {n:"Kagyu Samye Dzong",area:"Kenilworth, Cape Town",d:"Tibetan Buddhist (Karma Kagyu). Meditation Tue 7pm. R60/class",time:"Evening"},
-    {n:"ISKCON Cape Town",area:"Rondebosch, Cape Town",d:"Hare Krishna. Daily kirtan 4:30am. Sat 6pm. Sun Love Feast 11am",time:"Various",free:"Free/donation"},
+    {n:"ISKCON Cape Town",area:"17 St Andrews Rd, Rondebosch",d:"Daily kirtan 4:30am. Sat 6pm. Sun Love Feast 11am. Govinda's Café Tue–Sat",time:"Various",free:"Free/donation"},
     {n:"Diamond Way Buddhist Centre",area:"Cape Town",d:"Intro meditation Mondays 6:30pm",time:"Evening"},
-    {n:"Tushita Kadampa Meditation Centre",area:"Observatory, Cape Town",d:"Drop-in meditation, weekend courses. Also Simon's Town",time:"Various"},
+    {n:"Tushita Kadampa Meditation Centre",area:"47 Trill Rd, Observatory",d:"Drop-in meditation R50–R90. Dharma study, retreats. Proper temple",time:"Various"},
     {n:"Dhamma Patākā Vipassana Centre",area:"Worcester, Western Cape",d:"10-day Goenka courses. Free (donation). Africa's first",time:"Retreats",free:"Free"},
     {n:"Dance Awake Ecstatic Dance",area:"Claremont Civic Centre",d:"Thu 6:30–8:30pm. Conscious dance. R150",time:"Evening"},
     {n:"Leandra Besters Sound Healing",area:"Muizenberg",d:"Crystal singing bowl sound baths (432 Hz bowls)",time:"Flexible"},
     {n:"Bhakti Marga South Africa",area:"Cape Town",d:"Periodic darshan and kirtan events",time:"Events"},
+    {n:"The Dharma Centre (Zen)",area:"Sufi Temple, Newlands",d:"Zen meditation Mon evenings. Chanting, sitting, walking meditation, teachings",time:"Evening"},
+    {n:"Soul Holistic Center",area:"10 Surcingle Ave, Hout Bay",d:"Sound healing, shamanic ceremonies, breathwork. R2,250–R2,450/workshop",time:"Various"},
+    {n:"Shamballah Holistic Centre",area:"Redhill, Scarborough",d:"Monthly conscious dance nights",time:"Evening"},
+    {n:"House of Karuna",area:"Cape Town",d:"Cacao ceremony and ecstatic dance events. Listed on Quicket",time:"Various"},
   ]},
+
   {cat:"Cold Plunge & Swim",icon:"🧊",venues:[
-    {n:"Dalebrook Tidal Pool",area:"Kalk Bay",d:"Dawn swim community. Built 1907. Chardonnay Deli nearby",time:"Morning",free:"Free"},
-    {n:"St James Tidal Pool",area:"St James, Cape Town",d:"Iconic coloured beach huts. Shallow sections for kids",time:"Anytime",free:"Free"},
-    {n:"Woolley's Tidal Pool",area:"Kalk Bay",d:"Between Kalk Bay & Glencairn. Locals' secret, quiet",time:"Morning",free:"Free"},
+    // FALSE BAY (warm side)
+    {n:"Dalebrook Tidal Pool",area:"Kalk Bay",d:"Dawn swim community. Built 1907. Chardonnay Deli nearby. 18–22°C",time:"Morning",free:"Free"},
+    {n:"St James Tidal Pool",area:"St James, Cape Town",d:"Iconic coloured beach huts. Shallow sections for kids. 18–22°C",time:"Anytime",free:"Free"},
+    {n:"Woolley's Tidal Pool",area:"Kalk Bay",d:"Between Kalk Bay & Glencairn. Locals' secret, quiet. 18–22°C",time:"Morning",free:"Free"},
     {n:"ShuShu Sauna",area:"Various, Cape Town",d:"Mobile Finnish sauna + cold ocean plunge. WhatsApp group",time:"Weekend"},
     {n:"Expand Health",area:"De Waterkant, Cape Town",d:"Rooftop cold plunge, infrared sauna, PEMF. R150",time:"Morning"},
+    // ATLANTIC SIDE (cold side)
+    {n:"Saunders' Rock Pool",area:"Sea Point Promenade",d:"Community cold swim hub. Mobile sauna Thu/Fri/Sun. 10–15°C",time:"Morning",free:"Free"},
+    {n:"Milton Pool",area:"Sea Point",d:"Built 1910. Sandy shallows for kids. Family-friendly. 10–15°C",time:"Morning",free:"Free"},
+    {n:"Graaff's Pool",area:"Sea Point",d:"Historic tidal pool. Cold Atlantic water",time:"Morning",free:"Free"},
+    {n:"Sea Point Pavilion Pools",area:"Sea Point",d:"Olympic seawater pool + 2 kiddie splash pools. Lifeguards. World top-10 public pool",time:"Various"},
+    {n:"Camps Bay Tidal Pool",area:"Camps Bay",d:"Large pool, shallow kid areas. Mobile sauna Wed/Sat/Sun. 8–14°C",time:"Morning",free:"Free"},
+    {n:"Maiden's Cove Tidal Pools",area:"Between Camps Bay & Clifton",d:"Two pools in granite boulders. Grassy picnic areas. Sauna Thu/Fri/Sun",time:"Morning",free:"Free"},
   ]},
+
   {cat:"Surfing",icon:"🏄",venues:[
     {n:"Surf Emporium",area:"Muizenberg",d:"SA's leading school. 9x SA champion. From R340pp",time:"Morning"},
     {n:"Lifestyle Surf Shop",area:"Muizenberg",d:"Moms on Board: free lessons Tuesdays! Rental R200/2hrs",time:"Morning",free:"Free (Moms)"},
@@ -353,14 +400,18 @@ const DATA = [
     {n:"African Soul Surfer",area:"Muizenberg",d:"Surf + yoga combos. Yellow building, Surfer's Corner",time:"Morning"},
     {n:"SurfXCape",area:"Muizenberg",d:"HSP/Anxiety lesson option. Private R600",time:"Morning"},
     {n:"Surfshack",area:"Muizenberg",d:"22-year family-run. SUP tours past penguin colony",time:"Morning"},
+    {n:"Long Beach Surf",area:"Noordhoek / Kommetjie",d:"8km+ pristine beach. Inner Kom for beginners/longboarders. Cold Atlantic 13–17°C",time:"Morning"},
   ]},
+
   {cat:"Rock Climbing",icon:"🧗",venues:[
     {n:"Bloc11 Bouldering",area:"Diep River, Cape Town",d:"Closest to Muizenberg (~10 min). Day R100–R120. Monthly R650",time:"Morning"},
     {n:"CityROCK",area:"Paarden Eiland, Cape Town",d:"SA's premier. 4,000m², 16m walls. Day R210",time:"Various"},
     {n:"HangTime",area:"Pinelands, Cape Town",d:"Indoor + outdoor walls. 13m outdoor wall",time:"Various"},
     {n:"Mountain Club of SA (MCSA)",area:"Cape Town",d:"Founded 1891. 200+ meets/year. R900/year",time:"Weekend"},
   ]},
+
   {cat:"Children & Play",icon:"👶",venues:[
+    // MUIZENBERG / FALSE BAY
     {n:"Starseed Community School Playgroup",area:"Muizenberg",d:"Waldorf-based. Beach, vlei, mountain as classrooms",time:"Morning"},
     {n:"Planet Kids",area:"Muizenberg",d:"Indoor play. Under-3s Astronautees area. OT on staff",time:"Various"},
     {n:"Music 4 Mini's",area:"Cape Town",d:"Ages 3mo–5yr. 30-min lessons + socializing. ~R380",time:"Morning"},
@@ -369,14 +420,34 @@ const DATA = [
     {n:"Be.Up Indoor Adventure",area:"Pinelands, Cape Town",d:"Toddler Zone (under 4s) R55. Trampolines, maze",time:"Various"},
     {n:"Freedom Adventure Park",area:"Tokai, Cape Town",d:"Ages 1–12. Dedicated toddler zones. From R150",time:"Various"},
     {n:"Muizenberg Pavilion & Waterslides",area:"Muizenberg",d:"Pools, lawn space, waterslides at beachfront",time:"Various"},
+    // SEA POINT / GREEN POINT
+    {n:"Blue Train Park",area:"Mouille Point",d:"Miniature train R45pp, play gyms, jumping castle, bike track. Tue–Sun 9:30–6:30",time:"Various"},
+    {n:"Green Point Urban Park Playground",area:"Green Point",d:"Enclosed toddler playground, streams, wetlands, biodiversity garden",time:"Various",free:"Free"},
+    {n:"Sea Point Promenade Playgrounds",area:"Sea Point",d:"Multiple playgrounds along 7km promenade. Outdoor gyms. Pram-perfect",time:"Various",free:"Free"},
+    // HOUT BAY
+    {n:"Time2gether Playgroups",area:"Hout Bay",d:"Baby/toddler creative play, movement, music, puppets",time:"Morning"},
+    {n:"Earthworx Playpark",area:"Hout Bay",d:"Tree walks, treehouses, ziplines, slides. R30/day",time:"Various",free:"R30"},
+    {n:"The Riding Centre",area:"Main Rd, Hout Bay",d:"Pony rides, lessons, playground, farm animals",time:"Various"},
+    {n:"La Cabane Restaurant Playground",area:"Hout Bay",d:"Massive wooden castle playground. Kids' restaurant uses beads as currency",time:"Various"},
+    {n:"World of Birds",area:"Hout Bay",d:"400+ bird species across 4 hectares. Walk-through aviaries",time:"Various"},
+    // CONSTANTIA
+    {n:"Constantia Uitsig Playground",area:"Constantia",d:"Jungle gym, swings, tractor. Bike Park with pump tracks. Open 7 days 9am–6pm",time:"Various",free:"Free"},
+    {n:"Die Oog Bird Sanctuary",area:"Bergvliet",d:"Free nature walks perfect for toddlers",time:"Morning",free:"Free"},
+    // STELLENBOSCH
+    {n:"Jan Marais Nature Reserve",area:"Stellenbosch",d:"Central green space with play areas and daytime security",time:"Various",free:"Free"},
   ]},
+
   {cat:"Family Events",icon:"🎪",venues:[
     {n:"Kirstenbosch Sunset Concerts",area:"Kirstenbosch, Newlands",d:"Every Sun Nov–Mar. Kids 0–5 free. Adults R360",time:"Sunday"},
     {n:"Blue Bird Garage Market",area:"39 Albertyn Rd, Muizenberg",d:"Thu & Fri 4–10pm. Live bands, food, Kids Zone",time:"Evening",free:"Free entry"},
     {n:"Galileo Open Air Cinema",area:"Various, Cape Town",d:"Multiple venues Oct–May. From R155",time:"Evening"},
     {n:"Neighbourgoods Market",area:"Old Biscuit Mill, Woodstock",d:"Sat 9am–3pm. 100+ traders, live music",time:"Saturday",free:"Free entry"},
     {n:"OZCF Market",area:"V&A Waterfront, Cape Town",d:"Saturday morning farmers' market",time:"Saturday"},
+    {n:"Cape Point Vineyards Market",area:"Noordhoek",d:"Thu evenings in summer 4:30–8:30pm. Live music, sunset, kids' jungle gym",time:"Evening",free:"Free entry"},
+    {n:"Bay Harbour Market",area:"31 Harbour Rd, Hout Bay",d:"Fri 5–9pm live music on KWV Sound Stage. Weekend market",time:"Weekend"},
+    {n:"Oranjezicht City Farm Market",area:"Granger Bay, Waterfront",d:"Sat/Sun/Wed. 40+ farmers, 80+ traders. 8,000–12,000 weekly visitors",time:"Weekend"},
   ]},
+
   {cat:"Parks & Nature",icon:"🌿",venues:[
     {n:"Muizenberg Beach",area:"Muizenberg",d:"Warm water, gentle waves, lifeguards, shark spotters",time:"Anytime",free:"Free"},
     {n:"Zandvlei Recreational Park",area:"Muizenberg",d:"Wetland, picnic areas, playground, sailing, canoeing",time:"Various",free:"Free"},
@@ -386,43 +457,64 @@ const DATA = [
     {n:"Silvermine Nature Reserve",area:"Silvermine, above Muizenberg",d:"Reservoir boardwalk, Elephant's Eye Cave. R44",time:"Morning"},
     {n:"Muizenberg Catwalk",area:"Muizenberg",d:"3km flat coastal walk. Pram-suitable",time:"Morning",free:"Free"},
     {n:"Green Point Urban Park",area:"Green Point, Cape Town",d:"Three age-grouped playgrounds. Biodiversity trail",time:"Various",free:"Free"},
+    // NEW FROM RESEARCH
+    {n:"Company's Garden",area:"CBD, Cape Town",d:"SA's oldest garden. Toddler-friendly: duck pond, squirrels, playground",time:"Various",free:"Free"},
+    {n:"De Waal Park",area:"Oranjezicht",d:"Play equipment, open lawns, dog park. Daily family green space",time:"Various",free:"Free"},
+    {n:"Newlands Forest",area:"Newlands, Cape Town",d:"Multiple trails on Table Mountain slopes. Woodcutter's Trail 5km, Contour Path 8km",time:"Morning"},
+    {n:"Rondebosch Common",area:"Rondebosch",d:"40ha open fynbos. Daily toddler walks",time:"Morning",free:"Free"},
+    {n:"Paradise Park (Cape Town's biggest treehouse)",area:"Between Claremont & Newlands",d:"Giant treehouse playground. Free",time:"Various",free:"Free"},
+    {n:"Tokai Forest",area:"Tokai",d:"Flat 4km family loop, 21 MTB trails, Elephant's Eye Cave hike. SANParks",time:"Morning"},
+    {n:"Constantia Greenbelt",area:"Constantia",d:"Connected trails: Doordrift Walk (25 min), Alphen Trail, links to Kirstenbosch",time:"Morning",free:"Free"},
+    {n:"Noordhoek Beach (Long Beach)",area:"Noordhoek",d:"8km+ pristine white sand. Wild and beautiful. Cold Atlantic",time:"Morning",free:"Free"},
+    {n:"Jonkershoek Nature Reserve",area:"Stellenbosch",d:"9,800ha UNESCO site. Trails 45 min–8 hrs. Waterfalls, mountain pools",time:"Morning"},
+    {n:"Oranjezicht City Farm",area:"87 Upper Orange St, Oranjezicht",d:"Organic produce direct. Mon–Fri 8am–2pm, Sat 8am–12pm",time:"Morning"},
   ]},
+
   {cat:"Libraries",icon:"📚",venues:[
     {n:"Muizenberg Public Library",area:"Atlantic Rd, Muizenberg",d:"Storytelling sessions. Tel: 021 444 3197",time:"Morning",free:"Free"},
     {n:"Fish Hoek Public Library",area:"Fish Hoek",d:"Friday Story Hour (since 1950s). Children's section",time:"Morning",free:"Free"},
     {n:"Simon's Town Public Library",area:"Simon's Town",d:"Historic heritage building (1897)",time:"Morning",free:"Free"},
     {n:"Kalk Bay Books",area:"Main Road, Kalk Bay",d:"Independent bookshop. Readings, clubs, author events",time:"Daily"},
   ]},
+
   {cat:"Museums",icon:"🏛️",venues:[
     {n:"Two Oceans Aquarium",area:"V&A Waterfront, Cape Town",d:"Touch pools, penguins, jellyfish. Under 4 free",time:"Various"},
-    {n:"Cape Town Museum of Childhood",area:"Rondebosch",d:"First in Africa. Hands-on. Wed–Sat. Free",time:"Morning",free:"Free"},
+    {n:"Cape Town Museum of Childhood",area:"Rondebosch",d:"First in Africa. Hands-on. Wed–Sat 10am–4pm",time:"Morning",free:"Free"},
     {n:"Iziko South African Museum",area:"Company's Garden, CBD",d:"Whale skeletons, dinosaurs. Under 5 free",time:"Various"},
     {n:"Boulders Beach Penguin Colony",area:"Simon's Town",d:"Live penguins on boardwalks. 20 min from Muizenberg",time:"Morning"},
     {n:"Warrior Toy Museum",area:"Simon's Town",d:"4,000+ model cars, trains, dolls. R10",time:"Morning"},
     {n:"Cape Town Science Centre",area:"Observatory, Cape Town",d:"Kids play area, air rockets, giant chess. R80",time:"Various"},
     {n:"South African Jewish Museum",area:"CBD, Cape Town",d:"First synagogue (1863). Rare artifacts. Under 5 free",time:"Various"},
+    {n:"Rupert Museum",area:"Stellentia Ave, Stellenbosch",d:"World-class art collection",time:"Various"},
   ]},
+
   {cat:"Philosophy",icon:"💭",venues:[
     {n:"Lekker Chats",area:"Cape Town",d:"Structured conversation events. Sun 2x/month. Ages 25–45",time:"Sunday",free:"Free"},
-    {n:"UCT Philosophy Society",area:"UCT, Rondebosch",d:"Monthly Tue evening lectures 8–9:30pm. Open to all",time:"Evening",free:"Free"},
+    {n:"UCT Philosophy Society",area:"UCT, Rondebosch",d:"Monthly Tue evening lectures 8–9:30pm. Open to all. R100/yr membership",time:"Evening",free:"Free"},
     {n:"TEDxCapeTown",area:"Workshop17, V&A Waterfront",d:"Annual events + periodic salons. ~R250",time:"Weekend"},
     {n:"Curious to Change",area:"Cape Town",d:"Deep conversation community. Sun 3pm Meetup",time:"Sunday"},
+    {n:"STIAS (Stellenbosch Institute for Advanced Study)",area:"Stellenbosch",d:"Public lectures 3–4× per semester. World-class scholars",time:"Various",free:"Free"},
+    {n:"Stellenbosch University Philosophy Dept",area:"Stellenbosch",d:"9 faculty. AI ethics, environmental ethics, feminist philosophy. Public seminars",time:"Various"},
   ]},
+
   {cat:"Parenting",icon:"👪",venues:[
     {n:"The Parent Hub",area:"Cape Town",d:"SA's largest mom community. Pram walks, wellness meetups",time:"Various"},
     {n:"The Parent Centre",area:"Cape Town",d:"SA's NCT-equivalent (est. 1983). Workshops. Tel: 021 762 0116",time:"Various"},
     {n:"Fiona Couchman",area:"Plumstead, Cape Town",d:"Attachment specialist. Parent workshops",time:"Various"},
   ]},
+
   {cat:"Scouts",icon:"⚜️",venues:[
     {n:"1st Muizenberg Sea Scouts",area:"Sandvlei, Muizenberg",d:"Founded 1909. On Sandvlei lagoon. Meerkats from age 5",time:"Various"},
     {n:"1st Claremont Scout Group",area:"Claremont, Cape Town",d:"Early Meerkat program. Ranked 4th WC 2024",time:"Various"},
   ]},
+
   {cat:"Service Clubs",icon:"🤝",venues:[
     {n:"Rotary Club of Cape of Good Hope",area:"Galley Restaurant, Fish Hoek",d:"Tuesdays 6:30pm",time:"Evening"},
     {n:"Rotary Club of South Peninsula",area:"Fish Hoek Beach",d:"Thursdays 6:30pm. Chartered Jan 2024",time:"Evening"},
     {n:"Fish Hoek Lions Club",area:"Fish Hoek Bowling Club",d:"2nd Mon monthly 7pm. Leos Club for youth",time:"Evening"},
     {n:"Round Table Southern Africa",area:"Cape Town",d:"Men 18–40. Business + social meetings monthly",time:"Evening"},
   ]},
+
   {cat:"Writers",icon:"✍️",venues:[
     {n:"All About Writing Creative Saturdays",area:"Casa Labia, Muizenberg",d:"1st Sat every 2nd month. 9am. R425",time:"Saturday"},
     {n:"Cape Town Writers' Network",area:"The Bee-stro, Observatory",d:"Weekly Mon evenings. Free (buy food)",time:"Evening",free:"Free"},
@@ -430,77 +522,118 @@ const DATA = [
     {n:"Stories and Voices",area:"Newlands, Cape Town",d:"AWA method workshops. Thu mornings",time:"Morning"},
     {n:"The Book Lounge",area:"71 Roeland St, CBD",d:"Premier bookstore. Launches, talks, readings",time:"Evening"},
   ]},
+
   {cat:"Open Mics",icon:"🎤",venues:[
     {n:"Harvest Café",area:"York Rd, Muizenberg",d:"Thu 6–9pm. Singers, poets, musicians, dancers",time:"Evening",free:"Free"},
     {n:"The Melting Pot",area:"15 Church St, Muizenberg",d:"Wed from 7pm. Jazz, folk, rock, comedy",time:"Evening"},
     {n:"Ground Culture Café",area:"170 Lower Main Rd, Observatory",d:"Tue 6–10pm open mic + 1st Thu Sandbox Jam",time:"Evening",free:"Free"},
-    {n:"The Armchair Theatre",area:"135 Lower Main Rd, Observatory",d:"Mon Jam 8pm. Comedy Wed & Sun",time:"Evening"},
+    {n:"The Armchair Theatre",area:"135 Lower Main Rd, Observatory",d:"Mon Jam 8pm. Comedy Wed & Sun. Open daily 12pm–2am",time:"Evening"},
     {n:"House of Machines",area:"CBD, Cape Town",d:"Songwriter showcase every Tuesday",time:"Evening",free:"Free"},
     {n:"Third House Poetry",area:"Cape Town",d:"Premier spoken word. Last Tue monthly. ~R50–R80",time:"Evening"},
   ]},
-  {cat:"Music Jams",icon:"🎵",venues:[
+
+  {cat:"Music & Jams",icon:"🎵",venues:[
     {n:"The Shed Jazz Jam",area:"165 Main Rd, Muizenberg",d:"Every Sun from 3pm. Bring instruments & join",time:"Sunday",free:"Free"},
     {n:"The Striped Horse Open Jam",area:"York Rd, Muizenberg",d:"Bi-weekly Wed 8–11pm. All welcome",time:"Evening",free:"Free"},
     {n:"Fat Harry's Reloaded Jazz Jam",area:"166 2nd Ave, Kenilworth",d:"Weekly Mon 7pm. Hosted by Dan Shout",time:"Evening"},
     {n:"Amber on Bree Jazz Jam",area:"Bree St, CBD",d:"Weekly Tue 7:30pm. Curated by Muneeb Hermans",time:"Evening",free:"Free"},
     {n:"Sunday Jazz Jam at Openwine",area:"72 Wale St, CBD",d:"Every Sun from 4pm",time:"Sunday",free:"Free"},
+    {n:"Café Roux",area:"Chapman's Peak Dr, Noordhoek Farm Village",d:"60-seat intimate venue. Major SA artists, comedy, talks. Child-friendly area",time:"Evening"},
+    {n:"Straight No Chaser Jazz Club",area:"87 Station Rd, Observatory",d:"Dedicated jazz club. Sets 6:30/8pm. R60–R120",time:"Evening"},
+    {n:"Ganesh",area:"38 Trill Rd, Observatory",d:"Experimental jazz. Tickets from R100 on Quicket",time:"Evening"},
   ]},
+
   {cat:"Art & Galleries",icon:"🎨",venues:[
     {n:"Zeitz MOCAA",area:"V&A Waterfront, Cape Town",d:"Largest contemporary African art museum. ~R230",time:"Various"},
     {n:"First Thursdays Cape Town",area:"Bree, Loop, Wale Streets, CBD",d:"1st Thu monthly. ~35 galleries open til 9pm+",time:"Evening",free:"Free"},
     {n:"First Thursdays Down South",area:"Muizenberg / Kalk Bay",d:"1st Thu. Local galleries, shops, bars",time:"Evening"},
-    {n:"Stevenson Gallery",area:"Woodstock, Cape Town",d:"Leading contemporary. Mon–Fri 9–5, Sat 10–1",time:"Various",free:"Free"},
-    {n:"Goodman Gallery",area:"Woodstock, Cape Town",d:"Est. 1966. International. Tue–Sat",time:"Various",free:"Free"},
-    {n:"Norval Foundation",area:"Steenberg, Cape Town",d:"Major art museum + sculpture garden. ~R180",time:"Various"},
+    {n:"Stevenson Gallery",area:"160 Sir Lowry Rd, Woodstock",d:"Art Basel, Frieze. Zanele Muholi, Penny Siopis. Mon–Fri 9–5, Sat 10–1",time:"Various",free:"Free"},
+    {n:"Goodman Gallery",area:"176 Sir Lowry Rd, Woodstock",d:"William Kentridge, David Goldblatt. Tue–Sat",time:"Various",free:"Free"},
+    {n:"Norval Foundation",area:"4 Steenberg Rd, Tokai",d:"World-class museum. Sculpture garden. Kids' Holiday Arts Club R275. R180",time:"Various"},
     {n:"Gallery South",area:"Muizenberg",d:"Local and Pan-African art with performance space",time:"Daytime",free:"Free"},
     {n:"Artvark Gallery",area:"Kalk Bay",d:"Contemporary art in seaside setting",time:"Daytime",free:"Free"},
+    {n:"SMAC Gallery (Woodstock)",area:"Woodstock",d:"1,200 sqm. Art Basel and Artissima",time:"Various",free:"Free"},
+    {n:"SMAC Gallery (Stellenbosch)",area:"De Wet Centre, Church St, Stellenbosch",d:"Same gallery network. Art Basel, Artissima",time:"Various",free:"Free"},
+    {n:"Woodstock Exchange",area:"66 Albert Rd, Woodstock",d:"Creative hub: galleries, studios, shops, cafés",time:"Various",free:"Free"},
+    {n:"Blank Projects",area:"Woodstock",d:"Experimental, cutting-edge SA art. Tue–Fri 9–5, Sat 10–1",time:"Various",free:"Free"},
+    {n:"Hout Bay Gallery",area:"71 Victoria Ave, Hout Bay",d:"Established 1974",time:"Various"},
+    {n:"Ghuba Gallery",area:"73 Victoria Ave, Hout Bay",d:"African-only art",time:"Various"},
+    {n:"Dylan Lewis Sculpture Garden",area:"Paradyskloof Rd, Stellenbosch",d:"Internationally renowned outdoor sculpture",time:"Various"},
+    {n:"Rupert Museum",area:"Stellentia Ave, Stellenbosch",d:"World-class collection. Historic building",time:"Various"},
+    {n:"Muizenberg Open Studio Tour",area:"Muizenberg",d:"Annual (October). 20+ artists open homes/studios",time:"Weekend",free:"Free"},
+    {n:"Open Studios Kommetjie",area:"Kommetjie",d:"Annual 3-day event. 30+ curated artists open home studios",time:"Weekend",free:"Free"},
+    {n:"Noordhoek Art Point Gallery",area:"16 Noordhoek Main Rd",d:"20+ local artists showcased",time:"Various"},
   ]},
+
   {cat:"Theatre",icon:"🎭",venues:[
     {n:"Baxter Theatre Centre",area:"UCT, Rondebosch",d:"Morning Melodies 10:30am R80. Opera, pantomime",time:"Various"},
     {n:"Masque Theatre",area:"37 Main Rd, Muizenberg",d:"Community theatre right in Muizenberg village",time:"Evening"},
+    {n:"Theatre on the Bay",area:"Camps Bay",d:"264-seat performing arts venue. Quality productions",time:"Evening"},
   ]},
+
   {cat:"Jazz Venues",icon:"🎷",venues:[
     {n:"Kloof Street House",area:"Kloof St, Gardens",d:"Free jazz Sun 1–3pm on veranda. Family-friendly",time:"Sunday",free:"Free"},
     {n:"Woodstock Brewery",area:"Woodstock, Cape Town",d:"Glenn Robertson Jazz Band Sun from 1pm. R140",time:"Sunday"},
-    {n:"Mojo Market",area:"Sea Point, Cape Town",d:"Jazzy Tuesdays 7:30pm + Sunday jazz from 1pm",time:"Various"},
-    {n:"The Piano Bar",area:"De Waterkant, Cape Town",d:"Live music every night from 7:30pm. No cover",time:"Evening",free:"Free"},
+    {n:"Mojo Market",area:"30 Regent Rd, Sea Point",d:"Live music EVERY DAY 11am–9pm. Jazz Cats Sundays. Free entry",time:"Various",free:"Free"},
+    {n:"The Piano Bar",area:"47 Napier St, De Waterkant",d:"Live music every night from 7:30pm. No cover",time:"Evening",free:"Free"},
     {n:"The Crypt Jazz Restaurant",area:"St George's Cathedral, CBD",d:"Jazz club in the crypt. Tue–Sat 7pm. R50–R100",time:"Evening"},
-    {n:"The Blue Room at Grub & Vine",area:"CBD, Cape Town",d:"Speakeasy. Jazz, blues, soul. Wed–Sat 7pm",time:"Evening"},
+    {n:"The Blue Room at Grub & Vine",area:"103B Bree St, CBD",d:"Speakeasy. Jazz Tue–Sat from 7pm. R200 (R100 Tuesdays)",time:"Evening"},
+    {n:"Pigalle",area:"Green Point",d:"Seats 350+. Resident jazz band",time:"Evening"},
+    {n:"Famous Butchers Grill",area:"Green Point",d:"Jazz duo José & Nelson Mon/Wed/Fri 6:30–9:30pm",time:"Evening"},
+    {n:"Rick's Café Américain",area:"103 Kloof St, Gardens",d:"Roy and The Rick'sters live jazz 7–10pm",time:"Evening"},
+    {n:"Asoka",area:"68 Kloof St, Gardens",d:"Free jazz every Tuesday from 8pm",time:"Evening",free:"Free"},
+    {n:"The Athletic Club & Social",area:"35 Buitengracht St, CBD",d:"Jazz Thursdays from 9pm. Tickets from R200",time:"Evening"},
+    {n:"Alliance Française Jazz Rendez-vous",area:"CBD",d:"Last Friday monthly. R80",time:"Evening"},
+    {n:"Kaleidoscope Café",area:"Claremont",d:"Friday jazz since 2005. ~R120pp including dinner",time:"Evening"},
+    {n:"Cool Runnings Jazz Sessions",area:"49 2nd Ave, Harfield Village",d:"Sundays 3–6pm",time:"Sunday"},
+    {n:"Pakalolo",area:"10 Main Rd, Hout Bay",d:"Live music Fri, jazz Sundays, comedy last Thu monthly",time:"Various"},
+    {n:"Incognito Bar at The Alphen",area:"Constantia",d:"Jazz every Thursday 7–9:30pm with tapas",time:"Evening"},
+    {n:"Endler Hall",area:"Stellenbosch University",d:"550-seat venue. 40–50 concerts/year. Jazz @ the Endler",time:"Various"},
+    {n:"Van Ryn's Jazzy Sundowner",area:"Stellenbosch",d:"Monthly. R275pp including entry, music, picnic",time:"Evening"},
   ]},
+
   {cat:"Day Trips",icon:"🗺️",venues:[
     {n:"Spier Wine Farm",area:"Stellenbosch",d:"Kids' juice tasting, Eagle Encounter, playground. 45 min",time:"Weekend"},
-    {n:"Vergenoegd Wine Estate",area:"Stellenbosch",d:"Famous Duck Parade, cookie decorating",time:"Weekend"},
+    {n:"Vergenoegd Wine Estate",area:"Stellenbosch",d:"Famous Duck Parade 9:45am daily. Cookie decorating",time:"Weekend"},
     {n:"Boschendal",area:"Franschhoek",d:"Tree House play centre, Splish Splash water area",time:"Weekend"},
-    {n:"Groot Constantia",area:"Constantia, Cape Town",d:"Cape's original wine region. Closest to Muizenberg",time:"Weekend"},
+    {n:"Groot Constantia",area:"Constantia, Cape Town",d:"Cape's original wine region (334 years). Closest to Muizenberg",time:"Weekend"},
     {n:"Kraalbaai Beach, West Coast National Park",area:"Langebaan",d:"Turquoise lagoon, shallow, perfect for toddlers",time:"Weekend"},
     {n:"Cape Point & Cape of Good Hope",area:"Cape Point",d:"Dramatic cliffs, wildlife, tidal pools. 40 min",time:"Weekend"},
     {n:"Imhoff Farm",area:"Kommetjie",d:"Art studios, horse riding, camel rides, petting farm",time:"Weekend"},
+    {n:"Babylonstoren (Babel restaurant)",area:"Paarl",d:"Legendary farm-to-table dining. Stunning gardens",time:"Weekend"},
+    {n:"Animal Ocean Seal Snorkeling",area:"Hout Bay",d:"#1 TripAdvisor for Hout Bay. Swim with Cape fur seals in kelp forests",time:"Morning"},
   ]},
+
   {cat:"Workshops",icon:"🎯",venues:[
     {n:"Anthony Shapiro Pottery Studio",area:"CBD, Cape Town",d:"Drop-in R1,200. Tue–Thu + Sat mornings & evenings",time:"Various"},
     {n:"Calico Ceramics",area:"Salt River, Cape Town",d:"Full-day pottery + champagne + lunch. R1,950pp",time:"Weekend"},
-    {n:"Pencil Ceramics",area:"Cape Town",d:"Mindfulness-focused. Wine & Clay date nights",time:"Weekend"},
+    {n:"Pencil Ceramics",area:"Cape Town",d:"Mindfulness-focused (ex-Google/Spotify coach). Wine & Clay date nights",time:"Weekend"},
     {n:"All Fired Up Pottery",area:"Tokai, Cape Town",d:"Closest pottery to Muizenberg. 40+ years. Saturday",time:"Saturday"},
     {n:"Heart Art by Gail Schoeman",area:"Muizenberg",d:"Intuitive expressive art + mindfulness therapy",time:"Various"},
     {n:"Mercury School of Woodwork",area:"Cape Town",d:"Saturday courses. Parent & Child course",time:"Saturday"},
-    {n:"Imago Couples Workshop (Angela Fox)",area:"Cape Town",d:"Weekend workshop Fri–Sun. R6,500/couple",time:"Weekend"},
+    {n:"Imago Couples Workshop (Angela Fox)",area:"Cape Town",d:"Weekend workshop Fri–Sun. R6,500/couple. 70–75% success rate",time:"Weekend"},
+    {n:"Norval Foundation Holiday Arts Club",area:"Tokai",d:"R275/child. Parents get library, wifi, coffee while kids create",time:"School hols"},
   ]},
+
   {cat:"Shadow Work & Jungian",icon:"🌑",venues:[
-    {n:"ManKind Project South Africa",area:"Cape Town",d:"Weekend Apr 10 2026. Free ongoing men's groups",time:"Weekend"},
+    {n:"ManKind Project South Africa",area:"Cape Town",d:"Weekend Apr 10 2026. 3,500+ men trained. Free ongoing men's groups",time:"Weekend"},
     {n:"C.G. Jung Centre",area:"87 Main Rd, Rosebank",d:"1-year certificate. Library. Tel: 021 689 2090",time:"Various"},
     {n:"Authentic Relating Cape Town",area:"Cape Town",d:"Circling, NVC-inspired games. Meetup group",time:"Evening"},
     {n:"Light House Holistic Men's Group",area:"50 Bree St, CBD",d:"Safe space for men. Free/donation",time:"Evening",free:"Free"},
   ]},
+
   {cat:"Book Clubs",icon:"📖",venues:[
     {n:"Silent Book Club Cape Town",area:"The Commons, Muizenberg",d:"3x/month. Bring your book, read, socialize",time:"Various",free:"Free"},
     {n:"Kalk Bay Books",area:"124 Main Rd, Kalk Bay",d:"Book clubs, launches, poetry readings",time:"Various"},
     {n:"The Book Lounge",area:"71 Roeland St, CBD",d:"Literary epicenter. Regular launches & events",time:"Evening"},
   ]},
+
   {cat:"Social Clubs",icon:"🍻",venues:[
     {n:"Cape Town Hikes and Social Group",area:"Cape Town",d:"1,000+ members. Monthly 1st Sat hikes",time:"Saturday",free:"Free"},
     {n:"Social Coffee Hike Society",area:"Cape Town",d:"Hiking + coffee. Weekly meetups",time:"Morning"},
     {n:"Cape Town Community for Connection",area:"Cape Town",d:"2,672 Meetup members. Hikes, dinners, beach",time:"Various"},
   ]},
+
   {cat:"Hiking",icon:"🥾",venues:[
     {n:"Silvermine Reservoir Boardwalk",area:"Silvermine, above Muizenberg",d:"20-min flat loop. Stroller-friendly",time:"Morning",free:"R44"},
     {n:"Silvermine Elephant's Eye Cave",area:"Silvermine, above Muizenberg",d:"6km family-friendly hike. Great views",time:"Morning",free:"R44"},
@@ -508,18 +641,27 @@ const DATA = [
     {n:"Meridian Hiking Club",area:"Cape Town",d:"Est. 1989. 300+ members. Day hikes + social",time:"Weekend"},
     {n:"ComeHike",area:"Cape Town",d:"Structured club. Children welcome. R50/hike",time:"Weekend"},
     {n:"Muizenberg–St James Coastal Walk",area:"Muizenberg to St James",d:"3km flat. Pram-perfect. Beautiful coastal views",time:"Morning",free:"Free"},
-    {n:"Newlands Forest",area:"Newlands, Cape Town",d:"Easy trails, pram-friendly, year-round stream. R36",time:"Morning"},
+    {n:"Newlands Forest Trails",area:"Newlands, Cape Town",d:"Multiple trails. Woodcutter's 5km, Contour Path 8km. Some pram-friendly",time:"Morning"},
+    {n:"Platteklip Gorge",area:"Table Mountain",d:"Most direct route up Table Mountain. 10 min from Gardens",time:"Morning"},
+    {n:"Lion's Head",area:"Signal Hill, Cape Town",d:"Popular sunset hike. 5 min from Sea Point",time:"Morning"},
+    {n:"Pipe Track",area:"Above Camps Bay",d:"6km contour path. Spectacular views. One of CT's most beautiful runs",time:"Morning",free:"Free"},
+    {n:"Chapman's Peak Drive",area:"Hout Bay to Noordhoek",d:"One of world's most spectacular coastal routes",time:"Various"},
   ]},
+
   {cat:"Running",icon:"🏃",venues:[
     {n:"Zandvlei parkrun",area:"Zandvlei, Muizenberg",d:"Every Sat 8am. 5km flat. Pushchairs & dogs OK",time:"Saturday",free:"Free"},
     {n:"Fish Hoek parkrun",area:"Fish Hoek",d:"Every Sat 8am. 5km gravel/trail",time:"Saturday",free:"Free"},
     {n:"Running Wild — False Bay Crew",area:"False Bay, Cape Town",d:"Trail running Tue & Thu 8am",time:"Morning"},
     {n:"Celtic Harriers",area:"Claremont, Cape Town",d:"Est. 1906. Founded Two Oceans Marathon. Tue & Thu",time:"Morning"},
+    {n:"Hout Bay parkrun",area:"Ambleside School, 120 Milner Ave, Hout Bay",d:"Every Sat 8am. Post-run coffee at Roots Farm Shoppe",time:"Saturday",free:"Free"},
+    {n:"Root 44 parkrun",area:"Stellenbosch",d:"Sat 8am through vineyards. Mountain views. 900–1,500 runners",time:"Saturday",free:"Free"},
   ]},
+
   {cat:"Chess",icon:"♟️",venues:[
     {n:"Fish Hoek Chess Club",area:"Fish Hoek Library",d:"Closest to Muizenberg. Tel: 071 053 9001",time:"Various"},
     {n:"Observatory Chess Club",area:"Woodstock Brewery, Observatory",d:"Social atmosphere at taproom",time:"Evening"},
   ]},
+
   {cat:"Massage & Spa",icon:"💆",venues:[
     {n:"International School of Massage",area:"Cape Town",d:"Couples R1,650. Baby Massage R4,300. Thai R4,300",time:"Flexible"},
     {n:"Shen Mantra",area:"Cape Town",d:"Thai Yoga Massage courses. Level 1+2 = 72 hours",time:"Afternoon"},
@@ -527,19 +669,54 @@ const DATA = [
     {n:"Reef Beachfront Massage",area:"Muizenberg Beach",d:"Sports massage on the beach. 30-min R400",time:"Various"},
     {n:"The Grotto Spa",area:"CBD, Cape Town",d:"Couples Date Night R3,300 (massage + dinner)",time:"Evening"},
   ]},
+
   {cat:"Coworking",icon:"💻",venues:[
+    // MUIZENBERG
     {n:"Workshop17 Muizenberg",area:"Muizenberg",d:"Opening mid-2026. Premium coworking",time:"Weekday"},
     {n:"CoworkSurf Muizenberg",area:"Muizenberg",d:"Coworking + coliving + surfing",time:"Weekday"},
-    {n:"Ideas Cartel",area:"CBD, Cape Town",d:"Day pass R200, monthly from R1,000",time:"Weekday"},
+    // SEA POINT
+    {n:"Latitude Coworking",area:"9th Floor, Latitude Hotel, Sea Point",d:"Lion's Head views. Fiber WiFi",time:"Weekday"},
+    {n:"CreateSpace",area:"Sea Point",d:"Daily/weekly/monthly passes. Fiber WiFi",time:"Weekday"},
+    // CBD / WOODSTOCK
+    {n:"Ideas Cartel",area:"CBD / Claremont",d:"Day pass R200, monthly from R1,000–R2,000",time:"Weekday"},
+    {n:"GOODWork",area:"1A Armadale St, Woodstock",d:"Meditation room + wellness centre included",time:"Weekday"},
+    {n:"The Bureaux",area:"Woodstock Exchange",d:"Sun deck and gallery. Creative community",time:"Weekday"},
+    {n:"Regus Black River Park",area:"Observatory",d:"R2,390–R3,750/month for coworking desks",time:"Weekday"},
+    // SOUTHERN SUBURBS
+    {n:"Workshop17 Newlands",area:"146 Campground Rd, Newlands",d:"Overlooks cricket ground. Table Mountain views",time:"Weekday"},
+    {n:"werkhuis",area:"Newlands Village",d:"Scandi-style members-only business club",time:"Weekday"},
+    // CONSTANTIA
+    {n:"Venture Workspace Constantia",area:"Constantia Emporium Mall",d:"Hot desk R150/day. Monthly R1,800. Fiber + generator",time:"Weekday"},
+    // NOORDHOEK
+    {n:"The Loft Office",area:"Noordhoek Farm Village",d:"Hot desk R200/day or R3,000/month",time:"Weekday"},
+    // STELLENBOSCH
+    {n:"Hello Work",area:"Stellenbosch",d:"24/7 access. 100Mb/s. Generator backup. Dedicated desk R3,500/month",time:"Weekday"},
   ]},
+
   {cat:"Schools",icon:"🏫",venues:[
+    // WALDORF
     {n:"Starseed Community School",area:"Muizenberg",d:"Waldorf-based. Playgroup–Class 7. Beach as classroom",time:"Weekday"},
-    {n:"Imhoff Waldorf School",area:"Imhoff Farm, Kommetjie",d:"Playgroup–High School. Off-grid, environmental ethos",time:"Weekday"},
-    {n:"Constantia Waldorf School",area:"Constantia, Cape Town",d:"First Waldorf in Africa (est. 1967). Playgroup–Matric",time:"Weekday"},
-    {n:"Gaia Waldorf School",area:"Pinelands, Cape Town",d:"Most diverse Waldorf in SA. Horses, chickens, gardens",time:"Weekday"},
+    {n:"Imhoff Waldorf School",area:"Imhoff Farm, Kommetjie",d:"Solar/wind powered eco-school. Playgroup–Primary. Parent & Child Circle",time:"Weekday"},
+    {n:"Constantia Waldorf School",area:"Spaanschemat River Rd, Constantia",d:"First Waldorf in Africa (1967). Playgroup–Matric. R55k–R111k/yr",time:"Weekday"},
+    {n:"Gaia Waldorf School",area:"Oude Molen Village, Pinelands",d:"Most diverse Waldorf in SA. Sliding-scale fees. Horses, chickens, gardens",time:"Weekday"},
+    {n:"Michael Oak Waldorf",area:"Kenilworth",d:"Est. 1962. ~400 students. Playgroup–Matric",time:"Weekday"},
+    {n:"Stellenbosch Waldorf School",area:"Spier Estate, Stellenbosch",d:"K–12 ~270 children. From ~R48,175/yr for age 2",time:"Weekday"},
+    // MONTESSORI
     {n:"Cape Town Montessori School",area:"Oranjezicht, Cape Town",d:"40+ years, SAMA accredited. Toddler from 18 months",time:"Weekday"},
     {n:"Honeycomb Montessori",area:"Bergvliet, Cape Town",d:"Parent-run, 18 months–6 years",time:"Weekday"},
+    {n:"MELF Montessori on Kloof",area:"82 Kloof Rd, Sea Point",d:"R57,000/yr (5 days). School hours 8:00–12:15",time:"Weekday"},
+    {n:"Hout Bay Montessori",area:"4459 Main Rd, Hout Bay",d:"Nursery through primary",time:"Weekday"},
+    {n:"Noordhoek Montessori",area:"Noordhoek",d:"AMI-accredited for ages 3–6",time:"Weekday"},
+    {n:"Stellenbosch Montessori",area:"Paradyskloof, Stellenbosch",d:"SAMA accredited. From 16 months. Dedicated toddler classroom",time:"Weekday"},
+    {n:"Children's Studio",area:"Harfield Village, Claremont",d:"Established Montessori 35+ years. Ages 2–6",time:"Weekday"},
+    {n:"The Montessori Playgroup",area:"Spaanschemat River Rd, Constantia",d:"Ages 2–4. Est. 2006. Early enrolment essential",time:"Weekday"},
+    // OTHER
+    {n:"Mouse House Kindergarten",area:"Upper Portswood Rd, Green Point",d:"Montessori-meets-play-based. Ages 2+",time:"Weekday"},
+    {n:"Reddam House Atlantic Seaboard",area:"Green Point",d:"Reggio Emilia-inspired early learning. Age 1–Grade 12",time:"Weekday"},
+    {n:"Hout Bay International School",area:"Hout Bay",d:"IB Diploma programme",time:"Weekday"},
+    {n:"The Bay Academy",area:"Hout Bay",d:"Montessori philosophy with CAPS/NSC curriculum",time:"Weekday"},
   ]},
+
   {cat:"Churches & Spiritual",icon:"✨",venues:[
     {n:"Southreach Church",area:"Muizenberg",d:"Evangelical, multicultural. Sun 10am & 6pm",time:"Sunday"},
     {n:"Joshua Generation Church (JoshGen)",area:"3 Wherry Rd, Muizenberg",d:"Multisite (SA, USA, Zimbabwe). Home fellowship",time:"Sunday"},
@@ -547,7 +724,7 @@ const DATA = [
     {n:"Kalk Bay Community Church",area:"Kalk Bay",d:"Non-denominational, evangelical, multicultural",time:"Sunday"},
     {n:"CHS Life Centre",area:"Kirstenhof, Cape Town",d:"Co-working, café, outreach. 10 min from Muizenberg",time:"Various"},
     {n:"Encounter Church",area:"Cape Town",d:"Charismatic, presence-focused. Kids program 4–12",time:"Sunday"},
-    {n:"St George's Cathedral",area:"5 Wale St, CBD",d:"The People's Cathedral. Tutu's legacy. Labyrinth, tours",time:"Sunday"},
+    {n:"St George's Cathedral",area:"5 Wale St, CBD",d:"The People's Cathedral. Tutu's legacy. Labyrinth, tours, Crypt jazz club",time:"Sunday"},
     {n:"Muizenberg Synagogue",area:"Muizenberg",d:"Historic 1920s Orthodox. Fri evening, Sat morning",time:"Fri/Sat"},
     {n:"Temple Israel Wynberg (Progressive)",area:"Wynberg, Cape Town",d:"Reform. Welcomes non-Jews. Hebrew & English services",time:"Fri/Sat"},
     {n:"Gardens Shul",area:"Gardens, Cape Town",d:"Oldest active in SA (1905). Egyptian-revival. Seats 1,400+",time:"Various"},
@@ -556,7 +733,29 @@ const DATA = [
     {n:"Bahá'í Community",area:"Cape Town",d:"Interfaith worship. Children's classes. Study circles",time:"Various"},
     {n:"Cape Town Interfaith Initiative",area:"Rondebosch, Cape Town",d:"50 member orgs. Quarterly dialogue. Heritage tours",time:"Various"},
     {n:"Habibia Soofie Masjid (Sufi)",area:"63 Flat Rd, Rylands",d:"Sufi mosque est. 1905. Chishti order — love & tolerance",time:"Various"},
-    {n:"Ananda Kutir Ashrama",area:"24 Sprigg Rd, Rondebosch East",d:"Integral Yoga ashram. Sat evening satsang (free). Est. 1982",time:"Saturday",free:"Free"},
+    {n:"Ananda Kutir Ashrama",area:"24 Sprigg Rd, Rondebosch East",d:"Integral Yoga ashram est. 1982. Sat evening satsang (free)",time:"Saturday",free:"Free"},
+  ]},
+
+  {cat:"Vegan & Vegetarian",icon:"🥗",venues:[
+    // SEA POINT / GREEN POINT
+    {n:"Scheckter's Raw",area:"98 Regent Rd, Sea Point",d:"Entirely plant-based café. Also in Stellenbosch",time:"Daily"},
+    {n:"Okja Vegan Bakery",area:"2 Hill Rd, Green Point",d:"100% vegan bakery and café",time:"Daily"},
+    {n:"The Sunshine Food Sprouting Co",area:"Sea Point",d:"African vegan café",time:"Daily"},
+    {n:"Nourish'd",area:"Sea Point",d:"Plant-based, zero-waste café",time:"Daily"},
+    // OBSERVATORY / WOODSTOCK
+    {n:"Cocoa Cha-Chi",area:"20 Lower Main Rd, Observatory",d:"100% vegan. Daily 7am–11pm",time:"Daily"},
+    {n:"Prashad Vegan Café",area:"242 Sir Lowry Rd, Woodstock",d:"Indian vegan cuisine",time:"Daily"},
+    {n:"The Kind Kitchen",area:"252 Albert Rd, Woodstock",d:"Plant-based. Tue–Sat",time:"Daily"},
+    // CAMPS BAY
+    {n:"Plant Café",area:"87 Victoria Rd, Camps Bay",d:"100% vegan with ocean views",time:"Daily"},
+    // RONDEBOSCH
+    {n:"Govinda's Café (ISKCON)",area:"17 St Andrews Rd, Rondebosch",d:"Best rotis in the area. Vegetarian. Tue–Sat 12–6pm",time:"Daytime"},
+    // CONSTANTIA
+    {n:"Spirit Café",area:"Constantia Village",d:"Plant-based meals. Next door to YogaSpirit",time:"Daily"},
+    // STELLENBOSCH
+    {n:"Juvenate Conscious Eatery",area:"Stellenbosch",d:"Fully vegan/vegetarian/gluten-free",time:"Daily"},
+    {n:"Hygge Hygge",area:"11 Church St, Stellenbosch",d:"Vegan burgers, falafel, hummus",time:"Daily"},
+    {n:"Basic Bistro",area:"Church St, Stellenbosch",d:"7 vegan meals on menu",time:"Daily"},
   ]},
 ];
 
