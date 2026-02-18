@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cuenca Events Calendar</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#F7F3ED;--card:#FFFDF9;--border:#E2D9CC;--text:#33291E;--mid:#7A6B58;--light:#A09282;--accent:#B85C38;--radius:10px}
+body{font-family:'DM Sans',-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.5;-webkit-font-smoothing:antialiased}
+
+.header{background:linear-gradient(135deg,#6B3A2A 0%,#B85C38 55%,#D4845A 100%);color:#fff;padding:1.4rem 1.25rem 1rem;position:sticky;top:0;z-index:100;box-shadow:0 4px 20px rgba(107,58,42,0.35)}
+.header h1{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:600;letter-spacing:-0.02em}
+.header .sub{font-size:0.7rem;opacity:0.55;margin-bottom:0.4rem;letter-spacing:0.02em}
+.header-row{display:flex;gap:0.5rem;align-items:center;margin-top:0.4rem}
+.month-nav{display:flex;align-items:center;gap:0.2rem}
+.month-btn{background:rgba(255,255,255,0.15);border:none;border-radius:6px;color:#fff;padding:0.28rem 0.5rem;cursor:pointer;font-size:0.78rem;font-weight:700;transition:background 0.15s}
+.month-btn:hover{background:rgba(255,255,255,0.3)}
+.month-btn:disabled{opacity:0.25;cursor:default}
+.month-label{font-size:0.85rem;font-weight:700;min-width:115px;text-align:center}
+.ev-counter{margin-left:auto;font-size:0.65rem;font-weight:600;background:rgba(255,255,255,0.15);padding:0.15rem 0.45rem;border-radius:12px}
+
+.filter-panel{background:var(--card);border-bottom:1px solid var(--border);position:sticky;top:82px;z-index:90;padding:0.4rem 0.75rem 0.45rem}
+.filter-section{display:flex;gap:0.25rem;align-items:center;flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;margin-bottom:0.3rem}
+.filter-section::-webkit-scrollbar{display:none}
+.filter-section:last-child{margin-bottom:0}
+.filter-label{font-size:0.58rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--light);flex-shrink:0;margin-right:0.15rem;min-width:32px}
+.ftag{display:flex;align-items:center;gap:0.22rem;padding:0.18rem 0.45rem;border-radius:14px;border:1.5px solid var(--border);background:var(--card);font-size:0.62rem;font-weight:600;white-space:nowrap;cursor:pointer;user-select:none;transition:all 0.12s;color:var(--mid)}
+.ftag .dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;transition:opacity 0.1s}
+.ftag.off{opacity:0.3}
+.select-btns{display:flex;gap:0.2rem;flex-shrink:0;margin-left:0.15rem}
+.sel-btn{padding:0.15rem 0.4rem;border-radius:10px;border:1px solid var(--border);background:var(--bg);font-size:0.55rem;font-weight:700;color:var(--mid);cursor:pointer;white-space:nowrap;transition:all 0.1s}
+.sel-btn:hover{background:var(--border)}
+
+main{max-width:760px;margin:0 auto;padding:0.4rem 0.75rem 4rem}
+.date-group{margin-bottom:0.6rem}
+.date-header{display:flex;align-items:baseline;gap:0.5rem;padding:0.35rem 0 0.2rem;border-bottom:2px solid var(--text);margin-bottom:0.25rem;position:sticky;top:148px;background:var(--bg);z-index:10}
+.date-day{font-family:'Playfair Display',serif;font-size:1rem;font-weight:600}
+.date-weekday{font-size:0.68rem;font-weight:600;color:var(--light);text-transform:uppercase;letter-spacing:0.04em}
+.date-badge{font-size:0.55rem;font-weight:700;color:#fff;padding:0.06rem 0.3rem;border-radius:4px;margin-left:auto}
+.date-badge.today{background:#B85C38}
+.date-badge.tomorrow{background:#D4845A}
+
+.events-list{display:flex;flex-direction:column;gap:0.2rem}
+.ev{display:flex;gap:0.45rem;padding:0.45rem 0.55rem;background:var(--card);border-radius:var(--radius);border-left:4px solid transparent;transition:all 0.1s;align-items:flex-start}
+.ev:hover{box-shadow:0 2px 8px rgba(0,0,0,0.05);transform:translateY(-1px)}
+.ev.hidden{display:none}
+.ev-time{flex-shrink:0;width:44px;text-align:center;padding-top:0.08rem}
+.ev-time .t{font-size:0.72rem;font-weight:700;line-height:1.2}
+.ev-time .p{font-size:0.55rem;font-weight:600;color:var(--light);text-transform:uppercase}
+.ev-body{flex:1;min-width:0}
+.ev-name{font-weight:700;font-size:0.8rem;line-height:1.22}
+.ev-name a{color:inherit;text-decoration:none;border-bottom:1px dashed var(--border);transition:border-color 0.15s,color 0.15s}
+.ev-name a:hover{color:#B85C38;border-bottom-color:#B85C38}
+.ev-meta{font-size:0.68rem;color:var(--mid);line-height:1.3;margin-top:0.03rem}
+.ev-tags{display:flex;gap:0.18rem;flex-wrap:wrap;margin-top:0.18rem}
+.ev-cat{font-size:0.55rem;font-weight:700;padding:0.06rem 0.32rem;border-radius:3px;text-transform:uppercase;letter-spacing:0.03em}
+.ev-loc{font-size:0.55rem;font-weight:500;padding:0.06rem 0.28rem;border-radius:3px;background:#EDE7DD;color:var(--mid)}
+.ev-price{font-size:0.55rem;font-weight:600;padding:0.06rem 0.28rem;border-radius:3px;background:#E2F5E9;color:#1B7A3D}
+.ev-freq{font-size:0.52rem;font-weight:600;padding:0.05rem 0.25rem;border-radius:3px}
+.ev-freq.oneoff{background:#FFE8D6;color:#A0522D}
+.ev-freq.special{background:#E8D5F5;color:#6B3FA0}
+.ev-freq.daily{background:#D4EDDA;color:#155724}
+.ev-freq.biweekly{background:#FFF3CD;color:#856404}
+
+/* LINK ICONS ROW */
+.ev-links{display:flex;gap:4px;flex-wrap:wrap;margin-top:4px}
+.el{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:5px;text-decoration:none;transition:all 0.12s;flex-shrink:0;border:1px solid var(--border);background:var(--card)}
+.el:hover{transform:scale(1.12)}
+.el svg{width:12px;height:12px}
+.el.maps{color:#E07850;border-color:#E0CEC4}.el.maps:hover{background:#E07850;color:#fff;border-color:#E07850}
+.el.web{color:#5E8B5E;border-color:#C4D4C4}.el.web:hover{background:#5E8B5E;color:#fff;border-color:#5E8B5E}
+.el.ig{color:#C13584;border-color:#E4C4D8}.el.ig:hover{background:#C13584;color:#fff;border-color:#C13584}
+.el.fb{color:#1877F2;border-color:#B8CAE8}.el.fb:hover{background:#1877F2;color:#fff;border-color:#1877F2}
+.el.email{color:#5E6B8B;border-color:#C4CAD4}.el.email:hover{background:#5E6B8B;color:#fff;border-color:#5E6B8B}
+.el.wa{color:#25D366;border-color:#B8E8CA}.el.wa:hover{background:#25D366;color:#fff;border-color:#25D366}
+.el.phone{color:#7A6B58;border-color:#D4CCBF}.el.phone:hover{background:#7A6B58;color:#fff;border-color:#7A6B58}
+
+.gcal{flex-shrink:0;display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:6px;border:1.5px solid var(--border);background:var(--card);cursor:pointer;transition:all 0.12s;margin-top:0.08rem;text-decoration:none}
+.gcal:hover{border-color:#B85C38;background:#FDF1E8}
+.gcal svg{width:13px;height:13px}
+
+.empty-state{text-align:center;padding:3rem 1rem;color:var(--light);font-size:0.85rem}
+
+@media(max-width:480px){
+  .header{padding:1.1rem 0.8rem 0.7rem}
+  .header h1{font-size:1.15rem}
+  .filter-panel{top:74px;padding:0.35rem 0.6rem 0.4rem}
+  .date-header{top:140px}
+  main{padding:0.3rem 0.5rem 3rem}
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Cuenca Events Calendar</h1>
+  <p class="sub">All neighborhoods · Recurring + special events · Feb–Jul 2026</p>
+  <div class="header-row">
+    <div class="month-nav">
+      <button class="month-btn" id="prevMonth">◂</button>
+      <div class="month-label" id="monthLabel"></div>
+      <button class="month-btn" id="nextMonth">▸</button>
+    </div>
+    <div class="ev-counter"><span id="evCount">0</span> events</div>
+  </div>
+</div>
+
+<div class="filter-panel">
+  <div class="filter-section" id="catFilters"><span class="filter-label">Type</span></div>
+  <div class="filter-section" id="hoodFilters"><span class="filter-label">Area</span></div>
+</div>
+
+<main id="main"></main>
+
+<script>
+const CATS={
+  music:{l:"Music",c:"#B85C38",bg:"#FDF1E8"},
+  wellness:{l:"Wellness",c:"#7B5EA7",bg:"#F3EEF8"},
+  family:{l:"Family",c:"#D4845A",bg:"#FDF5EF"},
+  spiritual:{l:"Spiritual",c:"#8A5BA5",bg:"#F2ECF6"},
+  market:{l:"Markets",c:"#C0392B",bg:"#FBEAE8"},
+  fitness:{l:"Fitness",c:"#3C8F3C",bg:"#E7F3E7"},
+  ideas:{l:"Ideas",c:"#4A5899",bg:"#ECEEF8"},
+  creative:{l:"Creative",c:"#A0522D",bg:"#F8EDE5"},
+  social:{l:"Social",c:"#27AE60",bg:"#E5F6EC"},
+  food:{l:"Food & Drink",c:"#C2553A",bg:"#FAEAE6"},
+};
+const HOODS={
+  centro:{l:"Centro Histórico"},vergel:{l:"El Vergel"},huayna:{l:"Huayna-Cápac"},
+  sucre:{l:"Sucre"},gringolandia:{l:"Gringolandia"},banos:{l:"Baños"},
+  yanuncay:{l:"Yanuncay"},outside:{l:"Outside Cuenca"},various:{l:"Various"},
+};
+
+function locToHood(loc){
+  const l=(loc||'').toLowerCase();
+  if(/centro|calle larga|parque calderón|calderon|simon bolívar|bolivar|hermano miguel|gran colombia|mariscal lamar|luis cordero|presidente|sakura|eucalyptus|guarida|wunderbar|common ground|joes|joe's|craft brew|inca bar|kamaq|joyapa|carolina|proceso|mata de fr/i.test(l))return 'centro';
+  if(/vergel|remigio crespo|parque de la madre|parque.*paraí|paraiso|impaqto|c-tres/i.test(l))return 'vergel';
+  if(/huayna|paucarbamba|pumapungo|shakti|teatro pump/i.test(l))return 'huayna';
+  if(/sucre|adhikara|tamariz/i.test(l))return 'sucre';
+  if(/ordóñez|ordonez|gringolandia|cedros|claveles|jazz society/i.test(l))return 'gringolandia';
+  if(/baños|piedra de agua|novaqua|balneario/i.test(l))return 'banos';
+  if(/yanuncay|botánic/i.test(l))return 'yanuncay';
+  if(/cajas|cojitambo|girón|ingapirca|gualaceo|yunguilla|montañita|gaia|outside|stadium|coliseo|airport|carlos cueva/i.test(l))return 'outside';
+  return 'various';
+}
+
+// SVG icon fragments
+const IC={
+  maps:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>',
+  web:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>',
+  ig:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>',
+  fb:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>',
+  email:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 6L2 7"/></svg>',
+  wa:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18a8 8 0 0 1-4.236-1.209l-.304-.18-2.866.852.852-2.866-.18-.304A8 8 0 1 1 12 20z"/></svg>',
+  phone:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>',
+};
+
+// ── EVENTS DATA ──
+const REC=[
+  // MONDAY
+  {day:0,time:"7:00am",s:700,n:"Shakti Kriya Yoga",loc:"Shakti Yoga, Paucarbamba 2-24, Huayna-Cápac",d:"Shiva Kriya in Babaji tradition. Mon–Thu 7am. First class free",cat:"wellness",freq:"w",
+    maps:"Escuela+Valores+Divinos+Cuenca+Ecuador",phone:"+593 07 404 3834"},
+  {day:0,time:"6:00pm",s:1800,n:"Nia Technique (English w/ Lisa)",loc:"Adhikara, Remigio Tamariz Crespo 2-40, Sucre",d:"Dance-movement in English. Drop-in $7–8",cat:"wellness",price:"$7–8",freq:"w",
+    ig:"centro_adhikara",maps:"Centro+de+Transformacion+Adhikara+Cuenca",phone:"099 022 6088"},
+  {day:0,time:"7:30pm",s:1930,n:"Hatha Advanced Yoga",loc:"Adhikara, Sucre",d:"Advanced practice. Monthly pass $40 (8 classes) / $60 (12)",cat:"wellness",price:"$7–8",freq:"w",
+    ig:"centro_adhikara",phone:"099 022 6088"},
+  {day:0,time:"7:30pm",s:1930,n:"Running Motivation Ec",loc:"Parque Paraíso, El Vergel",d:"Mon/Wed Paraíso, Tue/Thu/Fri Parque de la Madre. $50/yr incl trainers",cat:"fitness",price:"$50/yr",freq:"w",
+    maps:"Parque+El+Paraiso+Cuenca+Ecuador"},
+  {day:0,time:"8:00pm",s:2000,n:"Bailoterapia (Free Dance Fitness)",loc:"Parque de la Madre, El Vergel",d:"Free outdoor dance fitness. Mon–Fri. Very local, high energy",cat:"fitness",price:"Free",freq:"w",
+    maps:"Parque+de+la+Madre+Cuenca+Ecuador"},
+
+  // TUESDAY
+  {day:1,time:"7:30am",s:730,n:"Tai Chi at Parque de la Madre",loc:"Parque de la Madre, El Vergel",d:"Tue/Wed/Thu 7:30am, Sat 8am. Gentle morning practice",cat:"wellness",price:"$2",freq:"w",
+    maps:"Parque+de+la+Madre+Cuenca+Ecuador"},
+  {day:1,time:"5:00pm",s:1700,n:"Shakti Kriya Yoga (Afternoon)",loc:"Shakti Yoga, Huayna-Cápac",d:"Mon–Thu afternoon class. Babaji tradition",cat:"wellness",freq:"w",
+    phone:"+593 07 404 3834"},
+  {day:1,time:"6:00pm",s:1800,n:"Hatha Flow Yoga",loc:"Adhikara, Sucre",d:"Tue & Thu 6pm. Drop-in $7–8",cat:"wellness",price:"$7–8",freq:"w",
+    ig:"centro_adhikara",phone:"099 022 6088"},
+  {day:1,time:"7:30pm",s:1930,n:"Running Motivation Ec",loc:"Parque de la Madre, El Vergel",d:"Tue/Thu/Fri evening runs with trainers",cat:"fitness",price:"$50/yr",freq:"w",
+    maps:"Parque+de+la+Madre+Cuenca+Ecuador"},
+  {day:1,time:"8:00pm",s:2000,n:"Wunderbar Live Jazz",loc:"Wunderbar Café, Parque Calderón, Centro",d:"Live jazz from 8pm every Tuesday. On the main square",cat:"music",freq:"w",
+    maps:"Wunderbar+Cafe+Cuenca+Ecuador",web:"https://www.instagram.com/wunderbarcafe/"},
+  {day:1,time:"8:00pm",s:2000,n:"BiciCuenca Cycling Club",loc:"Various routes, Cuenca",d:"Tue & Thu 8pm. Advanced and leisure routes available",cat:"fitness",freq:"w"},
+  {day:1,time:"8:00pm",s:2000,n:"Bailoterapia (Free Dance)",loc:"Parque de la Madre, El Vergel",d:"Free outdoor dance fitness nightly",cat:"fitness",price:"Free",freq:"w",
+    maps:"Parque+de+la+Madre+Cuenca+Ecuador"},
+
+  // WEDNESDAY
+  {day:2,time:"7:30am",s:730,n:"Tai Chi at Parque de la Madre",loc:"Parque de la Madre, El Vergel",d:"Gentle morning practice. $2/class",cat:"wellness",price:"$2",freq:"w",
+    maps:"Parque+de+la+Madre+Cuenca+Ecuador"},
+  {day:2,time:"12:00pm",s:1200,n:"Writers Collective Critique Group",loc:"Sunrise Café, Calle Larga, Centro",d:"Weekly critique. Cuenca Writers Collective — bring your work",cat:"ideas",freq:"w",
+    email:"cuencawriterscollective@gmail.com",maps:"Sunrise+Cafe+Calle+Larga+Cuenca+Ecuador"},
+  {day:2,time:"6:00pm",s:1800,n:"Jazz Society Dinner Concert",loc:"Jazz Society Café, Los Cedros y Los Claveles, Gringolandia",d:"Wed/Fri/Sat 6–10pm. Gourmet food + live jazz. Reservations by email",cat:"music",freq:"w",
+    web:"https://www.jazzsocietyofecuador.com/",email:"jazzsocietyofecuador@gmail.com",maps:"Jazz+Society+Cafe+Cuenca+Ecuador"},
+  {day:2,time:"6:00pm",s:1800,n:"Fly Yoga (Aerial)",loc:"Adhikara, Sucre",d:"Aerial yoga. Drop-in $7–8",cat:"wellness",price:"$7–8",freq:"w",
+    ig:"centro_adhikara"},
+  {day:2,time:"Evening",s:1900,n:"Vipassana Group Meditation",loc:"Various, Cuenca",d:"S.N. Goenka tradition. Weekly evening sits. By donation",cat:"spiritual",price:"Free",freq:"w",
+    web:"https://dhamma.org"},
+  {day:2,time:"7:30pm",s:1930,n:"Vinyasa Yoga",loc:"Adhikara, Sucre",d:"Evening flow class. Drop-in $7–8",cat:"wellness",price:"$7–8",freq:"w",
+    ig:"centro_adhikara"},
+  {day:2,time:"Afternoon",s:1400,n:"Circle of Friends Cocktails",loc:"La Craft Brewery, Centro Histórico",d:"Weekly social. 1,800+ member group",cat:"social",freq:"w",
+    fb:"CuencaCircleOfFriends",maps:"La+Craft+Brewery+Cuenca+Ecuador"},
+  {day:2,time:"7:30pm",s:1930,n:"Running Motivation Ec",loc:"Parque Paraíso, El Vergel",d:"Mon/Wed at Paraíso",cat:"fitness",price:"$50/yr",freq:"w"},
+  {day:2,time:"8:00pm",s:2000,n:"Bailoterapia (Free Dance)",loc:"Parque de la Madre, El Vergel",d:"Free outdoor dance fitness",cat:"fitness",price:"Free",freq:"w"},
+
+  // THURSDAY
+  {day:3,time:"7:30am",s:730,n:"Tai Chi at Parque de la Madre",loc:"Parque de la Madre, El Vergel",d:"Gentle morning class. $2",cat:"wellness",price:"$2",freq:"w",
+    maps:"Parque+de+la+Madre+Cuenca+Ecuador"},
+  {day:3,time:"Morning",s:900,n:"Circle of Friends Breakfast",loc:"Kolo Restaurant, Cuenca",d:"Weekly breakfast meetup. English-speaking community",cat:"social",freq:"w",
+    fb:"CuencaCircleOfFriends"},
+  {day:3,time:"5:00pm",s:1700,n:"Cuenca for Expats Lectures",loc:"Zoom / In-person, Cuenca",d:"Mon–Thu 5–6pm. University professors on history, culture & literature",cat:"ideas",freq:"w"},
+  {day:3,time:"6:00pm",s:1800,n:"Hatha Flow Yoga",loc:"Adhikara, Sucre",d:"Thu 6pm. Drop-in $7–8",cat:"wellness",price:"$7–8",freq:"w",
+    ig:"centro_adhikara"},
+  {day:3,time:"Evening",s:1900,n:"La Guarida Live Music",loc:"La Guarida, Calle Mariscal Lamar 22.23, Centro",d:"Cuenca's cultural heart. All door proceeds go to musicians",cat:"music",freq:"w",
+    fb:"LaGuaridaCuenca",maps:"La+Guarida+Cuenca+Ecuador",wa:"+593998068071"},
+  {day:3,time:"4:00pm",s:1600,n:"Circle of Friends at Inca Bar",loc:"Inca Bar & Lounge, Centro Histórico",d:"Weekly social gathering. All welcome",cat:"social",freq:"w",
+    fb:"CuencaCircleOfFriends",maps:"Inca+Bar+Cuenca+Ecuador"},
+  {day:3,time:"8:00pm",s:2000,n:"BiciCuenca Cycling Club",loc:"Various routes, Cuenca",d:"Thu 8pm ride. Advanced + leisure routes",cat:"fitness",freq:"w"},
+  {day:3,time:"8:00pm",s:2000,n:"Bailoterapia (Free Dance)",loc:"Parque de la Madre, El Vergel",d:"Free outdoor dance fitness",cat:"fitness",price:"Free",freq:"w"},
+  {day:3,time:"Evening",s:1900,n:"Wunderbar Live Bands",loc:"Wunderbar Café, Parque Calderón, Centro",d:"Thu–Sat bands. Central square location",cat:"music",freq:"w",
+    maps:"Wunderbar+Cafe+Cuenca+Ecuador"},
+  {day:3,time:"Various",s:1200,n:"Coworking Club Session",loc:"Rotating cafés, Cuenca",d:"Weekly rotating café coworking",cat:"social",freq:"w",
+    wa:"+447542286196"},
+
+  // FRIDAY
+  {day:4,time:"12:00pm",s:1200,n:"Frisbee Fridays",loc:"Parque de la Madre, El Vergel",d:"Weekly casual frisbee. Very social, expat-oriented",cat:"social",price:"Free",freq:"w",
+    maps:"Parque+de+la+Madre+Cuenca+Ecuador"},
+  {day:4,time:"5:00pm",s:1700,n:"Expat Friday Meetup — Sakura",loc:"Sakura Restaurant, 3 de Noviembre, Centro",d:"By the river. Flagship weekly expat gathering",cat:"social",freq:"w",
+    maps:"Sakura+Restaurant+Cuenca+Ecuador"},
+  {day:4,time:"5:00pm",s:1700,n:"Expat Friday Meetup — Eucalyptus",loc:"Café Eucalyptus, Gran Colombia 9-41, Centro",d:"Second Friday meetup location",cat:"social",freq:"w",
+    maps:"Cafe+Eucalyptus+Cuenca+Ecuador"},
+  {day:4,time:"6:00pm",s:1800,n:"Jazz Society Dinner Concert",loc:"Jazz Society Café, Gringolandia",d:"Fri 6–10pm. Live jazz + gourmet menu by Chef Debby Degamo",cat:"music",freq:"w",
+    web:"https://www.jazzsocietyofecuador.com/",email:"jazzsocietyofecuador@gmail.com"},
+  {day:4,time:"6:30pm",s:1830,n:"Kirtan at Adhikara",loc:"Adhikara, Sucre",d:"Weekly kirtan (devotional chanting). Community spiritual practice",cat:"spiritual",freq:"w",
+    ig:"centro_adhikara",maps:"Centro+de+Transformacion+Adhikara+Cuenca",phone:"099 022 6088"},
+  {day:4,time:"Evening",s:1900,n:"La Guarida Tasting Menu Friday",loc:"La Guarida, Calle Mariscal Lamar, Centro",d:"Gourmet tasting menu. Reservations recommended",cat:"food",freq:"w",
+    fb:"LaGuaridaCuenca",wa:"+593998068071"},
+  {day:4,time:"7:30pm",s:1930,n:"Running Motivation Ec",loc:"Parque de la Madre, El Vergel",d:"Fri at Parque de la Madre. Trainers included",cat:"fitness",price:"$50/yr",freq:"w"},
+  {day:4,time:"8:00pm",s:2000,n:"Bailoterapia (Free Dance)",loc:"Parque de la Madre, El Vergel",d:"Free outdoor dance fitness",cat:"fitness",price:"Free",freq:"w"},
+  {day:4,time:"Evening",s:1900,n:"Wunderbar Live Bands",loc:"Wunderbar Café, Parque Calderón, Centro",d:"Thu–Sat evening bands",cat:"music",freq:"w",
+    maps:"Wunderbar+Cafe+Cuenca+Ecuador"},
+
+  // SATURDAY
+  {day:5,time:"8:00am",s:800,n:"Tai Chi at Parque de la Madre",loc:"Parque de la Madre, El Vergel",d:"Saturday 8am class. $2",cat:"wellness",price:"$2",freq:"w",
+    maps:"Parque+de+la+Madre+Cuenca+Ecuador"},
+  {day:5,time:"Morning",s:930,n:"Expat Families Saturday Playgroup",loc:"Parque de la Madre, El Vergel",d:"Weekly meetup for expat families with kids. Free",cat:"family",price:"Free",freq:"w",
+    fb:"groups/expatfamiliesincuenca",maps:"Parque+de+la+Madre+Cuenca+Ecuador"},
+  {day:5,time:"6:00pm",s:1800,n:"Jazz Society Dinner Concert",loc:"Jazz Society Café, Los Cedros y Los Claveles, Gringolandia",d:"Sat 6–10pm. Best live jazz in Ecuador",cat:"music",freq:"w",
+    web:"https://www.jazzsocietyofecuador.com/",email:"jazzsocietyofecuador@gmail.com",maps:"Jazz+Society+Cafe+Cuenca+Ecuador"},
+  {day:5,time:"5:00pm",s:1700,n:"Joe's Secret Garden",loc:"Joe's Secret Garden, Centro Histórico",d:"1st Sat = fried chicken day. Lovely garden seating",cat:"social",freq:"w",
+    maps:"Joes+Secret+Garden+Cuenca+Ecuador"},
+  {day:5,time:"Evening",s:1900,n:"Wunderbar Live Bands",loc:"Wunderbar Café, Parque Calderón, Centro",d:"Saturday evening bands",cat:"music",freq:"w",
+    maps:"Wunderbar+Cafe+Cuenca+Ecuador"},
+  {day:5,time:"Afternoon",s:1400,n:"Common Grounds Live Music",loc:"Common Grounds, Eduardo Crespo Malo y Gran Colombia, Centro",d:"Soul, blues, funk, rock. No cover. Big screens, pool tables",cat:"music",freq:"w",
+    maps:"Common+Grounds+Cuenca+Ecuador"},
+
+  // SUNDAY
+  {day:6,time:"Morning",s:800,n:"Free Community Yoga",loc:"Parque del Paraíso, El Vergel",d:"Shakti Yoga free Sunday class. Open to all, bring a mat",cat:"wellness",price:"Free",freq:"w",
+    maps:"Parque+El+Paraiso+Cuenca+Ecuador"},
+  {day:6,time:"8:00am",s:800,n:"Free Sunday Bike Rental",loc:"Along rivers, Cuenca",d:"City bikes 8am–1pm. Helmets + police escort provided",cat:"fitness",price:"Free",freq:"w",
+    maps:"Rio+Tomebamba+Cuenca+Ecuador"},
+  {day:6,time:"Morning",s:930,n:"Shambhala Meditation",loc:"Calle Larga 11.43, Centro Histórico",d:"Tibetan Buddhist. English & Spanish. Sitting, walking, group lunch. Donation",cat:"spiritual",price:"Free",freq:"w",
+    web:"https://cuenca.shambhala.ws",maps:"Calle+Larga+11.43+Cuenca+Ecuador"},
+  {day:6,time:"9:30am",s:930,n:"Club A Correr (Running)",loc:"Parque de la Madre, El Vergel",d:"Sunday morning run. Family-friendly pace",cat:"fitness",freq:"w",
+    maps:"Parque+de+la+Madre+Cuenca+Ecuador"},
+  {day:6,time:"Morning",s:900,n:"Circle of Friends Sunday Walk",loc:"Parque Paraíso, El Vergel",d:"Sunday morning group walk. All welcome",cat:"social",freq:"w",
+    fb:"CuencaCircleOfFriends"},
+  {day:6,time:"11:00am",s:1100,n:"Sunday Brunch at Eucalyptus",loc:"Café Eucalyptus, Gran Colombia 9-41, Centro",d:"Expat brunch gathering. Open from 11am",cat:"social",freq:"w",
+    maps:"Cafe+Eucalyptus+Cuenca+Ecuador"},
+
+  // DAILY
+  {day:-1,time:"9:00am",s:900,n:"Pumapungo Museum + Ludobiblioteca",loc:"Museo Pumapungo, Calle Larga & Huayna-Cápac",d:"FREE. 5,000+ exhibits, Inca ruins, bird rescue, children's play-library. Closed Mon",cat:"family",price:"Free",freq:"d",
+    maps:"Museo+Pumapungo+Cuenca+Ecuador"},
+  {day:-1,time:"Anytime",s:800,n:"Río Tomebamba Riverwalk",loc:"El Barranco, Centro Histórico",d:"Paved, stroller-friendly. Playgrounds every few blocks",cat:"family",price:"Free",freq:"d",
+    maps:"El+Barranco+Cuenca+Ecuador"},
+
+  // MONTHLY
+  {day:5,time:"10:00am",s:1000,n:"La Guarida Jazz Brunch",loc:"La Guarida, Calle Mariscal Lamar, Centro",d:"Last Sat monthly. 10am–1pm. Reservations essential",cat:"music",freq:"mL",
+    fb:"LaGuaridaCuenca",wa:"+593998068071"},
+  {day:6,time:"Morning",s:900,n:"Vipassana Full-Day Sit",loc:"Various, Cuenca",d:"One Sunday/month. 6-hour meditation. S.N. Goenka tradition. By donation",cat:"spiritual",price:"Free",freq:"m1",
+    web:"https://dhamma.org"},
+  {day:4,time:"8:00pm",s:2000,n:"Critical Mass Bike Ride",loc:"Various, Cuenca",d:"Last Friday monthly. Mass community cycling event",cat:"fitness",price:"Free",freq:"mL"},
+  {day:5,time:"Afternoon",s:1400,n:"Hash House Harriers Run",loc:"Various, Cuenca",d:"Full moon + one Sat/month. 5–10km, $5 incl beer. Very social, expat-focused",cat:"fitness",price:"$5",freq:"bw",
+    web:"https://cuencaalpacas.com"},
+  {day:2,time:"5:00pm",s:1700,n:"Spoken Word Night",loc:"KAMAQ Gastro Arte, Centro Histórico",d:"Monthly. Dinner 5pm, readings 6pm. ~50 audience. Cuenca Writers Collective",cat:"ideas",freq:"m1",
+    email:"cuencawriterscollective@gmail.com",maps:"KAMAQ+Cuenca+Ecuador"},
+  {day:3,time:"Evening",s:1900,n:"Tech & Tacos Meetup",loc:"Various, Cuenca",d:"Monthly. Blockchain, fintech, innovation. Sells out in 24hrs",cat:"ideas",freq:"m1"},
+];
+
+const ONEOFF=[
+  {date:"2026-02-21",time:"Evening",s:1900,n:"Devendra Banhart Concert 🎸",loc:"Teatro Pumapungo, Huayna-Cápac",d:"Indie/folk icon live. Major concert event",cat:"music",
+    maps:"Teatro+Pumapungo+Cuenca+Ecuador",web:"https://www.songkick.com/metro-areas/28650-ecuador-cuenca"},
+  {date:"2026-02-21",time:"9:00am",s:900,n:"Cuenca Open — Rubik's Cube Competition",loc:"C.C. Batán Shopping, Outside Cuenca",d:"$7 registration. 60 competitors. Fun spectator event for families",cat:"family",price:"$7",
+    web:"https://www.worldcubeassociation.org/competitions/CuencaOpen2026"},
+  {date:"2026-03-29",time:"Morning",s:900,n:"Palm Sunday — Semana Santa Begins 🌿",loc:"Centro Histórico, Cuenca",d:"Palm frond processions through historic center. Week of solemn celebration begins",cat:"spiritual",price:"Free",
+    maps:"Parque+Calderon+Cuenca+Ecuador"},
+  {date:"2026-03-31",time:"All day",s:800,n:"LATAM Galápagos Direct Flights Launch ✈️",loc:"Cuenca Airport",d:"New Cuenca↔Galápagos route. Tuesdays & Saturdays. Game-changer for family travel",cat:"family"},
+  {date:"2026-04-02",time:"Evening",s:1900,n:"Holy Thursday — Seven Churches Visit",loc:"Centro Histórico churches, Cuenca",d:"Traditional visitation of seven churches. Fanesca soup served across the city",cat:"spiritual",price:"Free"},
+  {date:"2026-04-03",time:"Morning",s:900,n:"Good Friday — Passion Procession 🕊️",loc:"Centro Histórico, Cuenca",d:"Procession of the Passion of Christ. Cucuruchos in purple robes. Most solemn event",cat:"spiritual",price:"Free",
+    maps:"Parque+Calderon+Cuenca+Ecuador"},
+  {date:"2026-04-05",time:"Morning",s:900,n:"Easter Sunday 🐣",loc:"Various churches, Cuenca",d:"Masses throughout the day. Joyful celebration of resurrection",cat:"spiritual",price:"Free"},
+  {date:"2026-04-11",time:"Evening",s:1900,n:"Andrés Cepeda Concert 🎤",loc:"Coliseo Jefferson Pérez Quezada, Outside Cuenca",d:"Major Colombian singer-songwriter. Large venue",cat:"music",
+    web:"https://www.songkick.com/metro-areas/28650-ecuador-cuenca",maps:"Coliseo+Jefferson+Perez+Cuenca+Ecuador"},
+  {date:"2026-04-12",time:"All day",s:900,n:"Cuenca Foundation Day 🎉",loc:"Centro Histórico, Cuenca",d:"City anniversary (est. 1557). Parades, cultural events, three days of civic celebration",cat:"family",price:"Free",
+    maps:"Parque+Calderon+Cuenca+Ecuador"},
+  {date:"2026-05-01",time:"Daytime",s:1000,n:"Workers' Day — National Holiday 🇪🇨",loc:"Various, Cuenca",d:"Día del Trabajo. Public holiday with parades and civic events",cat:"social",price:"Free"},
+  {date:"2026-05-24",time:"Daytime",s:1000,n:"Battle of Pichincha Day 🇪🇨",loc:"Various, Cuenca",d:"Independence holiday. Military parades, school celebrations, national pride",cat:"family",price:"Free"},
+  {date:"2026-05-30",time:"Evening",s:1900,n:"No Te Va Gustar Concert 🎸",loc:"Teatro Carlos Cueva Tamariz, Cuenca",d:"Legendary Uruguayan rock band live in Cuenca",cat:"music",
+    web:"https://www.songkick.com/metro-areas/28650-ecuador-cuenca",maps:"Teatro+Carlos+Cueva+Tamariz+Cuenca+Ecuador"},
+  {date:"2026-06-04",time:"All day",s:900,n:"Corpus Christi Festival — Day 1 🎆",loc:"Centro Histórico, Cuenca",d:"'Corpus Sweets' — fireworks, castillos, traditional candy, games. Very toddler-friendly",cat:"family",price:"Free",
+    maps:"Parque+Calderon+Cuenca+Ecuador"},
+  {date:"2026-06-05",time:"All day",s:900,n:"Corpus Christi — Day 2",loc:"Centro Histórico, Cuenca",d:"Eucharistic procession, streets lined with altars and floral displays",cat:"spiritual",price:"Free"},
+  {date:"2026-06-18",time:"All day",s:900,n:"Inti Raymi Begins ☀️",loc:"Various, Cuenca",d:"Week-long Festival of the Sun. Indigenous celebrations, traditional dances, offerings",cat:"spiritual",price:"Free"},
+  {date:"2026-06-24",time:"All day",s:900,n:"Inti Raymi — Summer Solstice 🌄",loc:"Centro Histórico, Cuenca",d:"Peak celebration. Colorful processions, offerings to the sun god, music & dance",cat:"spiritual",price:"Free",
+    maps:"Parque+Calderon+Cuenca+Ecuador"},
+  {date:"2026-07-01",time:"All day",s:900,n:"Cuenca International Film Festival 🎬",loc:"Various venues, Cuenca",d:"Annual film festival. Multiple screenings across city. International + Ecuadorian cinema",cat:"creative"},
+  {date:"2026-07-24",time:"Daytime",s:1000,n:"Simón Bolívar Day 🇪🇨",loc:"Various, Cuenca",d:"National holiday. Military parades, school celebrations",cat:"family",price:"Free"},
+];
+
+// ── UTILITIES ──
+const addDays=(d,n)=>{const r=new Date(d);r.setDate(r.getDate()+n);return r};
+const fmtDate=d=>d.toISOString().slice(0,10);
+const parseDate=s=>{const[y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d)};
+const ourDayToJS=d=>d===6?0:(d+1);
+function nthWeekday(y,m,wd,n){
+  if(n>0){const f=new Date(y,m,1);return new Date(y,m,1+(wd-f.getDay()+7)%7+(n-1)*7);}
+  const l=new Date(y,m+1,0);return new Date(y,m,l.getDate()-(l.getDay()-wd+7)%7);
+}
+
+function generateEvents(start,end){
+  const evs={};
+  const add=(ds,ev)=>{if(!evs[ds])evs[ds]=[];evs[ds].push({...ev,hood:locToHood(ev.loc)});};
+  REC.forEach(r=>{
+    if(r.freq==='d'){let c=new Date(start);while(c<=end){const dw=c.getDay();if(!(dw===1&&/closed mon/i.test(r.d))){add(fmtDate(c),r);}c=addDays(c,1);}return;}
+    if(r.freq==='w'||r.freq==='bw'){
+      const js=ourDayToJS(r.day);let c=new Date(start);
+      while(c.getDay()!==js)c=addDays(c,1);
+      const step=r.freq==='bw'?14:7;
+      while(c<=end){add(fmtDate(c),r);c=addDays(c,step);}return;
+    }
+    if(r.freq.startsWith('m')){
+      const js=ourDayToJS(r.day),w=r.freq.slice(1);
+      let m=start.getMonth(),y=start.getFullYear();
+      for(let i=0;i<8;i++){
+        const dt=nthWeekday(y,m,js,w==='L'?-1:parseInt(w));
+        if(dt>=start&&dt<=end)add(fmtDate(dt),{...r,_monthly:true});
+        m++;if(m>11){m=0;y++;}
+      }
+    }
+  });
+  ONEOFF.forEach(o=>{const dt=parseDate(o.date);if(dt>=start&&dt<=end)add(o.date,{...o,_oneoff:true});});
+  Object.keys(evs).forEach(k=>evs[k].sort((a,b)=>a.s-b.s));
+  return evs;
+}
+
+// ── STATE ──
+const MONTHS=[
+  {label:"February 2026",start:new Date(2026,1,18),end:new Date(2026,1,28)},
+  {label:"March 2026",start:new Date(2026,2,1),end:new Date(2026,2,31)},
+  {label:"April 2026",start:new Date(2026,3,1),end:new Date(2026,3,30)},
+  {label:"May 2026",start:new Date(2026,4,1),end:new Date(2026,4,31)},
+  {label:"June 2026",start:new Date(2026,5,1),end:new Date(2026,5,30)},
+  {label:"July 2026",start:new Date(2026,6,1),end:new Date(2026,6,31)},
+];
+let curMonth=0;
+let catState={};Object.keys(CATS).forEach(k=>catState[k]=true);
+let hoodState={};Object.keys(HOODS).forEach(k=>hoodState[k]=true);
+
+const DN=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+const MN=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+
+function gcalUrl(ev,ds){
+  const dt=parseDate(ds);
+  let sH=9,sM=0;const tm=(ev.time||'').match(/(\d{1,2}):?(\d{2})?\s*(am|pm)?/i);
+  if(tm){sH=parseInt(tm[1]);sM=tm[2]?parseInt(tm[2]):0;if(tm[3]&&tm[3].toLowerCase()==='pm'&&sH<12)sH+=12;if(tm[3]&&tm[3].toLowerCase()==='am'&&sH===12)sH=0;}
+  else if(/morning/i.test(ev.time))sH=9;else if(/afternoon/i.test(ev.time))sH=14;else if(/evening/i.test(ev.time))sH=19;else if(/dawn/i.test(ev.time))sH=6;else if(/daytime|all/i.test(ev.time))sH=10;
+  const p=n=>String(n).padStart(2,'0');
+  const ss=`${dt.getFullYear()}${p(dt.getMonth()+1)}${p(dt.getDate())}T${p(sH)}${p(sM)}00`;
+  const es=`${dt.getFullYear()}${p(dt.getMonth()+1)}${p(dt.getDate())}T${p(sH+2)}${p(sM)}00`;
+  return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(ev.n.replace(/[\u{1F300}-\u{1FAFF}]/gu,'').trim())}&dates=${ss}/${es}&ctz=America/Guayaquil&location=${encodeURIComponent((ev.loc||'')+', Cuenca, Ecuador')}&details=${encodeURIComponent([ev.d,ev.price?'Price: '+ev.price:'',ev.web||''].filter(Boolean).join('\n'))}`;
+}
+
+function freqLabel(ev){
+  if(ev._oneoff)return '<span class="ev-freq oneoff">One-off</span>';
+  if(ev._monthly)return '<span class="ev-freq special">Monthly</span>';
+  if(ev.freq==='bw')return '<span class="ev-freq biweekly">Bi-weekly</span>';
+  if(ev.freq==='d')return '<span class="ev-freq daily">Daily</span>';
+  return '';
+}
+
+function isVisible(ev){return catState[ev.cat]&&hoodState[ev.hood]}
+
+function buildLinks(ev){
+  let h='';
+  if(ev.maps) h+=`<a class="el maps" href="https://www.google.com/maps/search/?api=1&query=${ev.maps}" target="_blank" rel="noopener" title="Google Maps">${IC.maps}</a>`;
+  if(ev.web){const u=ev.web.startsWith('http')?ev.web:'https://'+ev.web;h+=`<a class="el web" href="${u}" target="_blank" rel="noopener" title="Website">${IC.web}</a>`;}
+  if(ev.ig) h+=`<a class="el ig" href="https://instagram.com/${ev.ig}" target="_blank" rel="noopener" title="Instagram">${IC.ig}</a>`;
+  if(ev.fb){const u=ev.fb.startsWith('http')?ev.fb:`https://www.facebook.com/${ev.fb}`;h+=`<a class="el fb" href="${u}" target="_blank" rel="noopener" title="Facebook">${IC.fb}</a>`;}
+  if(ev.email) h+=`<a class="el email" href="mailto:${ev.email}" title="Email">${IC.email}</a>`;
+  if(ev.wa) h+=`<a class="el wa" href="https://wa.me/${ev.wa.replace(/[^0-9+]/g,'')}" target="_blank" rel="noopener" title="WhatsApp">${IC.wa}</a>`;
+  if(ev.phone&&!ev.wa) h+=`<a class="el phone" href="tel:${ev.phone.replace(/\s/g,'')}" title="Phone: ${ev.phone}">${IC.phone}</a>`;
+  return h?`<div class="ev-links">${h}</div>`:'';
+}
+
+function getPrimaryUrl(ev){
+  if(ev.web)return ev.web.startsWith('http')?ev.web:'https://'+ev.web;
+  if(ev.fb){return ev.fb.startsWith('http')?ev.fb:`https://www.facebook.com/${ev.fb}`;}
+  if(ev.ig)return `https://instagram.com/${ev.ig}`;
+  if(ev.maps)return `https://www.google.com/maps/search/?api=1&query=${ev.maps}`;
+  return null;
+}
+
+function renderCard(ev,ds){
+  const c=CATS[ev.cat]||{l:'?',c:'#666',bg:'#eee'};
+  const h=HOODS[ev.hood]||{l:'Other'};
+  const pUrl=getPrimaryUrl(ev);
+  const nameHtml=pUrl?`<a href="${pUrl}" target="_blank" rel="noopener">${ev.n}</a>`:ev.n;
+  return `<div class="ev${isVisible(ev)?'':' hidden'}" data-cat="${ev.cat}" data-hood="${ev.hood}" style="border-left-color:${c.c}">
+    <div class="ev-time"><div class="t">${(ev.time||'').replace(/am/i,'').replace(/pm/i,'')}</div><div class="p">${/am/i.test(ev.time)?'AM':/pm/i.test(ev.time)?'PM':''}</div></div>
+    <div class="ev-body">
+      <div class="ev-name">${nameHtml}</div>
+      <div class="ev-meta">${ev.d||''}</div>
+      <div class="ev-tags">
+        <span class="ev-cat" style="background:${c.bg};color:${c.c}">${c.l}</span>
+        <span class="ev-loc">${h.l}</span>
+        ${ev.price?`<span class="ev-price">${ev.price}</span>`:''}
+        ${freqLabel(ev)}
+      </div>
+      ${buildLinks(ev)}
+    </div>
+    <a class="gcal" href="${gcalUrl(ev,ds)}" target="_blank" rel="noopener" title="Add to Google Calendar">
+      <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="${c.c}" stroke-width="2"/><path d="M3 10h18" stroke="${c.c}" stroke-width="2"/><path d="M8 2v4M16 2v4" stroke="${c.c}" stroke-width="2" stroke-linecap="round"/><path d="M8 14h2v2H8zM14 14h2v2h-2z" fill="${c.c}"/></svg>
+    </a>
+  </div>`;
+}
+
+function render(){
+  const mo=MONTHS[curMonth];
+  document.getElementById('monthLabel').textContent=mo.label;
+  document.getElementById('prevMonth').disabled=curMonth===0;
+  document.getElementById('nextMonth').disabled=curMonth===MONTHS.length-1;
+  const evs=generateEvents(mo.start,mo.end);
+  const dates=Object.keys(evs).sort();
+  const today=fmtDate(new Date()),tmrw=fmtDate(addDays(new Date(),1));
+  let html='',total=0;
+  dates.forEach(ds=>{
+    const dayEvs=evs[ds];
+    const vis=dayEvs.filter(isVisible).length;
+    if(!vis)return;
+    total+=vis;
+    const dt=parseDate(ds);
+    let badge='';
+    if(ds===today)badge='<span class="date-badge today">Today</span>';
+    else if(ds===tmrw)badge='<span class="date-badge tomorrow">Tomorrow</span>';
+    html+=`<div class="date-group"><div class="date-header"><span class="date-day">${dt.getDate()} ${MN[dt.getMonth()]}</span><span class="date-weekday">${DN[dt.getDay()]}</span>${badge}</div><div class="events-list">${dayEvs.map(e=>renderCard(e,ds)).join('')}</div></div>`;
+  });
+  if(!html)html='<div class="empty-state">No events match your filters for this month</div>';
+  document.getElementById('main').innerHTML=html;
+  document.getElementById('evCount').textContent=total;
+}
+
+function buildFilters(){
+  const cf=document.getElementById('catFilters');
+  cf.innerHTML='<span class="filter-label">Type</span>'+
+    Object.entries(CATS).map(([k,c])=>`<span class="ftag" data-cat="${k}"><span class="dot" style="background:${c.c}"></span>${c.l}</span>`).join('')+
+    '<span class="select-btns"><span class="sel-btn" id="selAllCat">All</span><span class="sel-btn" id="selNoneCat">None</span></span>';
+  cf.querySelectorAll('.ftag').forEach(t=>t.addEventListener('click',()=>{
+    const k=t.dataset.cat;catState[k]=!catState[k];t.classList.toggle('off');render();
+  }));
+  document.getElementById('selAllCat').addEventListener('click',()=>{Object.keys(CATS).forEach(k=>catState[k]=true);cf.querySelectorAll('.ftag').forEach(t=>t.classList.remove('off'));render();});
+  document.getElementById('selNoneCat').addEventListener('click',()=>{Object.keys(CATS).forEach(k=>catState[k]=false);cf.querySelectorAll('.ftag').forEach(t=>t.classList.add('off'));render();});
+
+  const hf=document.getElementById('hoodFilters');
+  hf.innerHTML='<span class="filter-label">Area</span>'+
+    Object.entries(HOODS).map(([k,h])=>`<span class="ftag" data-hood="${k}">${h.l}</span>`).join('')+
+    '<span class="select-btns"><span class="sel-btn" id="selAllHood">All</span><span class="sel-btn" id="selNoneHood">None</span></span>';
+  hf.querySelectorAll('.ftag').forEach(t=>t.addEventListener('click',()=>{
+    const k=t.dataset.hood;hoodState[k]=!hoodState[k];t.classList.toggle('off');render();
+  }));
+  document.getElementById('selAllHood').addEventListener('click',()=>{Object.keys(HOODS).forEach(k=>hoodState[k]=true);hf.querySelectorAll('.ftag').forEach(t=>t.classList.remove('off'));render();});
+  document.getElementById('selNoneHood').addEventListener('click',()=>{Object.keys(HOODS).forEach(k=>hoodState[k]=false);hf.querySelectorAll('.ftag').forEach(t=>t.classList.add('off'));render();});
+}
+
+document.getElementById('prevMonth').addEventListener('click',()=>{if(curMonth>0){curMonth--;render();}});
+document.getElementById('nextMonth').addEventListener('click',()=>{if(curMonth<MONTHS.length-1){curMonth++;render();}});
+
+const now=new Date();
+if(now.getFullYear()===2026&&now.getMonth()>=1){const mi=now.getMonth()-1;if(mi>=0&&mi<MONTHS.length)curMonth=mi;}
+
+buildFilters();
+render();
+</script>
+</body>
+</html>

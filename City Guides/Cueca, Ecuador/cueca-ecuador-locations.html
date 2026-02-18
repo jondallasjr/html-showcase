@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cuenca, Ecuador — Family Relocation Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{background:#F5F0E8;font-family:'DM Sans',Helvetica,sans-serif;color:#2C2418;min-height:100vh}
+.header{background:linear-gradient(145deg,#2C2418 0%,#4A3728 60%,#3D2E1F 100%);padding:40px 20px 28px;text-align:center;position:relative;overflow:hidden}
+.header::before{content:'';position:absolute;inset:0;opacity:.04;background-image:repeating-linear-gradient(45deg,transparent,transparent 20px,rgba(255,255,255,.15) 20px,rgba(255,255,255,.15) 22px)}
+.header *{position:relative;z-index:1}
+.header .sub{font-size:11px;color:#C4956A;letter-spacing:.2em;text-transform:uppercase;margin-bottom:6px;font-weight:500}
+.header h1{font-family:'DM Serif Display',Georgia,serif;font-size:clamp(28px,7vw,48px);color:#FDFBF7;margin:0 0 6px;font-weight:400;line-height:1.1}
+.header .meta{color:#B8A892;font-size:13px}
+.sticky-bar{position:sticky;top:0;z-index:100;background:rgba(245,240,232,.96);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid #D4C9B8}
+.top-row{padding:10px 12px 6px;display:flex;gap:6px;align-items:center}
+.search-wrap{position:relative;flex:1;min-width:0}
+.search-wrap svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);opacity:.35}
+.search-wrap input{width:100%;padding:8px 10px 8px 30px;border-radius:100px;border:1px solid #D4C9B8;background:#FDFBF7;font-size:14px;font-family:'DM Sans',sans-serif;color:#2C2418;outline:none}
+.icon-btn{display:flex;align-items:center;gap:3px;flex-shrink:0;padding:8px 10px;border-radius:100px;cursor:pointer;font-size:14px;border:1px solid #D4C9B8;background:#FDFBF7;font-family:'DM Sans',sans-serif;transition:all .15s}
+.fav-btn{color:#C4956A}.fav-btn.active{background:#C4956A;color:#fff;border-color:#C4956A;font-weight:600}
+.filter-toggle{font-size:13px;font-weight:500;color:#5C5043}.filter-toggle.has-active{background:#5E6B8B;color:#fff;border-color:#5E6B8B}
+.badge-count{font-size:10px;font-weight:700}
+.filter-drawer{overflow:hidden;transition:max-height .3s ease,opacity .2s ease;max-height:0;opacity:0;padding:0 12px}
+.filter-drawer.open{max-height:700px;opacity:1;padding:4px 12px 12px}
+.fd-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px}
+.fd-row span{font-size:10px;color:#8B7E6E;text-transform:uppercase;letter-spacing:.1em;font-weight:600}
+.fd-actions{display:flex;gap:2px}.fd-actions button{font-size:10px;color:#8B7E6E;background:none;border:1px solid transparent;cursor:pointer;padding:2px 8px;font-family:'DM Sans',sans-serif;border-radius:100px;transition:all .15s;font-weight:500}
+.fd-actions button:hover{background:#E8E0D4}.fd-actions button.lit{color:#5E6B8B;background:#DDE3F0;border-color:#B8C4DC}
+.scroll-row{display:flex;gap:6px;overflow-x:auto;padding-bottom:6px;-webkit-overflow-scrolling:touch;scrollbar-width:none}.scroll-row::-webkit-scrollbar{display:none}
+.fd-section{margin-bottom:10px}
+.clear-all{margin-top:8px;padding:6px 0;border-radius:100px;cursor:pointer;font-size:11px;background:transparent;color:#8B7E6E;border:1px dashed #C4B8A8;font-family:'DM Sans',sans-serif;width:100%}
+.pill{display:inline-flex;align-items:center;gap:4px;padding:6px 12px;border-radius:100px;cursor:pointer;font-size:12px;font-family:'DM Sans',sans-serif;font-weight:400;white-space:nowrap;flex-shrink:0;background:#FDFBF7;color:#6B5D4E;border:1px solid #D4C9B8;transition:all .15s}
+.pill.active{font-weight:600;color:#fff}.pill .pc{font-size:10px;padding:0 5px;border-radius:100px;line-height:16px;background:#EDE7DD;color:#8B7E6E;font-weight:600}.pill.active .pc{background:rgba(255,255,255,.25);color:#fff}
+.results{max-width:900px;margin:0 auto;padding:14px 12px 80px}
+.results-count{font-size:12px;color:#8B7E6E;margin-bottom:14px;padding:0 4px}
+.cat-header{display:flex;align-items:center;gap:8px;margin-bottom:10px;padding-bottom:8px}
+.cat-header .ci{font-size:20px}.cat-header h2{margin:0;font-family:'DM Serif Display',Georgia,serif;font-size:18px;color:#2C2418;font-weight:400;flex:1}.cat-header .badge{font-size:11px;color:#8B7E6E;background:#EDE7DD;padding:1px 8px;border-radius:100px;flex-shrink:0}
+.cat-group{margin-bottom:24px}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,360px),1fr));gap:10px}
+.card{background:#FDFBF7;border-radius:12px;padding:16px;position:relative;border:1px solid #E8E0D4;box-shadow:0 1px 3px rgba(0,0,0,.03);transition:transform .15s,box-shadow .15s}
+.card.fav{border:1.5px solid rgba(196,149,106,.4);box-shadow:0 0 0 1px rgba(196,149,106,.13),0 2px 8px rgba(0,0,0,.05)}
+.fav-star{position:absolute;top:12px;right:12px;background:none;border:none;cursor:pointer;font-size:22px;padding:6px;line-height:1;color:#ccc;transition:color .15s}.fav-star.active{color:#C4956A}
+.card-tr{display:flex;align-items:flex-start;gap:7px;margin-bottom:4px;padding-right:36px}
+.card-tr .ci{font-size:16px;flex-shrink:0;margin-top:1px}.card-tr h3{margin:0;font-size:15px;font-family:'DM Serif Display',Georgia,serif;color:#2C2418;font-weight:400;line-height:1.3}
+.card-tags{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:8px;margin-left:23px}
+.tag{font-size:10px;padding:1px 7px;border-radius:100px;font-family:'DM Sans',sans-serif;font-weight:500}.tag.sched{background:#EDE7DD;color:#7B6E5E;font-weight:400}
+.card p{margin:0 0 12px;font-size:13px;line-height:1.55;color:#5C5043}
+.card-links{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.lb{display:inline-flex;align-items:center;gap:4px;font-size:11px;text-decoration:none;padding:4px 10px;border-radius:100px;font-family:'DM Sans',sans-serif;font-weight:500;transition:all .15s}
+.lb.m{color:#8B6F47;background:#FAF6EF;border:1px solid #D4C9B8}.lb.w{color:#6B8E6B;background:#F6FAF6;border:1px solid #C4D4C4}.lb.i{color:#8B5E7B;background:#FAF6FA;border:1px solid #D4C4D4}.lb.e{color:#5E6B8B;background:#F6F6FA;border:1px solid #C4C4D4}
+.ci-s{font-size:11px;color:#8B8078}
+.empty{text-align:center;padding:48px 20px;color:#8B7E6E}.empty .ei{font-size:40px;margin-bottom:10px;opacity:.4}
+.footer{background:#2C2418;padding:18px 16px;text-align:center;color:#6B5D4E;font-size:11px}
+@media(hover:hover){.lb.m:hover{background:#8B6F47;color:#fff;border-color:#8B6F47}.lb.w:hover{background:#6B8E6B;color:#fff;border-color:#6B8E6B}.lb.i:hover{background:#8B5E7B;color:#fff;border-color:#8B5E7B}.lb.e:hover{background:#5E6B8B;color:#fff;border-color:#5E6B8B}.card:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(0,0,0,.08)!important}}
+@media(min-width:768px){.filter-drawer{max-height:none!important;opacity:1!important;padding:4px 24px 16px!important}.filter-toggle{display:none!important}.scroll-row{flex-wrap:wrap;overflow-x:visible}.top-row{padding:10px 24px 6px}.results{padding:14px 24px 80px}}
+</style>
+</head>
+<body>
+<div class="header"><div class="sub">Family Relocation Guide</div><h1>Cuenca, Ecuador</h1><div class="meta" id="mc"></div></div>
+<div class="sticky-bar">
+<div class="top-row">
+<div class="search-wrap"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#5C5043" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" placeholder="Search..." id="si"></div>
+<button class="icon-btn fav-btn" id="fb">★<span class="badge-count" id="fc" style="display:none"></span></button>
+<button class="icon-btn filter-toggle" id="ft"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="20" y2="12"/><line x1="12" y1="18" x2="20" y2="18"/></svg><span class="badge-count" id="fn" style="display:none"></span></button>
+</div>
+<div class="filter-drawer" id="fd">
+<div class="fd-section"><div class="fd-row"><span>Category</span><div class="fd-actions"><button id="ca">All</button><button id="cn">None</button></div></div><div class="scroll-row" id="cp"></div></div>
+<div class="fd-section" style="margin-bottom:0"><div class="fd-row"><span>Neighborhood</span><div class="fd-actions"><button id="ha">All</button><button id="hn">None</button></div></div><div class="scroll-row" id="hp"></div></div>
+<button class="clear-all" id="clr" style="display:none">Clear all filters</button>
+</div>
+</div>
+<div class="results"><div class="results-count" id="rc"></div><div id="ro"></div></div>
+<div class="footer" id="fo"></div>
+<script>
+var L=[
+{id:"om-healing",name:"OM Healing Center",cat:"Yoga & Wellness",hood:"Huayna-Cápac",desc:"Top spiritual yoga — Hatha, Ashtanga Vinyasa, Mysore, Yin, meditation. Kirtan nights, sound healing, Reiki, Ayurvedic massage. Drop-in $5. Retreats at Yunguilla Valley ashram.",maps:"OM+Healing+Center+Cuenca+Ecuador",contact:"+593 98 316 3951",schedule:"Daily; check Instagram",ig:"omhealingcentercuenca"},
+{id:"adhikara",name:"Centro de Transformación Adhikara",cat:"Yoga & Wellness",hood:"Sucre",desc:"Best evening schedule. Fri kirtan 6:30 PM, Nia Mon 6 PM (English w/ Lisa), Hatha Flow Tue/Thu 6 PM, Fly Yoga Wed 6 PM, Vinyasa Wed 7:30 PM, Hatha Advanced Mon 7:30 PM. $40–60/mo. Holistic spa.",maps:"Centro+de+Transformacion+Adhikara+Cuenca",contact:"099 022 6088",schedule:"Mon–Fri evenings 6–9 PM",ig:"centro_adhikara"},
+{id:"shakti",name:"Shakti Yoga / Escuela Valores Divinos",cat:"Yoga & Wellness",hood:"Huayna-Cápac",desc:"Deeply spiritual ashram-style. Shiva Kriya Yoga in Babaji tradition. Morning 7 AM, afternoon 5 PM, Mon–Thu. Free community yoga Sun AM at Parque del Paraíso.",maps:"Escuela+Valores+Divinos+Cuenca+Ecuador",contact:"+593 07 404 3834",schedule:"Mon–Thu 7 AM & 5 PM; Sun AM free"},
+{id:"yumisol",name:"YumiSol Yoga",cat:"Yoga & Wellness",hood:"Huayna-Cápac",desc:"Younger, inclusive vibe. English-friendly. $5/class.",maps:"YumiSol+Yoga+Cuenca+Ecuador"},
+{id:"selina-yoga",name:"Selina Hotel Yoga",cat:"Yoga & Wellness",hood:"Centro Histórico",desc:"Gorgeous yoga deck overlooking Tomebamba River. $15/class, included with coworking membership.",maps:"Selina+Cuenca+Ecuador"},
+{id:"tai-chi",name:"Tai Chi at Parque de la Madre",cat:"Yoga & Wellness",hood:"El Vergel",desc:"Tue/Wed/Thu 7:30 AM and Sat 8 AM. $2/class. Gentle morning practice.",maps:"Parque+de+la+Madre+Cuenca+Ecuador",schedule:"Tue/Wed/Thu 7:30 AM; Sat 8 AM"},
+{id:"shambhala",name:"Shambhala Meditation Center",cat:"Meditation",hood:"Centro Histórico",desc:"Tibetan Buddhist meditation with chanting in English & Spanish. Sitting/walking meditation + group lunch. Free/donation. Library.",maps:"Calle+Larga+11-43+Cuenca+Ecuador",web:"cuenca.shambhala.ws",schedule:"Sundays (confirm times)"},
+{id:"vipassana",name:"Vipassana Meditation Group",cat:"Meditation",hood:"Various",desc:"S.N. Goenka tradition. Wed evening sits + one Sun/month 6-hr sit. Annual 10-day silent retreat in August. By donation.",web:"dhamma.org",schedule:"Wed evenings; 1 Sun/month"},
+{id:"srf",name:"Self-Realization Fellowship",cat:"Meditation",hood:"Solano",desc:"Paramahansa Yogananda's Kriya Yoga tradition. Established center on Av. Solano.",maps:"Self+Realization+Fellowship+Cuenca+Ecuador",contact:"+593 99 977 3294"},
+{id:"piedra",name:"Piedra de Agua Spa",cat:"Massage & Spa",hood:"Baños",desc:"Underground thermal spa — Turkish bath, volcanic mud, cave massage, thermal + cold plunge pools. $30/person, BOGO Mon & Fri. Best couples date night. 20 min taxi (~$5).",maps:"Piedra+de+Agua+Cuenca+Ecuador",web:"piedradeagua.com.ec",schedule:"Daily; evening hours"},
+{id:"novaqua",name:"Novaqua Spa",cat:"Massage & Spa",hood:"Baños",desc:"Thermal circuit from $15. Adults only (16+).",maps:"Novaqua+Spa+Cuenca+Ecuador"},
+{id:"shanti-spa",name:"Shanti Boutique Spa",cat:"Massage & Spa",hood:"Centro Histórico",desc:"Luxurious at Hotel Mansión Alcázar. Swedish, aromatherapy, Ayurvedic.",maps:"Shanti+Boutique+Spa+Hotel+Mansion+Alcazar+Cuenca"},
+{id:"balneario",name:"Balneario el Riñón",cat:"Massage & Spa",hood:"Baños",desc:"Budget thermal springs. $6/day. Great family half-day trip.",maps:"Balneario+el+Rinon+Cuenca+Ecuador"},
+{id:"cameron",name:"Cameron Kayce (Deep Tissue)",cat:"Massage & Spa",hood:"La Cuadra",desc:"40 years experience. Deep tissue specialist. Expat-recommended.",contact:"+593 999874417"},
+{id:"alejandra",name:"Alejandra Maldonado (Massage)",cat:"Massage & Spa",hood:"El Vergel",desc:"Expat-recommended. Roughly half US prices.",contact:"+593 991015477"},
+{id:"roosevelt",name:"Roosevelt Javier Rojas Bravo",cat:"Massage & Spa",hood:"Zona Rosa",desc:"Expat-recommended massage therapist.",contact:"+593 981626813"},
+{id:"c-tres",name:"C-tres Climbing Center",cat:"Climbing & Sports",hood:"Remigio Crespo",desc:"Largest gym — 30+ sport routes, bouldering. Also boxing, MMA, aerial silks, yoga, pool. ~$3–5.",maps:"C-tres+Climbing+Center+Cuenca+Ecuador",schedule:"Evening hours available"},
+{id:"cojitambo",name:"Cojitambo Outdoor Climbing",cat:"Climbing & Sports",hood:"Outside Cuenca",desc:"Ecuador's sport climbing mecca, 30 min north. 180+ routes, 5.9–5.13b. Free. Best Dec–Mar.",maps:"Cojitambo+Ecuador",schedule:"Anytime; weekends best"},
+{id:"bailoterapia",name:"Bailoterapia (Free Dance Fitness)",cat:"Climbing & Sports",hood:"El Vergel",desc:"Free outdoor dance fitness Mon–Fri 8 PM at Parque de la Madre. High energy, very local.",maps:"Parque+de+la+Madre+Cuenca+Ecuador",schedule:"Mon–Fri 8 PM; FREE"},
+{id:"run-mot",name:"Running Motivation Ec",cat:"Running & Cycling",hood:"Various",desc:"Mon–Fri 7:30–9:15 PM at Parque Paraíso (Mon/Wed) and Parque de la Madre (Tue/Thu/Fri). $50/year.",maps:"Parque+de+la+Madre+Cuenca+Ecuador",schedule:"Mon–Fri 7:30–9:15 PM"},
+{id:"trail-run",name:"Trail Runners Cuenca",cat:"Running & Cycling",hood:"Various",desc:"Daily 6:15–8 PM. Advanced, Olympic triathlon coach.",schedule:"Daily 6:15–8 PM"},
+{id:"hash",name:"Cuenca Alpaca Hash House Harriers",cat:"Running & Cycling",hood:"Various",desc:"2x monthly (full moon + Sat). $5 incl beer. 5–10 km, heavily social. Expat-focused.",web:"cuencaalpacas.com",schedule:"2x monthly"},
+{id:"club-correr",name:"Club A Correr",cat:"Running & Cycling",hood:"El Vergel",desc:"Sundays 9:30 AM at Parque de la Madre. Family-friendly.",maps:"Parque+de+la+Madre+Cuenca+Ecuador",schedule:"Sun 9:30 AM"},
+{id:"bicicuenca",name:"BiciCuenca Cycling Club",cat:"Running & Cycling",hood:"Various",desc:"Tue & Thu 8 PM. Critical Mass last Friday monthly.",schedule:"Tue/Thu 8 PM; biweekly Sun"},
+{id:"free-bikes",name:"Free Sunday Bike Rental",cat:"Running & Cycling",hood:"Various",desc:"City free bikes 8 AM–1 PM Sundays along river. Helmets + police. Great family activity.",maps:"Rio+Tomebamba+Cuenca+Ecuador",schedule:"Sun 8 AM–1 PM; FREE"},
+{id:"p-madre",name:"Parque de la Madre",cat:"Parks & Nature",hood:"El Vergel",desc:"Family MVP — running track, playgrounds, exercise equipment, planetarium. Home to Bailoterapia, Tai Chi, Frisbee Fridays, Sat expat family meetup.",maps:"Parque+de+la+Madre+Cuenca+Ecuador"},
+{id:"p-paraiso",name:"Parque El Paraíso",cat:"Parks & Nature",hood:"El Vergel",desc:"River confluence. Nature trails, lake, large playgrounds. Families on Sundays. Free yoga.",maps:"Parque+El+Paraiso+Cuenca+Ecuador"},
+{id:"rw-tom",name:"Río Tomebamba Riverwalk (El Barranco)",cat:"Parks & Nature",hood:"Centro Histórico",desc:"Signature daily walk — paved, stroller-friendly, past Pumapungo ruins, playgrounds every few blocks.",maps:"El+Barranco+Cuenca+Ecuador"},
+{id:"rw-yan",name:"Río Yanuncay Riverwalk",cat:"Parks & Nature",hood:"Yanuncay",desc:"Prettier than Tomebamba per residents. Stroller-friendly, Botanical Garden along banks.",maps:"Rio+Yanuncay+Cuenca+Ecuador"},
+{id:"botanical",name:"Jardín Botánico",cat:"Parks & Nature",hood:"Yanuncay",desc:"52 acres, 8,000+ species. Free. Along Yanuncay River. Perfect toddler wander.",maps:"Jardin+Botanico+Cuenca+Ecuador"},
+{id:"cajas",name:"Cajas National Park",cat:"Day Trips",hood:"Outside Cuenca",desc:"200+ lakes, páramo, polylepis forests. 30–45 min, FREE. Bus $2.50. Laguna Toreadora ~3 hrs. Bring layers + carrier.",maps:"Cajas+National+Park+Ecuador",schedule:"Bus 6:10, 10:20, 13:05"},
+{id:"polylepis",name:"Polylepis Tours (Guided Hikes)",cat:"Day Trips",hood:"Outside Cuenca",desc:"Bilingual guided hikes. $30–50/person.",maps:"Cajas+National+Park+Ecuador"},
+{id:"giron",name:"Girón Waterfall",cat:"Day Trips",hood:"Outside Cuenca",desc:"Stunning 3-tier waterfall, natural pools. 45 min south.",maps:"Giron+Waterfall+Ecuador"},
+{id:"ingapirca",name:"Ingapirca Ruins",cat:"Day Trips",hood:"Outside Cuenca",desc:"Ecuador's largest Inca ruin. 2 hrs north. Weekend bus 9 AM, returns 1:30 PM. $2 entry.",maps:"Ingapirca+Ecuador",schedule:"Weekend bus 9 AM"},
+{id:"gualaceo",name:"Gualaceo / Chordeleg / Sigsig",cat:"Day Trips",hood:"Outside Cuenca",desc:"Artisan villages: weaving, orchids, silver jewelry, Panama hats. 30–45 min, $1–2 bus.",maps:"Gualaceo+Ecuador"},
+{id:"gaia",name:"Gaia Sagrada Retreat",cat:"Day Trips",hood:"Outside Cuenca",desc:"Monthly 12-day shamanic retreats — ayahuasca/San Pedro, yoga, meditation, breathwork. 55 acres, hot tubs. 45 min NE.",maps:"Gaia+Sagrada+Ecuador",web:"gaiasagrada.com"},
+{id:"montanita",name:"Montañita (Surfing)",cat:"Day Trips",hood:"Outside Cuenca",desc:"Nearest surf. 5–7 hrs bus (~$13–24 RT). Board ~$12–15/day. Best Dec–Apr. Weekend trip.",maps:"Montanita+Ecuador"},
+{id:"om-ashram",name:"OM Ashram (Yunguilla Valley)",cat:"Day Trips",hood:"Outside Cuenca",desc:"OM Healing Center retreat. 1 hr south. 7-day yoga retreats, veggie meals, pool, spa.",maps:"Yunguilla+Valley+Ecuador"},
+{id:"pumapungo",name:"Museo Pumapungo + Ludobiblioteca",cat:"Kids & Family",hood:"Huayna-Cápac",desc:"FREE — 5,000+ exhibits, Inca ruins, bird rescue (macaws, eagles). New children's play-library with storybooks, art kits, instruments.",maps:"Museo+Pumapungo+Cuenca+Ecuador",schedule:"Tue–Fri 9–5; Sat–Sun 10–5"},
+{id:"manitos",name:"Manitos En La Arena",cat:"Kids & Family",hood:"Various",desc:"Ecuador's first interactive sand play — ideal sensory for age 2. Plaza Toledo + Mall del Río.",maps:"Manitos+en+la+Arena+Cuenca+Ecuador",ig:"manitosenlaarena"},
+{id:"rainbow",name:"Rainbow Park",cat:"Kids & Family",hood:"Outside Cuenca",desc:"Weekends 10–7 PM. Bouncy castles, trampolines, slides. $5.50–6.50. Vía Paccha, 20 min.",contact:"+593 97 993 4904",schedule:"Weekends 10 AM–7 PM"},
+{id:"amaru",name:"Amaru Bioparque",cat:"Kids & Family",hood:"Outside Cuenca",desc:"Conservation zoo — Andean bears, condors, jaguars. NOT stroller-friendly. $4–8. Better 3–4+.",maps:"Amaru+Bioparque+Cuenca+Ecuador"},
+{id:"circo",name:"Circo Social Cuenca",cat:"Kids & Family",hood:"Various",desc:"Children's circus arts — juggling, aerial silk, trapeze. Great for Bodhi in 1–2 years."},
+{id:"scouts",name:"Scouts Ecuador (Grupo Nro 13)",cat:"Kids & Family",hood:"Various",desc:"Cubs start ~age 7–8. For Bodhi's future.",web:"scoutsecuador.org"},
+{id:"jazz",name:"Jazz Society Café",cat:"Arts & Culture",hood:"Ordóñez Lasso",desc:"Ecuador's only jazz venue. NYC native Jim Gala. Sat afternoons, 20–25 seats. First visit free w/ YapaTree.",maps:"Jazz+Society+Cafe+Cuenca+Ecuador",schedule:"Sat afternoons"},
+{id:"guarida",name:"La Guarida",cat:"Arts & Culture",hood:"Centro Histórico",desc:"Cultural heart — live music Thu, films 2–3 nights/week, tasting menu Fri, jazz brunch, storytelling. #1 TripAdvisor.",maps:"La+Guarida+Cuenca+Ecuador",schedule:"Thu music; films multiple nights"},
+{id:"wunderbar",name:"Wunderbar Café",cat:"Arts & Culture",hood:"Centro Histórico",desc:"Live jazz Tue 8 PM, bands Thu–Sat. On Parque Calderón.",maps:"Wunderbar+Cafe+Cuenca+Ecuador",schedule:"Tue jazz 8 PM; Thu–Sat bands"},
+{id:"common",name:"Common Grounds",cat:"Arts & Culture",hood:"Centro Histórico",desc:"Expat music hub — soul, blues, funk, rock. No cover, pool tables.",maps:"Common+Grounds+Cuenca+Ecuador"},
+{id:"joyapa",name:"Café Joyapa",cat:"Arts & Culture",hood:"Centro Histórico",desc:"Intimate folk-club. Luis Ullauri, Latin American ballads.",maps:"Cafe+Joyapa+Cuenca+Ecuador"},
+{id:"kamaq",name:"KAMAQ Gastro Arte y Cultura",cat:"Arts & Culture",hood:"Centro Histórico",desc:"Spoken Word nights, cultural events. Gastronomy meets art.",maps:"KAMAQ+Cuenca+Ecuador"},
+{id:"symphony",name:"Cuenca Symphony Orchestra",cat:"Arts & Culture",hood:"Various",desc:"Founded 1972. Free concerts at Teatro Pumapungo, churches. World-class. Bodhi-friendly.",maps:"Teatro+Pumapungo+Cuenca+Ecuador",schedule:"Check CuencaHighLife"},
+{id:"act",name:"Azuay Community Theater (ACT)",cat:"Arts & Culture",hood:"Various",desc:"Only English-language theater in Ecuador. 2+ plays/year, comedy, storytelling.",schedule:"2+ productions/year"},
+{id:"fishbon",name:"Fishbon del Sur (Artists)",cat:"Arts & Culture",hood:"Various",desc:"Expat artist collective. Creative Labs every other Sunday, potluck.",schedule:"Every other Sun"},
+{id:"idiomart",name:"idiomART",cat:"Arts & Culture",hood:"Centro Histórico",desc:"Art classes adults & kids — drawing, painting, ceramics, sculpture, murals. Gallery + music.",maps:"idiomART+Cuenca+Ecuador"},
+{id:"maam",name:"Museo Municipal de Arte Moderno",cat:"Arts & Culture",hood:"San Sebastián",desc:"Free. Bienal de Cuenca home (next ~late 2027). Plaza de San Sebastián.",maps:"Museo+Municipal+de+Arte+Moderno+Cuenca"},
+{id:"vega",name:"Galería Eduardo Vega",cat:"Arts & Culture",hood:"Turi",desc:"Stunning ceramics + panoramic views from Turi hilltop.",maps:"Galeria+Eduardo+Vega+Cuenca+Ecuador"},
+{id:"proceso",name:"Galería Proceso",cat:"Arts & Culture",hood:"Centro Histórico",desc:"Avant-garde, conceptual art. Most experimental gallery.",maps:"Galeria+Proceso+Cuenca+Ecuador"},
+{id:"mad",name:"MAD Galería",cat:"Arts & Culture",hood:"Paucarbamba",desc:"New 2026. Children's art classes + rotating exhibitions.",maps:"MAD+Galeria+Cuenca+Ecuador"},
+{id:"mata",name:"La Mata de Frío",cat:"Arts & Culture",hood:"Centro Histórico",desc:"Urban art, graffiti, outsider art. Edgiest gallery.",maps:"La+Mata+de+Frio+Cuenca+Ecuador"},
+{id:"writers",name:"Cuenca Writers Collective",cat:"Intellectual & Social",hood:"Centro Histórico",desc:"Wed noon critique at Sunrise Café. Monthly Spoken Word (5 PM dinner, 6 PM readings, ~50 people) at KAMAQ. Annual conference.",maps:"Sunrise+Cafe+Calle+Larga+Cuenca",contact:"cuencawriterscollective@gmail.com",schedule:"Wed noon; monthly evening"},
+{id:"chess",name:"Chess at Café Austria",cat:"Intellectual & Social",hood:"Centro Histórico",desc:"WorldChess.com listed. Bilingual drop-in. Hermano Miguel 8-81.",maps:"Cafe+Austria+Cuenca+Ecuador",schedule:"Drop-in anytime"},
+{id:"lectures",name:"Cuenca for Expats Lectures",cat:"Intellectual & Social",hood:"Various",desc:"University professors on history, culture, literature. 5–6 PM Mon–Thu, Zoom or in-person.",schedule:"Mon–Thu 5–6 PM"},
+{id:"carolina",name:"Carolina Bookstore",cat:"Intellectual & Social",hood:"Centro Histórico",desc:"De facto expat center. Owner Lee is deeply knowledgeable. English books. Hermano Miguel.",maps:"Carolina+Bookstore+Cuenca+Ecuador"},
+{id:"techtacos",name:"Tech & Tacos",cat:"Intellectual & Social",hood:"Various",desc:"Monthly themed meetups — blockchain, fintech, innovation. Sells out in 24 hrs.",schedule:"Monthly"},
+{id:"brauner",name:"Christopher Brauner (CBT)",cat:"Therapy & Growth",hood:"Various",desc:"English couples therapy, $35/session.",contact:"+593 96 945 9751"},
+{id:"higgins",name:"Bob Higgins, LMFT",cat:"Therapy & Growth",hood:"Centro Histórico",desc:"Licensed (AZ) relationship therapist. $35/session. 'Art of Change' workshops $5.",maps:"Estevez+de+Toral+y+Vega+Munoz+Cuenca",contact:"093-980-1979"},
+{id:"nomads",name:"Conscious Nomads Tribe",cat:"Therapy & Growth",hood:"Outside Cuenca",desc:"Retreats at Inti Kamari — authentic relating, circles, cacao, breathwork, temazcal. English.",maps:"Yunguilla+Valley+Ecuador"},
+{id:"circle",name:"Cuenca Circle of Friends",cat:"Expat Community",hood:"Various",desc:"1,800+ members. Thu breakfast Kolo, Wed cocktails La Craft, Sun walks Parque Paraíso, Thu 4 PM Inca Bar.",schedule:"Thu AM, Wed PM, Sun AM"},
+{id:"sakura",name:"Sakura Restaurant (Fri Meetup)",cat:"Expat Community",hood:"Centro Histórico",desc:"Friday 5 PM expat meetup by the river.",maps:"Sakura+Restaurant+Cuenca+Ecuador",schedule:"Fri 5 PM"},
+{id:"eucalyptus",name:"Café Eucalyptus",cat:"Expat Community",hood:"Centro Histórico",desc:"Fri 5 PM meetup + Sun brunch 11 AM. Gran Colombia 9-41.",maps:"Cafe+Eucalyptus+Cuenca+Ecuador",schedule:"Fri 5 PM; Sun 11 AM"},
+{id:"joes",name:"Joe's Secret Garden",cat:"Expat Community",hood:"Centro Histórico",desc:"Garden seating. 1st Sat = fried chicken day, arrive 5 PM.",maps:"Joes+Secret+Garden+Cuenca+Ecuador",schedule:"1st Sat 5 PM"},
+{id:"craft",name:"La Craft Brewery",cat:"Expat Community",hood:"Centro Histórico",desc:"Circle of Friends Wed cocktails. Craft beer.",maps:"La+Craft+Brewery+Cuenca+Ecuador",schedule:"Wed"},
+{id:"inca",name:"Inca Bar & Lounge",cat:"Expat Community",hood:"Centro Histórico",desc:"Circle of Friends Thu 4 PM.",maps:"Inca+Bar+Cuenca+Ecuador",schedule:"Thu 4 PM"},
+{id:"frisbee",name:"Frisbee Fridays",cat:"Expat Community",hood:"El Vergel",desc:"Weekly casual frisbee noon at Parque de la Madre. Expat, social.",maps:"Parque+de+la+Madre+Cuenca+Ecuador",schedule:"Fri noon"},
+{id:"yapa",name:"YapaTree (formerly GringoTree)",cat:"Expat Community",hood:"Various",desc:"Essential — newsletter Mon & Thu, events, 40+ merchant discount card ($25/yr).",web:"yapatree.com"},
+{id:"chl",name:"CuencaHighLife",cat:"Expat Community",hood:"Various",desc:"Daily English Cuenca news. Best event listings.",web:"cuencahighlife.com"},
+{id:"gp",name:"GringoPost",cat:"Expat Community",hood:"Various",desc:"Classifieds, forum. Housing, services.",web:"gringopost.com"},
+{id:"lions",name:"Cuenca English Lions Club",cat:"Expat Community",hood:"Various",desc:"Monthly breakfast meetings + service projects. English."},
+{id:"soup",name:"Cuenca Soup Kitchen",cat:"Expat Community",hood:"Various",desc:"English-friendly volunteer. Immediate community.",web:"cuencasoupkitchen.org"},
+{id:"hearts",name:"Hearts of Gold (Volunteer)",cat:"Expat Community",hood:"Various",desc:"Seeks translators, writers, IT. Good fit for Jon."},
+{id:"grace",name:"Fundación GRACE (Volunteer)",cat:"Expat Community",hood:"Various",desc:"Refugee support. 501(c)(3)."},
+{id:"laofi",name:"La Ofi Work Center",cat:"Coworking",hood:"Centro Histórico",desc:"Fastest WiFi (93 Mbps). 45–50 desks, A/V studio, call booth. Day ~$10, unlimited $200/mo. 10% off YapaTree.",maps:"La+Ofi+Work+Center+Cuenca+Ecuador"},
+{id:"impaqto",name:"IMPAQTO Coworking",cat:"Coworking",hood:"El Vergel",desc:"Best community. River views at Parque de la Madre. Soundproof booth, pet-friendly. $80–200/mo.",maps:"IMPAQTO+Cuenca+Ecuador"},
+{id:"selina",name:"Selina Coworking",cat:"Coworking",hood:"Centro Histórico",desc:"Pink building on Tomebamba. $75–100/mo incl yoga, bar, terrace. WiFi 7 Mbps.",maps:"Selina+Cuenca+Ecuador"},
+{id:"cwcuenca",name:"Coworking Cuenca",cat:"Coworking",hood:"Yanuncay",desc:"Budget — $40/mo unlimited, river views, free coffee. Far from center.",maps:"Coworking+Cuenca+Yanuncay"},
+{id:"casa",name:"Casa Rivera (Free)",cat:"Coworking",hood:"Centro Histórico",desc:"University of Cuenca on river. FREE — register via QR.",maps:"Casa+Rivera+Cuenca+Ecuador"},
+{id:"cwclub",name:"Cuenca Coworking Club",cat:"Coworking",hood:"Various",desc:"Weekly rotating café sessions via WhatsApp.",contact:"+447542286196",schedule:"Weekly rotating"}
+];
+
+var CATS=[],HOODS=[],favs=new Set(),aCats=new Set(),aHoods=new Set(),favsOnly=false,search="",fOpen=false;
+var CI={"Yoga & Wellness":"\ud83e\uddd8","Meditation":"\ud83e\udeb7","Massage & Spa":"\ud83d\udc86","Climbing & Sports":"\ud83e\uddd7","Running & Cycling":"\ud83c\udfc3","Parks & Nature":"\ud83c\udf3f","Day Trips":"\ud83c\udfd4\ufe0f","Kids & Family":"\ud83d\udc76","Arts & Culture":"\ud83c\udfad","Intellectual & Social":"\ud83d\udcda","Therapy & Growth":"\ud83d\udca1","Expat Community":"\ud83e\udd1d","Coworking":"\ud83d\udcbb"};
+var CC={"Yoga & Wellness":"#8B6F47","Meditation":"#7B6B8A","Massage & Spa":"#9B7E6B","Climbing & Sports":"#6B8E6B","Running & Cycling":"#7B8E6B","Parks & Nature":"#5E8B5E","Day Trips":"#6B7E8E","Kids & Family":"#C4956A","Arts & Culture":"#8B5E5E","Intellectual & Social":"#5E6B8B","Therapy & Growth":"#8B7B5E","Expat Community":"#6B8B8B","Coworking":"#7B7B7B"};
+
+// Build unique lists
+var cs=new Set(),hs=new Set();L.forEach(function(l){cs.add(l.cat);hs.add(l.hood)});CATS=Array.from(cs);HOODS=Array.from(hs).sort();
+
+function esc(s){var d=document.createElement("div");d.textContent=s;return d.innerHTML}
+function afc(){return aCats.size+aHoods.size+(favsOnly?1:0)}
+
+async function loadF(){try{var r=await window.storage.get("cuenca-favs");if(r&&r.value)favs=new Set(JSON.parse(r.value))}catch(e){}}
+async function saveF(){try{await window.storage.set("cuenca-favs",JSON.stringify(Array.from(favs)))}catch(e){}}
+
+function mkPill(label,active,type,val,color,count){
+  var bg=active?(color||"#8B6F47"):"#FDFBF7",fg=active?"#FFF":"#6B5D4E",bd=active?(color||"#8B6F47"):"#D4C9B8",fw=active?"600":"400";
+  var cBg=active?"rgba(255,255,255,.25)":"#EDE7DD",cFg=active?"#FFF":"#8B7E6E";
+  return '<button class="pill'+(active?" active":"")+'" data-ft="'+type+'" data-fv="'+esc(val)+'" style="background:'+bg+";color:"+fg+";border-color:"+bd+";font-weight:"+fw+'">'+label+(count!=null?'<span class="pc" style="background:'+cBg+";color:"+cFg+'">'+count+"</span>":"")+"</button>";
+}
+
+function mkCard(l){
+  var f=favs.has(l.id),c=CC[l.cat]||"#8B6F47",mu=l.maps?"https://www.google.com/maps/search/?api=1&query="+l.maps:null;
+  var lk="";
+  if(mu)lk+='<a href="'+mu+'" target="_blank" rel="noopener" class="lb m"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Maps</a>';
+  if(l.web){var u=l.web.indexOf("http")===0?l.web:"https://"+l.web;lk+='<a href="'+u+'" target="_blank" rel="noopener" class="lb w"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> Web</a>';}
+  if(l.ig)lk+='<a href="https://instagram.com/'+l.ig+'" target="_blank" rel="noopener" class="lb i">\ud83d\udcf7 @'+esc(l.ig)+"</a>";
+  if(l.contact&&l.contact.indexOf("@")>=0)lk+='<a href="mailto:'+esc(l.contact)+'" class="lb e">\u2709\ufe0f '+esc(l.contact)+"</a>";
+  else if(l.contact)lk+='<span class="ci-s">\ud83d\udcde '+esc(l.contact)+"</span>";
+  var tg='<span class="tag" style="background:'+c+'14;color:'+c+'">'+esc(l.hood)+"</span>";
+  if(l.schedule)tg+='<span class="tag sched">\ud83d\udd50 '+esc(l.schedule)+"</span>";
+  return '<div class="card'+(f?" fav":"")+'"><button class="fav-star'+(f?" active":"")+'" data-fv-id="'+l.id+'">'+(f?"\u2605":"\u2606")+'</button><div class="card-tr"><span class="ci">'+(CI[l.cat]||"\ud83d\udccd")+"</span><h3>"+esc(l.name)+'</h3></div><div class="card-tags">'+tg+"</div><p>"+esc(l.desc)+'</p><div class="card-links">'+lk+"</div></div>";
+}
+
+function render(){
+  document.getElementById("mc").textContent=L.length+" venues \u00b7 "+CATS.length+" categories \u00b7 "+HOODS.length+" neighborhoods";
+  document.getElementById("fo").textContent="Cuenca Guide \u00b7 Jon, Jess & Bodhi \u00b7 "+L.length+" venues \u00b7 \u2605 saved across sessions";
+  // Fav btn
+  var fb=document.getElementById("fb");fb.className="icon-btn fav-btn"+(favsOnly?" active":"");
+  var fc=document.getElementById("fc");if(favs.size>0){fc.style.display="";fc.textContent=favs.size}else fc.style.display="none";
+  // Filter toggle
+  var af=afc(),ft=document.getElementById("ft");
+  ft.className="icon-btn filter-toggle"+(af>0?" has-active":"");
+  var fn=document.getElementById("fn");if(af>0){fn.style.display="";fn.textContent=af}else fn.style.display="none";
+  // Cat pills
+  var ch="";CATS.forEach(function(c){var n=L.filter(function(l){return l.cat===c}).length;ch+=mkPill((CI[c]||"")+" "+c,aCats.has(c),"cat",c,CC[c],n)});
+  document.getElementById("cp").innerHTML=ch;
+  document.getElementById("ca").className=aCats.size===CATS.length?"lit":"";
+  document.getElementById("cn").className=aCats.size===0?"lit":"";
+  // Hood pills
+  var hh="";HOODS.forEach(function(h){var n=L.filter(function(l){return l.hood===h}).length;hh+=mkPill(h,aHoods.has(h),"hood",h,null,n)});
+  document.getElementById("hp").innerHTML=hh;
+  document.getElementById("ha").className=aHoods.size===HOODS.length?"lit":"";
+  document.getElementById("hn").className=aHoods.size===0?"lit":"";
+  // Clear all
+  document.getElementById("clr").style.display=af>0?"":"none";
+  // Filter
+  var fl=L.filter(function(l){
+    if(favsOnly&&!favs.has(l.id))return false;
+    if(aCats.size>0&&!aCats.has(l.cat))return false;
+    if(aHoods.size>0&&!aHoods.has(l.hood))return false;
+    if(search){var q=search.toLowerCase();return l.name.toLowerCase().indexOf(q)>=0||l.desc.toLowerCase().indexOf(q)>=0||l.cat.toLowerCase().indexOf(q)>=0||l.hood.toLowerCase().indexOf(q)>=0}
+    return true;
+  });
+  var ct=fl.length+" of "+L.length+" venues";
+  if(favsOnly)ct+=" \u00b7 favorites";
+  if(aCats.size>0&&aCats.size<=3)ct+=" \u00b7 "+Array.from(aCats).join(", ");
+  else if(aCats.size>3)ct+=" \u00b7 "+aCats.size+" categories";
+  if(aHoods.size>0&&aHoods.size<=3)ct+=" \u00b7 "+Array.from(aHoods).join(", ");
+  else if(aHoods.size>3)ct+=" \u00b7 "+aHoods.size+" neighborhoods";
+  document.getElementById("rc").textContent=ct;
+  var g={};fl.forEach(function(l){if(!g[l.cat])g[l.cat]=[];g[l.cat].push(l)});
+  var co=CATS.filter(function(c){return g[c]});
+  if(!co.length){document.getElementById("ro").innerHTML='<div class="empty"><div class="ei">\ud83d\udd0d</div><p>No venues match</p><p class="e-sub">Adjust filters or search</p></div>';return}
+  var o="";co.forEach(function(cat){var cl=CC[cat]||"#D4C9B8";o+='<div class="cat-group"><div class="cat-header" style="border-bottom:2px solid '+cl+'25"><span class="ci">'+(CI[cat]||"")+"</span><h2>"+esc(cat)+'</h2><span class="badge">'+g[cat].length+"</span></div><div class='card-grid'>"+g[cat].map(mkCard).join("")+"</div></div>"});
+  document.getElementById("ro").innerHTML=o;
+}
+
+// Event delegation
+document.addEventListener("click",function(e){
+  var p=e.target.closest("[data-ft]");
+  if(p){var t=p.getAttribute("data-ft"),v=p.getAttribute("data-fv");if(t==="cat"){if(aCats.has(v))aCats.delete(v);else aCats.add(v)}else{if(aHoods.has(v))aHoods.delete(v);else aHoods.add(v)}render();return}
+  var s=e.target.closest("[data-fv-id]");
+  if(s){var id=s.getAttribute("data-fv-id");if(favs.has(id))favs.delete(id);else favs.add(id);saveF();render();return}
+});
+document.getElementById("fb").addEventListener("click",function(){favsOnly=!favsOnly;render()});
+document.getElementById("ft").addEventListener("click",function(){fOpen=!fOpen;var d=document.getElementById("fd");if(fOpen)d.classList.add("open");else d.classList.remove("open")});
+document.getElementById("ca").addEventListener("click",function(){CATS.forEach(function(c){aCats.add(c)});render()});
+document.getElementById("cn").addEventListener("click",function(){aCats.clear();render()});
+document.getElementById("ha").addEventListener("click",function(){HOODS.forEach(function(h){aHoods.add(h)});render()});
+document.getElementById("hn").addEventListener("click",function(){aHoods.clear();render()});
+document.getElementById("clr").addEventListener("click",function(){aCats.clear();aHoods.clear();favsOnly=false;search="";document.getElementById("si").value="";render()});
+var st;document.getElementById("si").addEventListener("input",function(e){clearTimeout(st);st=setTimeout(function(){search=e.target.value;render()},200)});
+
+(async function(){await loadF();render()})();
+</script>
+</body>
+</html>
