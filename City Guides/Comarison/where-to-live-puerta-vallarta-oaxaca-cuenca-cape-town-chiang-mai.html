@@ -1,0 +1,1294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Family Relocation: 5-City Comparison</title>
+<style>
+  :root {
+    --bg: #fafaf8;
+    --card: #ffffff;
+    --text: #2d2d2d;
+    --muted: #6b6b6b;
+    --border: #e2e0dc;
+    --accent: #3d6b50;
+    --accent-light: #e8f0eb;
+    --tier1: #b44d3d;
+    --tier2: #c4873b;
+    --tier3: #5a7d9a;
+    --tier4: #8a8a8a;
+    --green: #3d6b50;
+    --yellow: #c4873b;
+    --red: #b44d3d;
+    --gray: #999;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Georgia', serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.65;
+    padding: 2rem 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--text);
+  }
+  .subtitle {
+    font-size: 1rem;
+    color: var(--muted);
+    margin-bottom: 2rem;
+    font-style: italic;
+  }
+  .nav {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    padding: 0.75rem 0;
+    z-index: 10;
+    border-bottom: 1px solid var(--border);
+  }
+  .nav button {
+    padding: 0.4rem 0.8rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: var(--card);
+    cursor: pointer;
+    font-family: 'Georgia', serif;
+    font-size: 0.8rem;
+    color: var(--muted);
+    transition: all 0.2s;
+  }
+  .nav button.active, .nav button:hover {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+  }
+  .nav button[data-tier="1"] { border-left: 3px solid var(--tier1); }
+  .nav button[data-tier="2"] { border-left: 3px solid var(--tier2); }
+  .nav button[data-tier="3"] { border-left: 3px solid var(--tier3); }
+  .nav button[data-tier="4"] { border-left: 3px solid var(--tier4); }
+
+  .executive-summary {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  .executive-summary h2 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+  .verdict-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+  .verdict-card {
+    padding: 1rem;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+  }
+  .verdict-card h3 { font-size: 1rem; margin-bottom: 0.25rem; }
+  .verdict-card .rank { font-size: 0.85rem; color: var(--muted); margin-bottom: 0.5rem; }
+  .verdict-card p { font-size: 0.85rem; line-height: 1.5; }
+  .verdict-card.top { border-left: 4px solid var(--green); background: #f7faf8; }
+  .verdict-card.good { border-left: 4px solid var(--yellow); }
+  .verdict-card.weak { border-left: 4px solid var(--red); }
+
+  .requirement {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+  }
+  .req-header {
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+  }
+  .req-header:hover { background: #f8f8f6; }
+  .req-title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .req-number {
+    font-size: 0.75rem;
+    font-weight: 700;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    flex-shrink: 0;
+  }
+  .req-number.t1 { background: var(--tier1); }
+  .req-number.t2 { background: var(--tier2); }
+  .req-number.t3 { background: var(--tier3); }
+  .req-number.t4 { background: var(--tier4); }
+  .req-name { font-weight: 600; font-size: 0.95rem; }
+  .req-winner {
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-style: italic;
+    text-align: right;
+    min-width: 140px;
+  }
+  .arrow {
+    font-size: 0.8rem;
+    color: var(--muted);
+    transition: transform 0.2s;
+    margin-left: 0.5rem;
+  }
+  .arrow.open { transform: rotate(90deg); }
+
+  .req-body {
+    display: none;
+    padding: 0 1.5rem 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+  .req-body.open { display: block; padding-top: 1rem; }
+
+  .city-row {
+    display: grid;
+    grid-template-columns: 120px 1fr 60px;
+    gap: 0.5rem;
+    align-items: start;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #f0efed;
+  }
+  .city-row:last-child { border-bottom: none; }
+  .city-name {
+    font-weight: 600;
+    font-size: 0.85rem;
+    padding-top: 2px;
+  }
+  .city-detail {
+    font-size: 0.85rem;
+    color: var(--text);
+    line-height: 1.55;
+  }
+  .rating {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-align: center;
+    padding: 2px 8px;
+    border-radius: 3px;
+  }
+  .rating.strong { color: var(--green); background: #e8f0eb; }
+  .rating.ok { color: var(--yellow); background: #fdf3e7; }
+  .rating.weak { color: var(--red); background: #fae8e5; }
+  .rating.na { color: var(--gray); background: #f0f0f0; }
+
+  .bottom-line {
+    margin-top: 0.75rem;
+    padding: 0.75rem;
+    background: #f8f8f6;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-style: italic;
+    color: var(--muted);
+  }
+
+  .scorecard {
+    margin: 2rem 0;
+    overflow-x: auto;
+  }
+  .scorecard table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.8rem;
+  }
+  .scorecard th, .scorecard td {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--border);
+    text-align: center;
+  }
+  .scorecard th {
+    background: #f0efed;
+    font-weight: 600;
+  }
+  .scorecard td:first-child {
+    text-align: left;
+    font-weight: 500;
+  }
+  .scorecard .best { background: #e8f0eb; font-weight: 700; }
+  .scorecard .worst { background: #fae8e5; }
+
+  .final-section {
+    background: var(--card);
+    border: 2px solid var(--accent);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-top: 2rem;
+  }
+  .final-section h2 {
+    font-size: 1.2rem;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+  .final-section p {
+    font-size: 0.9rem;
+    margin-bottom: 0.75rem;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 700px) {
+    body { padding: 1rem 0.5rem; }
+    .city-row { grid-template-columns: 90px 1fr 50px; }
+    .verdict-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<h1>Puerto Vallarta vs. the Field</h1>
+<p class="subtitle">Comparing PV against Oaxaca, Cuenca, Cape Town &amp; Chiang Mai across all 22 requirements</p>
+
+<div class="executive-summary">
+  <h2>Executive Summary</h2>
+  <div class="verdict-grid">
+    <div class="verdict-card top">
+      <h3>🥇 Oaxaca</h3>
+      <div class="rank">Best overall fit</div>
+      <p>Wins on the things that matter most: perfect timezone, $0 tax in practice, world-class culture, settled expat families, strong wellness scene, and 3-hour flights to the US. The only real weakness is the Spanish learning curve for Jess in year one.</p>
+    </div>
+    <div class="verdict-card good">
+      <h3>🥈 Puerto Vallarta</h3>
+      <div class="rank">Strong runner-up</div>
+      <p>Matches Oaxaca on timezone, tax, and visa. Beats it on beaches, English accessibility, and healthcare. Falls behind on settled community depth (more seasonal/tourist), cultural richness, and cost of living. A genuinely good option — the beach lifestyle is a real draw.</p>
+    </div>
+    <div class="verdict-card good">
+      <h3>🥉 Cuenca</h3>
+      <div class="rank">Best on paper, gaps in practice</div>
+      <p>Unbeatable on cost, cleanest visa path for Jess (visa-free entry), and strong nature. But the retiree-heavy expat community, modest wellness scene, and 5-hour distance from Vilcabamba are real trade-offs. Tax situation has ambiguity worth resolving with an attorney.</p>
+    </div>
+    <div class="verdict-card weak">
+      <h3>4th: Chiang Mai</h3>
+      <div class="rank">The problem you're solving</div>
+      <p>Still the easiest option — infrastructure is set up, cost is lowest, wellness scene is unmatched. But the timezone destroys your family life, the community is transient, and burning season is genuinely dangerous for Bodhi. Staying means accepting the status quo.</p>
+    </div>
+    <div class="verdict-card weak">
+      <h3>5th: Cape Town</h3>
+      <div class="rank">Heart says yes, math says no</div>
+      <p>English-speaking, existing friends, stunning nature, close to Jess's family. But ~$40k/year in taxes (unless you stay under 183 days), timezone only marginally better than Thailand for family time, and no clear permanent residency path without the family route through Jess's father.</p>
+    </div>
+  </div>
+</div>
+
+<div class="nav" id="nav">
+  <button data-tier="1" class="active" onclick="filterTier('all', this)">All</button>
+  <button data-tier="1" onclick="filterTier(1, this)">Tier 1</button>
+  <button data-tier="2" onclick="filterTier(2, this)">Tier 2</button>
+  <button data-tier="3" onclick="filterTier(3, this)">Tier 3</button>
+  <button data-tier="4" onclick="filterTier(4, this)">Tier 4</button>
+</div>
+
+<div id="requirements">
+
+<!-- ============ TIER 1 ============ -->
+
+<div class="requirement" data-tier="1">
+  <div class="req-header" onclick="toggle(this)">
+    <div class="req-title">
+      <span class="req-number t1">1</span>
+      <span class="req-name">Timezone</span>
+    </div>
+    <div style="display:flex;align-items:center;">
+      <span class="req-winner">Oaxaca = PV (tie)</span>
+      <span class="arrow">▶</span>
+    </div>
+  </div>
+  <div class="req-body">
+    <div class="city-row">
+      <div class="city-name">Oaxaca</div>
+      <div class="city-detail">UTC-6. Work 8am–4pm local. Present for morning routine AND bedtime. Perfect alignment.</div>
+      <div class="rating strong">A+</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Puerto Vallarta</div>
+      <div class="city-detail">UTC-6 (same as Oaxaca). Identical schedule: 8am–4pm local. Both routines covered. PV observes the same Central Time.</div>
+      <div class="rating strong">A+</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Cuenca</div>
+      <div class="city-detail">UTC-5. Work 9am–5pm local. Morning routine works. Bedtime slightly tighter if work runs late, but still very good.</div>
+      <div class="rating strong">A</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Cape Town</div>
+      <div class="city-detail">UTC+2. ET 9–5 = 4pm–midnight local. You'd work roughly noon–8pm to get 4+ hours overlap. Miss bedtime most nights. Only marginally better than Thailand.</div>
+      <div class="rating weak">D+</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Chiang Mai</div>
+      <div class="city-detail">UTC+7. ET 9–5 = 8pm–2am local. Working until 2–3am. Miss bedtime, exhausted for mornings. This is the core problem.</div>
+      <div class="rating weak">F</div>
+    </div>
+    <div class="bottom-line">PV and Oaxaca are identically perfect here. Both are in the sweet spot. Cuenca is nearly as good. Cape Town and Chiang Mai fail this requirement.</div>
+  </div>
+</div>
+
+<div class="requirement" data-tier="1">
+  <div class="req-header" onclick="toggle(this)">
+    <div class="req-title">
+      <span class="req-number t1">2</span>
+      <span class="req-name">Visa Pathway (5+ years, both partners)</span>
+    </div>
+    <div style="display:flex;align-items:center;">
+      <span class="req-winner">Cuenca edges out</span>
+      <span class="arrow">▶</span>
+    </div>
+  </div>
+  <div class="req-body">
+    <div class="city-row">
+      <div class="city-name">Oaxaca</div>
+      <div class="city-detail">Residente Temporal (4 years, renewable). Jess joins as dependent. Path to permanent residency after 4 years. Jess needs a Mexican visa (Zimbabwean passport requires it), but joins under your RT. Well-trodden path.</div>
+      <div class="rating strong">A-</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Puerto Vallarta</div>
+      <div class="city-detail">Identical to Oaxaca — same country, same Residente Temporal visa. Jess as dependent. Same 4-year path to PR. No difference here.</div>
+      <div class="rating strong">A-</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Cuenca</div>
+      <div class="city-detail">Strongest path. Jess enters visa-free (one of ~32 countries for Zimbabwean passport). Digital nomad visa or Rentista for 2 years → permanent residency → citizenship at year 5. Jess as dependent throughout. Caveat: 90-day travel cap in first 2 years for PR qualification.</div>
+      <div class="rating strong">A+</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Cape Town</div>
+      <div class="city-detail">Complicated. Digital nomad visa exists but doesn't lead to PR. The family route through Jess's father (SA permanent resident) via Section 27(g) is the best option — but requires immigration attorney, unclear timeline, and you'd still need your own status. No straightforward path.</div>
+      <div class="rating ok">C+</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Chiang Mai</div>
+      <div class="city-detail">5-year DTV visa exists and you have it. But it doesn't lead to permanent residency. Thailand has no clear DN → PR pathway. You're on perpetual temporary status. Jess's visa depends on yours.</div>
+      <div class="rating ok">B-</div>
+    </div>
+    <div class="bottom-line">Ecuador's visa-free entry for Jess is uniquely valuable given her passport constraints. Mexico (both cities) is solid. Cape Town requires the family route or you're stuck in temporary status.</div>
+  </div>
+</div>
+
+<div class="requirement" data-tier="1">
+  <div class="req-header" onclick="toggle(this)">
+    <div class="req-title">
+      <span class="req-number t1">3</span>
+      <span class="req-name">Tax on Foreign-Earned Income</span>
+    </div>
+    <div style="display:flex;align-items:center;">
+      <span class="req-winner">Oaxaca = PV = Chiang Mai</span>
+      <span class="arrow">▶</span>
+    </div>
+  </div>
+  <div class="req-body">
+    <div class="city-row">
+      <div class="city-name">Oaxaca</div>
+      <div class="city-detail">On Residente Temporal, foreign-sourced income is not taxed if structured correctly. In practice, $0 local tax. This is well-established among expats. Enforcement on remote workers earning abroad is effectively nonexistent.</div>
+      <div class="rating strong">A+</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Puerto Vallarta</div>
+      <div class="city-detail">Identical to Oaxaca — same Mexican tax regime. Residente Temporal + foreign income = $0 local tax in practice. No difference between Mexican cities.</div>
+      <div class="rating strong">A+</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Cuenca</div>
+      <div class="city-detail">Mostly $0 in practice. Ecuador's system is described as territorial. A 2023 fiscal residence option gives 5-year protection on foreign income. But there's ambiguity: your FEIE-excluded income hasn't technically "been subject to tax" elsewhere. Worth a $300 attorney consult to confirm.</div>
+      <div class="rating strong">A-</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Cape Town</div>
+      <div class="city-detail">~$40–50k/year in SA income tax if you're a tax resident (183+ days or "ordinarily resident"). The 183-day strategy could work — stay under 183 days via strategic travel — but that conflicts with settling down. If Jess gets PR through her father, you may trigger "ordinarily resident" regardless of days.</div>
+      <div class="rating weak">D</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Chiang Mai</div>
+      <div class="city-detail">Currently $0 in practice. Thailand's DTV system hasn't set up tax collection for foreign remote workers. This is the baseline you're comparing against. Could change as Thailand formalizes its digital nomad regulations, but not imminent.</div>
+      <div class="rating strong">A+</div>
+    </div>
+    <div class="bottom-line">Cape Town's tax is the elephant in the room — $40k/year is transformative money. That's a full-time nanny, couples therapy, flights to the US, and school fees combined. Mexico and Thailand both deliver $0 in practice. Ecuador is likely $0 but confirm with an attorney.</div>
+  </div>
+</div>
+
+<div class="requirement" data-tier="1">
+  <div class="req-header" onclick="toggle(this)">
+    <div class="req-title">
+      <span class="req-number t1">4</span>
+      <span class="req-name">Safety</span>
+    </div>
+    <div style="display:flex;align-items:center;">
+      <span class="req-winner">Chiang Mai > Cuenca</span>
+      <span class="arrow">▶</span>
+    </div>
+  </div>
+  <div class="req-body">
+    <div class="city-row">
+      <div class="city-name">Oaxaca</div>
+      <div class="city-detail">Generally safe for expats in Centro, Jalatlaco, Xochimilco. Petty crime exists (phone snatching). Political protests/blockades happen but aren't violent toward foreigners. Jess walking with Bodhi during the day — fine. At night, stick to well-lit areas. Not Thailand-level safe, but workable with normal precautions. Good pediatric care at Hospital Reforma and local clinics.</div>
+      <div class="rating ok">B</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Puerto Vallarta</div>
+      <div class="city-detail">Comparable to Oaxaca — safe in tourist/expat zones (Versalles, Zona Romántica, Marina). PV benefits from heavy tourism infrastructure and police presence along the Malecón and beaches. Petty theft is the main concern. Hospital San Javier has PV's only pediatric ICU — a real advantage. The bay beach setting feels safe for families. Seasonal expat presence means well-lit, well-patrolled areas.</div>
+      <div class="rating ok">B+</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Cuenca</div>
+      <div class="city-detail">Ecuador has seen rising national security concerns, but Cuenca specifically remains one of the safest cities in the country. Large elderly expat population contributes to a safety-conscious environment. Walking around during the day is comfortable. Some petty crime. Good healthcare — multiple hospitals serve the large expat population.</div>
+      <div class="rating ok">B+</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Cape Town</div>
+      <div class="city-detail">The weakest on safety. Cape Town has high crime rates, including violent crime, though it's concentrated in specific areas. In safe neighborhoods (Sea Point, Camps Bay, Green Point), daily life is fine, but situational awareness is always required. Jess's psychology here matters — if she's anxious about safety, she stays home, which defeats the purpose. Excellent healthcare though (private hospitals are world-class).</div>
+      <div class="rating weak">C-</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Chiang Mai</div>
+      <div class="city-detail">The gold standard. Jess walks alone with Bodhi at any hour. Violent crime against foreigners is essentially unheard of. This is the benchmark. Good pediatric care at international hospitals (Bangkok Hospital Chiang Mai).</div>
+      <div class="rating strong">A+</div>
+    </div>
+    <div class="bottom-line">No Latin American city matches Thailand's safety level, but Oaxaca, PV, and Cuenca are all fine with normal urban precautions. PV's dedicated pediatric ICU is a genuine advantage for a toddler family. Cape Town's safety concern is real and connects directly to Jess's willingness to go out independently.</div>
+  </div>
+</div>
+
+<div class="requirement" data-tier="1">
+  <div class="req-header" onclick="toggle(this)">
+    <div class="req-title">
+      <span class="req-number t1">5</span>
+      <span class="req-name">Settled Community (Not Transient)</span>
+    </div>
+    <div style="display:flex;align-items:center;">
+      <span class="req-winner">Oaxaca wins clearly</span>
+      <span class="arrow">▶</span>
+    </div>
+  </div>
+  <div class="req-body">
+    <div class="city-row">
+      <div class="city-name">Oaxaca</div>
+      <div class="city-detail">The standout. Multiple sources describe the most settled and stable expat community they've ever seen. People come for a visit and stay for years. The community learns Spanish, integrates culturally, runs businesses. The Lending Library has been a community anchor for decades. Expat families cluster in identifiable neighborhoods. Facebook groups have the same names appearing for years. This is exactly what you described wanting.</div>
+      <div class="rating strong">A+</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Puerto Vallarta</div>
+      <div class="city-detail">Large expat community (94k+ in the main Facebook group), but significantly more seasonal and tourism-driven than Oaxaca. The community peaks November–May and thins dramatically in summer. Long-term residents exist (especially retirees and Canadian snowbirds), but the digital nomad layer is transient. "Young & Fun Expats" group skews toward people staying 1–6 months. The arts/event calendar itself is seasonal (most venues close June–October). This is better than Chiang Mai's revolving door but not as rooted as Oaxaca.</div>
+      <div class="rating ok">B-</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Cuenca</div>
+      <div class="city-detail">Very settled, but the wrong demographic. One of the largest expat communities in Latin America — people who've lived there 10+ years, own property, integrated. But it skews heavily toward American/Canadian retirees (60+). The young-family, wellness-oriented community you're looking for is much smaller. You might find 5–10 families like yours rather than 50.</div>
+      <div class="rating ok">B-</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Cape Town</div>
+      <div class="city-detail">English-speaking and you already have friends there. The local and expat communities are established. But the expat community is diverse and spread across a large metro area, not concentrated in walkable neighborhoods the way Oaxaca's is. Your existing connections are genuinely valuable though — you're not starting from zero.</div>
+      <div class="rating ok">B</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Chiang Mai</div>
+      <div class="city-detail">The revolving door. 90-day visa rotations, seasonal population swings, constant goodbyes. After two years you've experienced this firsthand. Veteran nomads invest less in new friendships. This is the problem you're solving.</div>
+      <div class="rating weak">D</div>
+    </div>
+    <div class="bottom-line">This is where PV and Oaxaca diverge most sharply. Oaxaca's community is described as uniquely rooted. PV's is large but seasonal — many of those 94k Facebook members are snowbirds and short-term visitors, not year-round families. If settled community is your #1 priority after timezone and tax, Oaxaca pulls ahead.</div>
+  </div>
+</div>
+
+<div class="requirement" data-tier="1">
+  <div class="req-header" onclick="toggle(this)">
+    <div class="req-title">
+      <span class="req-number t1">6</span>
+      <span class="req-name">Childcare / Nanny Availability</span>
+    </div>
+    <div style="display:flex;align-items:center;">
+      <span class="req-winner">Chiang Mai > Oaxaca = PV</span>
+      <span class="arrow">▶</span>
+    </div>
+  </div>
+  <div class="req-body">
+    <div class="city-row">
+      <div class="city-name">Oaxaca</div>
+      <div class="city-detail">Affordable ($300–600/month full-time). Found through expat Facebook groups, Babysits.mx, word-of-mouth, and Tlayudona for premium babysitting. University students available. English fluency among nannies varies — some speak basic English, many don't. The onboarding process requires community recommendations. Active mom groups facilitate referrals.</div>
+      <div class="rating ok">B+</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Puerto Vallarta</div>
+      <div class="city-detail">Similar dynamics to Oaxaca. PV's larger tourism industry means more English-speaking locals overall, which helps with nanny communication. Expat Facebook groups are the primary referral network. Tikitytok and restaurant ludotecas provide backup drop-off options. Cost likely $400–700/month for full-time. The seasonal expat population means some nannies work high-season-only, which could create continuity issues if you stay year-round.</div>
+      <div class="rating ok">B</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Cuenca</div>
+      <div class="city-detail">Very affordable ($200–400/month). Ecuadorian culture is family-oriented with strong domestic help traditions. Finding someone is relatively easy. English is the challenge — fewer English-speaking nannies than in Mexico's tourist zones. The retiree expat community doesn't generate the same nanny referral network that family-oriented communities do.</div>
+      <div class="rating ok">B</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Cape Town</div>
+      <div class="city-detail">Excellent. English-speaking nannies readily available. Strong domestic worker culture. Agencies and word-of-mouth both work well. Your existing friends can recommend immediately. $300–500/month for full-time. This is Cape Town's strongest practical advantage.</div>
+      <div class="rating strong">A</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Chiang Mai</div>
+      <div class="city-detail">You already have nannies set up. Extremely affordable ($200–350/month). English proficiency among nannies is decent. The infrastructure is established and you've already solved the trust-building problem. Returning means zero onboarding.</div>
+      <div class="rating strong">A+</div>
+    </div>
+    <div class="bottom-line">Childcare is solvable everywhere on this list, but the English communication factor varies. PV's tourism economy gives it a slight edge over Oaxaca on English-speaking nannies, but both require community networking. Cape Town and Chiang Mai are genuinely easier here.</div>
+  </div>
+</div>
+
+<!-- ============ TIER 2 ============ -->
+
+<div class="requirement" data-tier="2">
+  <div class="req-header" onclick="toggle(this)">
+    <div class="req-title">
+      <span class="req-number t2">7</span>
+      <span class="req-name">Nature (Daily Access)</span>
+    </div>
+    <div style="display:flex;align-items:center;">
+      <span class="req-winner">PV > Cape Town</span>
+      <span class="arrow">▶</span>
+    </div>
+  </div>
+  <div class="req-body">
+    <div class="city-row">
+      <div class="city-name">Oaxaca</div>
+      <div class="city-detail">Urban parks (El Llano, Jardín Etnobotánico) are walkable daily options. Mountains visible but not walkable from the city. Weekend hiking in Sierra Norte is spectacular. No beach (coast is 5–6 hours away). Good year-round air quality. Nature is accessible but you're in a city — it's not at your doorstep.</div>
+      <div class="rating ok">B</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Puerto Vallarta</div>
+      <div class="city-detail">This is PV's superpower. Beach is daily life — Conchas Chinas tide pools for Bodhi, Malecón walks, Camarones for soft sand. The Sierra Madre foothills start at the city's edge. Botanical Garden (30 min), Estero El Salado mangrove right in town, coastal hiking trails from Boca de Tomatlán. Whale watching in season. Bodhi grows up in the ocean. Year-round good air quality.</div>
+      <div class="rating strong">A+</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Cuenca</div>
+      <div class="city-detail">Excellent. Riverside trails built into the city. Cajas National Park 30 minutes away. "Eternal spring" climate year-round. Step-out-the-door-and-walk-to-nature is a genuine daily reality. No beach, but mountains and rivers are right there. Clean air.</div>
+      <div class="rating strong">A</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Cape Town</div>
+      <div class="city-detail">World-class. Table Mountain, beaches, botanical gardens, penguin colonies. Possibly the best nature-in-a-city on Earth. Daily access to stunning coastline and mountain trails. Incredible variety.</div>
+      <div class="rating strong">A+</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Chiang Mai</div>
+      <div class="city-detail">Beautiful mountains and temples nearby, but burning season (Feb–April) makes outdoor activity unsafe for months. That's a dealbreaker for a toddler. Good 8 months of the year, dangerous 4 months.</div>
+      <div class="rating weak">C</div>
+    </div>
+    <div class="bottom-line">PV and Cape Town are the nature champions. PV's unique combination of bay beaches, mountains, mangrove estuary, and coastal trails — all year-round — is exactly what Jess described wanting for daily life with Bodhi. Oaxaca is more of an urban-with-nature-nearby experience.</div>
+  </div>
+</div>
+
+<div class="requirement" data-tier="2">
+  <div class="req-header" onclick="toggle(this)">
+    <div class="req-title">
+      <span class="req-number t2">8</span>
+      <span class="req-name">Yoga / Meditation / Wellness</span>
+    </div>
+    <div style="display:flex;align-items:center;">
+      <span class="req-winner">Chiang Mai > PV ≈ Oaxaca</span>
+      <span class="arrow">▶</span>
+    </div>
+  </div>
+  <div class="req-body">
+    <div class="city-row">
+      <div class="city-name">Oaxaca</div>
+      <div class="city-detail">Strong alternative wellness scene. Temazcal, cacao ceremonies, ecstatic dance (twice monthly), breathwork, kirtan. Prana Yoga, Casa del Angel (since 1998, Osho meditations). Classes run $5–10. Less formalized than Chiang Mai but the pieces are there. Coast (Mazunte) has world-class yoga retreats 5–6 hours away. City scene is more culturally rooted than pure wellness tourism.</div>
+      <div class="rating ok">B+</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Puerto Vallarta</div>
+      <div class="city-detail">Surprisingly deep. 12+ studios covering every style. Taraka Yoga (kirtan, philosophy, meditation), Flying Heart (Katonah Yoga), Davannayoga (20+ years, Bhakti/Raja), Yoga Vallarta (beach sessions). Cold plunge scene emerging fast (IceBathPV, Cold Vikin, Raíces). Temazcal authentic and accessible. Terra Noble is a legitimate wellness hub. Sayulita (1hr) adds ecstatic dance. Monthly unlimited ~$94. The gap: no formal kirtan community beyond Taraka, no authentic relating groups.</div>
+      <div class="rating strong">A-</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Cuenca</div>
+      <div class="city-detail">Modest. ~8–10 studios, mostly in Spanish, skewing toward the retiree demographic (gentle hatha). Some wellness offerings but not the transformational/alternative scene Jess gravitates toward. Vilcabamba has that scene — but it's 5 hours away, not a weekend trip. This is a real gap.</div>
+      <div class="rating weak">C</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Cape Town</div>
+      <div class="city-detail">Good wellness scene — multiple studios, growing breathwork and cold plunge culture. English-language instruction throughout. Not as deep as Chiang Mai's but functional and accessible from day one.</div>
+      <div class="rating ok">B</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Chiang Mai</div>
+      <div class="city-detail">The gold standard. Incredible depth — studios, retreats, ecstatic dance, sound healing, breathwork, Vipassana. The wellness scene Jess fell in love with. Everything in English. Affordable ($3–5/class). This is what you're comparing everything against.</div>
+      <div class="rating strong">A+</div>
+    </div>
+    <div class="bottom-line">PV actually edges out Oaxaca City here — more studios, emerging cold plunge scene, Taraka's kirtan/philosophy offering, beach yoga. The key difference: Oaxaca's wellness scene is more culturally integrated (temazcal tradition, indigenous healing), while PV's is more tourist/expat-facing. Both are well below Chiang Mai's depth. Cuenca is a genuine weakness.</div>
+  </div>
+</div>
+
+<div class="requirement" data-tier="2">
+  <div class="req-header" onclick="toggle(this)">
+    <div class="req-title">
+      <span class="req-number t2">9</span>
+      <span class="req-name">Vegetarian Food</span>
+    </div>
+    <div style="display:flex;align-items:center;">
+      <span class="req-winner">Chiang Mai > PV ≈ Oaxaca</span>
+      <span class="arrow">▶</span>
+    </div>
+  </div>
+  <div class="req-body">
+    <div class="city-row">
+      <div class="city-name">Oaxaca</div>
+      <div class="city-detail">Traditional Oaxacan cuisine is meat-heavy (mole, tasajo, chapulines), but the expat-driven food scene has created a strong vegetarian ecosystem. Pochote organic market, health food restaurants, excellent produce. The wellness community has pushed veggie options into mainstream restaurants. The broader food scene is world-class — gastronomic capital of Mexico.</div>
+      <div class="rating ok">B+</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Puerto Vallarta</div>
+      <div class="city-detail">Good and improving. The Yogi Bar (vegan café + yoga studio combo) is ideal. Tourism drives diverse restaurant options including vegetarian-friendly spots. Markets have excellent tropical produce. The wellness/yoga community creates demand for plant-based food. Less of a standalone "vegetarian scene" than Oaxaca, but daily eating vegetarian is very doable. Smoothie bowls, fresh seafood that's easily swapped for veggie options.</div>
+      <div class="rating ok">B</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Cuenca</div>
+      <div class="city-detail">Weakest of the group. Ecuadorian cuisine is very meat-centric (cuy, hornado). Some expat-run restaurants with veggie options. Good produce at markets. But eating vegetarian at local restaurants requires more effort — you'd cook at home more.</div>
+      <div class="rating weak">C+</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Cape Town</div>
+      <div class="city-detail">Good. Growing vegetarian/vegan scene, especially in trendy neighborhoods. Health food stores, organic markets. Indian food tradition provides excellent vegetarian options. Better than Latin America overall for dedicated veggie restaurants.</div>
+      <div class="rating ok">B+</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Chiang Mai</div>
+      <div class="city-detail">The gold standard again. Buddhist vegetarian tradition means veggie food is everywhere — street stalls, restaurants, markets. Tofu, tempeh, fresh produce abundant and cheap. This is the benchmark.</div>
+      <div class="rating strong">A+</div>
+    </div>
+    <div class="bottom-line">Latin America is generally more meat-heavy than Southeast Asia, but both Oaxaca and PV have enough options through expat-driven demand. PV's tourism economy means more international restaurant variety. Neither will match Chiang Mai, but both are workable for daily vegetarian life.</div>
+  </div>
+</div>
+
+<div class="requirement" data-tier="2">
+  <div class="req-header" onclick="toggle(this)">
+    <div class="req-title">
+      <span class="req-number t2">10</span>
+      <span class="req-name">Alternative Schools</span>
+    </div>
+    <div style="display:flex;align-items:center;">
+      <span class="req-winner">Oaxaca (Waldorf exists)</span>
+      <span class="arrow">▶</span>
+    </div>
+  </div>
+  <div class="req-body">
+    <div class="city-row">
+      <div class="city-name">Oaxaca</div>
+      <div class="city-detail">Multiple Montessori options. Papalotes Escuela Waldorf (on the coast in La Punta — not in the city). Colegio Teizcali in San Felipe. Oaxaca International School (IB). Homeschool community exists. $200–500/month range. Bilingual Spanish-English instruction at most. The Waldorf option being on the coast (5+ hours away) is a consideration if you're city-based.</div>
+      <div class="rating ok">B+</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Puerto Vallarta</div>
+      <div class="city-detail">American School of PV (preschool–12th, $415–830/month, 30% international students). Instituto de las Américas (Howard Gardner–inspired pedagogy for very young children). Costa Verde in Sayulita (50/50 dual immersion, Waldorf-influenced). No dedicated Waldorf or Montessori school identified in PV proper, though Costa Verde in Sayulita comes closest. Kids become bilingual in under 2 years per multiple reports.</div>
+      <div class="rating ok">B</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Cuenca</div>
+      <div class="city-detail">Bilingual private schools in $200–500/month range. Growing homeschool community. No specifically identified Waldorf or Montessori options in our research. Adequate but not a strength.</div>
+      <div class="rating ok">B-</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Cape Town</div>
+      <div class="city-detail">Multiple Waldorf schools (Michael Oak, Constantia Waldorf). Montessori options available. English-medium instruction. More expensive ($300–800/month). Possibly the strongest alternative education scene of the five cities.</div>
+      <div class="rating strong">A</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Chiang Mai</div>
+      <div class="city-detail">Panyaden (bilingual Thai-English, nature-based, Buddhist values) is excellent but expensive (~$5,000–8,000/year). Multiple Montessori options. Good selection but pricier than Latin America.</div>
+      <div class="rating ok">B+</div>
+    </div>
+    <div class="bottom-line">Bodhi is ~2, so this isn't urgent for 6–12 months. PV's school options are adequate but less alternative than Oaxaca's Montessori variety. Costa Verde in Sayulita is intriguing if you're willing to commute 50 minutes or eventually move to Sayulita. Cape Town has the best Waldorf infrastructure.</div>
+  </div>
+</div>
+
+<div class="requirement" data-tier="2">
+  <div class="req-header" onclick="toggle(this)">
+    <div class="req-title">
+      <span class="req-number t2">11</span>
+      <span class="req-name">Cost of Living (Total Annual Outflow)</span>
+    </div>
+    <div style="display:flex;align-items:center;">
+      <span class="req-winner">Chiang Mai > Cuenca > Oaxaca</span>
+      <span class="arrow">▶</span>
+    </div>
+  </div>
+  <div class="req-body">
+    <div class="city-row">
+      <div class="city-name">Oaxaca</div>
+      <div class="city-detail">$2,500–3,500/month COL. $0 tax. Total outflow: ~$30–42k/year. Well within your $50k target. Rents $500–800 for nice 2BR in Xochimilco/Jalatlaco. Eating out $6–15/person. Nanny $300–600.</div>
+      <div class="rating strong">A</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Puerto Vallarta</div>
+      <div class="city-detail">$3,000–4,200/month COL. $0 tax. Total outflow: ~$36–50k/year. At the upper end of your target. Rents are higher than Oaxaca ($900–1,600 for 2BR in Versalles). Tourism drives up restaurant/activity prices. The summer off-season brings rents down 20–30%, which helps if you're year-round. PV is roughly 20–30% more expensive than Oaxaca for comparable lifestyle.</div>
+      <div class="rating ok">B</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Cuenca</div>
+      <div class="city-detail">$1,500–2,500/month COL. $0 tax (likely). Total outflow: ~$18–30k/year. The cheapest option by far. USD economy eliminates currency risk. Could save $10–15k/year vs. Oaxaca — that's nanny + therapy + US flights.</div>
+      <div class="rating strong">A+</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Cape Town</div>
+      <div class="city-detail">$2,500–3,500/month COL. Plus $40k tax if resident. Total outflow: ~$70–82k/year. Catastrophic. Even with the 183-day strategy (assume $0 tax), you're still at $30–42k COL, plus the cost of mandatory travel to stay under threshold. Worst financial outcome.</div>
+      <div class="rating weak">D</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Chiang Mai</div>
+      <div class="city-detail">$2,000–2,500/month COL. $0 tax. Total outflow: ~$24–30k/year. Your benchmark. Hard to beat on pure value.</div>
+      <div class="rating strong">A+</div>
+    </div>
+    <div class="bottom-line">PV is noticeably more expensive than Oaxaca — expect to pay $500–700/month more for a comparable lifestyle. At your income ($114–120k), PV is affordable, but the margin is thinner. The $6–12k/year PV premium over Oaxaca buys you beach life and easier English access. Whether that trade-off is worth it depends on how you weight those against community depth and cultural richness.</div>
+  </div>
+</div>
+
+<div class="requirement" data-tier="2">
+  <div class="req-header" onclick="toggle(this)">
+    <div class="req-title">
+      <span class="req-number t2">12</span>
+      <span class="req-name">Motorbike / Walking / Cycling</span>
+    </div>
+    <div style="display:flex;align-items:center;">
+      <span class="req-winner">Chiang Mai > Oaxaca ≈ PV</span>
+      <span class="arrow">▶</span>
+    </div>
+  </div>
+  <div class="req-body">
+    <div class="city-row">
+      <div class="city-name">Oaxaca</div>
+      <div class="city-detail">Very walkable in Centro, Jalatlaco, Xochimilco. Motorbike/scooter works well for the wider area. Cheap taxis and colectivos fill gaps. Most expats don't own cars. The closest to Chiang Mai's motorbike lifestyle in Latin America.</div>
+      <div class="rating strong">A-</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Puerto Vallarta</div>
+      <div class="city-detail">Versalles and Zona Romántica are walkable. The Malecón is a 2.5km flat promenade perfect for strollers. Sunday highway closures for pedestrians. But the wider metro sprawls — reaching Sayulita, Bucerias, or even Marina Vallarta from Versalles is best by car or taxi. Motorbike is usable but PV's traffic (especially on the highway) is more aggressive than Oaxaca. Less motorbike-culture than Thailand or Oaxaca.</div>
+      <div class="rating ok">B</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Cuenca</div>
+      <div class="city-detail">Very walkable historic center. Tram system. Relatively compact. Not a motorbike culture — cold and rainy at altitude. Walking and taxis work fine for daily life.</div>
+      <div class="rating ok">B</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Cape Town</div>
+      <div class="city-detail">Car-dependent. The city is sprawling, public transit is limited and not considered safe for most expats. You'd essentially need a car. This is a big lifestyle downgrade from Chiang Mai's scooter freedom.</div>
+      <div class="rating weak">D</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Chiang Mai</div>
+      <div class="city-detail">Everything by scooter. Cheap, fun, total freedom. The gold standard for your lifestyle preference.</div>
+      <div class="rating strong">A+</div>
+    </div>
+    <div class="bottom-line">Oaxaca is the closest to recreating Chiang Mai's motorbike lifestyle. PV is walkable in the center but the metro area's sprawl and highway traffic make it less scooter-friendly overall. Cape Town essentially requires a car.</div>
+  </div>
+</div>
+
+<div class="requirement" data-tier="2">
+  <div class="req-header" onclick="toggle(this)">
+    <div class="req-title">
+      <span class="req-number t2">13</span>
+      <span class="req-name">Proximity to US</span>
+    </div>
+    <div style="display:flex;align-items:center;">
+      <span class="req-winner">Oaxaca ≈ PV</span>
+      <span class="arrow">▶</span>
+    </div>
+  </div>
+  <div class="req-body">
+    <div class="city-row">
+      <div class="city-name">Oaxaca</div>
+      <div class="city-detail">~3 hours to Houston/Dallas. $150–300 flights. Multiple weekly direct flights. Weekend trip to see grandparents is genuinely feasible. Bodhi can see US family 3–4 times/year easily.</div>
+      <div class="rating strong">A+</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Puerto Vallarta</div>
+      <div class="city-detail">Even better connectivity than Oaxaca. PV's international airport (GRO) has direct flights to 30+ US/Canadian cities including LA, Dallas, Houston, Phoenix, Denver, Chicago, Seattle, and more. 3–4 hours to most US hubs. More route options than Oaxaca due to tourism volume. Flights often $150–350. This is a real advantage.</div>
+      <div class="rating strong">A+</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Cuenca</div>
+      <div class="city-detail">Cuenca → Quito or Guayaquil (1hr domestic) → US cities. Total journey 8–12 hours including layover. Flights $400–600. Doable but not easy with a toddler. Maybe 1–2 US visits/year.</div>
+      <div class="rating ok">C+</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Cape Town</div>
+      <div class="city-detail">17–24 hour journey. Expensive flights ($800–1,500+). 1 US visit/year maximum, and it's an expedition. Major downside with a toddler.</div>
+      <div class="rating weak">D</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Chiang Mai</div>
+      <div class="city-detail">24+ hours of travel. Expensive. Exhausting with a toddler. 1 US visit/year if that.</div>
+      <div class="rating weak">D-</div>
+    </div>
+    <div class="bottom-line">PV actually has more direct US flight routes than Oaxaca — the tourism infrastructure means airlines compete heavily on PV routes. Both Mexican cities dominate this category.</div>
+  </div>
+</div>
+
+<!-- ============ TIER 3 ============ -->
+
+<div class="requirement" data-tier="3">
+  <div class="req-header" onclick="toggle(this)">
+    <div class="req-title">
+      <span class="req-number t3">14</span>
+      <span class="req-name">Real Talk Events</span>
+    </div>
+    <div style="display:flex;align-items:center;">
+      <span class="req-winner">Oaxaca ≈ PV</span>
+      <span class="arrow">▶</span>
+    </div>
+  </div>
+  <div class="req-body">
+    <div class="city-row">
+      <div class="city-name">Oaxaca</div>
+      <div class="city-detail">Thriving informal workshop/event culture. The Philosophy Meetup with Vince Gray at Café del Elfo already exists. Lending Library hosts regular events. Multiple venues suited to small paid events. Gray-area enforcement is very low-risk at this scale. The settled community means your audience grows over time rather than resetting seasonally.</div>
+      <div class="rating strong">A</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Puerto Vallarta</div>
+      <div class="city-detail">The Deep Conversations Meetup (243 members, biweekly, $3/session) is already doing something similar — this is both validation and potential competition/collaboration. PV's event culture is rich during high season. Terra Noble, coworking spaces, and cafés provide venues. The risk: your audience shrinks dramatically June–October when snowbirds leave. You'd need to build a year-round local base, not just seasonal attendees.</div>
+      <div class="rating ok">B+</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Cuenca</div>
+      <div class="city-detail">Possible but harder. The retiree community may not be the right audience for philosophy events. Smaller English-speaking population interested in this format. Fewer venue options.</div>
+      <div class="rating weak">C</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Cape Town</div>
+      <div class="city-detail">You've already run events successfully. Existing connections. Large English-speaking population. Strong café/venue culture. The business registration concern (Section 15, R5M investment) is the legal overhang, but at small-event scale, enforcement risk is very low.</div>
+      <div class="rating ok">B+</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Chiang Mai</div>
+      <div class="city-detail">You've already done it. The transient community means constant new audience but shallow repeat attendance.</div>
+      <div class="rating ok">B</div>
+    </div>
+    <div class="bottom-line">Oaxaca's settled community is better for building a loyal returning audience. PV has an existing deep conversations group you could collaborate with, but the seasonal population swing is a real concern — your event would need to survive the summer exodus.</div>
+  </div>
+</div>
+
+<div class="requirement" data-tier="3">
+  <div class="req-header" onclick="toggle(this)">
+    <div class="req-title">
+      <span class="req-number t3">15</span>
+      <span class="req-name">Cultural Events & Arts Scene</span>
+    </div>
+    <div style="display:flex;align-items:center;">
+      <span class="req-winner">Oaxaca > PV</span>
+      <span class="arrow">▶</span>
+    </div>
+  </div>
+  <div class="req-body">
+    <div class="city-row">
+      <div class="city-name">Oaxaca</div>
+      <div class="city-detail">World-class and year-round. UNESCO heritage city. Guelaguetza festival, Día de Muertos (the real thing), 16 indigenous cultural traditions, contemporary art galleries, street art, mezcal culture, food festivals. MACO and IAGO museums. Deep, authentic, and not dependent on tourist season. This is one of Oaxaca's strongest cards.</div>
+      <div class="rating strong">A+</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Puerto Vallarta</div>
+      <div class="city-detail">Punches above its weight but is heavily seasonal. ArtWalk (29th season), South Side Shuffle, Spring Jazz Festival (30th anniversary), Act2PV theatre, Chamber Orchestra, film screenings, writers groups. Genuinely rich November–May. But most of this shuts down June–October. The arts scene is tourism-driven rather than culturally rooted. A good arts calendar, not a cultural capital.</div>
+      <div class="rating ok">B+</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Cuenca</div>
+      <div class="city-detail">Colonial architecture, some museums, local festivals. Cultural depth is present but the English-accessible layer is thin. Less vibrant than either Mexican city for an English-speaking expat.</div>
+      <div class="rating ok">C+</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Cape Town</div>
+      <div class="city-detail">Very strong. Live music, galleries, theatre (Baxter, Artscape), film festivals, design scene. Year-round and English-language. Excellent date-night options.</div>
+      <div class="rating strong">A</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Chiang Mai</div>
+      <div class="city-detail">Night markets, temples, some festivals. Limited performing arts. Not a cultural capital in the way Oaxaca or Cape Town are.</div>
+      <div class="rating ok">C+</div>
+    </div>
+    <div class="bottom-line">This is a major Oaxaca vs. PV differentiator. Oaxaca's cultural depth is foundational — it's a UNESCO heritage city with indigenous roots going back millennia. PV's scene is fun and surprisingly robust, but it's built on tourism rather than deep cultural identity, and it largely goes dormant in summer.</div>
+  </div>
+</div>
+
+<div class="requirement" data-tier="3">
+  <div class="req-header" onclick="toggle(this)">
+    <div class="req-title">
+      <span class="req-number t3">16</span>
+      <span class="req-name">English Widely Spoken</span>
+    </div>
+    <div style="display:flex;align-items:center;">
+      <span class="req-winner">Cape Town = Chiang Mai</span>
+      <span class="arrow">▶</span>
+    </div>
+  </div>
+  <div class="req-body">
+    <div class="city-row">
+      <div class="city-name">Oaxaca</div>
+      <div class="city-detail">English works within the expat bubble and for expat-facing services. But daily life (local nannies, doctors, shops, markets) is firmly in Spanish. Jess would need basic Spanish within months or rely on expat intermediaries. The Spanish learning curve is real — especially with a toddler consuming all her time. Harder than PV for the first year.</div>
+      <div class="rating ok">C+</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Puerto Vallarta</div>
+      <div class="city-detail">Significantly more English-accessible than Oaxaca. Decades of American/Canadian tourism means English is widely understood in shops, restaurants, medical offices, and service businesses throughout tourist/expat areas. Hospital staff, many nannies, taxi drivers, and shop owners speak functional English. Jess can navigate daily life in English from day one — doctors, grocery stores, parent interactions. Still Mexico, so Spanish helps enormously, but the English floor is much higher than Oaxaca.</div>
+      <div class="rating ok">B+</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Cuenca</div>
+      <div class="city-detail">English works within the large retiree expat community. Expat-facing services speak English. But outside that bubble, English is quite limited. Similar to Oaxaca's challenge but with a less vibrant English-speaking community for Jess's age group.</div>
+      <div class="rating ok">C</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Cape Town</div>
+      <div class="city-detail">English is a national language. Everything operates in English — government, healthcare, education, daily commerce. Zero language barrier. This is Cape Town's strongest advantage for Jess.</div>
+      <div class="rating strong">A+</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Chiang Mai</div>
+      <div class="city-detail">Extremely easy to navigate in English. Tourism infrastructure, expat services, medical facilities — all English-accessible. Jess speaks some Thai which makes it even easier. The benchmark for English comfort.</div>
+      <div class="rating strong">A+</div>
+    </div>
+    <div class="bottom-line">This is where PV has a real edge over Oaxaca for Jess specifically. In PV, she can walk into a doctor's office, talk to a potential nanny, or navigate a pharmacy in English from day one. In Oaxaca, she'd need the expat network as intermediary more often. Given that Jess is already carrying 100% of childcare, adding a language barrier on top is a real concern.</div>
+  </div>
+</div>
+
+<div class="requirement" data-tier="3">
+  <div class="req-header" onclick="toggle(this)">
+    <div class="req-title">
+      <span class="req-number t3">17</span>
+      <span class="req-name">Parents Clubs & Kids Events</span>
+    </div>
+    <div style="display:flex;align-items:center;">
+      <span class="req-winner">Oaxaca (barely)</span>
+      <span class="arrow">▶</span>
+    </div>
+  </div>
+  <div class="req-body">
+    <div class="city-row">
+      <div class="city-name">Oaxaca</div>
+      <div class="city-detail">The Lending Library Saturday children's programs are the hub. Expat parent groups exist on Facebook/WhatsApp. Mom groups are mostly in Spanish but bilingual parents bridge the gap. The settled family community means the same kids show up at the park week after week. Not as formalized as you'd find in the US, but the organic family network is real.</div>
+      <div class="rating ok">B</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Puerto Vallarta</div>
+      <div class="city-detail">La BiB (bilingual children's library, opened 2023) is a standout — storytime doubles as a de facto playgroup. Food Park playground, Tikitytok, Mockocity, restaurant ludotecas. Multiple Facebook groups for PV families. But the seasonal issue applies here too — expat families with young kids are most concentrated November–May. Year-round family infrastructure is thinner.</div>
+      <div class="rating ok">B-</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Cuenca</div>
+      <div class="city-detail">Limited for young expat families. The retiree community doesn't generate playgroups and mommy-and-me classes. You might find 5–10 families like yours rather than 50. Jess would need to build community more from scratch.</div>
+      <div class="rating weak">C-</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Cape Town</div>
+      <div class="city-detail">Good infrastructure for families — playgroups, mommy-and-me classes, toddler activities. English-language throughout. Your existing friends with kids provide immediate social access. More formalized than Latin America.</div>
+      <div class="rating ok">B+</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Chiang Mai</div>
+      <div class="city-detail">Active but transient. Playgroups form and dissolve as families rotate through. Good while you're plugged in, but the same revolving-door problem applies to kids' friendships.</div>
+      <div class="rating ok">B-</div>
+    </div>
+    <div class="bottom-line">None of these are Bali-level for expat family infrastructure. Oaxaca's advantage is that the families stay — Bodhi's playground friends will still be there next year. PV has more formal play spaces but fewer year-round families. La BiB is a gem though — founded by a mom who relocated to Mexico, which is exactly your story.</div>
+  </div>
+</div>
+
+<div class="requirement" data-tier="3">
+  <div class="req-header" onclick="toggle(this)">
+    <div class="req-title">
+      <span class="req-number t3">18</span>
+      <span class="req-name">Couples Therapy Access</span>
+    </div>
+    <div style="display:flex;align-items:center;">
+      <span class="req-winner">PV ≈ Cape Town</span>
+      <span class="arrow">▶</span>
+    </div>
+  </div>
+  <div class="req-body">
+    <div class="city-row">
+      <div class="city-name">Oaxaca</div>
+      <div class="city-detail">Limited English-speaking therapists locally. Telehealth in ET timezone works perfectly (you're UTC-6, therapist in ET = 1 hour difference). The childcare + scheduling challenge is the real barrier — you need overlapping free hours. Timezone alignment makes this easier than Cape Town.</div>
+      <div class="rating ok">B</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Puerto Vallarta</div>
+      <div class="city-detail">Better local options than Oaxaca. Vanessa Schön LMFT (in-person/online), Alexa Thurman, Karen Weber, Joy and Journey ($85/session Zoom). Multiple English-speaking therapists identified. No specifically Gottman or EFT-certified practitioners found in PV, but functional options exist. Same excellent timezone for US-based telehealth. Plus the retreat infrastructure (Beyond Yoga's 29-day mental health program) offers deeper work.</div>
+      <div class="rating strong">A-</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Cuenca</div>
+      <div class="city-detail">Very limited English-speaking therapists. Telehealth in ET timezone works (UTC-5). Depends entirely on online options.</div>
+      <div class="rating ok">C+</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Cape Town</div>
+      <div class="city-detail">Good English-speaking therapy scene. Multiple couples therapists available in-person. The challenge: scheduling around a noon–8pm work schedule means sessions at 8–9pm or weekends. Timezone doesn't align with US-based telehealth (6–7 hours ahead of ET).</div>
+      <div class="rating ok">B+</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Chiang Mai</div>
+      <div class="city-detail">Limited English-speaking therapists locally. Timezone makes US telehealth extremely difficult — your evening is their early morning. This is one reason couples therapy has lapsed.</div>
+      <div class="rating weak">D</div>
+    </div>
+    <div class="bottom-line">PV is genuinely strong here — multiple identified English-speaking therapists plus retreat options for deeper work. The UTC-6 timezone means US-based telehealth therapists are 1 hour off, making evening sessions easy to schedule. This directly addresses the gap you've both been feeling.</div>
+  </div>
+</div>
+
+<div class="requirement" data-tier="3">
+  <div class="req-header" onclick="toggle(this)">
+    <div class="req-title">
+      <span class="req-number t3">19</span>
+      <span class="req-name">Internet Reliability</span>
+    </div>
+    <div style="display:flex;align-items:center;">
+      <span class="req-winner">Chiang Mai ≈ PV</span>
+      <span class="arrow">▶</span>
+    </div>
+  </div>
+  <div class="req-body">
+    <div class="city-row">
+      <div class="city-name">Oaxaca</div>
+      <div class="city-detail">Good in expat neighborhoods. Fiber available in some areas. Coworking spaces (Convivio, Céntrico, Co404) provide backup. Mobile hotspot as failover. Reliable enough for remote work, occasional outages. Not as bulletproof as Chiang Mai.</div>
+      <div class="rating ok">B+</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Puerto Vallarta</div>
+      <div class="city-detail">Strong. Totalplay offers up to 1 Gbps fiber in Versalles, Fluvial, and Zona Romántica ($28–132/month). Ángulo Cowork has 1 Gbps with failover backup AND backup power — the ultimate safety net. Confirm fiber availability at your specific address. Multiple ISP options. PV's tourism infrastructure drives reliable internet investment.</div>
+      <div class="rating strong">A</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Cuenca</div>
+      <div class="city-detail">Adequate in the city center. Fiber available from major ISPs. Not as fast as Mexico's best, but sufficient for remote work. Mobile backup available.</div>
+      <div class="rating ok">B</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Cape Town</div>
+      <div class="city-detail">Good fiber infrastructure in urban areas. Load shedding (power outages) is the wildcard — South Africa's Eskom issues can knock out internet. UPS/generator or a coworking space with power backup is necessary. When power is stable, internet is excellent.</div>
+      <div class="rating ok">B</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Chiang Mai</div>
+      <div class="city-detail">Excellent. True fiber, reliable, fast. Multiple coworking spaces with backup. Rarely goes down. The standard for digital nomad infrastructure.</div>
+      <div class="rating strong">A+</div>
+    </div>
+    <div class="bottom-line">PV's internet infrastructure is genuinely strong — Totalplay fiber in Versalles + Ángulo's backup system means your work is well-protected. Slightly better than Oaxaca's options, and you don't have Cape Town's load-shedding risk.</div>
+  </div>
+</div>
+
+<!-- ============ TIER 4 ============ -->
+
+<div class="requirement" data-tier="4">
+  <div class="req-header" onclick="toggle(this)">
+    <div class="req-title">
+      <span class="req-number t4">20</span>
+      <span class="req-name">Weed Legalization</span>
+    </div>
+    <div style="display:flex;align-items:center;">
+      <span class="req-winner">Chiang Mai (was legal)</span>
+      <span class="arrow">▶</span>
+    </div>
+  </div>
+  <div class="req-body">
+    <div class="city-row">
+      <div class="city-name">Oaxaca</div>
+      <div class="city-detail">Decriminalized for personal use. Widely tolerated in expat/tourist areas. Easy to obtain. Not fully legal but very low-risk.</div>
+      <div class="rating ok">B+</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Puerto Vallarta</div>
+      <div class="city-detail">Same as Oaxaca — same country, same legal framework. Decriminalized, widely tolerated in tourist zones. PV's tourist culture makes it even more relaxed in practice.</div>
+      <div class="rating ok">B+</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Cuenca</div>
+      <div class="city-detail">Small amounts decriminalized in Ecuador (up to 10g). Tolerated but less culturally accepted than Mexico. Lower priority concern.</div>
+      <div class="rating ok">B-</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Cape Town</div>
+      <div class="city-detail">Legal for private use since 2018 Constitutional Court ruling. The most legally clear of all five options. "Dagga" culture is well-established.</div>
+      <div class="rating strong">A</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Chiang Mai</div>
+      <div class="city-detail">Was briefly legal/unregulated. Thailand has been re-regulating. Current status is in flux — check latest regulations. Was the most open of any option during the unregulated period.</div>
+      <div class="rating ok">B</div>
+    </div>
+    <div class="bottom-line">Not a decision driver, as you said. Cape Town is most legally clear. Mexico is practically fine. This shouldn't move the needle.</div>
+  </div>
+</div>
+
+<div class="requirement" data-tier="4">
+  <div class="req-header" onclick="toggle(this)">
+    <div class="req-title">
+      <span class="req-number t4">21</span>
+      <span class="req-name">Climate & Air Quality</span>
+    </div>
+    <div style="display:flex;align-items:center;">
+      <span class="req-winner">PV ≈ Cape Town</span>
+      <span class="arrow">▶</span>
+    </div>
+  </div>
+  <div class="req-body">
+    <div class="city-row">
+      <div class="city-name">Oaxaca</div>
+      <div class="city-detail">Spring-like at altitude (1,550m). Warm days, cool nights. Rainy season June–September. Good year-round air quality — no burning season. Pleasant but not tropical.</div>
+      <div class="rating ok">B+</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Puerto Vallarta</div>
+      <div class="city-detail">Tropical beach climate. Hot and humid year-round (25–35°C). Rainy season June–October but rain typically comes in afternoon bursts, not all-day. Hurricane risk exists (rare direct hits). Excellent year-round air quality — ocean breezes. Summer heat is intense but you're at the beach. No burning season, no air quality concerns for Bodhi.</div>
+      <div class="rating strong">A</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Cuenca</div>
+      <div class="city-detail">"Eternal spring" at 2,560m. 15–25°C year-round. Can feel cool/damp. Excellent air quality. Some people find the altitude adjustment takes a few weeks.</div>
+      <div class="rating ok">B+</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Cape Town</div>
+      <div class="city-detail">Mediterranean climate. Warm dry summers, cool wet winters. Excellent air quality. Beautiful weather September–April. Winter (June–August) is cool and rainy. Cape Doctor wind keeps air clean.</div>
+      <div class="rating strong">A</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Chiang Mai</div>
+      <div class="city-detail">Burning season (Feb–April) is the dealbreaker. AQI regularly hits hazardous levels. Genuinely dangerous for a toddler's developing lungs. This is one of the core reasons you're leaving.</div>
+      <div class="rating weak">D</div>
+    </div>
+    <div class="bottom-line">No air quality concerns in PV, Oaxaca, Cuenca, or Cape Town. PV's beach climate is hotter than the others — if you love tropical heat, it's a win; if you prefer mild/cool, Oaxaca or Cuenca are more comfortable. The key: none have Chiang Mai's dangerous burning season.</div>
+  </div>
+</div>
+
+<div class="requirement" data-tier="4">
+  <div class="req-header" onclick="toggle(this)">
+    <div class="req-title">
+      <span class="req-number t4">22</span>
+      <span class="req-name">Easy Zim Visa (standalone)</span>
+    </div>
+    <div style="display:flex;align-items:center;">
+      <span class="req-winner">Cuenca (visa-free)</span>
+      <span class="arrow">▶</span>
+    </div>
+  </div>
+  <div class="req-body">
+    <div class="city-row">
+      <div class="city-name">Oaxaca</div>
+      <div class="city-detail">Zimbabwean passport requires a Mexican visa. Jess enters as your dependent, which works, but she can't independently travel to Mexico without your visa being in order first. Less autonomy.</div>
+      <div class="rating ok">C</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Puerto Vallarta</div>
+      <div class="city-detail">Identical to Oaxaca — same country. Jess needs a Mexican visa via your dependent status.</div>
+      <div class="rating ok">C</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Cuenca</div>
+      <div class="city-detail">Visa-free for Zimbabwean passport. One of only ~32 visa-free destinations. Jess has full independent access. She could fly in alone, travel alone, leave and re-enter. Maximum autonomy. This is uniquely valuable.</div>
+      <div class="rating strong">A+</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Cape Town</div>
+      <div class="city-detail">Jess can enter SA with relative ease as an African national. Plus the family connection through her father's PR opens additional pathways. Good standalone access.</div>
+      <div class="rating strong">A</div>
+    </div>
+    <div class="city-row">
+      <div class="city-name">Chiang Mai</div>
+      <div class="city-detail">Jess has a DTV visa through your family. Not independent — depends on your visa status.</div>
+      <div class="rating ok">C+</div>
+    </div>
+    <div class="bottom-line">Ecuador's visa-free entry for Jess is a unique advantage — she doesn't need you to facilitate her presence. In Mexico, she's always legally dependent on your status. This matters for autonomy and flexibility.</div>
+  </div>
+</div>
+
+</div><!-- end requirements -->
+
+<!-- ============ SCORECARD ============ -->
+
+<div class="scorecard">
+  <h2 style="font-size:1.2rem; margin-bottom:1rem;">Quick-Reference Scorecard</h2>
+  <table>
+    <tr>
+      <th>Requirement</th>
+      <th>Tier</th>
+      <th>Oaxaca</th>
+      <th>Puerto Vallarta</th>
+      <th>Cuenca</th>
+      <th>Cape Town</th>
+      <th>Chiang Mai</th>
+    </tr>
+    <tr><td>1. Timezone</td><td>1</td><td class="best">A+</td><td class="best">A+</td><td>A</td><td class="worst">D+</td><td class="worst">F</td></tr>
+    <tr><td>2. Visa pathway</td><td>1</td><td>A-</td><td>A-</td><td class="best">A+</td><td class="worst">C+</td><td>B-</td></tr>
+    <tr><td>3. Tax</td><td>1</td><td class="best">A+</td><td class="best">A+</td><td>A-</td><td class="worst">D</td><td class="best">A+</td></tr>
+    <tr><td>4. Safety</td><td>1</td><td>B</td><td>B+</td><td>B+</td><td class="worst">C-</td><td class="best">A+</td></tr>
+    <tr><td>5. Settled community</td><td>1</td><td class="best">A+</td><td>B-</td><td>B-</td><td>B</td><td class="worst">D</td></tr>
+    <tr><td>6. Childcare</td><td>1</td><td>B+</td><td>B</td><td>B</td><td>A</td><td class="best">A+</td></tr>
+    <tr><td>7. Nature (daily)</td><td>2</td><td>B</td><td class="best">A+</td><td>A</td><td class="best">A+</td><td class="worst">C</td></tr>
+    <tr><td>8. Yoga/wellness</td><td>2</td><td>B+</td><td>A-</td><td class="worst">C</td><td>B</td><td class="best">A+</td></tr>
+    <tr><td>9. Vegetarian food</td><td>2</td><td>B+</td><td>B</td><td class="worst">C+</td><td>B+</td><td class="best">A+</td></tr>
+    <tr><td>10. Alt schools</td><td>2</td><td>B+</td><td>B</td><td class="worst">B-</td><td class="best">A</td><td>B+</td></tr>
+    <tr><td>11. Total outflow</td><td>2</td><td>A</td><td>B</td><td class="best">A+</td><td class="worst">D</td><td class="best">A+</td></tr>
+    <tr><td>12. Motorbike/walk</td><td>2</td><td>A-</td><td>B</td><td>B</td><td class="worst">D</td><td class="best">A+</td></tr>
+    <tr><td>13. US proximity</td><td>2</td><td class="best">A+</td><td class="best">A+</td><td>C+</td><td class="worst">D</td><td class="worst">D-</td></tr>
+    <tr><td>14. Real Talk events</td><td>3</td><td class="best">A</td><td>B+</td><td class="worst">C</td><td>B+</td><td>B</td></tr>
+    <tr><td>15. Arts & culture</td><td>3</td><td class="best">A+</td><td>B+</td><td class="worst">C+</td><td>A</td><td class="worst">C+</td></tr>
+    <tr><td>16. English spoken</td><td>3</td><td>C+</td><td>B+</td><td class="worst">C</td><td class="best">A+</td><td class="best">A+</td></tr>
+    <tr><td>17. Parents clubs</td><td>3</td><td>B</td><td>B-</td><td class="worst">C-</td><td>B+</td><td>B-</td></tr>
+    <tr><td>18. Couples therapy</td><td>3</td><td>B</td><td class="best">A-</td><td class="worst">C+</td><td>B+</td><td class="worst">D</td></tr>
+    <tr><td>19. Internet</td><td>3</td><td>B+</td><td>A</td><td>B</td><td>B</td><td class="best">A+</td></tr>
+    <tr><td>20. Weed</td><td>4</td><td>B+</td><td>B+</td><td>B-</td><td class="best">A</td><td>B</td></tr>
+    <tr><td>21. Climate</td><td>4</td><td>B+</td><td>A</td><td>B+</td><td>A</td><td class="worst">D</td></tr>
+    <tr><td>22. Zim visa</td><td>4</td><td>C</td><td>C</td><td class="best">A+</td><td>A</td><td>C+</td></tr>
+  </table>
+</div>
+
+<!-- ============ FINAL VERDICT ============ -->
+
+<div class="final-section">
+  <h2>The PV vs. Oaxaca Question</h2>
+  
+  <p>Since PV and Oaxaca share identical scores on your three most critical Tier 1 factors (timezone, tax, visa), the decision between them comes down to which <em>secondary</em> trade-offs matter more to your family right now.</p>
+
+  <p><strong>Choose PV over Oaxaca if:</strong> Beach life is non-negotiable for Jess and Bodhi's daily happiness. English accessibility matters more than cultural depth for the first year. You want the strongest nature-at-your-doorstep experience (bay beaches + mountains + jungle). You value having more direct US flights. You're okay with a seasonal community that thins in summer. And you can absorb $500–700/month more in living costs.</p>
+
+  <p><strong>Choose Oaxaca over PV if:</strong> A settled, year-round expat community matters most. Cultural richness feeds your soul (arts, indigenous traditions, food as identity rather than tourism). You want to build Real Talk with a loyal, returning audience. The lower cost of living gives you more financial breathing room. You prefer a walkable/scooter city over a sprawling beach metro. And you're willing to invest in Spanish earlier because Jess won't have PV's English safety net.</p>
+
+  <p><strong>The deeper question:</strong> PV is a great place to <em>live</em>. Oaxaca is a great place to <em>belong</em>. PV's seasonal rhythm means you'd experience the city as two different places — vibrant and connected November–May, quieter and more local June–October. That summer period could be isolating for Jess, or it could be when you deepen local friendships. Oaxaca's community doesn't have that on/off switch.</p>
+
+  <p><strong>One creative option:</strong> PV and the Oaxacan coast (Puerto Escondido) are both beach towns in Mexico. You could start in PV for 3–6 months as a soft landing — easy English, immediate beach life, strong infrastructure — then visit Oaxaca City during that period. If Oaxaca's community and culture pull you, relocate. You'd be comparing real experience rather than research. Mexico's Residente Temporal doesn't lock you to a city.</p>
+</div>
+
+<script>
+function toggle(header) {
+  const body = header.nextElementSibling;
+  const arrow = header.querySelector('.arrow');
+  body.classList.toggle('open');
+  arrow.classList.toggle('open');
+}
+
+function filterTier(tier, btn) {
+  document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.requirement').forEach(req => {
+    if (tier === 'all' || req.dataset.tier == tier) {
+      req.style.display = '';
+    } else {
+      req.style.display = 'none';
+    }
+  });
+}
+</script>
+
+</body>
+</html>
