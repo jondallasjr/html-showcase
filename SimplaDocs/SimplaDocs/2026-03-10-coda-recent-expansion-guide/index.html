@@ -1,0 +1,1402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coda → Superhuman: The Expansion Guide | SimplaDocs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg-dark: #0d1117;
+  --bg-section: #161b22;
+  --bg-section-alt: #1c2129;
+  --bg-card: #21262d;
+  --bg-details: #1a1f27;
+  --text-primary: #e6edf3;
+  --text-secondary: #8b949e;
+  --text-muted: #6e7681;
+  --accent: #58a6ff;
+  --accent-glow: rgba(88, 166, 255, 0.15);
+  --accent-teal: #3fb9a0;
+  --warning: #d29922;
+  --warning-bg: rgba(210, 153, 34, 0.1);
+  --warning-border: rgba(210, 153, 34, 0.4);
+  --danger: #f85149;
+  --danger-bg: rgba(248, 81, 73, 0.08);
+  --danger-border: rgba(248, 81, 73, 0.3);
+  --border: #30363d;
+  --timeline-line: #30363d;
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg-dark);
+  color: var(--text-primary);
+  line-height: 1.7;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* --- Navigation --- */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(13, 17, 23, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+}
+
+nav .nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+}
+
+nav .brand {
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--text-secondary);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+nav .nav-links {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+nav .nav-links::-webkit-scrollbar { display: none; }
+
+nav .nav-links a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 6px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+nav .nav-links a:hover {
+  color: var(--text-primary);
+  background: var(--bg-card);
+}
+
+/* --- Sections --- */
+section {
+  min-height: 100vh;
+  padding: 100px 24px 80px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+section:first-of-type {
+  min-height: 100vh;
+  align-items: center;
+}
+
+.container {
+  max-width: 900px;
+  width: 100%;
+}
+
+.section-label {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+h1 {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin-bottom: 24px;
+}
+
+h2 {
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+}
+
+h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--text-primary);
+}
+
+p, li {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.lead {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  max-width: 700px;
+}
+
+/* --- Hero --- */
+.hero-section {
+  background: linear-gradient(180deg, var(--bg-dark) 0%, var(--bg-section) 100%);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(ellipse at 50% 30%, rgba(88, 166, 255, 0.06) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.hero-section .container {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-meta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+.hero-meta span {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.hero-meta .divider {
+  width: 4px;
+  height: 4px;
+  background: var(--text-muted);
+  border-radius: 50%;
+}
+
+.hero-hook {
+  font-size: 1.15rem;
+  color: var(--accent);
+  font-weight: 600;
+  margin-top: 8px;
+  font-style: italic;
+}
+
+.hero-image {
+  margin-top: 48px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.hero-image img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  display: block;
+  opacity: 0.7;
+}
+
+/* --- Section backgrounds --- */
+.bg-dark { background: var(--bg-dark); }
+.bg-section { background: var(--bg-section); }
+.bg-alt { background: var(--bg-section-alt); }
+
+/* --- Bullet lists --- */
+ul.key-points {
+  list-style: none;
+  padding: 0;
+  margin: 24px 0;
+}
+
+ul.key-points > li {
+  padding: 12px 0 12px 28px;
+  position: relative;
+  border-bottom: 1px solid rgba(48, 54, 61, 0.5);
+  color: var(--text-primary);
+  font-size: 1.05rem;
+}
+
+ul.key-points > li:last-child { border-bottom: none; }
+
+ul.key-points > li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 20px;
+  width: 8px;
+  height: 8px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+
+/* --- Stats row --- */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px;
+  margin: 32px 0;
+}
+
+.stat-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+}
+
+.stat-card .number {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--accent);
+  line-height: 1.2;
+}
+
+.stat-card .label {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+/* --- Timeline --- */
+.timeline {
+  position: relative;
+  padding: 20px 0;
+  margin: 32px 0;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 20px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--timeline-line);
+}
+
+.timeline-item {
+  position: relative;
+  padding: 0 0 40px 56px;
+}
+
+.timeline-item:last-child { padding-bottom: 0; }
+
+.timeline-item .dot {
+  position: absolute;
+  left: 12px;
+  top: 4px;
+  width: 18px;
+  height: 18px;
+  background: var(--bg-dark);
+  border: 3px solid var(--accent);
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.timeline-item .date {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+}
+
+.timeline-item .title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.timeline-item .desc {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* --- Details/Summary --- */
+details {
+  background: var(--bg-details);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin: 20px 0;
+  overflow: hidden;
+}
+
+details summary {
+  padding: 16px 20px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  user-select: none;
+  transition: background 0.2s;
+}
+
+details summary:hover {
+  background: rgba(88, 166, 255, 0.05);
+}
+
+details summary::marker,
+details summary::-webkit-details-marker {
+  display: none;
+}
+
+details summary::before {
+  content: '▸';
+  font-size: 14px;
+  transition: transform 0.2s;
+  display: inline-block;
+}
+
+details[open] summary::before {
+  transform: rotate(90deg);
+}
+
+details .details-content {
+  padding: 0 20px 20px;
+  border-top: 1px solid var(--border);
+}
+
+details .details-content p,
+details .details-content li {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+details .details-content ul {
+  padding-left: 20px;
+  margin: 12px 0;
+}
+
+details .details-content li {
+  margin-bottom: 8px;
+}
+
+/* --- Callout boxes --- */
+.callout {
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin: 24px 0;
+  font-size: 0.95rem;
+}
+
+.callout-warning {
+  background: var(--warning-bg);
+  border: 1px solid var(--warning-border);
+  color: var(--warning);
+}
+
+.callout-danger {
+  background: var(--danger-bg);
+  border: 1px solid var(--danger-border);
+  color: var(--danger);
+}
+
+.callout-label {
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  margin-bottom: 6px;
+}
+
+/* --- Blockquotes --- */
+blockquote {
+  border-left: 3px solid var(--accent);
+  padding: 12px 20px;
+  margin: 24px 0;
+  background: var(--accent-glow);
+  border-radius: 0 8px 8px 0;
+}
+
+blockquote p {
+  color: var(--text-primary);
+  font-style: italic;
+  font-size: 1.05rem;
+}
+
+blockquote cite {
+  display: block;
+  margin-top: 8px;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-style: normal;
+}
+
+/* --- Product cards / grid --- */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin: 28px 0;
+}
+
+.product-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 24px 20px;
+  transition: border-color 0.2s;
+}
+
+.product-card:hover {
+  border-color: var(--accent);
+}
+
+.product-card .product-name {
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+}
+
+.product-card .product-role {
+  font-size: 0.85rem;
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.product-card .product-desc {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* --- Logo row --- */
+.logo-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  flex-wrap: wrap;
+  margin: 32px 0;
+  padding: 24px;
+  background: var(--bg-card);
+  border-radius: 10px;
+  border: 1px solid var(--border);
+}
+
+.logo-row img {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+  filter: brightness(0.9);
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+.logo-row img:hover { opacity: 1; }
+
+/* --- Section images --- */
+.section-image {
+  margin: 28px 0;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.section-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  max-height: 400px;
+  object-fit: cover;
+}
+
+.section-image.contain img {
+  object-fit: contain;
+  background: var(--bg-card);
+}
+
+.section-image.small img {
+  max-height: 260px;
+}
+
+/* --- Person cards --- */
+.person-card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px;
+  margin: 16px 0;
+}
+
+.person-card img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--border);
+  flex-shrink: 0;
+}
+
+.person-card .person-info .person-name {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--text-primary);
+}
+
+.person-card .person-info .person-role {
+  font-size: 0.85rem;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.person-card .person-info .person-desc {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+/* --- Two-column image grid --- */
+.image-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 28px 0;
+}
+
+.image-pair .section-image {
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  .image-pair { grid-template-columns: 1fr; }
+  .person-card { flex-direction: column; text-align: center; }
+}
+
+/* --- Competitive table --- */
+.comp-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 24px 0;
+  font-size: 0.9rem;
+}
+
+.comp-table th {
+  text-align: left;
+  padding: 12px 16px;
+  background: var(--bg-card);
+  color: var(--text-primary);
+  font-weight: 700;
+  border-bottom: 2px solid var(--border);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.comp-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-secondary);
+  vertical-align: top;
+}
+
+.comp-table tr:hover td {
+  background: rgba(88, 166, 255, 0.03);
+}
+
+/* --- Action items --- */
+.action-list {
+  list-style: none;
+  padding: 0;
+  margin: 24px 0;
+  counter-reset: action;
+}
+
+.action-list li {
+  counter-increment: action;
+  padding: 20px 20px 20px 60px;
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  margin-bottom: 12px;
+  color: var(--text-primary);
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.action-list li::before {
+  content: counter(action);
+  position: absolute;
+  left: 20px;
+  top: 18px;
+  width: 28px;
+  height: 28px;
+  background: var(--accent);
+  color: var(--bg-dark);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 800;
+}
+
+.action-list li .action-desc {
+  font-weight: 400;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin-top: 6px;
+  display: block;
+}
+
+/* --- Footer --- */
+footer {
+  padding: 48px 24px;
+  text-align: center;
+  border-top: 1px solid var(--border);
+  background: var(--bg-dark);
+}
+
+footer p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  section { padding: 80px 16px 60px; }
+  nav .nav-links { display: none; }
+  .stats-row { grid-template-columns: repeat(2, 1fr); }
+  .product-grid { grid-template-columns: 1fr; }
+  .logo-row { gap: 20px; }
+  .logo-row img { height: 30px; }
+  .comp-table { font-size: 0.8rem; }
+  .comp-table th, .comp-table td { padding: 8px 10px; }
+  .timeline::before { left: 14px; }
+  .timeline-item { padding-left: 44px; }
+  .timeline-item .dot { left: 6px; }
+}
+
+@media (max-width: 480px) {
+  .stats-row { grid-template-columns: 1fr; }
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+  <div class="nav-inner">
+    <div class="brand">SimplaDocs</div>
+    <div class="nav-links">
+      <a href="#timeline">Timeline</a>
+      <a href="#suite">Suite</a>
+      <a href="#go">Go</a>
+      <a href="#ai">AI Tools</a>
+      <a href="#sdk">SDK</a>
+      <a href="#impact">Impact</a>
+      <a href="#risks">Risks</a>
+      <a href="#landscape">Landscape</a>
+      <a href="#future">Future</a>
+      <a href="#moves">Moves</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Section 1 — Hero -->
+<section class="hero-section" id="hero">
+  <div class="container">
+    <div class="hero-meta">
+      <span>SimplaDocs Internal</span>
+      <span class="divider"></span>
+      <span>March 2026</span>
+      <span class="divider"></span>
+      <span>Developer Strategy Guide</span>
+    </div>
+    <h1>Coda Didn't Acquire Anyone &mdash; But Its CEO Now Runs Everything</h1>
+    <p class="lead">How Grammarly's acquisition of Coda triggered a chain reaction that created Superhuman &mdash; and what it means for every Coda developer.</p>
+    <p class="hero-hook">"The deal went from first conversation to signing in three weeks."</p>
+    <div class="hero-image">
+      <img src="./images/final/grammarly-acquires-coda.webp" alt="Grammarly to acquire Coda — official announcement graphic with Coda and Grammarly logos">
+    </div>
+    <div class="person-card" style="margin-top: 32px; max-width: 500px; margin-left: auto; margin-right: auto;">
+      <img src="./images/final/shishir-mehrotra-headshot.jpg" alt="Shishir Mehrotra">
+      <div class="person-info">
+        <div class="person-name">Shishir Mehrotra</div>
+        <div class="person-role">Co-founder of Coda &rarr; CEO of Superhuman</div>
+        <div class="person-desc">The acquired company's CEO now runs the $13B acquirer.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Section 2 — Acquisition Timeline -->
+<section class="bg-section" id="timeline">
+  <div class="container">
+    <div class="section-label">The Origin Story</div>
+    <h2>The Acquisition Chain That Reshaped Productivity Software</h2>
+    <p class="lead">In 14 months, four deals turned a grammar checker into an AI productivity platform. The sequence is counterintuitive &mdash; and that's the point.</p>
+
+    <div class="section-image contain">
+      <img src="./images/final/grammarly-coda-logos.jpg" alt="Grammarly and Coda logos — acquisition announcement">
+    </div>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="dot"></div>
+        <div class="date">Dec 17, 2024</div>
+        <div class="title">Grammarly Acquires Coda</div>
+        <div class="desc">Grammarly acquires Coda. Shishir Mehrotra &mdash; Coda's CEO &mdash; becomes CEO of the combined entity. The acquired company's leader now runs the acquirer.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="dot"></div>
+        <div class="date">May 29, 2025</div>
+        <div class="title">$1B Non-Dilutive Financing</div>
+        <div class="desc">General Catalyst's Customer Value Fund provides $1 billion. Not equity &mdash; repaid via capped revenue percentage. Preserves IPO optionality.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="dot"></div>
+        <div class="date">Jul 1, 2025</div>
+        <div class="title">Superhuman (Email) Acquired</div>
+        <div class="desc">The cult-favorite email client joins the fold. ~$35M ARR, 100+ employees. CEO Rahul Vohra becomes GM of email.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="dot"></div>
+        <div class="date">Oct 29, 2025</div>
+        <div class="title">Rebrand to Superhuman</div>
+        <div class="desc">Grammarly rebrands the entire parent company as "Superhuman." Launches the unified Superhuman Suite and Superhuman Go.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="dot"></div>
+        <div class="date">Feb 23, 2026</div>
+        <div class="title">Rows Acquired</div>
+        <div class="desc">Portuguese AI spreadsheet startup acquired. Rows.com sunsets by May 31, 2026. Live data integrations fold into Coda.</div>
+      </div>
+    </div>
+
+    <details>
+      <summary>Deal details: valuations, revenue, headcount</summary>
+      <div class="details-content">
+        <ul>
+          <li><strong>Coda</strong> at acquisition: $1.4B last known valuation (2021), ~$41M ARR, ~292 employees, ~50,000 teams</li>
+          <li><strong>Grammarly</strong> at acquisition: $13B valuation (2021), $700M+ ARR, 40M+ DAU, profitable</li>
+          <li><strong>Superhuman (email)</strong>: ~$35M ARR, 100+ employees, cult following among power users</li>
+          <li><strong>Rows</strong>: Portuguese AI spreadsheet startup, headcount not disclosed. Sunsetting Rows.com by May 31, 2026</li>
+          <li>The $1B financing from General Catalyst was deliberately non-dilutive &mdash; Grammarly repays capital plus a capped revenue share. This preserves equity structure for a potential IPO.</li>
+        </ul>
+      </div>
+    </details>
+
+    <div class="callout callout-warning">
+      <div class="callout-label">Controversial</div>
+      Mehrotra was literally drafting his 2025 planning memo titled "the AI-native productivity suite" when an advisor connected him with Grammarly. Three weeks later, the deal was signed. This speed suggests Coda may have seen limited options for standalone growth.
+    </div>
+  </div>
+</section>
+
+<!-- Section 3 — The Superhuman Suite -->
+<section class="bg-alt" id="suite">
+  <div class="container">
+    <div class="section-label">The Platform</div>
+    <h2>Four Products Under One Roof</h2>
+    <p class="lead">The October 2025 rebrand launched the Superhuman Suite. Each product serves a distinct role in the AI productivity stack.</p>
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="number">40M+</div>
+        <div class="label">Daily Active Users</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">1M+</div>
+        <div class="label">Apps &amp; Websites</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">$700M+</div>
+        <div class="label">Annual Revenue</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">$12/mo</div>
+        <div class="label">Pro (All 4 Products)</div>
+      </div>
+    </div>
+
+    <div class="section-image contain">
+      <img src="./images/final/superhuman-brand-hero.png" alt="Superhuman brand identity — gradient logo">
+    </div>
+
+    <div class="product-grid">
+      <div class="product-card">
+        <div class="product-role">Communication</div>
+        <div class="product-name">Superhuman Mail</div>
+        <div class="product-desc">Premium email with AI draft replies matching your voice, split inbox triage, auto-labeling. The natural entry point &mdash; professionals spend ~3 hours daily in email.</div>
+      </div>
+      <div class="product-card">
+        <div class="product-role">Build</div>
+        <div class="product-name">Coda</div>
+        <div class="product-desc">Collaborative workspace &mdash; docs, tables, formulas, automations, Packs. The platform where teams create custom workflows and internal tools. Rows integration strengthening data layer.</div>
+      </div>
+      <div class="product-card">
+        <div class="product-role">Distribution</div>
+        <div class="product-name">Grammarly</div>
+        <div class="product-desc">Writing-assistance layer embedded in 1M+ apps via browser extension. 40M+ DAU. The distribution backbone that no competitor can match.</div>
+      </div>
+      <div class="product-card">
+        <div class="product-role">Orchestration</div>
+        <div class="product-name">Superhuman Go</div>
+        <div class="product-desc">Proactive AI assistant working everywhere Grammarly reaches. Multi-agent architecture with connector, writing, and partner agents. Agent Store marketplace.</div>
+      </div>
+    </div>
+
+    <div class="section-image" style="margin-top: 24px;">
+      <img src="./images/final/superhuman-mail-dark.png" alt="Superhuman Mail dark mode interface — inbox with contact sidebar">
+    </div>
+
+    <div class="person-card">
+      <img src="./images/final/rahul-vohra-portrait.jpg" alt="Rahul Vohra">
+      <div class="person-info">
+        <div class="person-name">Rahul Vohra</div>
+        <div class="person-role">Founder of Superhuman &rarr; GM of Email</div>
+        <div class="person-desc">Built the cult-favorite email client. Now runs the email pillar of the combined entity.</div>
+      </div>
+    </div>
+
+    <details>
+      <summary>Pricing and interconnections</summary>
+      <div class="details-content">
+        <ul>
+          <li><strong>Pro: $12/month</strong> (annual) &mdash; bundles all four products</li>
+          <li><strong>Business: $33/month</strong> &mdash; team features, admin controls</li>
+          <li><strong>Enterprise:</strong> Waitlisted &mdash; not yet generally available</li>
+          <li>Coda retains maker-based billing &mdash; existing pricing and functionality unchanged</li>
+          <li>Grammarly extension serves as the deployment vehicle for Go agents across all websites</li>
+          <li>Rows' live data integrations will be folded into Coda's data layer</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- Section 4 — Superhuman Go & Agent Architecture -->
+<section class="bg-section" id="go">
+  <div class="container">
+    <div class="section-label">The New Core</div>
+    <h2>Superhuman Go &amp; the Agent Architecture</h2>
+    <p class="lead">Go is the most strategically important product in the suite. It doesn't wait for prompts &mdash; it observes what you're working on and acts.</p>
+
+    <div class="section-image">
+      <img src="./images/final/superhuman-go-gmail-sidebar.jpg" alt="Superhuman Go sidebar with AI agents (AI Detector, Plagiarism Checker, Proofreader, Google Calendar, Gmail) integrated into Gmail">
+    </div>
+
+    <ul class="key-points">
+      <li><strong>Proactive, context-aware AI</strong> that works everywhere Grammarly's browser extension reaches &mdash; across 1M+ apps and websites</li>
+      <li><strong>Multi-agent architecture</strong> with connector agents (Google Workspace, Outlook, Jira, Confluence), Grammarly writing agents, and partner agents</li>
+      <li><strong>Agent Store</strong> launched alongside Go &mdash; a marketplace for installable agents (Box, Gamma, Fireflies, Radical Candor, Wayground, and growing)</li>
+      <li><strong>Built on Coda Packs SDK</strong> &mdash; agents are essentially Packs extended with skills, screen annotations, fetcher tools, MCP, and indexing</li>
+    </ul>
+
+    <div class="section-image small" style="margin-top: 16px;">
+      <img src="./images/final/superhuman-go-dark-interaction.png" alt="Superhuman Go dark-themed AI interaction — proactive suggestion to add a summary from Jira content">
+    </div>
+
+    <div class="callout callout-danger">
+      <div class="callout-label">Hard Truth</div>
+      Coda Brain was wound down with the October 2025 Superhuman launch. Its learnings were folded into Go. Brain's replacement lives <em>outside</em> Coda &mdash; in a cross-app agent layer, not in your docs.
+    </div>
+
+    <details>
+      <summary>How Go's agent architecture works</summary>
+      <div class="details-content">
+        <ul>
+          <li><strong>Connector agents</strong> bridge Go to external services &mdash; Google Workspace, Outlook, Jira, Confluence. They sync data and enable cross-app workflows.</li>
+          <li><strong>Grammarly writing agents</strong> provide contextual writing assistance using the 16-year-old writing engine.</li>
+          <li><strong>Partner agents</strong> are built by third-party developers via the Agents SDK. Published through the Agent Store.</li>
+          <li><strong>Screen annotations</strong> are Grammarly-style inline suggestions &mdash; agents can suggest text rewrites directly on any webpage.</li>
+          <li><strong>Skills</strong> are custom behaviors defined with prompts and tool configurations via <code>pack.addSkill()</code>.</li>
+          <li>Agents can call external LLMs (like Gemini) and connect to MCP servers with <code>pack.addMCPServer()</code>.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details>
+      <summary>Coda Brain vs. Superhuman Go</summary>
+      <div class="details-content">
+        <ul>
+          <li><strong>Brain</strong> (launched June 2024): RAG-based enterprise AI search, powered by Snowflake Cortex, permission-aware, lived inside Coda docs. Ingested data from 500+ Packs.</li>
+          <li><strong>Go</strong> (launched Oct 2025): Cross-app AI assistant, works everywhere via browser extension, multi-agent architecture, partner ecosystem.</li>
+          <li>Brain was Coda-confined. Go is platform-agnostic. The trade-off: more reach, less doc-native integration.</li>
+          <li>Brain pilots were wound down. A v2.0 shipped March 2025 before being absorbed. The technology wasn't lost &mdash; but the product surface shifted dramatically.</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- Section 5 — Coda AI & Developer Tools -->
+<section class="bg-alt" id="ai">
+  <div class="container">
+    <div class="section-label">Developer Reality</div>
+    <h2>Coda AI &amp; Developer Tools Today</h2>
+    <p class="lead">The in-doc AI features remain active and continue evolving. But there are notable gaps &mdash; and they matter.</p>
+
+    <div class="image-pair">
+      <div class="section-image">
+        <img src="./images/final/coda-workspace-ui.png" alt="Coda workspace interface — search, navigation, and recent activity">
+      </div>
+      <div class="section-image">
+        <img src="./images/final/coda-project-timeline.png" alt="Coda project timeline with Gantt-style task tracking">
+      </div>
+    </div>
+
+    <ul class="key-points">
+      <li><strong>AI Chat</strong> &mdash; Side-panel conversational AI with doc context</li>
+      <li><strong>AI Assistant</strong> &mdash; Content generation via <code>/</code> commands</li>
+      <li><strong>AI Column</strong> &mdash; Apply prompts at scale across table rows</li>
+      <li><strong>AI Block</strong> &mdash; Page-level summarization</li>
+      <li><strong>AI Reviewer</strong> &mdash; Inline feedback as comments</li>
+      <li><strong>AI Pattern Fill</strong> &mdash; Auto-complete patterns in tables</li>
+      <li><strong>600+ Pack integrations</strong> &mdash; Connected to external services for AI context</li>
+    </ul>
+
+    <div class="callout callout-warning">
+      <div class="callout-label">Notable Gap</div>
+      Coda AI is not particularly good at helping with Coda formulas &mdash; a Coda team member has acknowledged this. ChatGPT and Claude currently provide better formula assistance than Coda's own AI.
+    </div>
+
+    <details>
+      <summary>MCP (Model Context Protocol) support</summary>
+      <div class="details-content">
+        <ul>
+          <li><strong>Community MCP servers</strong> &mdash; Multiple unofficial servers (TypeScript and Python) bridge AI assistants like Claude Desktop or Cursor to the Coda API for natural-language read/write operations.</li>
+          <li><strong>Official SDK MCP support</strong> &mdash; The Agents SDK supports MCP natively with <code>pack.addMCPServer()</code>. Currently limited to one MCP server per agent, Streamable HTTP transport only.</li>
+          <li>This means Coda data can be a context source for external AI tools &mdash; not just Coda's own AI features.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details>
+      <summary>Recent Coda-specific updates</summary>
+      <div class="details-content">
+        <ul>
+          <li>Two-way sync Packs &mdash; push changes back to Salesforce, Jira</li>
+          <li>Table locking with fine-grained permissions (April 2025)</li>
+          <li>Grids &mdash; simple layout tables</li>
+          <li>Timeline improvements</li>
+          <li>Admin AI analytics</li>
+          <li>Sync pages</li>
+          <li>Enhanced importers from Confluence, Notion, Airtable</li>
+          <li>Custom working days for formulas</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- Section 6 — Agents SDK -->
+<section class="bg-section" id="sdk">
+  <div class="container">
+    <div class="section-label">The Evolution</div>
+    <h2>The Agents SDK (Closed Beta)</h2>
+    <p class="lead">Packs are evolving into agents. Same SDK, new capabilities. But there's a catch: most developers can't build them yet.</p>
+
+    <div class="section-image contain">
+      <img src="./images/final/superhuman-partner-agents.png" alt="Superhuman Go partner agents — installable agents marketplace">
+    </div>
+
+    <h3>Packs &rarr; Agents: What's New</h3>
+    <ul class="key-points">
+      <li><strong>Skills</strong> &mdash; Custom behaviors defined with prompts and tool configurations via <code>pack.addSkill()</code></li>
+      <li><strong>Screen annotations</strong> &mdash; Grammarly-style text rewrite suggestions on any webpage</li>
+      <li><strong>Fetcher tools</strong> &mdash; HTTP requests to external APIs, accessible to the agent runtime</li>
+      <li><strong>MCP server tools</strong> &mdash; Connect to external MCP servers with minimal code</li>
+      <li><strong>Indexing</strong> &mdash; Semantic search over sync table data for contextual agent responses</li>
+      <li><strong>External LLM calls</strong> &mdash; Agents can invoke models like Gemini directly</li>
+    </ul>
+
+    <div class="callout callout-danger">
+      <div class="callout-label">Access Gate</div>
+      The Agents SDK is in closed beta. Only select partners can build, test, and publish agents. The timeline for broader access is unclear. This is the single biggest bottleneck for Coda developers right now.
+    </div>
+
+    <details>
+      <summary>What stays the same from Packs</summary>
+      <div class="details-content">
+        <ul>
+          <li>Same <code>@codahq/packs-sdk</code> framework</li>
+          <li>Same authentication patterns</li>
+          <li>Same sync table architecture</li>
+          <li>Pack skills translate directly to agent skills</li>
+          <li>Existing Pack development experience is the best preparation for agent development</li>
+        </ul>
+      </div>
+    </details>
+
+    <details>
+      <summary>Current known limitations</summary>
+      <div class="details-content">
+        <ul>
+          <li>Closed beta &mdash; no self-serve access for most developers</li>
+          <li>One MCP server per agent (current limitation)</li>
+          <li>Streamable HTTP transport only for MCP</li>
+          <li>Agents are not yet available natively inside Coda docs &mdash; they live in Superhuman Go</li>
+          <li>Agent Store review process is not yet publicly documented</li>
+          <li>No public timeline for general availability</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- Section 7 — What This Means for SimplaDocs -->
+<section class="bg-alt" id="impact">
+  <div class="container">
+    <div class="section-label">Our Opportunity</div>
+    <h2>What This Means for SimplaDocs</h2>
+    <p class="lead">The opportunity surface has expanded dramatically. But access is gated and uncertainty runs high.</p>
+
+    <div class="logo-row">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/9/98/Coda-io-logo.png" alt="Coda logo">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/d/dd/Grammarly_logo_2024.svg" alt="Grammarly logo">
+      <img src="./images/final/logo-superhuman.jpg" alt="Superhuman logo">
+      <img src="./images/final/logo-rows.png" alt="Rows logo">
+    </div>
+
+    <h3>The Upside</h3>
+    <ul class="key-points">
+      <li><strong>Massive distribution</strong> &mdash; Pack development skills now build agents reaching 40M+ users across 1M+ apps via Grammarly's extension</li>
+      <li><strong>Same SDK, bigger surface</strong> &mdash; Pack skills translate directly to agent skills. Our existing expertise is the foundation.</li>
+      <li><strong>Agent Store monetization</strong> &mdash; A new marketplace and distribution channel for our work</li>
+      <li><strong>Superhuman Alliance</strong> &mdash; Partner program targeting VARs and solution providers like us</li>
+    </ul>
+
+    <h3>The Risks</h3>
+    <ul class="key-points">
+      <li><strong>Gated access</strong> &mdash; Agents SDK is closed beta. We can't build for the broader platform until we get in.</li>
+      <li><strong>Center of gravity shifting</strong> &mdash; The agentic future lives in Go, not in Coda docs. Our Coda-native expertise is valuable but the action is moving elsewhere.</li>
+      <li><strong>Strategic drift potential</strong> &mdash; Core Coda features could be deprioritized in favor of the agent platform</li>
+      <li><strong>Platform dependency</strong> &mdash; We're building on someone else's platform during a period of rapid change</li>
+    </ul>
+
+    <details>
+      <summary>Specific opportunities for SimplaDocs</summary>
+      <div class="details-content">
+        <ul>
+          <li>Convert existing Packs into agents for the Agent Store &mdash; our Pack portfolio is a head start</li>
+          <li>Offer Superhuman Suite implementation services &mdash; enterprises need help with the transition</li>
+          <li>Build expertise in multi-agent architecture &mdash; Go's connector + partner agent model is complex enough that clients will need guidance</li>
+          <li>Position as early movers if we secure SDK access &mdash; first-mover advantage in the Agent Store</li>
+          <li>Rows migration consulting &mdash; teams on Rows.com (sunsetting May 31) need help moving to Coda</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- Section 8 — Risks & Hard Questions -->
+<section class="bg-section" id="risks">
+  <div class="container">
+    <div class="section-label">Eyes Open</div>
+    <h2>Risks &amp; Hard Questions</h2>
+    <p class="lead">This section isn't comfortable. That's the point. These are the questions that need honest answers.</p>
+
+    <div class="section-image">
+      <img src="https://images.pexels.com/photos/7504783/pexels-photo-7504783.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="Chess pieces on dark glass table">
+    </div>
+
+    <ul class="key-points">
+      <li><strong>Strategic priority drift</strong> &mdash; Will core Coda features (formulas, tables, automations) be deprioritized in favor of building AI agents for Superhuman Go?</li>
+      <li><strong>Agents live outside Coda</strong> &mdash; AI agent capabilities are in Go, not in Coda documents. What does that mean for Coda-native builders like us?</li>
+      <li><strong>Privacy concerns</strong> &mdash; Grammarly's browser extension (which some have called "essentially a keylogger") will now have access paths to company data hosted on Coda</li>
+      <li><strong>Manual migration</strong> &mdash; Workspace migration between Coda standalone and Superhuman Suite is manual. No auto-consolidation.</li>
+      <li><strong>Enterprise waitlist</strong> &mdash; Business/Enterprise suite plans are not yet generally available. Larger teams are waiting.</li>
+      <li><strong>Possible Coda rebrand</strong> &mdash; TechCrunch reports the company "is thinking about rebranding products like Coda in the long run"</li>
+    </ul>
+
+    <blockquote>
+      <p>"This is a 3 Body Problem &mdash; totally unpredictable."</p>
+      <cite>&mdash; Coda community member on the acquisition chain</cite>
+    </blockquote>
+
+    <details>
+      <summary>Privacy and security deep dive</summary>
+      <div class="details-content">
+        <ul>
+          <li>Grammarly maintains SOC 2/3 and ISO certifications</li>
+          <li>Company states it does not use content for model training</li>
+          <li>However, Hacker News users have raised concerns about the browser extension's broad access to page content</li>
+          <li>For enterprises, the question is whether Grammarly's extension processing is acceptable for sensitive internal data</li>
+          <li>This concern is amplified now that Grammarly/Coda/Go share an organizational umbrella</li>
+        </ul>
+      </div>
+    </details>
+
+    <details>
+      <summary>Community reactions and analyst perspectives</summary>
+      <div class="details-content">
+        <ul>
+          <li>Community members have flagged concerns about feature velocity slowing on core Coda</li>
+          <li>Analyst Irwin Lazar (Metrigy): "They are wagering that being a platform-agnostic AI orchestration suite is more valuable than owning the whole productivity suite."</li>
+          <li>Some developers worry about being locked into an ecosystem undergoing rapid, unpredictable transformation</li>
+          <li>Positive sentiment around the distribution opportunity &mdash; most agree the 40M DAU base is compelling</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- Section 9 — Competitive Landscape -->
+<section class="bg-alt" id="landscape">
+  <div class="container">
+    <div class="section-label">New Framing</div>
+    <h2>The Competitive Landscape Has Fundamentally Changed</h2>
+    <p class="lead">It's no longer "Coda vs. Notion." It's Superhuman vs. Microsoft Copilot vs. Google Gemini as AI orchestration layers for work.</p>
+
+    <div class="section-image">
+      <img src="./images/final/competitive-digital-code.jpg" alt="Abstract digital code visualization">
+    </div>
+
+    <div class="logo-row">
+      <img src="./images/final/logo-notion.png" alt="Notion logo">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/4/4b/Airtable_Logo.svg" alt="Airtable logo">
+      <img src="./images/final/logo-microsoft.jpg" alt="Microsoft logo">
+      <img src="./images/final/logo-google.png" alt="Google logo">
+    </div>
+
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>Competitor</th>
+          <th>Superhuman's Advantage</th>
+          <th>Their Advantage</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Notion</strong></td>
+          <td>Formula power, maker-based pricing, Packs ecosystem, cross-app agent layer</td>
+          <td>Notion Mail, Calendar, AI &mdash; integrated single-product suite with strong brand</td>
+        </tr>
+        <tr>
+          <td><strong>Airtable</strong></td>
+          <td>Stronger formulas and automations, Rows acquisition adds live data integrations</td>
+          <td>Deeper enterprise data workflows, established in large organizations</td>
+        </tr>
+        <tr>
+          <td><strong>Microsoft Copilot</strong></td>
+          <td>Platform-agnostic &mdash; works across all apps, not just Microsoft's</td>
+          <td>Owns the productivity suite (Office 365), enterprise relationships, can bundle for free</td>
+        </tr>
+        <tr>
+          <td><strong>Google Gemini</strong></td>
+          <td>16 years of cross-app browser presence via Grammarly extension</td>
+          <td>Owns Gmail, Docs, Sheets &mdash; can restrict API access at will</td>
+        </tr>
+        <tr>
+          <td><strong>Monday / Asana</strong></td>
+          <td>Diverged entirely &mdash; Superhuman is an AI productivity fabric, not a task manager</td>
+          <td>Focused project/task management with deep integrations</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout callout-danger">
+      <div class="callout-label">Existential Risk</div>
+      Superhuman relies on Google and Microsoft APIs for its overlay approach. Platform owners could restrict access or replicate the entire orchestration layer with Gemini and Copilot. This is the core bet.
+    </div>
+
+    <details>
+      <summary>The unique differentiator</summary>
+      <div class="details-content">
+        <p>Grammarly's 16-year installed base across 1M+ apps is what no competitor can replicate quickly. The browser extension is embedded in workflows across every major web application. This gives Superhuman Go a deployment vehicle that Microsoft (desktop-first) and Google (own-apps-first) don't have.</p>
+        <p>The bet: being platform-agnostic and already embedded everywhere is more valuable than owning the productivity suite yourself.</p>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- Section 10 — Where It's Headed -->
+<section class="bg-section" id="future">
+  <div class="container">
+    <div class="section-label">Looking Ahead</div>
+    <h2>Where It's Headed</h2>
+    <p class="lead">The trajectory points toward an IPO. The product roadmap is filling in. But prediction is hard &mdash; this is genuinely unpredictable territory.</p>
+
+    <div class="section-image">
+      <img src="./images/final/future-digital-horizon.webp" alt="Futuristic digital horizon">
+    </div>
+
+    <h3>Known Roadmap</h3>
+    <ul class="key-points">
+      <li><strong>Native Go agents inside Coda docs</strong> &mdash; In development. This would bring the agentic future back into the doc surface where we work.</li>
+      <li><strong>Rows integration into Coda data layer</strong> &mdash; Live data integrations and no-code data analysis, post-acquisition.</li>
+      <li><strong>Agent Store expansion</strong> &mdash; Continued onboarding of new partner agents and categories.</li>
+      <li><strong>Solution builder capabilities</strong> &mdash; Enabling partners to build and distribute complete solutions.</li>
+    </ul>
+
+    <h3>Trajectory Signals</h3>
+    <ul class="key-points">
+      <li><strong>IPO optionality</strong> &mdash; $700M+ revenue, profitable, non-dilutive financing preserves equity. The structure is IPO-ready.</li>
+      <li><strong>Possible Coda rebrand</strong> &mdash; TechCrunch: company "is thinking about rebranding products like Coda in the long run."</li>
+      <li><strong>Continued M&A</strong> &mdash; The $1B war chest may not be fully deployed. More acquisitions possible.</li>
+    </ul>
+
+    <details>
+      <summary>What to watch for</summary>
+      <div class="details-content">
+        <ul>
+          <li><strong>Agents SDK GA announcement</strong> &mdash; This is the single most important milestone for developers. Watch for dates, pricing, and terms.</li>
+          <li><strong>Native Go in Coda docs</strong> &mdash; When this ships, it validates that Coda-native development remains a priority.</li>
+          <li><strong>Enterprise suite GA</strong> &mdash; Large teams are waitlisted. When this opens, it signals enterprise readiness.</li>
+          <li><strong>API policy changes</strong> &mdash; Any restrictions from Google or Microsoft on the overlay approach would be an existential signal.</li>
+          <li><strong>Coda brand changes</strong> &mdash; If/when "Coda" is renamed, it will signal how much the product identity is being absorbed.</li>
+          <li><strong>Pack pricing changes</strong> &mdash; Currently unchanged, but monitor for any shifts as the agent economy develops.</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- Section 11 — Our Three Moves -->
+<section class="bg-alt" id="moves">
+  <div class="container">
+    <div class="section-label">Action Plan</div>
+    <h2>Our Three Moves</h2>
+    <p class="lead">The ground is shifting. Here's what we do about it &mdash; pragmatic, specific, and starting now.</p>
+
+    <div class="section-image small">
+      <img src="./images/final/three-moves-gear.jpg" alt="Gear mechanism imagery">
+    </div>
+
+    <ol class="action-list">
+      <li>
+        Apply for the Agents SDK Beta — Now
+        <span class="action-desc">Early access to the agent platform is the single highest-leverage opportunity in this ecosystem. We need to be building agents before the Agent Store gets crowded. Submit the application this week.</span>
+      </li>
+      <li>
+        Keep Investing in Pack Development
+        <span class="action-desc">Pack skills translate directly into agent skills. Same SDK, same framework. Every Pack we build today is a head start on agents tomorrow. Don't slow down &mdash; accelerate.</span>
+      </li>
+      <li>
+        Maintain Strategic Optionality
+        <span class="action-desc">The Coda product is explicitly preserved today, but the center of gravity is shifting toward Superhuman Go. Stay informed, stay flexible, and don't over-commit to any single assumption about where this lands.</span>
+      </li>
+    </ol>
+
+    <details>
+      <summary>Specific action items and ownership</summary>
+      <div class="details-content">
+        <ul>
+          <li><strong>This week:</strong> Submit Agents SDK beta application via Superhuman Alliance partner program</li>
+          <li><strong>This month:</strong> Audit existing Pack portfolio for agent-conversion readiness. Which Packs have the highest potential as agents?</li>
+          <li><strong>This quarter:</strong> Build proof-of-concept agent (even if in closed beta preview). Establish expertise before GA opens the floodgates.</li>
+          <li><strong>Ongoing:</strong> Monitor Coda community channels, changelog, and Superhuman announcements for roadmap signals</li>
+          <li><strong>Ongoing:</strong> Maintain documentation of our Pack development patterns &mdash; these become our agent development playbook</li>
+          <li><strong>Decision point:</strong> If Agents SDK GA is announced, immediately prioritize agent development &mdash; first-mover advantage matters in marketplaces</li>
+        </ul>
+      </div>
+    </details>
+
+    <blockquote>
+      <p>"The Coda ecosystem is no longer a standalone story &mdash; it's one surface in an ambitious, well-funded platform play led by Coda's own CEO, backed by $700M+ in revenue and $1B in acquisition capital."</p>
+    </blockquote>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <p>SimplaDocs Internal &middot; March 2026 &middot; Coda Expansion Strategy Guide</p>
+  <p style="margin-top: 8px;">Built from primary research. All figures sourced from public announcements, SEC filings, and community reports.</p>
+</footer>
+
+<script>
+// Smooth scroll for nav links
+document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+
+// Highlight active nav link on scroll
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('nav .nav-links a');
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.getAttribute('id');
+      navLinks.forEach(link => {
+        link.style.color = link.getAttribute('href') === '#' + id
+          ? 'var(--accent)'
+          : '';
+      });
+    }
+  });
+}, { rootMargin: '-40% 0px -60% 0px' });
+
+sections.forEach(section => observer.observe(section));
+
+// Animate elements on scroll
+const animateOnScroll = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.stat-card, .product-card, .timeline-item, .action-list li').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(20px)';
+  el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+  animateOnScroll.observe(el);
+});
+</script>
+
+</body>
+</html>
