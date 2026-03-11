@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parks &amp; Outdoors — Amsterdam Dallas Family Guide</title>
+  <meta name="description" content="Vondelpark playgrounds, Artis Royal Zoo, Hortus Botanicus, Amsterdamse Bos, and cargo bikes. Everything outside in Amsterdam for three generations.">
+  <meta property="og:title" content="Parks &amp; Outdoors — Amsterdam Dallas Family Guide">
+  <meta property="og:description" content="Vondelpark, Artis Zoo 400m from the apartment, Hortus Botanicus, Amsterdamse Bos. The outdoors guide for Amsterdam.">
+  <meta property="og:image" content="../../images/final/vondelpark-playground.jpg">
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2026-03-11">
+  <meta property="article:tag" content="Amsterdam">
+  <meta name="category" content="Travel Guide">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --blue: #1a3a5c; --orange: #e87722; --bg: #faf8f5; --text: #2c2c2c; --green: #4a8c5c; --card-bg: #ffffff; --border: #e8e0d5; --shadow: 0 2px 12px rgba(26,58,92,0.08); --shadow-hover: 0 8px 28px rgba(26,58,92,0.16); }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Source Sans 3', sans-serif; font-size: 18px; line-height: 1.7; color: var(--text); background: var(--bg); }
+    nav { background: var(--blue); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+    .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 60px; }
+    .nav-brand { color: #fff; font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 600; text-decoration: none; white-space: nowrap; }
+    .nav-brand span { color: var(--orange); }
+    .nav-links { display: flex; gap: 4px; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,0.85); text-decoration: none; font-size: 0.82rem; padding: 6px 9px; border-radius: 4px; transition: all 0.2s; white-space: nowrap; }
+    .nav-links a:hover, .nav-links a.active { color: #fff; background: rgba(255,255,255,0.12); }
+    .nav-links a.active { color: var(--orange); }
+    .nav-hamburger { display: none; background: none; border: none; color: #fff; cursor: pointer; padding: 8px; min-width: 44px; min-height: 44px; align-items: center; justify-content: center; }
+    .mobile-menu { display: none; background: var(--blue); border-top: 1px solid rgba(255,255,255,0.1); }
+    .mobile-menu.open { display: block; }
+    .mobile-menu a { display: block; color: rgba(255,255,255,0.85); text-decoration: none; padding: 14px 24px; font-size: 1rem; border-bottom: 1px solid rgba(255,255,255,0.07); transition: background 0.2s; min-height: 44px; }
+    .mobile-menu a:hover, .mobile-menu a.active { background: rgba(255,255,255,0.1); color: #fff; }
+    .mobile-menu a.active { color: var(--orange); }
+    .hero { position: relative; min-height: 55vh; display: flex; align-items: flex-end; overflow: hidden; }
+    .hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 35%; }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(26,58,92,0.85) 0%, rgba(26,58,92,0.3) 55%, rgba(0,0,0,0.15) 100%); }
+    .hero-content { position: relative; z-index: 2; padding: 48px 32px 56px; max-width: 800px; }
+    .hero-eyebrow { display: inline-block; background: var(--orange); color: #fff; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 5px 12px; border-radius: 2px; margin-bottom: 16px; }
+    .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 700; color: #fff; line-height: 1.2; margin-bottom: 16px; }
+    .hero p { color: #fff; font-size: clamp(1rem, 2vw, 1.2rem); font-weight: 400; max-width: 600px; text-shadow: 0 1px 3px rgba(0,0,0,0.6); }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+    section { padding: 56px 0; }
+    section + section { border-top: 1px solid var(--border); }
+    h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 700; color: var(--blue); margin-bottom: 8px; }
+    h3 { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 600; color: var(--blue); margin-bottom: 10px; }
+    .section-intro { color: #666; font-size: 1.05rem; margin-bottom: 36px; max-width: 640px; }
+    p { margin-bottom: 1em; } p:last-child { margin-bottom: 0; }
+    ul { padding-left: 1.4em; margin-bottom: 1em; } li { margin-bottom: 0.4em; }
+    .place-card { background: var(--card-bg); border-radius: 10px; overflow: hidden; box-shadow: var(--shadow); margin-bottom: 28px; }
+    .place-card.featured { border: 2px solid var(--green); }
+    .place-hero { height: 280px; overflow: hidden; position: relative; }
+    .place-hero img { width: 100%; height: 100%; object-fit: cover; }
+    .place-body { padding: 28px 32px; }
+    .place-grid { display: grid; grid-template-columns: 260px 1fr; gap: 0; }
+    .place-grid .place-img { overflow: hidden; min-height: 200px; }
+    .place-grid .place-img img { width: 100%; height: 100%; object-fit: cover; }
+    .badge { display: inline-block; font-size: 0.72rem; font-weight: 700; padding: 3px 8px; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .badge-free { background: #e8f7ed; color: #2d6b3c; }
+    .badge-book { background: #fff0e0; color: #b85a00; }
+    .badge-star { background: var(--orange); color: #fff; }
+    .badge-green { background: #e8f7ed; color: #2d6b3c; }
+    .badge-card { background: #e8f0f8; color: var(--blue); }
+    .place-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+    .info-row { display: flex; gap: 20px; flex-wrap: wrap; margin: 10px 0 14px; }
+    .info-item { display: flex; align-items: center; gap: 8px; font-size: 0.88rem; color: #666; }
+    .info-item i { color: var(--orange); flex-shrink: 0; }
+    .callout { border-radius: 8px; padding: 20px 24px; margin: 20px 0; }
+    .callout-success { background: #f0f7f2; border-left: 4px solid var(--green); }
+    .callout-info { background: #f0f5fb; border-left: 4px solid var(--blue); }
+    .callout-warning { background: #fff8f0; border-left: 4px solid var(--orange); }
+    .callout-title { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+    .callout-success .callout-title { color: #2d6b3c; }
+    .callout-info .callout-title { color: var(--blue); }
+    .callout-warning .callout-title { color: #b85a00; }
+    .callout p, .callout ul { font-size: 0.92rem; margin-bottom: 0.5em; }
+    .callout ul { padding-left: 1.2em; }
+    .pull-quote { border-left: 4px solid var(--orange); padding: 16px 24px; margin: 28px 0; font-family: 'Playfair Display', serif; font-size: 1.15rem; font-style: italic; color: var(--blue); background: #fff; border-radius: 0 8px 8px 0; }
+    details { border: 1px solid var(--border); border-radius: 8px; margin: 12px 0; overflow: hidden; }
+    summary { padding: 14px 18px; cursor: pointer; font-weight: 600; color: var(--blue); font-size: 0.95rem; display: flex; align-items: center; gap: 10px; list-style: none; min-height: 44px; background: var(--card-bg); transition: background 0.2s; }
+    summary::-webkit-details-marker { display: none; }
+    summary:hover { background: #f5f0e8; }
+    details[open] summary { border-bottom: 1px solid var(--border); }
+    details > *:not(summary) { padding: 16px 18px; font-size: 0.95rem; }
+    .img-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin: 24px 0; }
+    .img-row img { width: 100%; height: 200px; object-fit: cover; border-radius: 8px; }
+    footer { background: var(--blue); color: rgba(255,255,255,0.7); text-align: center; padding: 32px 24px; font-size: 0.9rem; margin-top: 64px; }
+    footer a { color: var(--orange); text-decoration: none; }
+    @media (max-width: 1024px) { .nav-links { display: none; } .nav-hamburger { display: flex; } .place-grid { grid-template-columns: 1fr; } .place-grid .place-img { min-height: 220px; height: 220px; } .img-row { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 600px) { .hero { min-height: 45vh; } .hero-content { padding: 32px 20px 40px; } .container { padding: 0 20px; } section { padding: 40px 0; } .place-body { padding: 20px; } .place-hero { height: 220px; } .img-row { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">Amsterdam <span>&#9670;</span> Dallas</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="dont-miss.html">Don't Miss</a></li>
+      <li><a href="best-deals.html">Best Deals</a></li>
+      <li><a href="art-museums.html">Art</a></li>
+      <li><a href="music-events.html">Music</a></li>
+      <li><a href="parks-outdoors.html" class="active">Parks</a></li>
+      <li><a href="churches-spaces.html">Churches</a></li>
+      <li><a href="food-markets.html">Food</a></li>
+      <li><a href="canals-cruises.html">Canals</a></li>
+      <li><a href="practical.html">Practical</a></li>
+      <li><a href="day-trips.html">Day Trips</a></li>
+    </ul>
+    <button class="nav-hamburger" id="hamburger" aria-label="Open menu">
+      <i data-lucide="menu" width="24" height="24"></i>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Home</a>
+    <a href="dont-miss.html">Don't Miss</a>
+    <a href="best-deals.html">Best Deals</a>
+    <a href="art-museums.html">Art &amp; Museums</a>
+    <a href="music-events.html">Music &amp; Events</a>
+    <a href="parks-outdoors.html" class="active">Parks &amp; Outdoors</a>
+    <a href="churches-spaces.html">Churches &amp; Spaces</a>
+    <a href="food-markets.html">Food &amp; Markets</a>
+    <a href="canals-cruises.html">Canals &amp; Cruises</a>
+    <a href="practical.html">Practical Info</a>
+    <a href="day-trips.html">Day Trips</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <img src="../../images/final/vondelpark-playground.jpg" alt="Dad with toddler on a large metal climbing tower at a Vondelpark playground">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <span class="hero-eyebrow">Parks &amp; Outdoors</span>
+    <h1>The city is Bodhi's playground</h1>
+    <p>Six Vondelpark playgrounds five minutes away. A world-class zoo seven minutes from the apartment. A butterfly house around the corner. Amsterdam is extraordinarily good for this trip.</p>
+  </div>
+</section>
+
+<div class="container">
+
+  <!-- VONDELPARK -->
+  <section>
+    <div class="place-card featured">
+      <div class="place-hero">
+        <img src="../../images/final/vondelpark-park.jpg" alt="Vondelpark in spring — green lawns, people relaxing by the pond">
+      </div>
+      <div class="place-body">
+        <div class="place-meta">
+          <span class="badge badge-free">Free always</span>
+          <span class="badge badge-star">Daily anchor</span>
+        </div>
+        <h3>Vondelpark</h3>
+        <div class="info-row">
+          <div class="info-item"><i data-lucide="map-pin" width="14" height="14"></i> <span>~20 min walk from Plantage, Amstelveenseweg entrance</span></div>
+          <div class="info-item"><i data-lucide="euro" width="14" height="14"></i> <span>Always free</span></div>
+        </div>
+        <p>Vondelpark will become the family's daily rhythm; a place you keep coming back to rather than checking off. Six playgrounds, multiple cafés, a paddling pool in warm weather, and the Openluchttheater with free outdoor performances starting in May.</p>
+
+        <details open>
+          <summary><i data-lucide="playground" width="14" height="14"></i> Groot Melkhuis — the family headquarters</summary>
+          <p>The main toddler playground near the Amstelveenseweg entrance. Fenced area with a separate toddler section including sandpit, baby swings, and water play. The café alongside it serves wood-fired pizza, poffertjes, and pancakes with a terrace overlooking the pond. On sunny weekends, there's a bouncy castle. This is the place you'll be every other afternoon.</p>
+        </details>
+        <details>
+          <summary><i data-lucide="trees" width="14" height="14"></i> De Vondeltuin — nature-style playground, southern end</summary>
+          <p>At the park's southern tip, a more adventurous playground with a giant climbing structure, a massive slide, and a sandbox. Adjacent family café with a kids' menu. Slightly quieter than Groot Melkhuis.</p>
+        </details>
+        <details>
+          <summary><i data-lucide="music" width="14" height="14"></i> Openluchttheater — free outdoor performances</summary>
+          <p>The open-air theatre starts its season around the Whitsun weekend (May 24–25). Typical schedule: Fridays dance, Saturdays kids'/family shows, Sundays music. Free, no booking needed; just show up. Program posts in April at openluchttheater.nl. Bring a blanket and food.</p>
+        </details>
+        <details>
+          <summary><i data-lucide="bicycle" width="14" height="14"></i> Cycling in Vondelpark</summary>
+          <p>The main path through Vondelpark is wide, calm, and perfect for cycling with children. Cargo bikes (bakfiets) can be rented from MacBike at Overtoom; Bodhi sits in the front box with seatbelts. The park is a much safer cycling environment than Amsterdam's streets.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARTIS ZOO -->
+  <section>
+    <h2>Artis Royal Zoo</h2>
+    <p class="section-intro">Seven minutes' walk from the apartment; probably the most convenient world-class zoo in Europe.</p>
+
+    <div class="place-card featured">
+      <div class="place-body" style="padding-bottom:0;">
+        <div class="place-meta">
+          <span class="badge badge-star">7 min walk from apartment</span>
+          <span class="badge badge-card">City Card</span>
+          <span class="badge badge-free">Bodhi free (under 3)</span>
+        </div>
+        <div class="info-row">
+          <div class="info-item"><i data-lucide="map-pin" width="14" height="14"></i> <span>Plantage Kerklaan 38–40</span></div>
+          <div class="info-item"><i data-lucide="clock" width="14" height="14"></i> <span>Open daily from 9:00 AM</span></div>
+          <div class="info-item"><i data-lucide="euro" width="14" height="14"></i> <span>~€26.50 online / free under 3 / City Card</span></div>
+        </div>
+      </div>
+      <div class="img-row" style="margin: 0; padding: 0 32px 28px;">
+        <img src="../../images/final/artis-giraffe-child.jpg" alt="Young child watching a giraffe at Artis Zoo">
+        <img src="../../images/final/artis-lion.jpg" alt="Lion at Artis Zoo Amsterdam">
+        <img src="../../images/final/artis-penguins.jpg" alt="Penguins at Artis Zoo Amsterdam">
+      </div>
+      <div class="place-body" style="padding-top: 0;">
+        <p>Over 700 animal species in a park setting that dates to 1838. Not a sterile zoo; it feels like a botanical garden that also has animals. Wide, flat paths throughout. Calm enough for Edie on a weekday morning.</p>
+        <p>The <strong>"Artis de Partis" route</strong> is designed for young children: petting zoo, butterfly pavilion, playground, and the option to ride a free trolley when legs get tired. Bodhi will lose his mind here.</p>
+        <div class="callout callout-info">
+          <div class="callout-title"><i data-lucide="heart" width="16" height="16"></i> Sunflower Lanyard at Artis</div>
+          <p>ARTIS recognizes the Hidden Disabilities Sunflower lanyard. Spare lanyards available free at the ticket desk. Staff are trained to offer extra support and patience to anyone wearing one; no need to explain.</p>
+        </div>
+        <details>
+          <summary><i data-lucide="clock" width="14" height="14"></i> Best time to visit</summary>
+          <p>Go at 9:00 AM on a weekday (Monday to Wednesday are the quietest). The grounds have fewer crowds, Edie will be at her best in the morning, and Bodhi's energy is highest before lunch. Allow 2–3 hours. Leave by noon before it gets crowded and warm.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- HORTUS BOTANICUS -->
+  <section>
+    <h2>Hortus Botanicus</h2>
+
+    <div class="place-card">
+      <div class="place-grid">
+        <div class="place-img">
+          <img src="../../images/final/hortus-exterior.jpg" alt="Hortus Botanicus Amsterdam exterior with canal and greenhouse dome">
+        </div>
+        <div class="place-body">
+          <div class="place-meta">
+            <span class="badge badge-star">Best for Edie</span>
+            <span class="badge badge-card">City Card</span>
+            <span class="badge badge-free">Free under 6</span>
+          </div>
+          <h3>Hortus Botanicus Amsterdam</h3>
+          <div class="info-row">
+            <div class="info-item"><i data-lucide="map-pin" width="14" height="14"></i> <span>Plantage Middenlaan 2a — 10 min walk from apartment</span></div>
+            <div class="info-item"><i data-lucide="euro" width="14" height="14"></i> <span>€13.50/adult — free under 6 — City Card</span></div>
+            <div class="info-item"><i data-lucide="clock" width="14" height="14"></i> <span>1–2 hours is plenty</span></div>
+          </div>
+          <p>Founded in 1638. Just 1.2 hectares, small enough to feel manageable and never overwhelming. Seven greenhouses, a butterfly house that Bodhi will love, exotic plants from around the world, and the lovely Orangery café for a sit-down rest.</p>
+          <p>This is arguably the single best attraction for Edie in Amsterdam. Sensory-rich: flowers, scents, gentle warmth in the greenhouses — but calm, quiet, and with plenty of benches. Nothing to navigate, no queuing, no crowds. Allow yourself to wander slowly.</p>
+          <img src="../../images/final/hortus-interior.jpg" alt="Inside the Hortus Botanicus greenhouses with tropical plants" style="width:100%;height:180px;object-fit:cover;border-radius:6px;margin-top:16px;">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AMSTERDAMSE BOS & OTHERS -->
+  <section>
+    <h2>Further out</h2>
+    <p class="section-intro">Worth the extra travel time for a change of pace, especially for a half-day escape from the city.</p>
+
+    <details>
+      <summary><i data-lucide="trees" width="16" height="16"></i> Amsterdamse Bos (Amsterdam Forest) — free, full day</summary>
+      <div>
+        <p>A thousand hectares of nature on Amsterdam's edge. Free entry. Toddler paddling pools open in May–September. The <strong>Ridammerhoeve goat farm</strong> has 150+ goats and makes its own cheese; Bodhi can feed them. <strong>Boerderij Meerzicht</strong> is a pancake house with a playground, deer, and peacocks.</p>
+        <p>Heritage trams run on Sundays. Reachable by bus or bike (about 30 minutes from center). Best as a full half-day, ideally when the city feels crowded.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary><i data-lucide="map-pin" width="16" height="16"></i> Amstelpark — Amsterdam's biggest playground</summary>
+      <div>
+        <p>Amsterdam's largest outdoor playground, plus a mini train ride (~€3), a petting zoo, a hedge maze, mini golf, and a pancake house. Nearly all free beyond the train ticket. Good option on a quiet weekday when Vondelpark feels too familiar.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary><i data-lucide="bicycle" width="16" height="16"></i> Cargo bikes — how to ride Amsterdam with Bodhi</summary>
+      <div>
+        <p>A cargo bike (bakfiets) is the best Amsterdam option for a toddler. Bodhi sits in the front box with proper seatbelts, visible to the rider at all times. <strong>MacBike</strong> at Overtoom (next to Vondelpark) rents cargo bikes from €32.95/day with child seats included.</p>
+        <p><strong>Important:</strong> Amsterdam cycling traffic is intense on main roads. Stick to Vondelpark paths and quieter residential streets. The park itself is ideal for a family ride.</p>
+      </div>
+    </details>
+
+  </section>
+
+</div>
+
+<footer>
+  <p>Built for the Dallas family &mdash; Amsterdam, May 23&ndash;June 1, 2026 &mdash; <a href="index.html">Home</a></p>
+</footer>
+
+<script>
+  lucide.createIcons();
+  var hamburger = document.getElementById('hamburger');
+  var mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', function() {
+    mobileMenu.classList.toggle('open');
+  });
+</script>
+</body>
+</html>

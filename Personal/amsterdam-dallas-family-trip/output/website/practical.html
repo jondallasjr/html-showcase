@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Practical Info — Amsterdam Dallas Family Guide</title>
+  <meta name="description" content="Getting around Amsterdam with a toddler: trams, cargo bikes, OV-chipkaart, Sunflower Lanyard, money, weather, emergency numbers, and language tips.">
+  <meta property="og:title" content="Practical Info — Amsterdam Dallas Family Guide">
+  <meta property="og:description" content="Trams, bikes, toddler logistics, cashless payments, weather, and emergency contacts — everything practical for the trip.">
+  <meta property="og:image" content="../../images/final/amsterdam-cargo-bike.jpg">
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2026-03-11">
+  <meta property="article:tag" content="Amsterdam">
+  <meta property="article:tag" content="Family Travel">
+  <meta name="category" content="Travel Guide">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --blue: #1a3a5c; --orange: #e87722; --bg: #faf8f5; --text: #2c2c2c; --green: #4a8c5c; --card-bg: #ffffff; --border: #e8e0d5; --shadow: 0 2px 12px rgba(26,58,92,0.08); --shadow-hover: 0 8px 28px rgba(26,58,92,0.16); }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Source Sans 3', sans-serif; font-size: 18px; line-height: 1.7; color: var(--text); background: var(--bg); }
+
+    /* NAV */
+    nav { background: var(--blue); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+    .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 60px; }
+    .nav-brand { color: #fff; font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 600; text-decoration: none; white-space: nowrap; }
+    .nav-brand span { color: var(--orange); }
+    .nav-links { display: flex; gap: 4px; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,0.85); text-decoration: none; font-size: 0.82rem; padding: 6px 9px; border-radius: 4px; transition: all 0.2s; white-space: nowrap; }
+    .nav-links a:hover { color: #fff; background: rgba(255,255,255,0.12); }
+    .nav-links a.active { color: var(--orange); background: rgba(255,255,255,0.08); }
+    .nav-hamburger { display: none; background: none; border: none; color: #fff; cursor: pointer; padding: 8px; min-width: 44px; min-height: 44px; align-items: center; justify-content: center; }
+    .mobile-menu { display: none; background: var(--blue); border-top: 1px solid rgba(255,255,255,0.1); }
+    .mobile-menu.open { display: block; }
+    .mobile-menu a { display: block; color: rgba(255,255,255,0.85); text-decoration: none; padding: 14px 24px; font-size: 1rem; border-bottom: 1px solid rgba(255,255,255,0.07); transition: background 0.2s; min-height: 44px; }
+    .mobile-menu a:hover { background: rgba(255,255,255,0.1); color: #fff; }
+    .mobile-menu a.active { color: var(--orange); background: rgba(255,255,255,0.06); }
+
+    /* HERO */
+    .hero { position: relative; min-height: 50vh; display: flex; align-items: flex-end; overflow: hidden; }
+    .hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 40%; }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(26,58,92,0.88) 0%, rgba(26,58,92,0.35) 55%, rgba(0,0,0,0.1) 100%); }
+    .hero-content { position: relative; z-index: 2; padding: 48px 32px 56px; max-width: 800px; }
+    .hero-eyebrow { display: inline-block; background: var(--orange); color: #fff; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 5px 12px; border-radius: 2px; margin-bottom: 16px; }
+    .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 700; color: #fff; line-height: 1.2; margin-bottom: 16px; }
+    .hero p { color: #fff; font-size: clamp(1rem, 2vw, 1.2rem); font-weight: 400; max-width: 600px; text-shadow: 0 1px 3px rgba(0,0,0,0.6); }
+
+    /* LAYOUT */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+    section { padding: 56px 0; }
+    section + section { border-top: 1px solid var(--border); }
+    h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 700; color: var(--blue); margin-bottom: 8px; }
+    h3 { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 600; color: var(--blue); margin-bottom: 10px; }
+    .section-intro { color: #666; font-size: 1.05rem; margin-bottom: 36px; max-width: 640px; }
+    p { margin-bottom: 1em; } p:last-child { margin-bottom: 0; }
+    ul { padding-left: 1.4em; margin-bottom: 1em; } li { margin-bottom: 0.4em; }
+    a { color: var(--orange); text-decoration: none; } a:hover { text-decoration: underline; }
+
+    /* CARDS */
+    .info-block { background: var(--card-bg); border-radius: 10px; padding: 28px 32px; box-shadow: var(--shadow); margin-bottom: 24px; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+
+    /* TRANSPORT TILES */
+    .transport-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-bottom: 28px; }
+    .transport-tile { background: var(--card-bg); border-radius: 10px; padding: 24px; box-shadow: var(--shadow); border-top: 3px solid var(--blue); }
+    .transport-tile.featured { border-top-color: var(--orange); }
+    .transport-icon { width: 44px; height: 44px; background: #f0f5fb; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 14px; color: var(--blue); }
+    .transport-tile.featured .transport-icon { background: #fff4ec; color: var(--orange); }
+    .transport-tile h3 { font-size: 1.1rem; margin-bottom: 8px; }
+    .transport-tile p { font-size: 0.92rem; color: #555; margin-bottom: 0.6em; }
+    .transport-tile p:last-child { margin-bottom: 0; }
+
+    /* TRAM ROUTES */
+    .tram-list { margin: 0; padding: 0; list-style: none; }
+    .tram-item { display: flex; align-items: flex-start; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--border); }
+    .tram-item:last-child { border-bottom: none; }
+    .tram-num { background: var(--blue); color: #fff; border-radius: 50%; width: 34px; height: 34px; min-width: 34px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem; }
+    .tram-detail { font-size: 0.92rem; line-height: 1.5; }
+    .tram-detail strong { display: block; color: var(--blue); margin-bottom: 2px; }
+
+    /* BODHI ITEMS */
+    .bodhi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .bodhi-item { background: var(--card-bg); border-radius: 10px; padding: 22px 24px; box-shadow: var(--shadow); }
+    .bodhi-item-icon { display: flex; align-items: center; gap: 8px; font-family: 'Playfair Display', serif; font-weight: 600; color: var(--blue); font-size: 1.05rem; margin-bottom: 10px; }
+    .bodhi-item-icon i { color: var(--green); }
+    .bodhi-item p, .bodhi-item ul { font-size: 0.92rem; }
+
+    /* CALLOUTS */
+    .callout { border-radius: 8px; padding: 20px 24px; margin: 20px 0; }
+    .callout-info { background: #f0f5fb; border-left: 4px solid var(--blue); }
+    .callout-success { background: #f0f7f2; border-left: 4px solid var(--green); }
+    .callout-warn { background: #fff8f0; border-left: 4px solid var(--orange); }
+    .callout-urgent { background: #fff1f0; border-left: 4px solid #c0392b; }
+    .callout-title { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+    .callout-info .callout-title { color: var(--blue); }
+    .callout-success .callout-title { color: #2d6b3c; }
+    .callout-warn .callout-title { color: #b05a00; }
+    .callout-urgent .callout-title { color: #c0392b; }
+    .callout p, .callout ul { font-size: 0.92rem; margin-bottom: 0; }
+    .callout ul { padding-left: 1.2em; }
+    .callout li { margin-bottom: 0.3em; }
+
+    /* EMERGENCY BOX */
+    .emergency-box { background: var(--blue); color: #fff; border-radius: 10px; padding: 28px 32px; }
+    .emergency-box h3 { color: #fff; font-size: 1.15rem; margin-bottom: 16px; }
+    .emergency-number { display: flex; align-items: flex-start; gap: 14px; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.12); }
+    .emergency-number:last-child { border-bottom: none; }
+    .emergency-num { font-size: 1.35rem; font-weight: 700; font-family: 'Playfair Display', serif; color: var(--orange); min-width: 110px; }
+    .emergency-label { font-size: 0.9rem; color: rgba(255,255,255,0.88); line-height: 1.5; }
+    .emergency-label strong { color: #fff; }
+
+    /* PAYMENT ITEMS */
+    .payment-row { display: flex; align-items: flex-start; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--border); }
+    .payment-row:last-child { border-bottom: none; }
+    .payment-icon { width: 38px; height: 38px; min-width: 38px; background: #f0f5fb; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--blue); }
+    .payment-text h4 { font-family: 'Playfair Display', serif; font-weight: 600; color: var(--blue); font-size: 1rem; margin-bottom: 4px; }
+    .payment-text p { font-size: 0.92rem; color: #555; margin-bottom: 0; }
+
+    /* WEATHER STRIP */
+    .weather-strip { background: var(--blue); color: #fff; border-radius: 10px; padding: 24px 28px; display: flex; align-items: center; gap: 24px; margin-bottom: 24px; }
+    .weather-temp { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 700; color: var(--orange); white-space: nowrap; }
+    .weather-strip p { font-size: 0.95rem; color: rgba(255,255,255,0.88); margin-bottom: 0; }
+
+    /* DETAILS */
+    details { border: 1px solid var(--border); border-radius: 8px; margin: 12px 0; overflow: hidden; }
+    summary { padding: 14px 18px; cursor: pointer; font-weight: 600; color: var(--blue); font-size: 0.95rem; display: flex; align-items: center; gap: 10px; list-style: none; min-height: 44px; background: var(--card-bg); transition: background 0.2s; }
+    summary::-webkit-details-marker { display: none; }
+    summary:hover { background: #f5f0e8; }
+    details[open] summary { border-bottom: 1px solid var(--border); }
+    details > *:not(summary) { padding: 16px 18px; font-size: 0.95rem; background: var(--card-bg); }
+
+    /* FOOTER */
+    footer { background: var(--blue); color: rgba(255,255,255,0.7); text-align: center; padding: 32px 24px; font-size: 0.9rem; margin-top: 64px; }
+    footer a { color: var(--orange); text-decoration: none; }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+    }
+    @media (max-width: 768px) {
+      .transport-grid { grid-template-columns: 1fr; }
+      .bodhi-grid { grid-template-columns: 1fr; }
+      .two-col { grid-template-columns: 1fr; }
+      .three-col { grid-template-columns: 1fr; }
+      .weather-strip { flex-direction: column; gap: 12px; align-items: flex-start; }
+    }
+    @media (max-width: 600px) {
+      .hero { min-height: 42vh; }
+      .hero-content { padding: 32px 20px 40px; }
+      .container { padding: 0 20px; }
+      section { padding: 40px 0; }
+      .info-block { padding: 20px; }
+      .emergency-box { padding: 20px; }
+      .emergency-num { font-size: 1.15rem; min-width: 90px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">Amsterdam <span>&#9670;</span> Dallas</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="dont-miss.html">Don't Miss</a></li>
+      <li><a href="best-deals.html">Best Deals</a></li>
+      <li><a href="art-museums.html">Art</a></li>
+      <li><a href="music-events.html">Music</a></li>
+      <li><a href="parks-outdoors.html">Parks</a></li>
+      <li><a href="churches-spaces.html">Churches</a></li>
+      <li><a href="food-markets.html">Food</a></li>
+      <li><a href="canals-cruises.html">Canals</a></li>
+      <li><a href="practical.html" class="active">Practical</a></li>
+      <li><a href="day-trips.html">Day Trips</a></li>
+    </ul>
+    <button class="nav-hamburger" id="hamburger" aria-label="Open menu">
+      <i data-lucide="menu" width="24" height="24"></i>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Home</a>
+    <a href="dont-miss.html">Don't Miss</a>
+    <a href="best-deals.html">Best Deals</a>
+    <a href="art-museums.html">Art &amp; Museums</a>
+    <a href="music-events.html">Music &amp; Events</a>
+    <a href="parks-outdoors.html">Parks &amp; Outdoors</a>
+    <a href="churches-spaces.html">Churches &amp; Spaces</a>
+    <a href="food-markets.html">Food &amp; Markets</a>
+    <a href="canals-cruises.html">Canals &amp; Cruises</a>
+    <a href="practical.html" class="active">Practical Info</a>
+    <a href="day-trips.html">Day Trips</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <img src="../../images/final/amsterdam-cargo-bike.jpg" alt="Woman cycling through Amsterdam on a cargo bike with two children in the front box — the classic Amsterdam family transport">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <span class="hero-eyebrow">Practical Info</span>
+    <h1>Getting around, with Bodhi</h1>
+    <p>Trams, cargo bikes, contactless payments, Sunflower Lanyards, and everything else that makes the difference between a smooth trip and a stressful one.</p>
+  </div>
+</section>
+
+<main>
+
+  <!-- GETTING AROUND -->
+  <section id="transport">
+    <div class="container">
+      <h2>Getting around</h2>
+      <p class="section-intro">Amsterdam is compact and very walkable. The tram fills the gaps. You won't need taxis or a car for anything on the itinerary.</p>
+
+      <div class="transport-grid">
+        <div class="transport-tile featured">
+          <div class="transport-icon"><i data-lucide="bike" width="22" height="22"></i></div>
+          <h3>Cargo bike (bakfiets)</h3>
+          <p>The local family solution, and the most enjoyable way to see the city. Bodhi rides in the enclosed wooden box up front. Rentals at <strong>MacBike</strong> or <strong>Star Bikes</strong> (~€15–20/day standard; cargo bikes ~€25–35/day).</p>
+          <p>Bikes have right of way over pedestrians. Trams have right of way over bikes: always yield to trams on rail lines.</p>
+        </div>
+        <div class="transport-tile">
+          <div class="transport-icon"><i data-lucide="train-front" width="22" height="22"></i></div>
+          <h3>Tram</h3>
+          <p>GVB operates trams, buses, and metro. Tap any contactless bank card or phone on the yellow reader when you board, then tap again when you exit. No special transit card needed. Day passes available at GVB service points.</p>
+          <p><strong>Tram 2</strong> and <strong>Tram 11</strong> are most useful: they link the Vondelpark area directly to Amsterdam Centraal.</p>
+        </div>
+        <div class="transport-tile">
+          <div class="transport-icon"><i data-lucide="footprints" width="22" height="22"></i></div>
+          <h3>Walking</h3>
+          <p>Most sites in Oud-Zuid, De Pijp, and Plantage are within 30 minutes of each other on foot. The core neighbourhood is very stroller-friendly; most routes are smooth despite occasional cobblestones.</p>
+          <p>The Rijksmuseum, Van Gogh Museum, and Vondelpark form one easy walkable cluster from the apartment.</p>
+        </div>
+        <div class="transport-tile">
+          <div class="transport-icon"><i data-lucide="car" width="22" height="22"></i></div>
+          <h3>Taxi &amp; rideshare</h3>
+          <p><strong>Uber</strong> and <strong>Bolt</strong> both work in Amsterdam. Taxis are available but expensive. Use for airport transfers or late-night returns only. No need for a car rental at any point during the trip.</p>
+        </div>
+      </div>
+
+      <!-- TRAM ROUTES -->
+      <div class="info-block">
+        <h3>Key tram routes from Oud-Zuid / Vondelpark</h3>
+        <ul class="tram-list">
+          <li class="tram-item">
+            <div class="tram-num">2</div>
+            <div class="tram-detail">
+              <strong>Vondelpark area &#8594; Amsterdam Centraal</strong>
+              Direct line from the neighbourhood to the main train station. Useful for canal cruise departures and heading north into the city.
+            </div>
+          </li>
+          <li class="tram-item">
+            <div class="tram-num">11</div>
+            <div class="tram-detail">
+              <strong>Vondelpark &#8596; Centraal via Leidseplein</strong>
+              Passes Leidseplein, useful for the Concertgebouw area and evening destinations. Runs frequently.
+            </div>
+          </li>
+          <li class="tram-item">
+            <div class="tram-num">3</div>
+            <div class="tram-detail">
+              <strong>Museumplein &#8594; Dam Square &#8594; Centraal</strong>
+              Use after Rijksmuseum or Van Gogh visits to get to the historic centre or station.
+            </div>
+          </li>
+          <li class="tram-item">
+            <div class="tram-num">24</div>
+            <div class="tram-detail">
+              <strong>De Pijp / Albert Cuyp Market &#8594; Centraal</strong>
+              North-south through the city. Handy for the Albert Cuyp Market and heading toward the waterfront.
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- AIRPORT TRAIN -->
+      <div class="callout callout-info">
+        <div class="callout-title"><i data-lucide="plane-landing" width="18" height="18"></i> Schiphol to Amsterdam Centraal</div>
+        <p>Direct train, 15–20 minutes, runs every 10 minutes, <strong>€5.60/person</strong>. First class upgrades available. Easiest airport-to-city connection in Europe. Follow train signs directly from baggage claim. From Centraal, take a tram to the apartment.</p>
+      </div>
+
+      <div style="margin-top:28px; border-radius:10px; overflow:hidden; height:240px; position:relative;">
+        <img src="../../images/final/canal-boat-cruise.jpg" alt="Canal boat passing classic Amsterdam gabled houses — the canal cruise is one of the best ways to see the city with a toddler" style="width:100%; height:100%; object-fit:cover; object-position:center 40%;">
+        <div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 50%);"></div>
+        <p style="position:absolute; bottom:16px; left:20px; right:20px; color:#fff; font-size:0.9rem; margin:0; text-shadow:0 1px 3px rgba(0,0,0,0.8);">Canal boats run throughout the day — covered boats are available if it rains. Strollers fold into boat storage.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- VISUAL BREAK -->
+  <div style="position:relative; height:300px; overflow:hidden;">
+    <img src="../../images/final/canal-spring-flowers.jpg" alt="Amsterdam canal lined with spring flowers in late May" style="width:100%; height:100%; object-fit:cover; object-position:center 55%;">
+    <div style="position:absolute; inset:0; background:linear-gradient(to right, rgba(26,58,92,0.65) 0%, rgba(26,58,92,0.1) 60%, transparent 100%);"></div>
+    <div style="position:absolute; top:50%; left:48px; transform:translateY(-50%); max-width:440px;">
+      <p style="color:#fff; font-family:'Playfair Display',serif; font-size:1.3rem; font-weight:600; margin:0; text-shadow:0 1px 4px rgba(0,0,0,0.7); line-height:1.4;">Amsterdam in late May — long evenings, spring light, and almost no rain yet</p>
+    </div>
+  </div>
+
+  <!-- WITH BODHI -->
+  <section id="bodhi">
+    <div class="container">
+      <h2>Travelling with Bodhi</h2>
+      <p class="section-intro">Amsterdam is genuinely toddler-friendly. Here's everything that's specific to the trip with a young child.</p>
+
+      <div class="bodhi-grid">
+        <div class="bodhi-item">
+          <div class="bodhi-item-icon"><i data-lucide="baby" width="18" height="18"></i> Stroller</div>
+          <p>The city is stroller-accessible. Most trams have low-floor boarding and dedicated stroller space; look for the baby/wheelchair symbol near the doors. Canal boats have storage for folded strollers.</p>
+          <p>Heavier-wheeled strollers handle cobblestones better than lightweight umbrella folds. Bring a cable lock to secure it outside small shops. Avoid the narrowest canal paths, as some have steep drop-offs with no railing.</p>
+        </div>
+        <div class="bodhi-item">
+          <div class="bodhi-item-icon"><i data-lucide="shopping-bag" width="18" height="18"></i> Baby &amp; toddler supplies</div>
+          <ul>
+            <li><strong>Albert Heijn</strong> — main supermarket chain, stocks Pampers, formula, baby food, wet wipes. Open daily until at least 10 PM. Multiple branches near the apartment.</li>
+            <li><strong>Kruidvat</strong> — pharmacy/drugstore, nappies, cream, OTC medicines. Cheaper than the supermarket for consumables.</li>
+          </ul>
+        </div>
+        <div class="bodhi-item">
+          <div class="bodhi-item-icon"><i data-lucide="sun" width="18" height="18"></i> Sunflower Lanyard</div>
+          <p>The Sunflower Lanyard signals hidden disabilities to trained staff; they offer quiet, unhurried assistance without needing an explanation. Available free from the <strong>Amsterdam Centraal info desk</strong> and at the entrance of most major attractions.</p>
+          <p><strong>Participating venues include</strong> Artis Zoo, Rijksmuseum, Van Gogh Museum, and Anne Frank House. Staff are trained to recognise it and respond discreetly.</p>
+        </div>
+        <div class="bodhi-item">
+          <div class="bodhi-item-icon"><i data-lucide="clock" width="18" height="18"></i> Nap logistics</div>
+          <p>Plan for one daily nap, whether at the apartment, in the stroller, or on a canal boat cruise. The gentle motion of canal boats often sends young children to sleep, which makes the 75-minute cruise a good afternoon slot.</p>
+          <p>Most large museums (Rijksmuseum, Artis, Van Gogh) have baby change rooms. For cafés, it's always worth asking at the bar.</p>
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:24px; margin-bottom:24px;">
+        <div style="border-radius:10px; overflow:hidden; height:220px; position:relative;">
+          <img src="../../images/final/artis-giraffe-child.jpg" alt="Small child in a hat watching giraffes at Artis Zoo — seven minutes from the apartment" style="width:100%; height:100%; object-fit:cover; object-position:center 30%;">
+          <div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(26,58,92,0.65) 0%, transparent 55%);"></div>
+          <p style="position:absolute; bottom:12px; left:14px; right:14px; color:#fff; font-size:0.82rem; margin:0; text-shadow:0 1px 3px rgba(0,0,0,0.7);">Artis Zoo — 7 min walk from apartment</p>
+        </div>
+        <div style="border-radius:10px; overflow:hidden; height:220px; position:relative;">
+          <img src="../../images/final/vondelpark-playground.jpg" alt="Dad with toddler at Vondelpark's large metal climbing tower playground" style="width:100%; height:100%; object-fit:cover; object-position:center 30%;">
+          <div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(26,58,92,0.65) 0%, transparent 55%);"></div>
+          <p style="position:absolute; bottom:12px; left:14px; right:14px; color:#fff; font-size:0.82rem; margin:0; text-shadow:0 1px 3px rgba(0,0,0,0.7);">Vondelpark playground — free, enormous, 20 min walk</p>
+        </div>
+      </div>
+
+      <div class="callout callout-success" style="margin-top: 8px;">
+        <div class="callout-title"><i data-lucide="map-pin" width="18" height="18"></i> Nearest pharmacy (apotheek)</div>
+        <p>Apotheek on Overtoom, a short walk from the Vondelpark apartment. Open weekdays 8:30 AM–5:30 PM, Saturday mornings. Out-of-hours pharmacies operate on a rota; the nearest open one is posted in pharmacy windows or at <strong>apotheek.nl</strong>. Paracetamol and ibuprofen are also available in all supermarkets.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MONEY & PAYMENTS -->
+  <section id="money">
+    <div class="container">
+      <h2>Money &amp; payments</h2>
+      <p class="section-intro">The Netherlands is almost entirely cashless. Your contactless card or phone works for trams, restaurants, most market stalls, and everywhere else.</p>
+
+      <div class="info-block">
+        <div class="payment-row">
+          <div class="payment-icon"><i data-lucide="credit-card" width="18" height="18"></i></div>
+          <div class="payment-text">
+            <h4>Contactless everywhere</h4>
+            <p>Visa, Mastercard, Apple Pay, and Google Pay accepted almost universally, including trams, ferries, and most street stalls. It's genuinely rare to need cash. Don't stress about it.</p>
+          </div>
+        </div>
+        <div class="payment-row">
+          <div class="payment-icon"><i data-lucide="landmark" width="18" height="18"></i></div>
+          <div class="payment-text">
+            <h4>ATMs if you need cash</h4>
+            <p><strong>ING</strong> and <strong>ABN AMRO</strong> bank ATMs accept most foreign cards at reasonable fees. Avoid GWK Travelex exchange offices near tourist areas. Poor rates and high fees. Your bank's network beats them.</p>
+          </div>
+        </div>
+        <div class="payment-row">
+          <div class="payment-icon"><i data-lucide="receipt" width="18" height="18"></i></div>
+          <div class="payment-text">
+            <h4>Tipping</h4>
+            <p>Not expected in the Netherlands. Rounding up or leaving 5–10% is appreciated if service was excellent. Cafés and bars typically expect nothing.</p>
+          </div>
+        </div>
+        <div class="payment-row">
+          <div class="payment-icon"><i data-lucide="tag" width="18" height="18"></i></div>
+          <div class="payment-text">
+            <h4>VAT refund (non-EU shoppers)</h4>
+            <p>Available on purchases over <strong>€50</strong> at participating shops. Ask for a Tax-Free shopping form at the till and process it at Schiphol on departure.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WEATHER & PACKING -->
+  <section id="weather">
+    <div class="container">
+      <h2>Weather &amp; packing</h2>
+
+      <div class="weather-strip">
+        <div class="weather-temp">15–19°C</div>
+        <div>
+          <p><strong>Late May daytime.</strong> Evenings drop to 9–13°C. Rain can arrive at any time but rarely lasts all day. Sun sets around 9:30 PM. Long, beautiful evenings for outdoor walks and parks.</p>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div class="info-block" style="margin-bottom: 0;">
+          <h3>Pack list</h3>
+          <ul>
+            <li><strong>Waterproof jacket</strong> — non-negotiable for every family member including Bodhi</li>
+            <li><strong>Layers</strong> — three thin layers beat one thick one for changing conditions</li>
+            <li><strong>Comfortable walking shoes</strong> that handle wet cobblestones without slipping</li>
+            <li><strong>One smart outfit</strong> for the Concertgebouw or Dutch National Opera</li>
+            <li><strong>Compact umbrella</strong> — wind makes full-size umbrellas awkward</li>
+            <li><strong>Sunscreen</strong> — late May sun gets strong when the cloud lifts</li>
+            <li><strong>Reusable water bottle</strong> — tap water is excellent throughout the Netherlands</li>
+            <li><strong>EU plug adapter</strong> (Type C/F round pins, 230V)</li>
+          </ul>
+        </div>
+        <div class="info-block" style="margin-bottom: 0;">
+          <h3>For Bodhi specifically</h3>
+          <ul>
+            <li>Rain cover for the stroller</li>
+            <li>Warm layer for canal boat trips (it's colder on the water)</li>
+            <li>Sun hat for Keukenhof and park days</li>
+            <li>Puddle suit if you have one</li>
+            <li>Small day pack the adults take turns carrying</li>
+          </ul>
+          <div class="callout callout-info" style="margin: 16px 0 0; padding: 14px 16px;">
+            <p><strong>Plug note:</strong> US devices need a Type C/F adapter and should be checked for voltage compatibility (look for 100–240V on the charger label). Buy a multi-socket EU adapter before you leave. Leidseplein area shops also stock them.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EMERGENCY NUMBERS -->
+  <section id="emergency">
+    <div class="container">
+      <h2>Emergency &amp; health</h2>
+
+      <div class="emergency-box">
+        <h3>Emergency contacts</h3>
+        <div class="emergency-number">
+          <div class="emergency-num">112</div>
+          <div class="emergency-label"><strong>All emergencies</strong> — police, fire, ambulance. Works from any mobile, no SIM required.</div>
+        </div>
+        <div class="emergency-number">
+          <div class="emergency-num">0900-8844</div>
+          <div class="emergency-label"><strong>Non-emergency police</strong> — lost property, non-urgent incidents.</div>
+        </div>
+        <div class="emergency-number">
+          <div class="emergency-num">OLVG</div>
+          <div class="emergency-label"><strong>Nearest hospital with A&amp;E</strong> — OLVG Oosterpark, Oosterpark 9. Approximately 2 km from the Vondelpark apartment. Full emergency department.</div>
+        </div>
+        <div class="emergency-number">
+          <div class="emergency-num">AMC Emma</div>
+          <div class="emergency-label"><strong>Paediatric emergencies</strong> — Emma Children's Hospital, Meibergdreef 9. Amsterdam's specialist children's hospital, about 20 minutes by taxi.</div>
+        </div>
+      </div>
+
+      <div class="two-col" style="margin-top: 24px;">
+        <div class="callout callout-info" style="margin: 0;">
+          <div class="callout-title"><i data-lucide="shield" width="18" height="18"></i> Travel insurance</div>
+          <p>Carry your EHIC (European Health Insurance Card) or private travel insurance card. Medical costs are billed upfront; keep all receipts to claim back. Ensure your policy covers all three of you including Bodhi.</p>
+        </div>
+        <div class="callout callout-success" style="margin: 0;">
+          <div class="callout-title"><i data-lucide="wifi" width="18" height="18"></i> Wi-Fi &amp; mobile data</div>
+          <p>Apartment has Wi-Fi. Free Wi-Fi at most cafés, museums, and Amsterdam Centraal. For mobile data: <strong>Lebara</strong> or <strong>Simyo</strong> SIMs from Kruidvat (€15–30). <strong>Airalo eSIM</strong> works if you prefer to set up before flying.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LANGUAGE & CUSTOMS -->
+  <section id="language">
+    <div class="container">
+      <h2>Language &amp; customs</h2>
+
+      <div class="info-block">
+        <h3>English everywhere — but a few words help</h3>
+        <p>Everyone in Amsterdam speaks English, including shop assistants, tram drivers, and museum staff. No Dutch required. A few words go a long way:</p>
+        <ul>
+          <li><strong>Dank je wel</strong> — thank you (pronounced: dank-ye-vell)</li>
+          <li><strong>Alsjeblieft</strong> — please / here you go (als-ye-bleeft)</li>
+          <li><strong>Apotheek</strong> — pharmacy</li>
+          <li><strong>Albert Heijn</strong> — pronounced "albert hine" — the main supermarket chain</li>
+        </ul>
+      </div>
+
+      <div class="three-col">
+        <div class="callout callout-info" style="margin: 0;">
+          <div class="callout-title"><i data-lucide="zap" width="16" height="16"></i> Dutch directness</div>
+          <p>Amsterdammers are famously direct. Not rude — just efficient. "No" means no, "yes" means yes. Refreshing once you adjust to it.</p>
+        </div>
+        <div class="callout callout-warn" style="margin: 0;">
+          <div class="callout-title"><i data-lucide="bike" width="16" height="16"></i> Cycling rules</div>
+          <p>Stay off bike paths when walking. Cyclists come fast from unexpected directions. Always look both ways before crossing any path; tram rails and cycle lanes often overlap where you don't expect them.</p>
+        </div>
+        <div class="callout callout-success" style="margin: 0;">
+          <div class="callout-title"><i data-lucide="moon" width="16" height="16"></i> Quiet hours</div>
+          <p>Generally observed after 10 PM in residential areas. The neighbourhood around the apartment is residential, worth knowing if Bodhi has a late bedtime routine.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>Amsterdam &#9670; Dallas Family Guide &nbsp;&middot;&nbsp; May 23&ndash;June 1, 2026 &nbsp;&middot;&nbsp; <a href="index.html">Back to home</a></p>
+</footer>
+
+<script>
+  lucide.createIcons();
+  var hamburger = document.getElementById('hamburger');
+  var mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', function() {
+    mobileMenu.classList.toggle('open');
+  });
+</script>
+
+</body>
+</html>

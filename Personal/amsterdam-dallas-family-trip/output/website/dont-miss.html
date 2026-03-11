@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Don't Miss — Amsterdam Dallas Family Guide</title>
+  <meta name="description" content="The absolute must-dos for the Dallas family in Amsterdam — art, animals, music, hidden spaces, and the essential Amsterdam moments.">
+  <meta property="og:title" content="Don't Miss — Amsterdam Dallas Family Guide">
+  <meta property="og:description" content="The absolute must-dos for the Dallas family in Amsterdam — art, animals, music, hidden spaces, and the essential Amsterdam moments.">
+  <meta property="og:image" content="../../images/final/canal-cruise-blueboat.jpg">
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2026-03-11">
+  <meta property="article:tag" content="Amsterdam">
+  <meta property="article:tag" content="Must-Do">
+  <meta name="category" content="Travel Guide">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --blue: #1a3a5c; --orange: #e87722; --bg: #faf8f5; --text: #2c2c2c; --green: #4a8c5c; --card-bg: #ffffff; --border: #e8e0d5; --shadow: 0 2px 12px rgba(26,58,92,0.08); --shadow-hover: 0 8px 28px rgba(26,58,92,0.16); }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Source Sans 3', sans-serif; font-size: 18px; line-height: 1.7; color: var(--text); background: var(--bg); }
+    nav { background: var(--blue); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+    .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 60px; }
+    .nav-brand { color: #fff; font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 600; text-decoration: none; white-space: nowrap; }
+    .nav-brand span { color: var(--orange); }
+    .nav-links { display: flex; gap: 4px; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,0.85); text-decoration: none; font-size: 0.82rem; font-weight: 400; padding: 6px 9px; border-radius: 4px; transition: all 0.2s; white-space: nowrap; }
+    .nav-links a:hover, .nav-links a.active { color: #fff; background: rgba(255,255,255,0.12); }
+    .nav-links a.active { color: var(--orange); }
+    .nav-hamburger { display: none; background: none; border: none; color: #fff; cursor: pointer; padding: 8px; min-width: 44px; min-height: 44px; align-items: center; justify-content: center; }
+    .mobile-menu { display: none; background: var(--blue); border-top: 1px solid rgba(255,255,255,0.1); }
+    .mobile-menu.open { display: block; }
+    .mobile-menu a { display: block; color: rgba(255,255,255,0.85); text-decoration: none; padding: 14px 24px; font-size: 1rem; border-bottom: 1px solid rgba(255,255,255,0.07); transition: background 0.2s; min-height: 44px; }
+    .mobile-menu a:hover, .mobile-menu a.active { background: rgba(255,255,255,0.1); color: #fff; }
+    .mobile-menu a.active { color: var(--orange); }
+    .hero { position: relative; min-height: 50vh; display: flex; align-items: flex-end; overflow: hidden; }
+    .hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 35%; }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(26,58,92,0.85) 0%, rgba(26,58,92,0.3) 50%, rgba(0,0,0,0.1) 100%); }
+    .hero-content { position: relative; z-index: 2; padding: 48px 32px 56px; max-width: 800px; }
+    .hero-eyebrow { display: inline-block; background: var(--orange); color: #fff; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 5px 12px; border-radius: 2px; margin-bottom: 16px; }
+    .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 700; color: #fff; line-height: 1.2; margin-bottom: 16px; }
+    .hero p { color: #fff; font-size: clamp(1rem, 2vw, 1.2rem); font-weight: 400; max-width: 560px; text-shadow: 0 1px 3px rgba(0,0,0,0.6); }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+    section { padding: 56px 0; }
+    section + section { border-top: 1px solid var(--border); }
+    h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 700; color: var(--blue); margin-bottom: 8px; }
+    h3 { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 600; color: var(--blue); margin-bottom: 8px; }
+    .section-intro { color: #666; font-size: 1.05rem; margin-bottom: 28px; max-width: 640px; }
+    p { margin-bottom: 1em; }
+    p:last-child { margin-bottom: 0; }
+    .content-block { background: var(--card-bg); border-radius: 10px; padding: 32px; box-shadow: var(--shadow); margin-bottom: 24px; }
+    .callout { border-radius: 8px; padding: 24px 28px; margin: 32px 0; }
+    .callout-warning { background: #fff8f0; border-left: 4px solid var(--orange); }
+    .callout-info { background: #f0f5fb; border-left: 4px solid var(--blue); }
+    .callout-success { background: #f0f7f2; border-left: 4px solid var(--green); }
+    .callout-title { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+    .callout-warning .callout-title { color: #b85a00; }
+    .callout-info .callout-title { color: var(--blue); }
+    .callout-success .callout-title { color: #2d6b3c; }
+    .callout ul, .callout ol { margin: 8px 0 0 0; padding-left: 20px; }
+    .callout li { margin-bottom: 8px; font-size: 0.95rem; line-height: 1.5; }
+    .badge { display: inline-block; font-size: 0.7rem; font-weight: 700; padding: 2px 7px; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.05em; margin-left: 6px; vertical-align: middle; }
+    .badge-free { background: #e8f7ed; color: #2d6b3c; }
+    .badge-book { background: #fff0e0; color: #b85a00; }
+    .badge-star { background: var(--orange); color: #fff; }
+    .pull-quote { border-left: 4px solid var(--orange); padding: 16px 24px; margin: 0 0 40px; font-family: 'Playfair Display', serif; font-size: 1.2rem; font-style: italic; color: var(--blue); background: #fff; border-radius: 0 8px 8px 0; }
+    .category-section { margin-bottom: 40px; }
+    .category-header { display: flex; align-items: center; gap: 12px; margin-bottom: 4px; }
+    .category-icon { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .icon-art { background: #e8f0f8; color: var(--blue); }
+    .icon-nature { background: #e8f7ed; color: #2d6b3c; }
+    .icon-music { background: #fff0e0; color: #b85a00; }
+    .icon-spaces { background: #f5f0e8; color: #6b5a3c; }
+    .icon-essential { background: #fdf0f0; color: #8c3a3a; }
+
+    /* Item cards — every item must have an image */
+    .item-card { display: grid; grid-template-columns: 180px 1fr; background: var(--card-bg); border-radius: 8px; overflow: hidden; box-shadow: var(--shadow); margin-bottom: 14px; }
+    .item-thumb { overflow: hidden; min-height: 130px; }
+    .thumb-imgs { display: grid; height: 100%; min-height: 130px; }
+    .thumb-imgs.thumb-1 { grid-template-columns: 1fr; }
+    .thumb-imgs.thumb-2 { grid-template-columns: 1fr 1fr; gap: 2px; }
+    .thumb-imgs img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .thumb-needed { background: #e8e0d5; min-height: 130px; display: flex; align-items: center; justify-content: center; color: #aaa; font-size: 0.72rem; text-align: center; padding: 12px; font-style: italic; }
+    .item-body { padding: 14px 20px; display: flex; flex-direction: column; justify-content: center; }
+    .item-title { color: var(--blue); font-family: 'Playfair Display', serif; font-size: 0.98rem; font-weight: 600; line-height: 1.3; margin-bottom: 6px; }
+    .item-desc { font-size: 0.88rem; color: #555; line-height: 1.6; }
+
+    .section-banner { width: 100%; height: 320px; object-fit: cover; border-radius: 10px; margin: 8px 0 48px; }
+
+    details { border: 1px solid var(--border); border-radius: 8px; margin: 12px 0; overflow: hidden; }
+    summary { padding: 14px 18px; cursor: pointer; font-weight: 600; color: var(--blue); font-size: 0.95rem; display: flex; align-items: center; gap: 10px; list-style: none; min-height: 44px; background: var(--card-bg); transition: background 0.2s; }
+    summary::-webkit-details-marker { display: none; }
+    summary:hover { background: #f5f0e8; }
+    details[open] summary { border-bottom: 1px solid var(--border); }
+    details > *:not(summary) { padding: 16px 18px; }
+    .experience-list { list-style: none; padding: 0; }
+    .experience-list li { padding: 14px 0; border-bottom: 1px solid var(--border); }
+    .experience-list li:last-child { border-bottom: none; }
+    .experience-list strong { color: var(--blue); display: block; font-size: 1.05rem; margin-bottom: 4px; }
+    .experience-list .exp-desc { font-size: 0.95rem; color: #555; line-height: 1.6; }
+    footer { background: var(--blue); color: rgba(255,255,255,0.7); text-align: center; padding: 32px 24px; font-size: 0.9rem; margin-top: 64px; }
+    footer a { color: var(--orange); text-decoration: none; }
+    @media (max-width: 1024px) { .nav-links { display: none; } .nav-hamburger { display: flex; } }
+    @media (max-width: 600px) {
+      .hero { min-height: 40vh; } .hero-content { padding: 32px 20px 40px; } .container { padding: 0 20px; } section { padding: 40px 0; } .content-block { padding: 20px; }
+      .item-card { grid-template-columns: 1fr; }
+      .thumb-imgs { min-height: 160px; }
+      .thumb-needed { min-height: 100px; }
+      .section-banner { height: 220px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">Amsterdam <span>&#9670;</span> Dallas</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="dont-miss.html" class="active">Don't Miss</a></li>
+      <li><a href="best-deals.html">Best Deals</a></li>
+      <li><a href="art-museums.html">Art</a></li>
+      <li><a href="music-events.html">Music</a></li>
+      <li><a href="parks-outdoors.html">Parks</a></li>
+      <li><a href="churches-spaces.html">Churches</a></li>
+      <li><a href="food-markets.html">Food</a></li>
+      <li><a href="canals-cruises.html">Canals</a></li>
+      <li><a href="practical.html">Practical</a></li>
+      <li><a href="day-trips.html">Day Trips</a></li>
+    </ul>
+    <button class="nav-hamburger" id="hamburger" aria-label="Open menu">
+      <i data-lucide="menu" width="24" height="24"></i>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Home</a>
+    <a href="dont-miss.html" class="active">Don't Miss</a>
+    <a href="best-deals.html">Best Deals</a>
+    <a href="art-museums.html">Art &amp; Museums</a>
+    <a href="music-events.html">Music &amp; Events</a>
+    <a href="parks-outdoors.html">Parks &amp; Outdoors</a>
+    <a href="churches-spaces.html">Churches &amp; Spaces</a>
+    <a href="food-markets.html">Food &amp; Markets</a>
+    <a href="canals-cruises.html">Canals &amp; Cruises</a>
+    <a href="practical.html">Practical Info</a>
+    <a href="day-trips.html">Day Trips</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <img src="../../images/final/hero-amsterdam-spring.jpg" alt="Amsterdam's canal ring and historic rooftops in late May spring light">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <span class="hero-eyebrow">The essentials</span>
+    <h1>Don't Miss</h1>
+    <p>The must-do experiences for your ten days in Amsterdam: art, animals, music, hidden spaces, and the moments that make this city unforgettable.</p>
+  </div>
+</section>
+
+<div class="container">
+
+  <section>
+
+    <div class="pull-quote">Amsterdam in late May is close to perfect: tulips still blooming, long golden evenings, and the big crowds still a week or two away.</div>
+
+    <!-- ART & DUTCH MASTERS -->
+    <div class="category-section">
+      <div class="category-header">
+        <div class="category-icon icon-art"><i data-lucide="palette" width="18" height="18"></i></div>
+        <h2>Art &amp; Dutch Masters</h2>
+      </div>
+      <p class="section-intro">The Rijksmuseum alone could fill two days. The trick is going early, going often.</p>
+
+      <div class="item-card">
+        <div class="item-thumb">
+          <div class="thumb-imgs thumb-1">
+            <img src="../../images/final/rijksmuseum-interior.jpg" alt="The Gallery of Honour at the Rijksmuseum with visitors and Dutch Masters paintings">
+          </div>
+        </div>
+        <div class="item-body">
+          <div class="item-title">Rijksmuseum — Gallery of Honour, 9AM with Fast Lane <span class="badge badge-star">essential</span></div>
+          <div class="item-desc">Four Vermeers in one room: the Milkmaid, Woman Reading a Letter, The Love Letter. The Night Watch at the end of the hall. Vrienden membership gets you through the Fast Lane before the crowds arrive. The Gallery of Honour at 9AM is nearly empty. Plan a full morning; the café is excellent for mid-visit coffee.</div>
+        </div>
+      </div>
+
+      <div class="item-card">
+        <div class="item-thumb">
+          <div class="thumb-imgs thumb-1">
+            <img src="../../images/final/rijksmuseum-garden.jpg" alt="Rijksmuseum's formal gardens in May — a calm setting for the Art and Dementia programme">
+          </div>
+        </div>
+        <div class="item-body">
+          <div class="item-title">Rijksmuseum — Art &amp; Dementia Guided Tour</div>
+          <div class="item-desc">Daily 14:30–16:00. A guided tour designed for visitors with dementia and their companions: calm, participatory, and genuinely moving. €30 for up to 12 people. Book via the Rijksmuseum website. One of the most thoughtful museum programs in Europe.</div>
+        </div>
+      </div>
+
+      <div class="item-card">
+        <div class="item-thumb">
+          <div class="thumb-imgs thumb-1">
+            <img src="../../images/final/van-gogh-museum-family.jpg" alt="Family viewing a Van Gogh painting at the Van Gogh Museum Amsterdam">
+          </div>
+        </div>
+        <div class="item-body">
+          <div class="item-title">Van Gogh Museum <span class="badge badge-book">pre-book required</span></div>
+          <div class="item-desc">Walk-in tickets are not available; you must book in advance at vangoghmuseum.nl. Best visited on a weekday morning. The permanent collection follows Van Gogh's complete arc chronologically, and the building itself is exceptional. Children free under 18.</div>
+        </div>
+      </div>
+
+      <div class="item-card">
+        <div class="item-thumb">
+          <div class="thumb-imgs thumb-1">
+            <img src="../../images/final/anne-frank-huis-sign.jpg" alt="Anne Frank Huis door sign, Amsterdam">
+          </div>
+        </div>
+        <div class="item-body">
+          <div class="item-title">Anne Frank House <span class="badge badge-book">tickets release Tuesdays 10AM CET</span></div>
+          <div class="item-desc">Tickets release six weeks in advance on Tuesdays at exactly 10:00AM CET. For late May, that means mid-to-late March. The annex has steep narrow stairs; no stroller access. Best plan: Jon and Jess take an evening slot (open until 10PM); Scott, Edie, and Bodhi enjoy the Begijnhof or a canal walk. €16.50/adult. Bodhi pays €1 booking fee only.</div>
+        </div>
+      </div>
+
+      <details>
+        <summary><i data-lucide="church" width="16" height="16"></i> Also worth it: Our Lord in the Attic — hidden Catholic church</summary>
+        <p style="font-size:0.92rem;">A full Catholic church concealed inside the attic of a 17th-century canal house on Oudezijds Voorburgwal. Built secretly during the Reformation and used for 200 years before Catholics could worship openly. Three floors of canal house below; a full nave above. One of Amsterdam's most extraordinary hidden spaces. See the <a href="churches-spaces.html">Churches &amp; Spaces</a> page for details.</p>
+      </details>
+    </div>
+
+
+    <!-- NATURE & ANIMALS -->
+    <div class="category-section">
+      <div class="category-header">
+        <div class="category-icon icon-nature"><i data-lucide="leaf" width="18" height="18"></i></div>
+        <h2>Nature &amp; Animals</h2>
+      </div>
+      <p class="section-intro">Bodhi's territory, but Artis and Hortus are genuinely great for everyone.</p>
+
+      <div class="item-card">
+        <div class="item-thumb">
+          <div class="thumb-imgs thumb-2">
+            <img src="../../images/final/keukenhof-tulips.jpg" alt="Rows of colorful tulips at Keukenhof gardens">
+            <img src="../../images/final/keukenhof-garden.jpg" alt="Keukenhof gardens in bloom with visitors walking the paths">
+          </div>
+        </div>
+        <div class="item-body">
+          <div class="item-title">Keukenhof Gardens <span class="badge badge-book">closes May 10 — go day 2</span></div>
+          <div class="item-desc">Seven million tulip bulbs, flat wide paths, spectacular late-variety blooms, and it's free for Bodhi. This is the most time-critical item on the list: Keukenhof closes May 10, so go on day 2 at the latest. Buy tickets in advance at keukenhof.nl (~€21.50). Take the Keukenhof Express bus from Amsterdam RAI, €18.20 round trip, runs direct.</div>
+        </div>
+      </div>
+
+      <div class="item-card">
+        <div class="item-thumb">
+          <div class="thumb-imgs thumb-2">
+            <img src="../../images/final/artis-giraffe-child.jpg" alt="Small child in a hat watching giraffes at Artis Zoo">
+            <img src="../../images/final/artis-lion.jpg" alt="Lion at Artis Royal Zoo Amsterdam">
+          </div>
+        </div>
+        <div class="item-body">
+          <div class="item-title">Artis Royal Zoo <span class="badge badge-star">top pick for Bodhi</span></div>
+          <div class="item-desc">Seven minutes from the apartment on foot. Follow the Artis de Partis toddler route: petting zoo, butterfly pavilion, sensory playground. Go weekday morning to beat school groups. Free for under-3. Allow 2–3 hours. The zoo is small enough to do at a toddler's pace without exhaustion. Bodhi has a Sunflower Lanyard option if crowds are overwhelming.</div>
+        </div>
+      </div>
+
+      <div class="item-card">
+        <div class="item-thumb">
+          <div class="thumb-imgs thumb-2">
+            <img src="../../images/final/hortus-exterior.jpg" alt="Hortus Botanicus Amsterdam exterior with canal and greenhouse dome">
+            <img src="../../images/final/hortus-interior.jpg" alt="Inside the Hortus Botanicus tropical greenhouse">
+          </div>
+        </div>
+        <div class="item-body">
+          <div class="item-title">Hortus Botanicus — butterfly house <span class="badge badge-star">top pick</span></div>
+          <div class="item-desc">Ten-minute walk from the apartment. One of Amsterdam's most manageable attractions: 1.2 hectares, seven greenhouses, and a tropical butterfly house where butterflies land on you. Beautiful for Edie in the morning before the groups arrive. Free for under-6 (Bodhi gets in free). €13.50 for adults, or free with City Card.</div>
+        </div>
+      </div>
+
+      <div class="item-card">
+        <div class="item-thumb">
+          <div class="thumb-imgs thumb-1">
+            <img src="../../images/final/vondelpark-playground.jpg" alt="Dad and young child at Vondelpark's big metal slide tower">
+          </div>
+        </div>
+        <div class="item-body">
+          <div class="item-title">Vondelpark — Groot Melkhuis playground <span class="badge badge-free">free</span></div>
+          <div class="item-desc">Fifteen minutes from the apartment. Fenced toddler area with sandpit and baby swings. The adjacent Groot Melkhuis café has wood-fired pizza, poffertjes, and reasonable coffee. This becomes Bodhi's daily backyard. Best in morning before crowds arrive; check if DiscoDip festival has the park on weekends.</div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- MUSIC & PERFORMANCE -->
+    <div class="category-section">
+      <div class="category-header">
+        <div class="category-icon icon-music"><i data-lucide="music" width="18" height="18"></i></div>
+        <h2>Music &amp; Performance</h2>
+      </div>
+      <p class="section-intro">The Concertgebouw is one of the great concert halls of the world. Use it.</p>
+
+      <div class="item-card">
+        <div class="item-thumb">
+          <div class="thumb-imgs thumb-1">
+            <img src="../../images/final/concertgebouw-interior.jpg" alt="The grand interior of Amsterdam's Concertgebouw concert hall">
+          </div>
+        </div>
+        <div class="item-body">
+          <div class="item-title">Emmylou Harris at the Concertgebouw — May 24 <span class="badge badge-book">book now</span></div>
+          <div class="item-desc">Americana in one of the world's great concert halls, acoustically extraordinary. With Jim Lauderdale. ~€60 per ticket. This sells out. Book immediately at concertgebouw.nl.</div>
+        </div>
+      </div>
+
+      <details>
+        <summary><i data-lucide="music" width="16" height="16"></i> Also: Le nozze di Figaro — Dutch National Opera <span class="badge badge-book" style="margin-left:6px;">book now</span></summary>
+        <p style="font-size:0.92rem;">May 23, 25, and 28. New production of Mozart's opera with the Netherlands Chamber Orchestra at the Dutch National Opera, two minutes from the apartment on performance nights. Various price levels by seat. Book at operaballet.nl. See <a href="music-events.html">Music &amp; Events</a> for full details.</p>
+      </details>
+
+      <div class="item-card">
+        <div class="item-thumb">
+          <div class="thumb-imgs thumb-1">
+            <img src="../../images/final/stopera-opera-house.jpg" alt="Dutch National Opera and concert building on the Amstel — Amsterdam's music scene">
+          </div>
+        </div>
+        <div class="item-body">
+          <div class="item-title">Concertgebouw Free Wednesday Lunchtime Concert <span class="badge badge-free">free</span></div>
+          <div class="item-desc">May 27, 12:30PM in the Recital Hall. About 30 minutes of live music, free. Arrive 20 minutes early; tickets are limited to 2 per person with a €2.50 transaction fee. Register at concertgebouw.nl when the program is announced.</div>
+        </div>
+      </div>
+
+      <div class="item-card">
+        <div class="item-thumb">
+          <div class="thumb-imgs thumb-1">
+            <img src="../../images/final/vondelpark-openluchttheater.jpg" alt="Vondelpark Openluchttheater — full audience watching a live performance on the outdoor stage in summer">
+          </div>
+        </div>
+        <div class="item-body">
+          <div class="item-title">Vondelpark Openluchttheater <span class="badge badge-free">free</span></div>
+          <div class="item-desc">Outdoor stage in the park, free performances all summer. Season starts Whitsun weekend (May 24). Everything from children's theater to jazz to dance. Check openluchttheater.nl in April for the full program. Perfect for a family afternoon; bring a blanket.</div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- PEACEFUL SPACES -->
+    <div class="category-section">
+      <div class="category-header">
+        <div class="category-icon icon-spaces"><i data-lucide="church" width="18" height="18"></i></div>
+        <h2>Peaceful Spaces</h2>
+      </div>
+      <p class="section-intro">The quietest and most beautiful places in a busy city.</p>
+
+      <div class="item-card">
+        <div class="item-thumb">
+          <div class="thumb-imgs thumb-1">
+            <img src="../../images/final/begijnhof-courtyard.jpg" alt="The tranquil Begijnhof courtyard with historic gabled houses and garden">
+          </div>
+        </div>
+        <div class="item-body">
+          <div class="item-title">Begijnhof courtyard <span class="badge badge-free">free</span></div>
+          <div class="item-desc">A 14th-century enclosed garden, 20 minutes from the apartment, with Amsterdam's oldest wooden house (c.1420) still standing inside. Silence is natural here; it's not posted so much as felt. One of the genuinely sacred spots in Amsterdam, and almost no one outside the tourist trail finds it. Enter through the inconspicuous door on Gedempte Begijnensloot.</div>
+        </div>
+      </div>
+
+      <div class="item-card">
+        <div class="item-thumb">
+          <div class="thumb-imgs thumb-2">
+            <img src="../../images/final/westerkerk-canal.jpg" alt="Westerkerk tower rising above the Prinsengracht canal at golden hour">
+            <img src="../../images/final/canal-boat-westerkerk.jpg" alt="Canal boat passing under a bridge with Westerkerk tower in background">
+          </div>
+        </div>
+        <div class="item-body">
+          <div class="item-title">Canal walks at dawn or dusk <span class="badge badge-free">free</span></div>
+          <div class="item-desc">The Prinsengracht, Keizersgracht, and Herengracht before 8AM are a different city. Houseboats waking up, cyclists, no tour groups. The golden hour light in late May doesn't end until after 9PM. Evening walks along the Amstel or Brouwersgracht are some of the best free experiences Amsterdam offers.</div>
+        </div>
+      </div>
+
+      <details>
+        <summary><i data-lucide="flower-2" width="16" height="16"></i> Also: Rijksmuseum gardens <span class="badge badge-free" style="margin-left:6px;">free</span></summary>
+        <p style="font-size:0.92rem;">The formal gardens on either side of the Rijksmuseum tunnel are free to walk through: sculpture, seasonal plantings, and a café. A quiet half-hour between museum visits or a place to let Bodhi run while others rest. See <a href="churches-spaces.html">Churches &amp; Spaces</a> for more calm spots.</p>
+      </details>
+    </div>
+
+
+    <!-- ESSENTIAL AMSTERDAM -->
+    <div class="category-section">
+      <div class="category-header">
+        <div class="category-icon icon-essential"><i data-lucide="star" width="18" height="18"></i></div>
+        <h2>Essential Amsterdam</h2>
+      </div>
+      <p class="section-intro">The things that are simply Amsterdam: boat, stroopwafel, canal.</p>
+
+      <div class="item-card">
+        <div class="item-thumb">
+          <div class="thumb-imgs thumb-2">
+            <img src="../../images/final/canal-cruise-blueboat.jpg" alt="Blue Boat canal cruise on Amsterdam's historic waterways">
+            <img src="../../images/final/canal-cruise-autumn.jpg" alt="Canal cruise boat on an Amsterdam canal with classic gabled houses">
+          </div>
+        </div>
+        <div class="item-body">
+          <div class="item-title">Canal cruise <span class="badge badge-star">do it twice</span></div>
+          <div class="item-desc">60–75 minutes, fully seated, covers the full canal ring. Calming for everyone; Bodhi often falls asleep on the gentle motion. Free for under-4. Use your City Card on Stromma for free entry. Blue Boat Company and Lovers are the other main operators. Go once in the afternoon and once at dusk.</div>
+        </div>
+      </div>
+
+      <div class="item-card">
+        <div class="item-thumb">
+          <div class="thumb-imgs thumb-2">
+            <img src="../../images/final/stroopwafel-fresh.jpg" alt="Fresh stroopwafel on a napkin, golden and warm from the iron">
+            <img src="../../images/final/albert-cuyp-market.jpg" alt="Albert Cuyp Market — long outdoor street market in Amsterdam">
+          </div>
+        </div>
+        <div class="item-body">
+          <div class="item-title">Fresh stroopwafel at Albert Cuyp Market <span class="badge badge-free">€1.50–2</span></div>
+          <div class="item-desc">One of the longest outdoor markets in Europe, open Monday–Saturday. The stroopwafels made fresh on the iron (two thin waffles with caramel syrup pressed between them) are so different from the packaged version that it barely counts as the same food. Go mid-morning before the lunch rush. The market is a 20-minute walk from the Vondelpark area.</div>
+        </div>
+      </div>
+
+      <div class="item-card">
+        <div class="item-thumb">
+          <div class="thumb-imgs thumb-1">
+            <img src="../../images/final/miffy-museum-entrance.jpg" alt="Nijntje (Miffy) Museum entrance in Utrecht with museum sign above the door">
+          </div>
+        </div>
+        <div class="item-body">
+          <div class="item-title">Miffy Museum (Nijntje Museum), Utrecht — day trip <span class="badge badge-book">book ahead</span></div>
+          <div class="item-desc">Designed specifically for ages 2–6. Twelve rooms to crawl, explore, and play, all built around Dick Bruna's simple, joyful visual language. This is Bodhi's peak age for it. Utrecht is 30 minutes by direct train from Amsterdam Centraal. Book at nijntjemuseum.nl. Free for under-2.</div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <section>
+    <h2>Book these before you leave</h2>
+    <p class="section-intro">Some take minutes. Some require being ready at a specific moment. All are worth doing now.</p>
+
+    <div class="callout callout-warning">
+      <div class="callout-title">
+        <i data-lucide="clock" width="20" height="20"></i>
+        Anne Frank House — most time-sensitive
+      </div>
+      <p style="font-size:0.95rem; margin-bottom:8px;">Tickets release <strong>Tuesdays at exactly 10:00AM CET, six weeks before your visit date</strong>. For a late-May visit, that means mid-to-late March. Create your account at <strong>annefrank.org</strong> now so you're ready the moment tickets open.</p>
+      <p style="font-size:0.95rem; margin-bottom:0;">The annex has steep narrow stairs; no stroller access. Best plan: Jon and Jess take an evening slot (open until 10PM), Scott, Edie, and Bodhi enjoy the Begijnhof or a canal walk.</p>
+    </div>
+
+    <div class="content-block">
+      <h3>Complete booking checklist</h3>
+      <ul class="experience-list">
+        <li>
+          <strong>Vrienden van het Rijksmuseum — buy immediately <span class="badge badge-star">best value</span></strong>
+          <span class="exp-desc">Two duo memberships at €90 each = €180 total for all 4 adults. Digital card emailed right away. Unlocks Fast Lane entry, unlimited visits, 10% café discount, 15% shop discount. Best money you'll spend.</span>
+        </li>
+        <li>
+          <strong>Anne Frank House — Tuesdays 10AM CET, 6 weeks out</strong>
+          <span class="exp-desc">Mid-to-late March. €16.50/adult. Bodhi pays €1 booking fee only. Create account at annefrank.org first.</span>
+        </li>
+        <li>
+          <strong>Emmylou Harris, Concertgebouw — May 24 <span class="badge badge-book">sells out</span></strong>
+          <span class="exp-desc">Book now at concertgebouw.nl. ~€60/ticket.</span>
+        </li>
+        <li>
+          <strong>Le nozze di Figaro, Dutch National Opera</strong>
+          <span class="exp-desc">May 23, 25, or 28. Various prices by seat. Book at operaballet.nl.</span>
+        </li>
+        <li>
+          <strong>Keukenhof + Keukenhof Express bus</strong>
+          <span class="exp-desc">keukenhof.nl for park tickets (~€21.50 online). Keukenhof Express bus from Amsterdam RAI = €18.20 round trip per person. Bodhi free on both.</span>
+        </li>
+        <li>
+          <strong>Miffy Museum Utrecht (Nijntje Museum)</strong>
+          <span class="exp-desc">nijntjemuseum.nl. Book in advance. Designed for ages 2–6.</span>
+        </li>
+        <li>
+          <strong>I amsterdam City Card 72h</strong>
+          <span class="exp-desc">€108/person, buy online. Activate Day 4 morning; covers through Day 7 evening.</span>
+        </li>
+      </ul>
+    </div>
+
+    <details>
+      <summary><i data-lucide="info" width="16" height="16"></i> Rijksmuseum exhibitions closing May 25</summary>
+      <p style="font-size:0.95rem;">"Metamorphoses" and "FAKE!" both close on May 25. If either interests you, plan to visit the Rijksmuseum in your first day or two. The permanent collection (Gallery of Honour, the Vermeers, the Night Watch) is always there.</p>
+    </details>
+
+  </section>
+
+</div>
+
+<footer>
+  <p>Built for the Dallas family &mdash; Amsterdam, May 23&ndash;June 1, 2026 &mdash; <a href="index.html">Home</a></p>
+</footer>
+
+<script>
+  lucide.createIcons();
+  var hamburger = document.getElementById('hamburger');
+  var mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', function() {
+    mobileMenu.classList.toggle('open');
+  });
+</script>
+</body>
+</html>

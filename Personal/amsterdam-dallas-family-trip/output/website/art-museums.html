@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Art &amp; Museums — Amsterdam Dallas Family Guide</title>
+  <meta name="description" content="Vermeer, Van Gogh, Anne Frank — and Miffy in Utrecht for Bodhi. Museum guide for the Dallas family in Amsterdam.">
+  <meta property="og:title" content="Art &amp; Museums — Amsterdam Dallas Family Guide">
+  <meta property="og:description" content="Vermeer, Van Gogh, Anne Frank — and Miffy in Utrecht for Bodhi.">
+  <meta property="og:image" content="../../images/final/rijksmuseum-interior.jpg">
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2026-03-11">
+  <meta property="article:tag" content="Amsterdam">
+  <meta property="article:tag" content="Museums">
+  <meta name="category" content="Travel Guide">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --blue: #1a3a5c; --orange: #e87722; --bg: #faf8f5; --text: #2c2c2c; --green: #4a8c5c; --card-bg: #ffffff; --border: #e8e0d5; --shadow: 0 2px 12px rgba(26,58,92,0.08); --shadow-hover: 0 8px 28px rgba(26,58,92,0.16); }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Source Sans 3', sans-serif; font-size: 18px; line-height: 1.7; color: var(--text); background: var(--bg); }
+    nav { background: var(--blue); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+    .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 60px; }
+    .nav-brand { color: #fff; font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 600; text-decoration: none; white-space: nowrap; }
+    .nav-brand span { color: var(--orange); }
+    .nav-links { display: flex; gap: 4px; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,0.85); text-decoration: none; font-size: 0.82rem; padding: 6px 9px; border-radius: 4px; transition: all 0.2s; white-space: nowrap; }
+    .nav-links a:hover, .nav-links a.active { color: #fff; background: rgba(255,255,255,0.12); }
+    .nav-links a.active { color: var(--orange); }
+    .nav-hamburger { display: none; background: none; border: none; color: #fff; cursor: pointer; padding: 8px; min-width: 44px; min-height: 44px; align-items: center; justify-content: center; }
+    .mobile-menu { display: none; background: var(--blue); border-top: 1px solid rgba(255,255,255,0.1); }
+    .mobile-menu.open { display: block; }
+    .mobile-menu a { display: block; color: rgba(255,255,255,0.85); text-decoration: none; padding: 14px 24px; font-size: 1rem; border-bottom: 1px solid rgba(255,255,255,0.07); transition: background 0.2s; min-height: 44px; }
+    .mobile-menu a:hover, .mobile-menu a.active { background: rgba(255,255,255,0.1); color: #fff; }
+    .mobile-menu a.active { color: var(--orange); }
+    .hero { position: relative; min-height: 50vh; display: flex; align-items: flex-end; overflow: hidden; }
+    .hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(26,58,92,0.85) 0%, rgba(26,58,92,0.35) 50%, rgba(0,0,0,0.2) 100%); }
+    .hero-content { position: relative; z-index: 2; padding: 48px 32px 56px; max-width: 800px; }
+    .hero-eyebrow { display: inline-block; background: var(--orange); color: #fff; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 5px 12px; border-radius: 2px; margin-bottom: 16px; }
+    .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 700; color: #fff; line-height: 1.2; margin-bottom: 16px; }
+    .hero p { color: #fff; font-size: clamp(1rem, 2vw, 1.2rem); font-weight: 400; max-width: 560px; text-shadow: 0 1px 3px rgba(0,0,0,0.6); }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+    section { padding: 56px 0; }
+    section + section { border-top: 1px solid var(--border); }
+    h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 700; color: var(--blue); margin-bottom: 8px; }
+    h3 { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 600; color: var(--blue); margin-bottom: 10px; }
+    .section-intro { color: #666; font-size: 1.05rem; margin-bottom: 36px; max-width: 640px; }
+    p { margin-bottom: 1em; }
+    p:last-child { margin-bottom: 0; }
+    .museum-card { background: var(--card-bg); border-radius: 10px; overflow: hidden; box-shadow: var(--shadow); margin-bottom: 28px; display: grid; grid-template-columns: 280px 1fr; }
+    .museum-card.card-featured { border: 2px solid var(--orange); }
+    .museum-img { height: 100%; min-height: 220px; overflow: hidden; }
+    .museum-img img { width: 100%; height: 100%; object-fit: cover; }
+    .museum-body { padding: 28px 32px; }
+    .museum-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+    .badge { display: inline-block; font-size: 0.72rem; font-weight: 700; padding: 3px 8px; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .badge-free { background: #e8f7ed; color: #2d6b3c; }
+    .badge-book { background: #fff0e0; color: #b85a00; }
+    .badge-star { background: var(--orange); color: #fff; }
+    .badge-card { background: #e8f0f8; color: var(--blue); }
+    .info-row { display: flex; gap: 24px; flex-wrap: wrap; margin: 14px 0; }
+    .info-item { display: flex; align-items: center; gap: 8px; font-size: 0.88rem; color: #666; }
+    .info-item i { color: var(--orange); flex-shrink: 0; }
+    .info-item strong { color: var(--text); }
+    .callout { border-radius: 8px; padding: 20px 24px; margin: 16px 0; }
+    .callout-warning { background: #fff8f0; border-left: 4px solid var(--orange); }
+    .callout-info { background: #f0f5fb; border-left: 4px solid var(--blue); }
+    .callout-success { background: #f0f7f2; border-left: 4px solid var(--green); }
+    .callout-title { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+    .callout-warning .callout-title { color: #b85a00; }
+    .callout-info .callout-title { color: var(--blue); }
+    .callout-success .callout-title { color: #2d6b3c; }
+    .callout p { font-size: 0.92rem; margin: 0; }
+    .pull-quote { border-left: 4px solid var(--orange); padding: 16px 24px; margin: 28px 0; font-family: 'Playfair Display', serif; font-size: 1.15rem; font-style: italic; color: var(--blue); background: #fff; border-radius: 0 8px 8px 0; }
+    details { border: 1px solid var(--border); border-radius: 8px; margin: 12px 0; overflow: hidden; }
+    summary { padding: 14px 18px; cursor: pointer; font-weight: 600; color: var(--blue); font-size: 0.95rem; display: flex; align-items: center; gap: 10px; list-style: none; min-height: 44px; background: var(--card-bg); transition: background 0.2s; }
+    summary::-webkit-details-marker { display: none; }
+    summary:hover { background: #f5f0e8; }
+    details[open] summary { border-bottom: 1px solid var(--border); }
+    details > *:not(summary) { padding: 16px 18px; }
+    footer { background: var(--blue); color: rgba(255,255,255,0.7); text-align: center; padding: 32px 24px; font-size: 0.9rem; margin-top: 64px; }
+    footer a { color: var(--orange); text-decoration: none; }
+    @media (max-width: 1024px) { .nav-links { display: none; } .nav-hamburger { display: flex; } .museum-card { grid-template-columns: 1fr; } .museum-img { min-height: 220px; height: 220px; } }
+    @media (max-width: 600px) { .hero { min-height: 40vh; } .hero-content { padding: 32px 20px 40px; } .container { padding: 0 20px; } section { padding: 40px 0; } .museum-body { padding: 20px; } }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">Amsterdam <span>&#9670;</span> Dallas</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="dont-miss.html">Don't Miss</a></li>
+      <li><a href="best-deals.html">Best Deals</a></li>
+      <li><a href="art-museums.html" class="active">Art</a></li>
+      <li><a href="music-events.html">Music</a></li>
+      <li><a href="parks-outdoors.html">Parks</a></li>
+      <li><a href="churches-spaces.html">Churches</a></li>
+      <li><a href="food-markets.html">Food</a></li>
+      <li><a href="canals-cruises.html">Canals</a></li>
+      <li><a href="practical.html">Practical</a></li>
+      <li><a href="day-trips.html">Day Trips</a></li>
+    </ul>
+    <button class="nav-hamburger" id="hamburger" aria-label="Open menu">
+      <i data-lucide="menu" width="24" height="24"></i>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Home</a>
+    <a href="dont-miss.html">Don't Miss</a>
+    <a href="best-deals.html">Best Deals</a>
+    <a href="art-museums.html" class="active">Art &amp; Museums</a>
+    <a href="music-events.html">Music &amp; Events</a>
+    <a href="parks-outdoors.html">Parks &amp; Outdoors</a>
+    <a href="churches-spaces.html">Churches &amp; Spaces</a>
+    <a href="food-markets.html">Food &amp; Markets</a>
+    <a href="canals-cruises.html">Canals &amp; Cruises</a>
+    <a href="practical.html">Practical Info</a>
+    <a href="day-trips.html">Day Trips</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <img src="../../images/final/rijksmuseum-interior.jpg" alt="Inside the Rijksmuseum — the grand gallery of Dutch Golden Age masterworks">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <span class="hero-eyebrow">Art &amp; Museums</span>
+    <h1>Vermeer, Van Gogh &amp; beyond</h1>
+    <p>The best museums in one of the great art cities, with a strategy for going with young children and someone who appreciates a calm pace.</p>
+  </div>
+</section>
+
+<div class="container">
+
+  <section>
+    <div class="callout callout-warning">
+      <div class="callout-title"><i data-lucide="alert-circle" width="18" height="18"></i> "Metamorphoses" and "FAKE!" close May 25</div>
+      <p>Two temporary exhibitions at the Rijksmuseum close on May 25. Visit in the first day or two of the trip if these interest you. The permanent collection (the Vermeers, the Night Watch) is always there.</p>
+    </div>
+
+    <!-- RIJKSMUSEUM -->
+    <div class="museum-card card-featured">
+      <div class="museum-img">
+        <img src="../../images/final/rijksmuseum-garden.jpg" alt="Rijksmuseum facade and formal gardens in spring bloom — the museum's Gothic stone exterior with tulips and sculpture">
+      </div>
+      <div class="museum-body">
+        <div class="museum-meta">
+          <span class="badge badge-star">Top pick for Scott</span>
+          <span class="badge badge-card">Vrienden membership</span>
+        </div>
+        <h3>Rijksmuseum</h3>
+        <div class="info-row">
+          <div class="info-item"><i data-lucide="map-pin" width="14" height="14"></i> <span>Museumplein — 20 min from apartment</span></div>
+          <div class="info-item"><i data-lucide="clock" width="14" height="14"></i> <span>9AM–5PM daily</span></div>
+          <div class="info-item"><i data-lucide="euro" width="14" height="14"></i> <span>Free with Vrienden membership</span></div>
+        </div>
+        <p>The Rijksmuseum holds four Vermeer paintings in the Gallery of Honour on Floor 2, more than anywhere else on Earth. The Milkmaid. Woman Reading a Letter. The Little Street. The Love Letter. The Night Watch anchors the far end of the hall. Go at 9AM on a Tuesday, Wednesday, or Thursday and the Gallery of Honour will be nearly empty.</p>
+        <p>Your Vrienden membership gives you Fast Lane priority entry; no queuing ever, which matters enormously with a toddler and a tired group. Free wheelchairs and pushchairs at the info desk. There's also a quiet room for visitors who need it.</p>
+        <div class="callout callout-success" style="margin-top:12px; margin-bottom:0;">
+          <div class="callout-title" style="font-size:0.9rem;"><i data-lucide="heart" width="16" height="16"></i> Art &amp; Dementia Tours — for Edie and the group</div>
+          <p>Daily 14:30–16:00. A guided tour designed for visitors with dementia and their companions: calm, participatory, focused on looking rather than listening. €30 for a group of up to 12. Worth booking.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- VAN GOGH -->
+    <div class="museum-card">
+      <div class="museum-img">
+        <img src="../../images/final/van-gogh-museum-family.jpg" alt="Family viewing Van Gogh painting at the Van Gogh Museum Amsterdam">
+      </div>
+      <div class="museum-body">
+        <div class="museum-meta">
+          <span class="badge badge-book">Book timed entry</span>
+        </div>
+        <h3>Van Gogh Museum</h3>
+        <div class="info-row">
+          <div class="info-item"><i data-lucide="map-pin" width="14" height="14"></i> <span>Next to Rijksmuseum, Museumplein</span></div>
+          <div class="info-item"><i data-lucide="euro" width="14" height="14"></i> <span>~€22/adult — Free under 18</span></div>
+          <div class="info-item"><i data-lucide="clock" width="14" height="14"></i> <span>Budget 90 minutes</span></div>
+        </div>
+        <p>The world's largest collection of Van Gogh's work: around 200 paintings and 500 drawings spanning his career. Timed entry is required and the museum sells out. Book your slot in advance at vangoghmuseum.nl.</p>
+        <p>Not included in the City Card; schedule your visit outside the 72h window to maximize the card's value. Bodhi is free under 18, and the museum is stroller-friendly on the ground floor.</p>
+      </div>
+    </div>
+
+    <!-- ANNE FRANK -->
+    <div class="museum-card">
+      <div class="museum-img">
+        <img src="../../images/final/anne-frank-huis-sign.jpg" alt="Anne Frank Huis door sign, Amsterdam">
+      </div>
+      <div class="museum-body">
+        <div class="museum-meta">
+          <span class="badge badge-book">Tuesdays 10AM CET — 6 weeks out</span>
+        </div>
+        <h3>Anne Frank House</h3>
+        <div class="info-row">
+          <div class="info-item"><i data-lucide="map-pin" width="14" height="14"></i> <span>Prinsengracht 263 — 20 min from apartment</span></div>
+          <div class="info-item"><i data-lucide="euro" width="14" height="14"></i> <span>€16.50/adult — Bodhi €1 booking fee only</span></div>
+          <div class="info-item"><i data-lucide="clock" width="14" height="14"></i> <span>Open until 10PM some evenings</span></div>
+        </div>
+        <p>Tickets release on Tuesdays at exactly 10:00AM CET, six weeks before your visit date. For late May visits, that's mid-to-late March. Create your account at annefrank.org now so you're ready to click at the right moment.</p>
+        <p>The annex has steep, narrow stairs and no stroller access. It's also emotionally intense. The best plan for your group: Jon and Jess take an evening slot, while Scott, Edie, and Bodhi enjoy the Begijnhof or a canal walk. Westerkerk is just next door and free to enter.</p>
+      </div>
+    </div>
+
+    <img src="../../images/final/begijnhof-courtyard.jpg" alt="Begijnhof courtyard in early spring" style="width:100%; height:300px; object-fit:cover; object-position:center 40%; border-radius:10px; margin-bottom:28px;">
+
+    <!-- SECONDARY MUSEUMS -->
+    <h2 style="margin-bottom:20px;">More museums — included with City Card</h2>
+
+    <div class="museum-card">
+      <div class="museum-img">
+        <img src="../../images/final/stedelijk-museum.jpg" alt="Stedelijk Museum Amsterdam exterior — modern wing with glass and corten steel">
+      </div>
+      <div class="museum-body">
+        <div class="museum-meta">
+          <span class="badge badge-card">City Card</span>
+          <span class="badge badge-star">Best for Edie</span>
+        </div>
+        <h3>Stedelijk Museum</h3>
+        <div class="info-row">
+          <div class="info-item"><i data-lucide="map-pin" width="14" height="14"></i> <span>Museumplein, next to Van Gogh Museum</span></div>
+        </div>
+        <p>Amsterdam's museum of modern and contemporary art. In May 2026: Kho Liang Ie retrospective and a Danh Vo solo show. Spacious, calm, and less crowded than the Rijksmuseum. Good for a quiet afternoon. Stroller-friendly throughout.</p>
+      </div>
+    </div>
+
+    <div class="museum-card">
+      <div class="museum-img">
+        <img src="../../images/final/nemo-museum-rooftop.jpg" alt="NEMO Science Museum Amsterdam — rooftop terrace with visitors and green copper building">
+      </div>
+      <div class="museum-body">
+        <div class="museum-meta">
+          <span class="badge badge-card">City Card</span>
+          <span class="badge badge-star">Perfect for Bodhi</span>
+        </div>
+        <h3>NEMO Science Museum</h3>
+        <div class="info-row">
+          <div class="info-item"><i data-lucide="map-pin" width="14" height="14"></i> <span>Oosterdok — 25 min from apartment</span></div>
+          <div class="info-item"><i data-lucide="euro" width="14" height="14"></i> <span>Free under 4</span></div>
+        </div>
+        <p>Four floors of hands-on science experiments designed for curious kids. The rooftop is free to access separately: water features and views over the harbor, great for Bodhi on a warm day. Entirely interactive, not a passive museum experience.</p>
+      </div>
+    </div>
+
+    <details>
+      <summary><i data-lucide="building" width="16" height="16"></i> Rembrandt House — also on City Card</summary>
+      <p style="font-size:0.95rem;">Rembrandt's actual house on Jodenbreestraat, where he lived and worked from 1639 to 1658. Carefully reconstructed interior, original print room and studio. A 15-minute walk from your apartment. The closest major museum to where you're staying.</p>
+    </details>
+
+  </section>
+
+  <section>
+    <h2>Day trip: Miffy Museum, Utrecht</h2>
+
+    <div class="museum-card card-featured">
+      <div class="museum-img">
+        <img src="../../images/final/miffy-museum-entrance.jpg" alt="Nijntje (Miffy) Museum entrance in Utrecht with museum sign above the door">
+      </div>
+      <div class="museum-body">
+        <div class="museum-meta">
+          <span class="badge badge-star">Bodhi's museum</span>
+          <span class="badge badge-book">Book in advance</span>
+        </div>
+        <h3>Nijntje (Miffy) Museum, Utrecht</h3>
+        <div class="info-row">
+          <div class="info-item"><i data-lucide="train" width="14" height="14"></i> <span>30 min direct train from Centraal</span></div>
+          <div class="info-item"><i data-lucide="users" width="14" height="14"></i> <span>Designed for ages 2–6</span></div>
+        </div>
+        <p>Designed specifically for children aged 2 to 6 (Bodhi's exact age group). Twelve thematic rooms: Miffy's house, a traffic village, a farm, a zoo. Everything is child-height and explorable. Book tickets in advance at nijntjemuseum.nl.</p>
+        <p>Utrecht is a beautiful small city in its own right. The canals are at a lower level than the streets, with terraced café-restaurants right on the water. Edie might enjoy a coffee at a canal-side café while others do the museum, then everyone explores together after.</p>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <p>Built for the Dallas family &mdash; Amsterdam, May 23&ndash;June 1, 2026 &mdash; <a href="index.html">Home</a></p>
+</footer>
+
+<script>
+  lucide.createIcons();
+  var hamburger = document.getElementById('hamburger');
+  var mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', function() {
+    mobileMenu.classList.toggle('open');
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amsterdam Family Trip — Dallas Family Guide</title>
+  <meta name="description" content="A 10-day Amsterdam guide for three generations. May 23–June 1, 2026.">
+  <meta property="og:title" content="Amsterdam Family Trip — Dallas Family Guide">
+  <meta property="og:description" content="A 10-day Amsterdam guide for three generations. Jon, Jess, Bodhi, Scott & Edie. May 23–June 1, 2026.">
+  <meta property="og:image" content="../../images/final/hero-amsterdam-spring.jpg">
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2026-03-11">
+  <meta property="article:tag" content="Amsterdam">
+  <meta property="article:tag" content="Family Travel">
+  <meta name="category" content="Travel Guide">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue: #1a3a5c;
+      --orange: #e87722;
+      --bg: #faf8f5;
+      --text: #2c2c2c;
+      --green: #4a8c5c;
+      --card-bg: #ffffff;
+      --border: #e8e0d5;
+      --shadow: 0 2px 12px rgba(26,58,92,0.08);
+      --shadow-hover: 0 8px 28px rgba(26,58,92,0.16);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 18px;
+      line-height: 1.7;
+      color: var(--text);
+      background: var(--bg);
+    }
+
+    @font-face { font-display: swap; }
+
+    /* NAV */
+    nav {
+      background: var(--blue);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+
+    .nav-brand {
+      color: #fff;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .nav-brand span {
+      color: var(--orange);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 4px;
+      list-style: none;
+      flex-wrap: nowrap;
+    }
+
+    .nav-links a {
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 400;
+      padding: 6px 9px;
+      border-radius: 4px;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: #fff;
+      background: rgba(255,255,255,0.12);
+    }
+
+    .nav-links a.active {
+      color: var(--orange);
+    }
+
+    .nav-hamburger {
+      display: none;
+      background: none;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+      padding: 8px;
+      min-width: 44px;
+      min-height: 44px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .mobile-menu {
+      display: none;
+      background: var(--blue);
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .mobile-menu.open {
+      display: block;
+    }
+
+    .mobile-menu a {
+      display: block;
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      padding: 14px 24px;
+      font-size: 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      transition: background 0.2s;
+      min-height: 44px;
+    }
+
+    .mobile-menu a:hover,
+    .mobile-menu a.active {
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+    }
+
+    .mobile-menu a.active {
+      color: var(--orange);
+    }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      min-height: 70vh;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+    }
+
+    .hero img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 40%;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(26,58,92,0.85) 0%, rgba(26,58,92,0.3) 50%, rgba(0,0,0,0.1) 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 48px 32px 56px;
+      max-width: 800px;
+    }
+
+    .hero-eyebrow {
+      display: inline-block;
+      background: var(--orange);
+      color: #fff;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 2px;
+      margin-bottom: 16px;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+
+    .hero p {
+      color: #fff;
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      font-weight: 400;
+      max-width: 560px;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+    }
+
+    /* STATS BAR */
+    .stats-bar {
+      background: var(--blue);
+      color: #fff;
+    }
+
+    .stats-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 16px 32px;
+      display: flex;
+      gap: 0;
+      flex-wrap: wrap;
+    }
+
+    .stat-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 24px 8px 0;
+      margin-right: 24px;
+      border-right: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .stat-item:last-child {
+      border-right: none;
+    }
+
+    .stat-item i {
+      color: var(--orange);
+      flex-shrink: 0;
+    }
+
+    .stat-label {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.6);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .stat-value {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    /* MAIN CONTENT */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    section {
+      padding: 56px 0;
+    }
+
+    section + section {
+      border-top: 1px solid var(--border);
+    }
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      color: var(--blue);
+      margin-bottom: 8px;
+    }
+
+    h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--blue);
+      margin-bottom: 8px;
+    }
+
+    .section-intro {
+      color: #666;
+      font-size: 1.05rem;
+      margin-bottom: 36px;
+      max-width: 640px;
+    }
+
+    p { margin-bottom: 1em; }
+    p:last-child { margin-bottom: 0; }
+
+    /* INTRO SECTION */
+    .intro-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .intro-text p {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 1.2em;
+    }
+
+    .intro-image {
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .intro-image img {
+      width: 100%;
+      height: 320px;
+      object-fit: cover;
+    }
+
+    /* CARD GRID */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .card-image {
+      height: 180px;
+      overflow: hidden;
+    }
+
+    .card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+
+    .card:hover .card-image img {
+      transform: scale(1.04);
+    }
+
+    .card-body {
+      padding: 20px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-tag {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 6px;
+    }
+
+    .card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--blue);
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      font-size: 0.9rem;
+      color: #666;
+      line-height: 1.5;
+      flex: 1;
+      margin-bottom: 0;
+    }
+
+    .card-arrow {
+      margin-top: 14px;
+      color: var(--orange);
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* CALLOUT / ALERT BOXES */
+    .callout {
+      border-radius: 8px;
+      padding: 24px 28px;
+      margin: 32px 0;
+    }
+
+    .callout-warning {
+      background: #fff8f0;
+      border-left: 4px solid var(--orange);
+    }
+
+    .callout-info {
+      background: #f0f5fb;
+      border-left: 4px solid var(--blue);
+    }
+
+    .callout-success {
+      background: #f0f7f2;
+      border-left: 4px solid var(--green);
+    }
+
+    .callout-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .callout-warning .callout-title { color: #b85a00; }
+    .callout-info .callout-title { color: var(--blue); }
+    .callout-success .callout-title { color: #2d6b3c; }
+
+    .callout ul {
+      margin: 8px 0 0 0;
+      padding-left: 20px;
+    }
+
+    .callout li {
+      margin-bottom: 6px;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    /* FAMILY MEMBER TAGS */
+    .for-who {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 12px;
+      margin-bottom: 10px;
+    }
+
+    .for-scott { background: #e8f0f8; color: var(--blue); }
+    .for-edie { background: #f0f7f2; color: #2d6b3c; }
+    .for-bodhi { background: #fff0e0; color: #b85a00; }
+    .for-all { background: #f5f0e8; color: #6b5a3c; }
+
+    /* TABLE */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 24px 0;
+      font-size: 0.9rem;
+    }
+
+    th {
+      background: var(--blue);
+      color: #fff;
+      padding: 12px 16px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 0.85rem;
+    }
+
+    td {
+      padding: 11px 16px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    tr:last-child td { border-bottom: none; }
+    tr:nth-child(even) td { background: #f8f5f0; }
+
+    .td-highlight {
+      font-weight: 600;
+      color: var(--blue);
+    }
+
+    /* DETAILS/SUMMARY */
+    details {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin: 12px 0;
+      overflow: hidden;
+    }
+
+    summary {
+      padding: 14px 18px;
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--blue);
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      list-style: none;
+      min-height: 44px;
+      background: var(--card-bg);
+      transition: background 0.2s;
+    }
+
+    summary::-webkit-details-marker { display: none; }
+
+    summary:hover {
+      background: #f5f0e8;
+    }
+
+    details[open] summary {
+      border-bottom: 1px solid var(--border);
+    }
+
+    details > *:not(summary) {
+      padding: 16px 18px;
+    }
+
+    /* PULL QUOTE */
+    .pull-quote {
+      border-left: 4px solid var(--orange);
+      padding: 16px 24px;
+      margin: 28px 0;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-style: italic;
+      color: var(--blue);
+      background: #fff;
+      border-radius: 0 8px 8px 0;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--blue);
+      color: rgba(255,255,255,0.7);
+      text-align: center;
+      padding: 32px 24px;
+      font-size: 0.9rem;
+      margin-top: 64px;
+    }
+
+    footer a {
+      color: var(--orange);
+      text-decoration: none;
+    }
+
+    /* BADGES */
+    .badge {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .badge-free { background: #e8f7ed; color: #2d6b3c; }
+    .badge-book { background: #fff0e0; color: #b85a00; }
+    .badge-star { background: var(--orange); color: #fff; }
+
+    /* PRICE TAG */
+    .price {
+      font-weight: 700;
+      color: var(--blue);
+    }
+
+    .price-free {
+      font-weight: 700;
+      color: var(--green);
+    }
+
+    /* ICON LABEL ROWS */
+    .info-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .info-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.95rem;
+    }
+
+    .info-list li:last-child { border-bottom: none; }
+
+    .info-list i {
+      color: var(--orange);
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+
+    /* CONTENT SECTIONS INSIDE PAGES */
+    .content-block {
+      background: var(--card-bg);
+      border-radius: 10px;
+      padding: 32px;
+      box-shadow: var(--shadow);
+      margin-bottom: 24px;
+    }
+
+    .content-block h3 {
+      margin-bottom: 12px;
+    }
+
+    /* PAGE HERO smaller for inner pages */
+    .hero-inner {
+      min-height: 50vh;
+    }
+
+    /* TWO COLUMN layout */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    /* THREE COLUMN for feature items */
+    .three-col {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      .card-grid { grid-template-columns: repeat(2, 1fr); }
+      .three-col { grid-template-columns: repeat(2, 1fr); }
+      .intro-grid { grid-template-columns: 1fr; }
+      .two-col { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      .card-grid { grid-template-columns: 1fr; }
+      .three-col { grid-template-columns: 1fr; }
+      .hero { min-height: 50vh; }
+      .hero-inner { min-height: 40vh; }
+      .hero-content { padding: 32px 20px 40px; }
+      .container { padding: 0 20px; }
+      section { padding: 40px 0; }
+      .stats-inner { padding: 12px 20px; gap: 4px; }
+      .stat-item { padding: 6px 16px 6px 0; margin-right: 16px; }
+      .stat-label { font-size: 0.7rem; }
+      .stat-value { font-size: 0.85rem; }
+      table { font-size: 0.8rem; }
+      th, td { padding: 8px 10px; }
+    }
+
+    @media (max-width: 480px) {
+      .stats-inner { flex-direction: column; }
+      .stat-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 10px; margin-right: 0; }
+      .stat-item:last-child { border-bottom: none; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">Amsterdam <span>&#9670;</span> Dallas</a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="dont-miss.html">Don't Miss</a></li>
+      <li><a href="best-deals.html">Best Deals</a></li>
+      <li><a href="art-museums.html">Art</a></li>
+      <li><a href="music-events.html">Music</a></li>
+      <li><a href="parks-outdoors.html">Parks</a></li>
+      <li><a href="churches-spaces.html">Churches</a></li>
+      <li><a href="food-markets.html">Food</a></li>
+      <li><a href="canals-cruises.html">Canals</a></li>
+      <li><a href="practical.html">Practical</a></li>
+      <li><a href="day-trips.html">Day Trips</a></li>
+    </ul>
+    <button class="nav-hamburger" id="hamburger" aria-label="Open menu">
+      <i data-lucide="menu" width="24" height="24"></i>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html" class="active">Home</a>
+    <a href="dont-miss.html">Don't Miss</a>
+    <a href="best-deals.html">Best Deals</a>
+    <a href="art-museums.html">Art &amp; Museums</a>
+    <a href="music-events.html">Music &amp; Events</a>
+    <a href="parks-outdoors.html">Parks &amp; Outdoors</a>
+    <a href="churches-spaces.html">Churches &amp; Spaces</a>
+    <a href="food-markets.html">Food &amp; Markets</a>
+    <a href="canals-cruises.html">Canals &amp; Cruises</a>
+    <a href="practical.html">Practical Info</a>
+    <a href="day-trips.html">Day Trips</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <img src="../../images/final/hero-amsterdam-spring.jpg" alt="Amsterdam canal in spring with bicycles and flowers on the bridge railing, canal houses in background">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <span class="hero-eyebrow">May 23 – June 1, 2026</span>
+    <h1>A 10-day Amsterdam guide<br>for three generations</h1>
+    <p>Put together for Jon, Jess, Bodhi, Scott &amp; Edie — based in Plantage, arriving in tulip season.</p>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <i data-lucide="calendar" width="18" height="18"></i>
+      <div>
+        <div class="stat-label">Dates</div>
+        <div class="stat-value">May 23 – June 1</div>
+      </div>
+    </div>
+    <div class="stat-item">
+      <i data-lucide="sun" width="18" height="18"></i>
+      <div>
+        <div class="stat-label">Duration</div>
+        <div class="stat-value">10 days</div>
+      </div>
+    </div>
+    <div class="stat-item">
+      <i data-lucide="map-pin" width="18" height="18"></i>
+      <div>
+        <div class="stat-label">Base</div>
+        <div class="stat-value">Plantage, Amsterdam</div>
+      </div>
+    </div>
+    <div class="stat-item">
+      <i data-lucide="users" width="18" height="18"></i>
+      <div>
+        <div class="stat-label">Travelers</div>
+        <div class="stat-value">5 people, 3 generations</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- INTRO -->
+<div class="container">
+  <section>
+    <div class="intro-grid">
+      <div class="intro-text">
+        <h2>Your family's Amsterdam</h2>
+        <p>This isn't a generic travel guide; it's built specifically for the five of you. Jon and Jess are navigating Amsterdam with Bodhi Bear, who'll be nearly two and free at almost everything. Scott, who plays piano and loves art, is in the right city at the right time. And Edie will find that Amsterdam, done thoughtfully, is genuinely calm, manageable, and beautiful.</p>
+        <p>You're based in Plantage — a quiet, residential neighborhood east of the center. Artis Zoo is a seven-minute walk. Hortus Botanicus is ten minutes. The Dutch National Opera is practically next door. You're not in the tourist scrum, but you're close enough to everything that matters.</p>
+        <p>This guide covers everything: the one-time experiences worth booking months out, the free daily pleasures, where to eat near the apartment, and how to make the cards work so you're not overpaying. Browse by topic, not by day; the trip will find its own rhythm.</p>
+      </div>
+      <div class="intro-image">
+        <img src="../../images/final/canal-boat-westerkerk.jpg" alt="Canal boat passing under a bridge with Westerkerk tower in the background and flowers in the foreground">
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOKING DEADLINES -->
+  <section>
+    <div class="callout callout-warning">
+      <div class="callout-title">
+        <i data-lucide="alert-circle" width="20" height="20"></i>
+        Book these before you leave home
+      </div>
+      <ul>
+        <li><strong>Vrienden van het Rijksmuseum</strong> — Buy 2 duo memberships (€90 each = €180 for 4 adults) at rijksmuseum.nl. Digital card emailed immediately. This is the single most important purchase.</li>
+        <li><strong>Anne Frank House</strong> — Tickets release Tuesdays at 10AM CET, exactly 6 weeks in advance. That means mid-to-late March for your dates. Create your account at annefrank.org now so you're ready to click.</li>
+        <li><strong>Keukenhof</strong> — Closes May 10, which is before your trip ends but day 2 works perfectly. Book tickets at keukenhof.nl and the Keukenhof Express bus (€18.20 round trip from Amsterdam RAI).</li>
+        <li><strong>Emmylou Harris at Concertgebouw</strong> — May 24. ~€60/ticket. Sells out. Book now at concertgebouw.nl.</li>
+        <li><strong>Miffy Museum, Utrecht</strong> — Nijntje Museum, for Bodhi. Book tickets in advance at nijntjemuseum.nl.</li>
+        <li><strong>I amsterdam City Card 72h</strong> — €108/person, buy online. Plan to activate Day 4 morning, covering through Day 7 evening.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CARD GRID NAV -->
+  <section>
+    <h2>Explore the guide</h2>
+    <p class="section-intro">10 sections covering everything from Vermeers to stroopwafels.</p>
+    <div class="card-grid">
+
+      <a class="card" href="dont-miss.html">
+        <div class="card-image">
+          <img src="../../images/final/westerkerk-canal.jpg" alt="Westerkerk tower and canal houses reflected in the Prinsengracht — Amsterdam at its most iconic">
+        </div>
+        <div class="card-body">
+          <div class="card-tag">Start here</div>
+          <h3>Don't Miss</h3>
+          <p>The absolute must-dos, organized by who in the family each one is for.</p>
+          <div class="card-arrow">Read more <i data-lucide="arrow-right" width="14" height="14"></i></div>
+        </div>
+      </a>
+
+      <a class="card" href="best-deals.html">
+        <div class="card-image">
+          <img src="../../images/final/canal-spring-flowers.jpg" alt="Amsterdam canal in spring with pansies on the bridge">
+        </div>
+        <div class="card-body">
+          <div class="card-tag">Save money</div>
+          <h3>Best Deals</h3>
+          <p>Save around €200 with the right membership cards. The numbers actually work out.</p>
+          <div class="card-arrow">Read more <i data-lucide="arrow-right" width="14" height="14"></i></div>
+        </div>
+      </a>
+
+      <a class="card" href="art-museums.html">
+        <div class="card-image">
+          <img src="../../images/final/rijksmuseum-interior.jpg" alt="Visitors viewing Dutch Golden Age art at the Rijksmuseum">
+        </div>
+        <div class="card-body">
+          <div class="card-tag">Art &amp; culture</div>
+          <h3>Art &amp; Museums</h3>
+          <p>Vermeer, Van Gogh, Anne Frank — and Miffy in Utrecht for Bodhi.</p>
+          <div class="card-arrow">Read more <i data-lucide="arrow-right" width="14" height="14"></i></div>
+        </div>
+      </a>
+
+      <a class="card" href="music-events.html">
+        <div class="card-image">
+          <img src="../../images/final/concertgebouw-interior.jpg" alt="Full orchestra performing in the grand Concertgebouw hall">
+        </div>
+        <div class="card-body">
+          <div class="card-tag">Live music</div>
+          <h3>Music &amp; Events</h3>
+          <p>Emmylou Harris at the Concertgebouw. Figaro at the National Opera. Free Wednesday concerts.</p>
+          <div class="card-arrow">Read more <i data-lucide="arrow-right" width="14" height="14"></i></div>
+        </div>
+      </a>
+
+      <a class="card" href="parks-outdoors.html">
+        <div class="card-image">
+          <img src="../../images/final/vondelpark-playground.jpg" alt="Dad and young child at Vondelpark's big metal slide tower">
+        </div>
+        <div class="card-body">
+          <div class="card-tag">Outside</div>
+          <h3>Parks &amp; Outdoors</h3>
+          <p>Vondelpark playgrounds, Artis Zoo, Hortus Botanicus, and the Amsterdamse Bos.</p>
+          <div class="card-arrow">Read more <i data-lucide="arrow-right" width="14" height="14"></i></div>
+        </div>
+      </a>
+
+      <a class="card" href="churches-spaces.html">
+        <div class="card-image">
+          <img src="../../images/final/begijnhof-courtyard.jpg" alt="Begijnhof courtyard in early spring with gabled houses and blue sky">
+        </div>
+        <div class="card-body">
+          <div class="card-tag">Quiet &amp; sacred</div>
+          <h3>Churches &amp; Spaces</h3>
+          <p>The Begijnhof. A hidden church in an attic. Quiet corners for Edie, Gothic stone for Scott.</p>
+          <div class="card-arrow">Read more <i data-lucide="arrow-right" width="14" height="14"></i></div>
+        </div>
+      </a>
+
+      <a class="card" href="food-markets.html">
+        <div class="card-image">
+          <img src="../../images/final/stroopwafel-fresh.jpg" alt="Fresh stroopwafel on a napkin">
+        </div>
+        <div class="card-body">
+          <div class="card-tag">Eat &amp; drink</div>
+          <h3>Food &amp; Markets</h3>
+          <p>Albert Cuyp Market stroopwafels, places near the apartment, Dutch food to try.</p>
+          <div class="card-arrow">Read more <i data-lucide="arrow-right" width="14" height="14"></i></div>
+        </div>
+      </a>
+
+      <a class="card" href="canals-cruises.html">
+        <div class="card-image">
+          <img src="../../images/final/canal-cruise-blueboat.jpg" alt="Blue Boat canal cruise with classic Amsterdam houses">
+        </div>
+        <div class="card-body">
+          <div class="card-tag">On the water</div>
+          <h3>Canals &amp; Cruises</h3>
+          <p>Why a canal cruise works perfectly for this family — and which operators to use.</p>
+          <div class="card-arrow">Read more <i data-lucide="arrow-right" width="14" height="14"></i></div>
+        </div>
+      </a>
+
+      <a class="card" href="practical.html">
+        <div class="card-image">
+          <img src="../../images/final/amsterdam-cargo-bike.jpg" alt="Woman on cargo bike with two children, elderly couple behind on regular bikes">
+        </div>
+        <div class="card-body">
+          <div class="card-tag">Logistics</div>
+          <h3>Practical Info</h3>
+          <p>OVpay trams, weather, baby supplies, canal safety, Sunflower Lanyards, and more.</p>
+          <div class="card-arrow">Read more <i data-lucide="arrow-right" width="14" height="14"></i></div>
+        </div>
+      </a>
+
+      <a class="card" href="day-trips.html">
+        <div class="card-image">
+          <img src="../../images/final/keukenhof-tulips.jpg" alt="Colorful rows of tulips at Keukenhof gardens">
+        </div>
+        <div class="card-body">
+          <div class="card-tag">Out of the city</div>
+          <h3>Day Trips</h3>
+          <p>Keukenhof tulips (closes May 10!), Miffy Museum in Utrecht, Haarlem, Zaanse Schans.</p>
+          <div class="card-arrow">Read more <i data-lucide="arrow-right" width="14" height="14"></i></div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+</div>
+
+<footer>
+  <p>Built for the Dallas family &mdash; Amsterdam, May 23&ndash;June 1, 2026 &mdash; <a href="index.html">Home</a></p>
+</footer>
+
+<script>
+  lucide.createIcons();
+  var hamburger = document.getElementById('hamburger');
+  var mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', function() {
+    mobileMenu.classList.toggle('open');
+  });
+</script>
+</body>
+</html>

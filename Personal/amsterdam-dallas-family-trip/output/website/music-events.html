@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Music &amp; Events — Amsterdam Dallas Family Guide</title>
+  <meta name="description" content="Emmylou Harris at the Concertgebouw, Le nozze di Figaro, free Wednesday concerts, Harry Styles, and more. May 23–June 1, 2026.">
+  <meta property="og:title" content="Music &amp; Events — Amsterdam Dallas Family Guide">
+  <meta property="og:description" content="Emmylou Harris at the Concertgebouw, Le nozze di Figaro, free Wednesday concerts. Live music guide for Amsterdam, May 2026.">
+  <meta property="og:image" content="../../images/final/concertgebouw-interior.jpg">
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2026-03-11">
+  <meta property="article:tag" content="Amsterdam">
+  <meta property="article:tag" content="Music">
+  <meta name="category" content="Travel Guide">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --blue: #1a3a5c; --orange: #e87722; --bg: #faf8f5; --text: #2c2c2c; --green: #4a8c5c; --card-bg: #ffffff; --border: #e8e0d5; --shadow: 0 2px 12px rgba(26,58,92,0.08); --shadow-hover: 0 8px 28px rgba(26,58,92,0.16); }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Source Sans 3', sans-serif; font-size: 18px; line-height: 1.7; color: var(--text); background: var(--bg); }
+    nav { background: var(--blue); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+    .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 60px; }
+    .nav-brand { color: #fff; font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 600; text-decoration: none; white-space: nowrap; }
+    .nav-brand span { color: var(--orange); }
+    .nav-links { display: flex; gap: 4px; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,0.85); text-decoration: none; font-size: 0.82rem; padding: 6px 9px; border-radius: 4px; transition: all 0.2s; white-space: nowrap; }
+    .nav-links a:hover, .nav-links a.active { color: #fff; background: rgba(255,255,255,0.12); }
+    .nav-links a.active { color: var(--orange); }
+    .nav-hamburger { display: none; background: none; border: none; color: #fff; cursor: pointer; padding: 8px; min-width: 44px; min-height: 44px; align-items: center; justify-content: center; }
+    .mobile-menu { display: none; background: var(--blue); border-top: 1px solid rgba(255,255,255,0.1); }
+    .mobile-menu.open { display: block; }
+    .mobile-menu a { display: block; color: rgba(255,255,255,0.85); text-decoration: none; padding: 14px 24px; font-size: 1rem; border-bottom: 1px solid rgba(255,255,255,0.07); transition: background 0.2s; min-height: 44px; }
+    .mobile-menu a:hover, .mobile-menu a.active { background: rgba(255,255,255,0.1); color: #fff; }
+    .mobile-menu a.active { color: var(--orange); }
+    .hero { position: relative; min-height: 50vh; display: flex; align-items: flex-end; overflow: hidden; }
+    .hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 40%; }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(26,58,92,0.88) 0%, rgba(26,58,92,0.4) 50%, rgba(0,0,0,0.2) 100%); }
+    .hero-content { position: relative; z-index: 2; padding: 48px 32px 56px; max-width: 800px; }
+    .hero-eyebrow { display: inline-block; background: var(--orange); color: #fff; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 5px 12px; border-radius: 2px; margin-bottom: 16px; }
+    .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 700; color: #fff; line-height: 1.2; margin-bottom: 16px; }
+    .hero p { color: #fff; font-size: clamp(1rem, 2vw, 1.2rem); font-weight: 400; max-width: 600px; text-shadow: 0 1px 3px rgba(0,0,0,0.6); }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+    section { padding: 56px 0; }
+    section + section { border-top: 1px solid var(--border); }
+    h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 700; color: var(--blue); margin-bottom: 8px; }
+    h3 { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 600; color: var(--blue); margin-bottom: 10px; }
+    .section-intro { color: #666; font-size: 1.05rem; margin-bottom: 36px; max-width: 640px; }
+    p { margin-bottom: 1em; } p:last-child { margin-bottom: 0; }
+    ul { padding-left: 1.4em; margin-bottom: 1em; } li { margin-bottom: 0.4em; }
+    .event-card { background: var(--card-bg); border-radius: 10px; overflow: hidden; box-shadow: var(--shadow); margin-bottom: 24px; display: grid; grid-template-columns: 200px 1fr; }
+    .event-card.featured { border: 2px solid var(--orange); }
+    .event-img { overflow: hidden; }
+    .event-img img { width: 100%; height: 100%; min-height: 180px; object-fit: cover; }
+    .event-body { padding: 24px 28px; }
+    .badge { display: inline-block; font-size: 0.72rem; font-weight: 700; padding: 3px 8px; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .badge-free { background: #e8f7ed; color: #2d6b3c; }
+    .badge-book { background: #fff0e0; color: #b85a00; }
+    .badge-star { background: var(--orange); color: #fff; }
+    .event-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+    .info-row { display: flex; gap: 20px; flex-wrap: wrap; margin: 10px 0 14px; }
+    .info-item { display: flex; align-items: center; gap: 8px; font-size: 0.88rem; color: #666; }
+    .info-item i { color: var(--orange); flex-shrink: 0; }
+    .callout { border-radius: 8px; padding: 20px 24px; margin: 20px 0; }
+    .callout-warning { background: #fff8f0; border-left: 4px solid var(--orange); }
+    .callout-info { background: #f0f5fb; border-left: 4px solid var(--blue); }
+    .callout-success { background: #f0f7f2; border-left: 4px solid var(--green); }
+    .callout-title { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+    .callout-warning .callout-title { color: #b85a00; }
+    .callout-info .callout-title { color: var(--blue); }
+    .callout-success .callout-title { color: #2d6b3c; }
+    .callout p, .callout ul { font-size: 0.92rem; margin-bottom: 0.5em; }
+    .callout ul { padding-left: 1.2em; }
+    .pull-quote { border-left: 4px solid var(--orange); padding: 16px 24px; margin: 28px 0; font-family: 'Playfair Display', serif; font-size: 1.15rem; font-style: italic; color: var(--blue); background: #fff; border-radius: 0 8px 8px 0; }
+    table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 0.875rem; }
+    th { background: var(--blue); color: #fff; padding: 10px 14px; text-align: left; font-size: 0.82rem; }
+    td { padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+    tr:nth-child(even) td { background: #f8f5f0; }
+    details { border: 1px solid var(--border); border-radius: 8px; margin: 12px 0; overflow: hidden; }
+    summary { padding: 14px 18px; cursor: pointer; font-weight: 600; color: var(--blue); font-size: 0.95rem; display: flex; align-items: center; gap: 10px; list-style: none; min-height: 44px; background: var(--card-bg); transition: background 0.2s; }
+    summary::-webkit-details-marker { display: none; }
+    summary:hover { background: #f5f0e8; }
+    details[open] summary { border-bottom: 1px solid var(--border); }
+    details > *:not(summary) { padding: 16px 18px; font-size: 0.95rem; }
+    footer { background: var(--blue); color: rgba(255,255,255,0.7); text-align: center; padding: 32px 24px; font-size: 0.9rem; margin-top: 64px; }
+    footer a { color: var(--orange); text-decoration: none; }
+    @media (max-width: 1024px) { .nav-links { display: none; } .nav-hamburger { display: flex; } .event-card { grid-template-columns: 1fr; } .event-img img { min-height: 200px; height: 200px; } }
+    @media (max-width: 600px) { .hero { min-height: 40vh; } .hero-content { padding: 32px 20px 40px; } .container { padding: 0 20px; } section { padding: 40px 0; } .event-body { padding: 20px; } table { font-size: 0.78rem; } th, td { padding: 7px 10px; } }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">Amsterdam <span>&#9670;</span> Dallas</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="dont-miss.html">Don't Miss</a></li>
+      <li><a href="best-deals.html">Best Deals</a></li>
+      <li><a href="art-museums.html">Art</a></li>
+      <li><a href="music-events.html" class="active">Music</a></li>
+      <li><a href="parks-outdoors.html">Parks</a></li>
+      <li><a href="churches-spaces.html">Churches</a></li>
+      <li><a href="food-markets.html">Food</a></li>
+      <li><a href="canals-cruises.html">Canals</a></li>
+      <li><a href="practical.html">Practical</a></li>
+      <li><a href="day-trips.html">Day Trips</a></li>
+    </ul>
+    <button class="nav-hamburger" id="hamburger" aria-label="Open menu">
+      <i data-lucide="menu" width="24" height="24"></i>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Home</a>
+    <a href="dont-miss.html">Don't Miss</a>
+    <a href="best-deals.html">Best Deals</a>
+    <a href="art-museums.html">Art &amp; Museums</a>
+    <a href="music-events.html" class="active">Music &amp; Events</a>
+    <a href="parks-outdoors.html">Parks &amp; Outdoors</a>
+    <a href="churches-spaces.html">Churches &amp; Spaces</a>
+    <a href="food-markets.html">Food &amp; Markets</a>
+    <a href="canals-cruises.html">Canals &amp; Cruises</a>
+    <a href="practical.html">Practical Info</a>
+    <a href="day-trips.html">Day Trips</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <img src="../../images/final/bimhuis-concert.jpg" alt="Live jazz ensemble performing on stage at Bimhuis Amsterdam, colorful stage lighting and full audience">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <span class="hero-eyebrow">Music &amp; Events</span>
+    <h1>One of the world's great music cities — for 10 days</h1>
+    <p>A major Harry Styles residency, Mozart at the National Opera, Emmylou Harris in the Concertgebouw, and free lunchtime concerts five minutes from the apartment.</p>
+  </div>
+</section>
+
+<div class="container">
+
+  <section>
+    <div class="callout callout-warning">
+      <div class="callout-title"><i data-lucide="alert-circle" width="18" height="18"></i> Book these before you leave</div>
+      <ul>
+        <li><strong>Emmylou Harris at Concertgebouw — May 24.</strong> Around €60/ticket. Sells out. Book now at concertgebouw.nl. Rare Americana in a world-class classical hall.</li>
+        <li><strong>Le nozze di Figaro — Dutch National Opera, May 23, 25 &amp; 28.</strong> New production of the Mozart opera. The opera house is a 2-minute walk from the apartment.</li>
+        <li><strong>Vivaldi: The Four Seasons — Concertgebouw, May 23.</strong> Last tickets. Check concertgebouw.nl.</li>
+        <li><strong>Harry Styles</strong> tickets are on secondary market now. Five shows: May 22, 23, 26, 29, 30 at Johan Cruijff ArenA.</li>
+      </ul>
+    </div>
+
+    <!-- CONCERTGEBOUW -->
+    <div class="event-card featured" style="margin-top:32px;">
+      <div class="event-img">
+        <img src="../../images/final/concertgebouw-interior.jpg" alt="The Concertgebouw main hall with orchestra and full audience">
+      </div>
+      <div class="event-body">
+        <div class="event-meta">
+          <span class="badge badge-star">Walk from apartment</span>
+          <span class="badge badge-free">Free Wednesdays</span>
+        </div>
+        <h3>Concertgebouw</h3>
+        <div class="info-row">
+          <div class="info-item"><i data-lucide="map-pin" width="14" height="14"></i> <span>5 min from Museumplein, ~20 min walk from Plantage</span></div>
+        </div>
+        <p>Consistently ranked one of the three best concert halls in the world for acoustic quality. Worth going to at least once regardless of program; the building itself is extraordinary.</p>
+        <p><strong>Free Wednesday lunchtime concerts</strong> (May 27, ~12:30 in the Recital Hall) are a 30-minute program, usually chamber music. Free to attend; collect free tickets at the door, max 2 per person, €2.50 transaction fee. Arrive 20 minutes early. Program posted one week before at concertgebouw.nl.</p>
+        <details>
+          <summary><i data-lucide="music" width="14" height="14"></i> Emmylou Harris — May 24</summary>
+          <p>Emmylou Harris and Jim Lauderdale at the Concertgebouw, a rare country/Americana show in this classical hall. Around €60/ticket. If you're booking one thing, this is it for Scott and the musicians in the family. Check concertgebouw.nl now.</p>
+        </details>
+        <details>
+          <summary><i data-lucide="music" width="14" height="14"></i> Mozart &amp; Vivaldi concerts — May 22–23</summary>
+          <p>Bach Choir and Orchestra of the Netherlands. May 22: Mozart Eine Kleine Nachtmusik &amp; Requiem. May 23 (last tickets): Vivaldi The Four Seasons. Both in the Grote Zaal, ~€60/person.</p>
+        </details>
+      </div>
+    </div>
+
+    <!-- DUTCH NATIONAL OPERA -->
+    <div class="event-card">
+      <div class="event-img">
+        <img src="../../images/final/stopera-opera-house.jpg" alt="Dutch National Opera & Ballet (Stopera) building from the Amstel river at golden hour">
+      </div>
+      <div class="event-body">
+        <div class="event-meta">
+          <span class="badge badge-star">2 min walk from apartment</span>
+          <span class="badge badge-book">Book soon</span>
+        </div>
+        <h3>Dutch National Opera — Le nozze di Figaro</h3>
+        <div class="info-row">
+          <div class="info-item"><i data-lucide="calendar" width="14" height="14"></i> <span>May 23, 25, 28</span></div>
+          <div class="info-item"><i data-lucide="map-pin" width="14" height="14"></i> <span>Amstel 3, next door to apartment</span></div>
+        </div>
+        <p>A brand-new production of Mozart's Le nozze di Figaro directed by Kirill Serebrennikov. Netherlands Chamber Orchestra in the pit under Francesco Corti. Rising stars Olga Kulchynska and Emily Pogorelc in the cast. Three performances during your window.</p>
+        <p>The opera house is literally around the corner from your apartment. This is the kind of thing you'd fly to Amsterdam for on its own. Worth booking at least one of the three dates.</p>
+      </div>
+    </div>
+
+    <!-- CARRÉ -->
+    <div class="event-card">
+      <div class="event-img">
+        <img src="../../images/final/carre-theatre.webp" alt="Koninklijk Theater Carré illuminated at night on the Amstel — the iconic circular 1887 theatre with neon sign">
+      </div>
+      <div class="event-body">
+        <div class="event-meta">
+          <span class="badge badge-star">2 min walk from apartment</span>
+        </div>
+        <h3>Koninklijk Theater Carré</h3>
+        <div class="info-row">
+          <div class="info-item"><i data-lucide="map-pin" width="14" height="14"></i> <span>Amstel 115–125, 2 min walk</span></div>
+        </div>
+        <p><strong>Nick Mulvey — May 23.</strong> British singer-songwriter, introspective folk-pop. Good seated-concert option for the same evening as the Vivaldi at Concertgebouw.</p>
+        <p><strong>Kovacs — May 24.</strong> Dutch dark-pop singer, cinematic and emotional. Beautiful voice. Check out a track before deciding.</p>
+      </div>
+    </div>
+
+  </section>
+
+  <section>
+    <h2>Jazz &amp; clubs</h2>
+    <p class="section-intro">Amsterdam has a serious jazz scene and a handful of excellent smaller venues.</p>
+
+    <div class="event-card">
+      <div class="event-img">
+        <img src="../../images/final/bimhuis-stage.jpg" alt="Bimhuis stage with grand piano, drums, and floor-to-ceiling windows overlooking Amsterdam's IJ waterfront at night">
+      </div>
+      <div class="event-body">
+        <div class="event-meta">
+          <span class="badge badge-star">For the musicians</span>
+        </div>
+        <h3>Bimhuis</h3>
+        <div class="info-row">
+          <div class="info-item"><i data-lucide="map-pin" width="14" height="14"></i> <span>Piet Heinkade 3, 20 min from apartment</span></div>
+        </div>
+        <p><strong>Aaron Parks Little Big — May 23</strong> at 20:30. €24–29. Aaron Parks is one of the best young jazz pianists working; this is a serious show for Scott especially.</p>
+        <p><strong>Free Tuesday jam sessions</strong> at 22:00 in the café. May 26; no ticket, just show up. The Bimhuis also programs additional acts through April and May, so check bimhuis.nl closer to the trip.</p>
+      </div>
+    </div>
+
+    <details>
+      <summary><i data-lucide="music" width="14" height="14"></i> 16 Horsepower — Paradiso, May 27</summary>
+      <p>Rare reunion of the gothic country/alt-rock band. Paradiso is one of Amsterdam's legendary rock venues, in a converted church near Leidseplein. If any member of the family knows this band, this is a once-in-a-decade show.</p>
+    </details>
+
+  </section>
+
+  <section>
+    <h2>Free &amp; outdoor</h2>
+
+    <div style="position:relative; height:280px; overflow:hidden; border-radius:10px; margin-bottom:28px;">
+      <img src="../../images/final/vondelpark-openluchttheater.jpg" alt="Vondelpark Openluchttheater — full audience watching a live performance on the outdoor stage in summer" style="width:100%; height:100%; object-fit:cover; object-position:center 40%;">
+      <div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(26,58,92,0.75) 0%, rgba(0,0,0,0.1) 60%);"></div>
+      <div style="position:absolute; bottom:0; left:0; padding:24px 28px;">
+        <p style="color:#fff; font-family:'Playfair Display',serif; font-size:1.2rem; font-weight:600; margin:0; text-shadow:0 1px 4px rgba(0,0,0,0.7);">Vondelpark — free performances all summer, starting Whitsun weekend</p>
+      </div>
+    </div>
+
+    <div class="callout callout-success">
+      <div class="callout-title"><i data-lucide="sun" width="18" height="18"></i> Vondelpark Openluchttheater — free outdoor performances</div>
+      <p>Five minutes from the apartment. The 2026 season starts around the Whitsun weekend (May 24–25) with free performances through September. Typical schedule: Fridays dance, Saturdays family/kids shows, Sundays music. Program posts in April at openluchttheater.nl. Bring a picnic blanket.</p>
+    </div>
+
+    <div class="callout callout-info">
+      <div class="callout-title"><i data-lucide="calendar" width="18" height="18"></i> DiscoDip Festival — May 24 (Family Day)</div>
+      <p>Amsterdamse Bos. Food trucks, cooking demos, disco bingo, and a dessert Ferris wheel. Sunday May 24 is the designated Family Day: face painting, children's disco, kids' cooking workshops. Go early, leave before it gets crowded. Free or low entry.</p>
+    </div>
+
+  </section>
+
+  <section>
+    <h2>Full concert calendar</h2>
+    <p class="section-intro">Every confirmed show during your window, across all venues.</p>
+
+    <div style="overflow-x:auto;">
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Artist / Event</th>
+          <th>Venue</th>
+          <th>Genre</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Fri May 22</strong></td><td>Harry Styles + Robyn</td><td>Johan Cruijff ArenA</td><td>Pop</td><td>19:30</td></tr>
+        <tr><td>Fri May 22</td><td>Mozart: Requiem &amp; Eine Kleine</td><td>Concertgebouw</td><td>Classical</td><td>~€60</td></tr>
+        <tr><td>Fri May 22</td><td>Gipsy Kings</td><td>AFAS Live</td><td>Flamenco</td><td>Verify date at afaslive.nl</td></tr>
+        <tr><td><strong>Sat May 23</strong></td><td>Harry Styles + Robyn</td><td>Johan Cruijff ArenA</td><td>Pop</td><td>19:30</td></tr>
+        <tr><td>Sat May 23</td><td>Vivaldi: The Four Seasons</td><td>Concertgebouw</td><td>Classical</td><td>Last tickets, ~€60</td></tr>
+        <tr><td>Sat May 23</td><td>Nick Mulvey</td><td>Carré Theatre</td><td>Folk/singer-songwriter</td><td>2 min walk</td></tr>
+        <tr><td>Sat May 23</td><td>Aaron Parks Little Big</td><td>Bimhuis</td><td>Jazz</td><td>20:30, €24–29</td></tr>
+        <tr><td>Sat May 23</td><td>Le nozze di Figaro (Mozart)</td><td>Dutch National Opera</td><td>Opera</td><td>New production, 2 min walk</td></tr>
+        <tr><td><strong>Sun May 24</strong></td><td>Emmylou Harris / Jim Lauderdale</td><td>Concertgebouw</td><td>Americana</td><td>~€60 — book now</td></tr>
+        <tr><td>Sun May 24</td><td>Kovacs</td><td>Carré Theatre</td><td>Dark pop</td><td>2 min walk</td></tr>
+        <tr><td>Sun May 24</td><td>DiscoDip Family Day</td><td>Amsterdamse Bos</td><td>Festival</td><td>Kids' disco, food trucks</td></tr>
+        <tr><td>Mon May 25</td><td>Le nozze di Figaro</td><td>Dutch National Opera</td><td>Opera</td><td>Whit Monday matinee</td></tr>
+        <tr><td><strong>Tue May 26</strong></td><td>Harry Styles + Robyn</td><td>Johan Cruijff ArenA</td><td>Pop</td><td>19:30</td></tr>
+        <tr><td><strong>Wed May 27</strong></td><td>Free Lunchtime Concert</td><td>Concertgebouw (Recital Hall)</td><td>Chamber</td><td>~12:30, FREE, arrive early</td></tr>
+        <tr><td>Wed May 27</td><td>16 Horsepower (reunion)</td><td>Paradiso</td><td>Gothic country</td><td>Rare</td></tr>
+        <tr><td>Wed–Thu May 27–28</td><td>Goose (USA) Nights 1–2</td><td>Melkweg</td><td>Jam band</td><td></td></tr>
+        <tr><td>Thu May 28</td><td>Le nozze di Figaro (final)</td><td>Dutch National Opera</td><td>Opera</td><td>Final performance of run</td></tr>
+        <tr><td><strong>Fri May 29</strong></td><td>Harry Styles + Robyn</td><td>Johan Cruijff ArenA</td><td>Pop</td><td>Added date</td></tr>
+        <tr><td>Fri May 29</td><td>Zucchero — Overdose d'amore GOLD</td><td>Ziggo Dome</td><td>Italian rock/blues</td><td>€50–73</td></tr>
+        <tr><td><strong>Sat May 30</strong></td><td>Harry Styles + Robyn</td><td>Johan Cruijff ArenA</td><td>Pop</td><td>Added date</td></tr>
+        <tr><td>Sat May 30</td><td>TWICE — Night 1</td><td>Ziggo Dome</td><td>K-pop</td><td>Netherlands debut</td></tr>
+        <tr><td>Sat May 30</td><td>Morgan Heritage</td><td>Paradiso</td><td>Reggae</td><td></td></tr>
+        <tr><td><strong>Sun May 31</strong></td><td>TWICE — Night 2</td><td>Ziggo Dome</td><td>K-pop</td><td></td></tr>
+        <tr><td>Mon Jun 1</td><td>Blue October</td><td>Paradiso</td><td>Alternative rock</td><td></td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <p style="font-size:0.85rem; color:#888; margin-top:8px;">Additional shows at Paradiso, Melkweg, Bimhuis, and Tolhuistuin will be announced through April–May. Check venue websites closer to the trip.</p>
+  </section>
+
+</div>
+
+<footer>
+  <p>Built for the Dallas family &mdash; Amsterdam, May 23&ndash;June 1, 2026 &mdash; <a href="index.html">Home</a></p>
+</footer>
+
+<script>
+  lucide.createIcons();
+  var hamburger = document.getElementById('hamburger');
+  var mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', function() {
+    mobileMenu.classList.toggle('open');
+  });
+</script>
+</body>
+</html>
