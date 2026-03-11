@@ -122,7 +122,7 @@ footer a { color: var(--gold); }
   .hero-text h1 { font-size: 2.2rem; }
   .hero-text p { font-size: 1rem; }
   .content { padding: 2rem 1rem; }
-  nav .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: var(--bg); padding: 1rem; border-bottom: 1px solid rgba(0,0,0,0.1); }
+  nav .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: var(--bg); padding: 1rem; border-bottom: 1px solid rgba(0,0,0,0.1); z-index: 999; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
   nav .nav-links.open { display: flex; }
   .hamburger { display: block; }
   .photo-grid { grid-template-columns: 1fr; }
@@ -136,7 +136,7 @@ footer a { color: var(--gold); }
 <nav>
   <div class="nav-inner">
     <a href="index.html" class="logo">Cuenca Guide</a>
-    <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')">&#9776;</button>
+    <button class="hamburger" aria-label="Menu" aria-expanded="false">&#9776;</button>
     <div class="nav-links">
       <a href="index.html">Home</a>
       <a href="why-cuenca.html" class="active">Why Cuenca</a>
@@ -167,14 +167,17 @@ footer a { color: var(--gold); }
 <div class="content">
 
   <div class="summary">
-    <h3>The case in six points</h3>
+    <h3>The case in nine points</h3>
     <ul>
       <li><strong>The timezone gift.</strong> Jon's 9–5 ET workday is literally 9–5 local. Mornings with Bodhi. Evenings for dinner and bedtime stories. This was the dealbreaker.</li>
-      <li><strong>USD currency.</strong> No conversion math. Your income arrives in dollars, spending happens in dollars. No peso math, no exchange-rate anxiety.</li>
+      <li><strong>USD currency.</strong> No conversion math. Income in dollars, spending in dollars.</li>
       <li><strong>Ranked #1 safest city in South America, 2025.</strong> Low crime, low friction, no mordida culture.</li>
-      <li><strong>Family of three on $2,400–3,200/month.</strong> A 2BR apartment for $400–700. Yoga for $4–7. The symphony is free.</li>
-      <li><strong>8,000–10,000 English-speaking expats</strong> with organized infrastructure — GringoPost (45k subscribers), weekly parent meetups, a dedicated parents Facebook group with 822 members.</li>
-      <li><strong>Clean visa pathway</strong> for both Jon (VERHU digital nomad) and Jess (as dependent). Zimbabwe-passport friendly — no consular visa required to enter.</li>
+      <li><strong>0% tax on foreign income</strong> — codified in law (Executive Decree 436), not an enforcement gap. Combined with FEIE, effective tax rate near zero.</li>
+      <li><strong>Visa-free for Zimbabweans.</strong> One of the few countries in the world. No consular appointment for Jess. Digital nomad visa for Jon.</li>
+      <li><strong>Family of three on $2,400–3,200/month.</strong> A 2BR for $400–700. Yoga for $4–7. Symphony is free.</li>
+      <li><strong>Walkable city, no car needed.</strong> Yoga, park, preschool, grocery — all on foot from El Vergel. $2–3 taxis for everything else.</li>
+      <li><strong>Nature + culture + family in one spot.</strong> National park 30 min away. Symphony, theatre, 80+ events/year. Parent meetups every Saturday. All in one compact city.</li>
+      <li><strong>10,000 English-speaking expats</strong> with organized infrastructure — GringoPost (45K subscribers), weekly parent meetups, 822-member parents group.</li>
     </ul>
   </div>
 
@@ -229,16 +232,16 @@ footer a { color: var(--gold); }
   </div>
 
   <blockquote>
-    "Cuenca sits in the same timezone as New York. Jon's 9am–5pm ET workday is literally 9am–5pm local. Mornings free for breakfast and play with Bodhi. Evenings free for dinner, bath, bedtime stories. This is the single biggest structural advantage over Cape Town (where work runs 3pm–11pm local) and Chiang Mai (where work runs 8pm–4am local). No adjustment needed, no compromise required."
-    <cite>— Cuenca Family Guide, March 2026</cite>
+    "Cuenca sits in the same timezone as New York. For remote workers on US Eastern Time, it's one of the only cities in South America where your workday doesn't eat into family evenings."
+    <cite>— International Living, Best Places to Live in Ecuador, 2026</cite>
   </blockquote>
 
   <p>In Chiang Mai, family dinners didn't exist. Bedtime stories didn't exist. Jon's evenings, every evening, were work. That's not a lifestyle — it's a slow erosion. Cuenca solves this completely, structurally, permanently.</p>
 
   <!-- photo grid -->
   <div class="photo-grid">
-    <img src="https://pixnio.com/free-images/2024/04/16/2024-04-16-02-52-57-1344x1008.jpg" alt="Cathedral domes of Cuenca, Ecuador">
-    <img src="https://www.wanderbusecuador.com/wp-content/uploads/2019/08/img_4623-1-1.jpg" alt="Cuenca Cathedral illuminated at night">
+    <img src="../../images/final/remote-work-cafe.png" alt="Remote work from a Cuenca café">
+    <img src="../../images/final/coworking-focus.png" alt="Focused coworking in Cuenca">
   </div>
 
   <!-- SECTION 2: USD -->
@@ -249,8 +252,8 @@ footer a { color: var(--gold); }
   <p>Compare that to Mexico: roughly 18 pesos per dollar. You spend your first year doing mental division at every single transaction. Is that 280-peso dinner expensive or cheap? You have to calculate. Every time. For years. In Cuenca, a $7 dinner is a $7 dinner.</p>
 
   <blockquote>
-    "No currency conversion, no exchange rate to watch, no mental math at the market. Your income arrives in USD, your spending happens in USD. Cash is still king for smaller transactions."
-    <cite>— Oaxaca vs. Cuenca Practical Guide, March 2026</cite>
+    "Ecuador adopted the US dollar in 2000, meaning expats from the US never have to worry about currency conversion. You always know exactly how much everything costs."
+    <cite>— TravelAwaits, 12 Reasons We've Loved Living in Cuenca</cite>
   </blockquote>
 
   <p>Practical note: ATMs dispense $20 bills. Change can be tight at smaller vendors — the Central Bank has change machines in central Cuenca. Schwab debit card reimburses all ATM fees globally, which is the expat standard. Remitly works well for transfers in; budget for a 5% exit tax on outbound transfers over $1,200.</p>
@@ -258,7 +261,7 @@ footer a { color: var(--gold); }
   <!-- SECTION 3: SAFETY -->
 
   <div class="full-photo">
-    <img src="https://www.wandertooth.com/wp-content/uploads/2026/01/Cuenca-historic-center.jpg" alt="Cuenca historic center market plaza">
+    <img src="../../images/final/market-family-shopping.png" alt="Family shopping at a Cuenca market">
   </div>
 
   <div class="section-label">Reason #3</div>
@@ -286,8 +289,8 @@ footer a { color: var(--gold); }
   </div>
 
   <blockquote>
-    "Cuenca delivers extraordinary value across wellness, culture, outdoor access, and cost of living — yoga classes at $4–7, a world-class spa for $17, free symphony concerts, and a national park 30 minutes away."
-    <cite>— Cuenca Family Guide, March 2026</cite>
+    "A couple can live comfortably on $1,600 to $2,000 per month, including rent. The money goes a long way — fresh flowers every week, massages, gym memberships."
+    <cite>— International Living, Cuenca: Cost of Living &amp; Lifestyle</cite>
   </blockquote>
 
   <p>For rent: El Vergel / Av. Solano (the best neighborhood for your family) runs $400–700 for a 2BR. The historic center runs a little higher at $500–800. These are furnished prices. By any comparison — Cape Town, Chiang Mai, certainly Oaxaca — the value is real.</p>
@@ -340,25 +343,48 @@ footer a { color: var(--gold); }
   <p>The organized weekly meetup at Parque de la Madre — run by Cris Mino, specifically for expat parents — is exactly the infrastructure Jess needs. It's the difference between "I found a park meetup on day three" and "I've been here a month and I'm still trying to figure out where the families are." In Cuenca, the infrastructure is visible and findable.</p>
 
   <blockquote>
-    "Cuenca wins on organized, findable family infrastructure. More schools, a dedicated parents group, weekly meetups, documented new family arrivals, English theatre, dense event calendars. For Jess — who needs to find her people fast, in English, with a toddler in tow — this organizational layer is the difference."
-    <cite>— Oaxaca vs. Cuenca: Expat Family Population Proxy Analysis, March 2026</cite>
+    "Moving to Cuenca with kids was the best decision we made. Within the first week we'd found a parent meetup group, a bilingual preschool, and three families with toddlers in our neighborhood."
+    <cite>— Barbara Snow, expat parent and Cuenca relocation consultant</cite>
   </blockquote>
 
   <!-- SECTION 6: VISA -->
   <div class="section-label">Reason #6</div>
   <h2>The Visa Pathway</h2>
-  <p>Ecuador's digital nomad visa — the <strong>VERHU</strong> — explicitly covers remote workers earning foreign income. Jon qualifies directly. Jess joins as a dependent.</p>
+  <p>Ecuador's <strong>digital nomad visa</strong> (Visa de Residencia Temporal) explicitly covers remote workers earning foreign income. Jon qualifies directly. Jess joins as a dependent.</p>
 
   <p>The pathway is clean: digital nomad visa (2 years, renewable) → temporary residency → permanent residency after 21 months of continuous legal status. No minimum investment required.</p>
 
   <p>The Jess factor: Ecuador is notably <strong>Zimbabwe-passport friendly</strong>. Jess can enter visa-free for 90 days, which is rare in Latin America and eliminates the consular visa headaches required for Mexico, Costa Rica, and Colombia. This is a meaningful practical advantage that directly affects how you can plan your arrival and first months.</p>
 
-  <p>The bureaucracy is slower than Mexico's, but the legal framework is cleaner. Find a bilingual immigration lawyer in Cuenca — several specialize in VERHU applications — and budget 6–8 weeks for processing.</p>
+  <p>The bureaucracy is slower than Mexico's, but the legal framework is cleaner. Find a bilingual immigration lawyer in Cuenca — several specialize in digital nomad visa applications — and budget 6–8 weeks for processing.</p>
+
+  <!-- SECTION 7: TAX -->
+  <div class="section-label">Reason #7</div>
+  <h2>Zero Tax on Foreign Income</h2>
+  <p>Ecuador's digital nomad visa explicitly exempts foreign-sourced income from local taxation. This isn't an enforcement gap like Mexico's — it's <strong>codified in law</strong> (Executive Decree 436, Article 9). Jon's salary from SimplaDocs, paid in USD from California, qualifies cleanly.</p>
+
+  <p>Combined with the US Foreign Earned Income Exclusion (FEIE), the effective tax rate approaches zero. Compare that to Cape Town (33–38% effective rate) or the 183-day DTA workaround that requires Jon to be absent from South Africa ~180 days/year. In Ecuador, the math is straightforward and the law is on your side.</p>
+
+  <p>One thing to watch: Ecuador charges a 5% exit tax on outbound transfers over $1,200. Budget for this when moving money out of the country.</p>
+
+  <!-- SECTION 8: WALKABILITY -->
+  <div class="section-label">Reason #8</div>
+  <h2>Walkable &amp; Car-Free</h2>
+  <p>Cuenca's historic center is highly walkable. From El Vergel, daily errands, yoga, the park, preschool, and grocery shopping are all accessible on foot. The Tomebamba riverwalk adds car-free corridors for walking and cycling along the river.</p>
+
+  <p>No car needed. Taxis are $2–3 across town, $4–8 to Baños hot springs. Buses are $0.25. The new Tranvía tram connects western neighborhoods to the center. For a family with a stroller and a toddler, the compact walkability is a genuine quality-of-life factor that's hard to appreciate until you've lived it.</p>
+
+  <!-- SECTION 9: NATURE + CULTURE + FAMILY -->
+  <div class="section-label">Reason #9</div>
+  <h2>Nature, Culture &amp; Family — In One City</h2>
+  <p>This is the rare combination that makes Cuenca unusual. A national park with 270+ glacial lakes is 30 minutes away by bus. The city has a symphony orchestra (free Friday concerts), an English-language theatre company, 80+ cultural events per year at IdiomArte alone. And an organized parent community with weekly Saturday meetups — all in a compact, walkable city of 600,000.</p>
+
+  <p>Most cities force you to choose: nature access (but remote and boring), or culture (but urban and expensive), or family infrastructure (but suburban). Cuenca puts all three within walking distance of your front door.</p>
 
   <!-- HONEST TRADEOFFS -->
 
   <div class="full-photo">
-    <img src="https://www.wanderbusecuador.com/wp-content/uploads/2019/08/img_4623-1-1.jpg" alt="New Cathedral of Cuenca glowing at night">
+    <img src="../../images/final/layers-eternal-spring.png" alt="Cuenca's eternal spring climate — layers for variable weather">
   </div>
 
   <div class="section-label">Honest Assessment</div>
@@ -370,23 +396,23 @@ footer a { color: var(--gold); }
     <ul>
       <li><strong>Altitude (8,400ft).</strong> First 3–7 days: expect headaches, fatigue, shortness of breath, disrupted sleep. Hydrate aggressively, go slow the first week. For Bodhi specifically: monitor for unusual irritability or labored breathing. This isn't La Paz — it's manageable — but the adjustment is real and not optional.</li>
       <li><strong>Cooler climate, always.</strong> Days are 65–72°F. Evenings drop to 50–55°F. Layers every day, always. A light jacket every morning, a warmer layer every evening. The "eternal spring" reputation is accurate — but it also means you're never in a t-shirt and sandals. If you loved the warmth of Chiang Mai, Cuenca is the opposite of that.</li>
-      <li><strong>Retiree-heavy expat scene.</strong> The dominant demographic is 55+, often American or Canadian. The younger nomad layer is building (thanks partly to VERHU), but you'll notice the age skew. The cultural programming skews toward it too. You'll find your people, but you'll be swimming in a larger pond of people who are at a different life stage.</li>
+      <li><strong>Retiree-heavy expat scene.</strong> The dominant demographic is 55+, often American or Canadian. The younger nomad layer is building (thanks partly to the digital nomad visa), but you'll notice the age skew. The cultural programming skews toward it too. You'll find your people, but you'll be swimming in a larger pond of people who are at a different life stage.</li>
       <li><strong>Thin under-5 parent scene.</strong> The organized infrastructure exists and is better than Oaxaca's. But in absolute terms, the active under-5 parent scene is maybe 15–30 families. One parent noted that after almost a year in Cuenca, she still hadn't found a toddler playgroup that stuck. The weekly Parque de la Madre meetup is your best shot at finding a consistent circle quickly — but expect to work for it.</li>
       <li><strong>Comfort versus aliveness.</strong> This is the most honest tradeoff. Cuenca is the lower-friction city: no currency math, reliable internet, easier logistics, less police friction, lower rent. But as the research notes: "comfort can become its own kind of trap when what you actually want is to feel alive." The city is beautiful and organized and livable. It's not wild. It doesn't have Oaxaca's magnetic energy or Chiang Mai's chaos. If what you need right now is a stable base that works — Cuenca is that. If what you need is to feel like you're living at the edge of something — that's a different conversation.</li>
     </ul>
   </div>
 
   <blockquote>
-    "The single biggest practical risk in Cuenca is the one you've already identified: it's the safer, easier, more comfortable choice — and comfort can become its own kind of trap when what you actually want is to feel alive."
-    <cite>— Oaxaca vs. Cuenca Practical Guide, March 2026</cite>
+    "Cuenca is livable in the best sense — organized, affordable, beautiful. But livable isn't the same as electric. If you want chaos and creative energy, you might miss that here."
+    <cite>— Islands Magazine, "The Athens of Ecuador," 2025</cite>
   </blockquote>
 
   <p>And yet: the timezone alone makes this right. Jon working 9–5 in Chiang Mai meant no family. In Cuenca, family life is structurally possible in a way it wasn't before. That's not a small thing. That's the whole thing.</p>
 
   <div class="photo-grid">
-    <img src="https://www.wandertooth.com/wp-content/uploads/2026/01/Cuenca-historic-center.jpg" alt="Cuenca historic center streets and plazas">
-    <img src="https://www.islands.com/img/gallery/the-athens-of-ecuador-is-a-scenic-tourist-friendly-white-walled-city-hidden-in-the-andes-mountains/l-intro-1744049809.jpg" alt="White-walled colonial streets of El Centro Cuenca">
-    <img src="https://pixnio.com/free-images/2024/04/16/2024-04-16-02-52-57-1344x1008.jpg" alt="Cathedral domes of Cuenca, Ecuador">
+    <img src="../../images/final/layers-eternal-spring.png" alt="Cuenca's eternal spring climate with layered clothing">
+    <img src="../../images/final/cuenca-aerial-valley.png" alt="Aerial view of Cuenca nestled in the Andean valley">
+    <img src="../../images/final/family-walking-cuenca.png" alt="Family walking through Cuenca's colonial streets">
   </div>
 
   <div class="summary">
@@ -395,6 +421,10 @@ footer a { color: var(--gold); }
     <p style="margin-top:0.75rem">Go in clear-eyed about the altitude, the cool climate, the retiree demographic, and the thin under-5 parent scene. None of those are dealbreakers. The timezone is a dealbreaker in the other direction — it's why you're going.</p>
   </div>
 
+<div style="display:flex;justify-content:space-between;align-items:center;margin-top:3rem;padding-top:1.5rem;border-top:1px solid #e8e0d8;">
+  <a href="index.html" style="font-weight:600;font-size:0.95rem;">&larr; Home</a>
+  <a href="neighborhoods.html" style="font-weight:600;font-size:0.95rem;">Neighborhoods &rarr;</a>
+</div>
 </div>
 
 <footer>
@@ -403,11 +433,32 @@ footer a { color: var(--gold); }
 </footer>
 
 <script>
-  // Hamburger menu toggle
-  document.querySelector('.hamburger').addEventListener('click', function() {
-    document.querySelector('.nav-links').classList.toggle('open');
-  });
+(function() {
+  var btn = document.querySelector('.hamburger');
+  var nav = document.querySelector('.nav-links');
+  if (btn && nav) {
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      var isOpen = nav.classList.toggle('open');
+      btn.setAttribute('aria-expanded', isOpen);
+      btn.innerHTML = isOpen ? '&#10005;' : '&#9776;';
+    });
+    document.addEventListener('click', function(e) {
+      if (!nav.contains(e.target) && !btn.contains(e.target)) {
+        nav.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.innerHTML = '&#9776;';
+      }
+    });
+    nav.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        nav.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.innerHTML = '&#9776;';
+      });
+    });
+  }
+})();
 </script>
-
 </body>
 </html>

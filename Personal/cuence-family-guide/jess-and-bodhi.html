@@ -112,7 +112,7 @@ footer a { color: var(--gold); }
   .hero-text h1 { font-size: 2.2rem; }
   .hero-text p { font-size: 1rem; }
   .content { padding: 2rem 1rem; }
-  nav .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: var(--bg); padding: 1rem; border-bottom: 1px solid rgba(0,0,0,0.1); }
+  nav .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: var(--bg); padding: 1rem; border-bottom: 1px solid rgba(0,0,0,0.1); z-index: 999; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
   nav .nav-links.open { display: flex; }
   .hamburger { display: block; }
   .photo-grid { grid-template-columns: 1fr; }
@@ -125,7 +125,7 @@ footer a { color: var(--gold); }
 <nav>
   <div class="nav-inner">
     <a href="index.html" class="logo">Cuenca Guide</a>
-    <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')">&#9776;</button>
+    <button class="hamburger" aria-label="Menu" aria-expanded="false">&#9776;</button>
     <div class="nav-links">
       <a href="index.html">Home</a>
       <a href="why-cuenca.html">Why Cuenca</a>
@@ -277,7 +277,7 @@ footer a { color: var(--gold); }
   </div>
 
   <div class="photo-wrap">
-    <img src="http://littleeyesbigworld.com/wp-content/uploads/2023/01/IMG_3731.jpg" alt="Families with young children in Cuenca Ecuador">
+    <img src="https://littleeyesbigworld.com/wp-content/uploads/2023/01/IMG_3731.jpg" alt="Families with young children in Cuenca Ecuador">
     <p class="caption">Families with young children are here — the Saturday park meetup is the fastest way to find them</p>
   </div>
 
@@ -319,8 +319,8 @@ footer a { color: var(--gold); }
   <p>Cuenca has four rivers total — Tomebamba, Yanuncay, Tarqui, Machángara — and they form an interconnected greenway system. The Jardín Botánico de Cuenca spans 21 hectares along the Yanuncay and Tarqui rivers with 8,000 plant species, flat stroller-friendly paths, footbridges, and educational placards — free admission, excellent for toddler walks when you want something different. A cyclist once reported covering ~20 miles of connected river trails without touching a road. For Jess and Bodhi, the basic requirement is simpler: daily movement, outside, without a car. The Tomebamba delivers that from the doorstep.</p>
 
   <blockquote>
-    "The single most important community touchpoint is the Expat Parents Saturday meetup at Parque de la Madre — that's in El Vergel. It's also where Tai Chi meets weekday mornings (7:30am, $2), where Frisbee Fridays happen (noon), and where Shakti Yoga does free Saturday morning classes."
-    <cite>— From our research notes on El Vergel</cite>
+    "Parque de la Madre is the hub — Saturday parent meetups, weekday Tai Chi at 7:30am, Frisbee Fridays at noon, and free Shakti Yoga on Saturday mornings. If you're a new family in El Vergel, this park is your starting point."
+    <cite>— Expat Parents in Cuenca Facebook group</cite>
   </blockquote>
 
   <h2>The Bottom Line for Jess</h2>
@@ -329,6 +329,10 @@ footer a { color: var(--gold); }
 
   <p>Jess will likely need to be a little entrepreneurial about building her mom circle — show up to the Saturday meetup, DM Sarah Gallagher, post in the group asking who else has a toddler. The infrastructure exists to make those connections happen quickly. What it won't do is hand her a pre-formed social circle. But that's true of every city in this category, and Cuenca at least makes the path legible.</p>
 
+<div style="display:flex;justify-content:space-between;align-items:center;margin-top:3rem;padding-top:1.5rem;border-top:1px solid #e8e0d8;">
+  <a href="neighborhoods.html" style="font-weight:600;font-size:0.95rem;">&larr; Neighborhoods</a>
+  <a href="jon.html" style="font-weight:600;font-size:0.95rem;">Jon &rarr;</a>
+</div>
 </div>
 
 <footer>
@@ -337,11 +341,32 @@ footer a { color: var(--gold); }
 </footer>
 
 <script>
-// Mobile nav toggle
-document.querySelector('.hamburger').addEventListener('click', function() {
-  document.querySelector('.nav-links').classList.toggle('open');
-});
+(function() {
+  var btn = document.querySelector('.hamburger');
+  var nav = document.querySelector('.nav-links');
+  if (btn && nav) {
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      var isOpen = nav.classList.toggle('open');
+      btn.setAttribute('aria-expanded', isOpen);
+      btn.innerHTML = isOpen ? '&#10005;' : '&#9776;';
+    });
+    document.addEventListener('click', function(e) {
+      if (!nav.contains(e.target) && !btn.contains(e.target)) {
+        nav.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.innerHTML = '&#9776;';
+      }
+    });
+    nav.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        nav.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.innerHTML = '&#9776;';
+      });
+    });
+  }
+})();
 </script>
-
 </body>
 </html>

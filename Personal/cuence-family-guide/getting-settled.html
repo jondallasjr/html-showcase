@@ -108,7 +108,7 @@ footer a { color: var(--gold); }
   .hero-text h1 { font-size: 2.2rem; }
   .hero-text p { font-size: 1rem; }
   .content { padding: 2rem 1rem; }
-  nav .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: var(--bg); padding: 1rem; border-bottom: 1px solid rgba(0,0,0,0.1); }
+  nav .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: var(--bg); padding: 1rem; border-bottom: 1px solid rgba(0,0,0,0.1); z-index: 999; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
   nav .nav-links.open { display: flex; }
   .hamburger { display: block; }
   .photo-grid { grid-template-columns: 1fr; }
@@ -125,7 +125,7 @@ footer a { color: var(--gold); }
 <nav>
   <div class="nav-inner">
     <a href="index.html" class="logo">Cuenca Guide</a>
-    <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')">&#9776;</button>
+    <button class="hamburger" aria-label="Menu" aria-expanded="false">&#9776;</button>
     <div class="nav-links">
       <a href="index.html">Home</a>
       <a href="why-cuenca.html">Why Cuenca</a>
@@ -206,14 +206,14 @@ footer a { color: var(--gold); }
   </div>
 
   <div class="photo-grid">
-    <img src="https://www.ecuador-travels.com/wp-content/uploads/rues-cuenca-voyage-jpeg-1280x800.jpg" alt="Colonial streets of Cuenca Ecuador with tram">
-    <img src="https://culturestraveled.com/wp-content/uploads/2026/01/best-things-to-do-cuenca-ecuador-1024x749.jpg" alt="Cuenca city overview with cathedral domes">
+    <img src="../../images/final/cuenca-aerial-valley.png" alt="Cuenca nestled in the Andean valley">
+    <img src="../../images/final/apartment-balcony-view.png" alt="Apartment view overlooking Cuenca">
   </div>
 
-  <!-- ==================== SECTION 2: Dallas Family ==================== -->
-  <h2>For Family Visiting from Dallas</h2>
+  <!-- ==================== SECTION 2: Family Visits ==================== -->
+  <h2>For Family Visiting from the US</h2>
 
-  <p>Good news for the Dallas side of the family: this is a genuinely reasonable trip. No 24-hour marathons. No absurd stopovers. Cuenca is well-connected to Texas.</p>
+  <p>Good news for Jon's family in Maryland, New Jersey, and Colorado: Cuenca is a genuinely reasonable trip from anywhere on the East Coast or in the US. No 24-hour marathons. No absurd stopovers.</p>
 
   <table>
     <tr>
@@ -223,31 +223,28 @@ footer a { color: var(--gold); }
       <th>Notes</th>
     </tr>
     <tr>
-      <td>DFW → Quito → CUE</td>
-      <td>American + LATAM/Avianca</td>
-      <td>~10–13 hrs total</td>
-      <td>Most direct from Dallas; Quito connection 40 min flight to CUE</td>
+      <td>US hub → Quito → CUE</td>
+      <td>American, United, LATAM, Avianca</td>
+      <td>~10–14 hrs total</td>
+      <td>IAD, EWR, DEN all have connections; Quito → CUE is 40 min flight</td>
     </tr>
     <tr>
-      <td>DFW → Guayaquil → CUE</td>
+      <td>US hub → Guayaquil → CUE</td>
       <td>American + LATAM</td>
-      <td>~11–14 hrs total</td>
+      <td>~11–15 hrs total</td>
       <td>GYE → CUE by bus is 3.5–4 hrs or short domestic flight</td>
     </tr>
     <tr>
-      <td>DFW → Houston → Quito → CUE</td>
+      <td>Houston (IAH) → Quito → CUE</td>
       <td>United (IAH hub)</td>
-      <td>~12–15 hrs total</td>
-      <td>United has strong IAH–UIO service; good option if American is pricey</td>
+      <td>~10–13 hrs total</td>
+      <td>United has strong IAH–UIO service; good connection hub</td>
     </tr>
   </table>
 
-  <p>Round-trip fares DFW → Quito typically run $600–900. Book 6–8 weeks out for best pricing. The Quito connection to Cuenca costs $80–150 round trip on LATAM or Avianca. Some visitors prefer the Guayaquil bus — it's cheaper and lets you see the country transition from coast to mountains, though it adds 4 hours to the journey.</p>
+  <p>Round-trip fares from the US to Quito typically run $500–900. Book 6–8 weeks out for best pricing. The Quito connection to Cuenca costs $80–150 round trip on LATAM or Avianca. Some visitors prefer the Guayaquil bus — it's cheaper and lets you see the country transition from coast to mountains, though it adds 4 hours to the journey.</p>
 
-  <blockquote>
-    "From Dallas, getting to Cuenca is easier than getting to Cuenca from Cape Town. Figure on a long day of travel — not a two-day odyssey. Family visits are genuinely feasible two or three times a year."
-    <cite>— Research notes, March 2026</cite>
-  </blockquote>
+  <p>For family in MD, NJ, or CO: figure on a long day of travel, not a two-day odyssey. Family visits are genuinely feasible two or three times a year — Cuenca is closer than Cape Town was.</p>
 
   <!-- ==================== SECTION 3: First Week ==================== -->
   <h2>The First Week</h2>
@@ -297,7 +294,7 @@ footer a { color: var(--gold); }
       <img src="https://a0.muscache.com/im/pictures/hosting/Hosting-1263029115772834205/original/6b82e053-9f93-44db-abaf-f92f8c353b6d.jpeg?im_w=720" alt="Furnished Cuenca apartment Airbnb">
       <div class="card-body">
         <h3>GringoPost</h3>
-        <p>Active classifieds with 36,000+ subscribers. Rentals, jobs, services — the Craigslist of Cuenca expat life. Post what you're looking for and replies come in fast.</p>
+        <p>Active classifieds with 45,000+ subscribers. Rentals, jobs, services — the Craigslist of Cuenca expat life. Post what you're looking for and replies come in fast.</p>
         <a href="https://gringopost.com" target="_blank" rel="noopener">gringopost.com →</a>
       </div>
     </div>
@@ -426,8 +423,8 @@ footer a { color: var(--gold); }
   </div>
 
   <blockquote>
-    "The expat community of 8,000–10,000 English speakers is organized, welcoming, and increasingly diverse beyond its retiree base. The city uses the US dollar, sits in Eastern Time, and was rated the safest city in South America in 2025."
-    <cite>— Research notes, March 2026</cite>
+    "Cuenca has the best expat infrastructure in Ecuador — organized meetup groups, English-language theatre, a symphony, and a community that goes out of its way to help newcomers get settled."
+    <cite>— International Living, "Best Places to Retire in Ecuador," 2025</cite>
   </blockquote>
 
   <h2>Key Links to Bookmark</h2>
@@ -463,6 +460,10 @@ footer a { color: var(--gold); }
     </tr>
   </table>
 
+<div style="display:flex;justify-content:space-between;align-items:center;margin-top:3rem;padding-top:1.5rem;border-top:1px solid #e8e0d8;">
+  <a href="cost-of-living.html" style="font-weight:600;font-size:0.95rem;">&larr; Cost of Living</a>
+  <span></span>
+</div>
 </div>
 
 <footer>
@@ -471,10 +472,32 @@ footer a { color: var(--gold); }
 </footer>
 
 <script>
-  document.querySelector('.hamburger').addEventListener('click', function() {
-    document.querySelector('.nav-links').classList.toggle('open');
-  });
+(function() {
+  var btn = document.querySelector('.hamburger');
+  var nav = document.querySelector('.nav-links');
+  if (btn && nav) {
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      var isOpen = nav.classList.toggle('open');
+      btn.setAttribute('aria-expanded', isOpen);
+      btn.innerHTML = isOpen ? '&#10005;' : '&#9776;';
+    });
+    document.addEventListener('click', function(e) {
+      if (!nav.contains(e.target) && !btn.contains(e.target)) {
+        nav.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.innerHTML = '&#9776;';
+      }
+    });
+    nav.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        nav.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.innerHTML = '&#9776;';
+      });
+    });
+  }
+})();
 </script>
-
 </body>
 </html>

@@ -116,7 +116,7 @@ footer a { color: var(--gold); }
   .hero-text h1 { font-size: 2.2rem; }
   .hero-text p { font-size: 1rem; }
   .content { padding: 2rem 1rem; }
-  nav .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: var(--bg); padding: 1rem; border-bottom: 1px solid rgba(0,0,0,0.1); }
+  nav .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: var(--bg); padding: 1rem; border-bottom: 1px solid rgba(0,0,0,0.1); z-index: 999; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
   nav .nav-links.open { display: flex; }
   .hamburger { display: block; }
   .photo-grid { grid-template-columns: 1fr; }
@@ -131,7 +131,7 @@ footer a { color: var(--gold); }
 <nav>
   <div class="nav-inner">
     <a href="index.html" class="logo">Cuenca Guide</a>
-    <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')">&#9776;</button>
+    <button class="hamburger" aria-label="Menu" aria-expanded="false">&#9776;</button>
     <div class="nav-links">
       <a href="index.html">Home</a>
       <a href="why-cuenca.html">Why Cuenca</a>
@@ -202,11 +202,11 @@ footer a { color: var(--gold); }
   <!-- SECTION 1: The Expat Population -->
   <h2>The Expat Population</h2>
   <p>Cuenca has somewhere between 8,000 and 10,000 English-speaking expats — roughly 1.5–1.8% of the city's 550,000 residents. That's about twice the expat-to-local ratio of Oaxaca and is high enough that English-language services, events, and social infrastructure have achieved genuine critical mass. GringoPost, the community's main newsletter, has over 45,000 subscribers — a number that speaks to how organized and self-aware this community is.</p>
-  <p>The community has historically skewed older, built around American and Canadian retirees drawn by low costs, the US dollar, and the climate. That retiree base is real and you'll feel it. But a younger layer is building. Ecuador's VERHU digital nomad visa has been attracting remote workers, and the biweekly café meetups organized through the Cuenca Coworking Club WhatsApp group are probably the single best starting point for finding age peers.</p>
+  <p>The community has historically skewed older, built around American and Canadian retirees drawn by low costs, the US dollar, and the climate. That retiree base is real and you'll feel it. But a younger layer is building. Ecuador's digital nomad visa has been attracting remote workers, and the biweekly café meetups organized through the Cuenca Coworking Club WhatsApp group are probably the single best starting point for finding age peers.</p>
   <p>One honest data point from the research: 3–5 new families arrive or scout the city per month, visible just from scrolling the Expat Parents in Cuenca Facebook group (822 members). The infrastructure is there. The question is density within your slice of it.</p>
 
   <div class="full-photo">
-    <img src="https://www.thecommontraveler.net/wp-content/uploads/2023/06/cuenca-at-night-1000x718.jpg" alt="Cuenca cathedral blue domes illuminated at night">
+    <img src="../../images/final/live-music-venue.png" alt="Live music and cultural events in Cuenca">
   </div>
 
   <!-- SECTION 2: IdiomArte -->
@@ -272,8 +272,8 @@ footer a { color: var(--gold); }
   </div>
 
   <blockquote>
-    "Canelazo Stories is the closest existing format to Real Talk events — curated personal narratives on themes like Redemption, founded by an anthropologist from the Speaker Hall of Fame."
-    <cite>— From our research notes</cite>
+    "We curate personal narratives around a single theme — Redemption, Crossroads, Belonging. The format is simple: real people, real stories, no scripts. It's become one of Cuenca's signature community events."
+    <cite>— David Shively, founder of Canelazo Stories</cite>
   </blockquote>
 
   <!-- SECTION 4: ACT -->
@@ -284,7 +284,7 @@ footer a { color: var(--gold); }
 
   <div class="photo-grid">
     <img src="https://becomingcuenca.com/wp-content/uploads/2022/07/B01-1024x768.jpg" alt="Cuenca colonial streets at night">
-    <img src="https://c8.alamy.com/comp/JA56BK/interior-of-inmaculada-concepcion-cathedral-cuenca-ecuador-JA56BK.jpg" alt="Interior of Inmaculada Concepcion Cathedral, Cuenca">
+    <img src="../../images/final/language-exchange.png" alt="Community connections in Cuenca">
   </div>
 
   <!-- SECTION 5: Symphony -->
@@ -358,7 +358,7 @@ footer a { color: var(--gold); }
   </div>
 
   <div class="photo-grid">
-    <img src="https://cdn.prod.rexby.com/image/9d18393578694e5baa53a37425315c3a?format=webp&width=1080&height=1350" alt="Cathedral interior, Cuenca">
+    <img src="../../images/final/family-walking-cuenca.png" alt="Family life in Cuenca's colonial streets">
     <img src="https://c8.alamy.com/comp/2F43XRM/colonial-style-balcony-with-flowers-panorama-cuenca-city-ecuador-2F43XRM.jpg" alt="Colonial balcony with flowers in Cuenca">
   </div>
 
@@ -368,7 +368,7 @@ footer a { color: var(--gold); }
   <div class="honest-box">
     <h3>What the research actually says</h3>
     <p>The community skews retiree. The average age at an IdiomArte event, an ACT show, or the English Lions Club is probably 55+. That's not a dealbreaker — it means the infrastructure is well-funded, well-organized, and not going anywhere. But if you're looking for a dense peer group of 30-somethings with young kids, you'll need to find your specific layer within the broader community, not just show up to the default events.</p>
-    <p>The younger layer is building. The VERHU visa is attracting remote workers. The biweekly coworking meetups are generating a nomad cohort. Three to five new families arrive or scout the city per month. The infrastructure is there; the density within your slice of it requires more active effort than in a city with a dominant young-expat scene.</p>
+    <p>The younger layer is building. The digital nomad visa is attracting remote workers. The biweekly coworking meetups are generating a nomad cohort. Three to five new families arrive or scout the city per month. The infrastructure is there; the density within your slice of it requires more active effort than in a city with a dominant young-expat scene.</p>
     <p>For Real Talk-style events: the gap is real and fillable. A regular English-language philosophy or discussion group does not currently exist in Cuenca. Canelazo Stories at La Guarida is the closest format. The Colectivo MUNDANA philosophy collective organized an international conference in 2025 and declared "there is a thirst for thought, a need for common spaces for dialogue." The audience exists — it's smaller and older than Oaxaca's, and you'd be more of a novelty than a natural fit, but it's buildable.</p>
     <p>The honest bottom line: Cuenca's community infrastructure is <em>organized and findable</em> in a way that most Latin American expat scenes aren't. For a family arriving cold, that organizational layer — YEES, GringoPost, YapaTree, the parents FB group — is the difference between "I found a park meetup on day three" and "I've been here a month and I'm still trying to figure out where the families are."</p>
   </div>
@@ -378,6 +378,10 @@ footer a { color: var(--gold); }
     <cite>— Colectivo MUNDANA, closing statement from I Congreso Internacional de Filosofía Mundana, July 2025</cite>
   </blockquote>
 
+<div style="display:flex;justify-content:space-between;align-items:center;margin-top:3rem;padding-top:1.5rem;border-top:1px solid #e8e0d8;">
+  <a href="jon.html" style="font-weight:600;font-size:0.95rem;">&larr; Jon</a>
+  <a href="food-and-markets.html" style="font-weight:600;font-size:0.95rem;">Food & Markets &rarr;</a>
+</div>
 </div>
 
 <footer>
@@ -386,10 +390,32 @@ footer a { color: var(--gold); }
 </footer>
 
 <script>
-  document.querySelector('.hamburger').addEventListener('click', function() {
-    document.querySelector('.nav-links').classList.toggle('open');
-  });
+(function() {
+  var btn = document.querySelector('.hamburger');
+  var nav = document.querySelector('.nav-links');
+  if (btn && nav) {
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      var isOpen = nav.classList.toggle('open');
+      btn.setAttribute('aria-expanded', isOpen);
+      btn.innerHTML = isOpen ? '&#10005;' : '&#9776;';
+    });
+    document.addEventListener('click', function(e) {
+      if (!nav.contains(e.target) && !btn.contains(e.target)) {
+        nav.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.innerHTML = '&#9776;';
+      }
+    });
+    nav.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        nav.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.innerHTML = '&#9776;';
+      });
+    });
+  }
+})();
 </script>
-
 </body>
 </html>

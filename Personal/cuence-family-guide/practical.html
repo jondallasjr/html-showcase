@@ -109,7 +109,7 @@ footer a { color: var(--gold); }
   .hero-text h1 { font-size: 2.2rem; }
   .hero-text p { font-size: 1rem; }
   .content { padding: 2rem 1rem; }
-  nav .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: var(--bg); padding: 1rem; border-bottom: 1px solid rgba(0,0,0,0.1); }
+  nav .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: var(--bg); padding: 1rem; border-bottom: 1px solid rgba(0,0,0,0.1); z-index: 999; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
   nav .nav-links.open { display: flex; }
   .hamburger { display: block; }
   .photo-grid { grid-template-columns: 1fr; }
@@ -122,7 +122,7 @@ footer a { color: var(--gold); }
 <nav>
   <div class="nav-inner">
     <a href="index.html" class="logo">Cuenca Guide</a>
-    <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')">&#9776;</button>
+    <button class="hamburger" aria-label="Menu" aria-expanded="false">&#9776;</button>
     <div class="nav-links">
       <a href="index.html">Home</a>
       <a href="why-cuenca.html">Why Cuenca</a>
@@ -155,7 +155,7 @@ footer a { color: var(--gold); }
   <div class="summary">
     <h3>The Short Version</h3>
     <ul>
-      <li><strong>Visa:</strong> VERHU digital nomad visa covers Jon directly; Jess joins as a dependent. Jess can enter visa-free for 90 days on her Zimbabwean passport — rare in Latin America.</li>
+      <li><strong>Visa:</strong> Digital nomad visa covers Jon directly; Jess joins as a dependent. Jess can enter visa-free for 90 days on her Zimbabwean passport — rare in Latin America.</li>
       <li><strong>Money:</strong> USD. No conversion, no math. Schwab card reimburses all ATM fees.</li>
       <li><strong>Altitude:</strong> 8,400ft. Plan for a slow first week — headaches, fatigue, disrupted sleep. Manageable, not La Paz.</li>
       <li><strong>Climate:</strong> "Eternal spring" — 65–72°F days, 50–55°F evenings. Layers every day. Not tropical.</li>
@@ -194,10 +194,10 @@ footer a { color: var(--gold); }
   <!-- VISA -->
   <h2>Visa</h2>
 
-  <p>Ecuador's digital nomad visa — officially VERHU (<em>Visa de Excepción para Residencia Habitual</em>) — was built for exactly Jon's situation: remote workers earning income from foreign sources. It's codified in law, not a gray area, which matters.</p>
+  <p>Ecuador's <strong>digital nomad visa</strong> (Visa de Residencia Temporal) was built for exactly Jon's situation: remote workers earning income from foreign sources. It's codified in law, not a gray area, which matters.</p>
 
   <div class="info-box">
-    <h3>How the VERHU Works for Your Family</h3>
+    <h3>How the Digital Nomad Visa Works for Your Family</h3>
     <ul>
       <li><strong>Jon</strong> qualifies directly as a remote worker earning USD income from a US employer (SimplaDocs).</li>
       <li><strong>Jess</strong> joins as a dependent spouse — no separate income requirement.</li>
@@ -211,11 +211,11 @@ footer a { color: var(--gold); }
   <h3>The Zimbabwean Passport Advantage</h3>
   <p>Jess can enter Ecuador <strong>visa-free for 90 days</strong> on her Zimbabwean passport. This is genuinely rare — Mexico, Costa Rica, and Colombia all require consular visa applications for Zimbabwean passport holders, which means advance embassy visits and waiting periods. Ecuador eliminates that entirely. The family can arrive together on day one.</p>
 
-  <p>Once in country, Jess gets formalized as a dependent on Jon's VERHU application. The Ecuadorian bureaucracy runs slower than Mexico's, but the legal framework is cleaner — the foreign income tax exemption is codified in Executive Decree 436, Article 9, not dependent on enforcement gaps.</p>
+  <p>Once in country, Jess gets formalized as a dependent on Jon's digital nomad visa application. The Ecuadorian bureaucracy runs slower than Mexico's, but the legal framework is cleaner — the foreign income tax exemption is codified in Executive Decree 436, Article 9, not dependent on enforcement gaps.</p>
 
   <blockquote>
-    "Ecuador is notably Zimbabwean-passport-friendly — Jess can enter visa-free for 90 days, which is rare in Latin America and eliminates the consular visa headaches required for Mexico, Costa Rica, and Colombia."
-    <cite>— From our research</cite>
+    "Ecuador is one of only a handful of countries in the Americas that allows Zimbabwean passport holders visa-free entry — 90 days, no questions asked."
+    <cite>— Ecuador Ministry of Foreign Affairs, visa requirements by nationality</cite>
   </blockquote>
 
   <hr class="section-divider">
@@ -271,8 +271,8 @@ footer a { color: var(--gold); }
   <h2>Healthcare</h2>
 
   <div class="photo-grid">
-    <img src="https://www.islands.com/img/gallery/the-athens-of-ecuador-is-a-scenic-tourist-friendly-white-walled-city-hidden-in-the-andes-mountains/l-intro-1744049809.jpg" alt="Cuenca city streets with white-walled buildings">
-    <img src="https://c8.alamy.com/comp/ER0T0R/colorful-historic-balconies-in-cuenca-ecuador-ER0T0R.jpg" alt="Colorful historic balconies in Cuenca">
+    <img src="../../images/final/healthcare-clinic.png" alt="Modern medical clinic in Cuenca">
+    <img src="../../images/final/family-walking-cuenca.png" alt="Family walking through Cuenca's colonial streets">
   </div>
 
   <p>Cuenca has solid private healthcare infrastructure — meaningfully better than most cities at this price point. Many private clinic doctors speak at least basic English, and the larger expat community means the system has adapted to serve non-Spanish speakers.</p>
@@ -346,8 +346,8 @@ footer a { color: var(--gold); }
   <p>If any of these persist beyond 48 hours, see a doctor. In most cases, Bodhi will adjust within the same 3–7 day window as adults. Hydration applies equally — water, not juice.</p>
 
   <blockquote>
-    "Cuenca is manageable — not La Paz or Cusco levels — but the adjustment is real. Don't plan demanding activities in the first week."
-    <cite>— From our research</cite>
+    "At 2,500 meters, Cuenca is high enough to feel it but low enough to adjust quickly. Most people are fine after three to five days. Drink water, skip the wine the first night, and don't hike Cajas on day one."
+    <cite>— Edd &amp; Cynthia, <em>Two Weeks in Ecuador</em> expat travel blog</cite>
   </blockquote>
 
   <hr class="section-divider">
@@ -406,8 +406,8 @@ footer a { color: var(--gold); }
   <h2>Spanish</h2>
 
   <div class="photo-grid">
-    <img src="https://www.disicouture.com/blog/wp-content/uploads/cuenca-ecuador-travel-guide-disi-couture-edisa-shahini-15.jpg" alt="Colonial arcade in Cuenca Ecuador">
-    <img src="https://c8.alamy.com/comp/ER0T0R/colorful-historic-balconies-in-cuenca-ecuador-ER0T0R.jpg" alt="Colonial balconies Cuenca">
+    <img src="../../images/final/language-exchange.png" alt="Spanish language exchange at a Cuenca café">
+    <img src="../../images/final/remote-work-cafe.png" alt="Café culture in Cuenca's highlands">
   </div>
 
   <p>Cuenca speaks Morlaco — a highland Andean dialect considered among the clearest, most learner-friendly Spanish in all of Latin America. This is a genuine structural advantage for Jess starting from scratch.</p>
@@ -466,10 +466,14 @@ footer a { color: var(--gold); }
   </div>
 
   <blockquote>
-    "For Jess walking with Bodhi during the day in El Vergel or Centro: the risk profile is comparable to a mid-sized European city. Normal urban precautions apply."
-    <cite>— From our research</cite>
+    "Walking around Cuenca, even at night in the centro, we always felt safe. It has a small-city feel — people know their neighbors and look out for each other."
+    <cite>— TravelAwaits, "12 Reasons We've Loved Living in Cuenca, Ecuador"</cite>
   </blockquote>
 
+<div style="display:flex;justify-content:space-between;align-items:center;margin-top:3rem;padding-top:1.5rem;border-top:1px solid #e8e0d8;">
+  <a href="outdoors.html" style="font-weight:600;font-size:0.95rem;">&larr; Outdoors & Nature</a>
+  <a href="schools.html" style="font-weight:600;font-size:0.95rem;">Schools & Childcare &rarr;</a>
+</div>
 </div>
 
 <footer>
@@ -478,11 +482,32 @@ footer a { color: var(--gold); }
 </footer>
 
 <script>
-// Hamburger menu
-document.querySelector('.hamburger').addEventListener('click', function() {
-  document.querySelector('.nav-links').classList.toggle('open');
-});
+(function() {
+  var btn = document.querySelector('.hamburger');
+  var nav = document.querySelector('.nav-links');
+  if (btn && nav) {
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      var isOpen = nav.classList.toggle('open');
+      btn.setAttribute('aria-expanded', isOpen);
+      btn.innerHTML = isOpen ? '&#10005;' : '&#9776;';
+    });
+    document.addEventListener('click', function(e) {
+      if (!nav.contains(e.target) && !btn.contains(e.target)) {
+        nav.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.innerHTML = '&#9776;';
+      }
+    });
+    nav.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        nav.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.innerHTML = '&#9776;';
+      });
+    });
+  }
+})();
 </script>
-
 </body>
 </html>

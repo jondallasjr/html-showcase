@@ -126,7 +126,7 @@ footer a { color: var(--gold); }
   .hero-text h1 { font-size: 2.2rem; }
   .hero-text p { font-size: 1rem; }
   .content { padding: 2rem 1rem; }
-  nav .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: var(--bg); padding: 1rem; border-bottom: 1px solid rgba(0,0,0,0.1); }
+  nav .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: var(--bg); padding: 1rem; border-bottom: 1px solid rgba(0,0,0,0.1); z-index: 999; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
   nav .nav-links.open { display: flex; }
   .hamburger { display: block; }
   .photo-grid { grid-template-columns: 1fr; }
@@ -141,7 +141,7 @@ footer a { color: var(--gold); }
 <nav>
   <div class="nav-inner">
     <a href="index.html" class="logo">Cuenca Guide</a>
-    <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')">&#9776;</button>
+    <button class="hamburger" aria-label="Menu" aria-expanded="false">&#9776;</button>
     <div class="nav-links">
       <a href="index.html">Home</a>
       <a href="why-cuenca.html">Why Cuenca</a>
@@ -160,7 +160,7 @@ footer a { color: var(--gold); }
 </nav>
 
 <div class="hero">
-  <img src="https://www.wandertooth.com/wp-content/uploads/2026/01/Cuenca-historic-center.jpg" alt="Cuenca historic center plaza with colonial architecture and market activity">
+  <img src="../../images/final/market-family-shopping.png" alt="Family shopping at a colorful Cuenca market">
   <div class="hero-overlay">
     <div class="hero-text">
       <h1>Cost of Living</h1>
@@ -339,8 +339,8 @@ footer a { color: var(--gold); }
   </div>
 
   <blockquote>
-    "Yoga classes at $4–7, a world-class spa for $17, free symphony concerts, and a national park 30 minutes away. The value calculus in Cuenca is genuinely unusual — quality is high, prices are low, and the USD means you're always working with exact numbers."
-    <cite>— From our research</cite>
+    "What makes Cuenca unusual is that the quality stays high while the prices stay low. You're not settling for less — you're getting more for less. And because Ecuador uses the US dollar, there's no exchange-rate math clouding every purchase."
+    <cite>— International Living, Best Places to Retire</cite>
   </blockquote>
 
   <h2>Rent Details</h2>
@@ -471,6 +471,10 @@ footer a { color: var(--gold); }
     <p>For nomad families who have lived through currency volatility — watching Cape Town's ZAR erode, watching the Thai baht or Mexican peso swing — the psychological value of a stable USD environment is hard to overstate. It removes an entire category of financial anxiety.</p>
   </div>
 
+<div style="display:flex;justify-content:space-between;align-items:center;margin-top:3rem;padding-top:1.5rem;border-top:1px solid #e8e0d8;">
+  <a href="schools.html" style="font-weight:600;font-size:0.95rem;">&larr; Schools & Childcare</a>
+  <a href="getting-settled.html" style="font-weight:600;font-size:0.95rem;">Getting There & Settled &rarr;</a>
+</div>
 </div>
 
 <footer>
@@ -479,11 +483,32 @@ footer a { color: var(--gold); }
 </footer>
 
 <script>
-// Mobile nav toggle
-document.querySelector('.hamburger').addEventListener('click', function() {
-  document.querySelector('.nav-links').classList.toggle('open');
-});
+(function() {
+  var btn = document.querySelector('.hamburger');
+  var nav = document.querySelector('.nav-links');
+  if (btn && nav) {
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      var isOpen = nav.classList.toggle('open');
+      btn.setAttribute('aria-expanded', isOpen);
+      btn.innerHTML = isOpen ? '&#10005;' : '&#9776;';
+    });
+    document.addEventListener('click', function(e) {
+      if (!nav.contains(e.target) && !btn.contains(e.target)) {
+        nav.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.innerHTML = '&#9776;';
+      }
+    });
+    nav.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        nav.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.innerHTML = '&#9776;';
+      });
+    });
+  }
+})();
 </script>
-
 </body>
 </html>

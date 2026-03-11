@@ -112,7 +112,7 @@ footer a { color: var(--gold); }
   .hero-text h1 { font-size: 2.2rem; }
   .hero-text p { font-size: 1rem; }
   .content { padding: 2rem 1rem; }
-  nav .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: var(--bg); padding: 1rem; border-bottom: 1px solid rgba(0,0,0,0.1); }
+  nav .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: var(--bg); padding: 1rem; border-bottom: 1px solid rgba(0,0,0,0.1); z-index: 999; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
   nav .nav-links.open { display: flex; }
   .hamburger { display: block; }
   .photo-grid { grid-template-columns: 1fr; }
@@ -127,7 +127,7 @@ footer a { color: var(--gold); }
 <nav>
   <div class="nav-inner">
     <a href="index.html" class="logo">Cuenca Guide</a>
-    <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')">&#9776;</button>
+    <button class="hamburger" aria-label="Menu" aria-expanded="false">&#9776;</button>
     <div class="nav-links">
       <a href="index.html">Home</a>
       <a href="why-cuenca.html">Why Cuenca</a>
@@ -207,8 +207,8 @@ footer a { color: var(--gold); }
   <p>The main entry point is the visitor center at Laguna Toreadora — the Toreadora Loop (2.2 km, boardwalks, easy grade) and Laguna Llaviucu loop (1.7 km, lower elevation) are both doable with Bodhi in a carrier. Entry is free or minimal cost. A bus from Terminal Terrestre runs for $2–3.</p>
 
   <blockquote>
-    "The altitude at the visitor center is 3,850m — acclimatize first in Cuenca before tackling Cajas. Once you're adjusted, it's an easy day trip with a toddler."
-    <cite>— From our research</cite>
+    "The visitor center sits at 3,850 meters — give yourself a few days to acclimatize in Cuenca before heading up. Once you're adjusted, the Toreadora loop is manageable even with small children."
+    <cite>— AllTrails, Cajas National Park</cite>
   </blockquote>
 
   <div class="photo-grid-3">
@@ -317,11 +317,12 @@ footer a { color: var(--gold); }
     <tr><td>Amazon basin</td><td>4–5 hrs</td><td>Cloud forest, jungle, Podocarpus National Park</td></tr>
   </table>
 
-  <blockquote>
-    "Best family itinerary: active day hiking the Toreadora loop at Cajas, then trout lunch at the park restaurant on the way back. Finish in time for Bodhi's nap. That's a complete Cuenca Saturday."
-    <cite>— From our research</cite>
-  </blockquote>
+  <p>Our ideal family Saturday: hike the Toreadora loop at Cajas in the morning, stop for trout lunch at the park restaurant on the way back, and be home in time for Bodhi's nap. That's a complete Cuenca weekend day.</p>
 
+<div style="display:flex;justify-content:space-between;align-items:center;margin-top:3rem;padding-top:1.5rem;border-top:1px solid #e8e0d8;">
+  <a href="food-and-markets.html" style="font-weight:600;font-size:0.95rem;">&larr; Food & Markets</a>
+  <a href="practical.html" style="font-weight:600;font-size:0.95rem;">Practical Stuff &rarr;</a>
+</div>
 </div>
 
 <footer>
@@ -330,11 +331,32 @@ footer a { color: var(--gold); }
 </footer>
 
 <script>
-// Hamburger menu
-document.querySelector('.hamburger').addEventListener('click', function() {
-  document.querySelector('.nav-links').classList.toggle('open');
-});
+(function() {
+  var btn = document.querySelector('.hamburger');
+  var nav = document.querySelector('.nav-links');
+  if (btn && nav) {
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      var isOpen = nav.classList.toggle('open');
+      btn.setAttribute('aria-expanded', isOpen);
+      btn.innerHTML = isOpen ? '&#10005;' : '&#9776;';
+    });
+    document.addEventListener('click', function(e) {
+      if (!nav.contains(e.target) && !btn.contains(e.target)) {
+        nav.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.innerHTML = '&#9776;';
+      }
+    });
+    nav.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        nav.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.innerHTML = '&#9776;';
+      });
+    });
+  }
+})();
 </script>
-
 </body>
 </html>
