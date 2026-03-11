@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Practical Stuff — Cuenca Family Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+:root {
+  --teal: #1a6b5c;
+  --teal-light: #e8f4f1;
+  --terracotta: #c4653a;
+  --gold: #d4a244;
+  --bg: #faf8f5;
+  --text: #2a2a2a;
+  --text-light: #666;
+  --max-width: 900px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: var(--text); background: var(--bg); line-height: 1.7; font-size: 18px; }
+a { color: var(--teal); text-decoration: none; }
+a:hover { color: var(--terracotta); }
+img { max-width: 100%; height: auto; display: block; }
+
+/* Nav */
+nav { position: sticky; top: 0; z-index: 100; background: rgba(250,248,245,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(0,0,0,0.08); }
+nav .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0.75rem 1.5rem; display: flex; align-items: center; justify-content: space-between; }
+nav .logo { font-family: 'DM Serif Display', serif; font-size: 1.25rem; color: var(--teal); }
+nav .nav-links { display: flex; gap: 0.25rem; flex-wrap: wrap; }
+nav .nav-links a { font-size: 0.8rem; padding: 0.35rem 0.65rem; border-radius: 6px; color: var(--text); font-weight: 500; transition: all 0.2s; }
+nav .nav-links a:hover, nav .nav-links a.active { background: var(--teal); color: white; }
+.hamburger { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text); }
+
+/* Hero */
+.hero { position: relative; height: 85vh; min-height: 500px; overflow: hidden; }
+.hero img { width: 100%; height: 100%; object-fit: cover; }
+.hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.5) 70%, rgba(0,0,0,0.7) 100%); display: flex; align-items: flex-end; padding: 3rem 2rem; }
+.hero-text { max-width: var(--max-width); margin: 0 auto; width: 100%; color: white; }
+.hero-text h1 { font-family: 'DM Serif Display', serif; font-size: 3.5rem; line-height: 1.15; margin-bottom: 0.75rem; text-shadow: 0 2px 20px rgba(0,0,0,0.3); }
+.hero-text p { font-size: 1.2rem; opacity: 0.9; max-width: 600px; text-shadow: 0 1px 10px rgba(0,0,0,0.3); }
+
+/* Content */
+.content { max-width: var(--max-width); margin: 0 auto; padding: 3rem 1.5rem; }
+.content h2 { font-family: 'DM Serif Display', serif; font-size: 2rem; color: var(--teal); margin: 2.5rem 0 1rem; }
+.content h2:first-child { margin-top: 0; }
+.content h3 { font-size: 1.15rem; font-weight: 700; margin: 1.5rem 0 0.5rem; color: var(--text); }
+.content p { margin-bottom: 1rem; }
+
+/* Summary box */
+.summary { background: var(--teal-light); border-left: 4px solid var(--teal); padding: 1.5rem 2rem; border-radius: 0 12px 12px 0; margin: 2rem 0; }
+.summary h3 { margin-top: 0; color: var(--teal); }
+.summary ul { padding-left: 1.25rem; }
+.summary li { margin-bottom: 0.35rem; }
+
+/* Stats bar */
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; margin: 2rem 0; }
+.stat { text-align: center; padding: 1.25rem 0.75rem; background: white; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+.stat .number { font-family: 'DM Serif Display', serif; font-size: 1.75rem; color: var(--terracotta); display: block; }
+.stat .label { font-size: 0.8rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 0.25rem; display: block; }
+
+/* Cards grid */
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; margin: 2rem 0; }
+.card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); transition: transform 0.2s, box-shadow 0.2s; }
+.card:hover { transform: translateY(-3px); box-shadow: 0 6px 24px rgba(0,0,0,0.1); }
+.card img { width: 100%; height: 200px; object-fit: cover; }
+.card .card-body { padding: 1.25rem; }
+.card .card-body h3 { margin: 0 0 0.5rem; font-size: 1.1rem; }
+.card .card-body p { font-size: 0.9rem; color: var(--text-light); margin: 0; }
+.card .card-body a { display: inline-block; margin-top: 0.75rem; font-weight: 700; font-size: 0.85rem; color: var(--terracotta); }
+
+/* Photo grid */
+.photo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 0.75rem; margin: 2rem 0; }
+.photo-grid img { width: 100%; height: 250px; object-fit: cover; border-radius: 8px; }
+
+/* Full bleed photo */
+.full-photo { width: 100vw; margin-left: calc(-50vw + 50%); margin-top: 2rem; margin-bottom: 2rem; }
+.full-photo img { width: 100%; height: 400px; object-fit: cover; }
+
+/* Blockquote */
+blockquote { border-left: 3px solid var(--gold); padding: 1rem 1.5rem; margin: 1.5rem 0; background: #fffdf8; border-radius: 0 8px 8px 0; font-style: italic; }
+blockquote cite { display: block; font-style: normal; font-size: 0.85rem; color: var(--text-light); margin-top: 0.5rem; }
+
+/* Tables */
+table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.95rem; }
+th { text-align: left; padding: 0.75rem 1rem; background: var(--teal); color: white; font-weight: 500; }
+td { padding: 0.75rem 1rem; border-bottom: 1px solid #eee; }
+tr:hover td { background: var(--teal-light); }
+
+/* Info box variants */
+.info-box { background: white; border: 1px solid #e0e0e0; border-radius: 12px; padding: 1.5rem 2rem; margin: 1.5rem 0; }
+.info-box h3 { margin-top: 0; color: var(--teal); }
+.info-box ul { padding-left: 1.25rem; }
+.info-box li { margin-bottom: 0.4rem; }
+
+.warning-box { background: #fff8f0; border-left: 4px solid var(--terracotta); padding: 1.25rem 1.75rem; border-radius: 0 12px 12px 0; margin: 1.5rem 0; }
+.warning-box h3 { margin-top: 0; color: var(--terracotta); }
+
+/* Section divider */
+.section-divider { border: none; border-top: 1px solid #e8e0d8; margin: 2.5rem 0; }
+
+/* Footer */
+footer { background: var(--teal); color: white; padding: 2rem; text-align: center; margin-top: 3rem; }
+footer p { opacity: 0.8; font-size: 0.9rem; }
+footer a { color: var(--gold); }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero { height: 60vh; }
+  .hero-text h1 { font-size: 2.2rem; }
+  .hero-text p { font-size: 1rem; }
+  .content { padding: 2rem 1rem; }
+  nav .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: var(--bg); padding: 1rem; border-bottom: 1px solid rgba(0,0,0,0.1); }
+  nav .nav-links.open { display: flex; }
+  .hamburger { display: block; }
+  .photo-grid { grid-template-columns: 1fr; }
+  .stats { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo">Cuenca Guide</a>
+    <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')">&#9776;</button>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="why-cuenca.html">Why Cuenca</a>
+      <a href="neighborhoods.html">Neighborhoods</a>
+      <a href="jess-and-bodhi.html">Jess &amp; Bodhi</a>
+      <a href="jon.html">Jon</a>
+      <a href="community.html">Community</a>
+      <a href="food-and-markets.html">Food</a>
+      <a href="outdoors.html">Outdoors</a>
+      <a href="practical.html" class="active">Practical</a>
+      <a href="schools.html">Schools</a>
+      <a href="cost-of-living.html">Cost</a>
+      <a href="getting-settled.html">Getting Settled</a>
+    </div>
+  </div>
+</nav>
+
+<div class="hero">
+  <img src="https://www.ecuador-travels.com/wp-content/uploads/rues-cuenca-voyage-jpeg-1280x800.jpg" alt="Cuenca colonial street with tram and white-walled buildings">
+  <div class="hero-overlay">
+    <div class="hero-text">
+      <h1>Practical Stuff</h1>
+      <p>Visa, money, healthcare, climate, altitude, and getting around</p>
+    </div>
+  </div>
+</div>
+
+<div class="content">
+
+  <div class="summary">
+    <h3>The Short Version</h3>
+    <ul>
+      <li><strong>Visa:</strong> VERHU digital nomad visa covers Jon directly; Jess joins as a dependent. Jess can enter visa-free for 90 days on her Zimbabwean passport — rare in Latin America.</li>
+      <li><strong>Money:</strong> USD. No conversion, no math. Schwab card reimburses all ATM fees.</li>
+      <li><strong>Altitude:</strong> 8,400ft. Plan for a slow first week — headaches, fatigue, disrupted sleep. Manageable, not La Paz.</li>
+      <li><strong>Climate:</strong> "Eternal spring" — 65–72°F days, 50–55°F evenings. Layers every day. Not tropical.</li>
+      <li><strong>Getting around:</strong> Walking plus $2–3 taxis. No car needed in El Vergel.</li>
+      <li><strong>Spanish:</strong> Morlaco dialect — slower and clearer than anywhere else in Latin America. Genuinely learner-friendly.</li>
+    </ul>
+  </div>
+
+  <div class="stats">
+    <div class="stat">
+      <span class="number">USD</span>
+      <span class="label">Currency</span>
+    </div>
+    <div class="stat">
+      <span class="number">8,400ft</span>
+      <span class="label">Altitude</span>
+    </div>
+    <div class="stat">
+      <span class="number">65–72°F</span>
+      <span class="label">Daytime Temp</span>
+    </div>
+    <div class="stat">
+      <span class="number">$2–3</span>
+      <span class="label">Taxi Across Town</span>
+    </div>
+    <div class="stat">
+      <span class="number">90 days</span>
+      <span class="label">Jess Visa-Free</span>
+    </div>
+    <div class="stat">
+      <span class="number">911</span>
+      <span class="label">Emergency</span>
+    </div>
+  </div>
+
+  <!-- VISA -->
+  <h2>Visa</h2>
+
+  <p>Ecuador's digital nomad visa — officially VERHU (<em>Visa de Excepción para Residencia Habitual</em>) — was built for exactly Jon's situation: remote workers earning income from foreign sources. It's codified in law, not a gray area, which matters.</p>
+
+  <div class="info-box">
+    <h3>How the VERHU Works for Your Family</h3>
+    <ul>
+      <li><strong>Jon</strong> qualifies directly as a remote worker earning USD income from a US employer (SimplaDocs).</li>
+      <li><strong>Jess</strong> joins as a dependent spouse — no separate income requirement.</li>
+      <li><strong>Bodhi</strong> joins as a dependent child.</li>
+      <li>The visa is valid for <strong>2 years, renewable</strong>.</li>
+      <li>Pathway: DN visa → temporary residency → <strong>permanent residency after 21 months</strong> of continuous legal status.</li>
+      <li>No investment capital required — this is not an investor visa.</li>
+    </ul>
+  </div>
+
+  <h3>The Zimbabwean Passport Advantage</h3>
+  <p>Jess can enter Ecuador <strong>visa-free for 90 days</strong> on her Zimbabwean passport. This is genuinely rare — Mexico, Costa Rica, and Colombia all require consular visa applications for Zimbabwean passport holders, which means advance embassy visits and waiting periods. Ecuador eliminates that entirely. The family can arrive together on day one.</p>
+
+  <p>Once in country, Jess gets formalized as a dependent on Jon's VERHU application. The Ecuadorian bureaucracy runs slower than Mexico's, but the legal framework is cleaner — the foreign income tax exemption is codified in Executive Decree 436, Article 9, not dependent on enforcement gaps.</p>
+
+  <blockquote>
+    "Ecuador is notably Zimbabwean-passport-friendly — Jess can enter visa-free for 90 days, which is rare in Latin America and eliminates the consular visa headaches required for Mexico, Costa Rica, and Colombia."
+    <cite>— From our research</cite>
+  </blockquote>
+
+  <hr class="section-divider">
+
+  <!-- MONEY -->
+  <h2>Money</h2>
+
+  <p>Ecuador adopted the US dollar in 2000. There is no currency conversion, no exchange rate to track, no mental math at the market. Income arrives in USD. Spending happens in USD. This is a structural advantage that compounds over years — you never lose money on conversion friction.</p>
+
+  <h3>ATMs</h3>
+  <p>Cash is still king for smaller transactions. Know the fee landscape:</p>
+
+  <table>
+    <tr>
+      <th>Bank</th>
+      <th>ATM Fee</th>
+      <th>Notes</th>
+    </tr>
+    <tr>
+      <td>JEP Credit Union</td>
+      <td>~$0.50</td>
+      <td>Lowest fees in Cuenca</td>
+    </tr>
+    <tr>
+      <td>Banco Guayaquil</td>
+      <td>~$3.51</td>
+      <td>Widely available</td>
+    </tr>
+    <tr>
+      <td>Produbanco / Banco del Pacífico</td>
+      <td>~$4.60</td>
+      <td>Handles Servipagos utility payments</td>
+    </tr>
+  </table>
+
+  <p><strong>The fix:</strong> A Schwab debit card reimburses all ATM fees globally. This is the standard expat move and it works. Get one before you leave.</p>
+
+  <h3>Transfers In</h3>
+  <p><strong>Remitly</strong> is specifically recommended over Wise for transfers into Ecuador — Wise has intermediary bank fee friction on some routes. Both work; Remitly is cleaner here.</p>
+
+  <h3>Exit Tax</h3>
+  <p>Ecuador charges a <strong>5% tax on outbound wire transfers over $1,200</strong>. This is real and affects anyone wiring money out of a local bank account. Plan your financial flows accordingly — most expats keep USD income flowing in and manage outbound transfers carefully.</p>
+
+  <h3>Paying Bills</h3>
+  <p><strong>Servipagos</strong> (a Produbanco division) handles most utilities. Pay in person with cash plus account number, or via apps once you have a local bank account. Key services: electricity via the Centro Sur app, water via ETAPA, mobile via Movistar/Claro/CNT apps. Minimal Spanish needed — just cash, the biller name, and your account number.</p>
+
+  <h3>Cash Note</h3>
+  <p>ATMs dispense $20 bills. Change can be difficult at smaller vendors and market stalls. The Central Bank has change machines at central Cuenca locations. Carry small bills when heading to markets.</p>
+
+  <hr class="section-divider">
+
+  <!-- HEALTHCARE -->
+  <h2>Healthcare</h2>
+
+  <div class="photo-grid">
+    <img src="https://www.islands.com/img/gallery/the-athens-of-ecuador-is-a-scenic-tourist-friendly-white-walled-city-hidden-in-the-andes-mountains/l-intro-1744049809.jpg" alt="Cuenca city streets with white-walled buildings">
+    <img src="https://c8.alamy.com/comp/ER0T0R/colorful-historic-balconies-in-cuenca-ecuador-ER0T0R.jpg" alt="Colorful historic balconies in Cuenca">
+  </div>
+
+  <p>Cuenca has solid private healthcare infrastructure — meaningfully better than most cities at this price point. Many private clinic doctors speak at least basic English, and the larger expat community means the system has adapted to serve non-Spanish speakers.</p>
+
+  <div class="info-box">
+    <h3>Key Healthcare Infrastructure</h3>
+    <ul>
+      <li><strong>Hospital Vicente Corral Moscoso</strong> — The main public hospital. Emergency care available. Higher wait times than private.</li>
+      <li><strong>Multiple private clinics</strong> — English-speaking staff available at most recommended expat-facing clinics. Standard for families living here long-term.</li>
+      <li><strong>IESS</strong> (Ecuadorian social security) — Enrollment is possible for legal residents. Some expats use this; most families with young children use private insurance.</li>
+      <li><strong>Private expat health insurance</strong> — $100–200/month for the family. Multiple international plans available. Strongly recommended over relying on public system alone.</li>
+      <li><strong>Pediatricians</strong> — Available and recommended through the expat parents Facebook group. Check "Expat Parents in Cuenca" for current community recommendations — parents share firsthand reviews regularly.</li>
+    </ul>
+  </div>
+
+  <h3>For Bodhi</h3>
+  <p>Pediatric care is available and of reasonable quality. The expat parent community is the best source for current doctor recommendations — the "Expat Parents in Cuenca" Facebook group (822 members) actively shares pediatrician reviews, and school communities (particularly CEDEI and Colegio Alemán) are reliable referral networks. Note: "Almost all doctors have their kids at Colegio Alemán" — that social network alone is a useful indicator of healthcare quality expectations in the city.</p>
+
+  <p><strong>Emergency:</strong> 911. Cuenca's emergency services are functional and comparable to a mid-sized European city.</p>
+
+  <hr class="section-divider">
+
+  <!-- CLIMATE -->
+  <h2>Climate</h2>
+
+  <p>Cuenca's reputation as a city of "eternal spring" is accurate — and also slightly misleading if you're arriving from Chiang Mai or Cape Town in summer. Understand what you're getting before you pack.</p>
+
+  <div class="info-box">
+    <h3>What "Eternal Spring" Actually Means</h3>
+    <ul>
+      <li><strong>Daytime:</strong> 18–22°C (65–72°F) — genuinely pleasant, not hot</li>
+      <li><strong>Evenings:</strong> 10–12°C (50–55°F) — always bring a jacket</li>
+      <li><strong>Rain:</strong> Can happen any month — waterproof shoes are essential on cobblestones</li>
+      <li><strong>No seasons:</strong> No hot summer, no cold winter, no rainy season in the Southeast Asian sense</li>
+      <li><strong>Never tropical:</strong> You are not in a t-shirt and sandals the way you were in Chiang Mai</li>
+    </ul>
+  </div>
+
+  <h3>What to Pack</h3>
+  <p>Layers every single day. A light jacket is not optional — it's daily wear. Warmer layers for evenings. Waterproof shoes are essential; cobblestones in rain are slippery. No heavy winter gear needed, but do not pack for tropical living.</p>
+
+  <h3>For Bodhi</h3>
+  <p>Warm layers always required, especially at night. Outdoor park time is year-round — the climate supports daily outdoor life consistently — but always dressed for mild cool, not heat.</p>
+
+  <p>One genuine advantage over Chiang Mai: <strong>no burning season</strong>. Cuenca has consistently clean air year-round. No AQI alerts, no smoky months, no reason to stay indoors. For a toddler spending hours in parks, this matters.</p>
+
+  <hr class="section-divider">
+
+  <!-- ALTITUDE -->
+  <h2>Altitude</h2>
+
+  <div class="warning-box">
+    <h3>Plan for a Slow First Week</h3>
+    <p>Cuenca sits at 2,560m (8,400ft). The adjustment is real. Don't arrive with a packed first week.</p>
+  </div>
+
+  <h3>What to Expect</h3>
+  <p>Days 1–7 at altitude: <strong>headaches</strong>, <strong>fatigue</strong>, <strong>shortness of breath on stairs</strong>, and <strong>disrupted sleep</strong>. This is normal. It passes. Cuenca is manageable — this is not the 3,600m of La Paz or the 3,400m of Cusco. Most people feel fully adjusted within 5–7 days.</p>
+
+  <h3>Hydrate Aggressively</h3>
+  <p>Drink significantly more water than you think you need, especially the first three days. Avoid alcohol initially — it intensifies altitude symptoms. Take things slow. Skip demanding hikes or fitness routines the first week.</p>
+
+  <h3>For Bodhi</h3>
+  <p>Children adjust to altitude similarly to adults but can be harder to read. Monitor for:</p>
+  <ul style="padding-left: 1.25rem; margin-bottom: 1rem;">
+    <li>Unusual irritability beyond normal toddler behavior</li>
+    <li>Loss of appetite lasting more than a day</li>
+    <li>Labored or rapid breathing at rest</li>
+    <li>Persistent headache (hard to identify in a toddler — watch for head-holding or unusual fussiness)</li>
+  </ul>
+  <p>If any of these persist beyond 48 hours, see a doctor. In most cases, Bodhi will adjust within the same 3–7 day window as adults. Hydration applies equally — water, not juice.</p>
+
+  <blockquote>
+    "Cuenca is manageable — not La Paz or Cusco levels — but the adjustment is real. Don't plan demanding activities in the first week."
+    <cite>— From our research</cite>
+  </blockquote>
+
+  <hr class="section-divider">
+
+  <!-- GETTING AROUND -->
+  <h2>Getting Around</h2>
+
+  <div class="full-photo">
+    <img src="https://boutiquehotelmansionalcazar.com/wp-content/uploads/2024/09/tomebamba-river-cuenca-ecuador.jpg" alt="Bridge over the Tomebamba River in Cuenca">
+  </div>
+
+  <p>Cuenca's historic center is genuinely walkable — not walkable-in-theory, but walkable in practice. From El Vergel, daily errands, markets, cafés, yoga studios, parks, and cultural venues are all accessible on foot.</p>
+
+  <table>
+    <tr>
+      <th>Transport</th>
+      <th>Cost</th>
+      <th>Notes</th>
+    </tr>
+    <tr>
+      <td>Walking</td>
+      <td>Free</td>
+      <td>Works for everything in El Vergel and Centro</td>
+    </tr>
+    <tr>
+      <td>City bus</td>
+      <td>$0.25 flat fare</td>
+      <td>Extensive network, functional</td>
+    </tr>
+    <tr>
+      <td>Tranvía tram</td>
+      <td>$0.25–0.30</td>
+      <td>Connects Gringolandia/Ordóñez Lasso to Centro</td>
+    </tr>
+    <tr>
+      <td>Taxi across town</td>
+      <td>$2–3</td>
+      <td>Standard fare for most El Vergel → Centro trips</td>
+    </tr>
+    <tr>
+      <td>Taxi to Baños thermal spa</td>
+      <td>$4–8</td>
+      <td>Use registered taxis or ride-hailing apps at night</td>
+    </tr>
+  </table>
+
+  <h3>No Car Needed</h3>
+  <p>In El Vergel, a car is genuinely unnecessary for daily life. Parque de la Madre, CEDEI school, Supermaxi grocery, OM Healing Center, and the Tomebamba riverwalk are all walkable. IdiomArte and La Guarida in Centro are 15–20 minutes on foot or a $2–3 taxi.</p>
+
+  <h3>Motorcycles — Possible but Different</h3>
+  <p>Motorcycles are legal in Cuenca; helmets required; scooters run around $1,600 USD. The key difference from Chiang Mai: Cuenca is hilly, and cobblestone streets become genuinely slippery when wet. Riding with Bodhi requires more caution than flat-terrain cities. Most expat families settle into the walking-plus-taxi model for daily life, with bikes more for leisure riding than errands.</p>
+
+  <hr class="section-divider">
+
+  <!-- SPANISH -->
+  <h2>Spanish</h2>
+
+  <div class="photo-grid">
+    <img src="https://www.disicouture.com/blog/wp-content/uploads/cuenca-ecuador-travel-guide-disi-couture-edisa-shahini-15.jpg" alt="Colonial arcade in Cuenca Ecuador">
+    <img src="https://c8.alamy.com/comp/ER0T0R/colorful-historic-balconies-in-cuenca-ecuador-ER0T0R.jpg" alt="Colonial balconies Cuenca">
+  </div>
+
+  <p>Cuenca speaks Morlaco — a highland Andean dialect considered among the clearest, most learner-friendly Spanish in all of Latin America. This is a genuine structural advantage for Jess starting from scratch.</p>
+
+  <h3>What Makes Morlaco Different</h3>
+  <ul style="padding-left: 1.25rem; margin-bottom: 1rem;">
+    <li><strong>Slower pace</strong> — noticeably slower than Mexican, coastal, or Caribbean Spanish</li>
+    <li><strong>Clear pronunciation</strong> — consonants don't drop, words don't blur together</li>
+    <li><strong>Singsong quality</strong> — a distinctive rhythm where syllables are stressed unexpectedly; sounds unusual at first, becomes easy to follow</li>
+    <li><strong>Quechua-origin words</strong> woven into daily speech: <em>ñaño</em> (bro), <em>choclo</em> (corn), <em>chévere</em> (cool), <em>chuta</em> (damn), <em>biela</em> (cold beer)</li>
+  </ul>
+
+  <h3>Pronouns</h3>
+  <p><em>Usted</em>, <em>tú</em>, and <em>vos</em> all coexist in the highlands. When uncertain, default to <strong><em>usted</em></strong> — it signals respect, not stiffness. You will not cause offense by being formal.</p>
+
+  <h3>Learning Resources</h3>
+  <p>Private tutors at <strong>$10–15/hour</strong> (via GringoPost or YapaTree) are more effective than group classes for Jess's situation — flexible scheduling around nanny hours, faster progression, tailored to actual daily vocabulary. CEDEI and Simon Bolivar Spanish School are the established options for group or intensive programs. IdiomArte offers Survival Spanish 2.0 workshops that are popular with new arrivals.</p>
+
+  <hr class="section-divider">
+
+  <!-- INTERNET & PHONE -->
+  <h2>Internet &amp; Phone</h2>
+
+  <p>This is not a concern in Cuenca. Claro, Movistar, and CNT offer fiber in most expat neighborhoods — 50–100 Mbps standard, with higher speeds available. Fiber availability in El Vergel, Centro, and Yanuncay is solid. Starlink is available as a backup if needed.</p>
+
+  <p>Contrast with Oaxaca, where internet speed ranges from 0.8 to 250 Mbps depending on the specific apartment — requiring active verification before signing any lease. In Cuenca, verify before signing as a formality, but expect reliability.</p>
+
+  <h3>SIM Cards</h3>
+  <p>Claro and Movistar SIM cards are easy to obtain at any carrier store — bring your passport. Data plans are inexpensive. Pick one up within your first few days.</p>
+
+  <h3>Power Grid Note</h3>
+  <p>Ecuador experienced rolling blackouts in 2024 (up to 14 hours/day at worst) due to drought depleting the hydroelectric system. As of early 2026, the situation has improved significantly — new generation capacity online, reservoirs refilling. But the structural vulnerability remains. Practical mitigation: budget for a UPS (uninterruptible power supply), know your nearest coworking space with a backup generator (IMPAQTO, Selina), and keep a charged 4G hotspot.</p>
+
+  <hr class="section-divider">
+
+  <!-- POLICE & SAFETY -->
+  <h2>Police &amp; Safety</h2>
+
+  <p>Cuenca was rated the safest city in South America in Numbeo's 2025 Safety Index. For a family in El Vergel day-to-day, the risk profile is comparable to a mid-sized European city.</p>
+
+  <h3>Practical Notes</h3>
+  <ul style="padding-left: 1.25rem; margin-bottom: 1rem;">
+    <li><strong>Opportunistic crime</strong> is the primary concern — phone theft, pickpocketing near crowded markets, bag snatches at night. Normal urban precautions apply.</li>
+    <li><strong>Don't flash valuables.</strong> Avoid walking alone late at night in unfamiliar areas.</li>
+    <li><strong>Police interactions</strong> are low-frequency and low-friction. Ecuador's mordida (bribe) culture exists but is not pervasive in Cuenca. Carry all documents when driving.</li>
+    <li><strong>The Ecuador national homicide rate is high</strong> — but driven entirely by coastal drug trafficking in Guayaquil, Esmeraldas, and Manabí. Cuenca's Azuay province saw a 54% reduction in homicides while the national rate spiked. The city is inland, structurally isolated from coastal violence.</li>
+  </ul>
+
+  <div class="info-box">
+    <h3>Key Numbers &amp; Registration</h3>
+    <ul>
+      <li><strong>Emergency (police, fire, ambulance):</strong> 911</li>
+      <li><strong>Register with the US Embassy in Quito</strong> after arriving — standard practice for all American expats, gives you a point of contact if anything goes sideways</li>
+      <li>Jess (Zimbabwean passport) should also register with the Zimbabwean embassy in Bogotá (nearest) for the same reason</li>
+    </ul>
+  </div>
+
+  <blockquote>
+    "For Jess walking with Bodhi during the day in El Vergel or Centro: the risk profile is comparable to a mid-sized European city. Normal urban precautions apply."
+    <cite>— From our research</cite>
+  </blockquote>
+
+</div>
+
+<footer>
+  <p>Made with care for the Dallas family. Research compiled March 2026.</p>
+  <p style="margin-top:0.5rem">Cape Town → Cuenca. The next chapter.</p>
+</footer>
+
+<script>
+// Hamburger menu
+document.querySelector('.hamburger').addEventListener('click', function() {
+  document.querySelector('.nav-links').classList.toggle('open');
+});
+</script>
+
+</body>
+</html>

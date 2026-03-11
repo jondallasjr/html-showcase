@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neighborhoods — Cuenca, Ecuador Family Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+:root {
+  --teal: #1a6b5c;
+  --teal-light: #e8f4f1;
+  --terracotta: #c4653a;
+  --gold: #d4a244;
+  --bg: #faf8f5;
+  --text: #2a2a2a;
+  --text-light: #666;
+  --max-width: 900px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: var(--text); background: var(--bg); line-height: 1.7; font-size: 18px; }
+a { color: var(--teal); text-decoration: none; }
+a:hover { color: var(--terracotta); }
+img { max-width: 100%; height: auto; display: block; }
+
+/* Nav */
+nav { position: sticky; top: 0; z-index: 100; background: rgba(250,248,245,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(0,0,0,0.08); }
+nav .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0.75rem 1.5rem; display: flex; align-items: center; justify-content: space-between; }
+nav .logo { font-family: 'DM Serif Display', serif; font-size: 1.25rem; color: var(--teal); }
+nav .nav-links { display: flex; gap: 0.25rem; flex-wrap: wrap; }
+nav .nav-links a { font-size: 0.8rem; padding: 0.35rem 0.65rem; border-radius: 6px; color: var(--text); font-weight: 500; transition: all 0.2s; }
+nav .nav-links a:hover, nav .nav-links a.active { background: var(--teal); color: white; }
+.hamburger { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text); }
+
+/* Hero */
+.hero { position: relative; height: 85vh; min-height: 500px; overflow: hidden; }
+.hero img { width: 100%; height: 100%; object-fit: cover; }
+.hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.5) 70%, rgba(0,0,0,0.7) 100%); display: flex; align-items: flex-end; padding: 3rem 2rem; }
+.hero-text { max-width: var(--max-width); margin: 0 auto; width: 100%; color: white; }
+.hero-text h1 { font-family: 'DM Serif Display', serif; font-size: 3.5rem; line-height: 1.15; margin-bottom: 0.75rem; text-shadow: 0 2px 20px rgba(0,0,0,0.3); }
+.hero-text p { font-size: 1.2rem; opacity: 0.9; max-width: 600px; text-shadow: 0 1px 10px rgba(0,0,0,0.3); }
+
+/* Content */
+.content { max-width: var(--max-width); margin: 0 auto; padding: 3rem 1.5rem; }
+.content h2 { font-family: 'DM Serif Display', serif; font-size: 2rem; color: var(--teal); margin: 2.5rem 0 1rem; }
+.content h2:first-child { margin-top: 0; }
+.content h3 { font-size: 1.15rem; font-weight: 700; margin: 1.5rem 0 0.5rem; color: var(--text); }
+.content p { margin-bottom: 1rem; }
+
+/* Summary box */
+.summary { background: var(--teal-light); border-left: 4px solid var(--teal); padding: 1.5rem 2rem; border-radius: 0 12px 12px 0; margin: 2rem 0; }
+.summary h3 { margin-top: 0; color: var(--teal); }
+.summary ul { padding-left: 1.25rem; }
+.summary li { margin-bottom: 0.35rem; }
+
+/* Stats bar */
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; margin: 2rem 0; }
+.stat { text-align: center; padding: 1.25rem 0.75rem; background: white; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+.stat .number { font-family: 'DM Serif Display', serif; font-size: 1.75rem; color: var(--terracotta); display: block; }
+.stat .label { font-size: 0.8rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 0.25rem; display: block; }
+
+/* Cards grid */
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; margin: 2rem 0; }
+.card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); transition: transform 0.2s, box-shadow 0.2s; }
+.card:hover { transform: translateY(-3px); box-shadow: 0 6px 24px rgba(0,0,0,0.1); }
+.card img { width: 100%; height: 200px; object-fit: cover; }
+.card .card-body { padding: 1.25rem; }
+.card .card-body h3 { margin: 0 0 0.5rem; font-size: 1.1rem; }
+.card .card-body p { font-size: 0.9rem; color: var(--text-light); margin: 0; }
+
+/* Photo grid */
+.photo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 0.75rem; margin: 2rem 0; }
+.photo-grid img { width: 100%; height: 250px; object-fit: cover; border-radius: 8px; }
+
+/* Full bleed photo */
+.full-photo { width: 100vw; margin-left: calc(-50vw + 50%); margin-top: 2rem; margin-bottom: 2rem; }
+.full-photo img { width: 100%; height: 400px; object-fit: cover; }
+
+/* Blockquote */
+blockquote { border-left: 3px solid var(--gold); padding: 1rem 1.5rem; margin: 1.5rem 0; background: #fffdf8; border-radius: 0 8px 8px 0; font-style: italic; }
+blockquote cite { display: block; font-style: normal; font-size: 0.85rem; color: var(--text-light); margin-top: 0.5rem; }
+
+/* Tables */
+table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.95rem; }
+th { text-align: left; padding: 0.75rem 1rem; background: var(--teal); color: white; font-weight: 500; }
+td { padding: 0.75rem 1rem; border-bottom: 1px solid #eee; }
+tr:hover td { background: var(--teal-light); }
+
+/* Neighborhood rank badge */
+.neighborhood-header { display: flex; align-items: baseline; gap: 1rem; margin: 2.5rem 0 0.5rem; }
+.neighborhood-header h2 { margin: 0; }
+.rank-badge { font-family: 'DM Serif Display', serif; font-size: 3rem; color: var(--terracotta); opacity: 0.25; line-height: 1; flex-shrink: 0; }
+
+/* Walkable list */
+.walkable-list { list-style: none; padding: 0; margin: 1rem 0 1.5rem; }
+.walkable-list li { padding: 0.6rem 0 0.6rem 1.75rem; border-bottom: 1px solid #eee; position: relative; font-size: 0.97rem; }
+.walkable-list li:last-child { border-bottom: none; }
+.walkable-list li::before { content: "→"; position: absolute; left: 0; color: var(--teal); font-weight: 700; }
+
+/* Tradeoff box */
+.tradeoff { background: #fff8f5; border-left: 4px solid var(--terracotta); padding: 1.25rem 1.75rem; border-radius: 0 12px 12px 0; margin: 1.5rem 0; }
+.tradeoff h4 { color: var(--terracotta); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem; font-weight: 700; }
+.tradeoff p { margin: 0; font-size: 0.97rem; }
+
+/* Winner callout */
+.winner-box { background: var(--teal); color: white; border-radius: 16px; padding: 2rem 2.5rem; margin: 2rem 0; }
+.winner-box h3 { font-family: 'DM Serif Display', serif; font-size: 1.5rem; margin-bottom: 0.75rem; }
+.winner-box p { opacity: 0.9; margin: 0; font-size: 1rem; }
+
+/* Section divider */
+.section-divider { border: none; border-top: 2px solid #eee; margin: 3rem 0; }
+
+/* Conditional badge */
+.conditional { display: inline-block; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; background: #f5f0e8; color: var(--gold); border: 1px solid var(--gold); border-radius: 4px; padding: 0.2rem 0.6rem; margin-left: 0.5rem; vertical-align: middle; }
+
+/* Footer */
+footer { background: var(--teal); color: white; padding: 2rem; text-align: center; margin-top: 3rem; }
+footer p { opacity: 0.8; font-size: 0.9rem; }
+footer a { color: var(--gold); }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero { height: 60vh; }
+  .hero-text h1 { font-size: 2.2rem; }
+  .hero-text p { font-size: 1rem; }
+  .content { padding: 2rem 1rem; }
+  nav .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: var(--bg); padding: 1rem; border-bottom: 1px solid rgba(0,0,0,0.1); }
+  nav .nav-links.open { display: flex; }
+  .hamburger { display: block; }
+  .photo-grid { grid-template-columns: 1fr; }
+  .stats { grid-template-columns: repeat(2, 1fr); }
+  table { font-size: 0.82rem; }
+  th, td { padding: 0.6rem 0.6rem; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo">Cuenca Guide</a>
+    <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')">&#9776;</button>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="why-cuenca.html">Why Cuenca</a>
+      <a href="neighborhoods.html" class="active">Neighborhoods</a>
+      <a href="jess-and-bodhi.html">Jess &amp; Bodhi</a>
+      <a href="jon.html">Jon</a>
+      <a href="community.html">Community</a>
+      <a href="food-and-markets.html">Food</a>
+      <a href="outdoors.html">Outdoors</a>
+      <a href="practical.html">Practical</a>
+      <a href="schools.html">Schools</a>
+      <a href="cost-of-living.html">Cost</a>
+      <a href="getting-settled.html">Getting Settled</a>
+    </div>
+  </div>
+</nav>
+
+<div class="hero">
+  <img src="https://becomingcuenca.com/wp-content/uploads/2022/11/Blog01-1-1024x683.jpg" alt="El Vergel neighborhood in Cuenca, Ecuador">
+  <div class="hero-overlay">
+    <div class="hero-text">
+      <h1>Neighborhoods</h1>
+      <p>Where to live — El Vergel wins, and it's not close</p>
+    </div>
+  </div>
+</div>
+
+<div class="content">
+
+  <div class="summary">
+    <h3>The Short Version</h3>
+    <p><strong>El Vergel / Av. Solano is the pick.</strong> $400–700/month for a 2BR. Walkable to parent meetups at Parque de la Madre, $5 yoga at OM Healing Center, CEDEI bilingual preschool, Supermaxi grocery, and the Tomebamba riverwalk — all without a car.</p>
+  </div>
+
+  <div class="stats">
+    <div class="stat">
+      <span class="number">$400–700</span>
+      <span class="label">2BR/month</span>
+    </div>
+    <div class="stat">
+      <span class="number">$5</span>
+      <span class="label">Drop-in yoga</span>
+    </div>
+    <div class="stat">
+      <span class="number">0</span>
+      <span class="label">Car needed</span>
+    </div>
+    <div class="stat">
+      <span class="number">$2–3</span>
+      <span class="label">Taxi to El Centro</span>
+    </div>
+  </div>
+
+  <!-- NEIGHBORHOOD #1 -->
+  <div class="neighborhood-header">
+    <span class="rank-badge">#1</span>
+    <h2>El Vergel / Av. Solano</h2>
+  </div>
+
+  <div class="winner-box">
+    <h3>The Winner — and it's not close</h3>
+    <p>El Vergel is the only neighborhood that puts you within walking distance of both the parent community infrastructure (Parque de la Madre meetups, CEDEI) and the yoga/wellness corridor (OM Healing Center, Hands Om Ayurveda). Tree-lined, residential, and voted best neighborhood in Cuenca by GringoPost readers.</p>
+  </div>
+
+  <p>The single most important community touchpoint for your family is the <strong>Expat Parents Saturday meetup at Parque de la Madre</strong> — that's where Cris Mino told "Jon Dallas" to come, where Sarah Gallagher is seeking playdates for her 1.5 and 3-year-old, and where the under-5 parent scene actually concentrates. Parque de la Madre sits right in El Vergel. It's also where Tai Chi meets weekday mornings at 7:30am, Frisbee Fridays happen at noon, and Shakti Yoga runs free Saturday morning classes.</p>
+
+  <div class="photo-grid">
+    <img src="https://becomingcuenca.com/wp-content/uploads/2022/11/Blog03-1-1024x683.jpg" alt="El Vergel area, Cuenca">
+    <img src="https://www.wandertooth.com/wp-content/uploads/2026/01/Tomebamba-River-and-public-park.jpg" alt="Tomebamba riverwalk public park">
+  </div>
+
+  <h3>What's walkable from El Vergel</h3>
+  <ul class="walkable-list">
+    <li><strong>Parque de la Madre</strong> — multiple wooden play structures across three areas, a running track, a free planetarium, and the gravitational center of the expat parent scene</li>
+    <li><strong>OM Healing Center</strong> (Huayna-Capac/Paucarbamba corridor) — $5 drop-in yoga, Ashtanga Mysore, sound healing, breathwork, psychotherapy. Jess's most likely daily studio</li>
+    <li><strong>Hands Om Ayurveda</strong> (Francisco Moscoso) — Abhyanga, Shirodhara, Reiki, prenatal massage</li>
+    <li><strong>CEDEI bilingual preschool</strong> — the top-recommended English-language early childhood option, right in the neighborhood</li>
+    <li><strong>Supermaxi grocery</strong> — walkable daily shopping</li>
+    <li><strong>Tomebamba riverwalk</strong> — runs along the northern edge. Daily nature walk for Jess and Bodhi without getting in a car</li>
+    <li><strong>Universidad de Cuenca</strong> — adjacent, which means student energy, the public library ("Juan Bautista Vázquez," open to the public), and Café Geográfico philosophy discussions at the Facultad de Filosofía</li>
+    <li><strong>IMPAQTO coworking</strong> (Av. 12 de Abril) — river-view coworking from $65/month, a short walk from the apartment</li>
+  </ul>
+
+  <blockquote>
+    "El Vergel is the only neighborhood that puts you within walking distance of <em>both</em> the parent community infrastructure and the yoga/wellness corridor. The university brings younger energy to an otherwise retirement-heavy expat scene."
+    <cite>— From the neighborhood analysis</cite>
+  </blockquote>
+
+  <div class="tradeoff">
+    <h4>The Tradeoff</h4>
+    <p>El Centro's cultural venues (IdiomArte, La Guarida, Azuay Community Theatre) are a 15–20 minute walk north across the river, or a $2–3 taxi. Not next door — but not a barrier either. You'll go when there's something worth going to, which is almost every week.</p>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- NEIGHBORHOOD #2 -->
+  <div class="neighborhood-header">
+    <span class="rank-badge">#2</span>
+    <h2>Southern El Centro — San Sebastián / Calle Larga</h2>
+  </div>
+
+  <p><strong>Rent: $400–700/month (2BR, older buildings).</strong> The cultural alternative. This puts you right on top of the venue infrastructure that dominates the events calendar — IdiomArte, La Guarida, Azuay Community Theatre, Museo Pumapungo, and Calle Larga all within easy walking distance.</p>
+
+  <div class="photo-grid">
+    <img src="https://www.roamingaroundtheworld.com/wp-content/uploads/2019/03/Flower-vendor-in-Cuenca.jpg" alt="Flower vendor in El Centro market, Cuenca">
+    <img src="https://culturestraveled.com/wp-content/uploads/2025/09/llamas-pumapungo-museum-cuenca-ecuador-1024x770.jpg" alt="Llamas at Museo Pumapungo, Cuenca">
+  </div>
+
+  <h3>What's walkable from southern El Centro</h3>
+  <ul class="walkable-list">
+    <li><strong>IdiomArte</strong> (Mariscal Lamar y Estevez de Toral) — 80+ events/year: Umbral art exhibition, Silhouettes life drawing, biodanza, Spanish workshops, theatre productions, community drum circle, Espíritu de Sevilla performances, Survival Spanish 2.0</li>
+    <li><strong>La Guarida</strong> (Mariscal Lamar 22.23) — Canelazo Stories (Moth-style storytelling, Thursday evenings 7–10pm), jazz brunch (last Saturday of month), live music Thursdays, movie nights. The closest existing format to Real Talk events</li>
+    <li><strong>Azuay Community Theatre</strong> (Antonio Vega Muñoz 14-46) — English-language plays, auditions open to expats</li>
+    <li><strong>Museo Pumapungo</strong> — free, outdoor Inca ruins, llamas, hummingbird garden, bird rescue center with scarlet macaws. The best toddler museum in the city</li>
+    <li><strong>Teatro Pumapungo</strong> — home of the Cuenca Symphony Orchestra (free Friday evening concerts)</li>
+    <li><strong>Tomebamba riverwalk</strong> — immediately accessible for daily nature walks</li>
+    <li><strong>Calle Larga</strong> — nightlife, restaurants, intercambio nights, Windhorse Café (Iyengar yoga Thursdays &amp; Saturdays)</li>
+  </ul>
+
+  <blockquote>
+    "If IdiomArte and La Guarida become your primary social anchors — which they might, given they host Real Talk–adjacent events, live music, art, and the deepest creative and intellectual programming in the city — living in walking distance means you'll actually go."
+    <cite>— From the neighborhood analysis</cite>
+  </blockquote>
+
+  <div class="tradeoff">
+    <h4>The Tradeoff</h4>
+    <p>El Centro is noisier. Buildings have poor sound insulation. Streets are busier with traffic and exhaust fumes. Parque de la Madre and the parent meetup scene are a 10–15 minute walk south across the river — doable, but you'd be commuting to the parent hub rather than living in it. Apartments tend to be older with less natural light.</p>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- NEIGHBORHOOD #3 -->
+  <div class="neighborhood-header">
+    <span class="rank-badge">#3</span>
+    <h2>Puertas del Sol <span class="conditional">Conditional</span></h2>
+  </div>
+
+  <p><strong>Rent: $450–600/month (2BR).</strong> A dark horse — but only if SHALA Pilates Studio becomes Jess's primary yoga home. Aubree Jeanne's yoga classes (Tuesdays &amp; Thursdays 6:30pm, Saturdays 8am) are here. The neighborhood sits on the south side of the Tomebamba River, west of Av. de las Américas — quiet, residential, along the river with greenway access for daily walks. Plaza Soleil shopping center and Feria Libre market are nearby.</p>
+
+  <div class="tradeoff">
+    <h4>The Tradeoff</h4>
+    <p>Previous residents reported noise issues near Plaza Soleil and Feria Libre. It's farther from El Centro's cultural scene, farther from El Vergel's parent community, and doesn't have the walkable density of amenities that either of those offers. Works if Jess builds her routine specifically around SHALA — but isolates you from the two hubs that matter most.</p>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- WHERE NOT TO LIVE -->
+  <h2>Where NOT to Live</h2>
+
+  <div class="full-photo">
+    <img src="https://culturestraveled.com/wp-content/uploads/2026/01/best-things-to-do-cuenca-ecuador-1024x749.jpg" alt="Cuenca Ecuador skyline">
+  </div>
+
+  <h3>Gringolandia / Ordóñez Lasso</h3>
+  <p>Common Grounds (the expat sports bar with weekly open mic, trivia Tuesdays, Gran Feria artisan markets) is here, and so is the Jazz Society Café (Ecuador's only dedicated jazz club, Wed/Fri/Sat 6–10pm). But the area is high-rise, car-dependent, and the community skews heavily retiree. The digital nomad café meetups rotate locations anyway, so you don't gain much by living near Common Grounds specifically. The Tranvía tram connects it to El Centro, but the neighborhood lacks the walkable village feel your family needs.</p>
+
+  <h3>Yanuncay / La Isla / Tres Puentes</h3>
+  <p>The greenest option. The Jardín Botánico (21 hectares, 8,000 plant species, free), Parque El Paraíso (forest trails, playgrounds, lake, children's traffic school), and the Yanuncay riverwalk are all here. Beautiful for daily outdoor time with Bodhi — and worth weekend trips.</p>
+  <p>But it's the farthest from both El Centro's cultural scene and El Vergel's parent community — roughly a 30-minute walk from most of this area to either hub. For a car-free family prioritizing walkability to community, it's too isolated as a home base.</p>
+
+  <hr class="section-divider">
+
+  <!-- VENUE TABLE -->
+  <h2>The Venue-to-Neighborhood Map</h2>
+
+  <p>Every recurring venue from the research mapped to its neighborhood — so you can see exactly how the city clusters.</p>
+
+  <div style="overflow-x: auto;">
+    <table>
+      <thead>
+        <tr>
+          <th>Venue</th>
+          <th>Neighborhood</th>
+          <th>Key Events</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Parque de la Madre</strong></td>
+          <td>El Vergel</td>
+          <td>Expat Parents Saturday meetup, Shakti free yoga (Sat AM), Tai Chi (Mon–Fri 7:30am), Frisbee Fridays, Running Motivation Ec</td>
+        </tr>
+        <tr>
+          <td><strong>OM Healing Center</strong></td>
+          <td>Huayna-Capac (adj. El Vergel)</td>
+          <td>Daily yoga ($5), Ashtanga Mysore, sound healing, breathwork, psychotherapy</td>
+        </tr>
+        <tr>
+          <td><strong>Hands Om Ayurveda</strong></td>
+          <td>Francisco Moscoso (adj. El Vergel)</td>
+          <td>Abhyanga, Shirodhara, Reiki, prenatal massage</td>
+        </tr>
+        <tr>
+          <td><strong>CEDEI School</strong></td>
+          <td>Near El Vergel</td>
+          <td>Bilingual preschool, English + Ecuadorian co-teachers</td>
+        </tr>
+        <tr>
+          <td><strong>Universidad de Cuenca</strong></td>
+          <td>Adjacent to El Vergel</td>
+          <td>Public library, Café Geográfico, cultural events, language exchange</td>
+        </tr>
+        <tr>
+          <td><strong>IMPAQTO Cuenca</strong></td>
+          <td>Av. 12 de Abril (near El Vergel)</td>
+          <td>Coworking ($65+/mo), networking events, river view</td>
+        </tr>
+        <tr>
+          <td><strong>IdiomArte</strong></td>
+          <td>El Centro (Mariscal Lamar y Estevez de Toral)</td>
+          <td>80+ events/year: art exhibitions, biodanza, drum circle, theatre, Spanish workshops, Writers Read!</td>
+        </tr>
+        <tr>
+          <td><strong>La Guarida</strong></td>
+          <td>Western El Centro (Mariscal Lamar 22.23)</td>
+          <td>Canelazo Stories (Thu 7–10pm), jazz brunch (last Sat), live music, movie nights</td>
+        </tr>
+        <tr>
+          <td><strong>Azuay Community Theatre</strong></td>
+          <td>NW of El Centro (Antonio Vega Muñoz)</td>
+          <td>English-language plays (~6/season), auditions</td>
+        </tr>
+        <tr>
+          <td><strong>Teatro Pumapungo</strong></td>
+          <td>Eastern El Centro</td>
+          <td>Cuenca Symphony Orchestra (Fri 8pm, often free)</td>
+        </tr>
+        <tr>
+          <td><strong>Museo Pumapungo</strong></td>
+          <td>Eastern El Centro</td>
+          <td>Free museum, Inca ruins, llamas, bird rescue — best toddler outing</td>
+        </tr>
+        <tr>
+          <td><strong>Vamos Spanish School</strong></td>
+          <td>Calle Larga (El Centro)</td>
+          <td>Language exchange Sat 11am–12:30pm, $2</td>
+        </tr>
+        <tr>
+          <td><strong>Café Ñucallacta</strong></td>
+          <td>El Centro area</td>
+          <td>International Night intercambio Wed 6:30–9pm</td>
+        </tr>
+        <tr>
+          <td><strong>Scoops</strong></td>
+          <td>El Centro area</td>
+          <td>Spanish class Thu 5pm + free intercambio 6pm</td>
+        </tr>
+        <tr>
+          <td><strong>Bistro Yaku</strong></td>
+          <td>El Centro (Yakumama Hostel)</td>
+          <td>Live bands (Funky Tu Madre, charangos), intercambio Fri 6:30pm</td>
+        </tr>
+        <tr>
+          <td><strong>Selina Cuenca</strong></td>
+          <td>Historic Center</td>
+          <td>Coworking, yoga deck, younger nomad crowd</td>
+        </tr>
+        <tr>
+          <td><strong>SHALA Pilates Studio</strong></td>
+          <td>Puertas del Sol</td>
+          <td>Aubree Jeanne yoga: Tues/Thu 6:30pm, Sat 8am</td>
+        </tr>
+        <tr>
+          <td><strong>Common Grounds</strong></td>
+          <td>Gringolandia (Eduardo Crespo Malo y Gran Colombia)</td>
+          <td>Open mic (Thu 7pm), trivia Tues, salsa Wed, live music Sat, Gran Feria (biweekly Sat)</td>
+        </tr>
+        <tr>
+          <td><strong>Jazz Society Café</strong></td>
+          <td>West side (Los Claveles y Ordóñez Lasso)</td>
+          <td>Jazz dinner concerts Wed/Fri/Sat 6–10pm, $10 cover</td>
+        </tr>
+        <tr>
+          <td><strong>Parque El Paraíso</strong></td>
+          <td>Yanuncay / La Isla</td>
+          <td>Largest park, forest trails, playgrounds, Shakti free yoga (Sun AM)</td>
+        </tr>
+        <tr>
+          <td><strong>Jardín Botánico</strong></td>
+          <td>Yanuncay / La Isla</td>
+          <td>21 hectares, 8,000 species, free, flat stroller paths</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- DECISION LOGIC -->
+  <h2>The Decision Logic</h2>
+
+  <div class="full-photo">
+    <img src="https://www.awaygowe.com/wp-content/uploads/2024/10/cuenca-ecuador-22-dsc_6432.jpg" alt="Tomebamba River and Barranco colonial houses, Cuenca">
+  </div>
+
+  <blockquote>
+    "Start in El Vergel because the parent community is the hardest thing to build from scratch — you want to be where the other families already are. The Parque de la Madre meetups are the single most important entry point."
+    <cite>— From the neighborhood analysis</cite>
+  </blockquote>
+
+  <p>Here's how the logic stacks up:</p>
+
+  <ul class="walkable-list">
+    <li><strong>The parent community is the hardest thing to build from scratch.</strong> You want to be where the other families already are. The Parque de la Madre Saturday meetups are the single most important entry point for Jess and Bodhi.</li>
+    <li><strong>Jess's daily yoga</strong> at OM Healing Center is walkable from El Vergel — $5 drop-in, no schedule required.</li>
+    <li><strong>CEDEI preschool</strong> for Bodhi is walkable — no car, no commute, no logistics overhead.</li>
+    <li><strong>The Tomebamba riverwalk</strong> gives Jess and Bodhi their daily nature fix from the front door.</li>
+    <li><strong>The university</strong> injects younger energy and intellectual programming into an otherwise retirement-heavy expat scene.</li>
+    <li><strong>El Centro's cultural scene</strong> is a short walk or $2–3 taxi — close enough for evening events, far enough to escape the noise.</li>
+  </ul>
+
+  <p>If after a few months IdiomArte and La Guarida become your primary social anchors — which they might — consider moving north into the Calle Larga / San Sebastián zone. But El Vergel is the safer starting point, and the right first home.</p>
+
+  <blockquote>
+    "El Vergel / Av. Solano is the clear winner — and it's not close."
+    <cite>— Cuenca Neighborhood Analysis, March 2026</cite>
+  </blockquote>
+
+</div>
+
+<footer>
+  <p>Made with care for the Dallas family. Research compiled March 2026.</p>
+  <p style="margin-top:0.5rem">Cape Town → Cuenca. The next chapter.</p>
+</footer>
+
+<script>
+// Hamburger nav for mobile
+document.querySelector('.hamburger').addEventListener('click', function() {
+  document.querySelector('.nav-links').classList.toggle('open');
+});
+</script>
+
+</body>
+</html>

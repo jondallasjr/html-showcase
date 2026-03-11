@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Food &amp; Markets — Cuenca Family Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+:root {
+  --teal: #1a6b5c;
+  --teal-light: #e8f4f1;
+  --terracotta: #c4653a;
+  --gold: #d4a244;
+  --bg: #faf8f5;
+  --text: #2a2a2a;
+  --text-light: #666;
+  --max-width: 900px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: var(--text); background: var(--bg); line-height: 1.7; font-size: 18px; }
+a { color: var(--teal); text-decoration: none; }
+a:hover { color: var(--terracotta); }
+img { max-width: 100%; height: auto; display: block; }
+
+/* Nav */
+nav { position: sticky; top: 0; z-index: 100; background: rgba(250,248,245,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(0,0,0,0.08); }
+nav .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0.75rem 1.5rem; display: flex; align-items: center; justify-content: space-between; }
+nav .logo { font-family: 'DM Serif Display', serif; font-size: 1.25rem; color: var(--teal); }
+nav .nav-links { display: flex; gap: 0.25rem; flex-wrap: wrap; }
+nav .nav-links a { font-size: 0.8rem; padding: 0.35rem 0.65rem; border-radius: 6px; color: var(--text); font-weight: 500; transition: all 0.2s; }
+nav .nav-links a:hover, nav .nav-links a.active { background: var(--teal); color: white; }
+.hamburger { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text); }
+
+/* Hero */
+.hero { position: relative; height: 85vh; min-height: 500px; overflow: hidden; }
+.hero img { width: 100%; height: 100%; object-fit: cover; }
+.hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.5) 70%, rgba(0,0,0,0.7) 100%); display: flex; align-items: flex-end; padding: 3rem 2rem; }
+.hero-text { max-width: var(--max-width); margin: 0 auto; width: 100%; color: white; }
+.hero-text h1 { font-family: 'DM Serif Display', serif; font-size: 3.5rem; line-height: 1.15; margin-bottom: 0.75rem; text-shadow: 0 2px 20px rgba(0,0,0,0.3); }
+.hero-text p { font-size: 1.2rem; opacity: 0.9; max-width: 600px; text-shadow: 0 1px 10px rgba(0,0,0,0.3); }
+
+/* Content */
+.content { max-width: var(--max-width); margin: 0 auto; padding: 3rem 1.5rem; }
+.content h2 { font-family: 'DM Serif Display', serif; font-size: 2rem; color: var(--teal); margin: 2.5rem 0 1rem; }
+.content h2:first-child { margin-top: 0; }
+.content h3 { font-size: 1.15rem; font-weight: 700; margin: 1.5rem 0 0.5rem; color: var(--text); }
+.content p { margin-bottom: 1rem; }
+
+/* Summary box */
+.summary { background: var(--teal-light); border-left: 4px solid var(--teal); padding: 1.5rem 2rem; border-radius: 0 12px 12px 0; margin: 2rem 0; }
+.summary h3 { margin-top: 0; color: var(--teal); }
+.summary ul { padding-left: 1.25rem; }
+.summary li { margin-bottom: 0.35rem; }
+
+/* Stats bar */
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; margin: 2rem 0; }
+.stat { text-align: center; padding: 1.25rem 0.75rem; background: white; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+.stat .number { font-family: 'DM Serif Display', serif; font-size: 1.75rem; color: var(--terracotta); display: block; }
+.stat .label { font-size: 0.8rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 0.25rem; display: block; }
+
+/* Cards grid */
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; margin: 2rem 0; }
+.card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); transition: transform 0.2s, box-shadow 0.2s; }
+.card:hover { transform: translateY(-3px); box-shadow: 0 6px 24px rgba(0,0,0,0.1); }
+.card img { width: 100%; height: 200px; object-fit: cover; }
+.card .card-body { padding: 1.25rem; }
+.card .card-body h3 { margin: 0 0 0.5rem; font-size: 1.1rem; }
+.card .card-body p { font-size: 0.9rem; color: var(--text-light); margin: 0; }
+
+/* Photo grid */
+.photo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 0.75rem; margin: 2rem 0; }
+.photo-grid img { width: 100%; height: 250px; object-fit: cover; border-radius: 8px; }
+
+/* Full bleed photo */
+.full-photo { width: 100vw; margin-left: calc(-50vw + 50%); margin-top: 2rem; margin-bottom: 2rem; }
+.full-photo img { width: 100%; height: 400px; object-fit: cover; }
+
+/* Blockquote */
+blockquote { border-left: 3px solid var(--gold); padding: 1rem 1.5rem; margin: 1.5rem 0; background: #fffdf8; border-radius: 0 8px 8px 0; font-style: italic; }
+blockquote cite { display: block; font-style: normal; font-size: 0.85rem; color: var(--text-light); margin-top: 0.5rem; }
+
+/* Tables */
+table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.95rem; }
+th { text-align: left; padding: 0.75rem 1rem; background: var(--teal); color: white; font-weight: 500; }
+td { padding: 0.75rem 1rem; border-bottom: 1px solid #eee; }
+tr:hover td { background: var(--teal-light); }
+
+/* Dish grid */
+.dish-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+.dish-card { background: white; border-radius: 12px; padding: 1.25rem 1.5rem; box-shadow: 0 2px 12px rgba(0,0,0,0.06); border-top: 3px solid var(--terracotta); }
+.dish-card .dish-name { font-family: 'DM Serif Display', serif; font-size: 1.2rem; color: var(--terracotta); margin-bottom: 0.35rem; }
+.dish-card .dish-tag { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-light); margin-bottom: 0.5rem; }
+.dish-card p { font-size: 0.9rem; color: var(--text); margin: 0; line-height: 1.6; }
+
+/* Market schedule label */
+.badge { display: inline-block; background: var(--teal); color: white; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; padding: 0.2rem 0.5rem; border-radius: 4px; margin-left: 0.4rem; vertical-align: middle; }
+.badge.gold { background: var(--gold); }
+
+/* Footer */
+footer { background: var(--teal); color: white; padding: 2rem; text-align: center; margin-top: 3rem; }
+footer p { opacity: 0.8; font-size: 0.9rem; }
+footer a { color: var(--gold); }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero { height: 60vh; }
+  .hero-text h1 { font-size: 2.2rem; }
+  .hero-text p { font-size: 1rem; }
+  .content { padding: 2rem 1rem; }
+  nav .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: var(--bg); padding: 1rem; border-bottom: 1px solid rgba(0,0,0,0.1); }
+  nav .nav-links.open { display: flex; }
+  .hamburger { display: block; }
+  .photo-grid { grid-template-columns: 1fr; }
+  .stats { grid-template-columns: repeat(2, 1fr); }
+  .dish-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo">Cuenca Guide</a>
+    <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')">&#9776;</button>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="why-cuenca.html">Why Cuenca</a>
+      <a href="neighborhoods.html">Neighborhoods</a>
+      <a href="jess-and-bodhi.html">Jess &amp; Bodhi</a>
+      <a href="jon.html">Jon</a>
+      <a href="community.html">Community</a>
+      <a href="food-and-markets.html" class="active">Food</a>
+      <a href="outdoors.html">Outdoors</a>
+      <a href="practical.html">Practical</a>
+      <a href="schools.html">Schools</a>
+      <a href="cost-of-living.html">Cost</a>
+      <a href="getting-settled.html">Getting Settled</a>
+    </div>
+  </div>
+</nav>
+
+<div class="hero">
+  <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/31/84/9b/d8/caption.jpg?w=1100&h=1100&s=1" alt="Mercado 10 de Agosto interior — Cuenca's main covered market">
+  <div class="hero-overlay">
+    <div class="hero-text">
+      <h1>Food &amp; Markets</h1>
+      <p>Mercado 10 de Agosto, Feria Libre, and $3 almuerzos</p>
+    </div>
+  </div>
+</div>
+
+<div class="content">
+
+  <div class="summary">
+    <h3>The Short Version</h3>
+    <ul>
+      <li>Markets are the heart of food culture — Mercado 10 de Agosto for cooked food, Feria Libre for bulk produce</li>
+      <li>The almuerzo (set lunch) is $2.50–3.50 everywhere: soup, main, juice — the best daily food deal you'll ever find</li>
+      <li>Supermaxi is the main supermarket, walkable from El Vergel; Gran Aki for bulk and basics</li>
+      <li>Fresh produce at markets is extraordinarily cheap — a week's worth for a family costs almost nothing</li>
+      <li>Coffee culture is growing fast; specialty cafés are scattered around El Centro and El Vergel</li>
+      <li>Vegetarians can eat well with some intentionality — ask "sin carne" and seek out dedicated spots</li>
+    </ul>
+  </div>
+
+  <div class="stats">
+    <div class="stat">
+      <span class="number">$2.50</span>
+      <span class="label">Almuerzo price</span>
+    </div>
+    <div class="stat">
+      <span class="number">$5</span>
+      <span class="label">Two dozen roses</span>
+    </div>
+    <div class="stat">
+      <span class="number">$8</span>
+      <span class="label">Giant prawns / lb</span>
+    </div>
+    <div class="stat">
+      <span class="number">$1</span>
+      <span class="label">Hornado plate</span>
+    </div>
+    <div class="stat">
+      <span class="number">8+</span>
+      <span class="label">Weekly markets</span>
+    </div>
+    <div class="stat">
+      <span class="number">$400</span>
+      <span class="label">Monthly groceries</span>
+    </div>
+  </div>
+
+  <!-- SECTION 1: Mercado 10 de Agosto -->
+  <h2>Mercado 10 de Agosto</h2>
+
+  <p>This is the one. Cuenca's main covered market sits in a beautiful barrel-vault hall in El Centro and is where locals — not tourists — go to eat. The building itself is worth the visit: a long, airy, iron-arched nave filled with the sound and smell of cooking. Head here Tuesday and Friday when it's at its best.</p>
+
+  <p>The ground floor is an education in Ecuadorian daily food. Rows of cooked-food stalls serve hornado (slow-roasted pork), encebollado (the fish stew that the whole city swears by), soups, rice plates, and juice bars pressing fresh naranjilla, tomate de árbol, and mora. A full plate runs $1–3. Juice is $0.50. You sit at communal counters, shoulder to shoulder with the butcher from next door and the schoolkids on lunch break.</p>
+
+  <p>Upstairs has something you won't find in most markets: a section of <em>limpias</em> — traditional spiritual cleansings performed by local healers with herbs, eggs, and smoke. Even if you don't partake, it's a window into the Andean Quechua culture that persists quietly inside this modern city.</p>
+
+  <blockquote>
+    "The market is where Cuenca's food identity lives. Everything else — the restaurants, the cafés — grew up around this."
+    <cite>— From our research notes</cite>
+  </blockquote>
+
+  <div class="photo-grid">
+    <img src="https://c8.alamy.com/comp/2C5ED7M/fruit-stalls-at-the-colorful-mercado-10-de-agosto-of-the-central-market-of-cuenca-in-ecuador-2C5ED7M.jpg" alt="Colorful fruit stalls at Mercado 10 de Agosto">
+    <img src="https://culturestraveled.com/wp-content/uploads/2025/09/fruit-stand-markets-cuenca-ecuador-861x1024.jpg" alt="Fresh fruit stand at a Cuenca market">
+    <img src="https://www.packing-up-the-pieces.com/wp-content/uploads/2021/11/Produce_Stalls_Cuenca_Markets.jpg" alt="Produce stalls at Cuenca markets">
+  </div>
+
+  <table>
+    <tr><th>Detail</th><th></th></tr>
+    <tr><td>Best days</td><td>Tuesday &amp; Friday</td></tr>
+    <tr><td>What to eat</td><td>Hornado, encebollado, soups, fresh juice</td></tr>
+    <tr><td>Price range</td><td>$1–3 per plate; $0.50 juice</td></tr>
+    <tr><td>Upstairs</td><td>Spiritual limpias (traditional cleansings)</td></tr>
+    <tr><td>Location</td><td>El Centro — easy walk from El Vergel</td></tr>
+  </table>
+
+  <!-- SECTION 2: Feria Libre -->
+  <h2>Feria Libre</h2>
+
+  <div class="full-photo">
+    <img src="https://photos.smugmug.com/destinations/SouthAmerica/Ecuador/Feria-Libre-Cuenca/i-kbnVmM3/0/05b8cd98/L/Feria-Libre-Cuenca-06128.jpg" alt="Feria Libre — Cuenca's massive open-air market">
+  </div>
+
+  <p>Feria Libre is a different animal. Where Mercado 10 de Agosto is orderly and covered, Feria Libre is sprawling, overwhelming, and completely authentic. It's the biggest open-air market in the city — a maze of stalls selling produce, meat, seafood, clothing, hardware, and things that defy categorization. Come Wednesday or Saturday for the full experience.</p>
+
+  <p>This is where you buy in bulk. Families from all over the Azuay province come here to stock up for the week. The prices are the lowest in the city — a kilo of tomatoes for $0.50, a bag of avocados for $1, choclo (giant Andean corn) roasted over coals on the spot. The chaos is part of it. There's no English spoken here. Point and gesture and smile.</p>
+
+  <p>The protein section is not for the faint-hearted: cuy (guinea pig) roasted whole, giant fresh prawns at around $8/lb, live chickens, whole fish on ice. Feria Libre is where you understand that Cuenca is not a tourist city wearing a market as an accessory — the market is the city's actual metabolism.</p>
+
+  <div class="photo-grid">
+    <img src="https://photos.smugmug.com/destinations/SouthAmerica/Ecuador/Feria-Libre-Cuenca/i-hsgjwWM/0/aa7c23f4/L/Feria-Libre-Cuenca-06123.jpg" alt="Cuy and roasted meats at Feria Libre">
+    <img src="https://photos.smugmug.com/destinations/SouthAmerica/Ecuador/Feria-Libre-Cuenca/i-Vqrk54s/0/e6d43017/L/Feria-Libre-Cuenca-06115.jpg" alt="Street vendor at Feria Libre Cuenca">
+  </div>
+
+  <!-- SECTION 3: The Almuerzo -->
+  <h2>The Almuerzo</h2>
+
+  <p>Ecuador's set lunch tradition is one of the best things about daily life here. At almost any restaurant, market stall, or neighborhood comedor between noon and 2pm, you can order the <em>almuerzo</em> — and for $2.50 to $3.50 you get:</p>
+
+  <div class="summary" style="margin: 1.5rem 0;">
+    <h3>What's Included</h3>
+    <ul>
+      <li><strong>Sopa</strong> — a hearty soup, often with potato, corn, or noodles</li>
+      <li><strong>Segundo</strong> — a main plate of rice, protein (chicken, fish, or pork), and salad</li>
+      <li><strong>Jugo</strong> — a fresh-pressed juice (naranjilla, mora, maracuyá)</li>
+      <li>Sometimes a small dessert or sweet drink is included</li>
+    </ul>
+  </div>
+
+  <p>The almuerzo is not a tourist construct — it's how working Cuencanos eat every day. The quality varies: market stalls are basic and filling; mid-range restaurants serve better proteins and more varied soups; dedicated vegetarian spots like Govinda's and Nandala do an almuerzo too, at $2.50–5. You'll eat the almuerzo most weekdays. It's that good a deal.</p>
+
+  <blockquote>
+    "The almuerzo tradition is a perfect daily anchor. Soup, main, juice, $3. You stop, you sit, you eat properly. Then you get back to work."
+    <cite>— From our research</cite>
+  </blockquote>
+
+  <!-- SECTION 4: Ecuadorian Dishes -->
+  <h2>Ecuadorian Dishes to Know</h2>
+
+  <p>Before you arrive, get familiar with what's on every menu. Cuenca's food is Andean highland cooking: hearty, corn-forward, pork-heavy, and deeply tied to the land.</p>
+
+  <div class="dish-grid">
+    <div class="dish-card">
+      <div class="dish-name">Hornado</div>
+      <div class="dish-tag">The classic — pork</div>
+      <p>Whole pig slow-roasted over wood for hours until the skin crisps to crackle. Sold by weight at Mercado 10 de Agosto for $1–3/plate. It comes with mote and llapingachos. This is the dish Cuenca is most known for. Order it on Tuesday or Friday.</p>
+    </div>
+    <div class="dish-card">
+      <div class="dish-name">Encebollado</div>
+      <div class="dish-tag">Fish stew — national dish</div>
+      <p>A thick, tangy soup of fresh tuna or fish with yuca, onion, tomato, and cilantro. Ecuador's unofficial national dish and widely considered the best hangover cure in the country. Available morning through afternoon at almost any market stall.</p>
+    </div>
+    <div class="dish-card">
+      <div class="dish-name">Cuy</div>
+      <div class="dish-tag">Guinea pig — the adventurous one</div>
+      <p>Whole roasted guinea pig, served with potatoes and salad. It's a delicacy, not a novelty — Andean families have been eating cuy for centuries, typically at celebrations. The meat is dark and slightly gamey, like rabbit. Try it at Feria Libre or a traditional restaurant. You only need to do it once to say you did.</p>
+    </div>
+    <div class="dish-card">
+      <div class="dish-name">Llapingachos</div>
+      <div class="dish-tag">Potato cakes</div>
+      <p>Pan-fried potato patties stuffed with cheese, crispy on the outside and soft in the middle. They come with almost every traditional plate — hornado, cuy, grilled meat. Think of them as Ecuador's answer to hash browns, but better.</p>
+    </div>
+    <div class="dish-card">
+      <div class="dish-name">Mote</div>
+      <div class="dish-tag">Hominy corn — in everything</div>
+      <p>Large, starchy hominy corn kernels that appear as a side dish, in soups, mixed with chicharrón (fried pork skin), and at markets everywhere. Mote pillo is scrambled with eggs and onion. Mote sucio is tossed with chicharrón. It's the starch backbone of highland Ecuadorian cooking.</p>
+    </div>
+    <div class="dish-card">
+      <div class="dish-name">Humitas</div>
+      <div class="dish-tag">Corn tamales</div>
+      <p>Fresh corn masa mixed with cheese and wrapped in corn husks, then steamed. Served sweet or savory. You'll find them at market stalls in the morning, eaten as breakfast with a coffee. They're softer and fresher than Mexican tamales — more delicate. Bodhi will probably love them.</p>
+    </div>
+  </div>
+
+  <div class="photo-grid">
+    <img src="https://culturestraveled.com/wp-content/uploads/2025/09/hornado-food-ecuador-769x1024.jpg" alt="Hornado — Ecuador's famous slow-roasted pork dish">
+  </div>
+
+  <!-- SECTION 5: The Restaurant Scene -->
+  <h2>The Restaurant Scene</h2>
+
+  <p>Beyond the markets, Cuenca has a real restaurant scene — not the depth of a major capital, but more than enough for daily life. The range runs from $3 almuerzo comedores to $15–20 sit-down dinners with actual wine lists.</p>
+
+  <h3>Notable Spots</h3>
+
+  <table>
+    <tr><th>Restaurant</th><th>Type</th><th>Notes</th></tr>
+    <tr><td><strong>La Guarida</strong></td><td>Cultural restaurant</td><td>Best cultural restaurant in the city. Mariscal Lamar 22.23, western El Centro. Quality vegetarian options alongside meat. The spot where Cuenca's creative class eats.</td></tr>
+    <tr><td><strong>Nandala Cocina Vegetariana</strong></td><td>Vegetarian</td><td>The standout for plant-based eating. Almuerzo $5–8. The Crispy Chicken Burger and Caesar salad are local favorites. Multiple vegan bloggers call it their top Cuenca pick.</td></tr>
+    <tr><td><strong>Govinda's Vegetariano &amp; Vegano</strong></td><td>Vegetarian / Hare Krishna</td><td>Filling and great value. Lunch buffet and à la carte. Curried vegetables, falafel, veggie paella. Almuerzo $2.50–4.</td></tr>
+    <tr><td><strong>Restaurant El Paraíso</strong></td><td>All-vegetarian</td><td>Multiple locations, decent smoothies for $1. Reliable and affordable rather than exciting.</td></tr>
+    <tr><td><strong>Sakura Restaurant</strong></td><td>Expat-friendly</td><td>Hosts the Friday 5pm Expat Happy Hour — a weekly community anchor.</td></tr>
+    <tr><td><strong>Gran Roca Farm-to-Table</strong></td><td>Organic / special</td><td>Wednesday noon–2pm at Hotel Los Balcones. Organic produce from a permaculture farm in Yunguilla Valley. $6.50 for lunch. Worth the detour.</td></tr>
+  </table>
+
+  <p>For higher-end dinners, El Centro has a growing collection of restaurants serving Ecuadorian fusion, Peruvian-influenced dishes, and international food. Expect $12–20/person including a drink. Not cheap by Cuenca standards, but exceptional value compared to any Western city.</p>
+
+  <!-- SECTION 6: Grocery Shopping -->
+  <h2>Grocery Shopping</h2>
+
+  <p>For everyday groceries, Supermaxi is the answer. It's a proper full-service supermarket — produce section, deli counter, bakery, decent wine and beer selection, and a health food aisle that stocks La Chakra products (vegan cheese, gluten-free breads, coconut oil). The El Vergel location is walkable from most apartments in the neighborhood. Gran Aki handles bulk basics at lower prices.</p>
+
+  <h3>What to Expect on Price</h3>
+
+  <table>
+    <tr><th>Item</th><th>Market Price</th><th>Supermaxi Price</th></tr>
+    <tr><td>Tomatoes (1 kg)</td><td>~$0.50</td><td>~$1.20</td></tr>
+    <tr><td>Avocados (bag of 4)</td><td>~$1.00</td><td>~$2.50</td></tr>
+    <tr><td>Eggs (dozen)</td><td>~$1.50</td><td>~$2.00</td></tr>
+    <tr><td>Chicken breast (1 kg)</td><td>~$3.00</td><td>~$4.50</td></tr>
+    <tr><td>Imported cheese</td><td>—</td><td>$5–10</td></tr>
+    <tr><td>Good wine (Chilean)</td><td>—</td><td>$7–15</td></tr>
+  </table>
+
+  <p>The rule of thumb: buy fresh produce at Feria Libre or Mercado 10 de Agosto — the price difference versus Supermaxi is dramatic, and the quality is equal or better. Buy packaged goods, dairy, and anything imported at Supermaxi. A family of three spending thoughtfully should land around $400–500/month on groceries and markets combined.</p>
+
+  <p>For specialty items — La Chakra is the go-to natural products store. Biweekly markets like the Gran Feria Sabatino's (first and third Saturdays, 10am–2pm at Roberto Aguilar &amp; 3 de Noviembre) and the Common Grounds Gran Feria feature kombucha, kefir, granola, organic produce, and artisan food producers. These are also great places to meet people.</p>
+
+  <!-- SECTION 7: Coffee Culture -->
+  <h2>Coffee Culture</h2>
+
+  <div class="photo-grid">
+    <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/78/40/31/nuestra-tienda-de-cafe.jpg?w=900&h=500&s=1" alt="Specialty coffee shop in Cuenca Ecuador">
+    <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2a/91/fa/39/a-cozy-cafe-with-specialty.jpg?w=900&h=500&s=1" alt="Cozy café interior with specialty coffee in Cuenca">
+  </div>
+
+  <p>Ecuador grows coffee — good coffee, mostly in the coastal lowlands and southern highlands. For a long time, the best beans got exported while Ecuadorians drank Nescafé. That's changing. Cuenca now has a real specialty coffee scene, concentrated around El Centro and Calle Larga, with proper third-wave cafés doing single-origin pour-overs and proper espresso.</p>
+
+  <p>The café culture serves a dual function in expat life: coffee and coworking. Kristi Rowles organizes digital nomad café meetups on Tuesday and Thursday afternoons (1–4pm) at rotating spots. Sunrise Café runs a Friday morning market (9am–1pm on Calle Larga y Benigno Malo) with bakery items, artisan goods, and good coffee alongside it.</p>
+
+  <p>For context: this is not Chiang Mai or Medellín — there are maybe 10–15 serious specialty cafés, not 100. But there are enough good ones within walking distance of El Vergel that daily espresso quality isn't a compromise.</p>
+
+  <div class="summary">
+    <h3>Market Calendar at a Glance</h3>
+    <ul>
+      <li><strong>Tues &amp; Fri</strong> — Mercado 10 de Agosto at its best (hornado, fresh produce)</li>
+      <li><strong>Wed &amp; Sat</strong> — Feria Libre (massive, bulk produce, lowest prices)</li>
+      <li><strong>Wed noon–2pm</strong> — Gran Roca Farm-to-Table at Hotel Los Balcones ($6.50 organic lunch)</li>
+      <li><strong>Tues &amp; Sat 8–10am</strong> — Farmers Market at Dos Sucres (small, fresh, local)</li>
+      <li><strong>Thu &amp; Sat</strong> — Mercado San Francisco (general produce)</li>
+      <li><strong>Fri 9am–1pm</strong> — Sunrise Café Friday Market (Calle Larga y Benigno Malo)</li>
+      <li><strong>1st &amp; 3rd Sat 10am–2pm</strong> — Gran Feria Sabatino's (~40 artisan food vendors)</li>
+      <li><strong>Biweekly Sat 10am–2pm</strong> — Common Grounds Gran Feria (kombucha, kefir, granola, organic)</li>
+      <li><strong>Daily</strong> — Plaza de las Flores (roses $5/two dozen — yes, really)</li>
+    </ul>
+  </div>
+
+</div>
+
+<footer>
+  <p>Made with care for the Dallas family. Research compiled March 2026.</p>
+  <p style="margin-top:0.5rem">Cape Town → Cuenca. The next chapter.</p>
+</footer>
+
+<script>
+document.querySelector('.hamburger').addEventListener('click', function() {
+  document.querySelector('.nav-links').classList.toggle('open');
+});
+</script>
+
+</body>
+</html>

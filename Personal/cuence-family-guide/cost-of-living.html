@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cost of Living — Cuenca, Ecuador Family Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+:root {
+  --teal: #1a6b5c;
+  --teal-light: #e8f4f1;
+  --terracotta: #c4653a;
+  --gold: #d4a244;
+  --bg: #faf8f5;
+  --text: #2a2a2a;
+  --text-light: #666;
+  --max-width: 900px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: var(--text); background: var(--bg); line-height: 1.7; font-size: 18px; }
+a { color: var(--teal); text-decoration: none; }
+a:hover { color: var(--terracotta); }
+img { max-width: 100%; height: auto; display: block; }
+
+/* Nav */
+nav { position: sticky; top: 0; z-index: 100; background: rgba(250,248,245,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(0,0,0,0.08); }
+nav .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0.75rem 1.5rem; display: flex; align-items: center; justify-content: space-between; }
+nav .logo { font-family: 'DM Serif Display', serif; font-size: 1.25rem; color: var(--teal); }
+nav .nav-links { display: flex; gap: 0.25rem; flex-wrap: wrap; }
+nav .nav-links a { font-size: 0.8rem; padding: 0.35rem 0.65rem; border-radius: 6px; color: var(--text); font-weight: 500; transition: all 0.2s; }
+nav .nav-links a:hover, nav .nav-links a.active { background: var(--teal); color: white; }
+.hamburger { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text); }
+
+/* Hero */
+.hero { position: relative; height: 85vh; min-height: 500px; overflow: hidden; }
+.hero img { width: 100%; height: 100%; object-fit: cover; }
+.hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.5) 70%, rgba(0,0,0,0.7) 100%); display: flex; align-items: flex-end; padding: 3rem 2rem; }
+.hero-text { max-width: var(--max-width); margin: 0 auto; width: 100%; color: white; }
+.hero-text h1 { font-family: 'DM Serif Display', serif; font-size: 3.5rem; line-height: 1.15; margin-bottom: 0.75rem; text-shadow: 0 2px 20px rgba(0,0,0,0.3); }
+.hero-text p { font-size: 1.2rem; opacity: 0.9; max-width: 600px; text-shadow: 0 1px 10px rgba(0,0,0,0.3); }
+
+/* Content */
+.content { max-width: var(--max-width); margin: 0 auto; padding: 3rem 1.5rem; }
+.content h2 { font-family: 'DM Serif Display', serif; font-size: 2rem; color: var(--teal); margin: 2.5rem 0 1rem; }
+.content h2:first-child { margin-top: 0; }
+.content h3 { font-size: 1.15rem; font-weight: 700; margin: 1.5rem 0 0.5rem; color: var(--text); }
+.content p { margin-bottom: 1rem; }
+
+/* Summary box */
+.summary { background: var(--teal-light); border-left: 4px solid var(--teal); padding: 1.5rem 2rem; border-radius: 0 12px 12px 0; margin: 2rem 0; }
+.summary h3 { margin-top: 0; color: var(--teal); }
+.summary ul { padding-left: 1.25rem; }
+.summary li { margin-bottom: 0.35rem; }
+
+/* Stats bar */
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; margin: 2rem 0; }
+.stat { text-align: center; padding: 1.25rem 0.75rem; background: white; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+.stat .number { font-family: 'DM Serif Display', serif; font-size: 1.75rem; color: var(--terracotta); display: block; }
+.stat .label { font-size: 0.8rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 0.25rem; display: block; }
+
+/* Cards grid */
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; margin: 2rem 0; }
+.card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); transition: transform 0.2s, box-shadow 0.2s; }
+.card:hover { transform: translateY(-3px); box-shadow: 0 6px 24px rgba(0,0,0,0.1); }
+.card img { width: 100%; height: 200px; object-fit: cover; }
+.card .card-body { padding: 1.25rem; }
+.card .card-body h3 { margin: 0 0 0.5rem; font-size: 1.1rem; }
+.card .card-body p { font-size: 0.9rem; color: var(--text-light); margin: 0; }
+.card .card-body a { display: inline-block; margin-top: 0.75rem; font-weight: 700; font-size: 0.85rem; color: var(--terracotta); }
+
+/* Photo grid */
+.photo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 0.75rem; margin: 2rem 0; }
+.photo-grid img { width: 100%; height: 250px; object-fit: cover; border-radius: 8px; }
+
+/* Full bleed photo */
+.full-photo { width: 100vw; margin-left: calc(-50vw + 50%); margin-top: 2rem; margin-bottom: 2rem; }
+.full-photo img { width: 100%; height: 400px; object-fit: cover; }
+
+/* Blockquote */
+blockquote { border-left: 3px solid var(--gold); padding: 1rem 1.5rem; margin: 1.5rem 0; background: #fffdf8; border-radius: 0 8px 8px 0; font-style: italic; }
+blockquote cite { display: block; font-style: normal; font-size: 0.85rem; color: var(--text-light); margin-top: 0.5rem; }
+
+/* Tables */
+table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.95rem; }
+th { text-align: left; padding: 0.75rem 1rem; background: var(--teal); color: white; font-weight: 500; }
+td { padding: 0.75rem 1rem; border-bottom: 1px solid #eee; }
+tr:hover td { background: var(--teal-light); }
+.td-range { color: var(--terracotta); font-weight: 600; white-space: nowrap; }
+.tr-total td { font-weight: 700; background: var(--teal-light); border-top: 2px solid var(--teal); }
+.tr-total:hover td { background: var(--teal-light); }
+
+/* Value highlight chips */
+.value-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin: 2rem 0; }
+.value-chip { background: white; border-radius: 12px; padding: 1.25rem 1.5rem; box-shadow: 0 2px 12px rgba(0,0,0,0.06); border-top: 3px solid var(--teal); }
+.value-chip .price { font-family: 'DM Serif Display', serif; font-size: 1.6rem; color: var(--terracotta); display: block; margin-bottom: 0.2rem; }
+.value-chip .item { font-weight: 700; font-size: 0.95rem; display: block; margin-bottom: 0.2rem; }
+.value-chip .note { font-size: 0.82rem; color: var(--text-light); }
+
+/* Comparison table */
+.comparison-table th:first-child { min-width: 160px; }
+.comparison-table .highlight { background: var(--teal-light); font-weight: 700; }
+
+/* Expensive section */
+.expensive-list { list-style: none; padding: 0; margin: 1rem 0; }
+.expensive-list li { padding: 0.6rem 0; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: baseline; font-size: 0.95rem; }
+.expensive-list li:last-child { border-bottom: none; }
+.expensive-list .item-name { flex: 1; }
+.expensive-list .item-cost { color: var(--terracotta); font-weight: 600; margin-left: 1rem; white-space: nowrap; }
+
+/* USD advantage callout */
+.callout { background: linear-gradient(135deg, #1a6b5c 0%, #0d4d40 100%); color: white; border-radius: 16px; padding: 2rem 2.5rem; margin: 2rem 0; }
+.callout h3 { color: var(--gold); font-family: 'DM Serif Display', serif; font-size: 1.5rem; margin-bottom: 0.75rem; }
+.callout p { opacity: 0.9; margin-bottom: 0.75rem; }
+.callout p:last-child { margin-bottom: 0; }
+.callout ul { padding-left: 1.25rem; opacity: 0.9; }
+.callout li { margin-bottom: 0.35rem; }
+
+/* Footer */
+footer { background: var(--teal); color: white; padding: 2rem; text-align: center; margin-top: 3rem; }
+footer p { opacity: 0.8; font-size: 0.9rem; }
+footer a { color: var(--gold); }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero { height: 60vh; }
+  .hero-text h1 { font-size: 2.2rem; }
+  .hero-text p { font-size: 1rem; }
+  .content { padding: 2rem 1rem; }
+  nav .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: var(--bg); padding: 1rem; border-bottom: 1px solid rgba(0,0,0,0.1); }
+  nav .nav-links.open { display: flex; }
+  .hamburger { display: block; }
+  .photo-grid { grid-template-columns: 1fr; }
+  .stats { grid-template-columns: repeat(2, 1fr); }
+  .value-grid { grid-template-columns: 1fr 1fr; }
+  .callout { padding: 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo">Cuenca Guide</a>
+    <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')">&#9776;</button>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="why-cuenca.html">Why Cuenca</a>
+      <a href="neighborhoods.html">Neighborhoods</a>
+      <a href="jess-and-bodhi.html">Jess &amp; Bodhi</a>
+      <a href="jon.html">Jon</a>
+      <a href="community.html">Community</a>
+      <a href="food-and-markets.html">Food</a>
+      <a href="outdoors.html">Outdoors</a>
+      <a href="practical.html">Practical</a>
+      <a href="schools.html">Schools</a>
+      <a href="cost-of-living.html" class="active">Cost</a>
+      <a href="getting-settled.html">Getting Settled</a>
+    </div>
+  </div>
+</nav>
+
+<div class="hero">
+  <img src="https://www.wandertooth.com/wp-content/uploads/2026/01/Cuenca-historic-center.jpg" alt="Cuenca historic center plaza with colonial architecture and market activity">
+  <div class="hero-overlay">
+    <div class="hero-text">
+      <h1>Cost of Living</h1>
+      <p>A family of three on $2,400–3,200 a month — and what that actually buys you.</p>
+    </div>
+  </div>
+</div>
+
+<div class="content">
+
+  <div class="summary">
+    <h3>The Numbers at a Glance</h3>
+    <ul>
+      <li>Monthly family budget: <strong>$2,400–3,200</strong> (living well, not scrimping)</li>
+      <li>Rent, 2BR furnished in El Vergel: <strong>$400–700</strong></li>
+      <li>Set lunch (almuerzo) at a local restaurant: <strong>$2.50–3.50</strong></li>
+      <li>Yoga drop-in class: <strong>$4–7</strong></li>
+      <li>Award-winning spa circuit: <strong>$17</strong></li>
+      <li>Symphony concerts: <strong>Free</strong></li>
+      <li>Currency: <strong>USD — no conversion, no exchange rate risk</strong></li>
+    </ul>
+  </div>
+
+  <div class="stats">
+    <div class="stat">
+      <span class="number">$2,700</span>
+      <span class="label">Midpoint Monthly</span>
+    </div>
+    <div class="stat">
+      <span class="number">$550</span>
+      <span class="label">Avg Rent (2BR)</span>
+    </div>
+    <div class="stat">
+      <span class="number">$3</span>
+      <span class="label">Almuerzo Lunch</span>
+    </div>
+    <div class="stat">
+      <span class="number">$5</span>
+      <span class="label">Yoga Class</span>
+    </div>
+    <div class="stat">
+      <span class="number">USD</span>
+      <span class="label">No Conversion</span>
+    </div>
+    <div class="stat">
+      <span class="number">~$33K</span>
+      <span class="label">Per Year</span>
+    </div>
+  </div>
+
+  <h2>Monthly Budget Breakdown</h2>
+  <p>These are honest numbers for a family of three living comfortably in El Vergel — not budget-backpacker, not expat-luxe. This is how a family with a toddler, a yoga practice, and a taste for eating out a few times a week actually lives.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Category</th>
+        <th>Monthly Range</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Rent (2BR furnished)</td>
+        <td class="td-range">$400–700</td>
+        <td>El Vergel, includes furnished options</td>
+      </tr>
+      <tr>
+        <td>Utilities (electricity, water)</td>
+        <td class="td-range">$30–60</td>
+        <td>Electricity cheap; no A/C needed at altitude</td>
+      </tr>
+      <tr>
+        <td>Groceries &amp; markets</td>
+        <td class="td-range">$300–400</td>
+        <td>Supermaxi + Feria Libre; fresh produce very cheap</td>
+      </tr>
+      <tr>
+        <td>Dining out</td>
+        <td class="td-range">$200–300</td>
+        <td>3–4x/week; almuerzos $3, nicer dinners $20–30</td>
+      </tr>
+      <tr>
+        <td>Transport</td>
+        <td class="td-range">$50–100</td>
+        <td>Walking + taxis ($2–3) + bus ($0.25); no car needed</td>
+      </tr>
+      <tr>
+        <td>Healthcare &amp; insurance</td>
+        <td class="td-range">$100–200</td>
+        <td>Private international health insurance; doctors ~$30–50/visit</td>
+      </tr>
+      <tr>
+        <td>Yoga &amp; wellness</td>
+        <td class="td-range">$50–100</td>
+        <td>Drop-in $4–7; monthly unlimited passes available</td>
+      </tr>
+      <tr>
+        <td>Childcare &amp; school</td>
+        <td class="td-range">$90–250</td>
+        <td>Private preschool tuition; nanny if needed adds $400–600</td>
+      </tr>
+      <tr>
+        <td>Entertainment &amp; culture</td>
+        <td class="td-range">$50–100</td>
+        <td>Many events free or $5–15; symphony free; theatre $15</td>
+      </tr>
+      <tr>
+        <td>Phone &amp; internet</td>
+        <td class="td-range">$30–50</td>
+        <td>Fiber at home; Claro/Movistar mobile plans cheap</td>
+      </tr>
+      <tr>
+        <td>Miscellaneous</td>
+        <td class="td-range">$100–200</td>
+        <td>Household items, personal care, incidentals</td>
+      </tr>
+      <tr class="tr-total">
+        <td>Total</td>
+        <td class="td-range">$2,400–3,200</td>
+        <td>Living well; annualizes to ~$29K–38K</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>With Ecuador's digital nomad visa exempting foreign-sourced income from local taxation — and FEIE handling most US federal tax — the total annual outflow is well under the $50K target. This is the best cost-income-tax combination of any city we researched that actually works for an East Coast timezone worker.</p>
+
+  <div class="full-photo">
+    <img src="https://www.packing-up-the-pieces.com/wp-content/uploads/2021/11/Produce_Stalls_Cuenca_Markets.jpg" alt="Fresh produce stalls at a Cuenca market with colorful fruits and vegetables">
+  </div>
+
+  <h2>The Value Highlights</h2>
+  <p>Some prices in Cuenca are so low they bear repeating separately. These aren't budget compromises — they're world-class amenities at prices that don't make sense until you're actually paying them.</p>
+
+  <div class="value-grid">
+    <div class="value-chip">
+      <span class="price">$4–7</span>
+      <span class="item">Yoga drop-in class</span>
+      <span class="note">OM Healing Center $5, Shakti Yoga $4, Adhikara $7. Same quality as a $25 class anywhere else.</span>
+    </div>
+    <div class="value-chip">
+      <span class="price">$17</span>
+      <span class="item">Award-winning spa circuit</span>
+      <span class="note">Piedra de Agua — Best Spa in N. &amp; S. America. Underground thermal caves, Japanese pool, massage caves. Regular 2-for-1 promotions.</span>
+    </div>
+    <div class="value-chip">
+      <span class="price">Free</span>
+      <span class="item">Symphony concerts</span>
+      <span class="note">Cuenca Philharmonic performs regularly in the city. No ticket, no catch.</span>
+    </div>
+    <div class="value-chip">
+      <span class="price">$2.50–3.50</span>
+      <span class="item">Almuerzo lunch</span>
+      <span class="note">Fixed set lunch at local restaurants: soup, main, juice, sometimes dessert. The way most of Cuenca eats every day.</span>
+    </div>
+    <div class="value-chip">
+      <span class="price">Free</span>
+      <span class="item">University library</span>
+      <span class="note">Universidad de Cuenca library is open to the public. Research, reading rooms, academic resources.</span>
+    </div>
+    <div class="value-chip">
+      <span class="price">Free</span>
+      <span class="item">Jardín Botánico</span>
+      <span class="note">Botanical garden in Yanuncay — a proper botanical collection, not a park with a few plants.</span>
+    </div>
+    <div class="value-chip">
+      <span class="price">Free</span>
+      <span class="item">Museo Pumapungo</span>
+      <span class="note">Pre-Columbian artifacts, Andean history, Inca ruins in the museum garden. Serious museum, no entry fee.</span>
+    </div>
+    <div class="value-chip">
+      <span class="price">$0.25</span>
+      <span class="item">City bus</span>
+      <span class="note">Flat fare for any route, including the Tranvía tram. Taxis across town: $2–3.</span>
+    </div>
+  </div>
+
+  <blockquote>
+    "Yoga classes at $4–7, a world-class spa for $17, free symphony concerts, and a national park 30 minutes away. The value calculus in Cuenca is genuinely unusual — quality is high, prices are low, and the USD means you're always working with exact numbers."
+    <cite>— From our research</cite>
+  </blockquote>
+
+  <h2>Rent Details</h2>
+
+  <div class="photo-grid">
+    <img src="https://yapatree.com/wp-content/uploads/2025/11/your-new-cuenca-home-112.jpg" alt="Cuenca apartment with modern interior and natural light">
+    <img src="https://mls.mls-ecuador.com/api/images/rl2500080/rl2500080_img_large.jpg" alt="Furnished condo in Cuenca with living area and large windows">
+    <img src="https://a0.muscache.com/im/pictures/hosting/Hosting-1263029115772834205/original/6b82e053-9f93-44db-abaf-f92f8c353b6d.jpeg?im_w=720" alt="Cuenca rental apartment living space with comfortable furnishings">
+  </div>
+
+  <p>A furnished 2-bedroom in El Vergel runs <strong>$400–700/month</strong>. The lower end gets you an older building with character; the upper end gets you something newer with good light, modern kitchen, and possibly a balcony. Most rentals aimed at expats come fully furnished — bed, sofa, kitchen appliances, the works. You can arrive with suitcases and live there from day one.</p>
+
+  <p>The rental market in Cuenca is notably less competitive than comparable expat cities. Oaxaca has become crowded with remote workers driving rents up; Cuenca's market is quieter and more stable. There's no bidding war, no "you have to decide today" pressure.</p>
+
+  <h3>Where to Look</h3>
+  <p><strong>YapaTree</strong> and <strong>GringoPost</strong> are the primary expat rental platforms for Cuenca. Facebook groups — particularly "Gringos in Cuenca" and "Cuenca Expats" — have active listings. Many of the best apartments circulate through word of mouth in these groups before they ever hit a formal listing site.</p>
+
+  <h3>What to Know</h3>
+  <p>Confirm fiber internet availability before signing anything. El Vergel has solid coverage from Claro, Movistar, and CNT — but confirm the specific building. Most expat apartment buildings installed generators after the 2024 blackout issues, so ask about that too. Leases are typically 6 or 12 months; month-to-month is possible but commands a premium.</p>
+
+  <div class="full-photo">
+    <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2e/fc/ab/4c/caption.jpg" alt="Cuenca cafe with warm interior and local atmosphere">
+  </div>
+
+  <h2>Comparison Context</h2>
+  <p>How does $2,400–3,200/month stack up against the other cities we considered — and against staying in the US?</p>
+
+  <table class="comparison-table">
+    <thead>
+      <tr>
+        <th>City</th>
+        <th>Family Monthly Budget</th>
+        <th>Timezone (vs ET)</th>
+        <th>USD Risk</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="highlight">
+        <td><strong>Cuenca</strong></td>
+        <td class="td-range">$2,400–3,200</td>
+        <td>Same (UTC-5)</td>
+        <td>None (uses USD)</td>
+        <td>Our pick</td>
+      </tr>
+      <tr>
+        <td>Chiang Mai</td>
+        <td class="td-range">$2,000–2,800</td>
+        <td>+11 hrs (brutal)</td>
+        <td>THB fluctuation</td>
+        <td>Cheapest; timezone kills it for ET workers</td>
+      </tr>
+      <tr>
+        <td>Oaxaca</td>
+        <td class="td-range">$2,200–3,000</td>
+        <td>-1 hr (good)</td>
+        <td>MXN fluctuation</td>
+        <td>Rent rising fast; family infrastructure thinner</td>
+      </tr>
+      <tr>
+        <td>Cape Town</td>
+        <td class="td-range">$2,800–4,000</td>
+        <td>+6 hrs (workday 3–11pm)</td>
+        <td>ZAR volatile</td>
+        <td>Beautiful but timezone and currency are real problems</td>
+      </tr>
+      <tr>
+        <td>Dallas, TX</td>
+        <td class="td-range">$6,000–9,000</td>
+        <td>Same (CT, close)</td>
+        <td>None</td>
+        <td>Baseline comparison — what we're leaving</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>The comparison isn't just about total monthly spend. Cuenca is the only city on that list that combines a low cost of living with the Eastern timezone and zero currency risk. Chiang Mai is cheaper but destroys an ET work schedule. Oaxaca is close on cost but the rental market is heating up, the family expat infrastructure is thinner and harder to find, and the MXN has fluctuated significantly. Cape Town's ZAR has lost a third of its value in recent years.</p>
+
+  <p>Against Dallas: the annual difference is roughly <strong>$40,000–70,000</strong>. For a family not dependent on US-based employment infrastructure (schools, property), that gap is hard to ignore.</p>
+
+  <h2>What's Actually Expensive</h2>
+  <p>Ecuador is not uniformly cheap. The economy is optimized for local production — anything that needs to be imported pays for it. Being honest about this matters for budgeting.</p>
+
+  <ul class="expensive-list">
+    <li>
+      <span class="item-name">Electronics (laptops, phones, cameras)</span>
+      <span class="item-cost">20–40% above US prices</span>
+    </li>
+    <li>
+      <span class="item-name">Cars and vehicle parts</span>
+      <span class="item-cost">Significantly higher than US</span>
+    </li>
+    <li>
+      <span class="item-name">Good imported wine</span>
+      <span class="item-cost">$15–25+ for a decent bottle</span>
+    </li>
+    <li>
+      <span class="item-name">Quality imported cheese</span>
+      <span class="item-cost">$8–15 for a small wedge</span>
+    </li>
+    <li>
+      <span class="item-name">Imported foods (specific brands, specialty items)</span>
+      <span class="item-cost">Often 2–3x what you'd pay in the US</span>
+    </li>
+    <li>
+      <span class="item-name">International flights</span>
+      <span class="item-cost">No direct US flights; Quito connections add $400–600 RT and a day of travel</span>
+    </li>
+    <li>
+      <span class="item-name">Specialty coffee (third-wave cafes)</span>
+      <span class="item-cost">$4–6 — same as the US, despite being Ecuador</span>
+    </li>
+  </ul>
+
+  <p>The practical implication: buy your electronics before you go. Bring the wine you love. Stock up on specialty ingredients if they matter to you. Budget for a trip to Quito's larger supermarkets every few months if imported foods are part of your life. None of these are dealbreakers — they're just the texture of life in a place with high import tariffs.</p>
+
+  <p>Ecuador produces excellent domestic wine from the coast and highlands — and local craft beer has exploded. You won't suffer. But the specific Burgundy you love from Trader Joe's is going to cost you.</p>
+
+  <div class="callout">
+    <h3>The USD Advantage</h3>
+    <p>Ecuador adopted the US dollar as its official currency in 2000 and has used it ever since. For a family earning in USD, this is structurally significant — not just a convenience.</p>
+    <ul>
+      <li><strong>No conversion fees.</strong> Every peso, baht, rand, or peso transaction eats a percentage. In Cuenca, your income and your spending are in the same currency. What you earn is what you spend, minus nothing.</li>
+      <li><strong>No exchange rate risk.</strong> The ZAR lost a third of its value against the dollar in recent years. The MXN has swung 20% in a single year. If your income is in USD and you're spending in MXN or ZAR, a currency move can erase a year of savings gains overnight. In Ecuador, that risk doesn't exist.</li>
+      <li><strong>No mental math.</strong> Grocery shopping, taxi rides, rent, yoga classes — all in USD. You always know exactly what things cost relative to your income.</li>
+      <li><strong>No cash conversion on arrival.</strong> You land, you go to an ATM, you take out dollars. Same dollars you've always used.</li>
+    </ul>
+    <p>For nomad families who have lived through currency volatility — watching Cape Town's ZAR erode, watching the Thai baht or Mexican peso swing — the psychological value of a stable USD environment is hard to overstate. It removes an entire category of financial anxiety.</p>
+  </div>
+
+</div>
+
+<footer>
+  <p>Made with care for the Dallas family. Research compiled March 2026.</p>
+  <p style="margin-top:0.5rem">Cape Town → Cuenca. The next chapter.</p>
+</footer>
+
+<script>
+// Mobile nav toggle
+document.querySelector('.hamburger').addEventListener('click', function() {
+  document.querySelector('.nav-links').classList.toggle('open');
+});
+</script>
+
+</body>
+</html>

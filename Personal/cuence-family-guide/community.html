@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Community & Culture — Cuenca Family Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+:root {
+  --teal: #1a6b5c;
+  --teal-light: #e8f4f1;
+  --terracotta: #c4653a;
+  --gold: #d4a244;
+  --bg: #faf8f5;
+  --text: #2a2a2a;
+  --text-light: #666;
+  --max-width: 900px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: var(--text); background: var(--bg); line-height: 1.7; font-size: 18px; }
+a { color: var(--teal); text-decoration: none; }
+a:hover { color: var(--terracotta); }
+img { max-width: 100%; height: auto; display: block; }
+
+/* Nav */
+nav { position: sticky; top: 0; z-index: 100; background: rgba(250,248,245,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(0,0,0,0.08); }
+nav .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0.75rem 1.5rem; display: flex; align-items: center; justify-content: space-between; }
+nav .logo { font-family: 'DM Serif Display', serif; font-size: 1.25rem; color: var(--teal); }
+nav .nav-links { display: flex; gap: 0.25rem; flex-wrap: wrap; }
+nav .nav-links a { font-size: 0.8rem; padding: 0.35rem 0.65rem; border-radius: 6px; color: var(--text); font-weight: 500; transition: all 0.2s; }
+nav .nav-links a:hover, nav .nav-links a.active { background: var(--teal); color: white; }
+.hamburger { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text); }
+
+/* Hero */
+.hero { position: relative; height: 85vh; min-height: 500px; overflow: hidden; }
+.hero img { width: 100%; height: 100%; object-fit: cover; }
+.hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.5) 70%, rgba(0,0,0,0.7) 100%); display: flex; align-items: flex-end; padding: 3rem 2rem; }
+.hero-text { max-width: var(--max-width); margin: 0 auto; width: 100%; color: white; }
+.hero-text h1 { font-family: 'DM Serif Display', serif; font-size: 3.5rem; line-height: 1.15; margin-bottom: 0.75rem; text-shadow: 0 2px 20px rgba(0,0,0,0.3); }
+.hero-text p { font-size: 1.2rem; opacity: 0.9; max-width: 600px; text-shadow: 0 1px 10px rgba(0,0,0,0.3); }
+
+/* Content */
+.content { max-width: var(--max-width); margin: 0 auto; padding: 3rem 1.5rem; }
+.content h2 { font-family: 'DM Serif Display', serif; font-size: 2rem; color: var(--teal); margin: 2.5rem 0 1rem; }
+.content h2:first-child { margin-top: 0; }
+.content h3 { font-size: 1.15rem; font-weight: 700; margin: 1.5rem 0 0.5rem; color: var(--text); }
+.content p { margin-bottom: 1rem; }
+
+/* Summary box */
+.summary { background: var(--teal-light); border-left: 4px solid var(--teal); padding: 1.5rem 2rem; border-radius: 0 12px 12px 0; margin: 2rem 0; }
+.summary h3 { margin-top: 0; color: var(--teal); }
+.summary ul { padding-left: 1.25rem; }
+.summary li { margin-bottom: 0.35rem; }
+
+/* Stats bar */
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; margin: 2rem 0; }
+.stat { text-align: center; padding: 1.25rem 0.75rem; background: white; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+.stat .number { font-family: 'DM Serif Display', serif; font-size: 1.75rem; color: var(--terracotta); display: block; }
+.stat .label { font-size: 0.8rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 0.25rem; display: block; }
+
+/* Cards grid */
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; margin: 2rem 0; }
+.card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); transition: transform 0.2s, box-shadow 0.2s; }
+.card:hover { transform: translateY(-3px); box-shadow: 0 6px 24px rgba(0,0,0,0.1); }
+.card img { width: 100%; height: 200px; object-fit: cover; }
+.card .card-body { padding: 1.25rem; }
+.card .card-body h3 { margin: 0 0 0.5rem; font-size: 1.1rem; }
+.card .card-body p { font-size: 0.9rem; color: var(--text-light); margin: 0; }
+.card .card-body .card-meta { font-size: 0.8rem; color: var(--teal); font-weight: 500; margin-top: 0.75rem; display: block; }
+
+/* Venue cards — no image */
+.venue-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+.venue-card { background: white; border-radius: 12px; padding: 1.25rem 1.5rem; box-shadow: 0 2px 12px rgba(0,0,0,0.06); border-top: 3px solid var(--teal); }
+.venue-card h3 { margin: 0 0 0.5rem; font-size: 1rem; color: var(--teal); }
+.venue-card p { font-size: 0.9rem; color: var(--text-light); margin: 0; }
+.venue-card .venue-detail { font-size: 0.8rem; color: var(--text-light); margin-top: 0.5rem; display: block; }
+
+/* Photo grid */
+.photo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 0.75rem; margin: 2rem 0; }
+.photo-grid img { width: 100%; height: 250px; object-fit: cover; border-radius: 8px; }
+
+/* Full bleed photo */
+.full-photo { width: 100vw; margin-left: calc(-50vw + 50%); margin-top: 2rem; margin-bottom: 2rem; }
+.full-photo img { width: 100%; height: 400px; object-fit: cover; }
+
+/* Blockquote */
+blockquote { border-left: 3px solid var(--gold); padding: 1rem 1.5rem; margin: 1.5rem 0; background: #fffdf8; border-radius: 0 8px 8px 0; font-style: italic; }
+blockquote cite { display: block; font-style: normal; font-size: 0.85rem; color: var(--text-light); margin-top: 0.5rem; }
+
+/* Tables */
+table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.95rem; }
+th { text-align: left; padding: 0.75rem 1rem; background: var(--teal); color: white; font-weight: 500; }
+td { padding: 0.75rem 1rem; border-bottom: 1px solid #eee; }
+tr:hover td { background: var(--teal-light); }
+
+/* Event list */
+.event-list { list-style: none; margin: 1rem 0; }
+.event-list li { padding: 0.65rem 0; border-bottom: 1px solid #eee; display: flex; gap: 1rem; align-items: baseline; font-size: 0.95rem; }
+.event-list li:last-child { border-bottom: none; }
+.event-day { font-weight: 700; color: var(--teal); min-width: 70px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.03em; }
+.event-name { flex: 1; }
+.event-cost { color: var(--text-light); font-size: 0.85rem; white-space: nowrap; }
+
+/* Honest-view box */
+.honest-box { background: #fff8f5; border-left: 4px solid var(--terracotta); padding: 1.5rem 2rem; border-radius: 0 12px 12px 0; margin: 2rem 0; }
+.honest-box h3 { margin-top: 0; color: var(--terracotta); }
+
+/* Footer */
+footer { background: var(--teal); color: white; padding: 2rem; text-align: center; margin-top: 3rem; }
+footer p { opacity: 0.8; font-size: 0.9rem; }
+footer a { color: var(--gold); }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero { height: 60vh; }
+  .hero-text h1 { font-size: 2.2rem; }
+  .hero-text p { font-size: 1rem; }
+  .content { padding: 2rem 1rem; }
+  nav .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: var(--bg); padding: 1rem; border-bottom: 1px solid rgba(0,0,0,0.1); }
+  nav .nav-links.open { display: flex; }
+  .hamburger { display: block; }
+  .photo-grid { grid-template-columns: 1fr; }
+  .stats { grid-template-columns: repeat(2, 1fr); }
+  .event-list li { flex-wrap: wrap; gap: 0.25rem; }
+  .event-day { min-width: auto; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo">Cuenca Guide</a>
+    <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')">&#9776;</button>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="why-cuenca.html">Why Cuenca</a>
+      <a href="neighborhoods.html">Neighborhoods</a>
+      <a href="jess-and-bodhi.html">Jess &amp; Bodhi</a>
+      <a href="jon.html">Jon</a>
+      <a href="community.html" class="active">Community</a>
+      <a href="food-and-markets.html">Food</a>
+      <a href="outdoors.html">Outdoors</a>
+      <a href="practical.html">Practical</a>
+      <a href="schools.html">Schools</a>
+      <a href="cost-of-living.html">Cost</a>
+      <a href="getting-settled.html">Getting Settled</a>
+    </div>
+  </div>
+</nav>
+
+<div class="hero">
+  <img src="https://www.wanderbusecuador.com/wp-content/uploads/2019/08/img_4623-1-1.jpg" alt="Cuenca cathedral illuminated at night">
+  <div class="hero-overlay">
+    <div class="hero-text">
+      <h1>Community &amp; Culture</h1>
+      <p>Theatre, storytelling nights, free symphony, and 80+ events a year</p>
+    </div>
+  </div>
+</div>
+
+<div class="content">
+
+  <div class="summary">
+    <h3>The Short Version</h3>
+    <ul>
+      <li>8,000–10,000 English-speaking expats — the largest such community in the Andes</li>
+      <li>Dense event infrastructure via YEES, IdiomArte, and GringoPost (45,000+ subscribers)</li>
+      <li>English-language community theatre with sold-out shows</li>
+      <li>Free Friday symphony at Teatro Pumapungo</li>
+      <li>Community skews older (retiree-dominated) but a younger digital nomad layer is building</li>
+    </ul>
+  </div>
+
+  <div class="stats">
+    <div class="stat">
+      <span class="number">~10K</span>
+      <span class="label">English Speakers</span>
+    </div>
+    <div class="stat">
+      <span class="number">80+</span>
+      <span class="label">Events/Year at IdiomArte</span>
+    </div>
+    <div class="stat">
+      <span class="number">45K+</span>
+      <span class="label">GringoPost Subscribers</span>
+    </div>
+    <div class="stat">
+      <span class="number">Free</span>
+      <span class="label">Friday Symphony</span>
+    </div>
+    <div class="stat">
+      <span class="number">6/season</span>
+      <span class="label">ACT Theatre Shows</span>
+    </div>
+    <div class="stat">
+      <span class="number">$7</span>
+      <span class="label">Storytelling Night</span>
+    </div>
+  </div>
+
+  <!-- SECTION 1: The Expat Population -->
+  <h2>The Expat Population</h2>
+  <p>Cuenca has somewhere between 8,000 and 10,000 English-speaking expats — roughly 1.5–1.8% of the city's 550,000 residents. That's about twice the expat-to-local ratio of Oaxaca and is high enough that English-language services, events, and social infrastructure have achieved genuine critical mass. GringoPost, the community's main newsletter, has over 45,000 subscribers — a number that speaks to how organized and self-aware this community is.</p>
+  <p>The community has historically skewed older, built around American and Canadian retirees drawn by low costs, the US dollar, and the climate. That retiree base is real and you'll feel it. But a younger layer is building. Ecuador's VERHU digital nomad visa has been attracting remote workers, and the biweekly café meetups organized through the Cuenca Coworking Club WhatsApp group are probably the single best starting point for finding age peers.</p>
+  <p>One honest data point from the research: 3–5 new families arrive or scout the city per month, visible just from scrolling the Expat Parents in Cuenca Facebook group (822 members). The infrastructure is there. The question is density within your slice of it.</p>
+
+  <div class="full-photo">
+    <img src="https://www.thecommontraveler.net/wp-content/uploads/2023/06/cuenca-at-night-1000x718.jpg" alt="Cuenca cathedral blue domes illuminated at night">
+  </div>
+
+  <!-- SECTION 2: IdiomArte -->
+  <h2>IdiomArte — The Cultural Engine</h2>
+  <p>If there's one institution that defines the expat cultural life of Cuenca, it's IdiomArte. Located at Mariscal Lamar 14-25 y Estevez de Toral in the historic center, it runs 80+ events per year, 40+ workshops, 16+ art exhibitions, and 12 "Patio Session" concerts. Director Sarah Hanenbauer (known in the community as Sarah HB) should be among the first people you meet when you arrive.</p>
+
+  <div class="venue-cards">
+    <div class="venue-card">
+      <h3>Umbral Art Exhibitions</h3>
+      <p>Contemporary exhibitions by local and international artists. "Umbral: At the Threshold of Reality" ran in early 2026.</p>
+    </div>
+    <div class="venue-card">
+      <h3>Silhouettes — Life Drawing</h3>
+      <p>Wednesday afternoons at 5pm. Drop-in figure drawing with a live model. No art experience required.</p>
+      <span class="venue-detail">Wed 5pm · drop-in</span>
+    </div>
+    <div class="venue-card">
+      <h3>Community Drum Circle</h3>
+      <p>Monthly Saturdays at 3pm. $3 donation, all ages, family-friendly. Running for nearly three years.</p>
+      <span class="venue-detail">Monthly Sat 3pm · $3 donation</span>
+    </div>
+    <div class="venue-card">
+      <h3>Survival Spanish</h3>
+      <p>Beginner Spanish classes Mon/Wed/Fri. Also themed grammar workshops (present perfect, subjunctive) for intermediate learners.</p>
+    </div>
+    <div class="venue-card">
+      <h3>Biodanza</h3>
+      <p>Movement and music sessions with Maria Mercedes Moreno. $15/session or $40 for a 3-session cycle.</p>
+      <span class="venue-detail">$15/session · $40 for 3</span>
+    </div>
+    <div class="venue-card">
+      <h3>Writers Read!</h3>
+      <p>Community reading and writing circle. One of the longer-running events in the IdiomArte calendar.</p>
+    </div>
+  </div>
+
+  <p>IdiomArte also hosts theatre productions, castanets workshops, and the annual Madre Tierra festival (March 16–22, organized with the Prefectura del Azuay). The Patio Sessions — 12 concerts a year in the venue's courtyard — are among the most intimate live music experiences in the city. If you're trying to plug in fast, check the YEES Facebook group for the current IdiomArte calendar. It's updated weekly.</p>
+
+  <!-- SECTION 3: La Guarida -->
+  <h2>La Guarida — Storytelling &amp; Jazz</h2>
+  <p>At Mariscal Lamar 22.23, a few doors down from IdiomArte, La Guarida is the closest thing Cuenca has to an intimate neighborhood cultural venue. It runs regular programming that's worth knowing about from day one.</p>
+
+  <div class="venue-cards">
+    <div class="venue-card">
+      <h3>Canelazo Stories</h3>
+      <p>Moth-style storytelling night. Curated 10-minute personal narratives on a theme ("Redemption," "Risk," "Home"). Founded by Dr. Jeff Salz (anthropologist, Speaker Hall of Fame) and Andrés Zambrano. English and Spanish alternate. The closest existing format to Real Talk events.</p>
+      <span class="venue-detail">Thu evenings 7–10pm · $7</span>
+    </div>
+    <div class="venue-card">
+      <h3>Jazz Brunch</h3>
+      <p>Last Saturday of each month, 10am–1pm. Live jazz in a relaxed setting. One of the more civilized ways to spend a Saturday morning.</p>
+      <span class="venue-detail">Last Sat of month · 10am–1pm</span>
+    </div>
+    <div class="venue-card">
+      <h3>Live Music Thursdays</h3>
+      <p>Regular Thursday evening live music. Rotating acts. Check the YEES group for specific lineups — changes monthly.</p>
+      <span class="venue-detail">Thu evenings</span>
+    </div>
+    <div class="venue-card">
+      <h3>Movie Nights</h3>
+      <p>Periodic film screenings. Typically art house or documentary. A quieter option when you want community without a loud bar.</p>
+    </div>
+  </div>
+
+  <blockquote>
+    "Canelazo Stories is the closest existing format to Real Talk events — curated personal narratives on themes like Redemption, founded by an anthropologist from the Speaker Hall of Fame."
+    <cite>— From our research notes</cite>
+  </blockquote>
+
+  <!-- SECTION 4: ACT -->
+  <h2>Azuay Community Theatre (ACT)</h2>
+  <p>ACT is a remarkable thing for a city this size: a fully functioning English-language community theatre company with a permanent venue, a season of roughly six productions a year, and all-volunteer casts and crew. The permanent space is at Antonio Vega Muñoz 14-46.</p>
+  <p>In February 2026, their production of "Steel Magnolias" ran four shows — all sold out. Auditions for "The Outsider" (a comedy by Paul Slade Smith) were posted for February 21. Tickets run $15/show or $75 for a six-show flex pass. The ACT audition process is informal and welcoming; the YEES group is where auditions get announced.</p>
+  <p>The existence of a sold-out English theatre in a mid-sized Ecuadorian city is one of the stronger signals that this expat community is genuinely rooted, not just passing through. Community theatre requires sustained volunteer commitment, repeat audiences, and institutional memory. ACT has all three. Nothing equivalent exists in Oaxaca.</p>
+
+  <div class="photo-grid">
+    <img src="https://becomingcuenca.com/wp-content/uploads/2022/07/B01-1024x768.jpg" alt="Cuenca colonial streets at night">
+    <img src="https://c8.alamy.com/comp/JA56BK/interior-of-inmaculada-concepcion-cathedral-cuenca-ecuador-JA56BK.jpg" alt="Interior of Inmaculada Concepcion Cathedral, Cuenca">
+  </div>
+
+  <!-- SECTION 5: Symphony -->
+  <h2>Cuenca Symphony Orchestra — Free, Every Friday</h2>
+  <p>The Cuenca Symphony Orchestra performs weekly at Teatro Pumapungo, typically Friday evenings at 8pm. Admission is free. The repertoire spans from Beethoven to Shostakovich to film music, and the orchestra is genuinely world-class for a city of this size.</p>
+  <p>Teatro Pumapungo is also adjacent to the Pumapungo Museum — the city's main archaeological and ethnographic museum, built on the site of an Inca palace. The whole complex is a 10-minute walk from El Vergel, free on weekends, and one of the best concentrated culture-per-dollar spots in the city. Making Friday symphony a weekly ritual costs nothing and gives Bodhi a very particular kind of cultural baseline.</p>
+
+  <!-- SECTION 6: Language Exchanges -->
+  <h2>Language Exchanges</h2>
+  <p>Intercambios happen almost every night of the week in Cuenca. They're the fastest, cheapest way to practice Spanish, meet locals, and get a read on the expat scene. Here's the current circuit:</p>
+
+  <ul class="event-list">
+    <li>
+      <span class="event-day">Wed</span>
+      <span class="event-name"><strong>Café Ñucallacta — International Night</strong> · Bilingual, structured, well-attended</span>
+      <span class="event-cost">6:30–9pm · Free</span>
+    </li>
+    <li>
+      <span class="event-day">Thu</span>
+      <span class="event-name"><strong>Scoops — Spanish Class + Free Intercambio</strong> · $5 for the class, intercambio free at 6pm</span>
+      <span class="event-cost">5pm class / 6pm free</span>
+    </li>
+    <li>
+      <span class="event-day">Fri</span>
+      <span class="event-name"><strong>Bistro Yaku — Intercambio</strong> (Yakumama Hostel, El Centro) · Casual, mixed crowd</span>
+      <span class="event-cost">6:30pm · Free</span>
+    </li>
+    <li>
+      <span class="event-day">Sat</span>
+      <span class="event-name"><strong>¡Vamos! Spanish School — Language Exchange</strong> (Calle Larga) · More structured, good for beginners</span>
+      <span class="event-cost">11am–12:30pm · $2</span>
+    </li>
+    <li>
+      <span class="event-day">Tue</span>
+      <span class="event-name"><strong>I.C. Cuenca — Structured Exchange</strong> · Biweekly, more formal format, $5 member / $3 nonmember</span>
+      <span class="event-cost">6:30–8:30pm · $3–5</span>
+    </li>
+  </ul>
+
+  <p>One standout for families: Golden Prague hosts the only intercambio where you can bring kids. Worth knowing about when Bodhi is old enough to be present without needing constant supervision.</p>
+
+  <!-- SECTION 7: The Organizational Layer -->
+  <h2>The Organizational Layer</h2>
+  <p>What makes Cuenca's expat community unusually easy to plug into isn't any single venue — it's the information infrastructure that sits on top of all of it. Most Latin American expat scenes run on WhatsApp groups that are invisible until someone points you to them. Cuenca has that layer, but also a public, indexed one.</p>
+
+  <div class="venue-cards">
+    <div class="venue-card">
+      <h3>YEES Facebook Group</h3>
+      <p>Your English Events and Services. The densest event calendar in Cuenca. Everything — IdiomArte workshops, ACT auditions, hiking trips, nomad meetups — gets posted here. Join on arrival day.</p>
+    </div>
+    <div class="venue-card">
+      <h3>YapaTree</h3>
+      <p>Weekly email newsletter with upcoming events, curated. The laziest way to stay current. Subscribe before you arrive.</p>
+    </div>
+    <div class="venue-card">
+      <h3>GringoPost</h3>
+      <p>45,000+ subscribers. Classifieds, community news, apartment listings, service recommendations. The oldest and most established English-language media in the city. Housing leads, nanny recommendations, and gear for sale all flow through here.</p>
+    </div>
+    <div class="venue-card">
+      <h3>CuencaHighLife</h3>
+      <p>News, longform articles, and event listings. More journalistic than GringoPost. Good for background on the city and longer reads on expat life.</p>
+    </div>
+    <div class="venue-card">
+      <h3>English Lions Club</h3>
+      <p>Monthly breakfast meetings. Civic service organization with a roster of longer-term English-speaking residents. Good access point into the more settled community layer.</p>
+    </div>
+    <div class="venue-card">
+      <h3>Cuenca Coworking Club</h3>
+      <p>WhatsApp group that organizes biweekly café meetups at rotating locations. Organized by Kristi Rowles. Likely the best single starting point for finding younger expats and digital nomads.</p>
+    </div>
+  </div>
+
+  <div class="photo-grid">
+    <img src="https://cdn.prod.rexby.com/image/9d18393578694e5baa53a37425315c3a?format=webp&width=1080&height=1350" alt="Cathedral interior, Cuenca">
+    <img src="https://c8.alamy.com/comp/2F43XRM/colonial-style-balcony-with-flowers-panorama-cuenca-city-ecuador-2F43XRM.jpg" alt="Colonial balcony with flowers in Cuenca">
+  </div>
+
+  <!-- SECTION 8: Honest View -->
+  <h2>The Honest View</h2>
+
+  <div class="honest-box">
+    <h3>What the research actually says</h3>
+    <p>The community skews retiree. The average age at an IdiomArte event, an ACT show, or the English Lions Club is probably 55+. That's not a dealbreaker — it means the infrastructure is well-funded, well-organized, and not going anywhere. But if you're looking for a dense peer group of 30-somethings with young kids, you'll need to find your specific layer within the broader community, not just show up to the default events.</p>
+    <p>The younger layer is building. The VERHU visa is attracting remote workers. The biweekly coworking meetups are generating a nomad cohort. Three to five new families arrive or scout the city per month. The infrastructure is there; the density within your slice of it requires more active effort than in a city with a dominant young-expat scene.</p>
+    <p>For Real Talk-style events: the gap is real and fillable. A regular English-language philosophy or discussion group does not currently exist in Cuenca. Canelazo Stories at La Guarida is the closest format. The Colectivo MUNDANA philosophy collective organized an international conference in 2025 and declared "there is a thirst for thought, a need for common spaces for dialogue." The audience exists — it's smaller and older than Oaxaca's, and you'd be more of a novelty than a natural fit, but it's buildable.</p>
+    <p>The honest bottom line: Cuenca's community infrastructure is <em>organized and findable</em> in a way that most Latin American expat scenes aren't. For a family arriving cold, that organizational layer — YEES, GringoPost, YapaTree, the parents FB group — is the difference between "I found a park meetup on day three" and "I've been here a month and I'm still trying to figure out where the families are."</p>
+  </div>
+
+  <blockquote>
+    "There is a thirst for thought, a need for common spaces for dialogue."
+    <cite>— Colectivo MUNDANA, closing statement from I Congreso Internacional de Filosofía Mundana, July 2025</cite>
+  </blockquote>
+
+</div>
+
+<footer>
+  <p>Made with care for the Dallas family. Research compiled March 2026.</p>
+  <p style="margin-top:0.5rem">Cape Town → Cuenca. The next chapter.</p>
+</footer>
+
+<script>
+  document.querySelector('.hamburger').addEventListener('click', function() {
+    document.querySelector('.nav-links').classList.toggle('open');
+  });
+</script>
+
+</body>
+</html>
