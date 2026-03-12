@@ -1,0 +1,151 @@
+{
+  "search_date": "2026-03-12",
+  "queries": [
+    "McKinsey trusted advisor framework consulting",
+    "David Maister trusted advisor consultant positioning",
+    "trusted advisor vs vendor consultant positioning framework levels",
+    "McKinsey consultant training trusted advisor mindset client relationship"
+  ],
+  "sources_fetched": [
+    {
+      "url": "https://trustedadvisor.com/why-trust-matters/understanding-trust/understanding-the-trust-equation",
+      "title": "The Trust Equation - Trusted Advisor Associates",
+      "relevance": "Primary source for the Trust Equation framework"
+    },
+    {
+      "url": "https://trustedadvisor.com/books/the-trusted-advisor",
+      "title": "The Trusted Advisor - Trusted Advisor Associates",
+      "relevance": "Book overview with five-step trust development process"
+    },
+    {
+      "url": "https://www.thepositiveencourager.global/david-maisters-approach-doing-professional-work/",
+      "title": "David Maister's Approach to Being a Trusted Advisor and True Professional",
+      "relevance": "Maister's philosophy, three guidelines, professional vs transactional mindset"
+    },
+    {
+      "url": "https://www.nateliason.com/notes/trusted-advisor-david-h-maister",
+      "title": "The Trusted Advisor by David H. Maister: Notes and Review",
+      "relevance": "Detailed book notes with trust equation, five steps, advisor characteristics, listening framework"
+    },
+    {
+      "url": "https://www.rocketblocks.me/guide/what-consultants-do.php",
+      "title": "What do management consultants like McKinsey actually do?",
+      "relevance": "McKinsey's advisory positioning and differentiation from vendors"
+    },
+    {
+      "url": "https://andrewsobel.com/article/earning-clients-for-life-as-a-trusted-advisor/",
+      "title": "Earning Clients for Life as a Trusted Advisor - Andrew Sobel",
+      "relevance": "Client Growth Matrix framework with four relationship levels"
+    },
+    {
+      "url": "https://trustedadvisor.com/trustmatters/six-hacks-to-get-into-the-trusted-advisor-mindset",
+      "title": "Six Hacks to Get into the Trusted Advisor Mindset",
+      "relevance": "Practical mindset shifts for advisor positioning"
+    },
+    {
+      "url": "https://consultingskill.com/the-trusted-advisor-advanced-client-relationship-development/",
+      "title": "The Trusted Advisor: Advanced Client Relationship Development",
+      "relevance": "Training framework based on 1,100+ executive interviews"
+    }
+  ],
+  "key_frameworks": {
+    "trust_equation": {
+      "formula": "Trustworthiness = (Credibility + Reliability + Intimacy) / Self-Orientation",
+      "source": "The Trusted Advisor (Maister, Green, Galford, 2000)",
+      "variables": {
+        "credibility": "Words — can we be believed? Expertise, accuracy, knowledge.",
+        "reliability": "Actions — do we meet expectations? Follow-through, consistency, deadlines.",
+        "intimacy": "Emotions — do they feel safe? Confidentiality, genuine care, vulnerability.",
+        "self_orientation": "Focus — is motivation self-serving or other-centered? THE DENOMINATOR. Most powerful variable."
+      }
+    },
+    "five_steps_to_trust": {
+      "source": "The Trusted Advisor (Maister, Green, Galford)",
+      "steps": [
+        "Engage — initiate dialogue, help clients acknowledge needs, develop credibility",
+        "Listen — create space for emotional dimensions, practice deep understanding",
+        "Frame — offer fresh perspectives, state root issues clearly, show creative insight",
+        "Envision — guide toward desired future states, sketch alternate realities",
+        "Commit — establish concrete actions, agree on steps, renew commitment energy"
+      ]
+    },
+    "client_growth_matrix": {
+      "source": "Andrew Sobel — Clients for Life",
+      "axes": {
+        "x": "Individual professional evolution (Expert → Trusted Advisor)",
+        "y": "Firm-level relationship breadth (narrow → broad)"
+      },
+      "quadrants": [
+        "Expert for Hire — starting point, reactive, narrow",
+        "Trusted Advisor — individual trust earned, but narrow firm relationship",
+        "Vendor — broad revenue but transactional, RFP territory",
+        "Trusted Client Partnership — both advisory status AND firm-wide capability"
+      ]
+    },
+    "six_mindset_hacks": {
+      "source": "Trusted Advisor Associates (Charles Green)",
+      "hacks": [
+        "Focus on the person, not the problem",
+        "Self-confidence — ask 'What value do I bring beyond solving this?'",
+        "Ego strength — mantra: 'It's not about me'",
+        "Curiosity — ask 'What's behind that?'",
+        "Inclusive professionalism — 'We will be more successful together'",
+        "The relationship is the goal — relationship > any single transaction"
+      ]
+    },
+    "maister_three_guidelines": {
+      "source": "David Maister",
+      "guidelines": [
+        "Passion — commit deeply to work you genuinely care about",
+        "People — understand how humans actually function",
+        "Principles — embody observable values consistently"
+      ]
+    },
+    "mckinsey_differentiation": {
+      "source": "McKinsey positioning / RocketBlocks analysis",
+      "three_pillars": [
+        "Functional Expertise — deep specialized knowledge enabling confident execution",
+        "Objective Analysis — third-party perspective to counteract internal biases",
+        "On-Demand Resources — specialized talent when internal teams lack capacity"
+      ],
+      "positioning": "Embedded partnership at multiple levels, adapting role based on client needs. Advisory relationships, not one-off service engagements."
+    }
+  },
+  "key_quotes": {
+    "maister_professionalism": "Act like a true professional, aiming for true excellence, and the money will follow. Act like a prostitute, with an attitude of 'I'll do it for the money,' and you'll lose the premium that excellence earns.",
+    "maister_philosophy": "My philosophy of business, and life itself, is that you earn and deserve what you want to get back from the world by giving first.",
+    "green_core": "The way to be a great advisor is to care about your client.",
+    "green_helpfulness": "It is not enough to be right, you must also be helpful.",
+    "self_orientation": "A person with low self-orientation breaks through skepticism because their focus is crystal clear: your success, not theirs.",
+    "denominator_principle": "Your trustworthiness plummets the moment you prioritize your interests over others'.",
+    "strategy_fat_smoker": "Organizations typically know what they should do — the challenge lies in consistent execution despite short-term temptations."
+  },
+  "trusted_advisor_characteristics": [
+    "Client-focused over self-focused",
+    "Self-confident listening without prejudgment",
+    "Curiosity-driven inquiry",
+    "Strong ego control — subordinate own ego",
+    "View clients as co-equals",
+    "Prioritize problem definition over technical mastery",
+    "Internalized drive for doing right things",
+    "Willingness to take personal risks with clients"
+  ],
+  "advisor_vs_vendor_signals": {
+    "vendor_behaviors": [
+      "Reactive to requests",
+      "Focused on deliverables and scope",
+      "Competes on price via RFPs",
+      "Transaction-oriented",
+      "Easily replaceable",
+      "Proves expertise constantly"
+    ],
+    "advisor_behaviors": [
+      "Proactive problem identification",
+      "Focused on client outcomes and relationships",
+      "Invited to the table — no RFP needed",
+      "Relationship-oriented",
+      "Part of client's inner circle",
+      "Earns advice-giving rights through listening"
+    ]
+  }
+}

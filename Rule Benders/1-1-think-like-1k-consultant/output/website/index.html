@@ -1,0 +1,1565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 1.1: Think Like a £1,000/Day Consultant | Rule Benders Academy</title>
+<meta property="og:title" content="Think Like a £1,000/Day Consultant">
+<meta property="og:description" content="The psychological shift that separates premium advisors from hired help. Lesson 1.1 of The High Paid Consultant course.">
+<meta property="og:image" content="../../images/final/confident-consultant-hero.png">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2026-03-12">
+<meta property="article:tag" content="consulting">
+<meta name="category" content="Course Lesson">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js" defer></script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --black: #000000;
+  --charcoal: #1A1A1A;
+  --white: #FFFFFF;
+  --light-gray: #E5E5E5;
+  --muted: #999999;
+  --blue: #2B5CE6;
+  --orange: #E85D00;
+  --green: #22C55E;
+  --red: #EF4444;
+  --border: #333333;
+  --card-hover: #222222;
+  --font-display: 'Montserrat', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--black);
+  color: var(--light-gray);
+  line-height: 1.7;
+  font-size: 16px;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Progress Bar ── */
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: var(--charcoal);
+  border-bottom: 1px solid var(--border);
+  padding: 0;
+}
+
+.progress-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.progress-label {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--muted);
+  white-space: nowrap;
+  margin-right: 8px;
+}
+
+.progress-dots {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  flex: 1;
+}
+
+.progress-dot {
+  width: 32px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--border);
+  transition: background 0.3s ease;
+  cursor: pointer;
+}
+
+.progress-dot.active {
+  background: var(--blue);
+}
+
+.progress-dot.completed {
+  background: var(--blue);
+  opacity: 0.5;
+}
+
+.progress-page-num {
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--muted);
+  white-space: nowrap;
+  margin-left: 8px;
+}
+
+/* ── Pages ── */
+.page {
+  display: none;
+  min-height: 100vh;
+  padding: 80px 20px 120px;
+}
+
+.page.active {
+  display: block;
+}
+
+.page-content {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+/* ── Hero Image ── */
+.hero-image {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  height: 50vh;
+  min-height: 320px;
+  max-height: 500px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 48px;
+}
+
+.hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+}
+
+.hero-image .hero-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60%;
+  background: linear-gradient(transparent, var(--black));
+}
+
+/* ── Section Image ── */
+.section-image {
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 32px 0;
+}
+
+.section-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+}
+
+/* ── Typography ── */
+.lesson-label {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--blue);
+  margin-bottom: 12px;
+}
+
+h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.15;
+  margin-bottom: 24px;
+}
+
+h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 4vw, 2.25rem);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+
+h3 {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 12px;
+}
+
+p {
+  margin-bottom: 20px;
+  color: var(--light-gray);
+}
+
+strong {
+  color: var(--white);
+  font-weight: 600;
+}
+
+/* ── Stat Card ── */
+.stat-card {
+  background: var(--charcoal);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 32px;
+  text-align: center;
+  margin: 32px 0;
+}
+
+.stat-number {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--orange);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.stat-label {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+/* ── Pull Quote ── */
+.pull-quote {
+  border-left: 3px solid var(--orange);
+  padding: 20px 24px;
+  margin: 32px 0;
+  background: rgba(232, 93, 0, 0.05);
+  border-radius: 0 8px 8px 0;
+}
+
+.pull-quote p {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+.pull-quote .attribution {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--muted);
+}
+
+/* ── Comparison Table ── */
+.comparison {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 32px 0;
+}
+
+.comparison-col {
+  background: var(--charcoal);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.comparison-col.negative {
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+.comparison-col.positive {
+  border-color: rgba(34, 197, 94, 0.3);
+}
+
+.comparison-col h3 {
+  font-size: 1rem;
+  margin-bottom: 16px;
+}
+
+.comparison-col.negative h3 { color: var(--red); }
+.comparison-col.positive h3 { color: var(--green); }
+
+.comparison-col ul {
+  list-style: none;
+  padding: 0;
+}
+
+.comparison-col li {
+  padding: 8px 0;
+  font-size: 14px;
+  border-bottom: 1px solid var(--border);
+  color: var(--light-gray);
+}
+
+.comparison-col li:last-child { border-bottom: none; }
+
+@media (max-width: 600px) {
+  .comparison {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Interactive Elements ── */
+.interactive-prompt {
+  background: var(--charcoal);
+  border: 1px solid var(--blue);
+  border-radius: 12px;
+  padding: 28px;
+  margin: 32px 0;
+}
+
+.interactive-prompt .prompt-label {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--blue);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.interactive-prompt h3 {
+  margin-bottom: 16px;
+}
+
+/* Self-Assessment Options */
+.assessment-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.assessment-option {
+  background: rgba(43, 92, 230, 0.08);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 15px;
+  color: var(--light-gray);
+  text-align: left;
+  font-family: var(--font-body);
+  line-height: 1.5;
+  min-height: 44px;
+}
+
+.assessment-option:hover {
+  border-color: var(--blue);
+  background: rgba(43, 92, 230, 0.15);
+}
+
+.assessment-option.selected {
+  border-color: var(--blue);
+  background: rgba(43, 92, 230, 0.2);
+}
+
+.assessment-response {
+  display: none;
+  margin-top: 16px;
+  padding: 20px;
+  background: rgba(43, 92, 230, 0.08);
+  border-radius: 8px;
+  border-left: 3px solid var(--blue);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--light-gray);
+}
+
+.assessment-response.visible { display: block; }
+
+/* Reveal Cards */
+.reveal-card {
+  background: var(--charcoal);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  margin: 12px 0;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.reveal-card:hover { border-color: var(--blue); }
+
+.reveal-card-header {
+  padding: 18px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  color: var(--white);
+  font-size: 15px;
+  min-height: 44px;
+}
+
+.reveal-card-header .card-num {
+  background: var(--blue);
+  color: var(--white);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  margin-right: 12px;
+  flex-shrink: 0;
+}
+
+.reveal-card-header .card-title { flex: 1; }
+
+.reveal-card-header .reveal-icon {
+  color: var(--muted);
+  font-size: 13px;
+  transition: transform 0.2s;
+}
+
+.reveal-card.open .reveal-icon { transform: rotate(180deg); }
+
+.reveal-card-body {
+  display: none;
+  padding: 0 20px 20px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--light-gray);
+}
+
+.reveal-card.open .reveal-card-body { display: block; }
+
+/* Blocker Cards */
+.blocker-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.blocker-card {
+  background: var(--charcoal);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.blocker-card:hover { border-color: var(--orange); }
+
+.blocker-card.selected { border-color: var(--orange); }
+
+.blocker-card-header {
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 600;
+  color: var(--white);
+  font-size: 15px;
+  min-height: 44px;
+}
+
+.blocker-card-header .blocker-icon {
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--orange);
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--orange);
+  border-radius: 50%;
+}
+
+.blocker-card-response {
+  display: none;
+  padding: 0 20px 20px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--light-gray);
+  border-top: 1px solid var(--border);
+  margin-top: 0;
+  padding-top: 16px;
+}
+
+.blocker-card.selected .blocker-card-response { display: block; }
+
+/* Scenario Choices */
+.scenario-block {
+  background: var(--charcoal);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 28px;
+  margin: 24px 0;
+}
+
+.scenario-block h3 {
+  margin-bottom: 8px;
+}
+
+.scenario-setup {
+  font-size: 15px;
+  margin-bottom: 20px;
+  color: var(--light-gray);
+  line-height: 1.7;
+}
+
+.scenario-choices {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.scenario-choice {
+  background: rgba(43, 92, 230, 0.06);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 14px;
+  color: var(--light-gray);
+  text-align: left;
+  font-family: var(--font-body);
+  line-height: 1.5;
+  min-height: 44px;
+}
+
+.scenario-choice:hover { border-color: var(--blue); }
+
+.scenario-choice.chosen { pointer-events: none; }
+.scenario-choice.chosen.advisor {
+  border-color: var(--green);
+  background: rgba(34, 197, 94, 0.1);
+}
+.scenario-choice.chosen.employee {
+  border-color: var(--red);
+  background: rgba(239, 68, 68, 0.1);
+}
+.scenario-choice.chosen.middle {
+  border-color: var(--orange);
+  background: rgba(232, 93, 0, 0.1);
+}
+.scenario-choice.dimmed {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.scenario-feedback {
+  display: none;
+  margin-top: 16px;
+  padding: 16px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.scenario-feedback.visible { display: block; }
+.scenario-feedback.advisor-feedback {
+  background: rgba(34, 197, 94, 0.08);
+  border-left: 3px solid var(--green);
+  color: var(--light-gray);
+}
+.scenario-feedback.employee-feedback {
+  background: rgba(239, 68, 68, 0.08);
+  border-left: 3px solid var(--red);
+  color: var(--light-gray);
+}
+.scenario-feedback.middle-feedback {
+  background: rgba(232, 93, 0, 0.08);
+  border-left: 3px solid var(--orange);
+  color: var(--light-gray);
+}
+
+/* Expandable Details */
+details {
+  background: var(--charcoal);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  margin: 24px 0;
+  overflow: hidden;
+}
+
+summary {
+  padding: 18px 20px;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--white);
+  font-size: 15px;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 44px;
+}
+
+summary::-webkit-details-marker { display: none; }
+
+summary::after {
+  content: '+';
+  font-size: 20px;
+  color: var(--muted);
+  transition: transform 0.2s;
+}
+
+details[open] summary::after {
+  content: '−';
+}
+
+details .details-content {
+  padding: 0 20px 20px;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+details .details-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 8px;
+}
+
+details .details-content th,
+details .details-content td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+}
+
+details .details-content th {
+  color: var(--muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 11px;
+}
+
+details .details-content td:first-child { color: var(--red); }
+details .details-content td:last-child { color: var(--green); }
+
+/* ── Action Items ── */
+.action-item {
+  background: var(--charcoal);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 24px;
+  margin: 16px 0;
+  display: flex;
+  gap: 16px;
+}
+
+.action-num {
+  background: var(--orange);
+  color: var(--white);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.action-text h3 { font-size: 1rem; margin-bottom: 8px; }
+.action-text p { font-size: 14px; margin-bottom: 0; }
+
+/* ── Navigation ── */
+.page-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: var(--charcoal);
+  border-top: 1px solid var(--border);
+  padding: 16px 20px;
+}
+
+.page-nav-inner {
+  max-width: 720px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.nav-btn {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 12px 28px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-btn.prev {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--light-gray);
+}
+
+.nav-btn.prev:hover {
+  border-color: var(--blue);
+  color: var(--white);
+}
+
+.nav-btn.next {
+  background: var(--blue);
+  color: var(--white);
+  margin-left: auto;
+}
+
+.nav-btn.next:hover {
+  background: #3d6ef0;
+}
+
+.nav-btn.next.final {
+  background: var(--orange);
+}
+
+.nav-btn.next.final:hover {
+  background: #f06a10;
+}
+
+.nav-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.nav-page-title {
+  font-size: 13px;
+  color: var(--muted);
+  text-align: center;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 500px) {
+  .nav-page-title { display: none; }
+  .nav-btn { padding: 12px 20px; font-size: 13px; }
+}
+
+/* ── CTA Button ── */
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--orange);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 600;
+  padding: 16px 32px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+  text-decoration: none;
+  margin-top: 16px;
+  min-height: 44px;
+}
+
+.cta-btn:hover { background: #f06a10; }
+
+/* ── Transition Box ── */
+.transition-box {
+  background: rgba(43, 92, 230, 0.08);
+  border: 1px solid rgba(43, 92, 230, 0.3);
+  border-radius: 12px;
+  padding: 28px;
+  margin: 32px 0;
+}
+
+.transition-box h3 { color: var(--blue); }
+
+/* ── Divider ── */
+.divider {
+  height: 1px;
+  background: var(--border);
+  margin: 40px 0;
+}
+
+/* ── Reflection Box ── */
+.reflection-box {
+  background: var(--charcoal);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 28px;
+  margin: 32px 0;
+}
+
+.reflection-box .reflection-prompt {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+.reflection-box .reveal-btn {
+  background: rgba(43, 92, 230, 0.12);
+  border: 1px solid var(--blue);
+  color: var(--blue);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  min-height: 44px;
+}
+
+.reflection-box .reveal-btn:hover {
+  background: rgba(43, 92, 230, 0.2);
+}
+
+.reflection-box .reveal-content {
+  display: none;
+  margin-top: 16px;
+  padding: 16px 20px;
+  background: rgba(43, 92, 230, 0.06);
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.reflection-box .reveal-content.visible { display: block; }
+
+/* Stats Row */
+.stats-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 32px 0;
+}
+
+@media (max-width: 500px) {
+  .stats-row { grid-template-columns: 1fr; }
+}
+
+/* Utility */
+.text-orange { color: var(--orange); }
+.text-blue { color: var(--blue); }
+.text-green { color: var(--green); }
+.text-red { color: var(--red); }
+.text-white { color: var(--white); }
+.mt-0 { margin-top: 0; }
+.mb-0 { margin-bottom: 0; }
+.mb-sm { margin-bottom: 8px; }
+
+</style>
+</head>
+<body>
+
+<!-- ── Progress Bar ── -->
+<div class="progress-bar">
+  <div class="progress-inner">
+    <span class="progress-label">LESSON 1.1</span>
+    <div class="progress-dots" id="progressDots"></div>
+    <span class="progress-page-num" id="progressNum">1 / 8</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- PAGE 1: The Hook -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div class="page active" data-page="1" data-title="The Hook">
+  <div class="hero-image">
+    <img src="../../images/final/confident-consultant-hero.png" alt="Confident consultant standing in a luxury high-rise office at night with city skyline behind him" onerror="this.parentElement.style.minHeight='0';this.parentElement.style.height='0';this.style.display='none'">
+    <div class="hero-overlay"></div>
+  </div>
+  <div class="page-content">
+    <div class="lesson-label">SECTION 1: THE £1K+ MINDSET</div>
+    <h1>You're Not Expensive Enough</h1>
+
+    <p>Early in my consulting career, I sat across the table from a client who was paying me £450 a day. Good money, I thought. Better than a salary. I was doing solid work — restructuring their programme governance, cleaning up a mess that had been festering for months.</p>
+
+    <p>Then I found out the consultant sitting two desks over — doing the <em>same level</em> of work — was billing <strong class="text-orange">£1,500 a day</strong>.</p>
+
+    <p>Same client. Same building. Same type of work. <strong>Three times my rate.</strong></p>
+
+    <p>He wasn't smarter than me. He didn't have better qualifications. He'd actually been consulting for fewer years. But he walked in differently. He spoke differently. He positioned himself differently.</p>
+
+    <p>That was the moment I realised: <strong>the gap between a £450/day consultant and a £1,500/day consultant has almost nothing to do with skill.</strong></p>
+
+    <div class="stat-card">
+      <div class="stat-number">67%</div>
+      <div class="stat-label">of consultants struggle with pricing confidence — charging far less than their work is actually worth</div>
+    </div>
+
+    <p>Most consultants think like employees. They price like contractors. They wait to be told what to do. And they wonder why they're stuck.</p>
+
+    <p><strong>This lesson changes that.</strong> By the end of these eight pages, you'll see exactly why you've been leaving money on the table — and you'll have the mental framework to stop.</p>
+
+    <div class="pull-quote">
+      <p>"The gap isn't skill. It's how you think. Change how you think, and the money follows."</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- PAGE 2: The Two Consultants -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div class="page" data-page="2" data-title="The Two Consultants">
+  <div class="page-content">
+    <div class="lesson-label">THE GAP</div>
+    <h2>Same Skills. Different Bank Accounts.</h2>
+
+    <p>Let me paint you a picture. Two consultants walk into the same client organisation on the same Monday morning.</p>
+
+    <div class="comparison">
+      <div class="comparison-col negative">
+        <h3>Consultant A — £400/day</h3>
+        <ul>
+          <li>Waits for a brief before starting</li>
+          <li>Asks "What do you want me to do?"</li>
+          <li>Tracks hours meticulously</li>
+          <li>Competes on availability</li>
+          <li>Sees themselves as hired help</li>
+          <li>Prices based on old salary + margin</li>
+        </ul>
+      </div>
+      <div class="comparison-col positive">
+        <h3>Consultant B — £1,500/day</h3>
+        <ul>
+          <li>Diagnoses the problem before being asked</li>
+          <li>Says "Here's what you need to do"</li>
+          <li>Prices on outcomes, not hours</li>
+          <li>Competes on insight and authority</li>
+          <li>Sees themselves as a trusted advisor</li>
+          <li>Prices based on value delivered</li>
+        </ul>
+      </div>
+    </div>
+
+    <p><strong>Same qualifications. Same years of experience. Same client.</strong> The only difference is what's happening between their ears.</p>
+
+    <div class="section-image">
+      <img src="../../images/final/two-paths-contrast.png" alt="A fork in a dark forest path — one path cold and dim, the other warm and golden" onerror="this.parentElement.style.display='none'">
+    </div>
+
+    <p>I lived this. I went from junior business analyst to billing <strong class="text-orange">£1,500 a day</strong> to founding a consultancy charging <strong class="text-orange">£4,000 a day</strong>. The work didn't change. <em>I did.</em></p>
+
+    <p>One consultant increased their fees by <strong>350%</strong> with identical deliverables — they only changed the pricing model. That's not a typo. Same work. Three and a half times the money.</p>
+
+    <div class="pull-quote">
+      <p>"Clients don't pay for what you do. They pay for what you represent."</p>
+    </div>
+
+    <!-- Interactive: Self-Assessment -->
+    <div class="interactive-prompt">
+      <div class="prompt-label"><i data-lucide="message-circle" style="width:14px;height:14px;"></i> SELF-ASSESSMENT</div>
+      <h3>Which consultant sounds more like you right now?</h3>
+      <div class="assessment-options" data-group="self-assess">
+        <button class="assessment-option" data-response="response-a">"I'm definitely Consultant A — I know I'm undercharging but I don't know how to change it."</button>
+        <button class="assessment-option" data-response="response-b">"I'm somewhere in between — I've raised my rates but still feel uncomfortable doing it."</button>
+        <button class="assessment-option" data-response="response-c">"I'm closer to B but I know there's another level I haven't reached yet."</button>
+        <button class="assessment-option" data-response="response-d">"I'm brand new to consulting and want to start right."</button>
+      </div>
+      <div class="assessment-response" id="response-a"><strong>Good — you're being honest.</strong> That honesty is your first advantage. Most Consultant A types don't even realise they're stuck. The fact that you can see it means you're already halfway out. This lesson is specifically designed for you. Pay close attention to Pages 3 and 5.</div>
+      <div class="assessment-response" id="response-b"><strong>The uncomfortable middle is where the money is.</strong> You've already proven clients will pay more. The discomfort you feel isn't a sign you're wrong — it's a sign you're growing. By the end of this lesson, that discomfort will start making sense.</div>
+      <div class="assessment-response" id="response-c"><strong>Smart.</strong> You're not here because you're failing — you're here because you refuse to plateau. The frameworks in Pages 4 and 5 will give you the next gear. The jump from good to elite is smaller than most people think.</div>
+      <div class="assessment-response" id="response-d"><strong>Perfect timing.</strong> Most consultants spend years building bad habits before unlearning them. You get to skip that. Everything in this lesson is the foundation I wish someone had given me on day one.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- PAGE 3: The Employee Trap -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div class="page" data-page="3" data-title="The Employee Trap">
+  <div class="page-content">
+    <div class="lesson-label">THE TRAP</div>
+    <h2>The Mindset That's Costing You £100K/Year</h2>
+
+    <p>Here's the uncomfortable truth. Most consultants don't have a skills problem. They have an <strong>identity problem</strong>.</p>
+
+    <p>They left employment but brought the employee mindset with them. And that mindset is costing them — conservatively — <strong class="text-orange">£100,000 a year</strong> in lost income.</p>
+
+    <div class="section-image">
+      <img src="../../images/final/employee-trap-corporate.png" alt="A man sitting alone in a grey corporate cubicle, head bowed, surrounded by rows of identical workstations under harsh fluorescent lighting" onerror="this.parentElement.style.display='none'">
+    </div>
+
+    <p>The employee mindset is comfortable. Someone else defines success. Someone else takes the risk. Someone else decides what you're worth. And that comfort is the thing that's keeping you cheap.</p>
+
+    <p>Research shows that consultants who actively work on their mindset are <strong>2.3x more likely</strong> to do weekly outreach to new clients. 65% versus 28%. The difference isn't hustle — it's how you see yourself.</p>
+
+    <p>Here's the worst part: failing to make this shift doesn't just limit your income. It <strong>recreates the boss-subordinate dynamic</strong> inside what should be an independent practice. You end up working at the client's whims, waiting for instructions, hoping they'll renew — exactly like the job you left.</p>
+
+    <!-- Interactive: The Three Tells -->
+    <div class="interactive-prompt">
+      <div class="prompt-label"><i data-lucide="eye" style="width:14px;height:14px;"></i> REVEAL</div>
+      <h3>The Three Tells That Mark You as "Hired Help"</h3>
+      <p class="mb-sm" style="font-size: 14px; color: var(--muted);">Think about your own behaviour first — then click each card to reveal the tell.</p>
+
+      <div class="reveal-card" data-reveal>
+        <div class="reveal-card-header">
+          <span class="card-num">1</span>
+          <span class="card-title">The Question Tell</span>
+          <span class="reveal-icon">▼</span>
+        </div>
+        <div class="reveal-card-body">
+          <p><strong>You ask "What do you want me to do?" instead of diagnosing the problem yourself.</strong></p>
+          <p>The moment you ask this question, you've positioned yourself as a pair of hands. An advisor doesn't ask for instructions. They assess the situation, form a view, and present it. "Based on what I've seen, here's what needs to happen." That's a fundamentally different relationship.</p>
+        </div>
+      </div>
+
+      <div class="reveal-card" data-reveal>
+        <div class="reveal-card-header">
+          <span class="card-num">2</span>
+          <span class="card-title">The Pricing Tell</span>
+          <span class="reveal-icon">▼</span>
+        </div>
+        <div class="reveal-card-body">
+          <p><strong>You price by the hour or day instead of by the outcome.</strong></p>
+          <p>Hourly billing punishes efficiency. The faster you solve a problem, the less you earn. That's backwards. Premium consultants price on the value they deliver. If your solution saves a client £2 million, your fee is a rounding error — regardless of how many hours it took.</p>
+        </div>
+      </div>
+
+      <div class="reveal-card" data-reveal>
+        <div class="reveal-card-header">
+          <span class="card-num">3</span>
+          <span class="card-title">The Initiative Tell</span>
+          <span class="reveal-icon">▼</span>
+        </div>
+        <div class="reveal-card-body">
+          <p><strong>You wait to be invited instead of proactively identifying what needs fixing.</strong></p>
+          <p>Employees wait for their next assignment. Advisors see problems before they're pointed out. When I walked into the Treasury, I didn't wait for someone to hand me a brief. I spent the first week observing, listening, and forming my own view of what was broken. By the time they asked for my assessment, I already had one.</p>
+        </div>
+      </div>
+    </div>
+
+    <p>Recognise any of these? Most consultants do. The good news is that once you can see the trap, you can walk out of it.</p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- PAGE 4: The Advisor Mindset -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div class="page" data-page="4" data-title="The Advisor Mindset">
+  <div class="page-content">
+    <div class="lesson-label">THE SHIFT</div>
+    <h2>Think Like Their Most Trusted Advisor</h2>
+
+    <p>There's a framework I keep coming back to. It was developed by David Maister, and it explains exactly why some consultants get invited back and others get replaced.</p>
+
+    <p>It's called the <strong>Trust Equation</strong>:</p>
+
+    <div class="stat-card">
+      <div class="stat-number" style="font-size: 1.5rem; letter-spacing: 1px;">TRUST = (Credibility + Reliability + Intimacy) ÷ Self-Orientation</div>
+      <div class="stat-label" style="margin-top: 12px;">The denominator is the killer. Your trustworthiness plummets the moment you prioritise your interests over the client's.</div>
+    </div>
+
+    <p>Most consultants focus on the top of the equation — credibility, track record, deliverables. But the thing that actually separates premium advisors from hired help is the <strong>denominator</strong>. Low self-orientation means your focus is on the client's success, not your next invoice.</p>
+
+    <div class="section-image">
+      <img src="../../images/final/boardroom-advisor.png" alt="A confident consultant standing at the head of a dark polished boardroom table, presenting to seated executives with city skyline visible through windows" onerror="this.parentElement.style.display='none'">
+    </div>
+
+    <h3>The Reframe That Multiplies Fees</h3>
+
+    <p>Here's a real example. A client says: <em>"We need customer service training."</em></p>
+
+    <p><strong class="text-red">The employee-consultant</strong> quotes a training programme. Four figures. Done.</p>
+
+    <p><strong class="text-green">The advisor-consultant</strong> says: <em>"Customer satisfaction needs to increase from 80% to 85%. That translates to roughly £1 million in retained revenue. Training is one lever among several organisational changes we should consider."</em></p>
+
+    <p>Same starting point. The first conversation leads to a <strong>four-figure contract</strong>. The second leads to a <strong class="text-orange">six-figure engagement</strong>.</p>
+
+    <p>The difference? The advisor reframed the <em>problem</em>, not just the <em>solution</em>.</p>
+
+    <div class="pull-quote">
+      <p>"When I walked into the Treasury billing £2,000 a day, I wasn't there to take orders. I was there because they needed someone who could see what they couldn't."</p>
+    </div>
+
+    <p>There's a consultant named Betsy Jordyn who describes this perfectly. She identifies two traps most consultants fall into: the <strong>"pair of hands"</strong> trap (you implement whatever the client asks) and the <strong>"surrogate leader"</strong> trap (you do the leader's job for them). The sweet spot is being a <strong>"leader of process"</strong> — you own <em>how</em> decisions get made. The client owns the decisions.</p>
+
+    <p>Her line that stuck with me: <strong class="text-orange">"He who has the marker controls the world."</strong></p>
+
+    <details>
+      <summary>Full advisor vs. employee language swaps</summary>
+      <div class="details-content">
+        <table>
+          <thead>
+            <tr><th>EMPLOYEE LANGUAGE</th><th>ADVISOR LANGUAGE</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>"What do you want me to do?"</td><td>"Here's what you need to do."</td></tr>
+            <tr><td>"I'll get that done for you."</td><td>"The real problem is..."</td></tr>
+            <tr><td>"How would you like me to approach it?"</td><td>"Based on my experience across similar organisations..."</td></tr>
+            <tr><td>"Let me know if you need anything."</td><td>"I've identified three risks we should address."</td></tr>
+            <tr><td>"I'm available whenever works for you."</td><td>"I'd recommend we meet on Tuesday to align on this."</td></tr>
+            <tr><td>"Here's the report you asked for."</td><td>"Here's what the data is telling us, and what I think we should do about it."</td></tr>
+            <tr><td>"Sure, I can do that."</td><td>"That's an option. Here's what I'd recommend instead, and why."</td></tr>
+            <tr><td>"What's the budget?"</td><td>"Here's what solving this problem is worth to you."</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- PAGE 5: The Value Equation -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div class="page" data-page="5" data-title="The Value Equation">
+  <div class="page-content">
+    <div class="lesson-label">THE MATHS</div>
+    <h2>Why Clients Happily Pay £1,000/Day</h2>
+
+    <p>Here's something most consultants never think about: <strong>hourly billing punishes efficiency.</strong></p>
+
+    <p>The faster you solve a problem, the less you earn. That's not just backwards — it creates an adversarial relationship. The client starts scrutinising your timesheets. You start padding your hours. Nobody wins.</p>
+
+    <div class="section-image">
+      <img src="../../images/final/business-impact-scale.png" alt="London financial district skyline at night with illuminated towers reflected in the Thames, dramatic dark sky" onerror="this.parentElement.style.display='none'">
+    </div>
+
+    <h3>The Maths That Changes Everything</h3>
+
+    <p>A consultant billing <strong>£300/hour</strong> spends 10 hours on a project. That's <strong>£3,000</strong>.</p>
+
+    <p>That project saves the client <strong>£200,000</strong>.</p>
+
+    <p>A value-based fee of 20% on that outcome? <strong class="text-orange">£40,000</strong>.</p>
+
+    <p>Same work. Same 10 hours. <strong>Thirteen times the money.</strong></p>
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-number">13x</div>
+        <div class="stat-label">Value-based vs hourly on the same project</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">~£30K</div>
+        <div class="stat-label">Lost per year from undercharging due to imposter syndrome</div>
+      </div>
+    </div>
+
+    <p>The psychology works in your favour too. <strong>95% of buying decisions are subconscious.</strong> Clients use price as a shortcut for quality. A higher fee doesn't just earn you more — it makes the client <em>more committed</em> to the engagement. They invest more effort. They follow through on recommendations. They get better results.</p>
+
+    <p>Charging more literally makes your clients better clients.</p>
+
+    <div class="pull-quote">
+      <p>"The framework that saved taxpayers £500 million. I didn't bill for my time. I billed for the outcome."</p>
+    </div>
+
+    <p>Here's the ROI framework I use: <strong>your fee should deliver 3-10x return for the client.</strong> If your strategy generates £500,000 in annual value, a £50,000 fee is an easy decision for any executive with a calculator.</p>
+
+    <!-- Interactive: Reflection -->
+    <div class="reflection-box">
+      <div class="reflection-prompt">Think about your last project. What was the business impact in pounds? Now divide your fee into that number. What's the ratio?</div>
+      <button class="reveal-btn" data-reveal-target="value-reflection">See Will's take</button>
+      <div class="reveal-content" id="value-reflection">
+        <p><strong>If your ratio is above 10:1, you're dramatically underpriced.</strong> Most consultants I coach find ratios of 20:1 or 30:1 when they actually do this exercise. That means the client is getting 20-30x return on what they pay you. You're not expensive — you're a bargain. And the client probably knows it, even if you don't.</p>
+        <p>Start tracking this number on every engagement. It's your ammunition for the pricing conversation.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- PAGE 6: The Scenario -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div class="page" data-page="6" data-title="The Scenario">
+  <div class="page-content">
+    <div class="lesson-label">PUT IT INTO PRACTICE</div>
+    <h2>What Would You Do?</h2>
+
+    <p>Time to test yourself. Here are two scenarios you'll face as a consultant. There's no trick — just choose the response closest to what you'd actually do. Then see what happens.</p>
+
+    <div class="section-image">
+      <img src="../../images/final/professional-decision.png" alt="A professional woman sitting alone at a dark conference table, deep in thought under dramatic spotlight lighting" onerror="this.parentElement.style.display='none'">
+    </div>
+
+    <!-- Scenario 1 -->
+    <div class="scenario-block">
+      <h3>Scenario 1: The Kickoff Meeting</h3>
+      <p class="scenario-setup">You're in a kickoff meeting. The client slides a detailed brief across the table and says: <em>"Can you deliver this by Friday?"</em></p>
+      <div class="scenario-choices" data-scenario="s1">
+        <button class="scenario-choice" data-type="employee" data-feedback="s1-employee">"Sure, I'll get started right away. I'll send you updates along the way."</button>
+        <button class="scenario-choice" data-type="middle" data-feedback="s1-middle">"I'll take a look at this and come back with a timeline and any questions."</button>
+        <button class="scenario-choice" data-type="advisor" data-feedback="s1-advisor">"Before I commit to a timeline, I want to understand the outcome you're driving toward. What does success look like beyond this deliverable?"</button>
+      </div>
+      <div class="scenario-feedback employee-feedback" id="s1-employee"><strong>Employee move.</strong> You just accepted the client's framing without question. You're now a pair of hands executing someone else's plan. Even if you deliver brilliantly, you've capped yourself at task-executor status. The client will see you as interchangeable — because you acted like it.</div>
+      <div class="scenario-feedback middle-feedback" id="s1-middle"><strong>Better, but still reactive.</strong> You're buying time, which is smart. But you're still operating inside the client's frame. You haven't challenged whether the brief itself is the right approach. You're a thoughtful employee, not an advisor.</div>
+      <div class="scenario-feedback advisor-feedback" id="s1-advisor"><strong>Advisor move.</strong> You've just done three things. You've shown you think beyond the task. You've signalled that you care about outcomes, not just deliverables. And you've positioned yourself as someone who challenges assumptions. This is how £1,500/day consultants operate from minute one.</div>
+    </div>
+
+    <!-- Scenario 2 -->
+    <div class="scenario-block">
+      <h3>Scenario 2: The Challenge</h3>
+      <p class="scenario-setup">You've presented your recommendation to the steering committee. A senior stakeholder leans back, folds their arms, and says: <em>"I'm not convinced this is the right approach. We tried something similar two years ago and it didn't work."</em></p>
+      <div class="scenario-choices" data-scenario="s2">
+        <button class="scenario-choice" data-type="employee" data-feedback="s2-employee">"Fair point. Let me take that away and come back with some alternatives."</button>
+        <button class="scenario-choice" data-type="middle" data-feedback="s2-middle">"I understand the concern. Can you tell me more about what happened two years ago so I can address the differences?"</button>
+        <button class="scenario-choice" data-type="advisor" data-feedback="s2-advisor">"I'd expect that concern — and it's exactly why this approach is different. Here's what failed last time and the three things we're doing to prevent a repeat."</button>
+      </div>
+      <div class="scenario-feedback employee-feedback" id="s2-employee"><strong>You just folded.</strong> The stakeholder tested your conviction and you retreated. You've signalled that your recommendation isn't something you believe in strongly enough to defend. Next time, they'll go around you — or replace you. Pushback isn't an attack. It's a test.</div>
+      <div class="scenario-feedback middle-feedback" id="s2-middle"><strong>Decent instinct, wrong energy.</strong> You're showing curiosity, which matters. But asking the stakeholder to explain the past failure puts them in the driver's seat. You should already know what happened two years ago. An advisor does their homework.</div>
+      <div class="scenario-feedback advisor-feedback" id="s2-advisor"><strong>That's how you hold the room.</strong> You acknowledged the concern without conceding. You showed you'd anticipated the objection. And you demonstrated depth of preparation. This is the moment where the room decides whether you're an advisor or a vendor. You just passed the test.</div>
+    </div>
+
+    <p>Here's something the research confirmed: <strong>90% of senior consultants aren't hired for economic reasons — they're hired for political ones.</strong> Executives bring in premium advisors for stakeholder alignment and political navigation. The advisor sees the politics. The employee just sees the task.</p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- PAGE 7: Mental Blocker Check -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div class="page" data-page="7" data-title="Mental Blockers">
+  <div class="page-content">
+    <div class="lesson-label">THE INTERNAL GAME</div>
+    <h2>The Voice That Keeps You Cheap</h2>
+
+    <p>Everything I've taught you so far is useless if there's a voice in your head telling you it doesn't apply to you.</p>
+
+    <p>I know that voice. I've had it. Every consultant I've coached has had it. It sounds reasonable. It sounds like humility. But it's not — it's fear dressed up as logic.</p>
+
+    <div class="section-image">
+      <img src="../../images/final/breaking-through.png" alt="A man in a suit breaking through a glass barrier, shards exploding outward with dramatic blue and orange lighting against a black background" onerror="this.parentElement.style.display='none'">
+    </div>
+
+    <p><strong>Click the blockers you recognise in yourself.</strong> Be honest — I'll give you my response to each one.</p>
+
+    <div class="blocker-cards">
+
+      <div class="blocker-card" data-blocker>
+        <div class="blocker-card-header">
+          <span class="blocker-icon">01</span>
+          <span>"I don't have enough experience yet."</span>
+        </div>
+        <div class="blocker-card-response">
+          <p><strong>I started billing £1,000 a day before most of my competitors had half my years.</strong> Experience is a story you tell yourself. Clients don't buy experience — they buy confidence, insight, and the ability to solve their problem. I've seen five-year consultants outperform twenty-year ones because they thought like advisors from day one.</p>
+          <p>If you're good enough for the client to hire you, you're good enough to charge what you're worth.</p>
+        </div>
+      </div>
+
+      <div class="blocker-card" data-blocker>
+        <div class="blocker-card-header">
+          <span class="blocker-icon">02</span>
+          <span>"Clients won't pay that much."</span>
+        </div>
+        <div class="blocker-card-response">
+          <p><strong>A consultant named Heather Younger actually lost a project because her fees were too low.</strong> The client assumed low price meant low value. That's not an anecdote — it's how buying psychology works. 95% of buying decisions are subconscious, and price is a quality signal.</p>
+          <p>24% of consultants don't raise their rates because they fear losing clients. But the fear is almost always assumption-based, not evidence-based. Test it. You'll be surprised.</p>
+        </div>
+      </div>
+
+      <div class="blocker-card" data-blocker>
+        <div class="blocker-card-header">
+          <span class="blocker-icon">03</span>
+          <span>"I need more qualifications first."</span>
+        </div>
+        <div class="blocker-card-response">
+          <p><strong>I didn't get my biggest contracts because of certifications.</strong> I got them because I walked in thinking like an advisor, not an applicant. Qualifications are a comfort blanket. They make you feel ready. But clients don't check your certificates — they check your presence.</p>
+          <p>If you're waiting until you feel "qualified enough" to charge premium rates, you'll wait forever. That feeling doesn't come from certificates. It comes from deciding.</p>
+        </div>
+      </div>
+
+      <div class="blocker-card" data-blocker>
+        <div class="blocker-card-header">
+          <span class="blocker-icon">04</span>
+          <span>"It's easy for me, so it can't be worth that much."</span>
+        </div>
+        <div class="blocker-card-response">
+          <p><strong>This one is sneaky.</strong> You discount your work precisely because you're good at it. "While it may be easy for us, it's not easy for them. That's why they're coming to us." Your ease is your expertise. It took years to make it look effortless.</p>
+          <p>A brain surgeon doesn't charge less because the operation only took 40 minutes. They charge for the 15 years it took to make it 40 minutes.</p>
+        </div>
+      </div>
+
+      <div class="blocker-card" data-blocker>
+        <div class="blocker-card-header">
+          <span class="blocker-icon">05</span>
+          <span>"I should be grateful for any work."</span>
+        </div>
+        <div class="blocker-card-response">
+          <p><strong>The scarcity mindset.</strong> It sounds humble. It's not. It's fear. And it creates a vicious cycle: low-paying clients are often the most demanding. They drain your energy, fill your calendar, and block you from the premium opportunities you should be pursuing.</p>
+          <p>Here's what actually happens when you raise your rates: the difficult, price-sensitive clients leave. And you have space for the ones who value what you bring. Higher rates attract better clients. Better clients get better results. Better results justify even higher rates. The cycle works in your favour — but only if you start.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- PAGE 8: Action Plan -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div class="page" data-page="8" data-title="Action Plan">
+  <div class="page-content">
+    <div class="lesson-label">YOUR NEXT MOVE</div>
+    <h2>Do This Before Lesson 1.2</h2>
+
+    <div class="section-image">
+      <img src="../../images/final/forward-momentum.png" alt="A figure in a dark suit walking confidently down an empty road toward a dramatic sunrise, dark clouds parting ahead" onerror="this.parentElement.style.display='none'">
+    </div>
+
+    <p>Here's the one shift that everything else builds on:</p>
+
+    <div class="pull-quote">
+      <p>"Stop thinking about what you do. Start thinking about what it's worth to them."</p>
+    </div>
+
+    <p>That's it. That's the foundation. Every framework, every pricing conversation, every client interaction in this course builds on that single mental shift.</p>
+
+    <p>But insight without action is just entertainment. Here are <strong>three things to do this week</strong> — before you move to Lesson 1.2.</p>
+
+    <div class="action-item">
+      <div class="action-num">1</div>
+      <div class="action-text">
+        <h3>Audit Your Language</h3>
+        <p>In your next client interaction — email, call, or meeting — catch yourself. Are you asking <em>"What do you want me to do?"</em> or telling them <em>"Here's what needs to happen"</em>? Write down every instance. No judgement, just awareness.</p>
+      </div>
+    </div>
+
+    <div class="action-item">
+      <div class="action-num">2</div>
+      <div class="action-text">
+        <h3>Calculate Your Value Ratio</h3>
+        <p>Take your last three projects. Estimate the business impact in pounds — revenue generated, costs saved, risks avoided. Divide by what you charged. If the ratio is above 10:1, you're dramatically underpriced. Write the number down. You'll need it later.</p>
+      </div>
+    </div>
+
+    <div class="action-item">
+      <div class="action-num">3</div>
+      <div class="action-text">
+        <h3>Name Your Blocker</h3>
+        <p>Pick the one mental blocker from the previous page that hit hardest. Write it down. Then write my counter-argument next to it. Read both every morning this week. The blocker loses power when you can see it clearly.</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="transition-box">
+      <h3>Coming Up: Lesson 1.2</h3>
+      <p>Now you know the gap. <strong>Lesson 1.2 — Break the £500/Day Rate Ceiling</strong> — is about the specific pricing trap that keeps most consultants stuck in the middle. We'll get tactical: the exact mental barriers around the £500/day mark, why they exist, and how to shatter them.</p>
+      <p>The mindset shift you just made is the foundation. Next, we get practical.</p>
+    </div>
+
+    <div class="pull-quote">
+      <p>"I've been where you are. Billing less than I was worth because I didn't think I could ask for more. The moment I stopped thinking like an employee was the moment everything changed. You've just taken the first step. Don't stop."</p>
+    </div>
+
+    <button class="cta-btn" style="pointer-events: none; opacity: 0.5;">Continue to Lesson 1.2 →</button>
+    <p style="font-size: 12px; color: var(--muted); margin-top: 8px;">Coming soon</p>
+
+  </div>
+</div>
+
+<!-- ── Bottom Navigation ── -->
+<div class="page-nav">
+  <div class="page-nav-inner">
+    <button class="nav-btn prev" id="prevBtn" disabled>← PREV</button>
+    <span class="nav-page-title" id="navTitle"></span>
+    <button class="nav-btn next" id="nextBtn">NEXT →</button>
+  </div>
+</div>
+
+<script>
+(function() {
+  const pages = document.querySelectorAll('.page');
+  const totalPages = pages.length;
+  let currentPage = 1;
+
+  // Build progress dots
+  const dotsContainer = document.getElementById('progressDots');
+  for (let i = 1; i <= totalPages; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'progress-dot';
+    dot.dataset.page = i;
+    dot.addEventListener('click', function() { goToPage(i); });
+    dotsContainer.appendChild(dot);
+  }
+
+  function goToPage(num) {
+    if (num < 1 || num > totalPages) return;
+    currentPage = num;
+
+    pages.forEach(p => p.classList.remove('active'));
+    document.querySelector('.page[data-page="' + num + '"]').classList.add('active');
+
+    // Update progress dots
+    document.querySelectorAll('.progress-dot').forEach(d => {
+      const dPage = parseInt(d.dataset.page);
+      d.className = 'progress-dot';
+      if (dPage === num) d.classList.add('active');
+      else if (dPage < num) d.classList.add('completed');
+    });
+
+    // Update page number
+    document.getElementById('progressNum').textContent = num + ' / ' + totalPages;
+
+    // Update nav
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const navTitle = document.getElementById('navTitle');
+
+    prevBtn.disabled = (num === 1);
+    if (num === totalPages) {
+      nextBtn.textContent = 'FINISH ✓';
+      nextBtn.classList.add('final');
+      nextBtn.disabled = true;
+    } else {
+      nextBtn.textContent = 'NEXT →';
+      nextBtn.classList.remove('final');
+      nextBtn.disabled = false;
+    }
+
+    const pageEl = document.querySelector('.page[data-page="' + num + '"]');
+    navTitle.textContent = pageEl.dataset.title || '';
+
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }
+
+  // Nav buttons
+  document.getElementById('prevBtn').addEventListener('click', function() {
+    goToPage(currentPage - 1);
+  });
+  document.getElementById('nextBtn').addEventListener('click', function() {
+    goToPage(currentPage + 1);
+  });
+
+  // Keyboard navigation
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+      e.preventDefault();
+      goToPage(currentPage + 1);
+    }
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+      e.preventDefault();
+      goToPage(currentPage - 1);
+    }
+  });
+
+  // Touch/swipe navigation
+  let touchStartX = 0;
+  let touchEndX = 0;
+  document.addEventListener('touchstart', function(e) {
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+  document.addEventListener('touchend', function(e) {
+    touchEndX = e.changedTouches[0].screenX;
+    const diff = touchStartX - touchEndX;
+    if (Math.abs(diff) > 60) {
+      if (diff > 0) goToPage(currentPage + 1); // swipe left = next
+      else goToPage(currentPage - 1); // swipe right = prev
+    }
+  }, { passive: true });
+
+  // Self-assessment options
+  document.querySelectorAll('.assessment-option').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      const group = this.closest('.assessment-options');
+      group.querySelectorAll('.assessment-option').forEach(function(b) { b.classList.remove('selected'); });
+      this.classList.add('selected');
+
+      // Hide all responses in this prompt
+      const prompt = this.closest('.interactive-prompt');
+      prompt.querySelectorAll('.assessment-response').forEach(function(r) { r.classList.remove('visible'); });
+
+      const responseId = this.dataset.response;
+      const response = document.getElementById(responseId);
+      if (response) response.classList.add('visible');
+    });
+  });
+
+  // Reveal cards
+  document.querySelectorAll('.reveal-card[data-reveal]').forEach(function(card) {
+    card.addEventListener('click', function() {
+      this.classList.toggle('open');
+    });
+  });
+
+  // Blocker cards
+  document.querySelectorAll('.blocker-card[data-blocker]').forEach(function(card) {
+    card.addEventListener('click', function() {
+      this.classList.toggle('selected');
+    });
+  });
+
+  // Scenario choices
+  document.querySelectorAll('.scenario-choice').forEach(function(choice) {
+    choice.addEventListener('click', function() {
+      const block = this.closest('.scenario-block');
+      const choices = block.querySelectorAll('.scenario-choice');
+      const type = this.dataset.type;
+
+      choices.forEach(function(c) {
+        c.classList.add('dimmed');
+        c.classList.remove('chosen');
+      });
+      this.classList.remove('dimmed');
+      this.classList.add('chosen', type);
+
+      // Hide all feedback, show the right one
+      block.querySelectorAll('.scenario-feedback').forEach(function(f) { f.classList.remove('visible'); });
+      var feedbackId = this.dataset.feedback;
+      var feedback = document.getElementById(feedbackId);
+      if (feedback) feedback.classList.add('visible');
+    });
+  });
+
+  // Reveal buttons (reflection boxes)
+  document.querySelectorAll('.reveal-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var targetId = this.dataset.revealTarget;
+      var target = document.getElementById(targetId);
+      if (target) {
+        target.classList.toggle('visible');
+        this.textContent = target.classList.contains('visible') ? 'Hide' : 'See Will\'s take';
+      }
+    });
+  });
+
+  // Initialize
+  goToPage(1);
+
+  // Initialize Lucide icons
+  if (window.lucide) lucide.createIcons();
+})();
+</script>
+
+</body>
+</html>

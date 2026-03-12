@@ -1,0 +1,172 @@
+{
+  "search_date": "2026-03-12",
+  "queries": [
+    {
+      "query": "consultant limiting beliefs undercharging imposter syndrome",
+      "results": [
+        {
+          "title": "Consultants! Here's How to Get Over 'The Imposter Syndrome'",
+          "url": "https://consultport.com/succeed-as-consultant/consultants-heres-how-to-get-over-the-imposter-syndrome/",
+          "fetched": false,
+          "notes": "Page returned CSS/layout only, no article content extractable"
+        },
+        {
+          "title": "Overcoming Impostor Syndrome: Shattering The Glass Ceilings In Our Minds - Anne Shoemaker",
+          "url": "https://anneshoemaker.com/overcoming-impostor-syndrome/",
+          "fetched": true,
+          "key_finding": "Impostor syndrome affects 70% of the population, particularly high achievers"
+        },
+        {
+          "title": "Overcoming Impostor Syndrome as a Consultant - BMT",
+          "url": "https://hub.bmt.org/overcoming-impostor-syndrome-as-a-consultant",
+          "fetched": true,
+          "key_findings": [
+            "Term coined 1978 by Clance and Imes at Georgia State University",
+            "Short-term client engagements amplify imposter feelings",
+            "Five coping strategies from real consultants (Lauren Dodden, Jos Espouy, Ewan Glen, Cat Savage, Chloe Woodger-Smith)"
+          ]
+        },
+        {
+          "title": "Imposter Syndrome vs. Limiting Beliefs: Nuances & Solutions - Bennett J. Lee",
+          "url": "https://www.bennettjlee.com/imposter-syndrome-vs-limiting-beliefs/",
+          "fetched": true,
+          "key_findings": [
+            "Imposter syndrome = feeling like a fraud despite success; limiting beliefs = preventing success in the first place",
+            "Narrative → Emotion → Action framework",
+            "Limiting beliefs fuel imposter syndrome in a vicious cycle",
+            "Recommended books: Valerie Young's The Secret Thoughts of Successful Women, Carol Dweck's Mindset, David D. Burns' Feeling Good, Jonathan Heston's The Unlimited Self"
+          ]
+        }
+      ]
+    },
+    {
+      "query": "mental barriers consultants charging higher rates",
+      "results": [
+        {
+          "title": "Consulting Fees in Mental Health",
+          "url": "https://tamarasuttle.com/consulting-fees-in-mental-health/",
+          "fetched": false,
+          "notes": "Not relevant - mental health therapy fees, not business consulting"
+        },
+        {
+          "title": "How to Charge More as a Private Practice Therapist: The Consultant Mindset",
+          "url": "https://therathink.com/how-to-charge-more-as-a-therapist/",
+          "fetched": false,
+          "notes": "Not relevant - therapy practice pricing"
+        }
+      ]
+    },
+    {
+      "query": "business consultant pricing psychology fear raising rates undercharging",
+      "results": [
+        {
+          "title": "Consulting Fees Guide: How Much To Charge For Consulting - Consulting Success",
+          "url": "https://www.consultingsuccess.com/consulting-fees",
+          "fetched": true,
+          "key_findings": [
+            "Case study: Heather Younger LOST a project with low fees and hourly rate",
+            "Value-based pricing consultants significantly more likely to land $10K+ projects",
+            "350%+ fee increase potential without changing deliverables",
+            "Three models compared: hourly, project-based, value-based"
+          ]
+        },
+        {
+          "title": "Freelance Pricing Psychology: How to Charge What You're Worth",
+          "url": "https://www.thecityceleb.com/editorial/freelance-pricing-psychology-how-to-charge-what-youre-worth/",
+          "fetched": true,
+          "key_findings": [
+            "Author lost ~$20,000 in early career from undercharging",
+            "Recommended rate increase: 20-50% above comfort level",
+            "Efficiency paradox: the faster and more efficient you become, the less you earn on hourly",
+            "Real example: $15,000 sales funnel proposal justified by six-figure annual ROI"
+          ]
+        },
+        {
+          "title": "The Psychology of Pricing: Why You're Worth More Than You're Charging - The Social Attendant",
+          "url": "https://www.thesocialattendant.com/blog/psychology-of-pricing",
+          "fetched": true,
+          "key_findings": [
+            "67% of consultants struggle with pricing confidence",
+            "Consultants undercharge by $100-300/hour compared to actual value delivery",
+            "Service providers with imposter syndrome lose average $30,000+ annually",
+            "Confidence-Competence Loop: higher rates → better clients → more expertise → justified premium",
+            "Anchoring Effect, Loss Aversion, Price-Quality Signaling mechanisms"
+          ]
+        },
+        {
+          "title": "The Psychology of Pricing: How to Charge What You're Worth - TechBullion",
+          "url": "https://techbullion.com/the-psychology-of-pricing-how-to-charge-what-youre-worth/",
+          "fetched": true,
+          "key_findings": [
+            "Anchoring Effect, Price-Quality Heuristic, Loss Aversion, Charm Pricing",
+            "Emphasis on ROI framing: $1,000 investment generating $10,000 revenue",
+            "Tiered/decoy pricing strategies"
+          ]
+        }
+      ]
+    },
+    {
+      "query": "consultant mindset blocks charging premium fees overcome pricing fears",
+      "results": [
+        {
+          "title": "Premium Consulting Fees, Moving Past the Commodity Mindset - Consulting Success",
+          "url": "https://www.consultingsuccess.com/6-ways-to-move-beyond-the-commodity-mindset",
+          "fetched": true,
+          "key_findings": [
+            "Commodity mindset: viewing services as interchangeable, competing on price",
+            "Race to the bottom when consultants commoditize their expertise",
+            "Author: Michael Zipursky, co-founder Consulting Success"
+          ]
+        },
+        {
+          "title": "Pricing from a Place of Abundance, Not Fear - The Upside",
+          "url": "https://betheupside.com/pricing-from-a-place-of-abundance-not-fear/",
+          "fetched": true,
+          "key_findings": [
+            "Abundance vs scarcity mindset framework for pricing",
+            "Internal beliefs significantly influence external pricing decisions",
+            "Author: Erin Halper"
+          ]
+        },
+        {
+          "title": "Four Pricing Mindset Hurdles and How to Overcome Them - Kristin Hadley",
+          "url": "https://www.kristinhadley.com/blog/four-pricing-mindset-hurdles-and-how-to-overcome-them",
+          "fetched": true,
+          "key_findings": [
+            "4 hurdles: Analysis Paralysis, Searching for 'Perfect' Price, Believing Prices Are Permanent, Undervaluing Beloved Work",
+            "Key quote: 'Other people's responses to your pricing have nothing to do with you'",
+            "The 'Easy for Me' trap: discounting work that comes naturally"
+          ]
+        },
+        {
+          "title": "Mind Over Matter: Mindset Behind Pricing Your Services - CPDUK",
+          "url": "https://www.cpduk.co.uk/news/mind-over-matter-mindset-behind-pricing-your-services-confidence-and-charging-your-worth",
+          "fetched": true,
+          "key_findings": [
+            "Three barriers: fear of being overpriced, worry about rejection, uncertainty about value",
+            "Key quote: 'Clients don't care how long something takes—they care that it gets done well'",
+            "Key quote: 'You and your services are probably worth MORE than you're thinking'",
+            "Reassess pricing every 6-12 months"
+          ]
+        },
+        {
+          "title": "How To Overcome The Fear Of Raising Your Prices - DoubleStack",
+          "url": "https://doublestack.net/web-design-pricing-fears/",
+          "fetched": true,
+          "key_findings": [
+            "5 fears: Universal Rejection, Client Affordability, Lead Loss Risk, Overcharging Concerns, Self-Doubt",
+            "Key quote: 'Your business will never outgrow your mindset'",
+            "Clients regularly pay $5,000-$10,000 for solutions",
+            "Distinguishes 'can't afford' from 'don't want to pay'"
+          ]
+        },
+        {
+          "title": "Overcoming Consultant Fear to Increase Billings - Centred Excellence",
+          "url": "https://centredexcellence.co.uk/overcoming-consultant-fear-to-increase-billings/",
+          "fetched": false,
+          "notes": "Page returned JS/CSS only, no article content extractable"
+        }
+      ]
+    }
+  ]
+}

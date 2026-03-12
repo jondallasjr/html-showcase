@@ -1,0 +1,138 @@
+{
+  "search_date": "2026-03-12",
+  "queries": [
+    {
+      "query": "value based consulting pricing vs hourly rate",
+      "results": [
+        {
+          "title": "From Hourly to Value-Based Pricing For The Modern Consultant",
+          "url": "https://www.consultingsuccess.com/value-based-pricing-consultants",
+          "source": "Consulting Success",
+          "fetched": true,
+          "key_findings": [
+            "ROI Formula: Identify quantifiable value, multiply by annual impact (2-3 years), add intangible benefits. Fee should deliver 3-10X ROI for clients.",
+            "Example: Strategy generating $500K annual revenue for 2 years ($1M total) could command $100K-$330K fee.",
+            "Offering 2-3 options increases average project value by 40-60%.",
+            "70-80% of clients choose the middle option (anchoring effect).",
+            "AI validates value-based pricing — hourly billing punishes efficiency when AI helps solve problems faster.",
+            "Strategic discovery questions: 'What's the cost of not solving this in 12 months?' and 'How would a 20% improvement look in dollars?'"
+          ]
+        },
+        {
+          "title": "Guide To Value-Based Pricing for Consultants: 10 Expert Strategies",
+          "url": "https://www.consultingsuccess.com/value-based-pricing",
+          "source": "Consulting Success",
+          "fetched": true,
+          "key_findings": [
+            "80% of clients raise their rates within 90 days of learning value-based pricing.",
+            "Average ROI of 130% for program participants.",
+            "Consultants can earn 3-5x higher fees with value-based pricing.",
+            "Target audience: independent consultants earning $0-$3M+ annually."
+          ]
+        },
+        {
+          "title": "Consulting Fees Guide: How Much To Charge For Consulting (3 Formulas & Examples)",
+          "url": "https://www.consultingsuccess.com/consulting-fees",
+          "source": "Consulting Success",
+          "fetched": true,
+          "key_findings": [
+            "Value-based pricing is 'the most profitable and scalable model' for experienced consultants.",
+            "Consultants using value-based pricing are significantly more likely to land $10K+ projects than those using hourly rates.",
+            "When you can demonstrate $500K in additional revenue for a client, a $50K fee becomes an easy decision.",
+            "The biggest mistake isn't choosing the wrong pricing structure — it's not charging enough."
+          ]
+        },
+        {
+          "title": "Consultants Are Ditching Hourly Rates for Value-Based Pricing",
+          "url": "https://www.systemx.net/consultants-are-ditching-hourly-rates-for-value-based-pricing/",
+          "source": "SystemX",
+          "fetched": true,
+          "key_findings": [
+            "Hourly model: $300/hour x 10 hours = $3,000. Value-based: 20% of $200K savings = $40,000. A 13x income increase on the same project.",
+            "Career-level impact: consultant moved from $150K/year billing hours to $400K with value-based projects while working fewer hours.",
+            "Hourly billing creates adversarial dynamics — clients scrutinize timesheets and haggle over rates.",
+            "Value-based fees become investments with clear ROI rather than line-item costs."
+          ]
+        },
+        {
+          "title": "Consulting Pricing Models Explained: Find Your New Standard",
+          "url": "https://www.appenate.com/blog/consulting-pricing-models-explained/",
+          "source": "Appenate",
+          "fetched": true,
+          "key_findings": [
+            "Fixed-price uplift calculation uses 1.25-2x multiplier.",
+            "Value-based pricing requires identifying the 'golden number' (projected value gained) and applying ROI percentage formula.",
+            "Bracketing strategy with tiered packages guides clients toward middle-tier options.",
+            "Optimal pricing depends on industry norms, target clientele, and competitive landscape."
+          ]
+        },
+        {
+          "title": "Top 5 consulting pricing models for maximizing profits",
+          "url": "https://www.rocketlane.com/blogs/consulting-pricing-models",
+          "source": "Rocketlane",
+          "fetched": true,
+          "key_findings": [
+            "Value-based example: 10% fee on client's revenue increase ($500K increase = $50K fee).",
+            "Healthcare marketing averages $150/hour as industry benchmark.",
+            "Tiered pricing example: $500 tier (2-hour consultation) through $5,000 tier (8-hour with comprehensive reports).",
+            "Value-based pricing tends to yield the highest profits when consultants can quantify their impact."
+          ]
+        },
+        {
+          "title": "The Complete Guide to Consulting Rates",
+          "url": "https://www.consultingsuccess.com/consulting-rates",
+          "source": "Consulting Success",
+          "fetched": true,
+          "key_findings": [
+            "Fee structures ranked worst to best: hourly billing (worst), daily rates, retainers, project-based fees, ROI/value-based fees (best).",
+            "Most consultants only bill 50-60% of working hours. Out of 2,000 annual hours, only 1,000-1,200 are billable.",
+            "In North America, consultants charging less than $150/hour may signal inexperience regardless of actual capabilities.",
+            "Baseline formula: (Target Annual Income + Overhead Expenses) / Billable Hours = Minimum Hourly Rate."
+          ]
+        }
+      ]
+    },
+    {
+      "query": "why clients pay premium consulting fees psychology",
+      "results": [
+        {
+          "title": "The Psychology of Premium Pricing: Why Clients Pay More for Transformation",
+          "url": "https://truecoach.co/blog/the-psychology-of-premium-pricing-why-clients-pay-more-for-transformation/",
+          "source": "TrueCoach",
+          "fetched": true,
+          "key_findings": [
+            "Content could not be fully extracted (JavaScript-rendered page). Search snippet findings used instead.",
+            "The more someone invests, the more effort they put in (sunk cost fallacy drives client compliance).",
+            "Premium pricing signals that service is proven, trusted, and personalized.",
+            "Clients seek authority and systems they can trust when uncertain about change."
+          ]
+        },
+        {
+          "title": "The Science Behind Premium Pricing (And How to Apply It)",
+          "url": "https://kenyarmosh.com/blog/pricing-psychology/",
+          "source": "Ken Yarmosh",
+          "fetched": true,
+          "key_findings": [
+            "People don't pay premium because you ARE worth it — they pay because they BELIEVE you're worth it.",
+            "Anchoring: Sets reference points that make actual prices seem reasonable. Essential for premium positioning.",
+            "Charm pricing ($4,997) undermines premium perception — avoid for premium services.",
+            "Installment pricing increases conversions 30-40%.",
+            "Tiered pricing converts binary yes/no into comparative choices. Top tier is anchor.",
+            "Pricing functions as positioning when marketing budgets are limited — it signals expertise and filters ideal clients.",
+            "Prospects evaluate whether working with you helps them become who they want to be (identity-based purchasing)."
+          ]
+        }
+      ]
+    }
+  ],
+  "search_summary_statistics": {
+    "51_percent_value_based_earn_10k_plus": "51% of consultants using value-based fees have average project value of $10K+, vs only 39% of hourly consultants",
+    "13x_income_increase_example": "$300/hr x 10 hrs = $3K (hourly) vs 20% of $200K savings = $40K (value-based)",
+    "career_transition_example": "Consultant went from $150K/year (hourly) to $400K/year (value-based) working fewer hours",
+    "option_pricing_uplift": "Offering 2-3 pricing options increases average project value by 40-60%",
+    "middle_option_selection": "70-80% of clients choose the middle pricing tier",
+    "billable_hours_reality": "Most consultants only bill 50-60% of working hours",
+    "installment_conversion_lift": "Installment pricing increases conversions by 30-40%",
+    "north_america_floor": "Consultants charging less than $150/hr may signal inexperience"
+  }
+}

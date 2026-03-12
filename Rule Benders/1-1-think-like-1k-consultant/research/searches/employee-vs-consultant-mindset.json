@@ -1,0 +1,136 @@
+{
+  "search_date": "2026-03-12",
+  "searches": [
+    {
+      "query": "employee mindset vs consultant mindset psychology",
+      "results": [
+        {
+          "title": "The 7 Mindsets of Successful Consultants & How to Cultivate Them",
+          "url": "https://www.melisaliberman.com/blog/consulting-mindset",
+          "fetched": true,
+          "relevance": "high"
+        },
+        {
+          "title": "Developing a Consulting Mindset: A Guide to Long-Term Success",
+          "url": "https://voltagecontrol.com/articles/developing-a-consulting-mindset-a-guide-to-long-term-success/",
+          "fetched": true,
+          "relevance": "high"
+        },
+        {
+          "title": "Consulting Mindset: Shifting From The 'What' To The 'How'",
+          "url": "https://strategyu.co/consulting-mindset-shifting-from-the-what-to-the-how/",
+          "fetched": false,
+          "relevance": "high",
+          "note": "Domain blocked"
+        },
+        {
+          "title": "Behind the Scenes: Mindsets of Top Management Consultants",
+          "url": "https://consultport.com/succeed-as-consultant/behind-the-scenes-mindsets-of-top-management-consultants/",
+          "fetched": true,
+          "relevance": "medium",
+          "note": "Page returned CSS/markup only"
+        },
+        {
+          "title": "The Psychology Of Success For Consultants",
+          "url": "https://www.consultingsuccess.com/psychology-of-success",
+          "fetched": true,
+          "relevance": "high"
+        },
+        {
+          "title": "Employee vs Employer Change Mindset",
+          "url": "https://lsaglobal.com/blog/employee-vs-employer-change-mindset/",
+          "fetched": false,
+          "relevance": "medium"
+        },
+        {
+          "title": "How to Cultivate the Consultant Mindset and Become a Value Detective",
+          "url": "https://humannatureatwork.com/wp-content/uploads/2017/12/How-to-Cultivate-the-Consultant-Mindset-and-Become-a-Value-Detective.pdf",
+          "fetched": false,
+          "relevance": "medium"
+        },
+        {
+          "title": "Consultant Mindset: The Key to Workplace Success",
+          "url": "https://www.linkedin.com/pulse/consultant-mindset-key-workplace-success-chimobi-benedict-oguanabi",
+          "fetched": false,
+          "relevance": "medium"
+        },
+        {
+          "title": "The Consultant Mindset",
+          "url": "https://www.theprojectlab.com/insights/the-consultant-mindset",
+          "fetched": false,
+          "relevance": "medium"
+        }
+      ]
+    },
+    {
+      "query": "shift from employee thinking to business owner consulting",
+      "results": [
+        {
+          "title": "From Employee to Business Owner Mindset",
+          "url": "https://www.incorp.com/help-center/business-articles/think-like-a-business-owner",
+          "fetched": true,
+          "relevance": "high"
+        },
+        {
+          "title": "How to Switch from an Employee to an Entrepreneur Mindset",
+          "url": "https://www.ellevatenetwork.com/articles/8443-how-to-switch-from-an-employee-to-an-entrepreneur-mindset",
+          "fetched": false,
+          "relevance": "medium"
+        },
+        {
+          "title": "From Employee to Entrepreneur: The Mindset Shift You Must Make",
+          "url": "https://medium.com/the-neurohackers-lab-showing-our-minds-who-s-the/from-employee-to-entrepreneur-b52b96a032ca",
+          "fetched": false,
+          "relevance": "high",
+          "note": "403 forbidden"
+        },
+        {
+          "title": "How I switched from being an employee to a consultant… in my mind",
+          "url": "https://medium.com/id-confidential/how-i-switched-from-being-an-employee-to-a-consultant-in-my-mind-eb090517fcc4",
+          "fetched": false,
+          "relevance": "high",
+          "note": "403 forbidden"
+        },
+        {
+          "title": "Shifting from Employee to Entrepreneur Mindset",
+          "url": "https://corporateescapeartist.com/how-to-shift-from-employee-to-entrepreneur-mindset/",
+          "fetched": true,
+          "relevance": "high"
+        },
+        {
+          "title": "The Winning Consulting Mindset: How to Think Like a 7-Figure Consultant",
+          "url": "https://www.consultingsuccess.com/consulting-mindset",
+          "fetched": true,
+          "relevance": "high"
+        },
+        {
+          "title": "Making a Career Change to Consulting After Corporate",
+          "url": "https://resources.businesstalentgroup.com/btg-blog/career-change-consulting-after-corporate",
+          "fetched": false,
+          "relevance": "medium"
+        },
+        {
+          "title": "How To Shift From Employee to Entrepreneur Mindset (Personal Story)",
+          "url": "https://gabrielboth.com/business/entrepreneurship/employee-to-entrepreneur-mindset/",
+          "fetched": true,
+          "relevance": "high"
+        }
+      ]
+    }
+  ],
+  "sources_fetched": [
+    "https://www.melisaliberman.com/blog/consulting-mindset",
+    "https://www.consultingsuccess.com/consulting-mindset",
+    "https://voltagecontrol.com/articles/developing-a-consulting-mindset-a-guide-to-long-term-success/",
+    "https://www.consultingsuccess.com/psychology-of-success",
+    "https://www.incorp.com/help-center/business-articles/think-like-a-business-owner",
+    "https://corporateescapeartist.com/how-to-shift-from-employee-to-entrepreneur-mindset/",
+    "https://gabrielboth.com/business/entrepreneurship/employee-to-entrepreneur-mindset/"
+  ],
+  "sources_failed": [
+    "https://consultport.com/succeed-as-consultant/behind-the-scenes-mindsets-of-top-management-consultants/ (returned CSS only)",
+    "https://medium.com/id-confidential/how-i-switched-from-being-an-employee-to-a-consultant-in-my-mind-eb090517fcc4 (403)",
+    "https://medium.com/the-neurohackers-lab-showing-our-minds-who-s-the/from-employee-to-entrepreneur-b52b96a032ca (403)",
+    "https://strategyu.co/consulting-mindset-shifting-from-the-what-to-the-how/ (domain blocked)"
+  ]
+}
